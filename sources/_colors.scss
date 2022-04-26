@@ -1,0 +1,87 @@
+/* Fallback colors for variables */
+$abris-base-color: #7694ce;
+
+$abc-primary-0:     #7694ce;	/* Основной Цвет */
+$abc-primary-1:     #697a9b;
+$abc-primary-2:     #264786;
+$abc-primary-3:     #9db6e7;
+$abc-primary-4:     #b0c3e7;
+$abc-secondary-a-0: #73da8e;	/* Вторичный Цвет A */
+$abc-secondary-a-1: #69a379;
+$abc-secondary-a-2: #258e41;
+$abc-secondary-a-3: #98ecae;
+$abc-secondary-a-4: #afecbf;
+$abc-secondary-a-5: #afecbf;
+$abc-secondary-a-6: #afecbf;
+$abc-secondary-a-7: #afecbf;
+$abc-secondary-a-8: #afecbf;
+$abc-secondary-a-9: #afecbf;
+$abc-secondary-a-10: #afecbf;
+$abc-secondary-a-11: #afecbf;
+$abc-secondary-a-12: #afecbf;
+$abc-secondary-a-13: #afecbf;
+
+$abc-secondary-b-0: #ff9486;	/* Вторичный Цвет B */
+$abc-secondary-b-1: #bf837b;
+$abc-secondary-b-2: #a63a2c;
+$abc-secondary-b-3: #ffafa4;
+$abc-secondary-b-4: #ffc4bc;
+$abc-complement-0:  #ffd586;	/* Дополнительный Цвет */
+$abc-complement-1:  #bfa87b;
+$abc-complement-2:  #a67c2c;
+$abc-complement-3:  #ffe0a4;
+$abc-complement-4:  #ffe8bc;
+
+$abc-primary-0-op-95:      scale-color($abc-primary-0, $alpha: -5%);          // scale-color(#092a3a, $alpha: -5%);     // var(--abc-primary-0-op-95, $abc-primary-0-op-95);
+$abc-primary-0-op-80:      scale-color($abc-primary-0, $alpha: -20%);         // scale-color(#092a3a, $alpha: -20%);    // var(--abc-primary-0-op-80, $abc-primary-0-op-80);
+$abc-primary-0-op-70:      scale-color($abc-primary-0, $alpha: -30%);         // scale-color(#092a3a, $alpha: -30%);    // var(--abc-primary-0-op-70, $abc-primary-0-op-70);
+$abc-primary-0-op-65:      scale-color($abc-primary-0, $alpha: -35%);         // scale-color(#092a3a, $alpha: -35%);    // var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+$abc-primary-0-op-30:      scale-color($abc-primary-0, $alpha: -70%);         // scale-color(#092a3a, $alpha: -70%);    // var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+$abc-primary-0-op-20:      scale-color($abc-primary-0, $alpha: -80%);         // scale-color(#092a3a, $alpha: -80%);    // var(--abc-primary-0-op-20, $abc-primary-0-op-20);
+$abc-primary-0-op-15:      scale-color($abc-primary-0, $alpha: -85%);         // scale-color(#092a3a, $alpha: -85%);    // var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+$abc-primary-0-op-10:      scale-color($abc-primary-0, $alpha: -90%);         // scale-color(#092a3a, $alpha: -90%);    // var(--abc-primary-0-op-10, $abc-primary-0-op-10);
+$abc-primary-0-op-05:      scale-color($abc-primary-0, $alpha: -95%);         // scale-color(#092a3a, $alpha: -95%);    // var(--abc-primary-0-op-05, $abc-primary-0-op-05);
+
+$abc-primary-1-dark-05:    darken($color: $abc-primary-1, $amount: 0.5);     // darken($color: #f8f9fd, $amount: 0.5); // var(--abc-primary-2-dark-05, $abc-primary-2-dark-05);
+$abc-primary-1-dark-3:     darken($color: $abc-primary-1, $amount: 3);       // darken($color: #f8f9fd, $amount: 3);   // var(--abc-primary-2-dark-3, $abc-primary-2-dark-3);
+$abc-primary-1-dark-4:     darken($color: $abc-primary-1, $amount: 4);       // darken($color: #f8f9fd, $amount: 4);   // var(--abc-primary-2-dark-4, $abc-primary-2-dark-4);
+$abc-primary-1-dark-7:     darken($color: $abc-primary-1, $amount: 7);       // darken($color: #f8f9fd, $amount: 7);   // var(--abc-primary-2-dark-7, $abc-primary-2-dark-7);
+$abc-primary-1-dark-8:     darken($color: $abc-primary-1, $amount: 8);       // darken($color: #f8f9fd, $amount: 8);   // var(--abc-primary-2-dark-8, $abc-primary-2-dark-8);
+
+$abc-primary-2-op-90:      scale-color($abc-primary-2, $alpha: -10%);         // scale-color(#ffffff, $alpha: -10%);    // var(--abc-primary-2-op-90, $abc-primary-2-op-90);
+$abc-primary-2-op-50:      scale-color($abc-primary-2, $alpha: -50%);         // scale-color(#ffffff, $alpha: -50%);    // var(--abc-primary-2-op-50, $abc-primary-2-op-50);
+$abc-primary-2-op-30:      scale-color($abc-primary-2, $alpha: -70%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
+$abc-primary-2-op-20:      scale-color($abc-primary-2, $alpha: -80%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
+$abc-primary-2-op-15:      scale-color($abc-primary-2, $alpha: -85%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
+$abc-primary-2-op-10:      scale-color($abc-primary-2, $alpha: -90%);         // scale-color(#ffffff, $alpha: -90%);    // var(--abc-primary-2-op-10, $abc-primary-2-op-10);
+
+$abc-primary-3-op-40:      scale-color($abc-primary-3, $alpha: -60%);         // scale-color(#323232, $alpha: -60%);    // var(--abc-primary-3-op-40, $abc-primary-3-op-40);
+$abc-primary-3-op-30:      scale-color($abc-primary-3, $alpha: -70%);         // scale-color(#323232, $alpha: -70%);    // var(--abc-primary-3-op-30, $abc-primary-3-op-30);
+$abc-primary-3-op-20:      scale-color($abc-primary-3, $alpha: -80%);         // scale-color(#323232, $alpha: -80%);    // var(--abc-primary-3-op-20, $abc-primary-3-op-20);
+$abc-primary-3-op-10:      scale-color($abc-primary-3, $alpha: -90%);         // scale-color(#323232, $alpha: -90%);    // var(--abc-primary-3-op-10, $abc-primary-3-op-10);
+
+$abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);     // scale-color(#22b2ea, $alpha: -85%);    // var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+
+
+@mixin mx-form-control {
+    width: 100%;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid var(--abc-primary-0-op-20, $abc-primary-0-op-20);
+    background: var(--abc-primary-1, $abc-primary-1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+@mixin mx-form-control-focus {
+    border-color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+}
+
+@mixin mx-form-control-readonly {
+    border-radius: 0;
+    border-color: var(--abc-primary-1, $abc-primary-1);
+    border-bottom: 1px solid var(--abc-primary-0-op-20, $abc-primary-0-op-20);
+}
+
+@mixin mx-form-control-momodified {
+    background: linear-gradient(#f8f9fd, 75%, #FBE5A4BD);//#FBE5A4BD !important; //var(--abc-secondary-a-13, $abc-secondary-a-13);
+}

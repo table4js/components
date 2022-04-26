@@ -1,0 +1,6 @@
+﻿<span data-bind="text: value"></span>
+<select data-bind="value: func">
+  <!-- ko foreach: summaryItems -->
+    <option data-bind="text: title, value: value"></option>
+  <!-- /ko -->  
+</select>

@@ -1,0 +1,59 @@
+body {
+
+}
+
+:root {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+
+    --main-color: royalblue;
+    --inactive-color: lightgray;
+    --hover-color: gray;
+    --text-color: black;
+    --label-color: rgb(84, 84, 84);
+}
+
+.test-form {
+}
+
+.test-group {
+}
+
+.test-item {
+}
+
+.test-label {
+    font-size: 1rem;
+    display: inline-block;
+    box-sizing: border-box;    
+    width: 100%;
+    min-width: 200px;
+    margin: 0;
+    padding: 2px;
+    color: var(--label-color);
+}
+.test-item:focus-within .test-label {
+    color: var(--text-color);
+}
+
+.test-input {
+    display: inline-block;
+    box-sizing: border-box;    
+    width: 100%;
+    min-width: 200px;
+    margin: 0;
+    padding: 2px;
+    border: none;
+    outline: none;    
+    font-size: 1rem;
+}
+.input-control {
+    border: none;
+    outline: none;    
+    border-bottom: 1px dotted var(--inactive-color);
+    font-size: 1rem;
+}
+.input-control:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--main-color);
+}
