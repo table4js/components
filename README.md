@@ -1,3 +1,5 @@
+[![Build Project](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml/badge.svg)](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml)
+
 # abris-components
 JavaScript (TypeScript) components library. Contains UI Abris components.
 
