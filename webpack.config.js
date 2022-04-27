@@ -1,18 +1,23 @@
-var _ = require('underscore');
-var webpack = require('webpack');
-var packageJson = require('./package.json');
+const _ = require('underscore');
+const webpack = require('webpack');
+const packageJson = require('./package.json');
+const publishPackageJson = require('./publish/package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var PascalCaseNamePlugin = require('./webpack-pascal-case-name');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PascalCaseNamePlugin = require('./webpack-pascal-case-name');
+const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
-var libraryName = 'Abris';
-var banner = [
+publishPackageJson.version = packageJson.version;
+
+const libraryName = 'AbrisComponents';
+const banner = [
     "abris-components - JavaScript components library v" + packageJson.version,
     "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
     "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
 
-var BASE_CFG = {
+const BASE_CFG = {
   target: 'web',
   resolve: {
     extensions: ['.ts', '.js'],
@@ -54,7 +59,7 @@ var BASE_CFG = {
   }
 };
 
-var DEV_CFG = _.extend({}, BASE_CFG, {
+const DEV_CFG = _.extend({}, BASE_CFG, {
   mode: 'development',
   plugins: [
     new MiniCssExtractPlugin(
@@ -79,7 +84,7 @@ var DEV_CFG = _.extend({}, BASE_CFG, {
   devtool: 'inline-source-map'
 });
 
-var PROD_CFG = _.extend({}, BASE_CFG, {
+const PROD_CFG = _.extend({}, BASE_CFG, {
   mode: 'production',
   plugins: [
     new MiniCssExtractPlugin(
@@ -95,6 +100,12 @@ var PROD_CFG = _.extend({}, BASE_CFG, {
     new webpack.BannerPlugin(banner),
     new PascalCaseNamePlugin(),
     //new webpack.optimize.UglifyJsPlugin()
+    new GeneratePackageJsonPlugin(publishPackageJson),
+    new CopyPlugin({
+      patterns: [
+        { from: "README.md" }
+      ],
+    })
   ],
   output: {
     library: '[pc-name]',

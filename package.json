@@ -2,7 +2,7 @@
   "name": "abris-components",
   "version": "0.1.2",
   "description": "JavaScript components library",
-  "homepage": "https://github.com/abris-platform/components",
+  "homepage": "https://github.com/abris-platform/abris-components",
   "authors": [
     "Serge T <@domain.com>",
     "Fedor D <@domain.com>",
@@ -17,14 +17,13 @@
   ],
   "moduleType": "umd",
   "ignore": [
-    ".travis.yml",
-    ".coveralls.yml",
-    ".bithoundrc",
-    "deploy-ghpages.cmd"
+    "index.html",
+    "index.debug.html",
+    "webpack-pascal-case-name.js"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/abris-platform/components.git"
+    "url": "https://github.com/abris-platform/abris-components.git"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development",
@@ -43,7 +42,9 @@
     "@types/knockout": "^3.4.60",
     "@types/node": "^7.0.5",
     "@webpack-cli/serve": "^1.6.1",
+    "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^2.0.0",
+    "generate-package-json-webpack-plugin": "^2.6.0",
     "html-webpack-plugin": "latest",
     "jest": "^28.0.0",
     "json-loader": "latest",
