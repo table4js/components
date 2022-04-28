@@ -103,7 +103,8 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     new GeneratePackageJsonPlugin(publishPackageJson),
     new CopyPlugin({
       patterns: [
-        { from: "README.md" }
+        { from: "README.md" },
+        { from: "publish/abris-components.d.ts", to: "abris-components.d.ts" }
       ],
     })
   ],

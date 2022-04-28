@@ -11,6 +11,7 @@
   "private": false,
   "license": "MIT",
   "main": "abris-components.js",
+  "typings": "abris-components.d.ts",
   "keywords": [
     "JavaScript",
     "components"
