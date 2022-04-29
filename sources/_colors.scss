@@ -1,25 +1,26 @@
 /* Fallback colors for variables */
 $abris-base-color: #7694ce;
 
-$abc-primary-0:     #7694ce;	/* Основной Цвет */
-$abc-primary-1:     #697a9b;
-$abc-primary-2:     #264786;
-$abc-primary-3:     #9db6e7;
-$abc-primary-4:     #b0c3e7;
-$abc-secondary-a-0: #73da8e;	/* Вторичный Цвет A */
-$abc-secondary-a-1: #69a379;
-$abc-secondary-a-2: #258e41;
-$abc-secondary-a-3: #98ecae;
-$abc-secondary-a-4: #afecbf;
+$abc-primary-0:     #263769;	/* Основной Цвет */
+$abc-primary-1:     #f8f9fd;
+$abc-primary-2:     #ffffff;
+$abc-primary-3:     #323232;
+$abc-primary-4:     #263769;
+
+$abc-secondary-a-0: #263769;	/* Вторичный Цвет A */
+$abc-secondary-a-1: #07742B;
+$abc-secondary-a-2: #AC160A;
+$abc-secondary-a-3: #1B274B;
+$abc-secondary-a-4: #bbbfca2a;
 $abc-secondary-a-5: #afecbf;
-$abc-secondary-a-6: #afecbf;
-$abc-secondary-a-7: #afecbf;
-$abc-secondary-a-8: #afecbf;
-$abc-secondary-a-9: #afecbf;
-$abc-secondary-a-10: #afecbf;
-$abc-secondary-a-11: #afecbf;
-$abc-secondary-a-12: #afecbf;
-$abc-secondary-a-13: #afecbf;
+$abc-secondary-a-6: #C1170B;
+$abc-secondary-a-7: #9A1309;
+$abc-secondary-a-8: #078834;
+$abc-secondary-a-9: #056125;
+$abc-secondary-a-10: #304788;
+$abc-secondary-a-11: #202F5B;
+$abc-secondary-a-12: #BCC5CC;
+$abc-secondary-a-13: #FBE5A4;
 
 $abc-secondary-b-0: #ff9486;	/* Вторичный Цвет B */
 $abc-secondary-b-1: #bf837b;
@@ -74,6 +75,7 @@ $abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);     //
 }
 @mixin mx-form-control-focus {
     border-color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+    outline: none;
 }
 
 @mixin mx-form-control-readonly {
