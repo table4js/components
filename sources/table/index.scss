@@ -6,6 +6,9 @@
   fill: var(--abc-primary-2, $abc-primary-2);
 }
 
+* {
+  box-sizing: border-box;
+}
 
 abris-table,
 abris-components-table {
@@ -443,8 +446,11 @@ abris-components-table {
               }
 
               .row-check {
-                width: 18px;
-                height: 18px;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 border-radius: 4px;
                 border: 2px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
                 margin: auto;
@@ -453,8 +459,6 @@ abris-components-table {
                   height: 18px;
                   width: 18px;
                   fill: var(--abc-primary-4, $abc-primary-4);
-                  margin-top: -1px;
-                  margin-left: -1px;
                 }
               }
             }
@@ -483,7 +487,6 @@ abris-components-table {
               height: 100%;
               width: 100%;
               border-radius: 8px;
-              box-sizing: border-box;
             }
 
             &:hover {
