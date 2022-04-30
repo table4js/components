@@ -27,10 +27,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - run: npm run doc:gen
-      - uses: andstor/copycat-action@v3
-        with:
-          src_path: /examples
-          dst_path: /docs/examples
+      - run: |
+          cp -R ./examples/* ./docs/examples
 
       - uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
