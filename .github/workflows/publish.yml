@@ -31,3 +31,4 @@ jobs:
         with:
           branch: gh-pages
           folder: docs
+          token: ${{secrets.GHP_TOKEN}}
