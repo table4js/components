@@ -103,20 +103,22 @@ export class TableWidget {
             this.navigateTo(newValue);
         });
 
-        const resizeObserver = new ResizeObserver(entries => {
-            for(let entry of entries) {
-                if (entry.target.tagName === "THEAD") {
-                    if(entry.contentRect.width < 700) {
-                        entry.target.parentElement.classList.add("abris-dataTable-small");
+        if(typeof ResizeObserver !== "undefined") {
+            const resizeObserver = new ResizeObserver(entries => {
+                for(let entry of entries) {
+                    if (entry.target.tagName === "THEAD") {
+                        if(entry.contentRect.width < 700) {
+                            entry.target.parentElement.classList.add("abris-dataTable-small");
+                        }
+                        else {
+                            entry.target.parentElement.classList.remove("abris-dataTable-small");
+                        }
+                        this.tableHeadHeight(entry.contentRect.height + 5);
                     }
-                    else {
-                        entry.target.parentElement.classList.remove("abris-dataTable-small");
-                    }
-                    this.tableHeadHeight(entry.contentRect.height + 5);
                 }
-            }
-        });
-        resizeObserver.observe(element.getElementsByTagName("thead")[0]);
+            });
+            resizeObserver.observe(element.getElementsByTagName("thead")[0]);
+        }
     }
 
     protected showDetail(rowData: any) {

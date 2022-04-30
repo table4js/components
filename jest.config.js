@@ -3,10 +3,8 @@ module.exports = {
     "tests"
   ],
   "transform": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css|sass|scss|html)$": "<rootDir>/tests/file-transformer.js",
     "^.+\\.(ts|tsx)?$": "ts-jest"
-  },
-  "moduleNameMapper": {
-    "\\.(scss|html)$": "<rootDir>/tests/empty-module.js"
   },
   "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(ts|tsx)?$",
   "moduleFileExtensions": [

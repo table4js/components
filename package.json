@@ -47,7 +47,7 @@
     "css-loader": "^2.0.0",
     "generate-package-json-webpack-plugin": "^2.6.0",
     "html-webpack-plugin": "latest",
-    "jest": "^28.0.0",
+    "jest": ">=27.0.0 <28.0.0-0",
     "json-loader": "latest",
     "mini-css-extract-plugin": "latest",
     "sass": "^1",
