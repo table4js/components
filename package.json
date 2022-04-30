@@ -30,6 +30,7 @@
     "build": "webpack",
     "test": "jest",
     "test:dev": "jest --watch",
+    "doc:gen": "typedoc sources/index.ts --out docs --readme ./publish/doc-index.md --name '@abris/components' --includeVersion --hideGenerator",
     "release": "standard-version --message \"Release: %s\""
   },
   "dependencies": {
@@ -56,6 +57,7 @@
     "text-loader": "0.0.1",
     "ts-jest": "^27.1.4",
     "ts-loader": "latest",
+    "typedoc": "^0.22.15",
     "typescript": "latest",
     "underscore": "^1.8.3",
     "webpack": "^5.72.0",
