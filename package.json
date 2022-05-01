@@ -28,6 +28,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack",
+    "build:types": "tsc sources/index.ts --declaration --emitDeclarationOnly --skipLibCheck --target es5 --moduleResolution node --outFile dist/abris-components.d.ts && echo declare module '@abris-lab/components' { import main = require('index'); export = main; } >> dist/abris-components.d.ts",
     "test": "jest",
     "test:dev": "jest --watch",
     "doc:gen": "typedoc sources/index.ts --out docs --readme ./publish/doc-index.md --name '@abris/components' --includeVersion --hideGenerator",

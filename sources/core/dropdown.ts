@@ -1,3 +1,5 @@
+import * as ko from "knockout";
+
 export class Dropdown {
     constructor($element: JQuery, isOpen: ko.Observable = undefined ) {
         var $applicationRoot = $(document).find(".abris-application");
