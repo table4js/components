@@ -12,7 +12,7 @@ publishPackageJson.version = packageJson.version;
 
 const libraryName = 'AbrisComponents';
 const banner = [
-    "abris-components - JavaScript components library v" + packageJson.version,
+    "@abris-lab/components - JavaScript components library v" + packageJson.version,
     "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
     "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
@@ -72,6 +72,7 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
       template: './public/index.html',
       scriptLoading: "blocking"
     }),
+    new webpack.BannerPlugin(banner),
     new PascalCaseNamePlugin()
   ],
   output: {

@@ -22,12 +22,13 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npm run doc:gen
       - run: npm run build:types
+
       - run: npm publish dist --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - run: npm run doc:gen
       - run: |
           mkdir -p ./docs/examples
           cp -R ./examples/* ./docs/examples
