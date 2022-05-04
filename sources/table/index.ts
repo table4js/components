@@ -70,9 +70,9 @@ export class TableWidget {
     private tableElement: HTMLTableElement;
 
     constructor(config: ITableConfig, private element: HTMLElement) {
-        this.scrollerElement = element.getElementsByClassName("scrollContainer")[0] as HTMLDivElement;
+        this.scrollerElement = element.getElementsByClassName("scroll-container")[0] as HTMLDivElement;
         this.tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
-        this.resizerElement = element.getElementsByClassName("abris-dataTable")[0] as HTMLDivElement;
+        this.resizerElement = element.getElementsByClassName("abris-table")[0] as HTMLDivElement;
 
         this.options = config.model;
         this.showTableSummary = this.options.showTableSummary;
@@ -108,10 +108,10 @@ export class TableWidget {
                 for(let entry of entries) {
                     if (entry.target.tagName === "THEAD") {
                         if(entry.contentRect.width < 700) {
-                            entry.target.parentElement.classList.add("abris-dataTable-small");
+                            entry.target.parentElement.classList.add("abris-table--small");
                         }
                         else {
-                            entry.target.parentElement.classList.remove("abris-dataTable-small");
+                            entry.target.parentElement.classList.remove("abris-table--small");
                         }
                         this.tableHeadHeight(entry.contentRect.height + 5);
                     }

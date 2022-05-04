@@ -1,13 +1,416 @@
 @import "../_colors";
 
-.svg-icon {
+abris-components-table * {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+}
+
+.svg-icon, .button-svg-icon {
   width: 15px;
   height: 15px;
   fill: var(--abc-primary-2, $abc-primary-2);
 }
 
-* {
-  box-sizing: border-box;
+.resizable-container {
+  min-height: 100px;
+  height: 100%;
+}
+
+.scroll-container {
+  overflow-y: auto;
+  min-height: 100%;
+  max-height: calc(100vh - 80px);
+  height: auto;
+  width: 100%;
+}
+
+.scroll-container__narrow {
+  display: inline-block;
+  max-width: 500px;
+}
+
+.scroll-container--unlocked {
+  width: fit-content;
+}
+
+.scroll-container--locked {
+  overflow-y: visible;
+}
+
+.scroll-container--loadmore {
+  display: none;
+}
+
+@-moz-document url-prefix() {
+  .resizable-container {
+    padding-right: 8px;
+  }
+
+  .scroll-container {
+    width: calc(100% + 8px);
+  }
+}
+
+.abris-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.abris-table--small {
+  min-width: 400px;
+}
+
+.sticky-component {
+  z-index: 10;
+  position: sticky;
+  background: var(--abc-primary-1, $abc-primary-1);
+}
+
+.abris-table__header {
+  top: 0;
+}
+
+.header-tools__cell {
+  padding: 0;
+}
+
+.header-tools__container {
+  background: darken(#f8f9fd, $amount: 2);
+  border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.preheader {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.search-group {
+  display: flex;
+  flex-grow: 1;
+  margin-right: 25px;
+}
+
+.advanced-settings {
+  display: flex;
+  align-items: center;
+}
+
+.button-more {
+  margin-left: 15px;
+}
+
+.filter {
+  border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  width: 100%;
+  height: 50px;
+  position: relative;
+}
+
+.filter__container {
+  position: absolute;
+  display: flex;
+  height: fit-content;
+  padding: 5px;
+  width: calc(100% - 10px);
+  overflow-x: auto;
+}
+
+.header-title__cell {
+  padding: 10px;
+  background: var(--abc-primary-0, $abc-primary-0);
+  border-right: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
+  position: relative;
+
+  &:hover {
+    .title__filter {
+      display: block;
+    }
+  }
+}
+
+.switch {
+  width: 15px;
+}
+
+.switch__text {
+  font-weight: lighter;
+  text-align: center;
+  color: var(--abc-primary-2-op-50, $abc-primary-2-op-50);
+}
+
+.switch__text--selected {
+  color: var(--abc-primary-2, $abc-primary-2);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.title__text {
+  flex-grow: 1;
+  margin-right: 30px;
+  color: var(--abc-primary-2, $abc-primary-2);
+  font-weight: lighter;
+  text-align: left;
+}
+
+.title__tools {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  right: -5px;
+  background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, $abc-primary-0) 20%);
+}
+
+.title__filter {
+  margin-left: 3px;
+  display: none;
+  cursor: pointer;
+}
+
+.title_resize {
+  height: 100%;
+  width: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: col-resize;
+}
+
+.abris-table__row {
+  background: var(--abc-primary-1, $abc-primary-1);
+  position: relative;
+
+  &:hover {
+    .abris-table__more {
+      display: none;
+    }
+  
+    .abris-table__edit {
+      display: block;
+    }
+
+    .abris-table__row--select {
+      display: block;
+    }
+  }
+}
+
+.abris-table__row--selected {
+  .abris-table__check {
+    border-color: var(--abc-primary-4, $abc-primary-4);
+  }
+
+  .abris-table__more {
+    display: none;
+  }
+
+  .abris-table__edit {
+    display: block;
+    fill: var(--abc-primary-4, $abc-primary-4);
+  }
+
+  .abris-table__row--select {
+    display: block;
+    border-color: var(--abc-primary-0-op-80, $abc-primary-0-op-80);
+    background: var(--abc-primary-0-op-05, $abc-primary-0-op-05);
+  }
+}
+
+.abris-table__cell {
+  border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  padding: 5px;
+
+  &:first-child {
+    border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  }
+}
+
+.technical-cell {
+  background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
+  max-width: 35px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.technical-cell__container {
+  display: flex;
+  padding: 4px 0;
+  z-index: 1;
+  position: relative;
+}
+
+.abris-table__number {
+  margin: auto;
+}
+
+.abris-table__check {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 2px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+  margin: auto;
+}
+
+.abris-table__icon-check {
+  height: 100%;
+  width: 100%;
+  fill: var(--abc-primary-4, $abc-primary-4);
+}
+
+.icon-row-tools {
+  height: 20px;
+  width: 20px;
+  fill: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
+  margin: auto;
+}
+
+.abris-table__edit {
+  display: none;
+}
+
+.cell__container {
+  height: 100%;
+  display: flex;
+}
+
+.cell__text {
+  max-width: 280px;
+  margin: auto 0;
+  z-index: 1;
+}
+
+.cell__merged-text {
+  z-index: 1;
+  position: relative;
+}
+
+.cell__sticky-text {
+  position: sticky;
+}
+
+.abris-table__row--select {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+  background: var(--abc-primary-0-op-03, $abc-primary-0-op-03);
+}
+
+.abris-table__footer {
+  bottom: 0;
+}
+
+.icon-equal {
+  fill: var(--abc-primary-0, $abc-primary-0);
+  margin: 0 auto;
+}
+
+.footer__cell {
+  border-bottom: none;
+  padding: 0;
+}
+
+
+tfoot {
+
+  tr {
+    th {
+      padding: 0px;
+      background: darken(#f8f9fd, $amount: 2);
+      border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+    }
+  }
+
+  .table-footer-actions {
+    th {
+      border: none;
+
+      .table-footer-actions-container {
+        display: flex;
+        padding: 5px;
+        border-radius: 0 0 10px 10px;
+        background: darken(#f8f9fd, $amount: 2);
+        border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+
+        .table-bottom-actions {
+          margin-right: 25px;
+          flex-grow: 1;
+
+          .actions {
+            display: flex;
+
+            button {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        .rows-loaded {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-weight: lighter;
+            color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+          }
+
+          .rows-loaded-status {
+            margin-right: 15px;
+          }
+
+          .rows-go-to {
+            display: flex;
+            align-items: center;
+
+            span {
+              margin-right: 5px;
+            }
+
+            input {
+              @include mx-form-control;
+              width: 35px;
+
+              &:focus,
+              &:focus-visible {
+                @include mx-form-control-focus;
+              }
+            }
+
+            .btn-transparent {
+              margin: 0;
+              padding: 3px;
+              height: fit-content;
+
+              .svg-icon {
+                margin: 0;
+                fill: var(--abc-primary-0, $abc-primary-0);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 abris-table,
@@ -15,72 +418,31 @@ abris-components-table {
   display: inline-block;
   height: 100%;
 
-  .abris-detail {
-    z-index: 3000;
-  }
-
-  .resizableContainer {
-    min-height: 100px;
-    height: 100%;
-  }
-
   &.abrs-table-child-view {
     height: 100%;
   }
 
-  .scrollContainer {
-    overflow-y: auto;
-    max-height: calc(100vh - 130px);
-    height: auto;
-    width: 100%;
+  .scroll-container__locked {
+    >table {
+      >tr {
+        visibility: collapse;
 
-    &.scrollContainer-narrow {
-      display: inline-block;
-      max-width: 500px;
-    }
+        &.row-visible {
+          visibility: visible;
+        }
 
-    &.scrollContainer-unlocked {
-      width: fit-content;
-    }
-
-    &.scrollContainer-locked {
-      overflow-y: visible;
-
-      .loadmore {
-        display: none;
-      }
-
-      >table {
-        >tbody {
-          >tr {
-            visibility: collapse;
-
-            &.row-visible {
-              visibility: visible;
-            }
-
-            &.row-table-detail {
-              visibility: visible;
-            }
-          }
+        &.row-table-detail {
+          visibility: visible;
         }
       }
     }
   }
 
-  .caption {
-    display: inline-block;
-  }
-
   .abrs-table-side-edit {
     .abris-table-extended {
-      .resizableContainer>.btn-ref-line {
+      .resizable-container>.btn-ref-line {
         display: block;
       }
-    }
-
-    .scrollContainer {
-      transition: width 1s;
     }
 
     .abrs-table-side-detail {
@@ -92,475 +454,8 @@ abris-components-table {
     }
   }
 
-  table.abris-dataTable {
-    width: auto;
-    margin: 0;
-    height: auto;
-    border: 1px solid transparent;
-    clear: both;
-    border-collapse: separate;
-    border-spacing: 0;
-
-    thead {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-
-      & > .table-header-actions {
-        background: var(--abc-primary-1, $abc-primary-1);
-
-        th {
-          padding: 0px;
-
-          .table-header-actions-container {
-            background: darken(#f8f9fd, $amount: 2);
-            border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-
-            .table-preheader {
-              display: flex;
-              align-items: center;
-              padding: 5px;
-
-              .search-group {
-                display: flex;
-                flex-grow: 1;
-                margin-right: 25px;
-
-                .table-actions {
-                  .actions {
-                    display: flex;
-                  }
-                }
-              }
-
-              .abrs-advanced-settings {
-                display: flex;
-                align-items: center;
-
-                .abris-add-table-column {
-                  margin-left: 15px;
-
-                  .btn-blue {
-                    margin: 0;
-                  }
-
-                  .dropdown-menu {
-                    margin-left: -70px;
-                  }
-                }
-              }
-            }
-
-            .table-filter {
-              border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-              width: 100%;
-              height: 50px;
-              position: relative;
-
-              .table-filter-container {
-                position: absolute;
-                display: flex;
-                height: fit-content;
-                padding: 5px;
-                width: calc(100% - 10px);
-                overflow-x: auto;
-              }
-            }
-          }
-        }
-      }
-
-      & > .table-header {
-        & th {
-          padding: 10px;
-          background: var(--abc-primary-0, $abc-primary-0);
-          border-right: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
-          position: relative;
-
-          &.select_number {
-            padding: 8px 10px;
-            width: 15px;
-
-            div {
-              font-weight: lighter;
-              text-align: center;
-              color: var(--abc-primary-2-op-50, $abc-primary-2-op-50);
-    
-              &.selected {
-                color: var(--abc-primary-2, $abc-primary-2);
-              }
-            }
-          }
-
-          .th-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-
-            .caption {
-              width: min-content;
-              flex-grow: 1;
-              margin-right: 28px;
-              color: var(--abc-primary-2, $abc-primary-2);
-              font-weight: lighter;
-              text-align: left;
-            }
-
-            .th-actions {
-              display: flex;
-              align-items: center;
-              height: 100%;
-              position: absolute;
-              right: -5px;
-              background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, $abc-primary-0) 20%);
-
-              .abris-table-caption-filter {
-                margin-left: 3px;
-                display: none;
-                cursor: pointer;
-                height: 15px;
-                width: 15px;
-              }
-            }
-          }
-
-          &:hover {
-            .th-container {
-              .th-actions {
-                .abris-table-caption-filter {
-                  display: block;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .resize {
-        height: 100%;
-        width: 10px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: col-resize;
-        user-select: none;
-      }
-    }
-
-    tfoot {
-      position: sticky;
-      bottom: 0;
-      z-index: 10;
-
-      tr {
-        background: var(--abc-primary-1, $abc-primary-1);
-
-        th {
-          padding: 0px;
-          background: darken(#f8f9fd, $amount: 2);
-          border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-        }
-      }
-
-      .table-footer-actions {
-        th {
-          background: var(--abc-primary-1, $abc-primary-1);
-          border: none;
-
-          .table-footer-actions-container {
-            display: flex;
-            padding: 5px;
-            border-radius: 0 0 10px 10px;
-            background: darken(#f8f9fd, $amount: 2);
-            border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-
-            .table-bottom-actions {
-              margin-right: 25px;
-              flex-grow: 1;
-
-              .actions {
-                display: flex;
-
-                button {
-                  margin-bottom: 0;
-                }
-              }
-            }
-
-            .rows-loaded {
-              display: flex;
-              align-items: center;
-
-              span {
-                font-weight: lighter;
-                color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
-              }
-
-              .rows-loaded-status {
-                margin-right: 15px;
-              }
-
-              .rows-go-to {
-                display: flex;
-                align-items: center;
-
-                span {
-                  margin-right: 5px;
-                }
-
-                input {
-                  @include mx-form-control;
-                  width: 35px;
-
-                  &:focus, &:focus-visible {
-                    @include mx-form-control-focus;
-                  }
-                }
-
-                .btn-transparent {
-                  margin: 0;
-                  padding: 3px;
-                  height: fit-content;
-
-                  .svg-icon {
-                    margin: 0;
-                    fill: var(--abc-primary-0, $abc-primary-0);
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .dataTables_footer_filter {
-        &.filter_active {
-          th {
-            border: none !important;
-            border-bottom: 1px solid var(--abc-primary-0-op-20, $abc-primary-0-op-20) !important;
-            padding: 0px;
-
-            .body {
-              height: 31px;
-            }
-          }
-        }
-
-        & th:first-child {
-          &::before {
-            content: "\f0b0";
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-          }
-        }
-
-        &.filter_nonactive {
-          display: none;
-        }
-      }
-
-      .abris-table-summary {
-        th {
-          border-bottom: none !important;
-        }
-
-        & div {
-          display: flex;
-          justify-content: end;
-          border-radius: 8px;
-          border: 1px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
-          margin: 0px;
-          padding: 5px 7px;
-
-          &>span {
-            font-weight: initial;
-          }
-        }
-
-        .row-summary-cell {
-          height: 30px;
-
-
-          select {
-            border: none;
-            background: none;
-            vertical-align: middle;
-            cursor: pointer;
-            margin-left: 5px;
-          }
-        }
-      }
-    }
-
-    tbody {
-      & > tr {
-        background: var(--abc-primary-1, $abc-primary-1);
-        position: relative;
-
-        & > td {
-          border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-          border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-          padding: 5px;
-          font-size: 14px;
-
-          .td-content {
-            height: 100%;
-            display: flex;
-
-            span {
-              max-width: 280px;
-              margin: auto 0;
-            }
-          }
-
-          span {
-            z-index: 1;
-            position: relative;
-          }
-
-          &.row-rowspan {
-            span {
-              position: sticky;
-              height: max-content;
-            }
-          }
-
-          &.row-first-col {
-            background: darken(#f8f9fd, $amount: 2);
-            min-width: 35px;
-            height: 30px;
-            border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-            padding: 0;
-
-            .row-first-col-container {
-              display: flex;
-              padding: 4px 0;
-              z-index: 1;
-              position: relative;
-
-              .row-number {
-                margin: auto;
-              }
-
-              .row-check {
-                width: 20px;
-                height: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 4px;
-                border: 2px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
-                margin: auto;
-
-                .svg-icon {
-                  height: 18px;
-                  width: 18px;
-                  fill: var(--abc-primary-4, $abc-primary-4);
-                }
-              }
-            }
-          }
-
-          &.row-last-col {
-            min-width: 35px;
-            max-width: 35px;
-            width: 35px;
-            height: 30px;
-            padding: 0;
-            background: darken(#f8f9fd, $amount: 2);
-
-            .row-last-col-container {
-              display: flex;
-              padding: 4px 0;
-              z-index: 1;
-              position: relative;
-              height: 100%;
-            }
-
-            .row-select {
-              position: absolute;
-              top: 0;
-              right: 0;
-              height: 100%;
-              width: 100%;
-              border-radius: 8px;
-            }
-
-            &:hover {
-              .row-select {
-                border: 2px solid scale-color(#263769, $alpha: -55%);
-                background: scale-color(#263769, $alpha: -98%);
-                
-              }
-            }
-
-            .svg-icon {
-              height: 20px;
-              width: 20px;
-              fill: scale-color(#263769, $alpha: -45%);
-              margin: auto;
-
-              &.row-edit {
-                display: none;
-              }
-            }
-
-          }
-        }
-
-        &.selected {
-          td.row-first-col {
-            .row-first-col-container {
-              .row-check {
-                border-color: var(--abc-primary-4, $abc-primary-4);
-              }
-            }
-
-          }
-
-          .row-last-col {
-            .row-select {
-              border: 2px solid var(--abc-primary-0-op-80, $abc-primary-0-op-80);
-              background: scale-color(#263769, $alpha: -95%);
-              width: 100%;
-            }
-
-            .svg-icon {
-              &.row-more {
-                display: none;
-              }
-
-              &.row-edit {
-                display: block;
-                fill: var(--abc-primary-4, $abc-primary-4);
-              }
-            }
-          }
-        }
-
-        &:hover {
-          td.row-last-col {
-            .svg-icon {
-              &.row-more {
-                display: none;
-              }
-
-              &.row-edit {
-                display: block;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .abris-dataTable.abris-dataTable-small {
-    min-width: 400px;
-
+  
+  .abris-table--small {
     .table-bottom-actions,
     .table-actions {
       .row.er-actions-row .actions {
@@ -596,80 +491,7 @@ abris-components-table {
   }
 }
 
-.bottom {
-  display: flex;
-  width: 100%;
-  margin-top: 10px;
-
-  .dataTables_length,
-  .dataTables_info {
-    display: flex;
-  }
-
-  label {
-    color: var(--abc-primary-3, $abc-primary-3);
-  }
-
-  .dt-buttons {
-    display: flex;
-    justify-content: end;
-
-    @media print {
-      display: none;
-    }
-  }
-
-  .dataTables_paginate {
-    padding: 0;
-    display: flex;
-    margin: 0 55px;
-
-    @media print {
-      display: none !important;
-    }
-
-    .paginate_button {
-      color: var(--abc-primary-3, $abc-primary-3);
-      line-height: normal;
-      height: 30px;
-      padding: 5px 11px;
-      border-radius: 8px;
-      margin: 0;
-      margin-right: 5px;
-      border: none;
-      background: var(--abc-primary-0-op-10, $abc-primary-0-op-10);
-
-      &.current {
-        background: var(--abc-primary-0-op-95, $abc-primary-0-op-95);
-        color: var(--abc-primary-2, $abc-primary-2) !important;
-      }
-
-      &:hover {
-        background: linear-gradient(135deg, var(--abc-primary-0, $abc-primary-0) 0%, var(--abc-secondary-a-0, $abc-secondary-a-0) 100%);
-        color: var(--abc-primary-2, $abc-primary-2);
-      }
-    }
-
-    span {
-      line-height: 14px;
-    }
-  }
-}
-
-.dataTables_info {
-  padding: 5px 5px;
-}
-
-.abris-multi-selected-table>div>table>tbody>tr.detail>td>div>div.abris-child-view>div>form>div.row.detail>div.detail-view-col>div>div>div .form-control,
-.abris-multi-selected-table>div>table>tbody>tr.detail>td>div>div.abris-child-view>div>form>div.row.detail>div.detail-view-col>div>div>div>div .form-control,
-.abris-multi-selected-table>div>table>tbody>tr.detail>td>div>div.abris-child-view>div>form>div.row.detail>div.detail-view-col>div>div>div>abris-select>div>span>span>span,
-.abris-multi-selected-table>div>table>tbody>tr.detail>td>div>div.abris-child-view>div>form>div.row.detail>div.detail-view-col>div>div>div div>.plainEditor,
-.abris-multi-selected-table>div>table>tbody>tr.detail>td>div>div.abris-child-view>div>form>div.row.detail>div.detail-view-col>div>div>div .abris-datetimepicker {
-  color: var(--abc-primary-3-op-30, $abc-primary-3-op-30);
-}
-
 .abris-view-content-holder-inner {
-  // height: calc(100% - 20px);
   height: 100%;
 }
 
@@ -682,16 +504,6 @@ abris-components-table {
     height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
-    //padding-right: 8px;
-
-    // border: 1px solid;
-    //padding: 5px 25px 5px 5px;
-
-    .scrollContainer {
-      max-height: calc(100vh - 80px);
-      min-height: 100%;
-      height: auto;
-    }
   }
 
   .abrs-table-container-side {
@@ -699,17 +511,10 @@ abris-components-table {
     display: flex;
     flex-direction: column;
 
-    //min-width: 500px;
-    // border: 1px solid;
-    //padding: 5px 25px 5px 5px;
-    .resizableContainer {
-      //padding-right: 8px;
-
-      .scrollContainer {
-        width: 100%;
-        height: inherit;
-        margin-top: 5px;
-      }
+    .scroll-container {
+      width: 100%;
+      height: inherit;
+      margin-top: 5px;
     }
   }
 
@@ -720,35 +525,13 @@ abris-components-table {
 }
 
 @-moz-document url-prefix() {
-  .abrs-table-container {
-    .abrs-table-container-one {
-      .scrollContainer {
-        width: calc(100% + 8px);
-      }
-    }
-
-    .abrs-table-container-side {
-      .resizableContainer {
-        padding-right: 8px;
-
-        .scrollContainer {
-          width: calc(100% + 8px);
-        }
-      }
+  .abrs-table-container-side {
+    .scroll-container {
+      width: calc(100% + 8px);
     }
   }
 }
 
 .row.abrs-table-content-right {
   padding-right: 10px;
-}
-
-.abrs-table-container-one {
-
-  abris-table,
-  abris-components-table {
-    .scrollContainer {
-      max-height: calc(100vh - 80px);
-    }
-  }
 }
