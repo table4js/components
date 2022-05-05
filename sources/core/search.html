@@ -1,6 +1,9 @@
-<div class="a-search input-group">
-  <input data-bind="value: value, attr: { placeholder: $app.getLocalizedString('searching') }" />
-  <div class="a-search-button" data-bind="click: refresh, attr: { title: $app.getLocalizedString('findByValue') }">
-    <svg class="svg-icon"><use xlink:href='spritemap.svg#sprite-icon_search'></use></svg>
+<div class="abris-search">
+  <input class="abris-search__value"
+    data-bind="value: value, attr: { placeholder: $app.getLocalizedString('searching') }" />
+  <div class="abris-search__button" data-bind="click: refresh, attr: { title: $app.getLocalizedString('findByValue') }">
+    <svg class="svg-icon abris-search__icon">
+      <use xlink:href='spritemap.svg#sprite-icon_search'></use>
+    </svg>
   </div>
 </div>

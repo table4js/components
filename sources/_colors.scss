@@ -33,38 +33,38 @@ $abc-complement-2:  #a67c2c;
 $abc-complement-3:  #ffe0a4;
 $abc-complement-4:  #ffe8bc;
 
-$abc-primary-0-op-95:      scale-color($abc-primary-0, $alpha: -5%);          // scale-color(#092a3a, $alpha: -5%);     // var(--abc-primary-0-op-95, $abc-primary-0-op-95);
-$abc-primary-0-op-80:      scale-color($abc-primary-0, $alpha: -20%);         // scale-color(#092a3a, $alpha: -20%);    // var(--abc-primary-0-op-80, $abc-primary-0-op-80);
-$abc-primary-0-op-70:      scale-color($abc-primary-0, $alpha: -30%);         // scale-color(#092a3a, $alpha: -30%);    // var(--abc-primary-0-op-70, $abc-primary-0-op-70);
-$abc-primary-0-op-65:      scale-color($abc-primary-0, $alpha: -35%);         // scale-color(#092a3a, $alpha: -35%);    // var(--abc-primary-0-op-65, $abc-primary-0-op-65);
-$abc-primary-0-op-40:      scale-color($abc-primary-0, $alpha: -60%);         // scale-color(#092a3a, $alpha: -70%);    // var(--abc-primary-0-op-30, $abc-primary-0-op-30);
-$abc-primary-0-op-30:      scale-color($abc-primary-0, $alpha: -70%);         // scale-color(#092a3a, $alpha: -70%);    // var(--abc-primary-0-op-30, $abc-primary-0-op-30);
-$abc-primary-0-op-20:      scale-color($abc-primary-0, $alpha: -80%);         // scale-color(#092a3a, $alpha: -80%);    // var(--abc-primary-0-op-20, $abc-primary-0-op-20);
-$abc-primary-0-op-15:      scale-color($abc-primary-0, $alpha: -85%);         // scale-color(#092a3a, $alpha: -85%);    // var(--abc-primary-0-op-15, $abc-primary-0-op-15);
-$abc-primary-0-op-10:      scale-color($abc-primary-0, $alpha: -90%);         // scale-color(#092a3a, $alpha: -90%);    // var(--abc-primary-0-op-10, $abc-primary-0-op-10);
-$abc-primary-0-op-05:      scale-color($abc-primary-0, $alpha: -95%);         // scale-color(#092a3a, $alpha: -95%);    // var(--abc-primary-0-op-05, $abc-primary-0-op-05);
-$abc-primary-0-op-03:      scale-color($abc-primary-0, $alpha: -97%);         // scale-color(#092a3a, $alpha: -95%);    // var(--abc-primary-0-op-05, $abc-primary-0-op-05);
+$abc-primary-0-op-95:      scale-color($abc-primary-0, $alpha: -5%); 
+$abc-primary-0-op-80:      scale-color($abc-primary-0, $alpha: -20%);
+$abc-primary-0-op-70:      scale-color($abc-primary-0, $alpha: -30%);
+$abc-primary-0-op-65:      scale-color($abc-primary-0, $alpha: -35%);
+$abc-primary-0-op-40:      scale-color($abc-primary-0, $alpha: -60%);
+$abc-primary-0-op-30:      scale-color($abc-primary-0, $alpha: -70%);
+$abc-primary-0-op-20:      scale-color($abc-primary-0, $alpha: -80%);
+$abc-primary-0-op-15:      scale-color($abc-primary-0, $alpha: -85%);
+$abc-primary-0-op-10:      scale-color($abc-primary-0, $alpha: -90%);
+$abc-primary-0-op-05:      scale-color($abc-primary-0, $alpha: -95%);
+$abc-primary-0-op-03:      scale-color($abc-primary-0, $alpha: -97%);
 
-$abc-primary-1-dark-05:    darken($color: $abc-primary-1, $amount: 0.5);     // darken($color: #f8f9fd, $amount: 0.5); // var(--abc-primary-2-dark-05, $abc-primary-2-dark-05);
-$abc-primary-1-dark-2:     darken($color: $abc-primary-1, $amount: 2);       // darken($color: #f8f9fd, $amount: 3);   // var(--abc-primary-2-dark-3, $abc-primary-2-dark-3);
-$abc-primary-1-dark-3:     darken($color: $abc-primary-1, $amount: 3);       // darken($color: #f8f9fd, $amount: 3);   // var(--abc-primary-2-dark-3, $abc-primary-2-dark-3);
-$abc-primary-1-dark-4:     darken($color: $abc-primary-1, $amount: 4);       // darken($color: #f8f9fd, $amount: 4);   // var(--abc-primary-2-dark-4, $abc-primary-2-dark-4);
-$abc-primary-1-dark-7:     darken($color: $abc-primary-1, $amount: 7);       // darken($color: #f8f9fd, $amount: 7);   // var(--abc-primary-2-dark-7, $abc-primary-2-dark-7);
-$abc-primary-1-dark-8:     darken($color: $abc-primary-1, $amount: 8);       // darken($color: #f8f9fd, $amount: 8);   // var(--abc-primary-2-dark-8, $abc-primary-2-dark-8);
+$abc-primary-1-dark-05:    darken($color: $abc-primary-1, $amount: 0.5);
+$abc-primary-1-dark-2:     darken($color: $abc-primary-1, $amount: 2);
+$abc-primary-1-dark-3:     darken($color: $abc-primary-1, $amount: 3);
+$abc-primary-1-dark-4:     darken($color: $abc-primary-1, $amount: 4);
+$abc-primary-1-dark-7:     darken($color: $abc-primary-1, $amount: 7);
+$abc-primary-1-dark-8:     darken($color: $abc-primary-1, $amount: 8);
 
-$abc-primary-2-op-90:      scale-color($abc-primary-2, $alpha: -10%);         // scale-color(#ffffff, $alpha: -10%);    // var(--abc-primary-2-op-90, $abc-primary-2-op-90);
-$abc-primary-2-op-50:      scale-color($abc-primary-2, $alpha: -50%);         // scale-color(#ffffff, $alpha: -50%);    // var(--abc-primary-2-op-50, $abc-primary-2-op-50);
-$abc-primary-2-op-30:      scale-color($abc-primary-2, $alpha: -70%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
-$abc-primary-2-op-20:      scale-color($abc-primary-2, $alpha: -80%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
-$abc-primary-2-op-15:      scale-color($abc-primary-2, $alpha: -85%);         // scale-color(#ffffff, $alpha: -80%);    // var(--abc-primary-2-op-20, $abc-primary-2-op-20);
-$abc-primary-2-op-10:      scale-color($abc-primary-2, $alpha: -90%);         // scale-color(#ffffff, $alpha: -90%);    // var(--abc-primary-2-op-10, $abc-primary-2-op-10);
+$abc-primary-2-op-90:      scale-color($abc-primary-2, $alpha: -10%);
+$abc-primary-2-op-50:      scale-color($abc-primary-2, $alpha: -50%);
+$abc-primary-2-op-30:      scale-color($abc-primary-2, $alpha: -70%);
+$abc-primary-2-op-20:      scale-color($abc-primary-2, $alpha: -80%);
+$abc-primary-2-op-15:      scale-color($abc-primary-2, $alpha: -85%);
+$abc-primary-2-op-10:      scale-color($abc-primary-2, $alpha: -90%);
 
-$abc-primary-3-op-40:      scale-color($abc-primary-3, $alpha: -60%);         // scale-color(#323232, $alpha: -60%);    // var(--abc-primary-3-op-40, $abc-primary-3-op-40);
-$abc-primary-3-op-30:      scale-color($abc-primary-3, $alpha: -70%);         // scale-color(#323232, $alpha: -70%);    // var(--abc-primary-3-op-30, $abc-primary-3-op-30);
-$abc-primary-3-op-20:      scale-color($abc-primary-3, $alpha: -80%);         // scale-color(#323232, $alpha: -80%);    // var(--abc-primary-3-op-20, $abc-primary-3-op-20);
-$abc-primary-3-op-10:      scale-color($abc-primary-3, $alpha: -90%);         // scale-color(#323232, $alpha: -90%);    // var(--abc-primary-3-op-10, $abc-primary-3-op-10);
+$abc-primary-3-op-40:      scale-color($abc-primary-3, $alpha: -60%);
+$abc-primary-3-op-30:      scale-color($abc-primary-3, $alpha: -70%);
+$abc-primary-3-op-20:      scale-color($abc-primary-3, $alpha: -80%);
+$abc-primary-3-op-10:      scale-color($abc-primary-3, $alpha: -90%);
 
-$abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);     // scale-color(#22b2ea, $alpha: -85%);    // var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+$abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);
 
 
 @mixin mx-form-control {

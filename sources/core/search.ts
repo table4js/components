@@ -11,7 +11,7 @@ ko.components.register("abris-search", {
             var model = ko.unwrap(params.model);
             var filterModel = model[params.options.data] || model;
             var searchText = params.options.text && model[params.options.text] || ko.observable();
-            $(componentInfo.element).on("keyup", ".a-search input", event => {
+            $(componentInfo.element).on("keyup", ".abris-search input", event => {
                 if(event.keyCode === 13) filterModel.search(searchText());
             });
             return {

@@ -1,34 +1,33 @@
 @import "../colors";
-abris-search {
-    display: block;
-    max-width: 250px;
-    margin-right: 5px;
-    .a-search {
-        &.input-group {
-            display: flex;
-            align-items: center;
-            height: 30px;
-            max-width: 250px;
-            min-width: 110px;
-            border: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
-            border-radius: 15px;
-            background: var(--abc-primary-1, $abc-primary-1);
-            padding: 0 8px;
-        }
-        input {
-            width: 100%;
-            border: none;
-            background: none;
-        }
-        .a-search-button {
-            cursor: pointer;
-            .svg-icon {
-                fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40);
 
-                &:hover {
-                    fill: var(--abc-primary-4, $abc-primary-4);
-                }
-            }
-        }
+abris-search {
+    margin-right: 10px;
+}
+
+.abris-search {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    max-width: 250px;
+    min-width: 110px;
+    border: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+    border-radius: 15px;
+    background: var(--abc-primary-1, $abc-primary-1);
+    padding: 0 8px;
+}
+
+.abris-search__value {
+    width: 100%;
+    border: none;
+    background: none;
+}
+
+.abris-search__button {
+    &:hover {
+        fill: var(--abc-primary-4, $abc-primary-4);
     }
+}
+
+.abris-search__icon {
+    fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40);
 }
