@@ -51,12 +51,6 @@ abris-actions {
   }
 }
 
-.row.detail {
-  abris-actions.abris-view-top-actions {
-    right: 5px;
-  }
-}
-
 @media print {
   abris-actions {
     display: none;
