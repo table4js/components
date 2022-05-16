@@ -384,4 +384,7 @@ export class TableWidget {
     get topActions() {
         return this.getActions('top');
     }
+    get dropdownActions() {
+        return this.getActions('dropdown');
+    }
 }

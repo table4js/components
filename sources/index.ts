@@ -8,6 +8,7 @@ export * from "./core/dropdown";
 export * from "./core/dropdown-wrapper";
 export * from "./core/dd-tree-menu";
 export * from "./core/dd-tree-menu-item";
+export * from "./core/dropdown-actions";
 
 export * from "./find";
 export * from "./table";

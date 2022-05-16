@@ -35,11 +35,29 @@ var model = {
         {
             name: "a1",
             title: "test action",
-            action: () => {
+            action: function () {
                 alert(this.title);
             },
             svg: "icon_add-column",
             container: "top"
+        },
+        {
+            name: "a2",
+            title: "test dropdown action 1",
+            action: function () {
+                alert(this.title);
+            },
+            svg: "icon_add-column",
+            container: "dropdown"
+        },
+        {
+            name: "a3",
+            title: "test dropdown action 2",
+            action: function () {
+                alert(this.title);
+            },
+            svg: "icon_add-column",
+            container: "dropdown"
         }
     ]
 };

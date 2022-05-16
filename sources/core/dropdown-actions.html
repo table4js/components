@@ -1,0 +1,14 @@
+<div class="dropdown-toggle group-context-actions" data-bind="click: toggle, attr: { title: title }">
+    <button class="btn-transparent" type="button">
+        <svg class="svg-icon">
+            <use xlink:href='spritemap.svg#sprite-icon_more_sq'></use>
+        </svg>
+        <span class="action-label" data-bind="text: moreText"></span>
+    </button>
+    <!-- ko if: isOpen -->
+    <ul class="dropdown-menu">
+        <abris-actions class="top-context-actions" params="model: data, options: { action: action }">
+        </abris-actions>
+    </ul>
+    <!-- /ko -->
+</div>
