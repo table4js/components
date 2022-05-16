@@ -70,7 +70,7 @@ export class TableWidget {
     private tableElement: HTMLTableElement;
 
     constructor(config: ITableConfig, private element: HTMLElement) {
-        this.scrollerElement = element.getElementsByClassName("scroll-container")[0] as HTMLDivElement;
+        this.scrollerElement = element.getElementsByClassName("abris-table-scroll-container")[0] as HTMLDivElement;
         this.tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
         this.resizerElement = element.getElementsByClassName("abris-table")[0] as HTMLDivElement;
 

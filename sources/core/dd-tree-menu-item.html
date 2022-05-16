@@ -6,14 +6,14 @@
             <!-- ko if: hasItems -->
             <div class="c-items-menu-collapser"
                  data-bind="click: collapserClick, clickBubble: false, css: { 'add-element' : !hasItems }">
-                <svg class="button__svg-icon">
+                <svg class="abris-button__svg-icon">
                     <use data-bind="attr:{'xlink:href':'spritemap.svg#sprite-'+collapserSvg()}" xlink:href=''></use>
                 </svg>
             </div>
             <!-- /ko -->
             <!-- ko if: !hasItems -->
             <div class="c-items-menu-collapser add-element" data-bind="click: itemClick">
-                <svg class="button__svg-icon icon-plus">
+                <svg class="abris-button__svg-icon icon-plus">
                     <use xlink:href="spritemap.svg#sprite-icon_plus-cl"></use>
                 </svg>
             </div>

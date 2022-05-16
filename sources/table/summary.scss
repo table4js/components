@@ -6,7 +6,7 @@ abris-table-summary {
   padding: 5px;
 }
 
-.summary__select {
+.abris-table-summary__select {
   margin-left: 5px;
   background: none;
   border: none;
@@ -15,7 +15,7 @@ abris-table-summary {
   width: 20%;
 }
 
-.summary__value {
+.abris-table-summary__value {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 }

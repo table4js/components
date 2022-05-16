@@ -5,23 +5,19 @@ abris-actions {
   position: relative;
 }
 
-.actions {
-  position: relative;
-}
-
 button.action-button.action-checked {
   border: 1px solid var(--abc-primary-0-op-65, $abc-primary-0-op-65) !important;
 }
 
-.action__report {
+.abris-nested-actions {
   &:hover {
-    .report__dropdown {
+    .abris-nested-actions__dropdown {
       display: block;
     }
   }
 }
 
-.report__dropdown {
+.abris-nested-actions__dropdown {
   display: none;
   position: absolute;
   padding: 5px;
@@ -76,7 +72,7 @@ button.action-button.action-checked {
   .btn-green,
   .btn-red,
   .btn-blue,
-  .btn-transparent {
+  .abris-btn-transparent {
     margin-bottom: 0;
   }
 }

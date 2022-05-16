@@ -9,19 +9,19 @@ button {
   margin: 0;
 }
 
-.svg-icon,
-.button__svg-icon {
+.abris-svg-icon,
+.abris-button__svg-icon {
   width: 15px;
   height: 15px;
   fill: var(--abc-primary-2, $abc-primary-2);
 }
 
-.resizable-container {
+.abris-table-resizable-container {
   min-height: 100px;
   height: 100%;
 }
 
-.scroll-container {
+.abris-table-scroll-container {
   overflow-y: auto;
   min-height: 100%;
   max-height: calc(100vh - 80px);
@@ -29,29 +29,29 @@ button {
   width: 100%;
 }
 
-.scroll-container__narrow {
+.abris-table-scroll-container__narrow {
   display: inline-block;
   max-width: 500px;
 }
 
-.scroll-container--unlocked {
+.abris-table-scroll-container--unlocked {
   width: fit-content;
 }
 
-.scroll-container--locked {
+.abris-table-scroll-container--locked {
   overflow-y: visible;
 }
 
-.scroll-container--loadmore {
+.abris-table-scroll-container--loadmore {
   display: none;
 }
 
 @-moz-document url-prefix() {
-  .resizable-container {
+  .abris-table-resizable-container {
     padding-right: 8px;
   }
 
-  .scroll-container {
+  .abris-table-scroll-container {
     width: calc(100% + 8px);
   }
 }
@@ -65,7 +65,7 @@ button {
   min-width: 400px;
 }
 
-.sticky-component {
+.abris-table-sticky-component {
   z-index: 10;
   position: sticky;
   background: var(--abc-primary-1, $abc-primary-1);
@@ -75,46 +75,46 @@ button {
   top: 0;
 }
 
-.header-tools__cell {
+.abris-table-header-tools__cell {
   padding: 0;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
 }
 
-.group-header-technical-cell {
+.abris-table-group-header-abris-table-technical-cell {
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
 }
 
-.preheader {
+.abris-table-preheader {
   display: flex;
   align-items: center;
   padding: 5px;
 }
 
-.search-group {
+.abris-table-search-group {
   display: flex;
   flex-grow: 1;
   margin-right: 25px;
 }
 
-.advanced-settings {
+.abris-table-advanced-settings {
   display: flex;
   align-items: center;
 }
 
-.button-more {
+.abris-button-more {
   margin-left: 15px;
 }
 
-.filter {
+.abris-table-filter {
   border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   width: 100%;
   height: 50px;
   position: relative;
 }
 
-.filter__container {
+.abris-table-filter__container {
   position: absolute;
   display: flex;
   height: fit-content;
@@ -123,41 +123,41 @@ button {
   overflow-x: auto;
 }
 
-.header-title__cell {
+.abris-table-header-title__cell {
   padding: 10px;
   background: var(--abc-primary-0, $abc-primary-0);
   border-right: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
   position: relative;
 
   &:hover {
-    .title__filter {
+    .abris-table-title__filter {
       display: block;
     }
   }
 }
 
-.switch {
+.abris-table-switch {
   width: 15px;
 }
 
-.switch__text {
+.abris-table-switch__text {
   font-weight: lighter;
   text-align: center;
   color: var(--abc-primary-2-op-50, $abc-primary-2-op-50);
 }
 
-.switch__text--selected {
+.abris-table-switch__text--selected {
   color: var(--abc-primary-2, $abc-primary-2);
 }
 
-.title {
+.abris-table-title {
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
 }
 
-.title__text {
+.abris-table-title__text {
   flex-grow: 1;
   margin-right: 30px;
   color: var(--abc-primary-2, $abc-primary-2);
@@ -165,7 +165,7 @@ button {
   text-align: left;
 }
 
-.title__tools {
+.abris-table-title__tools {
   display: flex;
   align-items: center;
   height: 100%;
@@ -174,13 +174,13 @@ button {
   background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, $abc-primary-0) 20%);
 }
 
-.title__filter {
+.abris-table-title__filter {
   margin-left: 3px;
   display: none;
   cursor: pointer;
 }
 
-.title_resize {
+.abris-table-title_resize {
   height: 100%;
   width: 10px;
   position: absolute;
@@ -245,7 +245,7 @@ button {
   }
 }
 
-.technical-cell {
+.abris-table-technical-cell {
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   max-width: 35px;
   width: 30px;
@@ -253,7 +253,7 @@ button {
   padding: 0;
 }
 
-.technical-cell__container {
+.abris-table-technical-cell__container {
   display: flex;
   padding: 4px 0;
   z-index: 1;
@@ -281,7 +281,7 @@ button {
   fill: var(--abc-primary-4, $abc-primary-4);
 }
 
-.icon-row-tools {
+.abris-table-icon-row-tools {
   height: 20px;
   width: 20px;
   fill: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
@@ -292,18 +292,18 @@ button {
   display: none;
 }
 
-.cell__container {
+.abris-table-cell__container {
   height: 100%;
   display: flex;
 }
 
-.cell__text {
+.abris-table-cell__text {
   max-width: 280px;
   margin: auto 0;
   z-index: 1;
 }
 
-.cell__merged-text {
+.abris-table-cell__merged-text {
   z-index: 1;
   position: relative;
 }
@@ -329,34 +329,34 @@ button {
   z-index: 9;
 }
 
-.icon-equal {
+.abris-table-icon-equal {
   fill: var(--abc-primary-0, $abc-primary-0);
   margin: 0 auto;
 }
 
-.footer__cell {
+.abris-table-footer__cell {
   border-bottom: none;
   padding: 0;
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
 }
 
-.footer-tools__cell {
+.abris-table-footer-tools__cell {
   padding: 0px;
   border-radius: 0 0 10px 10px;
 }
 
-.footer-tools__container {
+.abris-table-footer-tools__container {
   display: flex;
   padding: 5px;
 }
 
-.row-management {
+.abris-table-row-management {
   margin-right: 25px;
   flex-grow: 1;
 }
 
-.row-management__actions .actions {
+.abris-table-row-management__actions .actions {
   display: flex;
 
   button {
@@ -364,30 +364,30 @@ button {
   }
 }
 
-.info {
+.abris-table-info {
   display: flex;
   align-items: center;
 }
 
-.info__total {
+.abris-table-info__total {
   margin-right: 15px;
 }
 
-.info__text {
+.abris-table-info__text {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 }
 
-.info__go-to {
+.abris-table-info__go-to {
   display: flex;
   align-items: center;
 }
 
-.go-to__text {
+.abris-table-go-to__text {
   margin-right: 5px;
 }
 
-.go-to__value {
+.abris-table-go-to__value {
   @include mx-form-control;
   width: 40px;
   height: 20px;
@@ -399,7 +399,7 @@ button {
   }
 }
 
-.btn-transparent {
+.abris-btn-transparent {
   margin: 0;
   padding: 3px;
   height: 21px;
@@ -411,7 +411,7 @@ button {
     background-color: var(--abc-primary-0-op-20, rgba(118, 148, 206, 0.2));
   }
 
-  .svg-icon {
+  .abris-svg-icon {
     margin: 0;
     fill: var(--abc-primary-0, $abc-primary-0);
   }
@@ -419,9 +419,9 @@ button {
 
 .abris-table--small {
   .table-bottom-actions,
-  .table-actions {
+  .abris-table-actions {
     button.action-button {
-      .button__svg-icon {
+      .abris-button__svg-icon {
         margin-right: 0;
       }
 
@@ -431,10 +431,10 @@ button {
     }
   }
 
-  abris-dropdown-wrapper.actions-menu {
-    .dropdown-toggle.group-context-actions {
-      button.btn-transparent {
-        .svg-icon {
+  abris-dropdown-wrapper.abris-table-actions-menu {
+    .abris-table-dropdown-toggle.group-context-actions {
+      button.abris-btn-transparent {
+        .abris-svg-icon {
           margin-right: 0;
         }
 
@@ -444,7 +444,7 @@ button {
       }
     }
 
-    &.open .group-context-actions .dropdown-menu {
+    &.open .group-context-actions .abris-table-dropdown-menu {
       left: -141px;
     }
   }
@@ -459,7 +459,7 @@ abris-components-table {
     height: 100%;
   }
 
-  .scroll-container__locked {
+  .abris-table-scroll-container__locked {
     >table {
       >tr {
         visibility: collapse;
@@ -477,7 +477,7 @@ abris-components-table {
 
   .abrs-table-side-edit {
     .abris-table-extended {
-      .resizable-container>.btn-ref-line {
+      .abris-table-resizable-container>.btn-ref-line {
         display: block;
       }
     }
@@ -512,7 +512,7 @@ abris-components-table {
     display: flex;
     flex-direction: column;
 
-    .scroll-container {
+    .abris-table-scroll-container {
       width: 100%;
       height: inherit;
       margin-top: 5px;
@@ -527,7 +527,7 @@ abris-components-table {
 
 @-moz-document url-prefix() {
   .abrs-table-container-side {
-    .scroll-container {
+    .abris-table-scroll-container {
       width: calc(100% + 8px);
     }
   }
