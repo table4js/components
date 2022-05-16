@@ -1,16 +1,17 @@
-<button data-bind="click: $data.formId !== undefined ? undefined : action, visible: visible, enable: !$data.enabled || ko.unwrap(enabled),  attr: { class: 'action-icon abris-action-'+ko.unwrap($data.name)+' '+ko.unwrap($data.cssClasses)+((ko.unwrap($data.active)=== true)?' active':''), title: title, form: $data.formId, type: $data.formId !== undefined ? 'submit' : 'button' }">
+<button
+    data-bind="click: $data.formId !== undefined ? undefined : action, visible: visible, enable: !$data.enabled || ko.unwrap(enabled),  attr: { class: 'action-button abris-action-'+ko.unwrap($data.name)+' '+ko.unwrap($data.cssClasses)+((ko.unwrap($data.active)=== true)?' active':''), title: title, form: $data.formId, type: $data.formId !== undefined ? 'submit' : 'button' }">
     <!-- ko if: $data.icon -->
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->
     <!-- ko if: $data.svg -->
-
-    <svg class="button-svg-icon"><use data-bind="attr:{'xlink:href':'spritemap.svg#sprite-'+svg}"  xlink:href=''></use></svg>
-
+    <svg class="abris-button__svg-icon abris-action-button__icon">
+        <use data-bind="attr:{'xlink:href':'spritemap.svg#sprite-'+svg}" xlink:href=''></use>
+    </svg>
     <!-- /ko -->
     <!-- ko ifnot: $data.icon -->
     <!--<span></span>-->
     <!-- /ko -->
     <!-- ko ifnot: $parents[1].short -->
-    <span class="button-label" data-bind="text: title"></span>
+    <span class="abris-action-button__label" data-bind="text: title"></span>
     <!-- /ko -->
 </button>

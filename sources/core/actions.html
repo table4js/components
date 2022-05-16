@@ -1,29 +1,26 @@
-﻿<div class='row er-actions-row'>
-    <div class="actions">
-        <!-- ko foreach: actions -->
-            <!-- ko ifnot: ko.unwrap($data.actions) -->
-                    <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
-                    <!-- ko component: { name: 'abris-action-item', params: $data } -->
-                    <!-- /ko -->
-                <!-- /ko -->
-            <!-- /ko -->
-            <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->
-            <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
-
-            <div class="abris-nested-actions abris-nested-actions__title action-context-button">
-                <!--<span class="icon icon-angle-right"></span>
+﻿<!-- ko foreach: actions -->
+<!-- ko ifnot: ko.unwrap($data.actions) -->
+<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
+<!-- ko component: { name: 'abris-action-item', params: $data } -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->
+<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
+<div class="abris-nested-actions abris-action-context-button">
+    <!--<span class="icon icon-angle-right"></span>
                 <span class="icon icon-angle-down"></span>-->
-                <svg class="button-svg-icon"><use xlink:href='spritemap.svg#sprite-icon_paste'></use></svg>
-                <span data-bind="text: title"></span>
-                <div class="abris-nested-actions abris-nested-actions__content">
-                    <!-- ko foreach: actions -->
-                    <!-- ko component: { name: 'abris-action-item', params: $data } -->
-                    <!-- /ko -->
-                    <!-- /ko -->
-                </div>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
+    <svg class="abris-button__svg-icon">
+        <use xlink:href='spritemap.svg#sprite-icon_paste'></use>
+    </svg>
+    <span class="abris-button__label" data-bind="text: title"></span>
+    <div class="abris-nested-actions__dropdown">
+        <!-- ko foreach: actions -->
+        <!-- ko component: { name: 'abris-action-item', params: $data } -->
+        <!-- /ko -->
         <!-- /ko -->
     </div>
 </div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
