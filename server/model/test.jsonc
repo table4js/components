@@ -1,0 +1,19 @@
+{
+    "$schema": "./modelschema.json",
+    "property": [
+        {
+            "name": "col1",
+            "title": "Column 1",
+            "type": "string",
+            "visible": true
+        },
+        {
+            "name": "col2",
+            "title": "Column 2",
+            "type": "string",
+            "visible": true
+        }
+    ],
+    //madn c,
+    "name": "hhhg"
+}
