@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import { IAction } from "../core/action";
 import { IAggregate } from "../find";
 
 import "./index.scss";
@@ -57,6 +58,7 @@ export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
     getViewModelData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
     showTableSummary: ko.Observable<boolean>;
+    actions?: Array<IAction>;
 }
 
 export interface ITableConfig {
@@ -374,4 +376,12 @@ export class TableWidget {
 
     isShowDetail = ko.observable(false);
     expandedRowKey;
+
+    getActions = (container?: string) => {
+        const actions = this.options.actions || [];
+        return actions.filter(action => action.container === container);
+    }
+    get topActions() {
+        return this.getActions('top');
+    }
 }
