@@ -431,6 +431,10 @@ button {
     }
   }
 
+  .abris-action-button__icon {
+    margin-right: 0;
+  }
+
   abris-dropdown-wrapper.abris-table-actions-menu {
     .abris-table-dropdown-toggle.group-context-actions {
       button.abris-btn-transparent {
