@@ -1,10 +1,11 @@
-<button
-    data-bind="click: $data.formId !== undefined ? undefined : action, 
-               visible: !$data.visible || ko.unwrap(visible),
-               enable: !$data.enabled || ko.unwrap(enabled),
-               attr: { class: 'abris-button--transparent action-button abris-action-'+ko.unwrap($data.name)+' '+ko.unwrap($data.cssClasses)+((ko.unwrap($data.active)=== true)?' active':''),
-               title: title, form: $data.formId,
-               type: $data.formId !== undefined ? 'submit' : 'button' }" >
+<button data-bind="click: $data.formId !== undefined ? undefined : action, 
+                visible: !$data.visible || ko.unwrap(visible),
+                enable: !$data.enabled || ko.unwrap(enabled),
+                attr: {
+                        class: 'abris-button--transparent action-button abris-action ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' abris-action--active' : ''),
+                        title: title, form: $data.formId,
+                        type: $data.formId !== undefined ? 'submit' : 'button'
+                    }">
     <!-- ko if: $data.icon -->
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->

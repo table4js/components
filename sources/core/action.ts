@@ -12,6 +12,7 @@ export interface IAction {
     icon?: string;
     svg?: string;
     container?: string;
+    cssClasses?: string;
 }
 
 ko.components.register("abris-action-item", {

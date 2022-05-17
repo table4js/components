@@ -35,6 +35,7 @@ var model = {
         {
             name: "a1",
             title: "test action",
+            cssClasses: "my-custom-class",
             action: function () {
                 alert(this.title);
             },
