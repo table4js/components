@@ -42,6 +42,11 @@ export interface ITableCell {
 
 }
 
+export interface ITableCellType {
+    name: string;
+    css: string;
+}
+
 export interface ITableRow {
     cells: ko.ObservableArray<ITableCell>,
     data: any,
@@ -70,6 +75,14 @@ export class TableWidget {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
+    public static cellTypes = {
+        "default": {
+            css: "abris-table__cell--left"
+        },
+    };
+    public static registerCellType(cellType: ITableCellType) {
+        TableWidget.cellTypes[cellType.name] = cellType;
+    }
 
     constructor(config: ITableConfig, private element: HTMLElement) {
         this.scrollerElement = element.getElementsByClassName("abris-table-scroll-container")[0] as HTMLDivElement;
@@ -228,6 +241,11 @@ export class TableWidget {
         return data[column.name] as string;
     }
 
+    protected getCellCss(data: any, column: ITableColumnDescription): string {
+        const cellTypeDescription = TableWidget.cellTypes[column.type] || TableWidget.cellTypes["default"];
+        return cellTypeDescription.css;
+    }
+
     protected createRow(data: any, num: number, back: boolean): ITableRow {
         let rowCells = [];
         let lastText = null;
@@ -241,7 +259,8 @@ export class TableWidget {
                 count: ko.observable(1),
                 color: colorCell,
                 name: col.name,
-                inplaceEditForm: ko.observable()
+                inplaceEditForm: ko.observable(),
+                css: this.getCellCss(data, col)
             }
             if (back) {
                 if (col.last.text() === cell.text()) {

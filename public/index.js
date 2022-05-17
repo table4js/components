@@ -15,7 +15,7 @@ var model = {
         {
             name: "col2",
             title: "Column 2",
-            type: "string",
+            type: "number",
             visible: true,
             order: ko.observable(),
             filterContext: {
@@ -27,7 +27,7 @@ var model = {
     getViewModelData: function (limit, offset, order, key, back, callback) {
         var result = [];
         for (var i = offset; i < offset + limit; i++) {
-            result.push({ id: i, col1: "test1" + i, col2: "test2" + i });
+            result.push({ id: i, col1: "test1" + i, col2: i });
         }
         callback(result, offset + limit, limit * 1000);
     },

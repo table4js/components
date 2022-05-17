@@ -294,7 +294,6 @@ button {
 
 .abris-table-cell__container {
   height: 100%;
-  display: flex;
 }
 
 .abris-table-cell__text {
@@ -418,6 +417,7 @@ button {
 }
 
 .abris-table--small {
+
   .table-bottom-actions,
   .abris-table-actions {
     button.action-button {
@@ -539,4 +539,12 @@ abris-components-table {
 
 .row.abrs-table-content-right {
   padding-right: 10px;
+}
+
+.abris-table__cell--left {
+  text-align: left;
+}
+
+.abris-table__cell--right {
+  text-align: right;
 }

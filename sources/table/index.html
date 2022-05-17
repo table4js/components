@@ -107,7 +107,7 @@
             data-bind="attr: {rowspan: $parents[1].isMergedСells() ? count() : 1}, style: {background: color}, visible: (count() > 0) || !$parents[1].isMergedСells()">
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count() > 1) && $parents[1].isMergedСells() -->
-            <div class="abris-table-cell__container">
+            <div class="abris-table-cell__container" data-bind="css: css">
               <span class="abris-table-cell__text" data-bind="html: text, click: $parents[1].startEditCell"></span>
             </div>
             <!-- /ko -->

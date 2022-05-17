@@ -13,6 +13,7 @@ export * from "./core/dropdown-actions";
 export * from "./find";
 export * from "./table";
 export * from "./table/summary";
+export * from "./table/number";
 
 export var tableWidgetTemplate = require("text-loader!./table/index.html");
 
