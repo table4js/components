@@ -67,6 +67,7 @@ button.action-button.action-checked {
 
 .table-actions,
 .dropdown.actions-menu {
+
   .btn-default,
   .btn-green,
   .btn-red,
@@ -85,7 +86,7 @@ button.action-button.action-checked {
   margin-right: 5px;
   background: transparent;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   user-select: none;
   cursor: pointer;
   box-shadow: none !important;
@@ -111,6 +112,7 @@ button.action-button.action-checked {
   white-space: nowrap;
   font-size: 13px;
   line-height: 17px;
+  font-weight: lighter;
 }
 
 .abris-button-toggle__dropdown-menu {
@@ -130,19 +132,21 @@ button.action-button.action-checked {
 }
 
 .abris-context-actions {
-  .abris-button--transparent {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 80px;
-    height: auto;
-    justify-content: center;
-    border: none;
-    border-radius: 6px;
-    padding: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    background: var(--abc-primary-1-dark-3, $abc-primary-1-dark-3);
+  display: flex;
+}
+
+.abris-context-button {
+  justify-content: center;
+  flex-direction: column;
+  width: 80px;
+  height: auto;
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background: var(--abc-primary-1-dark-3, $abc-primary-1-dark-3);
+
+  &:hover {
+    background: var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   }
 
   .abris-action-button__icon {
@@ -153,11 +157,6 @@ button.action-button.action-checked {
 
   .abris-action-button__label {
     line-height: 14px;
-    font-weight: lighter;
     white-space: break-spaces;
   }
-}
-
-.abris-context-actions {
-  display: flex;
 }

@@ -51,6 +51,7 @@ var model = {
                 alert(this.title);
             },
             svg: "icon_add-column",
+            cssClasses: "abris-context-button",
             container: "dropdown"
         },
         {
@@ -60,6 +61,7 @@ var model = {
                 alert(this.title);
             },
             svg: "icon_add-column",
+            cssClasses: "abris-context-button",
             container: "dropdown"
         }
     ]
