@@ -13,11 +13,13 @@ export interface IAction {
     svg?: string;
     container?: string;
     cssClasses?: string;
+    cssImage?: string;
+    cssLabel?: string;
 }
 
 ko.components.register("abris-action-item", {
     viewModel: {
-        createViewModel: (params, componentInfo) => {
+        createViewModel: (params: IAction, componentInfo) => {
             return params;
         }
     },
