@@ -1,4 +1,5 @@
-<button class="abris-action-button abris-button--transparent abris-button-toggle" type="button" data-bind="click: toggle, attr: { title: title }">
+<button class="abris-action-button abris-button--transparent abris-button-toggle" type="button"
+    data-bind="click: toggle, attr: { title: title }">
     <svg class="abris-button__svg-icon abris-action-button__icon">
         <use xlink:href='spritemap.svg#sprite-icon_more_sq'></use>
     </svg>
@@ -6,7 +7,7 @@
 </button>
 <!-- ko if: isOpen -->
 <ul class="abris-button-toggle__dropdown-menu">
-    <abris-actions class="abris-context-actions" params="model: data, options: { action: action }">
+    <abris-actions class="abris-context-actions" params="model: data, options: { action: actions }">
     </abris-actions>
 </ul>
 <!-- /ko -->
