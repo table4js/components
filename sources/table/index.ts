@@ -1,42 +1,8 @@
 import * as ko from "knockout";
 import { IAction } from "../core/action";
-import { IAggregate } from "../find";
+import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 
 import "./index.scss";
-
-export interface ITableColumnDescription {
-    name: string;
-    title: string;
-    type: string;
-    visible: boolean;
-    // filter: any;
-    // filterContext: any,
-    // order: ko.Observable<string>,
-    // count: number,
-    // prev: any,
-    // prevValue: any,
-    // concatPrev: boolean,
-    // last: any,
-    // row_color: string
-}
-
-export interface ITableColumn extends ITableColumnDescription {
-    // name: string;
-    // title: string;
-    // type: string;
-    // visible: boolean;
-    filter: any;
-    filterContext: any,
-    order: ko.Observable<string>,
-    summaryValue: ko.Observable<any>,
-    summaryParams: ko.Observable<IAggregate>,
-    count: number,
-    prev: any,
-    prevValue: any,
-    concatPrev: boolean,
-    last: any,
-    row_color: string
-}
 
 export interface ITableCell {
 
@@ -62,7 +28,7 @@ export interface ITableRow {
 export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
     getViewModelData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    showTableSummary: ko.Observable<boolean>;
+    showTableSummary?: ko.Observable<boolean>;
     actions?: Array<IAction>;
 }
 
@@ -71,10 +37,12 @@ export interface ITableConfig {
     model: ITableViewModel;
 }
 
-export class TableWidget {
+export class TableWidget implements ITableColumnOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
+    public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
+
     public static cellTypes = {
         "default": {
             css: "abris-table__cell--left"
@@ -84,21 +52,26 @@ export class TableWidget {
         TableWidget.cellTypes[cellType.name] = cellType;
     }
 
-    constructor(config: ITableConfig, private element: HTMLElement) {
+    constructor(private config: ITableConfig, element?: HTMLElement) {
+        this.options = this.config.model;
+        this.showTableSummary = this.options.showTableSummary || ko.observable(false);
+        this.primaryKey = this.config.options.primaryKey;
+        this.createColumns(this.config.model);
+
+        if(!!element) {
+            this.initialize(element);
+        }
+    }
+
+    initialize(element: HTMLElement) {
         this.scrollerElement = element.getElementsByClassName("abris-table-scroll-container")[0] as HTMLDivElement;
         this.tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
         this.resizerElement = element.getElementsByClassName("abris-table")[0] as HTMLDivElement;
-
-        this.options = config.model;
-        this.showTableSummary = this.options.showTableSummary;
-        this.primaryKey = config.options.primaryKey;
-        this.createColumns(config.model);
-        var rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
         
         var checkLoading = () => {
             var self = this;
-            self.partRowCount = Math.round(self.scrollerElement.clientHeight / rowHeight);
-            if(self.scrollerElement.scrollTop < rowHeight && self.lastOffsetBack > 0) {
+            self.partRowCount = Math.round(self.scrollerElement.clientHeight / TableWidget.rowHeight);
+            if(self.scrollerElement.scrollTop < TableWidget.rowHeight && self.lastOffsetBack > 0) {
                 if ((self.lastOffsetBack - self.partRowCount) < 0) {
                     self.drawRows(self.lastOffsetBack, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
                 } 
@@ -136,6 +109,10 @@ export class TableWidget {
         }
     }
 
+    calculateSummary(column: ITableColumn): void {
+
+    }
+
     protected showDetail(rowData: any) {
         this.isShowDetail(true);
     }
@@ -157,7 +134,7 @@ export class TableWidget {
     }
 
     protected createColumn(column: any, model: ITableViewModel): ITableColumn {
-        return column;
+        return new TableColumn(column, this);
     }
 
     protected createColumns(model: ITableViewModel) {

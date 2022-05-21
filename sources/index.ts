@@ -20,6 +20,11 @@ export var tableWidgetTemplate = require("text-loader!./table/index.html");
 ko.components.register("abris-components-table", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
+            if(!!params.widgetModel) {
+                const widgetModel = params.widgetModel as TableWidget;
+                widgetModel.initialize(componentInfo.element);
+                return widgetModel;
+            }
             return new TableWidget(params, componentInfo.element);
         }
     },
