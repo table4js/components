@@ -35,8 +35,10 @@
     "release": "standard-version --message \"Release: %s\""
   },
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "jquery": "^3.5.1",
-    "knockout": "^3.5.0"
+    "knockout": "^3.5.0",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "@types/jest": "^23.3.3",

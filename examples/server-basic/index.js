@@ -21,7 +21,7 @@ var model = {
     showTableSummary: ko.observable(false),
     columns: [],
     getViewModelData: function (limit, offset, order, key, back, callback) {
-        postData("getData", { limit: limit, offset: offset, order: order, key: key, }).then((data) => {
+        postData("getData", { name: model.name, limit: limit, offset: offset, order: order, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count);
         });
     }
@@ -29,14 +29,11 @@ var model = {
 
 function getColumns(name, model) {
     postData("getModel", { name: name }).then((data) => {
+        model.name = name,
         model.columns = data;
-        model.columns.forEach(column => {
-            column.order = ko.observable();
-            column.filterContext = { showFilter: ko.observable() };
-            column.summaryParams = ko.observableArray();
-        });
+
 
         ko.applyBindings(model);
     });
 }
-getColumns("name", model);
+getColumns(window.location.hash.substring(1), model);

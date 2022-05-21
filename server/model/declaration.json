@@ -1,0 +1,46 @@
+{
+    "property": [
+        {
+            "name": "p",
+            "title": "Position",
+            "type": "number"
+        },
+        {
+            "name": "a",
+            "title": "Article"
+        },
+        {
+            "name": "pa",
+            "title": "Paragraph"
+        },
+        {
+            "name": "c",
+            "title": "Content"
+        },
+        {
+            "name": "l",
+            "title": "Letters",
+            "type": "number"
+        },
+        {
+            "name": "w",
+            "title": "Words",
+            "type": "number"
+        }
+    ],
+    "name": "Universal Declaration of Human Rights",
+    "connector": {
+        "type": "csv",
+        "headers": ["p","a","pa","c","l","w"],
+        "separator": ";",
+        "defaultRow": {
+            "p": null,
+            "a": null,
+            "pa": null,
+            "c": null,
+            "l": null,
+            "w": null
+        },
+        "fileName": "declaration.csv"
+    }
+}

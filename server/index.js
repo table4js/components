@@ -1,4 +1,7 @@
 const http = require('http');
+const CSS = require("./csv");
+const Postgres = require("./postgres")
+
 const hostname = '127.0.0.1';
 const port = 3000;
 
@@ -11,23 +14,23 @@ function streamToString (stream) {
     })
   }
 
-const server = http.createServer((req, res) => { 
+const server = http.createServer(async (req, res) => { 
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     if (req.method === "POST") {
         (async ()=>{
-            let body = await streamToString(req);
-            let result = "";
+            let result, body = await streamToString(req);
             if (body) {
                 switch (req.url.substring(1)) {
-                    case "getData":  result = getData(JSON.parse(body)); break;
-                    case "getModel": result = getModel(JSON.parse(body)); break;
-                    default: result = `{"err": "Incorrect method name"}`; break;
+                    case "getData":  result = await getData(JSON.parse(body)); break;
+                    case "getModel": result = await getModel(JSON.parse(body)); break;
+                    default: result = {code: 405, data: `{"err": "Incorrect method name"}`}; break;
                 }
             }
+            res.statusCode = result.code;
             res.setHeader('Content-Type', 'application/json');
-            res.end(result);
+            res.end(result.data);
         })();
     }
     else {
@@ -39,30 +42,50 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
-
-function getData(params) {
-    let result = [];
-    for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && i < dataArray.length; i++) {
-        let row = dataArray[i].split(";");
-        result.push({ id: i, col1: row[0], col2: row[1] });
+const models = {
+    async get (name) {
+        const fs = require("fs").promises;
+        if (!models[name]) {
+            models[name] = JSON.parse(await fs.readFile(`./model/${name}.json`, "utf8"));
+        }
+        return models[name];
     }
-    return JSON.stringify({data: result, count: dataArray.length});
-} 
-
-function getModel(name) {
-    const fs = require("fs");
-    readTestCsv();
-    let buffer = fs.readFileSync("./model/test.jsonc", "utf8");
-    const re = new RegExp("\/\/(.*)","g");
-    buffer = buffer.replace(re,'');    
-    let model  = JSON.parse(buffer);
-    let property = model.property;
-    return JSON.stringify(property);
-} 
-
-var dataArray = [];
-function readTestCsv(){
-    const fs = require("fs");
-    let csv = fs.readFileSync("./data/test.csv", "utf8");
-    dataArray = csv.split(/\r?\n/);
 }
+
+
+const dataSourses = {
+    list: {},
+    pools: {},
+    async load () {
+        const fs = require("fs").promises;
+        dataSourses.list =  JSON.parse(await fs.readFile("./model/data_sources.json", "utf8"));
+    },
+    pool (name) {
+        return this.pools[name];
+    } 
+};
+dataSourses.load();
+
+
+async function getData(params) {
+    let connector = (await models.get(params.name)).connector;
+    switch(connector.type) {
+        case "csv": return CSS.getData(params, connector); 
+        case "postgres": return await Postgres.getData(params, connector, dataSourses);
+        default: return {code: 501, data: "{'err': 'Incorrect connector type'}"}; 
+    }
+} 
+
+
+async function getModel(params) {
+    let model = await models.get(params.name); 
+    switch(model.connector.type) {
+        case "csv": CSS.read(model.connector, model.property); break; 
+        case "postgres": Postgres.createPool(dataSourses, model.connector.dataSource); break;
+        default: return {code: 501, data: "{'err': 'Incorrect model name'}"}; 
+    }
+    return {code: 200, data: JSON.stringify(model.property)};
+} 
+
+
+

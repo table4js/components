@@ -1,0 +1,26 @@
+{
+    "property": [
+        {
+            "name": "first_name",
+            "title": "First name"
+        },
+        {
+            "name": "last_name",
+            "title": "Last name"
+        },
+        {
+            "name": "email",
+            "title": "Email"
+        },
+        {
+            "name": "activebool",
+            "title": "Active"
+        }
+    ],
+    "connector": {
+        "type": "postgres",
+        "dataSource": "abris",
+        "templateSQL": "SELECT first_name, last_name, email, activebool FROM customer",
+        "countSQL": "SELECT count(*) FROM customer"
+    }
+}
