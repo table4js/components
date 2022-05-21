@@ -27,6 +27,22 @@ button {
   max-height: calc(100vh - 80px);
   height: auto;
   width: 100%;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--abc-primary-0, $abc-primary-0);
+  }
 }
 
 .abris-table-scroll-container__narrow {
