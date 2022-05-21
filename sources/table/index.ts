@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { IAction } from "../core/action";
-import { ITableColumn, ITableColumnDescription, TableColumn } from "./column";
+import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 
 import "./index.scss";
 
@@ -37,7 +37,7 @@ export interface ITableConfig {
     model: ITableViewModel;
 }
 
-export class TableWidget {
+export class TableWidget implements ITableColumnOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
@@ -109,6 +109,10 @@ export class TableWidget {
         }
     }
 
+    calculateSummary(column: ITableColumn): void {
+
+    }
+
     protected showDetail(rowData: any) {
         this.isShowDetail(true);
     }
@@ -130,7 +134,7 @@ export class TableWidget {
     }
 
     protected createColumn(column: any, model: ITableViewModel): ITableColumn {
-        return new TableColumn(column);
+        return new TableColumn(column, this);
     }
 
     protected createColumns(model: ITableViewModel) {

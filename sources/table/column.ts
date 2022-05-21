@@ -36,9 +36,14 @@ export interface ITableColumn extends ITableColumnDescription {
     row_color: string
 }
 
-export class TableColumn implements ITableColumn {
+export interface ITableColumnOwner {
+    calculateSummary(column: ITableColumn): void;
+}
 
-    constructor(columnDescription: ITableColumnDescription) {
+export class TableColumn implements ITableColumn {
+    private subscription: ko.Computed;
+
+    constructor(columnDescription: ITableColumnDescription, owner) {
         Object.keys(columnDescription || {}).forEach(key => {
             if(columnDescription[key] !== undefined) {
                 this[key] = columnDescription[key];
@@ -47,6 +52,9 @@ export class TableColumn implements ITableColumn {
         if(this.title === undefined) {
             this.title = this.name;
         }
+        this.subscription = ko.computed(() => {
+            owner.calculateSummary(this);
+        });
     }
 
     filter: any;
@@ -64,4 +72,10 @@ export class TableColumn implements ITableColumn {
     title: string;
     type: string = "string";
     visible: boolean = true;
+
+    dispose() {
+        if(this.subscription) {
+            this.subscription.dispose();
+        }
+    }
 }

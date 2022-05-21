@@ -37,11 +37,11 @@ button {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
+    background: var(--abc-primary-0-op-20, $abc-primary-0-op-20);
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: var(--abc-primary-0, $abc-primary-0);
+    background: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
   }
 }
 
