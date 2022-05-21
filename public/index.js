@@ -1,27 +1,16 @@
-var model = {
-    showTableSummary: ko.observable(false),
+var showTableSummary = ko.observable(false);
+
+var options = {
+    showTableSummary,
     columns: [
         {
             name: "col1",
-            title: "Column 1",
-            type: "string",
-            visible: true,
-            order: ko.observable(),
-            filterContext: {
-                showFilter: ko.observable()
-            },
-            summaryParams: ko.observableArray()
+            title: "Column 1"
         },
         {
             name: "col2",
             title: "Column 2",
-            type: "number",
-            visible: true,
-            order: ko.observable(),
-            filterContext: {
-                showFilter: ko.observable()
-            },
-            summaryParams: ko.observableArray()
+            type: "number"
         }
     ],
     getViewModelData: function (limit, offset, order, key, back, callback) {
@@ -33,15 +22,15 @@ var model = {
     },
     actions: [
         {
-            name: "a1",
-            title: "test action",
+            name: "summary-action",
+            title: "Show/hide summary",
             cssClasses: "my-custom-class",
             cssImage: "my-custom-class",
             cssLabel: "my-custom-class",
             action: function () {
-                alert(this.title);
+                showTableSummary(!showTableSummary());
             },
-            svg: "icon_add-column",
+            svg: "icon_table",
             container: "top"
         },
         {
@@ -67,4 +56,6 @@ var model = {
     ]
 };
 
-ko.applyBindings(model);
+var widgetModel = new AbrisComponents.TableWidget({ model: options, options: {} });
+
+ko.applyBindings(widgetModel);

@@ -1,6 +1,7 @@
 import * as ko from "knockout";
+import { ITableColumn } from "./column";
+
 import "./summary.scss";
-import { ITableColumn } from ".";
 
 var summaryTemplate = require("text-loader!./summary.html");
 
@@ -27,7 +28,7 @@ export class TableSummaryViewModel {
     this.func.subscribe(v => column.summaryParams({ func: v, field: column.name, }));
   }
   value: ko.Observable;
-  func= ko.observable(null);
+  func = ko.observable(null);
   summaryItems = ko.observableArray<TableSummaryItem>();
 }
 
