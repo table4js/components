@@ -11,7 +11,8 @@ const Functions: Array<{ title: string; value: string; types?: string[] }> =  [
   { title: "x̄", value: "avg", types: ["integer", "money", "number"] }, 
   { title: "min", value: "min", types: ["integer", "money", "date", "number"] },
   { title: "max", value: "max", types: ["integer", "money", "date", "number"] },
-  { title: "Ν", value: "count" }
+  { title: "Ν", value: "count" },
+  { title: "U", value: "unique" },
 ];
 
 export class TableSummaryItem {

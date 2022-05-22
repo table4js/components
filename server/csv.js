@@ -2,7 +2,7 @@
 const csv = require('csv-parser');
 
 module.exports.getSummary = function (params, connector) {
-    let result = connector.dataArray[0][params.field], sum = 0, count = 0;
+    let result = connector.dataArray[0][params.field], sum = 0, count = 0, uniques = [];
     connector.dataArray.forEach(row => {
         switch(params.func){
             case "sum": result = result + row[params.field]; break;
@@ -10,6 +10,7 @@ module.exports.getSummary = function (params, connector) {
             case "min": result = result < row[params.field] ? result : row[params.field]; break;
             case "max": result = result > row[params.field] ? result : row[params.field]; break;
             case "count": if(row[params.field]) count++; result = count; break;
+            case "unique": if(!uniques.includes(row[params.field])) {uniques.push(row[params.field]);} result = uniques.length; break; 
             default: break;
         }
     })
