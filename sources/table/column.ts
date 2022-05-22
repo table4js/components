@@ -53,6 +53,7 @@ export class TableColumn implements ITableColumn {
             this.title = this.name;
         }
         this.subscription = ko.computed(() => {
+            ko.unwrap(this.summaryParams);
             owner.calculateSummary(this);
         });
     }

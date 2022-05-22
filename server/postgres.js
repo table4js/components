@@ -1,5 +1,10 @@
 const Pool = require('pg').Pool;
 
+module.exports.getSummary = async function (params, connector, dataSourses) {
+    let result = await dataSourses.pool(connector.dataSource).query(`SELECT ${params.func}(${params.field}) as value from (${connector.templateSQL}) t `);
+    return {code: 200, data: JSON.stringify({data: result.rows[0].value})};
+}
+
 module.exports.getData = async function (params, connector, dataSourses){
     let order = null;
     params.order.reverse().forEach(e => {

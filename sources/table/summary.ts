@@ -7,10 +7,10 @@ var summaryTemplate = require("text-loader!./summary.html");
 
 const Functions: Array<{ title: string; value: string; types?: string[] }> =  [
   { title: "-", value: "" }, 
-  { title: "Σ", value: "sum", types: ["integer", "money"] }, 
-  { title: "x̄", value: "avg", types: ["integer", "money"] }, 
-  { title: "min", value: "min", types: ["integer", "money", "date"] },
-  { title: "max", value: "max", types: ["integer", "money", "date"] },
+  { title: "Σ", value: "sum", types: ["integer", "money", "number"] }, 
+  { title: "x̄", value: "avg", types: ["integer", "money", "number"] }, 
+  { title: "min", value: "min", types: ["integer", "money", "date", "number"] },
+  { title: "max", value: "max", types: ["integer", "money", "date", "number"] },
   { title: "Ν", value: "count" }
 ];
 

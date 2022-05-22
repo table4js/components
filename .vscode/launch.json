@@ -13,15 +13,6 @@
             ],
             "type": "node",
             "cwd":"${workspaceFolder}/server"
-        },
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\dist\\abris-components.js"
         }
     ]
 }

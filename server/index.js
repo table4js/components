@@ -25,6 +25,7 @@ const server = http.createServer(async (req, res) => {
                 switch (req.url.substring(1)) {
                     case "getData":  result = await getData(JSON.parse(body)); break;
                     case "getModel": result = await getModel(JSON.parse(body)); break;
+                    case "getSummary": result = await getSummary(JSON.parse(body)); break;
                     default: result = {code: 405, data: `{"err": "Incorrect method name"}`}; break;
                 }
             }
@@ -66,6 +67,14 @@ const dataSourses = {
 };
 dataSourses.load();
 
+async function getSummary(params) {
+    let connector = (await models.get(params.name)).connector;
+    switch(connector.type) {
+        case "csv": return CSS.getSummary(params, connector); 
+        case "postgres": return await Postgres.getSummary(params, connector, dataSourses);
+        default: return {code: 501, data: "{'err': 'Incorrect connector type'}"}; 
+    }
+} 
 
 async function getData(params) {
     let connector = (await models.get(params.name)).connector;

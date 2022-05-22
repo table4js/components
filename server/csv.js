@@ -1,6 +1,21 @@
 
 const csv = require('csv-parser');
 
+module.exports.getSummary = function (params, connector) {
+    let result = connector.dataArray[0][params.field], sum = 0, count = 0;
+    connector.dataArray.forEach(row => {
+        switch(params.func){
+            case "sum": result = result + row[params.field]; break;
+            case "avg": sum = sum + row[params.field]; count++; result = sum / count; break;
+            case "min": result = result < row[params.field] ? result : row[params.field]; break;
+            case "max": result = result > row[params.field] ? result : row[params.field]; break;
+            case "count": if(row[params.field]) count++; result = count; break;
+            default: break;
+        }
+    })
+    return {code: 200, data: JSON.stringify({data: result})};
+}
+
 module.exports.getData = function (params, connector) {
     function sortfunc (a,b) {
         for (let i=0; i<params.order.length; i++) {
