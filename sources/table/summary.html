@@ -1,6 +1,6 @@
 ﻿<span class="abris-table-summary__value" data-bind="text: value"></span>
 <select class="abris-table-summary__select"  data-bind="value: func">
   <!-- ko foreach: summaryItems -->
-    <option data-bind="text: title, value: value"></option>
+    <option data-bind="text: title, value: value, attr: {title: title}"></option>
   <!-- /ko -->  
 </select>

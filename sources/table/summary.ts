@@ -5,14 +5,14 @@ import "./summary.scss";
 
 var summaryTemplate = require("text-loader!./summary.html");
 
-const Functions: Array<{ title: string; value: string; types?: string[] }> =  [
-  { title: "-", value: "" }, 
-  { title: "Σ", value: "sum", types: ["integer", "money", "number"] }, 
-  { title: "x̄", value: "avg", types: ["integer", "money", "number"] }, 
-  { title: "min", value: "min", types: ["integer", "money", "date", "number"] },
-  { title: "max", value: "max", types: ["integer", "money", "date", "number"] },
-  { title: "Ν", value: "count" },
-  { title: "U", value: "unique" },
+const Functions: Array<{ title: string; value: string; hint: string, types?: string[] }> =  [
+  { title: "-", value: "", hint: "" }, 
+  { title: "Σ", value: "sum", hint: "Sum of cells for this table column", types: ["integer", "money", "number"] }, 
+  { title: "x̄", value: "avg", hint: "Arithmetic mean in this table column", types: ["integer", "money", "number"] }, 
+  { title: "min", value: "min", hint: "Minimum value in this table column", types: ["integer", "money", "date", "number"] },
+  { title: "max", value: "max", hint: "Maximum value in this table column", types: ["integer", "money", "date", "number"] },
+  { title: "Ν", value: "count", hint: "Number of non-blank cells in this column" },
+  { title: "U", value: "unique", hint: "Number of unique cells in this column" },
 ];
 
 export class TableSummaryItem {
