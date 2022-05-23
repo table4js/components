@@ -58,6 +58,10 @@ export class TableColumn implements ITableColumn {
         });
     }
 
+    get filterComponentName() {
+        return "abris-table-filter-default";
+    }
+
     filter: any;
     filterContext: any = new FilterContext();
     order: Observable<string> = ko.observable<string>();

@@ -59,6 +59,20 @@ export class TableWidget implements ITableColumnOwner {
         this.primaryKey = this.config.options.primaryKey;
         this.createColumns(this.config.model);
 
+        ko.computed(() => {
+            const columnFilterValues = [];
+            this.columns().forEach(column => {
+                const columnFilterValue = ko.unwrap(column.filterContext.value);
+                if(columnFilterValue) {
+                    columnFilterValues.push(columnFilterValue);
+                }
+            });
+            if(columnFilterValues.length > 0) {
+                console.log("this.refresh();");
+                // this.refresh();
+            }
+        });    
+
         if(!!element) {
             this.initialize(element);
         }
@@ -182,8 +196,8 @@ export class TableWidget implements ITableColumnOwner {
         }
     }
 
-    public clickFilter = (data: ITableColumn, event) => {
-        data.filterContext.addItem()();
+    public clickFilter = (column: ITableColumn, event) => {
+        column.filterContext.addItem()(column);
         event.stopPropagation();
     }
 

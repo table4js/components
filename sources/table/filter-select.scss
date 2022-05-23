@@ -1,0 +1,20 @@
+@import "../_colors";
+abris-filter-builder {
+  .abrs-filter-builder {
+    .abrs-filter-row {
+      .input-group {
+        abris-select-filter {
+          display: block;
+          padding: 0;
+
+          .select2-container--default .select2-selection--multiple {
+            min-height: initial;
+            border: none;
+
+            
+          }
+        }  
+      }
+    }
+  }
+}

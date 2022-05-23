@@ -14,6 +14,10 @@ export * from "./find";
 export * from "./table";
 export * from "./table/summary";
 export * from "./table/number";
+export * from "./table/filter";
+export * from "./table/filter-default";
+export * from "./table/filter-item";
+export * from "./table/filter-select";
 
 export var tableWidgetTemplate = require("text-loader!./table/index.html");
 
