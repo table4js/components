@@ -46,7 +46,7 @@ export class TableWidget implements ITableColumnOwner {
 
     public static cellTypes = {
         "default": {
-            css: "abris-table__cell--left"
+            css: "abris-table-cell--left"
         },
     };
     public static registerCellType(cellType: ITableCellType) {

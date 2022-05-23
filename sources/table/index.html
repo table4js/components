@@ -3,8 +3,8 @@
     <table class="abris-table">
       <thead class="abris-table__header abris-table-sticky-component">
         <tr class="abris-table-header-tools">
-          <th class="abris-table-header-tools__cell abris-table-group-header-technical-cell" colspan="100%">
-            <div class="abris-table-header-tools__container">
+          <th class="abris-table-header-tools__cell" colspan="100%">
+            <div class="abris-table-header-tools__container abris-table-group-header-technical-cell">
               <div class="abris-table-preheader">
 
                 <!-- ko ifnot: $data.viewModel -->
@@ -83,12 +83,12 @@
       <tbody class="abris-table__body">
         <!-- ko if: rows().length == 0 -->
         <tr class="abris-table__row">
-          <th class="abris-table__cell" colspan="100%">Данных нет</th>
+          <th class="abris-table-cell" colspan="100%">Данных нет</th>
         </tr>
         <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
         <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}">
-          <td class="abris-table__cell abris-table-technical-cell" data-bind="click: select">
+          <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
             <div class="abris-table-technical-cell__container">
               <!-- ko if: $parent.isNumber() -->
               <div class="abris-table__number" data-bind="text: number"></div>
@@ -103,8 +103,11 @@
             </div>
           </td>
           <!-- ko foreach: cells -->
-          <td class="abris-table__cell"
-            data-bind="attr: {rowspan: $parents[1].isMergedСells() ? count() : 1}, style: {background: color}, visible: (count() > 0) || !$parents[1].isMergedСells()">
+          <td class="abris-table-cell"
+            data-bind="attr: {rowspan: $parents[1].isMergedСells() ? count() : 1},
+                       style: {background: color},
+                       visible: (count() > 0) || !$parents[1].isMergedСells(),
+                       css: (count() > 1) && $parents[1].isMergedСells() ? 'abris-table-cell--merged ' + css : css ">
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count() > 1) && $parents[1].isMergedСells() -->
             <div class="abris-table-cell__container" data-bind="css: css">
@@ -113,7 +116,9 @@
             <!-- /ko -->
             <!-- ko if: (count() > 1) && $parents[1].isMergedСells() -->
             <span class="abris-table-cell__merged-text"
-              data-bind="html: text, style: {top: $parents[1].tableHeadHeight() + 'px'}, click: $parents[1].startEditCell, css: (count() > 1) && $parents[1].isMergedСells() ? 'cell__sticky-text' : ''"></span>
+              data-bind="html: text, style: {top: $parents[1].tableHeadHeight() + 1 + 'px'},
+                         click: $parents[1].startEditCell,
+                         css: (count() > 1) && $parents[1].isMergedСells() ? 'cell__sticky-text' : ''"></span>
             <!-- /ko -->
             <!-- /ko -->
             <!-- ko if: inplaceEditForm -->
@@ -122,7 +127,7 @@
             <!-- /ko -->
           </td>
           <!-- /ko -->
-          <td class="abris-table__cell abris-table-technical-cell" data-bind="click: click">
+          <td class="abris-table-cell abris-table-technical-cell" data-bind="click: click">
             <div class="abris-table-technical-cell__container">
               <svg class="abris-svg-icon abris-table-icon-row-tools abris-table__more">
                 <use xlink:href="spritemap.svg#sprite-icon_more"></use>
@@ -138,7 +143,7 @@
       </tbody>
       <tfoot class="abris-table__footer abris-table-sticky-component">
         <tr class="abris-table-footer-summary" data-bind="visible: showTableSummary">
-          <th class="abris-table__cell abris-table-technical-cell abris-table-footer__cell">
+          <th class="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
             <div class="abris-table-technical-cell__container">
               <svg class="abris-svg-icon abris-table-icon-equal">
                 <use xlink:href="spritemap.svg#sprite-icon_equal"></use>
@@ -147,16 +152,16 @@
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
-          <th class="abris-table__cell abris-table-footer__cell">
+          <th class="abris-table-cell abris-table-footer__cell">
             <abris-table-summary params='column: $data'></abris-table-summary>
           </th>
           <!-- /ko -->
           <!-- /ko -->
-          <th class="abris-table__cell abris-table-technical-cell abris-table-footer__cell"></th>
+          <th class="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>
         </tr>
         <tr class="abris-table-footer-tools">
-          <th class="abris-table-footer-tools__cell abris-table-group-header-technical-cell" colspan="100%">
-            <div class="abris-table-footer-tools__container">
+          <th class="abris-table-footer-tools__cell" colspan="100%">
+            <div class="abris-table-footer-tools__container abris-table-group-header-technical-cell">
               <div class="abris-table-row-management">
                 <!-- ko if: $data.viewModel -->
                 <abris-actions class="abris-table-row-management__actions"

@@ -34,14 +34,14 @@ var model = {
     actions: [
         {
             name: "summary-action",
-            title: "Show/hide summary",
+            title: "Summary",
             cssClasses: "my-custom-class",
             cssImage: "my-custom-class",
             cssLabel: "my-custom-class",
             action: function () {
                 showTableSummary(!showTableSummary());
             },
-            svg: "icon_table",
+            svg: "icon_equal",
             container: "top"
         },
         {

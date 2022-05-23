@@ -3,7 +3,7 @@ body {
 }
 
 :root {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
 
     --main-color: royalblue;

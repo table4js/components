@@ -3,6 +3,28 @@
 abris-components-table * {
   box-sizing: border-box;
   outline: none;
+  scrollbar-width: thin;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: lighter;
+
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #F0F0F0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #CDCDCD;
+  
+    &:hover {
+        background: #A6A6A6;
+    }
+  }
 }
 
 button {
@@ -27,22 +49,6 @@ button {
   max-height: calc(100vh - 80px);
   height: auto;
   width: 100%;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--abc-primary-0-op-20, $abc-primary-0-op-20);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
-  }
 }
 
 .abris-table-scroll-container__narrow {
@@ -94,6 +100,9 @@ button {
 .abris-table-header-tools__cell {
   padding: 0;
   border-bottom: none;
+}
+
+.abris-table-header-tools__container {
   border-radius: 10px 10px 0 0;
 }
 
@@ -224,7 +233,7 @@ button {
   }
 
   &:last-child {
-    .abris-table__cell {
+    .abris-table-cell {
       border-bottom: none;
     }
   }
@@ -251,7 +260,7 @@ button {
   }
 }
 
-.abris-table__cell {
+.abris-table-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   padding: 5px;
@@ -259,6 +268,10 @@ button {
   &:first-child {
     border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   }
+}
+
+.abris-table-cell--merged {
+  vertical-align: top;
 }
 
 .abris-table-technical-cell {
@@ -358,12 +371,12 @@ button {
 
 .abris-table-footer-tools__cell {
   padding: 0px;
-  border-radius: 0 0 10px 10px;
 }
 
 .abris-table-footer-tools__container {
   display: flex;
   padding: 5px;
+  border-radius: 0 0 10px 10px;
 }
 
 .abris-table-row-management {
@@ -557,10 +570,10 @@ abris-components-table {
   padding-right: 10px;
 }
 
-.abris-table__cell--left {
+.abris-table-cell--left {
   text-align: left;
 }
 
-.abris-table__cell--right {
+.abris-table-cell--right {
   text-align: right;
 }
