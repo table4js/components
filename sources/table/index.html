@@ -39,7 +39,7 @@
                 <div class="abris-table-filter__container">
                   <!-- ko foreach: columns -->
                   <!-- ko if: $data.filterComponentName -->
-                  <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext, column: $data } } -->
+                  <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext, column: $data, table: $parent } } -->
                   <!-- /ko -->
                   <!-- /ko -->
                   <!-- /ko -->

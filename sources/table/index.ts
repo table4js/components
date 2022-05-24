@@ -29,6 +29,7 @@ export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
     getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
     getViewModelSummary(func: string, field: string, callback: (value: any) => void);
+    getItems: (column, value, callback) => void;
     showTableSummary?: ko.Observable<boolean>;
     actions?: Array<IAction>;
 }

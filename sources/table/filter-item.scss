@@ -58,50 +58,9 @@
   height: 10px !important;
 }
 
-abris-select-filter.abrs-filter__value {
-  background: transparent;
+abris-filter-select.abrs-filter__value {
+  min-width: 70px;
+  // background: transparent;
   border: none;
   padding: 0;
-
-  .select2.select2-container .selection {
-    .select2-selection {
-      border: none;
-      border-bottom-color: currentcolor;
-      border-bottom-style: none;
-      border-bottom-width: medium;
-      background: transparent;
-      border-radius: 0;
-      border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
-      max-height: 22px;
-      min-height: 22px;
-
-      .select2-selection__rendered {
-        padding: 0px;
-        padding-bottom: 2px;
-        height: 20px;
-        display: flex;
-
-        .select2-selection__clear {
-          display: none;
-          margin: 0;
-          padding: 0;
-          font-weight: lighter;
-          position: absolute;
-          right: 0;
-          top: 2px;
-          padding-left: 5px;
-          background: linear-gradient(90deg, transparent 10%, var(--abc-primary-1-dark-8, $abc-primary-1-dark-8) 15%);
-        }
-
-        .select2-search {
-          height: 100%;
-
-          .select2-search__field {
-            height: 100%;
-            margin: 0;
-          }
-        }
-      }
-    }
-  }
 }

@@ -1,1 +1,26 @@
-﻿<select style='width: 100%;' multiple="multiple"></select>
+﻿<div class="abris-filter-select--selection">
+    <!-- ko foreach: selectedItems -->
+    <span class="abris-filter-select--selected-item">
+        <span data-bind="text: $data"></span>
+        <span data-bind="">х</span>
+    </span>
+    <!-- /ko -->
+</div>
+<button class="abris-filter-select--toggle-button abris-action-button abris-button-toggle" type="button"
+    data-bind="click: toggle, attr: { title: title }">
+    <svg class="abris-button__svg-icon abris-action-button__icon">
+        <use xlink:href='spritemap.svg#sprite-icon_more_sq'></use>
+    </svg>
+    <span class="abris-action-button__label" data-bind="text: moreText"></span>
+</button>
+<!-- ko if: isOpen -->
+<ul class="abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
+    <input style="width: 100%;" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
+    <!-- ko foreach: foundItems -->
+    <div data-bind="click: $parent.clickItem">
+        <input type="checkbox" data-bind="checked: $parent.isChecked($data)" />
+        <span data-bind="text: $data"></span>
+    </div>
+    <!-- /ko -->
+</ul>
+<!-- /ko -->

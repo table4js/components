@@ -53,7 +53,10 @@ var options = {
             cssClasses: "abris-context-button",
             container: "dropdown"
         }
-    ]
+    ],
+    getItems: (column, filter, callback) => {
+        setTimeout(() => callback([1, 2, 3, 4, 5]), 500);
+    }
 };
 
 var widgetModel = new AbrisComponents.TableWidget({ model: options, options: {} });

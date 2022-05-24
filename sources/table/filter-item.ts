@@ -4,6 +4,7 @@ import "./filter-item.scss";
 
 import { operationsMap, IFindOperation } from "../find";
 import { ITableColumn } from "./column";
+import { TableWidget } from ".";
 
 var filterTemplate = require("text-loader!./filter-item.html");
 
@@ -12,11 +13,8 @@ export class FilterTableItem {
   constructor(
     public filterItemValue: { value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; },
     public filterEditorName: string,
-    public propertyInfo: any,
-    public propertyPath: any,
-    public viewModel: any,
     public column: any,
-    public entityName: string
+    public getItems
   ) {
     ko.computed(() => {
       if(!!this.operation()) {
@@ -41,13 +39,15 @@ export class FilterTableViewModel {
       showFilter: KnockoutObservable<boolean>;
     },
     private column: ITableColumn,
-    componentInfo
+    private table: TableWidget
   ) {
     params.addItem((column) => {
       let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observable(column.name) };
       filterValue.value.subscribe(() => this.apply());
       filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
-      this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.params.propertyInfo, this.params.propertyPath, this.params.model, this.params.column, this.params.entityName))
+      this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.column, (column, filter, callback) => {
+        this.table.options.getItems(column, filter, callback);
+      }));
       params.showFilter(!!this.filterItems().length);
     });
 
@@ -90,7 +90,7 @@ export class FilterTableViewModel {
 ko.components.register("abris-filter-item", {
   viewModel: {
     createViewModel: function(params, componentInfo) {
-      var viewModel = new FilterTableViewModel(params.context, params.column, componentInfo);
+      var viewModel = new FilterTableViewModel(params.context, params.column, params.table);
       return viewModel;
     }
   },

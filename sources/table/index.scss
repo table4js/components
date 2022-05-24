@@ -20,9 +20,9 @@ abris-components-table * {
 
   &::-webkit-scrollbar-thumb {
     background: #CDCDCD;
-  
+
     &:hover {
-        background: #A6A6A6;
+      background: #A6A6A6;
     }
   }
 }
@@ -145,7 +145,7 @@ button {
   height: fit-content;
   padding: 5px;
   width: calc(100% - 10px);
-  overflow-x: auto;
+  // overflow-x: auto;
 }
 
 .abris-table-header-title__cell {
