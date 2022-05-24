@@ -3,7 +3,7 @@
   <div class="abris-filter__title abris-filter-text" data-bind="text: column.title + ':'"></div>
   <!-- ko foreach: filterItems -->
   <!-- ko if: $index() > 0 -->
-  <div class="abris-filter__operator abris-filter-text" data-bind="text: $app.getLocalizedString('and')"></div>
+  <div class="abris-filter__operator abris-filter-text" data-bind="text: '&'"></div>
   <!-- /ko -->
   <select class="abris-filter___operation"
     data-bind="options: $parent.operations, value: operation, optionsText: 'text'"></select>

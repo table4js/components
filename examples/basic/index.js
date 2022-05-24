@@ -9,7 +9,7 @@ var model = {
             title: "Column 2"
         }
     ],
-    getViewModelData: function (limit, offset, order, key, back, callback) {
+    getViewModelData: function (limit, offset, order, filters, key, back, callback) {
         var result = [];
         for (var i = offset; i < offset + limit; i++) {
             result.push({ id: i, col1: "test1" + i, col2: "test2" + i });

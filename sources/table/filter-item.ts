@@ -10,7 +10,7 @@ var filterTemplate = require("text-loader!./filter-item.html");
 
 export class FilterTableItem {
   constructor(
-    public filterItemValue: { value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservableArray<string>; },
+    public filterItemValue: { value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; },
     public filterEditorName: string,
     public propertyInfo: any,
     public propertyPath: any,
@@ -35,7 +35,7 @@ export class FilterTableViewModel {
       propertyInfo: any;
       propertyPath: any;
       column: any;
-      value: KnockoutObservableArray<{ value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservableArray<string>; }>;
+      value: KnockoutObservableArray<{ value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; }>;
       entityName: string;
       addItem: KnockoutObservable<any>;
       showFilter: KnockoutObservable<boolean>;
@@ -44,7 +44,7 @@ export class FilterTableViewModel {
     componentInfo
   ) {
     params.addItem((column) => {
-      let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observableArray([column.name]) };
+      let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observable(column.name) };
       filterValue.value.subscribe(() => this.apply());
       filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
       this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.params.propertyInfo, this.params.propertyPath, this.params.model, this.params.column, this.params.entityName))

@@ -27,7 +27,7 @@ export interface ITableRow {
 
 export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
-    getViewModelData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
+    getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
     getViewModelSummary(func: string, field: string, callback: (value: any) => void);
     showTableSummary?: ko.Observable<boolean>;
     actions?: Array<IAction>;
@@ -36,6 +36,12 @@ export interface ITableViewModel {
 export interface ITableConfig {
     options: { primaryKey: string };
     model: ITableViewModel;
+}
+
+interface ITableFilter {
+    value: string,
+    op: string,
+    field: string,
 }
 
 export class TableWidget implements ITableColumnOwner {
@@ -60,16 +66,18 @@ export class TableWidget implements ITableColumnOwner {
         this.createColumns(this.config.model);
 
         ko.computed(() => {
-            const columnFilterValues = [];
+            this.tableFilter = [];
             this.columns().forEach(column => {
-                const columnFilterValue = ko.unwrap(column.filterContext.value);
+                let columnFilterValue = ko.unwrap(column.filterContext.value);
                 if(columnFilterValue) {
-                    columnFilterValues.push(columnFilterValue);
+                    columnFilterValue.forEach(e => {
+                        if ((e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
+                        this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
+                    })
                 }
             });
-            if(columnFilterValues.length > 0) {
-                console.log("this.refresh();");
-                // this.refresh();
+            if(this.tableFilter.length > 0) {
+                this.refresh();
             }
         });    
 
@@ -142,7 +150,7 @@ export class TableWidget implements ITableColumnOwner {
         if(startRow) {
             this.lastOffsetBack = startRow - 1;
             this.lastOffset = startRow - 1;
-            this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = 0; c.last = null });
+            this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
             this.rows.removeAll();
             this.drawRows(this.partRowCount, startRow - 1, false, true);
             this.hideDetail();
@@ -162,7 +170,7 @@ export class TableWidget implements ITableColumnOwner {
     protected refresh() {
         this.lastOffsetBack = 0;
         this.lastOffset = 0;
-        this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = 0; });
+        this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows.removeAll();
         this.drawRows(this.partRowCount, 0, false, true);
         this.hideDetail();
@@ -175,6 +183,7 @@ export class TableWidget implements ITableColumnOwner {
                 limit, 
                 offset,
                 this.columns().filter(c => c.order() !== undefined).map(c => <any>{field: c.name, desc: c.order()}),
+                this.tableFilter,
                 null /*&& this.pinnedRowKey()*/, 
                 back, 
                 (data, newOffset: number, totalCount: number, back: boolean) => {
@@ -385,6 +394,7 @@ export class TableWidget implements ITableColumnOwner {
     tableHeadHeight = ko.observable(0);
     showTableFilter = ko.observable(true);
     viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter()).length > 0); 
+    tableFilter: ITableFilter[];
 
     isShowDetail = ko.observable(false);
     expandedRowKey;

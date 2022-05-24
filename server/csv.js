@@ -27,13 +27,25 @@ module.exports.getData = function (params, connector) {
     }
     (params.order.length > 0) && connector.dataArray.sort(sortfunc);
     let result = [];
-    for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && connector.dataArray && i < connector.dataArray.length; i++) {
-        result.push( Object.assign({}, connector.defaultRow, connector.dataArray[i]));
+    const filteredData = connector.dataArray.filter(row => {
+        let accept = true;
+        params.filters.forEach(f => {
+            switch(f.op) {
+                case "C":  accept = row[f.field] == f.value; break;
+                case "ISN":  accept = !(row[f.field]); break;
+                case "ISNN":  accept = !!(row[f.field]); break;
+                default: accept = true; break;
+            }
+        });
+        return accept;
+    });
+    for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && filteredData && i < filteredData.length; i++) {
+        result.push(filteredData[i]);
     }
-    return {code: 200, data: JSON.stringify({data: result, count: connector.dataArray.length})};
+    return {code: 200, data: JSON.stringify({data: result, count: filteredData.length})};
 }
 
-module.exports.read = function (params, property){
+module.exports.read = function (connector, property){
     function typeCasting(object, property) {
         Object.keys(object).forEach(name => {
             if(property.filter(p=>p.name === name)[0].type === "number"){
@@ -45,8 +57,8 @@ module.exports.read = function (params, property){
 
     const results = [];
     const fs = require("fs");
-    fs.createReadStream(`./data/${params.fileName}`)
-    .pipe(csv({separator: params.separator, headers: params.headers}))
-    .on('data', (data) => results.push(typeCasting(data, property)))
-    .on('end', () => params.dataArray = results);
+    fs.createReadStream(`./data/${connector.fileName}`)
+    .pipe(csv({separator: connector.separator, headers: connector.headers}))
+    .on('data', (data) => results.push(typeCasting( Object.assign({}, connector.defaultRow, data), property)))
+    .on('end', () => connector.dataArray = results);
 }

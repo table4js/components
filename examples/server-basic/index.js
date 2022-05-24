@@ -21,8 +21,8 @@ var showTableSummary = ko.observable(false);
 var model = {
     showTableSummary,
     columns: [],
-    getViewModelData: function (limit, offset, order, key, back, callback) {
-        postData("getData", { name: model.name, limit: limit, offset: offset, order: order, key: key, }).then((data) => {
+    getViewModelData: function (limit, offset, order, filters, key, back, callback) {
+        postData("getData", { name: model.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count);
         });
     },
