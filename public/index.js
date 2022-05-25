@@ -54,8 +54,8 @@ var options = {
             container: "dropdown"
         }
     ],
-    getItems: (column, filter, callback) => {
-        setTimeout(() => callback([1, 2, 3, 4, 5]), 500);
+    getItems: (column, filter, limit, offset, callback) => {
+        setTimeout(() => callback(["1 "+offset, "2 "+offset, "3 "+offset, "4 "+offset, "5 "+offset, "t6 "+offset, "t7 "+offset, "t8 "+offset, "t9 "+offset, "t10 "+offset]), 500);
     }
 };
 

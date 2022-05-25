@@ -10,6 +10,8 @@ var selectboxFilterTemplate = require("text-loader!./filter-select.html");
 export class TableFilterSelect {
     private subscriptionFilterText: ko.Subscription;
     private subscriptionSelection: ko.Subscription;
+    private limit: number = 10;
+    private offset: number = 0;
 
     constructor(private column: ITableColumn, private getItems, isOpen?: ko.Observable<boolean>, public title: string = "", public moreText: string = "") {
         if(isOpen !== undefined) {
@@ -17,14 +19,29 @@ export class TableFilterSelect {
         }
         this.subscriptionFilterText = this.filterText.subscribe((filterValue) => {
             this.foundItems([]);
-            this.getItems(this.column, filterValue, items => this.foundItems(items));
+            this.offset = 0;
+            this.getItems(this.column, filterValue, this.limit, this.offset, items => {
+                this.foundItems(items);
+                this.isLoadMore(items.length === this.limit);
+                this.offset += 10;
+            });
         });
         this.subscriptionSelection = this.selectedItems.subscribe((value) => {
             console.log("Set filter value to " + JSON.stringify(value));
             // this.column.filterContext.value(this.selectedItems());
         });
+        this.filterText.notifySubscribers(null)
     }
+    loadMore() {
+        this.getItems(this.column, this.filterText(), this.limit, this.offset, items => {
+            items.forEach(i => this.foundItems.push(i))
+            this.isLoadMore(items.length === this.limit);
+            this.offset += 10;
+            console.log("this.isLoadMore()", this.isLoadMore());
+        });
+}
     isOpen = ko.observable(false);
+    isLoadMore = ko.observable(false);
     toggle = (_, event) => {
         this.isOpen(!this.isOpen());
         event.stopPropagation();
