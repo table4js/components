@@ -4,6 +4,7 @@ var sampleDataProvider = new ArrayDataProvider(sampleData);
 var showTableSummary = ko.observable(false);
 
 var options = {
+    showSearch: ko.observable(true),
     showTableSummary,
     columns: [
         {

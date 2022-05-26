@@ -7,6 +7,9 @@
             <div class="abris-table-header-tools__container abris-table-group-header-technical-cell">
               <div class="abris-table-preheader">
                 <div class="abris-table-search-group">
+                  <!-- ko if: showSearch -->
+                  <abris-search params="model: searchModel"></abris-search>
+                  <!-- /ko -->
                   <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'topActions' }">
                   </abris-actions>
                   <abris-dropdown-actions class="abris-table-dropdown abris-table-actions-menu"
