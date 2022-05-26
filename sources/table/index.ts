@@ -1,11 +1,14 @@
 import * as ko from "knockout";
 import { IAction } from "../core/action";
+import { InplaceEditor } from "./cell-editor";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 
 import "./index.scss";
 
 export interface ITableCell {
-
+    [key: string]: any;
+    text: ko.Observable<string>;
+    inplaceEditForm: ko.Observable;
 }
 
 export interface ITableCellType {
@@ -264,7 +267,7 @@ export class TableWidget implements ITableColumnOwner {
         this.columns().reverse().forEach(col => {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
-            let cell = {
+            let cell: ITableCell = {
                 data: data[col.name],
                 text:  ko.observable(text), 
                 count: ko.observable(1),
@@ -320,7 +323,8 @@ export class TableWidget implements ITableColumnOwner {
         return false;
     }
 
-    public startEditCell = (cell: any, event: MouseEvent) => {
+    public startEditCell = (cell: ITableCell, event: MouseEvent) => {
+        cell.inplaceEditForm(new InplaceEditor(cell));
         this.completeEditCell();
     }
 
