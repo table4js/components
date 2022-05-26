@@ -31,7 +31,8 @@ module.exports.getData = function (params, connector) {
         let accept = true;
         params.filters.forEach(f => {
             switch(f.op) {
-                case "C":  accept = row[f.field] == f.value; break;
+                case "EQ": accept = f.value.includes(row[f.field]); break;
+                case "C":  accept = ~row[f.field].toUpperCase().indexOf(f.value.toUpperCase()); break;
                 case "ISN":  accept = !(row[f.field]); break;
                 case "ISNN":  accept = !!(row[f.field]); break;
                 default: accept = true; break;
@@ -43,6 +44,17 @@ module.exports.getData = function (params, connector) {
         result.push(filteredData[i]);
     }
     return {code: 200, data: JSON.stringify({data: result, count: filteredData.length})};
+}
+
+module.exports.getColumnData = function (params, connector) {
+    let result = [], uniques = [];
+    const filteredData = connector.dataArray.map(row => {
+        if((!(params.filter) || ~row[params.columnName].toUpperCase().indexOf(params.filter.toUpperCase())) && !uniques.includes(row[params.columnName])) {uniques.push(row[params.columnName]);};
+    });
+    for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && uniques && i < uniques.length; i++) {
+        result.push(uniques[i]);
+    }
+    return {code: 200, data: JSON.stringify({data: result})};
 }
 
 module.exports.read = function (connector, property){

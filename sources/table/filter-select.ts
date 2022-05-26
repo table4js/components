@@ -2,25 +2,21 @@ import * as ko from "knockout";
 
 import "./filter-select.scss";
 
-import { IFindLogic } from "../find";
-import { ITableColumn } from "./column";
-
 var selectboxFilterTemplate = require("text-loader!./filter-select.html");
-
 export class TableFilterSelect {
     private subscriptionFilterText: ko.Subscription;
     private subscriptionSelection: ko.Subscription;
     private limit: number = 10;
     private offset: number = 0;
 
-    constructor(private column: ITableColumn, private getItems, isOpen?: ko.Observable<boolean>, public title: string = "", public moreText: string = "") {
+    constructor( private value: ko.Observable,  private columnName: string, private getItems, isOpen?: ko.Observable<boolean>, public title: string = "", public moreText: string = "") {
         if(isOpen !== undefined) {
             this.isOpen = isOpen;
         }
         this.subscriptionFilterText = this.filterText.subscribe((filterValue) => {
             this.foundItems([]);
             this.offset = 0;
-            this.getItems(this.column, filterValue, this.limit, this.offset, items => {
+            this.getItems(this.columnName, filterValue, this.limit, this.offset, items => {
                 this.foundItems(items);
                 this.isLoadMore(items.length === this.limit);
                 this.offset += 10;
@@ -28,16 +24,16 @@ export class TableFilterSelect {
         });
         this.subscriptionSelection = this.selectedItems.subscribe((value) => {
             console.log("Set filter value to " + JSON.stringify(value));
-            // this.column.filterContext.value(this.selectedItems());
+            this.value(this.selectedItems());
+
         });
         this.filterText.notifySubscribers(null)
     }
     loadMore() {
-        this.getItems(this.column, this.filterText(), this.limit, this.offset, items => {
+        this.getItems(this.columnName, this.filterText(), this.limit, this.offset, items => {
             items.forEach(i => this.foundItems.push(i))
             this.isLoadMore(items.length === this.limit);
             this.offset += 10;
-            console.log("this.isLoadMore()", this.isLoadMore());
         });
 }
     isOpen = ko.observable(false);
@@ -60,6 +56,10 @@ export class TableFilterSelect {
             this.selectedItems.push(item);
         }
     }
+    deleteItems = (name) => {
+        const itemIndex = this.selectedItems().indexOf(name);
+        this.selectedItems.splice(itemIndex, 1);
+    }
 
     dispose() {
         this.subscriptionFilterText.dispose();
@@ -70,7 +70,7 @@ export class TableFilterSelect {
 ko.components.register("abris-filter-select", {
     viewModel: {
         createViewModel: function(params, componentInfo) {
-            const viewModel = new TableFilterSelect(params.column, params.getItems, params.isOpen, params.title, params.moreText);
+            const viewModel = new TableFilterSelect(params.value, params.columnName, params.getItems, params.isOpen, params.title, params.moreText);
             const close = () => viewModel.isOpen(false);
             document.body.addEventListener("click", close);
             ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function() {

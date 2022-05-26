@@ -44,7 +44,7 @@ export class FilterTableViewModel {
     params.addItem((column) => {
       let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observable(column.name) };
       filterValue.value.subscribe(() => this.apply());
-      filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
+      // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
       this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.column, (column, filter, limit, offset, callback) => {
         this.table.options.getItems(column, filter, limit, offset, callback);
       }));

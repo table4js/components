@@ -10,7 +10,7 @@
   <!-- ko if: showOperand -->
   <!-- ko if: operation().id == "EQ" -->
   <abris-filter-select class="abrs-filter__value"
-    params="value: filterItemValue.value, column: column, getItems: getItems">
+    params="value: filterItemValue.value, columnName: column.name, getItems: getItems">
   </abris-filter-select>
   <!-- /ko -->
   <!-- ko if: operation().id != "EQ" -->

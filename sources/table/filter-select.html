@@ -2,7 +2,7 @@
     <!-- ko foreach: selectedItems -->
     <span class="abris-filter-select--selected-item">
         <span data-bind="text: $data"></span>
-        <span data-bind="">х</span>
+        <span data-bind="click: $parent.deleteItems">х</span>
     </span>
     <!-- /ko -->
 </div>

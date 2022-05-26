@@ -72,7 +72,7 @@ export class TableWidget implements ITableColumnOwner {
                 let columnFilterValue = ko.unwrap(column.filterContext.value);
                 if(columnFilterValue) {
                     columnFilterValue.forEach(e => {
-                        if ((e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
+                        if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
                         this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
                     })
                 }

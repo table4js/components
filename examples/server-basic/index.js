@@ -31,6 +31,11 @@ var model = {
             callback(data.data);
         });
     },
+    getItems: (columnName, filter, limit, offset, callback) => {
+        postData("getColumnData", { name: model.name, columnName: columnName, filter: filter, limit: limit, offset: offset}).then((data) => {
+            callback(data.data);
+        });
+    },
     actions: [
         {
             name: "summary-action",
