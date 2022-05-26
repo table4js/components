@@ -67,6 +67,7 @@ export class TableWidget implements ITableColumnOwner {
         this.createColumns(this.config.model);
 
         ko.computed(() => {
+            const isOldFilter = (this.tableFilter &&this.tableFilter.length > 0);
             this.tableFilter = [];
             this.columns().forEach(column => {
                 let columnFilterValue = ko.unwrap(column.filterContext.value);
@@ -77,7 +78,7 @@ export class TableWidget implements ITableColumnOwner {
                     })
                 }
             });
-            if(this.tableFilter.length > 0) {
+            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0) ) {
                 this.refresh();
             }
         });    
