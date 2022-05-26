@@ -6,8 +6,6 @@
           <th class="abris-table-header-tools__cell" colspan="100%">
             <div class="abris-table-header-tools__container abris-table-group-header-technical-cell">
               <div class="abris-table-preheader">
-
-                <!-- ko ifnot: $data.viewModel -->
                 <div class="abris-table-search-group">
                   <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'topActions' }">
                   </abris-actions>
@@ -15,25 +13,6 @@
                     params="data: $data, actions: 'dropdownActions'">
                   </abris-dropdown-actions>
                 </div>
-                <!-- /ko -->
-
-                <!-- ko if: $data.viewModel -->
-                <div class="abris-table-search-group">
-                  <abris-search params="model: viewModel, options: { data: 'filterBuilder' }"></abris-search>
-                  <abris-actions class="abris-table-actions"
-                    params="model: $data.viewModel, options: {action: 'mainContextActions' }"></abris-actions>
-                  <abris-dropdown-wrapper class="abris-table-dropdown abris-table-actions-menu"
-                    params="template: 'table-view-context-actions-template', data: $data.viewModel">
-                  </abris-dropdown-wrapper>
-                </div>
-                <div class="abris-table-advanced-settings">
-                  <abris-samplesettings-panel params="model: viewModel" data-bind="visible: viewModel.showTools">
-                  </abris-samplesettings-panel>
-                  <abris-dropdown-menu class="abris-button-more" data-bind="visible: $parent.showConstructor"
-                    params="model: viewModel, options: {selectedItem: 'propertyItemToAdd',  getItems: 'getItems', emptyText: 'Открыть связанную колонку', icon: 'add-column' }">
-                  </abris-dropdown-menu>
-                </div>
-                <!-- /ko -->
               </div>
               <div class="abris-table-filter" data-bind="visible: viewFilterTable">
                 <div class="abris-table-filter__container">

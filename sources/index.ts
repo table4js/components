@@ -4,10 +4,6 @@ export * from "./core/action";
 export * from "./core/actions";
 export * from "./core/icon";
 export * from "./core/search";
-export * from "./core/dropdown";
-export * from "./core/dropdown-wrapper";
-export * from "./core/dd-tree-menu";
-export * from "./core/dd-tree-menu-item";
 export * from "./core/dropdown-actions";
 
 export * from "./find";
