@@ -28,8 +28,9 @@ module.exports.getData = function (params, connector) {
     (params.order.length > 0) && connector.dataArray.sort(sortfunc);
     let result = [];
     const filteredData = connector.dataArray.filter(row => {
-        let accept = true;
+        let ret = true;
         params.filters.forEach(f => {
+            let accept = true;
             switch(f.op) {
                 case "EQ": accept = f.value.includes(row[f.field]); break;
                 case "C":  accept = ~row[f.field].toUpperCase().indexOf(f.value.toUpperCase()); break;
@@ -37,8 +38,9 @@ module.exports.getData = function (params, connector) {
                 case "ISNN":  accept = !!(row[f.field]); break;
                 default: accept = true; break;
             }
+            if (!accept) ret = false;
         });
-        return accept;
+        return ret;
     });
     for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && filteredData && i < filteredData.length; i++) {
         result.push(filteredData[i]);
