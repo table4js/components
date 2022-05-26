@@ -7,7 +7,7 @@
   height: 34px;
   margin-right: 10px;
   padding: 5px 10px;
-  background: var(--abc-primary-1-dark-8, #586784);
+  background: var(--abc-primary-1-dark-8, $abc-primary-1-dark-8);
   border-radius: 20px;
 }
 
@@ -20,7 +20,7 @@
   min-width: fit-content;
 }
 
-.abris-filter-operator {
+.abris-filter__operator {
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -33,9 +33,9 @@
   padding: 2px 0;
 }
 
-.abris-filter__operand .ui-autocomplete-input {
+.abris-filter__operand input {
   width: 105px !important;
-  height: 22px;
+  height: 24px;
   background: none;
   border: none;
   border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
