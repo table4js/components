@@ -1,29 +1,34 @@
-﻿<div class="abris-filter-select--selection">
+﻿<div class="abris-select-selection">
     <!-- ko foreach: selectedItems -->
-    <span class="abris-filter-select--selected-item">
-        <span data-bind="text: $data"></span>
-        <span data-bind="click: $parent.deleteItems">х</span>
-    </span>
+    <div class="abris-select-selection-item">
+        <span class="abris-select-item-title" data-bind="text: $data"></span>
+        <svg class="abris-svg-icon abris-select-item-close" data-bind="click: $parent.deleteItems">
+            <use xlink:href='spritemap.svg#sprite-icon_cross'></use>
+        </svg>
+    </div>
     <!-- /ko -->
 </div>
-<button class="abris-filter-select--toggle-button abris-action-button abris-button-toggle" type="button"
-    data-bind="click: toggle, attr: { title: title }">
-    <svg class="abris-button__svg-icon abris-action-button__icon">
-        <use xlink:href='spritemap.svg#sprite-icon_more_sq'></use>
-    </svg>
-    <span class="abris-action-button__label" data-bind="text: moreText"></span>
-</button>
+<svg class="abris-select-button abris-svg-icon" data-bind="click: toggle, attr: { title: title }">
+    <use xlink:href='spritemap.svg#sprite-icon_arrow-down'></use>
+</svg>
 <!-- ko if: isOpen -->
-<ul class="abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
-    <input style="width: 100%;" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
+<ul class="abris-select__dropdown-menu abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
+    <div class="abris-select__dropdown-search-container">
+        <input class="abris-select__dropdown-search" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
+    </div>
     <!-- ko foreach: foundItems -->
-    <div data-bind="click: $parent.clickItem">
-        <input type="checkbox" data-bind="checked: $parent.isChecked($data)" />
-        <span data-bind="text: $data"></span>
+    <div class="abris-select__dropdown-item" data-bind="click: $parent.clickItem">
+        <input class="abris-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
+        <svg class="abris-svg-icon abris-select__dropdown-check">
+            <use xlink:href='spritemap.svg#sprite-icon_check'></use>
+        </svg>
+        <span class="abris-select__dropdown-label" data-bind="text: $data"></span>
     </div>
     <!-- /ko -->
     <!-- ko if: isLoadMore -->
-    <button data-bind="click: loadMore">more</button>
+    <button class="abris-select__dropdown-button" data-bind="click: loadMore">
+        <span class="abris-action-button__label">More</span>
+    </button>
     <!-- /ko -->
 </ul>
 <!-- /ko -->
