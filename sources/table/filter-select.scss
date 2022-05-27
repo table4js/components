@@ -28,6 +28,10 @@ abris-filter-select {
 .abris-select-item-title {
   margin-right: 5px;
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
 }
 
 .abris-select-item-close {
@@ -67,7 +71,6 @@ abris-filter-select {
 
 .abris-select__dropdown-search {
   @include mx-form-control;
-  width: auto;
 
   &:focus {
     @include mx-form-control-focus;
@@ -83,6 +86,8 @@ abris-filter-select {
     border-bottom: none;
   }
 }
+
+
 
 .abris-select__dropdown-hide-check {
   display: none;
@@ -111,4 +116,10 @@ abris-filter-select {
   &:hover {
     color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
   }
+}
+
+.abris-select__dropdown-label {
+  max-width: 300px;
+  white-space: break-spaces;
+  text-align: left;
 }
