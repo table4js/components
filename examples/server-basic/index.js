@@ -20,6 +20,7 @@ var showTableSummary = ko.observable(false);
 
 var model = {
     showTableSummary,
+    showSearch: ko.observable(true),
     columns: [],
     getViewModelData: function (limit, offset, order, filters, key, back, callback) {
         postData("getData", { name: model.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {

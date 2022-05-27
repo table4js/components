@@ -78,6 +78,7 @@ export class TableWidget implements ITableColumnOwner {
         ko.computed(() => {
             const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
             this.tableFilter = [];
+            if (this.searchModel.searchValue()) this.tableFilter.push({value: this.searchModel.searchValue(), op: "C", field: null});
             this.columns().forEach(column => {
                 let columnFilterValue = ko.unwrap(column.filterContext.value);
                 if(columnFilterValue) {
@@ -87,7 +88,7 @@ export class TableWidget implements ITableColumnOwner {
                     })
                 }
             });
-            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0 || this.searchModel.searchValue() !== this.searchModel.prevSearchValue.peek()) ) {
+            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
                 this.searchModel.prevSearchValue(this.searchModel.searchValue());
                 this.refresh();
             }

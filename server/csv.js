@@ -2,23 +2,18 @@
 const csv = require('csv-parser');
 
 function filtered(params, connector) {
-    return connector.dataArray?.filter(row => {
-        let ret = true;
-        params.filters.forEach(f => {
-            let accept = true;
+    return connector.dataArray?.filter(row => 
+        params.filters.every(f => {
             switch(f.op) {
-                case "EQ": accept = f.value.includes(row[f.field]); break;
-                case "C":  accept = ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()); break;
-                case "ISN":  accept = !(row[f.field]); break;
-                case "ISNN":  accept = !!(row[f.field]); break;
-                default: accept = true; break;
+                case "EQ": return f.value.includes(row[f.field]); 
+                case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.values(row).some(r=> ~r.toString().toUpperCase().indexOf(f.value.toUpperCase()));
+                case "ISN":  return !(row[f.field]); 
+                case "ISNN":  return !!(row[f.field]); 
+                default: return true; 
             }
-            if (!accept) ret = false;
-        });
-        return ret;
-    }) ?? [];
+        })
+    ) ?? [];
 } 
-
 
 module.exports.getSummary = function (params, connector) {
     const filteredData = filtered(params, connector);

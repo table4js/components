@@ -104,7 +104,7 @@ async function getModel(params) {
     let model = await models.get(params.name); 
     switch(model && model.connector.type) {
         case "csv": CSV.read(model.connector, model.property); break; 
-        case "postgres": Postgres.createPool(dataSourses, model.connector.dataSource); break;
+        case "postgres": Postgres.createPool(dataSourses, model.connector.dataSource); model.connector.columns = model.property.map(e=>e.name);  break;
         default: return {code: 501, data: JSON.stringify({err: `Incorrect model name - ${params.name}`})}; 
     }
     return {code: 200, data: JSON.stringify(model.property)};
