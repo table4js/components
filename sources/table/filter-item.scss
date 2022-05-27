@@ -35,14 +35,21 @@
 
 .abris-filter__operand input {
   width: 105px !important;
+  max-width: 105px;
   height: 24px;
   background: none;
   border: none;
   border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
-  max-width: 105px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.abrs-filter__value {
+  min-width: 105px;
+  height: 24px;
+  border: none;
+  border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
 }
 
 .abris-filter__remove {
@@ -56,11 +63,9 @@
 .abris-filter__remove-icon {
   width: 10px;
   height: 10px !important;
-}
+  fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 
-abris-filter-select.abrs-filter__value {
-  min-width: 70px;
-  // background: transparent;
-  border: none;
-  padding: 0;
+  &:hover {
+    fill: var(--abc-primary-0, $abc-primary-0);
+  }
 }
