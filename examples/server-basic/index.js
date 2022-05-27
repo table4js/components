@@ -24,7 +24,7 @@ var model = {
     columns: [],
     getViewModelData: function (limit, offset, order, filters, key, back, callback) {
         postData("getData", { name: model.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
-            callback(data.data, offset + limit, data.count);
+            callback(data.data, offset + limit, data.count, back);
         });
     },
     getViewModelSummary: function(func, field, filters, callback ) {

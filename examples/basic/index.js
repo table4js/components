@@ -14,7 +14,7 @@ var model = {
         for (var i = offset; i < offset + limit; i++) {
             result.push({ id: i, col1: "test1" + i, col2: "test2" + i });
         }
-        callback(result, offset + limit, limit * 1000);
+        callback(result, offset + limit, limit * 1000, back);
     }
 };
 

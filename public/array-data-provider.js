@@ -1,5 +1,17 @@
 function ArrayDataProvider(data) {
-
+    function filtered(filters, data) {
+        return data?.filter(row => 
+            filters.every(f => {
+                switch(f.op) {
+                    case "EQ": return f.value.includes(row[f.field]); 
+                    case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.values(row).some(r=> ~r.toString().toUpperCase().indexOf(f.value.toUpperCase()));
+                    case "ISN":  return !(row[f.field]); 
+                    case "ISNN":  return !!(row[f.field]); 
+                    default: return true; 
+                }
+            })
+        ) ?? [];
+    } 
     this.getViewModelData = function (limit, offset, order, filters, key, back, callback) {
         function sortfunc(a, b) {
             for (let i = 0; i < order.length; i++) {
@@ -10,28 +22,17 @@ function ArrayDataProvider(data) {
         }
         (order.length > 0) && data.sort(sortfunc);
         let result = [];
-        const filteredData = data.filter(row => {
-            let ret = true;
-            filters.forEach(f => {
-                let accept = true;
-                switch (f.op) {
-                    case "EQ": accept = f.value.includes(row[f.field]); break;
-                    case "C": accept = ~row[f.field].toUpperCase().indexOf(f.value.toUpperCase()); break;
-                    case "ISN": accept = !(row[f.field]); break;
-                    case "ISNN": accept = !!(row[f.field]); break;
-                }
-                if (!accept) ret = false;
-            });
-            return ret;
-        });
+        const filteredData = filtered(filters, data);
         for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
             result.push(filteredData[i]);
         }
-        callback(result, offset + limit, filteredData.length);
+        callback(result, offset + limit, filteredData.length, back);
     };
 
-    this.getViewModelSummary = function (func, field, callback) {
-        let result = data[0][field], sum = 0, count = 0, uniques = [];
+    this.getViewModelSummary = function (func, field, filters, callback) {
+        const filteredData = filtered(filters, data);
+        let result = filteredData.length ? filteredData[0][params.field] : false;
+        let sum = 0, count = 0, uniques = [];
         data.forEach(row => {
             switch (func) {
                 case "sum": result = result + row[field]; break;

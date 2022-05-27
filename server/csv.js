@@ -43,7 +43,7 @@ module.exports.getData = function (params, connector) {
     }
     (params.order.length > 0) && connector.dataArray?.sort(sortfunc);
     let result = [];
-    const filteredData =filtered(params, connector);
+    const filteredData = filtered(params, connector);
     for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && filteredData && i < filteredData.length; i++) {
         result.push(filteredData[i]);
     }
