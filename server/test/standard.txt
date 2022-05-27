@@ -1,0 +1,74 @@
+Start 
+
+Metod -> getModel
+Data -> {"name":"declaration"}
+Response ->[{"name":"p","title":"Position","type":"number"},{"name":"a","title":"Article"},{"name":"pa","title":"Paragraph"},{"name":"c","title":"Content"},{"name":"l","title":"Letters","type":"number"},{"name":"w","title":"Words","type":"number"}]
+
+Metod -> getModel-
+Data -> {"name":"declaration"}
+Response ->{"err":"Incorrect method name"}
+
+Metod -> getModel
+Data -> {"name":"declaration-"}
+Response ->{"err":"Incorrect model name - declaration-"}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[],"filters":[],"key":null}
+Response ->{"data":[{"p":1,"a":"Preamble","pa":"","c":"Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,","l":180,"w":31},{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":3,"a":"Preamble","pa":"","c":"Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,","l":193,"w":35}],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":3,"order":[],"filters":[],"key":null}
+Response ->{"data":[{"p":4,"a":"Preamble","pa":"","c":"Whereas it is essential to promote the development of friendly relations between nations,","l":89,"w":13},{"p":5,"a":"Preamble","pa":"","c":"Whereas the peoples of the United Nations have in the Charter reaffirmed their faith in fundamental human rights, in the dignity and worth of the human person and in the equal rights of men and women and have determined to promote social progress and better standards of life in larger freedom,","l":294,"w":51},{"p":6,"a":"Preamble","pa":"","c":"Whereas Member States have pledged themselves to achieve, in co-operation with the United Nations, the promotion of universal respect for and observance of human rights and fundamental freedoms,","l":194,"w":28}],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":-3,"offset":0,"order":[],"filters":[],"key":null}
+Response ->{"data":[],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":-3,"order":[],"filters":[],"key":null}
+Response ->{"data":[],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","desc":false}],"filters":[],"key":null}
+Response ->{"data":[{"p":1,"a":"Preamble","pa":"","c":"Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,","l":180,"w":31},{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":3,"a":"Preamble","pa":"","c":"Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,","l":193,"w":35}],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","asc":false}],"filters":[],"key":null}
+Response ->{"data":[{"p":1,"a":"Preamble","pa":"","c":"Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,","l":180,"w":31},{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":3,"a":"Preamble","pa":"","c":"Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,","l":193,"w":35}],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","rtg":false}],"filters":[],"key":null}
+Response ->{"data":[{"p":1,"a":"Preamble","pa":"","c":"Whereas recognition of the inherent dignity and of the equal and inalienable rights of all members of the human family is the foundation of freedom, justice and peace in the world,","l":180,"w":31},{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":3,"a":"Preamble","pa":"","c":"Whereas it is essential, if man is not to be compelled to have recourse, as a last resort, to rebellion against tyranny and oppression, that human rights should be protected by the rule of law,","l":193,"w":35}],"count":59}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","desc":false}],"filters":[{"value":"2","op":"C","field":"p"}],"key":null}
+Response ->{"data":[{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":12,"a":"Article 2","pa":"","c":"Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status. Furthermore, no distinction shall be made on the basis of the political, jurisdictional or international status of the country or territory to which a person belongs, whether it be independent, trust, non-self-governing or under any other limitation of sovereignty.","l":516,"w":78},{"p":20,"a":"Article 10","pa":"","c":"Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him.","l":199,"w":33}],"count":15}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[],"filters":[{"value":"2","op":"C","field":"p"}],"key":null}
+Response ->{"data":[{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53},{"p":12,"a":"Article 2","pa":"","c":"Everyone is entitled to all the rights and freedoms set forth in this Declaration, without distinction of any kind, such as race, colour, sex, language, religion, political or other opinion, national or social origin, property, birth or other status. Furthermore, no distinction shall be made on the basis of the political, jurisdictional or international status of the country or territory to which a person belongs, whether it be independent, trust, non-self-governing or under any other limitation of sovereignty.","l":516,"w":78},{"p":20,"a":"Article 10","pa":"","c":"Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him.","l":199,"w":33}],"count":15}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":"2","op":"EQ","field":"p"}],"key":null}
+Response ->{"data":[{"p":2,"a":"Preamble","pa":"","c":"Whereas disregard and contempt for human rights have resulted in barbarous acts which have outraged the conscience of mankind, and the advent of a world in which human beings shall enjoy freedom of speech and belief and freedom from fear and want has been proclaimed as the highest aspiration of the common people,","l":314,"w":53}],"count":1}
+
+Metod -> getColumnData
+Data -> {"name":"declaration","columnName":"p","filter":null,"limit":2,"offset":0}
+Response ->{"data":[11,20]}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":[20],"op":"EQ","field":"p"}],"key":null}
+Response ->{"data":[{"p":20,"a":"Article 10","pa":"","c":"Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him.","l":199,"w":33}],"count":1}
+
+Metod -> getData
+Data -> {"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":[20,24],"op":"EQ","field":"p"}],"key":null}
+Response ->{"data":[{"p":20,"a":"Article 10","pa":"","c":"Everyone is entitled in full equality to a fair and public hearing by an independent and impartial tribunal, in the determination of his rights and obligations and of any criminal charge against him.","l":199,"w":33},{"p":24,"a":"Article 13","pa":"1.","c":"Everyone has the right to freedom of movement and residence within the borders of each state.","l":93,"w":16}],"count":2}
+
+Metod -> getColumnData
+Data -> {"name":"declaration","columnName":"p","limit":5,"offset":10}
+Response ->{"data":[29,30,31,33,32]}
+
+Metod -> getColumnData
+Data -> {"name":"declaration","columnName":"p","filter":"2","limit":10,"offset":0}
+Response ->{"data":[20,21,22,23,24,25,26,27,28,29]}
+

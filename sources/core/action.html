@@ -3,7 +3,7 @@
                 enable: !$data.enabled || ko.unwrap(enabled),
                 attr: {
                         class: 'abris-button--transparent action-button abris-action ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' abris-action--active' : ''),
-                        title: title, form: $data.formId,
+                        title: $data.title || $data.name, form: $data.formId,
                         type: $data.formId !== undefined ? 'submit' : 'button'
                     }">
     <!-- ko if: $data.icon -->
@@ -15,6 +15,6 @@
     </svg>
     <!-- /ko -->
     <!-- ko ifnot: $parents[1].short -->
-    <span class="abris-action-button__label" data-bind="text: title, css: ko.unwrap($data.cssLabel)"></span>
+    <span class="abris-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel)"></span>
     <!-- /ko -->
 </button>

@@ -12,9 +12,9 @@ publishPackageJson.version = packageJson.version;
 
 const libraryName = 'AbrisComponents';
 const banner = [
-    "@abris-lab/components - JavaScript components library v" + packageJson.version,
-    "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
-    "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
+  "@abris-lab/components - JavaScript components library v" + packageJson.version,
+  "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
+  "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
 
 const BASE_CFG = {
@@ -23,22 +23,22 @@ const BASE_CFG = {
     extensions: ['.ts', '.js'],
   },
   module: {
-      rules: [
-          {
-            test: /\.(css|scss)$/,
-            use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { sourceMap: true } }, { loader: 'sass-loader', options: { sourceMap: true } }],
-          },
-          {
-            test: /\.(ts|tsx)$/,
-            loader: 'ts-loader',
-            options: {
-              compilerOptions: {
-                  //'declaration': true,
-                  //'outDir': 'typings/'
-              }
-            }
+    rules: [
+      {
+        test: /\.(css|scss)$/,
+        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { sourceMap: true } }, { loader: 'sass-loader', options: { sourceMap: true } }],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader',
+        options: {
+          compilerOptions: {
+            //'declaration': true,
+            //'outDir': 'typings/'
           }
-      ]
+        }
+      }
+    ]
   },
   externals: {
     knockout: {
@@ -47,12 +47,6 @@ const BASE_CFG = {
       commonjs: "knockout",
       amd: "knockout"
     },
-    'jquery': {
-        root: 'jQuery',
-        commonjs2: 'jquery',
-        commonjs: 'jquery',
-        amd: 'jquery'
-    }
   },
   entry: {
     [packageJson.name]: './sources/index.ts',

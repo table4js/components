@@ -1,11 +1,14 @@
 import * as ko from "knockout";
 import { IAction } from "../core/action";
+import { InplaceEditor } from "./cell-editor";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 
 import "./index.scss";
 
 export interface ITableCell {
-
+    [key: string]: any;
+    text: ko.Observable<string>;
+    inplaceEditForm: ko.Observable;
 }
 
 export interface ITableCellType {
@@ -28,8 +31,9 @@ export interface ITableRow {
 export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
     getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    getViewModelSummary(func: string, field: string, callback: (value: any) => void);
+    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
     getItems: (column, value, limit, offset, callback) => void;
+    showSearch?: ko.Observable<boolean>;
     showTableSummary?: ko.Observable<boolean>;
     actions?: Array<IAction>;
 }
@@ -63,10 +67,16 @@ export class TableWidget implements ITableColumnOwner {
     constructor(private config: ITableConfig, element?: HTMLElement) {
         this.options = this.config.model;
         this.showTableSummary = this.options.showTableSummary || ko.observable(false);
+        this.showSearch = this.options.showSearch || ko.observable(false);
         this.primaryKey = this.config.options.primaryKey;
         this.createColumns(this.config.model);
+        this.searchModel.search = (text: string) => {
+            this.searchModel.prevSearchValue(this.searchModel.searchValue());
+            this.searchModel.searchValue(text);
+        };
 
         ko.computed(() => {
+            const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
             this.tableFilter = [];
             this.columns().forEach(column => {
                 let columnFilterValue = ko.unwrap(column.filterContext.value);
@@ -77,7 +87,8 @@ export class TableWidget implements ITableColumnOwner {
                     })
                 }
             });
-            if(this.tableFilter.length > 0) {
+            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0 || this.searchModel.searchValue() !== this.searchModel.prevSearchValue.peek()) ) {
+                this.searchModel.prevSearchValue(this.searchModel.searchValue());
                 this.refresh();
             }
         });    
@@ -135,7 +146,7 @@ export class TableWidget implements ITableColumnOwner {
 
     calculateSummary(column: ITableColumn): void {
         if(column.summaryParams() && column.summaryParams().field === column.name && column.summaryParams().func)
-            this.options.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, (data) => column.summaryValue(data));
+            this.options.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
     }
 
     protected showDetail(rowData: any) {
@@ -256,7 +267,7 @@ export class TableWidget implements ITableColumnOwner {
         this.columns().reverse().forEach(col => {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
-            let cell = {
+            let cell: ITableCell = {
                 data: data[col.name],
                 text:  ko.observable(text), 
                 count: ko.observable(1),
@@ -312,7 +323,8 @@ export class TableWidget implements ITableColumnOwner {
         return false;
     }
 
-    public startEditCell = (cell: any, event: MouseEvent) => {
+    public startEditCell = (cell: ITableCell, event: MouseEvent) => {
+        cell.inplaceEditForm(new InplaceEditor(cell));
         this.completeEditCell();
     }
 
@@ -389,6 +401,8 @@ export class TableWidget implements ITableColumnOwner {
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
     options: ITableViewModel;
     showTableSummary: ko.Observable<boolean>;
+    // @property() showSearch: boolean;
+    showSearch: ko.Observable<boolean>;
     startRow: ko.Observable<number> = ko.observable(null);
     lastSelectRow = null;
     totalCount = ko.observable(0);
@@ -399,6 +413,12 @@ export class TableWidget implements ITableColumnOwner {
 
     isShowDetail = ko.observable(false);
     expandedRowKey;
+
+    searchModel = {
+        search: undefined,
+        prevSearchValue: ko.observable(),
+        searchValue: ko.observable()
+    }
 
     getActions = (container?: string) => {
         const actions = this.options.actions || [];

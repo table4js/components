@@ -1,23 +1,11 @@
 const Pool = require('pg').Pool;
 
-module.exports.getSummary = async function (params, connector, dataSourses) {
-    let result
-    result = (params.func === "unique")
-        ? await dataSourses.pool(connector.dataSource).query(`SELECT count(DISTINCT "${params.field.replace('"', '""')}") as value FROM (${connector.templateSQL}) t `)
-        : await dataSourses.pool(connector.dataSource).query(`SELECT ${params.func}("${params.field.replace('"', '""')}") as value FROM (${connector.templateSQL}) t `);
-    return {code: 200, data: JSON.stringify({data: result.rows[0].value})};
-}
-
-module.exports.getData = async function (params, connector, dataSourses){
+function createFilter(params){
     function arrayStringify(arr){
         let ret = "";
         arr.forEach(e => ret = (ret ? `${ret}, '${e}'`: `'${e}'`));
         return `(${ret})`;
     }
-    let order = null;
-    params.order.reverse().forEach(e => {
-        order = (order ? order + ", " : " ORDER BY ") + e.field + (e.desc ? " desc " : " asc ");
-    });
     let tableFilter = "";
     params.filters.forEach(f => {
         tableFilter = (tableFilter ? tableFilter + " AND " : "" );
@@ -28,7 +16,24 @@ module.exports.getData = async function (params, connector, dataSourses){
             case "ISNN":  tableFilter = tableFilter + ` "${f.field.replace('"', '""')}" IS NOT NULL `; break;
         }
     })
-    tableFilter = (tableFilter ? " WHERE " + tableFilter : "" );
+    return (tableFilter ? " WHERE " + tableFilter : "" );
+}
+
+module.exports.getSummary = async function (params, connector, dataSourses) {
+    let result
+    let tableFilter = createFilter(params);
+    result = (params.func === "unique")
+        ? await dataSourses.pool(connector.dataSource).query(`SELECT count(DISTINCT "${params.field.replace('"', '""')}") as value FROM (${connector.templateSQL}) t ${tableFilter}`)
+        : await dataSourses.pool(connector.dataSource).query(`SELECT ${params.func}("${params.field.replace('"', '""')}") as value FROM (${connector.templateSQL}) t ${tableFilter}`);
+    return {code: 200, data: JSON.stringify({data: result.rows[0].value})};
+}
+
+module.exports.getData = async function (params, connector, dataSourses){
+    let order = null;
+    params.order.reverse().forEach(e => {
+        order = (order ? order + ", " : " ORDER BY ") + e.field + (e.desc ? " desc " : " asc ");
+    });
+    let tableFilter = createFilter(params);
     console.log (`SELECT * FROM (${connector.templateSQL}) t ${tableFilter} LIMIT $1 OFFSET $2`);
     try {
         let result = await dataSourses.pool(connector.dataSource).query(`SELECT * FROM (${connector.templateSQL}) t ${tableFilter}  LIMIT $1 OFFSET $2`, [params.limit, params.offset]);

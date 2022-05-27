@@ -1,8 +1,9 @@
+import { Localization } from "./localization";
+
 type  TOperation = "EQ" | "NEQ" | "G" | "L" | "GEQ" | "LEQ" | "ISN" | "ISNN" | "C";
 export interface IFindOperation {
-    id: string;
-    text: string;
     op: string;
+    text: string;
     func?: string;
 }
 
@@ -42,117 +43,69 @@ export interface IFindProperty {
     val2: KnockoutObservable<any>;
 }
 
-export class Localization {
-    static getString(stringId: string) {
-        return stringId;
-    } 
-}
-
 export var operationsMap: { [index: string]: IFindOperation[] } = {};
+
 export function operationsMapReload () {
     var defaultOperationsMap = {
-    caption: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    string: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    text: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    plain: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    date: [
-        {id: "EQ", text: Localization.getString("filterdateequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filterdatenotequal"), op: "!="},
-        {id: "G", text: Localization.getString("filterdategreater"), op: ">"},
-        {id: "L", text: Localization.getString("filterdateless"), op: "<"},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    datetime: [
-        {id: "G", text: Localization.getString("filterdategreater"), op: ">"},
-        {id: "L", text: Localization.getString("filterdateless"), op: "<"},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    parent_id: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    integer: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "G", text: Localization.getString("filtergreater"), op: ">"},
-        {id: "L", text: Localization.getString("filterless"), op: "<"},
-        {id: "GEQ", text: Localization.getString("filtergreaterequal"), op: ">="},
-        {id: "LEQ", text: Localization.getString("filterlessequal"), op: "<="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    numeric: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "G", text: Localization.getString("filtergreater"), op: ">"},
-        {id: "L", text: Localization.getString("filterless"), op: "<"},
-        {id: "GEQ", text: Localization.getString("filtergreaterequal"), op: ">="},
-        {id: "LEQ", text: Localization.getString("filterlessequal"), op: "<="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    ref_link: [
-        {id: "C", text: Localization.getString("filtercontains"), op: "CONTAINS"},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    ref_tree: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "TEQ", text: "Поддерево", op: "TEQ"},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    bool: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="}
-    ],
-    money: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "G", text: Localization.getString("filtergreater"), op: ">"},
-        {id: "L", text: Localization.getString("filterless"), op: "<"},
-        {id: "GEQ", text: Localization.getString("filtergreaterequal"), op: ">="},
-        {id: "LEQ", text: Localization.getString("filterlessequal"), op: "<="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
-    radiobutton: [
-        {id: "EQ", text: Localization.getString("filterequal"), op: "="},
-        {id: "NEQ", text: Localization.getString("filternotequal"), op: "!="},
-        {id: "ISN", text: Localization.getString("filterisnull"), op: "IS NULL"},
-        {id: "ISNN", text: Localization.getString("filterisnotnull"), op: "IS NOT NULL"},
-    ],
+        string: [
+            {op: "C", text: Localization.getString("filtercontains")},
+            {op: "EQ", text: Localization.getString("filterequal")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        date: [
+            {op: "EQ", text: Localization.getString("filterdateequal")},
+            {op: "G", text: Localization.getString("filterdategreater")},
+            {op: "L", text: Localization.getString("filterdateless")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        datetime: [
+            {op: "G", text: Localization.getString("filterdategreater")},
+            {op: "L", text: Localization.getString("filterdateless")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        integer: [
+            {op: "EQ", text: Localization.getString("filterequal")},
+            {op: "NEQ", text: Localization.getString("filternotequal")},
+            {op: "G", text: Localization.getString("filtergreater")},
+            {op: "L", text: Localization.getString("filterless")},
+            {op: "GEQ", text: Localization.getString("filtergreaterequal")},
+            {op: "LEQ", text: Localization.getString("filterlessequal")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        numeric: [
+            {op: "EQ", text: Localization.getString("filterequal")},
+            {op: "NEQ", text: Localization.getString("filternotequal")},
+            {op: "G", text: Localization.getString("filtergreater")},
+            {op: "L", text: Localization.getString("filterless")},
+            {op: "GEQ", text: Localization.getString("filtergreaterequal")},
+            {op: "LEQ", text: Localization.getString("filterlessequal")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        bool: [
+            {op: "EQ", text: Localization.getString("filterequal")},
+        ],
+        money: [
+            {op: "EQ", text: Localization.getString("filterequal")},
+            {op: "NEQ", text: Localization.getString("filternotequal")},
+            {op: "G", text: Localization.getString("filtergreater")},
+            {op: "L", text: Localization.getString("filterless")},
+            {op: "GEQ", text: Localization.getString("filtergreaterequal")},
+            {op: "LEQ", text: Localization.getString("filterlessequal")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+        radiobutton: [
+            {op: "EQ", text: Localization.getString("filterequal")},
+            {op: "ISN", text: Localization.getString("filterisnull")},
+            {op: "ISNN", text: Localization.getString("filterisnotnull")},
+        ],
+    }
+    Object.keys(defaultOperationsMap).forEach(key => operationsMap[key] = defaultOperationsMap[key]);
 }
-    $.each(defaultOperationsMap, (k, v) => {operationsMap[k] = v});
-};
+
 operationsMapReload ();

@@ -18,12 +18,12 @@ export class FilterTableItem {
   ) {
     ko.computed(() => {
       if(!!this.operation()) {
-        filterItemValue.op(this.operation().id);
+        filterItemValue.op(this.operation().op);
       }
     });
   }
   operation = ko.observable<IFindOperation>();
-  showOperand = ko.computed(() => this.operation() && this.operation().id !== "ISN" && this.operation().id !== "ISNN")
+  showOperand = ko.computed(() => this.operation() && this.operation().op !== "ISN" && this.operation().op !== "ISNN")
 }
 
 export class FilterTableViewModel {

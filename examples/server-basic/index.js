@@ -26,8 +26,8 @@ var model = {
             callback(data.data, offset + limit, data.count);
         });
     },
-    getViewModelSummary: function(func, field, callback ) {
-        postData("getSummary", { name: model.name, func: func, field: field }).then((data) => {
+    getViewModelSummary: function(func, field, filters, callback ) {
+        postData("getSummary", { name: model.name, func: func, field: field, filters: filters }).then((data) => {
             callback(data.data);
         });
     },

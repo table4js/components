@@ -35,10 +35,7 @@
     "release": "standard-version --message \"Release: %s\""
   },
   "dependencies": {
-    "csv-parser": "^3.0.0",
-    "jquery": "^3.5.1",
-    "knockout": "^3.5.0",
-    "pg": "^8.7.3"
+    "knockout": "^3.5.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.3",
@@ -48,11 +45,13 @@
     "@webpack-cli/serve": "^1.6.1",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^2.0.0",
+    "csv-parser": "^3.0.0",
     "generate-package-json-webpack-plugin": "^2.6.0",
     "html-webpack-plugin": "latest",
     "jest": ">=27.0.0 <28.0.0-0",
     "json-loader": "latest",
     "mini-css-extract-plugin": "latest",
+    "pg": "^8.7.3",
     "sass": "^1",
     "sass-loader": "^8.0.2",
     "standard-version": "^9.3.2",

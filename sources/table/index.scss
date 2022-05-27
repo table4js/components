@@ -362,6 +362,7 @@ button {
   border-radius: 8px;
   border: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
   background: var(--abc-primary-0-op-03, $abc-primary-0-op-03);
+  pointer-events: none;
 }
 
 .abris-table__footer {
@@ -474,24 +475,6 @@ button {
 
   .abris-action-button__icon {
     margin-right: 0;
-  }
-
-  abris-dropdown-wrapper.abris-table-actions-menu {
-    .abris-table-dropdown-toggle.group-context-actions {
-      button.abris-btn-transparent {
-        .abris-svg-icon {
-          margin-right: 0;
-        }
-
-        span {
-          display: none;
-        }
-      }
-    }
-
-    &.open .group-context-actions .abris-table-dropdown-menu {
-      left: -141px;
-    }
   }
 }
 

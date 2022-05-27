@@ -1,36 +1,42 @@
+
+var sampleDataProvider = new ArrayDataProvider(sampleData);
+
 var showTableSummary = ko.observable(false);
 
 var options = {
+    showSearch: ko.observable(true),
     showTableSummary,
     columns: [
         {
-            name: "col1",
-            title: "Column 1"
+            name: "word",
+            title: "Word"
         },
         {
-            name: "col2",
-            title: "Column 2",
+            name: "num",
+            title: "Number",
             type: "number"
+        },
+        {
+            name: "text",
+            title: "Text",
         }
     ],
     getViewModelData: function (limit, offset, order, filters, key, back, callback) {
-        var result = [];
-        for (var i = offset; i < offset + limit; i++) {
-            result.push({ id: i, col1: "test1" + i, col2: i });
-        }
-        callback(result, offset + limit, limit * 1000);
+        sampleDataProvider.getViewModelData(limit, offset, order, filters, key, back, callback);
+    },
+    getViewModelSummary: function (func, field, callback) {
+        sampleDataProvider.getViewModelSummary(func, field, callback);
+    },
+    getItems: (columnName, filter, limit, offset, callback) => {
+        sampleDataProvider.getItems(columnName, filter, limit, offset, callback);
     },
     actions: [
         {
             name: "summary-action",
-            title: "Show/hide summary",
-            cssClasses: "my-custom-class",
-            cssImage: "my-custom-class",
-            cssLabel: "my-custom-class",
             action: function () {
                 showTableSummary(!showTableSummary());
             },
-            svg: "icon_table",
+            svg: "icon_equal",
             container: "top"
         },
         {
@@ -41,6 +47,8 @@ var options = {
             },
             svg: "icon_add-column",
             cssClasses: "abris-context-button",
+            cssImage: "my-custom-class",
+            cssLabel: "my-custom-class",
             container: "dropdown"
         },
         {
@@ -53,10 +61,7 @@ var options = {
             cssClasses: "abris-context-button",
             container: "dropdown"
         }
-    ],
-    getItems: (column, filter, limit, offset, callback) => {
-        setTimeout(() => callback(["1 "+offset, "2 "+offset, "3 "+offset, "4 "+offset, "5 "+offset, "t6 "+offset, "t7 "+offset, "t8 "+offset, "t9 "+offset, "t10 "+offset]), 500);
-    }
+    ]
 };
 
 var widgetModel = new AbrisComponents.TableWidget({ model: options, options: {} });
