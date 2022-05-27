@@ -31,7 +31,7 @@ export interface ITableRow {
 export interface ITableViewModel {
     columns: Array<ITableColumnDescription>;
     getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    getViewModelSummary(func: string, field: string, callback: (value: any) => void);
+    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
     getItems: (column, value, limit, offset, callback) => void;
     showSearch?: ko.Observable<boolean>;
     showTableSummary?: ko.Observable<boolean>;
@@ -146,7 +146,7 @@ export class TableWidget implements ITableColumnOwner {
 
     calculateSummary(column: ITableColumn): void {
         if(column.summaryParams() && column.summaryParams().field === column.name && column.summaryParams().func)
-            this.options.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, (data) => column.summaryValue(data));
+            this.options.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
     }
 
     protected showDetail(rowData: any) {

@@ -1,9 +1,30 @@
 
 const csv = require('csv-parser');
 
+function filtered(params, connector) {
+    return connector.dataArray?.filter(row => {
+        let ret = true;
+        params.filters.forEach(f => {
+            let accept = true;
+            switch(f.op) {
+                case "EQ": accept = f.value.includes(row[f.field]); break;
+                case "C":  accept = ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()); break;
+                case "ISN":  accept = !(row[f.field]); break;
+                case "ISNN":  accept = !!(row[f.field]); break;
+                default: accept = true; break;
+            }
+            if (!accept) ret = false;
+        });
+        return ret;
+    }) ?? [];
+} 
+
+
 module.exports.getSummary = function (params, connector) {
-    let result = connector.dataArray[0][params.field], sum = 0, count = 0, uniques = [];
-    connector.dataArray.forEach(row => {
+    const filteredData = filtered(params, connector);
+    let result = filteredData.length ? filteredData[0][params.field] : false;
+    let sum = 0, count = 0, uniques = [];
+    filteredData.forEach(row => {
         switch(params.func){
             case "sum": result = result + row[params.field]; break;
             case "avg": sum = sum + row[params.field]; count++; result = sum / count; break;
@@ -25,23 +46,9 @@ module.exports.getData = function (params, connector) {
         }
         return 0;
     }
-    (params.order.length > 0) && connector.dataArray.sort(sortfunc);
+    (params.order.length > 0) && connector.dataArray?.sort(sortfunc);
     let result = [];
-    const filteredData = connector.dataArray.filter(row => {
-        let ret = true;
-        params.filters.forEach(f => {
-            let accept = true;
-            switch(f.op) {
-                case "EQ": accept = f.value.includes(row[f.field]); break;
-                case "C":  accept = ~row[f.field].toUpperCase().indexOf(f.value.toUpperCase()); break;
-                case "ISN":  accept = !(row[f.field]); break;
-                case "ISNN":  accept = !!(row[f.field]); break;
-                default: accept = true; break;
-            }
-            if (!accept) ret = false;
-        });
-        return ret;
-    });
+    const filteredData =filtered(params, connector);
     for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && filteredData && i < filteredData.length; i++) {
         result.push(filteredData[i]);
     }
@@ -50,9 +57,9 @@ module.exports.getData = function (params, connector) {
 
 module.exports.getColumnData = function (params, connector) {
     let result = [], uniques = [];
-    const filteredData = connector.dataArray.map(row => {
-        if((!(params.filter) || ~row[params.columnName].toUpperCase().indexOf(params.filter.toUpperCase())) && !uniques.includes(row[params.columnName])) {uniques.push(row[params.columnName]);};
-    });
+    const filteredData = connector.dataArray?.map(row => {
+        if((!(params.filter) || ~row[params.columnName].toString().toUpperCase().indexOf(params.filter.toUpperCase())) && !uniques.includes(row[params.columnName])) {uniques.push(row[params.columnName]);};
+    }) ?? [];
     for(var i = params.offset > 0 ? params.offset : 0; i < params.offset + params.limit && uniques && i < uniques.length; i++) {
         result.push(uniques[i]);
     }
@@ -71,8 +78,14 @@ module.exports.read = function (connector, property){
 
     const results = [];
     const fs = require("fs");
-    fs.createReadStream(`./data/${connector.fileName}`)
-    .pipe(csv({separator: connector.separator, headers: connector.headers}))
-    .on('data', (data) => results.push(typeCasting( Object.assign({}, connector.defaultRow, data), property)))
-    .on('end', () => connector.dataArray = results);
+    try{
+        fs.createReadStream(`./data/${connector.fileName}`)
+        .pipe(csv({separator: connector.separator, headers: connector.headers}))
+        .on('data', (data) => results.push(typeCasting( Object.assign({}, connector.defaultRow, data), property)))
+        .on('end', () => connector.dataArray = results);
+        return 1;
+    }
+    catch{
+        return 0;
+    }
 }

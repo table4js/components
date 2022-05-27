@@ -1,5 +1,5 @@
 const http = require('http');
-const CSS = require("./csv");
+const CSV = require("./csv");
 const Postgres = require("./postgres")
 
 const hostname = '127.0.0.1';
@@ -22,6 +22,7 @@ const server = http.createServer(async (req, res) => {
         (async ()=>{
             let result, body = await streamToString(req);
             if (body) {
+                console.log(JSON.stringify({"url":req.url.substring(1), "data":JSON.parse(body)}), ",");
                 switch (req.url.substring(1)) {
                     case "getData":  result = await getData(JSON.parse(body)); break;
                     case "getModel": result = await getModel(JSON.parse(body)); break;
@@ -48,7 +49,9 @@ const models = {
     async get (name) {
         const fs = require("fs").promises;
         if (!models[name]) {
-            models[name] = JSON.parse(await fs.readFile(`./model/${name}.json`, "utf8"));
+            try {
+                models[name] = JSON.parse(await fs.readFile(`./model/${name}.json`, "utf8"));
+            } catch { return false;}
         }
         return models[name];
     }
@@ -71,9 +74,9 @@ dataSourses.load();
 async function getColumnData(params) {
     let connector = (await models.get(params.name)).connector;
     switch(connector.type) {
-        case "csv": return CSS.getColumnData(params, connector); 
+        case "csv": return CSV.getColumnData(params, connector); 
         case "postgres": return await Postgres.getColumnData(params, connector, dataSourses);
-        default: return {code: 501, data: "{'err': 'Incorrect connector type'}"}; 
+        default: return {code: 501, data: JSON.stringify({err: `Incorrect model name - ${params.name}`})}; 
     }
 } 
 
@@ -81,28 +84,28 @@ async function getColumnData(params) {
 async function getSummary(params) {
     let connector = (await models.get(params.name)).connector;
     switch(connector.type) {
-        case "csv": return CSS.getSummary(params, connector); 
+        case "csv": return CSV.getSummary(params, connector); 
         case "postgres": return await Postgres.getSummary(params, connector, dataSourses);
-        default: return {code: 501, data: "{'err': 'Incorrect connector type'}"}; 
+        default: return {code: 501, data: JSON.stringify({err: `Incorrect model name - ${params.name}`})}; 
     }
 } 
 
 async function getData(params) {
     let connector = (await models.get(params.name)).connector;
-    switch(connector.type) {
-        case "csv": return CSS.getData(params, connector); 
+    switch(connector && connector.type) {
+        case "csv": return CSV.getData(params, connector); 
         case "postgres": return await Postgres.getData(params, connector, dataSourses);
-        default: return {code: 501, data: "{'err': 'Incorrect connector type'}"}; 
+        default: return {code: 501, data: JSON.stringify({err: `Incorrect model name - ${params.name}`})}; 
     }
 } 
 
 
 async function getModel(params) {
     let model = await models.get(params.name); 
-    switch(model.connector.type) {
-        case "csv": CSS.read(model.connector, model.property); break; 
+    switch(model && model.connector.type) {
+        case "csv": CSV.read(model.connector, model.property); break; 
         case "postgres": Postgres.createPool(dataSourses, model.connector.dataSource); break;
-        default: return {code: 501, data: "{'err': 'Incorrect model name'}"}; 
+        default: return {code: 501, data: JSON.stringify({err: `Incorrect model name - ${params.name}`})}; 
     }
     return {code: 200, data: JSON.stringify(model.property)};
 } 
