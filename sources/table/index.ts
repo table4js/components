@@ -325,7 +325,9 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     public startEditCell = (cell: ITableCell, event: MouseEvent) => {
+        if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm(undefined);
         cell.inplaceEditForm(new InplaceEditor(cell));
+        this.currentCellEditor = cell; 
         this.completeEditCell();
     }
 
@@ -411,7 +413,7 @@ export class TableWidget implements ITableColumnOwner {
     showTableFilter = ko.observable(true);
     viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter()).length > 0); 
     tableFilter: ITableFilter[];
-
+    currentCellEditor: ITableCell;
     isShowDetail = ko.observable(false);
     expandedRowKey;
 

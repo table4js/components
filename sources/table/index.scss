@@ -275,7 +275,7 @@ button {
 .abris-table-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-  padding: 5px;
+  // padding: 5px;
 
   &:first-child {
     border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
@@ -335,12 +335,16 @@ button {
 
 .abris-table-cell__container {
   height: 100%;
+  padding: 5px;
 }
 
 .abris-table-cell__text {
   max-width: 280px;
   margin: auto 0;
   z-index: 1;
+}
+.abris-table-cell__text__modified {
+  font-weight: bold;
 }
 
 .abris-table-cell__merged-text {

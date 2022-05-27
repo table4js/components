@@ -92,7 +92,8 @@
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count() > 1) && $parents[1].isMergedСells() -->
             <div class="abris-table-cell__container" data-bind="css: css">
-              <span class="abris-table-cell__text" data-bind="html: text, click: $parents[1].startEditCell"></span>
+              <span data-bind="html: text, click: $parents[1].startEditCell,
+                    css: text()!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
             </div>
             <!-- /ko -->
             <!-- ko if: (count() > 1) && $parents[1].isMergedСells() -->
