@@ -1,0 +1,21 @@
+[
+    {"url":"getModel","data":{"name":"declaration"}},
+    {"url":"getModel-","data":{"name":"declaration"}},
+    {"url":"getModel","data":{"name":"declaration-"}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":3,"order":[],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":-3,"offset":0,"order":[],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":-3,"order":[],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","desc":false}],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","asc":false}],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","rtg":false}],"filters":[],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"p","desc":false}],"filters":[{"value":"2","op":"C","field":"p"}],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[],"filters":[{"value":"2","op":"C","field":"p"}],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":"2","op":"EQ","field":"p"}],"key":null}},
+    {"url":"getColumnData","data":{"name":"declaration","columnName":"p","filter":null,"limit":2,"offset":0}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":[20],"op":"EQ","field":"p"}],"key":null}},
+    {"url":"getData","data":{"name":"declaration","limit":3,"offset":0,"order":[{"field":"a","desc":false}],"filters":[{"value":[20,24],"op":"EQ","field":"p"}],"key":null}},
+    {"url":"getColumnData","data":{"name":"declaration","columnName":"p","limit":5,"offset":10}},
+    {"url":"getColumnData","data":{"name":"declaration","columnName":"p","filter":"2","limit":10,"offset":0}},
+    {"url":"getSummary","data":{"name":"declaration","func":"max","field":"p","filters":[{"value":"pre","op":"C","field":"a"}]}}
+]
