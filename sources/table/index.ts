@@ -49,6 +49,10 @@ interface ITableFilter {
     field: string,
 }
 
+/**
+ * Creates TableWidget class.
+ * @param config - table options.
+ */
 export class TableWidget implements ITableColumnOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;

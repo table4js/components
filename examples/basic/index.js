@@ -1,21 +1,69 @@
-var model = {
+
+var sampleDataProvider = new ArrayDataProvider(sampleData);
+
+var showTableSummary = ko.observable(false);
+
+var options = {
+    showSearch: ko.observable(true),
+    showTableSummary,
     columns: [
         {
-            name: "col1",
-            title: "Column 1"
+            name: "word",
+            title: "Word"
         },
         {
-            name: "col2",
-            title: "Column 2"
+            name: "num",
+            title: "Number",
+            type: "number"
+        },
+        {
+            name: "text",
+            title: "Text",
         }
     ],
     getViewModelData: function (limit, offset, order, filters, key, back, callback) {
-        var result = [];
-        for (var i = offset; i < offset + limit; i++) {
-            result.push({ id: i, col1: "test1" + i, col2: "test2" + i });
+        sampleDataProvider.getViewModelData(limit, offset, order, filters, key, back, callback);
+    },
+    getViewModelSummary: function (func, field, callback) {
+        sampleDataProvider.getViewModelSummary(func, field, callback);
+    },
+    getItems: (columnName, filter, limit, offset, callback) => {
+        sampleDataProvider.getItems(columnName, filter, limit, offset, callback);
+    },
+    actions: [
+        {
+            name: "summary-action",
+            action: function () {
+                showTableSummary(!showTableSummary());
+            },
+            svg: "icon_equal",
+            container: "top"
+        },
+        {
+            name: "a2",
+            title: "test dropdown action 1",
+            action: function () {
+                alert(this.title);
+            },
+            svg: "icon_add-column",
+            cssClasses: "abris-context-button",
+            cssImage: "my-custom-class",
+            cssLabel: "my-custom-class",
+            container: "dropdown"
+        },
+        {
+            name: "a3",
+            title: "test dropdown action 2",
+            action: function () {
+                alert(this.title);
+            },
+            svg: "icon_add-column",
+            cssClasses: "abris-context-button",
+            container: "dropdown"
         }
-        callback(result, offset + limit, limit * 1000, back);
-    }
+    ]
 };
 
-ko.applyBindings(model);
+var widgetModel = new AbrisComponents.TableWidget({ model: options, options: {} });
+
+ko.applyBindings(widgetModel);

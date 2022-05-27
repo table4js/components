@@ -27,13 +27,13 @@ var model = {
             callback(data.data, offset + limit, data.count, back);
         });
     },
-    getViewModelSummary: function(func, field, filters, callback ) {
+    getViewModelSummary: function (func, field, filters, callback) {
         postData("getSummary", { name: model.name, func: func, field: field, filters: filters }).then((data) => {
             callback(data.data);
         });
     },
     getItems: (columnName, filter, limit, offset, callback) => {
-        postData("getColumnData", { name: model.name, columnName: columnName, filter: filter, limit: limit, offset: offset}).then((data) => {
+        postData("getColumnData", { name: model.name, columnName: columnName, filter: filter, limit: limit, offset: offset }).then((data) => {
             callback(data.data);
         });
     },
@@ -76,10 +76,9 @@ var model = {
 function getColumns(name, model) {
     postData("getModel", { name: name }).then((data) => {
         model.name = name,
-        model.columns = data;
-
+            model.columns = data;
 
         ko.applyBindings(model);
     });
 }
-getColumns(window.location.hash.substring(1), model);
+getColumns("declaration", model);

@@ -1,17 +1,45 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
     <title>Welcome to Abris Components</title>
-    </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+</head>
+
+<body>
     <h2>You can check the following examples of Abris Components:</h2>
-    <ul>
-        <li><a href="basic/index.html">TableWidget basic usage</a></li>
-        <li><a href="server-basic/index.html#declaration">Universal Declaration of Human Rights</a></li>
-        <li><a href="server-basic/index.html#customer">Customer from Pagila</a></li>
-    </ul>
-    </body>
+    <div style="display: flex; height: calc(100vh - 100px);">
+        <div style="display: flex; flex-direction: column; height: 100%; overflow: auto;">
+            <div>Content</div>
+            <ul data-bind="foreach: $data">
+                <li>
+                    <a data-bind="text: title, attr: { href: '#' + name }"></a>
+                </li>
+            </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; height: 100%; overflow: auto; flex-grow: 1;">
+            <div style="padding-left: 50px;">
+                <div data-bind="foreach: $data">
+                    <div>
+                        <h3 data-bind="text: title, attr: { id: name }"></h3>
+                        <p data-bind="text: description"></p>
+                        <a target="_blank" data-bind="attr: { href: name + '/index.html' }">Open in new window</a>
+                    </div>
+                    <iframe style="min-width: 800px; min-height: 500px; border: none; outline: none;"
+                        data-bind="attr: { src: $data.name + '/index.html' }"></iframe>
+                    <div>
+                        <div data-bind="text: file"></div>
+                        <pre style="max-width: 800px; max-height: 400px; border: 1px solid lightgrey; overflow: auto;"
+                            data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
 
 </html>
