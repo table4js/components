@@ -1,7 +1,16 @@
 
 const csv = require('csv-parser');
 
-function filtered(params, connector) {
+/**
+ * Filters data.
+ * 
+ * @param params parameters passed in the request
+ * @param params.field column name
+ * @param params.filters array with column values of functions and filter values
+ * @param connector connected data source 
+ * @returns filtered array
+ */
+ function filtered(params, connector) {
     return connector.dataArray?.filter(row => 
         params.filters.every(f => {
             switch(f.op) {
@@ -15,7 +24,16 @@ function filtered(params, connector) {
     ) ?? [];
 } 
 
-module.exports.getSummary = function (params, connector) {
+/**
+ * Gets data with single column summary.
+ * 
+ * @param params parameters passed in the request
+ * @param params.field column name
+ * @param params.func the name of the function for calculating the summary
+ * @param connector connected data source 
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getSummary = function (params, connector) {
     const filteredData = filtered(params, connector);
     let result = filteredData.length ? filteredData[0][params.field] : false;
     let sum = 0, count = 0, uniques = [];
@@ -33,7 +51,17 @@ module.exports.getSummary = function (params, connector) {
     return {code: 200, data: JSON.stringify({data: result})};
 }
 
-module.exports.getData = function (params, connector) {
+/**
+ * Gets data from the specified range.
+ * 
+ * @param params parameters passed in the request
+ * @param params.order list with columns and sort direction
+ * @param params.offset number of row to be skipped before starting data transfer
+ * @param params.limit number of transmitted data 
+ * @param connector connected data source 
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getData = function (params, connector) {
     function sortfunc (a,b) {
         for (let i=0; i<params.order.length; i++) {
             if(a[params.order[i].field] === b[params.order[i].field]) continue;
@@ -50,7 +78,18 @@ module.exports.getData = function (params, connector) {
     return {code: 200, data: JSON.stringify({data: result, count: filteredData.length})};
 }
 
-module.exports.getColumnData = function (params, connector) {
+/**
+ * Gets data from one column. Used to dynamically filter data.
+ * 
+ * @param params parameters passed in the request
+ * @param params.columnName column name
+ * @param params.filter a string containing the filter value for this column
+ * @param params.offset number of row to be skipped before starting data transfer
+ * @param params.limit number of transmitted data 
+ * @param connector connected data source 
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getColumnData = function (params, connector) {
     let result = [], uniques = [];
     const filteredData = connector.dataArray?.map(row => {
         if((!(params.filter) || ~row[params.columnName].toString().toUpperCase().indexOf(params.filter.toUpperCase())) && !uniques.includes(row[params.columnName])) {uniques.push(row[params.columnName]);};
@@ -61,7 +100,15 @@ module.exports.getColumnData = function (params, connector) {
     return {code: 200, data: JSON.stringify({data: result})};
 }
 
-module.exports.read = function (connector, property){
+/**
+ * Reads given data from csv file.
+ * 
+ * @param params parameters passed in the request
+ * @param connector connected data source 
+ * @param property an array with a description of the properties of the projection (columns) 
+ * @returns 1 on success and 0 on error
+ */
+ module.exports.read = function (connector, property){
     function typeCasting(object, property) {
         Object.keys(object).forEach(name => {
             if(property.filter(p=>p.name === name)[0].type === "number"){

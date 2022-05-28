@@ -1,6 +1,15 @@
 const Pool = require('pg').Pool;
 
-function createFilter(params, connector){
+/**
+ * Filters data.
+ * 
+ * @param params parameters passed in the request
+ * @param params.field column name
+ * @param params.filters array with column values of functions and filter values
+ * @param connector connected data source 
+ * @returns query filter substring
+ */
+ function createFilter(params, connector){
     function arrayStringify(arr){
         let ret = "";
         arr.forEach(e => ret = (ret ? `${ret}, '${e}'`: `'${e}'`));
@@ -26,7 +35,17 @@ function createFilter(params, connector){
     return (tableFilter ? " WHERE " + tableFilter : "" );
 }
 
-module.exports.getSummary = async function (params, connector, dataSourses) {
+/**
+ * Gets data with single column summary.
+ * 
+ * @param params parameters passed in the request
+ * @param params.field column name
+ * @param params.func the name of the function for calculating the summary
+ * @param connector connected data source 
+ * @param dataSourses data source
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getSummary = async function (params, connector, dataSourses) {
     let result
     let tableFilter = createFilter(params, connector);
     result = (params.func === "unique")
@@ -35,7 +54,18 @@ module.exports.getSummary = async function (params, connector, dataSourses) {
     return {code: 200, data: JSON.stringify({data: result.rows[0].value})};
 }
 
-module.exports.getData = async function (params, connector, dataSourses){
+/**
+ * Gets data from the specified range.
+ * 
+ * @param params parameters passed in the request
+ * @param params.order list with columns and sort direction
+ * @param params.offset number of row to be skipped before starting data transfer
+ * @param params.limit number of transmitted data 
+ * @param connector connected data source 
+ * @param dataSourses data source
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getData = async function (params, connector, dataSourses){
     let order = null;
     params.order.reverse().forEach(e => {
         order = (order ? order + ", " : " ORDER BY ") + e.field + (e.desc ? " desc " : " asc ");
@@ -53,7 +83,19 @@ module.exports.getData = async function (params, connector, dataSourses){
     }
 }
 
-module.exports.getColumnData = async function (params, connector, dataSourses) {
+/**
+ * Gets data from one column. Used to dynamically filter data.
+ * 
+ * @param params parameters passed in the request
+ * @param params.columnName column name
+ * @param params.filter a string containing the filter value for this column
+ * @param params.offset number of row to be skipped before starting data transfer
+ * @param params.limit number of transmitted data 
+ * @param connector connected data source 
+ * @param dataSourses data source
+ * @returns an object with data prepared for sending or an object with an error description
+ */
+ module.exports.getColumnData = async function (params, connector, dataSourses) {
     const tableFilter =params.filter ? ` WHERE "${params.columnName.replace('"', '""')}" ILIKE '%${params.filter.replace("'", "''")}%' ` : "";
     try {
         let result = await dataSourses.pool(connector.dataSource).query(`SELECT DISTINCT "${params.columnName}" AS value FROM (${connector.templateSQL}) t ${tableFilter}  LIMIT $1 OFFSET $2`, [params.limit, params.offset]);
@@ -65,7 +107,13 @@ module.exports.getColumnData = async function (params, connector, dataSourses) {
     }
 }
 
-module.exports.createPool = function (dataSourses, name) {
+/**
+ * creates a database connection.
+ * 
+ * @param dataSourses data source
+ * @param name projection name
+ */
+ module.exports.createPool = function (dataSourses, name) {
     if (!dataSourses.pools[name]) {
         dataSourses.pools[name] = new Pool({
             user: dataSourses.list[name].user,
