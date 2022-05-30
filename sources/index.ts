@@ -22,12 +22,9 @@ export var tableWidgetTemplate = require("./table/index.html").default;
 ko.components.register("abris-components-table", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            if(!!params.widgetModel) {
-                const widgetModel = params.widgetModel as TableWidget;
-                widgetModel.initialize(componentInfo.element);
-                return widgetModel;
-            }
-            return new TableWidget(params, componentInfo.element);
+            const widgetModel = params.model as TableWidget;
+            widgetModel.initialize(componentInfo.element);
+            return widgetModel;
         }
     },
     template: tableWidgetTemplate

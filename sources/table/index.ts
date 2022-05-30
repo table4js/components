@@ -31,8 +31,8 @@ export interface ITableRow {
 
 export interface ITableConfig extends IDataProvider {
     columns: Array<ITableColumnDescription>;
-    showSearch?: ko.Observable<boolean>;
-    showTableSummary?: ko.Observable<boolean>;
+    enableSearch?: boolean;
+    enableSummary?: boolean;
     actions?: Array<IAction>;
     keyColumn?: string;
 }
@@ -51,6 +51,9 @@ export class TableWidget implements ITableColumnOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
+
+    private innerActions: Array<IAction> = [];
+
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
 
     public static cellTypes = {
@@ -63,8 +66,8 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
-        this.showTableSummary = this.config.showTableSummary || ko.observable(false);
-        this.showSearch = this.config.showSearch || ko.observable(false);
+        this.showSearch(config.enableSearch === true);
+        this.createActions(this.config);
         this.createColumns(this.config);
         this.searchModel.search = (text: string) => {
             this.searchModel.prevSearchValue(this.searchModel.searchValue());
@@ -174,6 +177,19 @@ export class TableWidget implements ITableColumnOwner {
         this.columns(config.columns.map(column => 
             this.createColumn(column, config)
         ));
+    }
+
+    protected createActions(config: ITableConfig) {
+        if(config.enableSummary === true) {
+            this.innerActions.push({
+                name: "summary-action",
+                action: () => {
+                    this.showTableSummary(!this.showTableSummary());
+                },
+                svg: "icon_equal",
+                container: "top"
+            });
+        }
     }
 
     private _dataProvider: IDataProvider = undefined;
@@ -416,9 +432,9 @@ export class TableWidget implements ITableColumnOwner {
     }
     rows = ko.observableArray<ITableRow>();
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
-    showTableSummary: ko.Observable<boolean>;
+    showTableSummary: ko.Observable<boolean> = ko.observable(false);
     // @property() showSearch: boolean;
-    showSearch: ko.Observable<boolean>;
+    showSearch: ko.Observable<boolean> = ko.observable(false);
     startRow: ko.Observable<number> = ko.observable(null);
     lastSelectRow = null;
     totalCount = ko.observable(0);
@@ -437,7 +453,7 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     getActions = (container?: string) => {
-        const actions = this.config.actions || [];
+        const actions = [].concat(this.innerActions).concat(this.config.actions || []);
         return actions.filter(action => action.container === container);
     }
     get topActions() {
@@ -447,3 +463,4 @@ export class TableWidget implements ITableColumnOwner {
         return this.getActions('dropdown');
     }
 }
+
