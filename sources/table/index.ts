@@ -462,5 +462,8 @@ export class TableWidget implements ITableColumnOwner {
     get dropdownActions() {
         return this.getActions('dropdown');
     }
+    get bottomActions() {
+        return this.getActions('bottom');
+    }
 }
 

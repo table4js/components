@@ -91,13 +91,16 @@
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count() > 1) && $parents[1].isMergedСells() -->
             <div class="abris-table-cell__container" data-bind="css: css">
-              <span data-bind="html: text, click: $parents[1].startEditCell,
+              <span
+                data-bind="html: text, click: $parents[1].startEditCell,
                 css: text()!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
             </div>
             <!-- /ko -->
             <!-- ko if: (count() > 1) && $parents[1].isMergedСells() -->
-            <div class="abris-table-cell__container" data-bind="css: (count() > 1) && $parents[1].isMergedСells() ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight() - 2 + 'px'}">
-              <span class="abris-table-cell__merged-text" data-bind="html: text, click: $parents[1].startEditCell"></span>
+            <div class="abris-table-cell__container"
+              data-bind="css: (count() > 1) && $parents[1].isMergedСells() ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight() - 2 + 'px'}">
+              <span class="abris-table-cell__merged-text"
+                data-bind="html: text, click: $parents[1].startEditCell"></span>
             </div>
             <!-- /ko -->
             <!-- /ko -->
@@ -142,10 +145,8 @@
           <th class="abris-table-footer-tools__cell" colspan="100%">
             <div class="abris-table-footer-tools__container abris-table-group-header-technical-cell">
               <div class="abris-table-row-management">
-                <!-- ko if: $data.viewModel -->
-                <abris-actions class="abris-table-row-management__actions"
-                  params="model: $data.viewModel, options: {action: 'footerContextActions' }"></abris-actions>
-                <!-- /ko -->
+                <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'bottomActions' }">
+                </abris-actions>
               </div>
               <div class="abris-table-info">
                 <span class="abris-table-info__total abris-table-info__text"
