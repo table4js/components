@@ -20,12 +20,12 @@ var options = {
     enableSearch: true,
     enableSummary: true,
     columns: [],
-    getViewoptionsData: function (limit, offset, order, filters, key, back, callback) {
+    getViewModelData: function (limit, offset, order, filters, key, back, callback) {
         postData("getData", { name: options.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count, back);
         });
     },
-    getViewoptionsSummary: function (func, field, filters, callback) {
+    getViewModelSummary: function (func, field, filters, callback) {
         postData("getSummary", { name: options.name, func: func, field: field, filters: filters }).then((data) => {
             callback(data.data);
         });
