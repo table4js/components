@@ -1,6 +1,6 @@
 import "./filter-default.scss";
 
-var summaryTemplate = require("text-loader!./filter-default.html");
+var summaryTemplate = require("./filter-default.html").default;
 
 ko.components.register("abris-table-filter-default", {
   viewModel: {

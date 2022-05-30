@@ -3,7 +3,7 @@ import { ITableColumn } from "./column";
 
 import "./summary.scss";
 
-var summaryTemplate = require("text-loader!./summary.html");
+var summaryTemplate = require("./summary.html").default;
 
 const Functions: Array<{ title: string; value: string; hint: string, types?: string[] }> =  [
   { title: "-", value: "", hint: "" }, 

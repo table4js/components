@@ -52,6 +52,7 @@
     "json-loader": "latest",
     "mini-css-extract-plugin": "latest",
     "pg": "^8.7.3",
+    "raw-loader": "^4.0.2",
     "sass": "^1",
     "sass-loader": "^8.0.2",
     "standard-version": "^9.3.2",

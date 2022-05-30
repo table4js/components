@@ -2,7 +2,7 @@ import * as ko from "knockout";
 
 import "./search.scss";
 
-var searchTemplate = require("text-loader!./search.html");
+var searchTemplate = require("./search.html").default;
 
 ko.components.register("abris-search", {
     viewModel: {

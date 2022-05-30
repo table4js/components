@@ -2,7 +2,7 @@ import * as ko from "knockout";
 
 import "./dropdown-actions.scss";
 
-var dropdownTemplate = require("text-loader!./dropdown-actions.html");
+var dropdownTemplate = require("./dropdown-actions.html").default;
 
 ko.components.register("abris-dropdown-actions", {
     viewModel: {

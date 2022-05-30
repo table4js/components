@@ -29,6 +29,10 @@ const BASE_CFG = {
         use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { sourceMap: true } }, { loader: 'sass-loader', options: { sourceMap: true } }],
       },
       {
+        test: /\.(htm|html)$/,
+        loader: 'raw-loader',
+      },
+      {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
         options: {

@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 
-var actionTemplate = require("text-loader!./action.html");
+var actionTemplate = require("./action.html").default;
 
 export interface IAction {
     name: string;

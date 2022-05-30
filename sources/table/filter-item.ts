@@ -6,7 +6,7 @@ import { operationsMap, IFindOperation } from "../find";
 import { ITableColumn } from "./column";
 import { TableWidget } from ".";
 
-var filterTemplate = require("text-loader!./filter-item.html");
+var filterTemplate = require("./filter-item.html").default;
 
 
 export class FilterTableItem {

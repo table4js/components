@@ -3,7 +3,7 @@ import { ITableCell } from ".";
 
 import "./cell-editor.scss";
 
-var searchTemplate = require("text-loader!./cell-editor.html");
+var searchTemplate = require("./cell-editor.html").default;
 
 export class InplaceEditor {
     constructor(private cell: ITableCell) {

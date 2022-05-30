@@ -6,7 +6,7 @@ ko.components.register("abris-icon", {
             return params;     
         }
     },
-    template: require("text-loader!./icon.html")
+    template: require("./icon.html").default
 });
 
 export var AbrisIconWidget;

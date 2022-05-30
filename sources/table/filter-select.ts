@@ -2,7 +2,7 @@ import * as ko from "knockout";
 
 import "./filter-select.scss";
 
-var selectboxFilterTemplate = require("text-loader!./filter-select.html");
+var selectboxFilterTemplate = require("./filter-select.html").default;
 export class TableFilterSelect {
     private subscriptionFilterText: ko.Subscription;
     private subscriptionSelection: ko.Subscription;

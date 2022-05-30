@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import "./actions.scss";
 
-var actionsTemplate = require("text-loader!./actions.html");
+var actionsTemplate = require("./actions.html").default;
 
 ko.components.register("abris-actions", {
     viewModel: {
