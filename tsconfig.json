@@ -2,6 +2,10 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
+        "lib": [
+            "DOM",
+            "ES2015"
+        ],
         "skipLibCheck": true,
         "sourceMap": true,
         "moduleResolution": "node",

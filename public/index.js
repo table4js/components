@@ -1,5 +1,5 @@
 
-var sampleDataProvider = new ArrayDataProvider(sampleData);
+// var sampleDataProvider = new AbrisComponents.ArrayDataProvider(sampleData);
 
 var showTableSummary = ko.observable(false);
 
@@ -21,15 +21,15 @@ var options = {
             title: "Text",
         }
     ],
-    getViewModelData: function (limit, offset, order, filters, key, back, callback) {
-        sampleDataProvider.getViewModelData(limit, offset, order, filters, key, back, callback);
-    },
-    getViewModelSummary: function (func, field, callback) {
-        sampleDataProvider.getViewModelSummary(func, field, callback);
-    },
-    getItems: (columnName, filter, limit, offset, callback) => {
-        sampleDataProvider.getItems(columnName, filter, limit, offset, callback);
-    },
+    // getViewModelData: function (limit, offset, order, filters, key, back, callback) {
+    //     sampleDataProvider.getViewModelData(limit, offset, order, filters, key, back, callback);
+    // },
+    // getViewModelSummary: function (func, field, callback) {
+    //     sampleDataProvider.getViewModelSummary(func, field, callback);
+    // },
+    // getItems: (columnName, filter, limit, offset, callback) => {
+    //     sampleDataProvider.getItems(columnName, filter, limit, offset, callback);
+    // },
     actions: [
         {
             name: "summary-action",
@@ -64,6 +64,8 @@ var options = {
     ]
 };
 
-var widgetModel = new AbrisComponents.TableWidget({ model: options, options: {} });
+var widgetModel = new AbrisComponents.TableWidget(options);
+// widgetModel.dataProvider = new AbrisComponents.ArrayDataProvider(sampleData);
+widgetModel.data = sampleData;
 
 ko.applyBindings(widgetModel);

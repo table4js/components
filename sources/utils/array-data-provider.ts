@@ -1,18 +1,29 @@
-function ArrayDataProvider(data) {
-    function filtered(filters, data) {
+export interface IDataProvider {
+    getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
+    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
+    getItems: (column, value, limit, offset, callback) => void;
+}
+
+export class ArrayDataProvider implements IDataProvider {
+    constructor(public data: Array<any>) {
+
+    }
+
+    filtered(filters, data) {
         return data?.filter(row => 
             filters.every(f => {
                 switch(f.op) {
                     case "EQ": return f.value.includes(row[f.field]); 
-                    case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.values(row).some(r=> ~r.toString().toUpperCase().indexOf(f.value.toUpperCase()));
+                    case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.keys(row).some(k => ~row[k].toString().toUpperCase().indexOf(f.value.toUpperCase()));
                     case "ISN":  return !(row[f.field]); 
                     case "ISNN":  return !!(row[f.field]); 
                     default: return true; 
                 }
             })
         ) ?? [];
-    } 
-    this.getViewModelData = function (limit, offset, order, filters, key, back, callback) {
+    }
+
+    getViewModelData(limit, offset, order, filters, key, back, callback) {
         function sortfunc(a, b) {
             for (let i = 0; i < order.length; i++) {
                 if (a[order[i].field] === b[order[i].field]) continue;
@@ -20,20 +31,20 @@ function ArrayDataProvider(data) {
             }
             return 0;
         }
-        (order.length > 0) && data.sort(sortfunc);
+        (order.length > 0) && this.data.sort(sortfunc);
         let result = [];
-        const filteredData = filtered(filters, data);
+        const filteredData = this.filtered(filters, this.data);
         for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
             result.push(filteredData[i]);
         }
         callback(result, offset + limit, filteredData.length, back);
-    };
+    }
 
-    this.getViewModelSummary = function (func, field, filters, callback) {
-        const filteredData = filtered(filters, data);
-        let result = filteredData.length ? filteredData[0][params.field] : false;
+    getViewModelSummary(func, field, filters, callback) {
+        const filteredData = this.filtered(filters, this.data);
+        let result = filteredData.length ? filteredData[0][field] : false;
         let sum = 0, count = 0, uniques = [];
-        data.forEach(row => {
+        this.data.forEach(row => {
             switch (func) {
                 case "sum": result = result + row[field]; break;
                 case "avg": sum = sum + row[field]; count++; result = sum / count; break;
@@ -45,16 +56,16 @@ function ArrayDataProvider(data) {
             }
         })
         callback(result);
-    };
+    }
 
-    this.getItems = (columnName, filter, limit, offset, callback) => {
+    getItems(columnName, filter, limit, offset, callback) {
         let result = [], uniques = [];
-        const filteredData = data.map(row => {
+        const filteredData = this.data.map(row => {
             if ((!(filter) || ~row[columnName].toUpperCase().indexOf(filter.toUpperCase())) && !uniques.includes(row[columnName])) { uniques.push(row[columnName]); };
         });
         for (var i = offset > 0 ? offset : 0; i < offset + limit && uniques && i < uniques.length; i++) {
             result.push(uniques[i]);
         }
         callback(result);
-    };
+    }
 }

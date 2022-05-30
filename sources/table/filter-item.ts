@@ -46,7 +46,7 @@ export class FilterTableViewModel {
       filterValue.value.subscribe(() => this.apply());
       // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
       this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.column, (column, filter, limit, offset, callback) => {
-        this.table.options.getItems(column, filter, limit, offset, callback);
+        this.table.dataProvider.getItems(column, filter, limit, offset, callback);
       }));
       params.showFilter(!!this.filterItems().length);
     });

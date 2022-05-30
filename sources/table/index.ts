@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { IAction } from "../core/action";
 import { InplaceEditor } from "./cell-editor";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
+import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 
 import "./index.scss";
 
@@ -28,19 +29,12 @@ export interface ITableRow {
 
 }
 
-export interface ITableViewModel {
+export interface ITableConfig extends IDataProvider {
     columns: Array<ITableColumnDescription>;
-    getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
-    getItems: (column, value, limit, offset, callback) => void;
     showSearch?: ko.Observable<boolean>;
     showTableSummary?: ko.Observable<boolean>;
     actions?: Array<IAction>;
-}
-
-export interface ITableConfig {
-    options: { primaryKey: string };
-    model: ITableViewModel;
+    keyColumn?: string;
 }
 
 interface ITableFilter {
@@ -68,12 +62,10 @@ export class TableWidget implements ITableColumnOwner {
         TableWidget.cellTypes[cellType.name] = cellType;
     }
 
-    constructor(private config: ITableConfig, element?: HTMLElement) {
-        this.options = this.config.model;
-        this.showTableSummary = this.options.showTableSummary || ko.observable(false);
-        this.showSearch = this.options.showSearch || ko.observable(false);
-        this.primaryKey = this.config.options.primaryKey;
-        this.createColumns(this.config.model);
+    constructor(public config: ITableConfig, element?: HTMLElement) {
+        this.showTableSummary = this.config.showTableSummary || ko.observable(false);
+        this.showSearch = this.config.showSearch || ko.observable(false);
+        this.createColumns(this.config);
         this.searchModel.search = (text: string) => {
             this.searchModel.prevSearchValue(this.searchModel.searchValue());
             this.searchModel.searchValue(text);
@@ -151,7 +143,7 @@ export class TableWidget implements ITableColumnOwner {
 
     calculateSummary(column: ITableColumn): void {
         if(column.summaryParams() && column.summaryParams().field === column.name && column.summaryParams().func)
-            this.options.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
+            this.dataProvider.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
     }
 
     protected showDetail(rowData: any) {
@@ -174,14 +166,30 @@ export class TableWidget implements ITableColumnOwner {
         }
     }
 
-    protected createColumn(column: any, model: ITableViewModel): ITableColumn {
+    protected createColumn(column: any, model: ITableConfig): ITableColumn {
         return new TableColumn(column, this);
     }
 
-    protected createColumns(model: ITableViewModel) {
-        this.columns(model.columns.map(column => 
-            this.createColumn(column, model)
+    protected createColumns(config: ITableConfig) {
+        this.columns(config.columns.map(column => 
+            this.createColumn(column, config)
         ));
+    }
+
+    private _dataProvider: IDataProvider = undefined;
+    get dataProvider() {
+        return this._dataProvider || this.config;
+    }
+    set dataProvider(provider: IDataProvider) {
+        this._dataProvider = provider;
+        this.refresh();
+    }
+
+    // get data() {
+    //     return [];
+    // }
+    set data(_data: Array<any>) {
+        this.dataProvider = new ArrayDataProvider(_data);
     }
 
     protected refresh() {
@@ -196,7 +204,7 @@ export class TableWidget implements ITableColumnOwner {
     drawRows(limit: number, offset: number, back = false, refresh = false) {
         if(!this.loadingMutex) {
             this.loadingMutex = true;
-            this.options.getViewModelData(
+            this.dataProvider.getViewModelData(
                 limit, 
                 offset,
                 this.columns().filter(c => c.order() !== undefined).map(c => <any>{field: c.name, desc: c.order()}),
@@ -311,7 +319,7 @@ export class TableWidget implements ITableColumnOwner {
             colorCell = (col.row_color && col.concatPrev) ? ko.unwrap(data[col.name]) : null;
         });
         this.columns().reverse();
-        let row_id = ko.unwrap(data[this.primaryKey]);
+        let row_id = ko.unwrap(data[this.keyColumn]);
         return {
             cells: ko.observableArray(rowCells.reverse()),
             data: ko.toJS(data),
@@ -403,10 +411,11 @@ export class TableWidget implements ITableColumnOwner {
     lastOffsetBack = 0;
     partRowCount = 10;
     columns = ko.observableArray<ITableColumn>();
-    primaryKey: string;
+    get keyColumn(): string {
+        return this.config.keyColumn;
+    }
     rows = ko.observableArray<ITableRow>();
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
-    options: ITableViewModel;
     showTableSummary: ko.Observable<boolean>;
     // @property() showSearch: boolean;
     showSearch: ko.Observable<boolean>;
@@ -428,7 +437,7 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     getActions = (container?: string) => {
-        const actions = this.options.actions || [];
+        const actions = this.config.actions || [];
         return actions.filter(action => action.container === container);
     }
     get topActions() {

@@ -1,4 +1,4 @@
-import { Observable } from "knockout";
+import * as ko from "knockout";
 import { IAggregate } from "../find";
 import { FilterContext } from "./filter";
 
@@ -64,9 +64,9 @@ export class TableColumn implements ITableColumn {
 
     filter: any;
     filterContext: any = new FilterContext();
-    order: Observable<string> = ko.observable<string>();
-    summaryValue: Observable<any> = ko.observable();
-    summaryParams: Observable<IAggregate> = ko.observable();
+    order: ko.Observable<string> = ko.observable<string>();
+    summaryValue: ko.Observable<any> = ko.observable();
+    summaryParams: ko.Observable<IAggregate> = ko.observable();
     count: number;
     prev: any;
     prevValue: any;

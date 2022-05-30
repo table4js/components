@@ -15,6 +15,8 @@ export * from "./table/filter-item";
 export * from "./table/filter-select";
 export * from "./table/search";
 
+export * from "./utils/array-data-provider";
+
 export var tableWidgetTemplate = require("./table/index.html").default;
 
 ko.components.register("abris-components-table", {
