@@ -16,69 +16,55 @@ async function postData(url = '', data = {}) {
     return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-var showTableSummary = ko.observable(false);
-
-var model = {
-    showTableSummary,
-    showSearch: ko.observable(true),
+var options = {
+    enableSearch: true,
+    enableSummary: true,
     columns: [],
-    getViewModelData: function (limit, offset, order, filters, key, back, callback) {
-        postData("getData", { name: model.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
+    getViewoptionsData: function (limit, offset, order, filters, key, back, callback) {
+        postData("getData", { name: options.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count, back);
         });
     },
-    getViewModelSummary: function (func, field, filters, callback) {
-        postData("getSummary", { name: model.name, func: func, field: field, filters: filters }).then((data) => {
+    getViewoptionsSummary: function (func, field, filters, callback) {
+        postData("getSummary", { name: options.name, func: func, field: field, filters: filters }).then((data) => {
             callback(data.data);
         });
     },
     getItems: (columnName, filter, limit, offset, callback) => {
-        postData("getColumnData", { name: model.name, columnName: columnName, filter: filter, limit: limit, offset: offset }).then((data) => {
+        postData("getColumnData", { name: options.name, columnName: columnName, filter: filter, limit: limit, offset: offset }).then((data) => {
             callback(data.data);
         });
     },
-    actions: [
-        {
-            name: "summary-action",
-            title: "Summary",
-            cssClasses: "my-custom-class",
-            cssImage: "my-custom-class",
-            cssLabel: "my-custom-class",
-            action: function () {
-                showTableSummary(!showTableSummary());
-            },
-            svg: "icon_equal",
-            container: "top"
-        },
-        {
-            name: "a2",
-            title: "test dropdown action 1",
-            action: function () {
-                alert(this.title);
-            },
-            svg: "icon_add-column",
-            cssClasses: "abris-context-button",
-            container: "dropdown"
-        },
-        {
-            name: "a3",
-            title: "test dropdown action 2",
-            action: function () {
-                alert(this.title);
-            },
-            svg: "icon_add-column",
-            cssClasses: "abris-context-button",
-            container: "dropdown"
-        }
-    ]
+    // actions: [
+    //     {
+    //         name: "a2",
+    //         title: "test dropdown action 1",
+    //         action: function () {
+    //             alert(this.title);
+    //         },
+    //         svg: "icon_add-column",
+    //         cssClasses: "abris-context-button",
+    //         container: "dropdown"
+    //     },
+    //     {
+    //         name: "a3",
+    //         title: "test dropdown action 2",
+    //         action: function () {
+    //             alert(this.title);
+    //         },
+    //         svg: "icon_add-column",
+    //         cssClasses: "abris-context-button",
+    //         container: "dropdown"
+    //     }
+    // ]
 };
 
-function getColumns(name, model) {
-    postData("getModel", { name: name }).then((data) => {
-        model.name = name,
-            model.columns = data;
+function getColumns(name, options) {
+    postData("getoptions", { name: name }).then((data) => {
+        options.name = name,
+            options.columns = data;
 
-        ko.applyBindings(model);
+        ko.applyBindings(new AbrisComponents.TableWidget(options));
     });
 }
-getColumns("declaration", model);
+getColumns("declaration", options);
