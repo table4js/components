@@ -2,7 +2,7 @@
                 visible: !$data.visible || ko.unwrap(visible),
                 enable: !$data.enabled || ko.unwrap(enabled),
                 attr: {
-                        class: 'abris-button--transparent action-button abris-action ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' abris-action--active' : ''),
+                        class: 'abris-button--transparent action-button abris-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' abris-action--active' : ''),
                         title: $data.title || $data.name, form: $data.formId,
                         type: $data.formId !== undefined ? 'submit' : 'button'
                     }">
@@ -10,7 +10,7 @@
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->
     <!-- ko if: $data.svg -->
-    <svg class="abris-button__svg-icon abris-action-button__icon" data-bind="css: ko.unwrap($data.cssImage)">
+    <svg class="abris-action-button__icon abris-button__svg-icon" data-bind="css: ko.unwrap($data.cssImage)">
         <use data-bind="attr:{'xlink:href':'spritemap.svg#sprite-'+svg}" xlink:href=''></use>
     </svg>
     <!-- /ko -->
