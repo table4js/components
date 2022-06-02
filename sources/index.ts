@@ -18,6 +18,7 @@ export * from "./table/filter-select";
 export * from "./table/search";
 
 export * from "./utils/array-data-provider";
+export * from "./utils/remote-data-provider";
 
 export class KnockoutHashTableStorage extends HashTableStorage {
     public getValue(name: string) {
