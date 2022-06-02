@@ -7,9 +7,6 @@ ko.components.register("abris-actions", {
     viewModel: {
         createViewModel: function(params, componentInfo) {
             var modelValue = (params.model || {})[params.options.action];
-            ko.computed(() => {
-                (ko.unwrap(modelValue) || []).forEach(action => action.cssClasses = action.cssClasses || "");
-            });
             return {
                 actions: modelValue,
                 short: params.options.short,
