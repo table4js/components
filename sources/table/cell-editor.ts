@@ -1,18 +1,21 @@
 import * as ko from "knockout";
+import { Base } from "../core/base";
 import { ITableCell } from ".";
 
 import "./cell-editor.scss";
+import { property } from "../core/property";
 
 var searchTemplate = require("./cell-editor.html").default;
 
-export class InplaceEditor {
+export class InplaceEditor extends Base {
     constructor(private cell: ITableCell) {
-        this.value(this.cell.text());
+        super();
+        this.value = this.cell.text();
     }
-    value = ko.observable();
+    @property() value: any;
     complete(commit: boolean) {
         if(commit) {
-            this.cell.text(this.value());
+            this.cell.text(this.value);
         }
         this.cell.inplaceEditForm(undefined);
     }

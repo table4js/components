@@ -3,14 +3,14 @@ const webpack = require('webpack');
 const packageJson = require('./package.json');
 const publishPackageJson = require('./publish/package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PascalCaseNamePlugin = require('./webpack-pascal-case-name');
 const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 publishPackageJson.version = packageJson.version;
 
-// const libraryName = 'AbrisComponents';
+const libraryName = 'AbrisComponents';
 const banner = [
   "@abris-lab/components - JavaScript components library v" + packageJson.version,
   "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
@@ -63,13 +63,12 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
     new MiniCssExtractPlugin(
       { filename: '[name].css' }
     ),
-    // new HtmlWebpackPlugin({
-    //   title: libraryName,
-    //   filename: 'index.debug.html',
-    //   inject: 'head',
-    //   template: './public/index.html',
-    //   scriptLoading: "blocking"
-    // }),
+    new HtmlWebpackPlugin({
+      title: libraryName,
+      inject: 'head',
+      template: './public/index.html',
+      scriptLoading: "blocking"
+    }),
     new webpack.BannerPlugin(banner),
     new PascalCaseNamePlugin()
   ],

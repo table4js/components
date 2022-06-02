@@ -146,7 +146,7 @@ export class TableWidget implements ITableColumnOwner {
 
     calculateSummary(column: ITableColumn): void {
         if(column.summaryParams() && column.summaryParams().field === column.name && column.summaryParams().func)
-            this.dataProvider.getViewModelSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
+            this.dataProvider.getSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
     }
 
     protected showDetail(rowData: any) {
@@ -220,7 +220,7 @@ export class TableWidget implements ITableColumnOwner {
     drawRows(limit: number, offset: number, back = false, refresh = false) {
         if(!this.loadingMutex) {
             this.loadingMutex = true;
-            this.dataProvider.getViewModelData(
+            this.dataProvider.getData(
                 limit, 
                 offset,
                 this.columns().filter(c => c.order() !== undefined).map(c => <any>{field: c.name, desc: c.order()}),

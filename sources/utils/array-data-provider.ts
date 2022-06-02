@@ -1,7 +1,7 @@
 export interface IDataProvider {
-    getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
-    getItems: (column, value, limit, offset, callback) => void;
+    getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
+    getSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
+    getColumnData: (column, value, limit, offset, callback) => void;
 }
 
 export class ArrayDataProvider implements IDataProvider {
@@ -23,7 +23,7 @@ export class ArrayDataProvider implements IDataProvider {
         ) ?? [];
     }
 
-    getViewModelData(limit, offset, order, filters, key, back, callback) {
+    getData(limit, offset, order, filters, key, back, callback) {
         function sortfunc(a, b) {
             for (let i = 0; i < order.length; i++) {
                 if (a[order[i].field] === b[order[i].field]) continue;
@@ -40,7 +40,7 @@ export class ArrayDataProvider implements IDataProvider {
         callback(result, offset + limit, filteredData.length, back);
     }
 
-    getViewModelSummary(func, field, filters, callback) {
+    getSummary(func, field, filters, callback) {
         const filteredData = this.filtered(filters, this.data);
         let result = filteredData.length ? filteredData[0][field] : false;
         let sum = 0, count = 0, uniques = [];
@@ -58,7 +58,7 @@ export class ArrayDataProvider implements IDataProvider {
         callback(result);
     }
 
-    getItems(columnName, filter, limit, offset, callback) {
+    getColumnData(columnName, filter, limit, offset, callback) {
         let result = [], uniques = [];
         const filteredData = this.data.map(row => {
             if ((!(filter) || ~row[columnName].toUpperCase().indexOf(filter.toUpperCase())) && !uniques.includes(row[columnName])) { uniques.push(row[columnName]); };
