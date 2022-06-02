@@ -5,11 +5,136 @@
     <title>Welcome to Abris Components</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-
+    <link rel="stylesheet" href="style.css" >
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
 </head>
 
 <body>
+    <div class="header">
+        <div class="page-size">
+            <div class="header__contaier">
+                <img class="header__logo" src="/examples/img/logo/logo-long.svg" alt="abris-logo">
+                <div class="header__pages">
+                    <span class="header__link-page header__link-page--active">Main</span>
+                    <span class="header__link-page">Examples</span>
+                    <span class="header__link-page">Buy</span>
+                    <span class="header__link-page">Documentaion</span>
+                    <span class="header__link-page">Contact us</span>
+                    <span class="header__link-page">GitHub</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-title blue-background">
+        <div class="page-size">
+            <div class="main-title__contaier">
+                <img class="main-title__logo" src="/examples/img/logo/logo-components.svg" alt="abris-logo">
+                <div class="tagline">
+                    <div class="tagline__line-one">
+                        <span class="tagline__text">No </span>
+                        <span class="tagline__text tagline__accent">&lt;code&gt;</span>
+                        <span class="tagline__text">, no special </span>
+                        <span class="tagline__text tagline__accent">design</span>
+                        <img class="tagline__blink" src="/examples/img/logo/1.svg">
+                    </div>
+                    <div class="tagline__line-two">
+                        <span class="tagline__text">Just </span>
+                        <span class="tagline__text tagline__link">install</span>
+                        <span class="tagline__text">&nbsp;and use</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-start">
+        <div class="page-size">
+            <div class="quick-start__container">
+                <div class="headline three-column">
+                    <span class="headline__text">&lt;abris-components-table&gt; … </span>
+                    <span class="headline__text">&lt;/abris-components-table&gt;</span>
+                </div>
+                <span class="headline-description three-column">- it's super JavaScript (TypeScript) components library. Contains UI Abris components.</span>
+                <div class="semple">
+                    <div class="steps two-column">
+                        <span class="steps__description">1 Clone repo from github</span>
+                        <span class="steps__code">git clone https://github.com/abris-platform/abris-components.git</span>
+                        <span class="steps__description">2 Call this command </span>
+                        <span class="steps__code">cd abris-components<br>npm i<br>npm test<br>npm run build</span>
+                        <span class="steps__description">3 Add your data in abris-table and enjoy result  </span>
+                        <div class="buttons">
+                            <button class="button button--accent">Buy</button>
+                            <button class="button">Getting Started guide</button>
+                        </div>
+                    </div>
+                    <iframe class="three-column" style="min-height: 500px; border: none; outline: none;" src="basic/index.html"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="unique-selling">
+        <div class="page-size">
+            <div class="unique-selling__container">
+                <div class="unique-selling__column three-column">
+                    <span class="headline__text text-right">We guarantee that you will enjoy using your abris-table!</span>
+                    <span class="unique-selling__description text-right">if not, we will unconditionally refund your money within 90 days.</span>
+                    <button class="button button--accent">Go to shopping!</button>
+                </div>
+                <img class="two-column" src="/examples/img/usp/1.svg">
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="page-size">
+            <div class="features__container">
+                <div class="headline four-column">
+                    <span class="headline__text">&lt;abris-components-table&gt;</span>
+                    <span class="headline__text">- it's not just a table, it's...</span>
+                </div>
+                <div class="features__reason reason-left">
+                    <img class="reason-img" src="/examples/img/features/1.svg">
+                    <div class="reason-column">
+                        <span class="headline__text three-column">Convenient data viewing</span>
+                        <span class="reason__description two-column">Viewing data without pagination is much more convenient and does not require switching pages and all that.</span>
+                    </div>
+                </div>
+                <div class="features__reason reason-right">
+                    <div class="reason-column">
+                        <span class="headline__text three-column text-right">Instant search and filters</span>
+                        <span class="reason__description two-column text-right">You can search data in your table without using additional libraries and scripts.</span>
+                    </div>
+                    <img class="reason-img" src="/examples/img/features/2.svg">
+                </div>
+                <div class="features__reason reason-left">
+                    <img class="reason-img" src="/examples/img/features/3.svg">
+                    <div class="reason-column">
+                        <span class="headline__text three-column">Standard and advanced Features</span>
+                        <span class="reason__description two-column">Use the built-in table functions such as sorting, filtering, searching, totals, etc. and create your own functions for convenient work with the table.</span>
+                    </div>
+                </div>
+                <div class="features__reason reason-right">
+                    <div class="reason-column">
+                        <span class="headline__text three-column text-right">Edit data right in the table</span>
+                        <span class="reason__description two-column text-right">Edit data directly in the table without leaving the cash register.</span>
+                    </div>
+                    <img class="reason-img" src="/examples/img/features/4.svg">
+                </div>
+                <div class="features__reason reason-left">
+                    <img class="reason-img" src="/examples/img/features/5.svg">
+                    <div class="reason-column">
+                        <span class="headline__text three-column">Use almost any data source</span>
+                        <span class="reason__description two-column">Fill the table with data from various sources that come to your mind.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <h2>You can check the following examples of Abris Components:</h2>
     <div style="display: flex; height: calc(100vh - 100px);">
         <div style="display: flex; flex-direction: column; height: 100%; overflow: auto;">
