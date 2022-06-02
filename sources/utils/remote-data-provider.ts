@@ -22,17 +22,17 @@ export class RemoteDataProvider implements IDataProvider {
 
     }
 
-    getViewModelData(limit: number, offset: number, order: any[], filters: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void) {
+    getData(limit: number, offset: number, order: any[], filters: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void) {
         postData(this.url + "getData", { name: this.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count, back);
         });
     }
-    getViewModelSummary(func: string, field: string, filters: any[], callback: (value: any) => void) {
+    getSummary(func: string, field: string, filters: any[], callback: (value: any) => void) {
         postData(this.url + "getSummary", { name: this.name, func: func, field: field, filters: filters }).then((data) => {
             callback(data.data);
         });
     }
-    getItems(columnName: string, filter: any, limit: number, offset: number, callback: (value: any) => void) {
+    getColumnData(columnName: string, filter: any, limit: number, offset: number, callback: (value: any) => void) {
         postData(this.url + "getColumnData", { name: this.name, columnName: columnName, filter: filter, limit: limit, offset: offset }).then((data) => {
             callback(data.data);
         });

@@ -9,14 +9,14 @@ export class TableFilterSelect {
     private limit: number = 10;
     private offset: number = 0;
 
-    constructor( private value: ko.Observable,  private columnName: string, private getItems, isOpen?: ko.Observable<boolean>, public title: string = "", public moreText: string = "") {
+    constructor(private value: ko.Observable,  private columnName: string, private getColumnData, isOpen?: ko.Observable<boolean>, public title: string = "", public moreText: string = "") {
         if(isOpen !== undefined) {
             this.isOpen = isOpen;
         }
         this.subscriptionFilterText = this.filterText.subscribe((filterValue) => {
             this.foundItems([]);
             this.offset = 0;
-            this.getItems(this.columnName, filterValue, this.limit, this.offset, items => {
+            this.getColumnData(this.columnName, filterValue, this.limit, this.offset, items => {
                 this.foundItems(items);
                 this.isLoadMore(items.length === this.limit);
                 this.offset += 10;
@@ -30,7 +30,7 @@ export class TableFilterSelect {
         this.filterText.notifySubscribers(null)
     }
     loadMore() {
-        this.getItems(this.columnName, this.filterText(), this.limit, this.offset, items => {
+        this.getColumnData(this.columnName, this.filterText(), this.limit, this.offset, items => {
             items.forEach(i => this.foundItems.push(i))
             this.isLoadMore(items.length === this.limit);
             this.offset += 10;
@@ -70,7 +70,7 @@ export class TableFilterSelect {
 ko.components.register("abris-filter-select", {
     viewModel: {
         createViewModel: function(params, componentInfo) {
-            const viewModel = new TableFilterSelect(params.value, params.columnName, params.getItems, params.isOpen, params.title, params.moreText);
+            const viewModel = new TableFilterSelect(params.value, params.columnName, params.getColumnData, params.isOpen, params.title, params.moreText);
             const close = () => viewModel.isOpen(false);
             document.body.addEventListener("click", close);
             ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function() {
