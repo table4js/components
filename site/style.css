@@ -25,7 +25,10 @@ body {
 
 .main-title,
 .quick-start,
-.unique-selling {
+.unique-selling,
+.features,
+.crossbrow,
+.form-back {
     margin-bottom: 70px;
 }
 
@@ -61,6 +64,11 @@ body {
     justify-content: space-between;
 }
 
+.header__link-page {
+    text-decoration: none;
+    color: #263769;
+}
+
 .header__link-page:not(:last-child) {
     margin-right: 10px;
 }
@@ -78,6 +86,13 @@ body {
     background-image: url(img/background/blue.svg);
     background-repeat: no-repeat;
     background-position: bottom;
+    background-size: cover;
+}
+
+.blue-top-background {
+    background-image: url(img/background/blue.svg);
+    background-repeat: no-repeat;
+    background-position: top;
     background-size: cover;
 }
 
@@ -280,4 +295,112 @@ body {
 
 .reason-right .reason-column {
     align-items: flex-end;
+}
+
+.crossbrow .headline {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.crossbrow__browsers {
+    display: flex;
+    align-items: center;
+}
+
+.crossbrow__item:not(:last-child) {
+    margin-right: 40px;
+}
+
+.form-back .headline {
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.form-back .headline__text {
+    align-self: center;
+}
+
+.form-back__form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.form-back__label {
+    margin-bottom: 5px;
+}
+
+.form-back__field {
+    background: #fff;
+    border: 1px solid #A59EFF;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+textarea.form-back__field {
+    margin-bottom: 20px;
+}
+
+.form-back__field:focus {
+    border: 1px solid #7469FF;
+}
+
+.form-back__field:focus-visible {
+    outline: none;
+}
+
+.form-back__button {
+    margin: auto;
+}
+
+.form-back__succes .reason__description {
+    margin-bottom: 15px;
+}
+
+.form-back__succes .button {
+    margin-left: 0;
+}
+
+.footer {
+    padding-top: 90px;
+    padding-bottom: 30px;
+}
+
+.footer__container {
+    display: flex;
+}
+
+.footer__column:not(:last-child) {
+    display: flex;
+    flex-direction: column;    
+    margin-right: 40px;
+}
+
+.footer__logo {
+    margin: auto;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+.footer__ltd {
+    text-align: center;
+}
+
+.footer__column .header__link-page {
+    margin-bottom: 15px;
+}
+
+.social {
+    display: flex;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.social__icon {
+    margin-right: 5px;
+}
+
+.social__link {
+    color: #263769;
 }
