@@ -19,7 +19,7 @@ export class TableSummaryItem {
   }
 }
 
-export class TableSummaryViewModel extends Base {
+export class TableSummary extends Base {
   constructor(private column: ITableColumn) {
     super();
     this.summaryItems = Functions.filter(funcDescription => {
@@ -32,7 +32,7 @@ export class TableSummaryViewModel extends Base {
   set value(val: any) {
     this.column.summaryValue = val;
   }
-  @property({ defaultValue: null, onSet: (val, target: TableSummaryViewModel) => {
+  @property({ defaultValue: null, onSet: (val, target: TableSummary) => {
     target.column.summaryParams = { func: val, field: target.column.name };
   } }) func: any;
   summaryItems: Array<TableSummaryItem>;

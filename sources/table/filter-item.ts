@@ -11,7 +11,7 @@ import "./filter-item.scss";
 var filterTemplate = require("./filter-item.html").default;
 
 
-export class FilterTableItem extends Base {
+export class TableFilterItem extends Base {
   constructor(
     public filterItemValue: { value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; },
     public filterEditorName: string,
@@ -20,7 +20,7 @@ export class FilterTableItem extends Base {
   ) {
     super();
   }
-  @property({ onSet: (val: IFindOperation, target: FilterTableItem) => {
+  @property({ onSet: (val: IFindOperation, target: TableFilterItem) => {
     if(!!val) {
       target.filterItemValue.op(val.op);
     }
@@ -29,7 +29,7 @@ export class FilterTableItem extends Base {
   @property({ defaultValue: false }) showOperand: boolean;
 }
 
-export class FilterTableViewModel {
+export class TableFilter {
   constructor(
     private filterContext: FilterContext,
     private column: ITableColumn,
@@ -39,7 +39,7 @@ export class FilterTableViewModel {
       let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observable(column.name) };
       filterValue.value.subscribe(() => this.apply());
       // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
-      this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.column, (column, filter, limit, offset, callback) => {
+      this.filterItems.push(new TableFilterItem(filterValue, this.filterEditorName, this.column, (column, filter, limit, offset, callback) => {
         this.table.dataProvider.getColumnData(column, filter, limit, offset, callback);
       }));
       filterContext.showFilter = !!this.filterItems().length;
@@ -52,7 +52,7 @@ export class FilterTableViewModel {
   }
 
   operations: ko.ObservableArray;
-  filterItems = ko.observableArray<FilterTableItem>();
+  filterItems = ko.observableArray<TableFilterItem>();
 
   apply() {
     this.filterContext.value = this.filterItems().map(i => i.filterItemValue);
@@ -74,7 +74,7 @@ export class FilterTableViewModel {
     // return "abris-table-filter-default";
     return this.column["filterComponentName"];
   }
-  removeFilterItem(model: FilterTableViewModel, item: FilterTableItem) {
+  removeFilterItem(model: TableFilter, item: TableFilterItem) {
     this.filterItems.splice(this.filterItems.indexOf(item), 1);
     this.filterContext.showFilter = !!this.filterItems().length;    
     this.filterContext.value = this.filterItems().map(i => i.filterItemValue);
@@ -84,7 +84,7 @@ export class FilterTableViewModel {
 ko.components.register("abris-filter-item", {
   viewModel: {
     createViewModel: function(params, componentInfo) {
-      var viewModel = new FilterTableViewModel(params.context, params.column, params.table);
+      var viewModel = new TableFilter(params.context, params.column, params.table);
       return viewModel;
     }
   },
