@@ -1,8 +1,8 @@
-import { ITableCellType, TableWidget } from ".";
+import { ITableCellType, TableCell } from "./cell";
 
 export class NumberCell implements ITableCellType {
     name: string = "number";
     css: string = "abris-table-cell--right"
 }
 
-TableWidget.registerCellType(new NumberCell());
+TableCell.registerCellType(new NumberCell());

@@ -10,11 +10,6 @@ import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 
 import "./index.scss";
 
-export interface ITableCellType {
-    name: string;
-    css: string;
-}
-
 export interface ITableRow {
     cells: ko.ObservableArray<ITableCell>,
     data: any,
@@ -52,15 +47,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
     private innerActions: Array<IAction> = [];
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
-
-    public static cellTypes = {
-        "default": {
-            css: "abris-table-cell--left"
-        },
-    };
-    public static registerCellType(cellType: ITableCellType) {
-        TableWidget.cellTypes[cellType.name] = cellType;
-    }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
@@ -274,48 +260,15 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return data[column.name] as string;
     }
 
-    protected getCellCss(data: any, column: ITableColumnDescription): string {
-        const cellTypeDescription = TableWidget.cellTypes[column.type] || TableWidget.cellTypes["default"];
-        return cellTypeDescription.css;
-    }
-
     protected createRow(data: any, num: number, back: boolean): ITableRow {
         let rowCells = [];
         let lastText = null;
-        let colorCell = null, colorRow = null ;
+        let colorCell = null, colorRow = null;
         this.columns().reverse().forEach(col => {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
-            let cell: ITableCell = new TableCell();
-            cell.data = data[col.name],
-            cell.text = text, 
-            cell.color = colorCell;
-            cell.name = col.name;
-            cell.css = this.getCellCss(data, col);
-            if (back) {
-                if (col.last.text === cell.text) {
-                    cell.count = col.last.count + 1;
-                    col.last.count = 0;
-                    if (col.last == col.prev) {
-                        col.prev = cell;
-                        col.count = cell.count;
-                    }
-                }
-                col.last = cell;
-            }
-            else {
-                if (col.last === null) col.last = cell;
-                if(col.prevValue === cell.text) {
-                    col.count++;
-                    cell.count = 0;
-                    col.prev.count = col.count;
-                }
-                else {
-                    col.count = 1;
-                    col.prev = cell;
-                    col.prevValue = cell.text;
-                }
-            }
+            let cell = new TableCell();
+            cell.initialize(col, back, data, text, colorCell);
             if(col.visible) rowCells.push(cell);
             lastText = (col.concatPrev && !col.row_color) ? text : null;
             colorRow = (col.row_color && !col.concatPrev) ? ko.unwrap(data[col.name]) : colorRow;
