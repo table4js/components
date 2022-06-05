@@ -5,6 +5,8 @@ export * from "./core/dropdown-actions";
 
 export * from "./find";
 export * from "./table";
+export * from "./table/cell";
+export * from "./table/column";
 export * from "./table/summary";
 export * from "./table/number";
 export * from "./table/filter";

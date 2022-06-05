@@ -33,7 +33,8 @@
         <tr class="abris-table-header-title">
           <th class="abris-table-header-title__cell abris-table-switch">
             <div class="abris-table-switch__text"
-              data-bind="css: {'switch__text--selected': isNumber}, click: ()=>isNumber(!isNumber())">#</td>
+              data-bind="css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber">#
+              </td>
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
@@ -72,10 +73,10 @@
         <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}">
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
             <div class="abris-table-technical-cell__container">
-              <!-- ko if: $parent.isNumber() -->
+              <!-- ko if: $parent.isNumber -->
               <div class="abris-table__number" data-bind="text: number"></div>
               <!-- /ko -->
-              <!-- ko if: !$parent.isNumber() -->
+              <!-- ko if: !$parent.isNumber -->
               <div class="abris-table__check">
                 <svg class="abris-svg-icon abris-table__icon-check" data-bind="visible: selected">
                   <use xlink:href="spritemap.svg#sprite-icon_check"></use>
@@ -85,20 +86,20 @@
             </div>
           </td>
           <!-- ko foreach: cells -->
-          <td class="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells() ? count() : 1},
-            style: {background: color}, css: (count() > 1) && $parents[1].isMergedСells() ? 'abris-table-cell--merged ' : '',
-            visible: (count() > 0) || !$parents[1].isMergedСells()">
+          <td class="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
+            style: {background: color}, css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
+            visible: (count > 0) || !$parents[1].isMergedСells">
             <!-- ko ifnot: inplaceEditForm -->
-            <!-- ko ifnot: (count() > 1) && $parents[1].isMergedСells() -->
+            <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
             <div class="abris-table-cell__container" data-bind="css: css">
               <span
                 data-bind="html: text, click: $parents[1].startEditCell,
-                css: text()!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
+                css: text!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
             </div>
             <!-- /ko -->
-            <!-- ko if: (count() > 1) && $parents[1].isMergedСells() -->
+            <!-- ko if: (count > 1) && $parents[1].isMergedСells -->
             <div class="abris-table-cell__container"
-              data-bind="css: (count() > 1) && $parents[1].isMergedСells() ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight() - 2 + 'px'}">
+              data-bind="css: (count > 1) && $parents[1].isMergedСells ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight - 2 + 'px'}">
               <span class="abris-table-cell__merged-text"
                 data-bind="html: text, click: $parents[1].startEditCell"></span>
             </div>
@@ -150,7 +151,7 @@
               </div>
               <div class="abris-table-info">
                 <span class="abris-table-info__total abris-table-info__text"
-                  data-bind="text: 'Всего: ' + totalCount()"></span>
+                  data-bind="text: 'Всего: ' + totalCount"></span>
                 <div class="abris-table-info__go-to">
                   <span class="abris-table-go-to__text abris-table-info__text">Перейти к </span>
                   <input class="abris-table-go-to__value" data-bind="value: startRow">

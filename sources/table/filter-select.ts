@@ -35,7 +35,7 @@ export class TableFilterSelect {
             this.isLoadMore(items.length === this.limit);
             this.offset += 10;
         });
-}
+    }
     isOpen = ko.observable(false);
     isLoadMore = ko.observable(false);
     toggle = (_, event) => {

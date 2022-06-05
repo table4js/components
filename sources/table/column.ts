@@ -1,6 +1,7 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
 import { IAggregate } from "../find";
+import { ITableCell } from "./cell";
 import { FilterContext } from "./filter";
 
 export interface ITableColumnDescription {
@@ -30,10 +31,10 @@ export interface ITableColumn extends ITableColumnDescription {
     summaryValue: any,
     summaryParams: IAggregate,
     count: number,
-    prev: any,
+    prev: ITableCell,
     prevValue: any,
     concatPrev: boolean,
-    last: any,
+    last: ITableCell,
     row_color: string
 }
 

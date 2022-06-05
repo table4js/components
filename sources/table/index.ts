@@ -3,16 +3,11 @@ import { Base } from "../core/base";
 import { IAction } from "../core/action";
 import { property } from "../core/property";
 import { InplaceEditor } from "./cell-editor";
+import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 
 import "./index.scss";
-
-export interface ITableCell {
-    [key: string]: any;
-    text: ko.Observable<string>;
-    inplaceEditForm: ko.Observable;
-}
 
 export interface ITableCellType {
     name: string;
@@ -28,7 +23,6 @@ export interface ITableRow {
     color: any,
     select: (data: ITableRow, event) => void,
     click: (data: ITableRow, event) => void
-
 }
 
 export interface ITableConfig extends IDataProvider {
@@ -117,17 +111,13 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     self.drawRows(self.partRowCount, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
                 }
             }
-            if((self.scrollerElement.scrollTop >= self.tableElement.clientHeight - self.scrollerElement.clientHeight) && this.loadMore()) {
+            if((self.scrollerElement.scrollTop >= self.tableElement.clientHeight - self.scrollerElement.clientHeight) && this.loadMore) {
                 self.drawRows(self.partRowCount, self.lastOffset, false);
             }
         }
         this.scrollerElement.onscroll = checkLoading;
         this.resizerElement.onresize = checkLoading;
         checkLoading();
-
-        this.startRow.subscribe((newValue) => {
-            this.navigateTo(newValue);
-        });
 
         if(typeof ResizeObserver !== "undefined") {
             const resizeObserver = new ResizeObserver(entries => {
@@ -139,7 +129,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                         else {
                             entry.target.parentElement.classList.remove("abris-table--small");
                         }
-                        this.tableHeadHeight(entry.contentRect.height + 5);
+                        this.tableHeadHeight = entry.contentRect.height + 5;
                     }
                 }
             });
@@ -153,12 +143,12 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     protected showDetail(rowData: any) {
-        this.isShowDetail(true);
+        this.isShowDetail = true;
     }
 
     protected hideDetail() {
         this.expandedRowKey = null;
-        this.isShowDetail(false);
+        this.isShowDetail = false;
     }
 
     navigateTo(startRow: number) {
@@ -187,7 +177,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             this.innerActions.push({
                 name: "summary-action",
                 action: () => {
-                    this.showTableSummary(!this.showTableSummary());
+                    this.showTableSummary = !this.showTableSummary;
                 },
                 svg: "icon_equal",
                 container: "top"
@@ -236,9 +226,9 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     } else {
                         this.lastOffset = this.lastOffset + limit;
                     }
-                    this.loadMoreBack(this.lastOffsetBack > 0);
-                    this.totalCount(totalCount);
-                    this.loadMore(this.lastOffset <= totalCount);
+                    this.loadMoreBack = this.lastOffsetBack > 0;
+                    this.totalCount = totalCount;
+                    this.loadMore = this.lastOffset <= totalCount;
                     (data || []).forEach((d, i) => {
                         var newRow = this.createRow(back ? data[data.length - 1 - Number(i)] : data[i], back?data.length - 1 - Number(i) + offset : Number(i) + offset, back);
                         if(back) { this.rows.unshift(newRow); }
@@ -272,7 +262,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     public clickColumn = (data, event) => {
-        if(this.isShowDetail()) {
+        if(this.isShowDetail) {
             this.hideDetail();
         }
         var newOrder = data.order === undefined ? false : !data.order;
@@ -299,37 +289,34 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.columns().reverse().forEach(col => {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
-            let cell: ITableCell = {
-                data: data[col.name],
-                text:  ko.observable(text), 
-                count: ko.observable(1),
-                color: colorCell,
-                name: col.name,
-                inplaceEditForm: ko.observable(),
-                css: this.getCellCss(data, col)
-            }
+            let cell: ITableCell = new TableCell();
+            cell.data = data[col.name],
+            cell.text = text, 
+            cell.color = colorCell;
+            cell.name = col.name;
+            cell.css = this.getCellCss(data, col);
             if (back) {
-                if (col.last.text() === cell.text()) {
-                    cell.count(col.last.count() + 1);
-                    col.last.count(0);
+                if (col.last.text === cell.text) {
+                    cell.count = col.last.count + 1;
+                    col.last.count = 0;
                     if (col.last == col.prev) {
                         col.prev = cell;
-                        col.count = cell.count();
+                        col.count = cell.count;
                     }
                 }
                 col.last = cell;
             }
             else {
                 if (col.last === null) col.last = cell;
-                if(col.prevValue === cell.text()) {
+                if(col.prevValue === cell.text) {
                     col.count++;
-                    cell.count(0);
-                    col.prev.count(col.count);
+                    cell.count = 0;
+                    col.prev.count = col.count;
                 }
                 else {
                     col.count = 1;
                     col.prev = cell;
-                    col.prevValue = cell.text();
+                    col.prevValue = cell.text;
                 }
             }
             if(col.visible) rowCells.push(cell);
@@ -356,8 +343,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     public startEditCell = (cell: ITableCell, event: MouseEvent) => {
-        if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm(undefined);
-        cell.inplaceEditForm(new InplaceEditor(cell));
+        if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm = undefined;
+        cell.inplaceEditForm = new InplaceEditor(cell);
         this.currentCellEditor = cell; 
         this.completeEditCell();
     }
@@ -409,7 +396,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return false;
     }
     paddingDiff(col) {
-        if (this.getStyleVal(col,'box-sizing') == 'border-box'){
+        if (this.getStyleVal(col,'box-sizing') == 'border-box') {
          return 0;
         }
         var padLeft = this.getStyleVal(col,'padding-left');
@@ -417,15 +404,15 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return (parseInt(padLeft) + parseInt(padRight));
     }
     getStyleVal(elm,css){
-        return (window.getComputedStyle(elm, null).getPropertyValue(css))
+        return window.getComputedStyle(elm, null).getPropertyValue(css);
     }
 
     protected rootLevel: any = true;
-    isNumber = ko.observable(false);
-    isMergedСells = ko.observable(true);
+    @property({ defaultValue: false }) isNumber: boolean;
+    @property({ defaultValue: true }) isMergedСells: boolean;
     loadingMutex = false;
-    loadMore = ko.observable(true);
-    loadMoreBack = ko.observable(false);
+    @property({ defaultValue: true }) loadMore: boolean;
+    @property({ defaultValue: false }) loadMoreBack: boolean;
     lastOffset = 0;
     lastOffsetBack = 0;
     partRowCount = 10;
@@ -435,17 +422,19 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
     rows = ko.observableArray<ITableRow>();
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
-    showTableSummary: ko.Observable<boolean> = ko.observable(false);
-    @property() showSearch: boolean;
-    startRow: ko.Observable<number> = ko.observable(null);
+    @property({ defaultValue: false }) showTableSummary: boolean;
+    @property({ defaultValue: false }) showSearch: boolean;
+    @property({ onSet: (newValue: number, target: TableWidget) => {
+        target.navigateTo(newValue);
+    } }) startRow: number;
     lastSelectRow = null;
-    totalCount = ko.observable(0);
-    tableHeadHeight = ko.observable(0);
-    showTableFilter = ko.observable(true);
+    @property({ defaultValue: 0 }) totalCount: number;
+    @property({ defaultValue: 0 }) tableHeadHeight: number;
+    @property({ defaultValue: true }) showTableFilter: boolean;
     viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter).length > 0); 
     tableFilter: ITableFilter[];
     currentCellEditor: ITableCell;
-    isShowDetail = ko.observable(false);
+    @property({ defaultValue: false }) isShowDetail: boolean;
     expandedRowKey;
 
     searchModel = {
