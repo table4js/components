@@ -5,6 +5,7 @@ import { property } from "../core/property";
 import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
+import { SearchModel } from "./search";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 
 import "./index.scss";
@@ -66,15 +67,11 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.showSearch = config.enableSearch === true;
         this.createActions(this.config);
         this.createColumns(this.config);
-        this.searchModel.search = (text: string) => {
-            this.searchModel.prevSearchValue(this.searchModel.searchValue());
-            this.searchModel.searchValue(text);
-        };
 
         ko.computed(() => {
             const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
             this.tableFilter = [];
-            if (this.searchModel.searchValue()) this.tableFilter.push({value: this.searchModel.searchValue(), op: "C", field: null});
+            if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
             this.columns().forEach(column => {
                 let columnFilterValue = column.filterContext.value;
                 if(columnFilterValue) {
@@ -85,7 +82,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 }
             });
             if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
-                this.searchModel.prevSearchValue(this.searchModel.searchValue());
+                this.searchModel.prevSearchValue = this.searchModel.searchValue;
                 this.refresh();
             }
         });    
@@ -437,11 +434,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     @property({ defaultValue: false }) isShowDetail: boolean;
     expandedRowKey;
 
-    searchModel = {
-        search: undefined,
-        prevSearchValue: ko.observable(),
-        searchValue: ko.observable()
-    }
+    searchModel = new SearchModel();
 
     getActions = (container?: string) => {
         const actions = [].concat(this.innerActions).concat(this.config.actions || []);
