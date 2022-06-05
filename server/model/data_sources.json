@@ -1,9 +1,0 @@
-{
-    "abris": {
-            "user": "guest",
-            "password": "xxxxx",
-            "port": 5432,
-            "host": "xxxxxxx",
-            "database": "pagila"
-    }
-}
