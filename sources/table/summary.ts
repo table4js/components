@@ -1,9 +1,8 @@
-import * as ko from "knockout";
+import { Base } from "../core/base";
+import { property } from "../core/property";
 import { ITableColumn } from "./column";
 
 import "./summary.scss";
-
-var summaryTemplate = require("./summary.html").default;
 
 const Functions: Array<{ title: string; value: string; hint: string, types?: string[] }> =  [
   { title: "-", value: "", hint: "" }, 
@@ -20,25 +19,21 @@ export class TableSummaryItem {
   }
 }
 
-export class TableSummaryViewModel {
+export class TableSummaryViewModel extends Base {
   constructor(private column: ITableColumn) {
-    this.value = column.summaryValue;
-    this.summaryItems(Functions.filter(funcDescription => {
+    super();
+    this.summaryItems = Functions.filter(funcDescription => {
         return !funcDescription.types || funcDescription.types.indexOf(column.type) !== -1
-      }).map(funcDescription => new TableSummaryItem (funcDescription.title, funcDescription.value)));
-    this.func.subscribe(v => column.summaryParams({ func: v, field: column.name, }));
+      }).map(funcDescription => new TableSummaryItem (funcDescription.title, funcDescription.value));
   }
-  value: ko.Observable;
-  func = ko.observable(null);
-  summaryItems = ko.observableArray<TableSummaryItem>();
+  get value() {
+    return this.column.summaryValue;
+  }
+  set value(val: any) {
+    this.column.summaryValue = val;
+  }
+  @property({ defaultValue: null, onSet: (val, target: TableSummaryViewModel) => {
+    target.column.summaryParams = { func: val, field: target.column.name };
+  } }) func: any;
+  summaryItems: Array<TableSummaryItem>;
 }
-
-ko.components.register("abris-table-summary", {
-  viewModel: {
-    createViewModel: function(params, componentInfo) {
-      return new TableSummaryViewModel(params.column);
-    }
-  },
-  template: summaryTemplate
-});
-

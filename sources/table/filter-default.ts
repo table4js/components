@@ -1,6 +1,7 @@
+import * as ko from "knockout";
 import "./filter-default.scss";
 
-var summaryTemplate = require("./filter-default.html").default;
+var defaultFilterTemplate = require("./filter-default.html").default;
 
 ko.components.register("abris-table-filter-default", {
   viewModel: {
@@ -8,6 +9,6 @@ ko.components.register("abris-table-filter-default", {
       return params;
     }
   },
-  template: summaryTemplate
+  template: defaultFilterTemplate
 });
 

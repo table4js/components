@@ -1,5 +1,7 @@
 import * as ko from "knockout";
+import { Base } from "../core/base";
 import { IAction } from "../core/action";
+import { property } from "../core/property";
 import { InplaceEditor } from "./cell-editor";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
@@ -47,7 +49,7 @@ interface ITableFilter {
  * Creates TableWidget class.
  * @param config - table options.
  */
-export class TableWidget implements ITableColumnOwner {
+export class TableWidget extends Base implements ITableColumnOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
@@ -66,7 +68,8 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
-        this.showSearch(config.enableSearch === true);
+        super();
+        this.showSearch = config.enableSearch === true;
         this.createActions(this.config);
         this.createColumns(this.config);
         this.searchModel.search = (text: string) => {
@@ -79,7 +82,7 @@ export class TableWidget implements ITableColumnOwner {
             this.tableFilter = [];
             if (this.searchModel.searchValue()) this.tableFilter.push({value: this.searchModel.searchValue(), op: "C", field: null});
             this.columns().forEach(column => {
-                let columnFilterValue = ko.unwrap(column.filterContext.value);
+                let columnFilterValue = column.filterContext.value;
                 if(columnFilterValue) {
                     columnFilterValue.forEach(e => {
                         if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
@@ -145,8 +148,8 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     calculateSummary(column: ITableColumn): void {
-        if(column.summaryParams() && column.summaryParams().field === column.name && column.summaryParams().func)
-            this.dataProvider.getSummary(column.summaryParams().func, column.summaryParams().field, this.tableFilter, (data) => column.summaryValue(data));
+        if(column.summaryParams && column.summaryParams.field === column.name && column.summaryParams.func)
+            this.dataProvider.getSummary(column.summaryParams.func, column.summaryParams.field, this.tableFilter, (data) => column.summaryValue = data);
     }
 
     protected showDetail(rowData: any) {
@@ -223,7 +226,7 @@ export class TableWidget implements ITableColumnOwner {
             this.dataProvider.getData(
                 limit, 
                 offset,
-                this.columns().filter(c => c.order() !== undefined).map(c => <any>{field: c.name, desc: c.order()}),
+                this.columns().filter(c => c.order !== undefined).map(c => <any>{field: c.name, desc: c.order}),
                 this.tableFilter,
                 null /*&& this.pinnedRowKey()*/, 
                 back, 
@@ -247,7 +250,7 @@ export class TableWidget implements ITableColumnOwner {
     }
 
     public clickFilter = (column: ITableColumn, event) => {
-        column.filterContext.addItem()(column);
+        column.filterContext.addItem(column);
         event.stopPropagation();
     }
 
@@ -272,11 +275,11 @@ export class TableWidget implements ITableColumnOwner {
         if(this.isShowDetail()) {
             this.hideDetail();
         }
-        var newOrder = data.order() === undefined ? false : !data.order();
+        var newOrder = data.order === undefined ? false : !data.order;
         if (!event.shiftKey) {
-            this.columns().map((c) => c.order(undefined))
+            this.columns().map((c) => c.order = undefined)
         } 
-        data.order(newOrder);
+        data.order = newOrder;
         this.refresh();
     }
 
@@ -433,14 +436,13 @@ export class TableWidget implements ITableColumnOwner {
     rows = ko.observableArray<ITableRow>();
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
     showTableSummary: ko.Observable<boolean> = ko.observable(false);
-    // @property() showSearch: boolean;
-    showSearch: ko.Observable<boolean> = ko.observable(false);
+    @property() showSearch: boolean;
     startRow: ko.Observable<number> = ko.observable(null);
     lastSelectRow = null;
     totalCount = ko.observable(0);
     tableHeadHeight = ko.observable(0);
     showTableFilter = ko.observable(true);
-    viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter()).length > 0); 
+    viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter).length > 0); 
     tableFilter: ITableFilter[];
     currentCellEditor: ITableCell;
     isShowDetail = ko.observable(false);

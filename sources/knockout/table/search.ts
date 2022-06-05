@@ -2,7 +2,7 @@ import * as ko from "knockout";
 
 import "./search.scss";
 
-var searchTemplate = require("./search.html").default;
+export var searchTemplate = require("./search.html").default;
 
 ko.components.register("abris-search", {
     viewModel: {
@@ -24,4 +24,3 @@ ko.components.register("abris-search", {
     template: searchTemplate
 });
 
-export var AbrisSearchWidget;

@@ -1,55 +1,49 @@
 import * as ko from "knockout";
-
-import "./filter-item.scss";
-
 import { operationsMap, IFindOperation } from "../find";
 import { ITableColumn } from "./column";
 import { TableWidget } from ".";
+import { FilterContext } from "./filter";
+import { Base } from "../core/base";
+import { property } from "../core/property";
+
+import "./filter-item.scss";
 
 var filterTemplate = require("./filter-item.html").default;
 
 
-export class FilterTableItem {
+export class FilterTableItem extends Base {
   constructor(
     public filterItemValue: { value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; },
     public filterEditorName: string,
     public column: any,
     public getColumnData
   ) {
-    ko.computed(() => {
-      if(!!this.operation()) {
-        filterItemValue.op(this.operation().op);
-      }
-    });
+    super();
   }
-  operation = ko.observable<IFindOperation>();
-  showOperand = ko.computed(() => this.operation() && this.operation().op !== "ISN" && this.operation().op !== "ISNN")
+  @property({ onSet: (val: IFindOperation, target: FilterTableItem) => {
+    if(!!val) {
+      target.filterItemValue.op(val.op);
+    }
+    target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
+  } }) operation: IFindOperation;
+  @property({ defaultValue: false }) showOperand: boolean;
 }
 
 export class FilterTableViewModel {
   constructor(
-    private params: {
-      model: any;
-      propertyInfo: any;
-      propertyPath: any;
-      column: any;
-      value: KnockoutObservableArray<{ value: KnockoutObservable<any>; op: KnockoutObservable<string>; field: KnockoutObservable<string>; }>;
-      entityName: string;
-      addItem: KnockoutObservable<any>;
-      showFilter: KnockoutObservable<boolean>;
-    },
+    private filterContext: FilterContext,
     private column: ITableColumn,
     private table: TableWidget
   ) {
-    params.addItem((column) => {
+    filterContext.addItem = (column) => {
       let filterValue = { value: ko.observable<any>(), op: ko.observable<string>(), field: ko.observable(column.name) };
       filterValue.value.subscribe(() => this.apply());
       // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
       this.filterItems.push(new FilterTableItem(filterValue, this.filterEditorName, this.column, (column, filter, limit, offset, callback) => {
         this.table.dataProvider.getColumnData(column, filter, limit, offset, callback);
       }));
-      params.showFilter(!!this.filterItems().length);
-    });
+      filterContext.showFilter = !!this.filterItems().length;
+    };
 
     if(operationsMap[this.column.type])
       this.operations = ko.observableArray(operationsMap[this.column.type]);
@@ -61,7 +55,7 @@ export class FilterTableViewModel {
   filterItems = ko.observableArray<FilterTableItem>();
 
   apply() {
-    this.params.value(this.filterItems().map(i =>i.filterItemValue));
+    this.filterContext.value = this.filterItems().map(i => i.filterItemValue);
   }
   get filterEditorName() {
     // if (this.column.type === "bool") {
@@ -82,8 +76,8 @@ export class FilterTableViewModel {
   }
   removeFilterItem(model: FilterTableViewModel, item: FilterTableItem) {
     this.filterItems.splice(this.filterItems.indexOf(item), 1);
-    this.params.showFilter(!!this.filterItems().length);    
-    this.params.value(this.filterItems().map(i =>i.filterItemValue));
+    this.filterContext.showFilter = !!this.filterItems().length;    
+    this.filterContext.value = this.filterItems().map(i => i.filterItemValue);
   }
 }
 

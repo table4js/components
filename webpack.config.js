@@ -53,7 +53,7 @@ const BASE_CFG = {
     },
   },
   entry: {
-    [packageJson.name]: './sources/index.ts',
+    [packageJson.name]: './sources/knockout/index.ts',
   }
 };
 

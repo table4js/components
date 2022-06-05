@@ -1,4 +1,5 @@
-import * as ko from "knockout";
+import { Base } from "../core/base";
+import { property } from "../core/property";
 import { IAggregate } from "../find";
 import { FilterContext } from "./filter";
 
@@ -25,9 +26,9 @@ export interface ITableColumn extends ITableColumnDescription {
     // visible: boolean;
     filter: any;
     filterContext: any,
-    order: ko.Observable<string>,
-    summaryValue: ko.Observable<any>,
-    summaryParams: ko.Observable<IAggregate>,
+    order: string,
+    summaryValue: any,
+    summaryParams: IAggregate,
     count: number,
     prev: any,
     prevValue: any,
@@ -40,10 +41,10 @@ export interface ITableColumnOwner {
     calculateSummary(column: ITableColumn): void;
 }
 
-export class TableColumn implements ITableColumn {
-    private subscription: ko.Computed;
+export class TableColumn extends Base implements ITableColumn {
 
-    constructor(columnDescription: ITableColumnDescription, owner) {
+    constructor(columnDescription: ITableColumnDescription, private owner) {
+        super();
         Object.keys(columnDescription || {}).forEach(key => {
             if(columnDescription[key] !== undefined) {
                 this[key] = columnDescription[key];
@@ -52,10 +53,6 @@ export class TableColumn implements ITableColumn {
         if(this.title === undefined) {
             this.title = this.name;
         }
-        this.subscription = ko.computed(() => {
-            ko.unwrap(this.summaryParams);
-            owner.calculateSummary(this);
-        });
     }
 
     get filterComponentName() {
@@ -64,9 +61,11 @@ export class TableColumn implements ITableColumn {
 
     filter: any;
     filterContext: any = new FilterContext();
-    order: ko.Observable<string> = ko.observable<string>();
-    summaryValue: ko.Observable<any> = ko.observable();
-    summaryParams: ko.Observable<IAggregate> = ko.observable();
+    @property() order: string;
+    @property() summaryValue: any;
+    @property({ onSet: (val: IAggregate, target: TableColumn) => {
+        target.owner.calculateSummary(target);
+    }}) summaryParams: IAggregate;
     count: number;
     prev: any;
     prevValue: any;
@@ -79,8 +78,5 @@ export class TableColumn implements ITableColumn {
     visible: boolean = true;
 
     dispose() {
-        if(this.subscription) {
-            this.subscription.dispose();
-        }
     }
 }

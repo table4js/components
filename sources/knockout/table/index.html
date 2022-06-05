@@ -42,10 +42,10 @@
             <div class="abris-table-title">
               <span class="abris-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
               <div class="abris-table-title__tools">
-                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order() === false">
+                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === false">
                   <use xlink:href="spritemap.svg#sprite-icon_sort-up"></use>
                 </svg>
-                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order() === true">
+                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === true">
                   <use xlink:href="spritemap.svg#sprite-icon_sort-down"></use>
                 </svg>
                 <svg class="abris-svg-icon abris-table-title__filter" data-bind="click: $parent.clickFilter">
