@@ -404,3 +404,72 @@ textarea.form-back__field {
 .social__link {
     color: #263769;
 }
+
+.examples__container {
+    display: flex;
+    padding: 30px 0;
+}
+
+.examples__sticky-list {
+    margin-right: 40px;
+    height: fit-content;
+    position: sticky;
+    top: 91px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.examples__list-logo {
+    margin-bottom: 30px;
+}
+
+.examples__list {
+    padding-inline-start: 0;
+    padding: 15px;
+    margin: 0;
+
+    background: #D4D0FF;
+    border-radius: 8px;
+    list-style: none;
+}
+
+.examples__page:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.examples__page-link {
+    color: #263769;
+    text-decoration: none;
+}
+
+.examples__page-link:hover {
+    text-decoration: underline;
+}
+
+.examples__samples {
+    display: flex;
+    flex-direction: column;
+}
+
+.examples__headline {
+    line-height: 1;
+    margin-bottom: 30px;
+    font-size: 1.7em;
+    color: #263769;
+}
+
+.sample__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sample__container:first-of-type {
+    margin-top: -14px;
+}
+
+.sample__headline {
+    border-bottom: 3px solid #7469FF;
+    width: 100%;
+}

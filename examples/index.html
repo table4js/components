@@ -5,18 +5,18 @@
     <title>Welcome to Abris Components</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../site/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
 </head>
 
 <body>
-    <div class="header">
+    <section class="header">
         <div class="page-size">
             <div class="header__contaier">
-                <img class="header__logo" src="/examples/img/logo/logo-long.svg" alt="abris-logo">
+                <img class="header__logo" src="../site/img/logo/logo-long.svg" alt="abris-logo">
                 <div class="header__pages">
-                    <span class="header__link-page header__link-page--active">Main</span>
-                    <span class="header__link-page">Examples</span>
+                    <span class="header__link-page">Main</span>
+                    <span class="header__link-page header__link-page--active">Examples</span>
                     <span class="header__link-page">Buy</span>
                     <span class="header__link-page">Documentaion</span>
                     <span class="header__link-page">Contact us</span>
@@ -24,44 +24,82 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="main-title blue-background">
-        <div class="page-size" style="width: 1200px;">
-
-            <h2>You can check the following examples of Abris Components:</h2>
-            <div style="display: flex;">
-                <div style="display: flex; flex-direction: column; height: 100%;">
-                    <div>Content</div>
-                    <ul data-bind="foreach: $data">
-                        <li>
-                            <a data-bind="text: title, attr: { href: '#' + name }"></a>
+    </section>
+    <section class="examples">
+        <div class="page-size">
+            <div class="examples__container">
+                <div class="examples__sticky-list one-column">
+                    <img class="examples__list-logo one-column" src="../site/img/logo/logo-components.svg" alt="abris-logo">
+                    <ul class="examples__list" data-bind="foreach: $data">
+                        <li class="examples__page">
+                            <a class="examples__page-link" data-bind="text: title, attr: { href: '#' + name }"></a>
                         </li>
                     </ul>
                 </div>
-                <div style="display: flex; flex-direction: column; height: 100%; overflow: auto; flex-grow: 1;">
-                    <div style="padding-left: 50px;">
-                        <div data-bind="foreach: $data">
-                            <div>
-                                <h3 data-bind="text: title, attr: { id: name }"></h3>
-                                <p data-bind="text: description"></p>
-                                <a target="_blank" data-bind="attr: { href: name + '/index.html' }">Open in new
-                                    window</a>
-                            </div>
+                <div class="examples__samples four-column">
+                    <span class="examples__headline headline__text">You can check the following examples of Abris Components</span>
+                    <!-- ko foreach: $data -->
+                    <div class="sample__container" data-bind="">
+                        <span class="sample__headline headline__text" data-bind="text: title, attr: { id: name }"></span>
+                        <p data-bind="text: description"></p>
+                        <div class="sample__table">
+                            <a target="_blank" data-bind="attr: { href: name + '/index.html' }">Open in new
+                                window</a>
                             <iframe style="min-width: 800px; min-height: 500px; border: none; outline: none;"
                                 data-bind="attr: { src: $data.name + '/index.html' }"></iframe>
-                            <div>
-                                <div data-bind="text: file"></div>
-                                <pre style="max-width: 800px; max-height: 400px; border: 1px solid lightgrey; overflow: auto;"
-                                    data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
-                            </div>
+                        </div>
+                        <div class="sample__code">
+                            <div data-bind="text: file"></div>
+                            <pre style="max-width: 800px; max-height: 400px; border: 1px solid lightgrey; overflow: auto;"
+                                data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
                         </div>
                     </div>
+                    <!-- /ko -->
                 </div>
             </div>
 
         </div>
-    </div>
+    </section>
+    <section class="footer blue-top-background">
+        <div class="page-size">
+            <div class="footer__container">
+                <div class="footer__column two-column">
+                    <img class="footer__logo two-column" src="/site/img/logo/logo.svg">
+                    <span class="footer__ltd">© 2020 Research laboratory ABRIS Ltd</span>
+                </div>
+                <div class="footer__column one-column">
+                    <span class="header__link-page header__link-page--active">Main</span>
+                    <a class="header__link-page" href="examples">Examples</a>
+                    <span class="header__link-page">Buy</span>
+                    <a class="header__link-page" href="docs">Documentaion</a>
+                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
+                </div>
+                <div class="footer__column two-column">
+                    <a href="mailto:info@abrisplatform.com" class="social">
+                        <img class="social__icon" src="/site/img/footer/email.svg">
+                        <span class="social__link">info@abrisplatform.com</span>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCkENTPqm7neTGbysFQV6mfw" class="social">
+                        <img class="social__icon" src="/site/img/footer/youtube.svg">
+                        <span class="social__link">Abris Platform on youtube</span>
+                    </a>
+                    <a href="https://github.com/abris-platform/abris-components" class="social">
+                        <img class="social__icon" src="/site/img/footer/github.svg">
+                        <span class="social__link">Abris Platform GitHub repo</span>
+                    </a>
+                    <a href="https://www.facebook.com/abrisplatform/" class="social">
+                        <img class="social__icon" src="/site/img/footer/facebook.svg">
+                        <span class="social__link">Abris Platform on Facebook</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abris-platform-9149361ab/" class="social">
+                        <img class="social__icon" src="/site/img/footer/linkedin.svg">
+                        <span class="social__link">Abris Platform on LinkedIn</span>
+                    </a>
+                </div>
 
+            </div>
+        </div>
+    </section>
 
     <script src="index.js"></script>
 </body>
