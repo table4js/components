@@ -41,17 +41,23 @@
                     <!-- ko foreach: $data -->
                     <div class="sample__container" data-bind="">
                         <span class="sample__headline headline__text" data-bind="text: title, attr: { id: name }"></span>
-                        <p data-bind="text: description"></p>
+                        <span class="sample__description" data-bind="text: description + description + description + description + description + description + description + description + description + description + description"></span>
                         <div class="sample__table">
-                            <a target="_blank" data-bind="attr: { href: name + '/index.html' }">Open in new
-                                window</a>
+                            <a class="sample__new-window" target="_blank" data-bind="attr: { href: name + '/index.html' }">
+                                <span>Open in new window</span>
+                                <img src="../site/img/icons/icon_external-link.svg">
+                            </a>
                             <iframe style="min-width: 800px; min-height: 500px; border: none; outline: none;"
                                 data-bind="attr: { src: $data.name + '/index.html' }"></iframe>
                         </div>
+                        <span class="sample__code-headline headline__text">Source code</span>
                         <div class="sample__code">
-                            <div data-bind="text: file"></div>
-                            <pre style="max-width: 800px; max-height: 400px; border: 1px solid lightgrey; overflow: auto;"
-                                data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
+                            <div class="sample__code-files">
+                                <div class="sample__code-file sample__code-file--active" data-bind="text: file"></div>
+                                <div class="sample__code-file" data-bind="text: file"></div>
+                                <div class="sample__code-file" data-bind="text: file"></div>
+                            </div>
+                            <pre class="sample__code-text four-column" data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
                         </div>
                     </div>
                     <!-- /ko -->
