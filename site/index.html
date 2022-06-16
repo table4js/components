@@ -6,7 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+    <script src="./index.js"></script>
 </head>
 
 <body>
@@ -175,11 +177,11 @@
                     <span for="form-back__label">Message</span>
                     <textarea id="message" class="form-back__field" rows="5" placeholder="Enter your message.."
                         required></textarea>
-                    <button id="form-submit" class="button button--accent form-back__button" onclick="submitForm_en()"
+                    <button id="form-submit" class="button button--accent form-back__button" onclick="formSuccess()"
                         type="button">Send</button>
                 </form>
             </div>
-            <div class="features__reason reason-left hidden form-back__succes" id="contact-succes">
+            <div class="features__reason reason-left form-back__succes form-back__succes--hidden" id="contact-succes">
                 <img class="reason-img" src="img/form-back/1.svg">
                 <div class="reason-column">
                     <span class="headline__text three-column">Your message has been sent successfully!</span>
@@ -233,5 +235,4 @@
     </section>
 
 </body>
-
 </html>
