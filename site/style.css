@@ -548,3 +548,15 @@ textarea.form-back__field {
 .sample__code-headline {
     margin-bottom: -45px;
 }
+
+.form-back__succes {
+    padding: 65px 0;
+}
+
+.form-back__container--hidden {
+    display: none;
+}
+
+.form-back__succes--hidden {
+    display: none;
+}
