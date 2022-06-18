@@ -9,7 +9,7 @@ function getColumns(name, baseUrl) {
 
         var widgetModel = new AbrisComponents.TableWidget(options);
         widgetModel.dataProvider = new AbrisComponents.RemoteDataProvider(name, baseUrl);
-        ko.applyBindings(new AbrisComponents.TableWidget(options));
+        ko.applyBindings(widgetModel);
     });
 }
 getColumns("declaration", "http://127.0.0.1:3000/");
