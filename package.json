@@ -31,7 +31,7 @@
     "build:types": "tsc sources/index.ts --declaration --emitDeclarationOnly --skipLibCheck --target es5 --moduleResolution node --experimentalDecorators true --outFile dist/abris-components.d.ts && echo \"declare module '@abris-lab/components' { import main = require('index'); export = main; }\" >> dist/abris-components.d.ts",
     "test": "jest",
     "test:dev": "jest --watch",
-    "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name '@abris/components' --includeVersion --hideGenerator",
+    "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name '@abris/components' --includeVersion  --customCss ./publish/abris-theme.css --plugin ./publish/abris-theme.js --hideGenerator",
     "release": "standard-version --message \"Release: %s\""
   },
   "dependencies": {
