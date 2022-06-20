@@ -244,15 +244,15 @@ export class TableWidget extends Base implements ITableColumnOwner {
         if (this.selectedRows().length !== 1) this.hideDetail();
     }
 
-    public clickColumn = (data, event) => {
+    public clickColumn = (column: ITableColumn, event) => {
         if(this.isShowDetail) {
             this.hideDetail();
         }
-        var newOrder = data.order === undefined ? false : !data.order;
+        var newOrder = column.order === undefined ? false : !column.order;
         if (!event.shiftKey) {
             this.columns().map((c) => c.order = undefined)
         } 
-        data.order = newOrder;
+        column.order = newOrder as any; // TODO: something wrong is here
         this.refresh();
     }
 
