@@ -1,7 +1,11 @@
 var options = {
     enableSearch: true,
     enableSummary: true,
+    keyColumn: "key",
     columns: [
+        {   name: "key",
+            visible: false,
+        },
         {
             name: "word",
             title: "Word"

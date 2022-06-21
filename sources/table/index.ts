@@ -164,6 +164,28 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 },
                 svg: "icon_equal",
                 container: "top"
+            },
+            {
+                name: "save-action",
+                action: () => {
+                    this.rows().forEach(r=>{
+                        let modify = {};
+                        r.cells().forEach(c=>{
+                            if(c.text !== c.data) {
+                                modify[c.name] = c.text; 
+                            }
+                        })
+                        if(!isEmpty(modify)) {
+                            if(this.dataProvider.saveData(this.keyColumn, r.data[this.keyColumn], modify)) {
+                                r.cells().forEach(c=>{
+                                    c.data = c.text;
+                                })
+                            }
+                        }
+                    });
+                },
+                svg: "icon_save",
+                container: "bottom"
             });
         }
     }
@@ -402,5 +424,12 @@ export class TableWidget extends Base implements ITableColumnOwner {
     get bottomActions() {
         return this.getActions('bottom');
     }
+}
+
+function isEmpty(obj: {}) {
+    for (let key in obj) {
+        return false;
+    }
+    return true;
 }
 

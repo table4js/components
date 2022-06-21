@@ -2,6 +2,7 @@ export interface IDataProvider {
     getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
     getSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
     getColumnData: (column, value, limit, offset, callback) => void;
+    saveData: (keyName:string,  key:any, modify:{} ) => boolean;
 }
 
 export class ArrayDataProvider implements IDataProvider {
@@ -67,5 +68,11 @@ export class ArrayDataProvider implements IDataProvider {
             result.push(uniques[i]);
         }
         callback(result);
+    }
+
+    saveData(keyName:string, key:any, modify:{}) {
+        // console.log(`${keyName} - ${key} => ${modify}`);
+        Object.keys(modify).forEach( p=> this.data.find(r => r[keyName] == key)[p] = modify[p]);
+        return true;
     }
 }

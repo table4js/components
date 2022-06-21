@@ -37,4 +37,10 @@ export class RemoteDataProvider implements IDataProvider {
             callback(data.data);
         });
     }
+
+    saveData(keyName:string, key:any, modify:{}) {
+        console.log(`${keyName} - ${key} => ${modify}`);
+        return true;
+    }
+
 }
