@@ -12,12 +12,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 12
-      # Доставляем собранное приложение на сервер
-      - name: Deploy to Server
+      - uses: actions/checkout@master
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DEPLOY_ABRIS_HOST }}
           port: ${{ secrets.DEPLOY_ABRIS_PORT }}
