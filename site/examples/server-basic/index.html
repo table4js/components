@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Abris Table Component Basic Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+        <!-- <script src="https://unpkg.com/@abris-lab/components"></script>
+        <link href="https://unpkg.com/@abris-lab/components/abris-components.css" rel="stylesheet"> -->
+        <script src="../../dist/abris-components.js"></script>
+        <link href="../../dist/abris-components.css" rel="stylesheet">
+        <link href="index.css" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app-container" style="height: 80vh;">
+            <abris-components-table params="{ model: $data, options: {} }"></abris-components-table>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
