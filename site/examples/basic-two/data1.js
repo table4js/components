@@ -1,4 +1,4 @@
-var sampleData = [
+var sampleData1 = [
     { word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!" },
     { word: "there ", num: 24, text: "Their bearing, although they were not completely calm, with its ease, full of dignity and humility at the same time, aroused admiration" },
     { word: "there ", num: 18, text: "I'm to blame, I'm to blame, because I choose my own people." },

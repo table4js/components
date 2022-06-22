@@ -1,4 +1,4 @@
-var options = {
+var options1 = {
     enableSearch: true,
     enableSummary: true,
     columns: [
@@ -18,10 +18,38 @@ var options = {
     ],
 };
 
-var table1 = new AbrisComponents.TableWidget(options);
-table1.data = sampleData;
+var table1 = new AbrisComponents.TableWidget(options1);
+table1.data = sampleData1;
 
-var table2 = new AbrisComponents.TableWidget(options);
-table2.data = sampleData;
+var options2 = {
+    enableSearch: true,
+    enableSummary: true,
+    columns: [
+        {
+            name: "name",
+            title: "Name"
+        },
+        {
+            name: "age",
+            title: "Age",
+            type: "number"
+        },
+        {
+            name: "phone",
+            title: "Phone",
+        },
+        {
+            name: "address",
+            title: "Address",
+        },
+        {
+            name: "balance",
+            title: "Balance",
+        }
+    ],
+};
+
+var table2 = new AbrisComponents.TableWidget(options2);
+table2.data = sampleData2;
 
 ko.applyBindings({ table1: table1, table2: table2 });
