@@ -19,6 +19,12 @@ var examples = [
         title: "Universal Declaration of Human Rights",
         description: "Universal Declaration of Human Rights description",
         file: "index.js"
+    },
+    {
+        name: "basic-two",
+        title: "Two tables on the same page",
+        description: "Two tables on the same page",
+        file: "index.js"
     }
 ];
 

@@ -46,7 +46,7 @@ button {
 .abris-table-scroll-container {
   overflow-y: auto;
   min-height: 100%;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100% - 180px);
   height: auto;
   width: 100%;
 }
