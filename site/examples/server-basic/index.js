@@ -12,4 +12,4 @@ function getColumns(name, baseUrl) {
         ko.applyBindings(widgetModel);
     });
 }
-getColumns("declaration", "http://abris.site:3333/");
+getColumns("declaration", "https://abris.site:3334/");
