@@ -1,19 +1,19 @@
-name: CI
+name: Deploy to demo.abris.site
 
-on: [push]
+on:
+  release:
+    types: [published]
 
 env:
   DEPLOY_PATH: /home/github-deploy-components/www
-  # В теории можно собрать не только Vue-приложение, так как принцип сборки мало где отличается
-  # BUILD_SCRIPT: npm run build
   BUILD_SCRIPT_OUTPUT: site
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: copy file via ssh password
+      - uses: actions/checkout@v3
+      - name: copy files via ssh password
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DEPLOY_ABRIS_HOST }}
@@ -24,4 +24,4 @@ jobs:
           target: ${{ env.DEPLOY_PATH }}/
           # strip_components: 1
       - name: Print Info
-        run: echo "Deployed at https://abris.site/new"
+        run: echo "Deployed at https://demo.abris.site/"
