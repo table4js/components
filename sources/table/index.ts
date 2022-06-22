@@ -186,6 +186,25 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 },
                 svg: "icon_save",
                 container: "bottom"
+            },
+            {
+                name: "delete-action",
+                action: () => {
+                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.data[this.keyColumn]), (_ => this.refresh()))
+                },
+                svg: "icon_delete",
+                container: "bottom"
+            },
+            {
+                name: "new-action",
+                action: () => {
+                    let newRow = [];
+                    this.columns().forEach(c => {c.visible && newRow.push({text: c.name, inplaceEditForm: undefined})})
+                    this.newRow(newRow);
+                    console.log("new", newRow);
+                },
+                svg: "icon_add",
+                container: "bottom"
             });
         }
     }
@@ -317,6 +336,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     public startEditCell = (cell: ITableCell, event: MouseEvent) => {
         if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm = undefined;
         cell.inplaceEditForm = new InplaceEditor(cell);
+        console.log(cell);
         this.currentCellEditor = cell; 
         this.completeEditCell();
     }
@@ -389,6 +409,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffsetBack = 0;
     partRowCount = 10;
     columns = ko.observableArray<ITableColumn>();
+    newRow = ko.observable(undefined)
     get keyColumn(): string {
         return this.config.keyColumn;
     }

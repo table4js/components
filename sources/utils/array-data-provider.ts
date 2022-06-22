@@ -3,6 +3,7 @@ export interface IDataProvider {
     getSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
     getColumnData: (column, value, limit, offset, callback) => void;
     saveData: (keyName:string,  key:any, modify:{} ) => boolean;
+    deleteData: (keyName:string, keys:any[], callback) => void; 
 }
 
 export class ArrayDataProvider implements IDataProvider {
@@ -75,4 +76,13 @@ export class ArrayDataProvider implements IDataProvider {
         Object.keys(modify).forEach( p=> this.data.find(r => r[keyName] == key)[p] = modify[p]);
         return true;
     }
+
+    deleteData(keyName:string, keys:any[], callback) {
+        console.log(keys)
+
+        keys.forEach(k => this.data.find(r => this.data.splice(this.data.indexOf(this.data.find(r => r[keyName] == k)),1)))
+        console.log(this.data);
+        callback(true);
+    } 
+
 }

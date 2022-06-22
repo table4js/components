@@ -69,6 +69,24 @@
           <th class="abris-table-cell" colspan="100%">Данных нет</th>
         </tr>
         <!-- /ko -->
+        <!-- ko if: newRow() -->
+          <tr class="abris-table__row" >
+            <td class="abris-table-cell abris-table-technical-cell">
+            </td>
+            <!-- ko foreach: newRow -->
+              <td class="abris-table-cell" >
+                <!-- ko ifnot: inplaceEditForm -->
+                  <span data-bind="text: text, click: $parents[0].startEditCell"></span>
+                <!-- /ko -->
+                <!-- ko if: inplaceEditForm -->
+                  <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>
+                <!-- /ko -->
+              </td>
+            <!-- /ko -->
+            <td class="abris-table-cell abris-table-technical-cell">
+            </td>
+          </tr>
+        <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
         <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}">
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
