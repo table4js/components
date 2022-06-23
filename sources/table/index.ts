@@ -327,11 +327,11 @@ export class TableWidget extends Base implements ITableColumnOwner {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
             let cell = new TableCell();
-            cell.initialize(col, back, data, text, colorCell);
-            if(col.visible) rowCells.push(cell);
             lastText = (col.concatPrev && !col.row_color) ? text : null;
             colorRow = (col.row_color && !col.concatPrev) ? ko.unwrap(data[col.name]) : colorRow;
             colorCell = (col.row_color && col.concatPrev) ? ko.unwrap(data[col.name]) : null;
+            cell.initialize(col, back, data, text, colorCell);
+            if(col.visible) rowCells.push(cell);
         });
         this.columns().reverse();
         let row_id = ko.unwrap(data[this.keyColumn]);

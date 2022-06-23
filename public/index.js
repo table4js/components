@@ -7,6 +7,17 @@ var options = {
             visible: false,
         },
         {
+            name: "color",
+            visible: false,
+            row_color: false,
+        },
+        {
+            name: "cs",
+            visible: false,
+            row_color: true,
+            concatPrev: true,
+        },
+        {
             name: "word",
             title: "Word"
         },

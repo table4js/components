@@ -87,7 +87,7 @@
           </td>
           <!-- ko foreach: cells -->
           <td class="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
-            style: {background: color}, css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
+            style: {'background-color': count > 1 ? null : $parent.color || color }, css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
             visible: (count > 0) || !$parents[1].isMergedСells">
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
