@@ -69,24 +69,6 @@
           <th class="abris-table-cell" colspan="100%">Данных нет</th>
         </tr>
         <!-- /ko -->
-        <!-- ko if: newRow() -->
-          <tr class="abris-table__row" >
-            <td class="abris-table-cell abris-table-technical-cell">
-            </td>
-            <!-- ko foreach: newRow -->
-              <td class="abris-table-cell" >
-                <!-- ko ifnot: inplaceEditForm -->
-                  <span data-bind="text: text, click: $parents[0].startEditCell"></span>
-                <!-- /ko -->
-                <!-- ko if: inplaceEditForm -->
-                  <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>
-                <!-- /ko -->
-              </td>
-            <!-- /ko -->
-            <td class="abris-table-cell abris-table-technical-cell">
-            </td>
-          </tr>
-        <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
         <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}">
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
@@ -109,17 +91,18 @@
             visible: (count > 0) || !$parents[1].isMergedСells">
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
-            <div class="abris-table-cell__container" data-bind="css: css">
+            <div class="abris-table-cell__container" data-bind="css: css, click: $parents[1].startEditCell">
               <span
-                data-bind="html: text, click: $parents[1].startEditCell,
+                data-bind="html: text,
                 css: text!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
             </div>
             <!-- /ko -->
             <!-- ko if: (count > 1) && $parents[1].isMergedСells -->
             <div class="abris-table-cell__container"
-              data-bind="css: (count > 1) && $parents[1].isMergedСells ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight - 2 + 'px'}">
+              data-bind="css: (count > 1) && $parents[1].isMergedСells ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight - 2 + 'px'},
+                click: $parents[1].startEditCell">
               <span class="abris-table-cell__merged-text"
-                data-bind="html: text, click: $parents[1].startEditCell"></span>
+                data-bind="html: text"></span>
             </div>
             <!-- /ko -->
             <!-- /ko -->

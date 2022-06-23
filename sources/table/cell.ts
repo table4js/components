@@ -46,30 +46,31 @@ export class TableCell extends Base implements ITableCell {
         this.color = color;
         this.name = col.name;
         this.css = this.getCellCss(data, col);
-        if (back) {
-            if (col.last.text === this.text) {
-                this.count = col.last.count + 1;
-                col.last.count = 0;
-                if (col.last == col.prev) {
-                    col.prev = this;
-                    col.count = this.count;
+        if(back !== null) {
+            if (back) {
+                if (col.last && col.last.text === this.text) {
+                    this.count = col.last.count + 1;
+                    col.last.count = 0;
+                    if (col.last == col.prev) {
+                        col.prev = this;
+                        col.count = this.count;
+                    }
                 }
-            }
-            col.last = this;
-        }
-        else {
-            if (col.last === null) col.last = this;
-            if(col.prevValue === this.text) {
-                col.count++;
-                this.count = 0;
-                col.prev.count = col.count;
+                col.last = this;
             }
             else {
-                col.count = 1;
-                col.prev = this;
-                col.prevValue = this.text;
+                if (col.last === null) col.last = this;
+                if(col.prevValue === this.text) {
+                    col.count++;
+                    this.count = 0;
+                    col.prev.count = col.count;
+                }
+                else {
+                    col.count = 1;
+                    col.prev = this;
+                    col.prevValue = this.text;
+                }
             }
         }
-
     }
 }

@@ -10,10 +10,25 @@ import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 
 import "./index.scss";
 
+/**
+ * The collection of data for a table row. The key is the name of the column. The value is the content of the table cell.
+ */
+export interface ITableRowData {
+    /** Table cell content */
+    [key: string]: string | number
+}
+
+/**
+ * Information needed to render a table row
+ */
 export interface ITableRow {
+    /** Array containing observable table cells */
     cells: ko.ObservableArray<ITableCell>,
-    data: any,
+    /** The collection of data for a table row */
+    rowData: ITableRowData,
+    /**  */
     id: any,
+    /**  */
     number: number,
     selected: ko.Observable<boolean>,
     color: any,
@@ -125,7 +140,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             this.dataProvider.getSummary(column.summaryParams.func, column.summaryParams.field, this.tableFilter, (data) => column.summaryValue = data);
     }
 
-    protected showDetail(rowData: any) {
+    protected showDetail(rowData: ITableRowData) {
         this.isShowDetail = true;
     }
 
@@ -168,21 +183,20 @@ export class TableWidget extends Base implements ITableColumnOwner {
             {
                 name: "save-action",
                 action: () => {
+                    let isInsert = false;
                     this.rows().forEach(r=>{
                         let modify = {};
-                        r.cells().forEach(c=>{
-                            if(c.text !== c.data) {
-                                modify[c.name] = c.text; 
+                        if(r.number>0) {
+                            r.cells().forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
+                            if(!isEmpty(modify)) {
+                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells().forEach(c=>c.data = c.text)
                             }
-                        })
-                        if(!isEmpty(modify)) {
-                            if(this.dataProvider.saveData(this.keyColumn, r.data[this.keyColumn], modify)) {
-                                r.cells().forEach(c=>{
-                                    c.data = c.text;
-                                })
-                            }
+                        } else {
+                            r.cells().forEach(c => modify[c.name] = c.text); 
+                            if(this.dataProvider.insertData(this.keyColumn, modify)) isInsert = true;
                         }
                     });
+                    if (isInsert) this.refresh();
                 },
                 svg: "icon_save",
                 container: "bottom"
@@ -190,7 +204,10 @@ export class TableWidget extends Base implements ITableColumnOwner {
             {
                 name: "delete-action",
                 action: () => {
-                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.data[this.keyColumn]), (_ => this.refresh()))
+                    this.selectedRows().forEach(r => {
+                        if (r.number>0) this.rows.slice(this.rows.indexOf(r), 1);
+                    })
+                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
                 },
                 svg: "icon_delete",
                 container: "bottom"
@@ -198,10 +215,10 @@ export class TableWidget extends Base implements ITableColumnOwner {
             {
                 name: "new-action",
                 action: () => {
-                    let newRow = [];
-                    this.columns().forEach(c => {c.visible && newRow.push({text: c.name, inplaceEditForm: undefined})})
-                    this.newRow(newRow);
-                    console.log("new", newRow);
+                    this.scrollerElement.scrollTop = 0;
+                    let newRow:ITableRowData = {};
+                    this.columns().forEach(c => c.visible && (newRow[c.name]=""));
+                    this.rows.unshift(this.createRow(newRow, -1, null));
                 },
                 svg: "icon_add",
                 container: "bottom"
@@ -301,7 +318,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return data[column.name] as string;
     }
 
-    protected createRow(data: any, num: number, back: boolean): ITableRow {
+
+    protected createRow(data: {[key: string]: string|number}, num: number, back: boolean): ITableRow {
         let rowCells = [];
         let lastText = null;
         let colorCell = null, colorRow = null;
@@ -319,7 +337,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         let row_id = ko.unwrap(data[this.keyColumn]);
         return {
             cells: ko.observableArray(rowCells.reverse()),
-            data: ko.toJS(data),
+            rowData: ko.toJS(data),
             id: row_id,
             number: num + 1,
             selected: ko.observable(row_id && (this.expandedRowKey === row_id)),
@@ -336,7 +354,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
     public startEditCell = (cell: ITableCell, event: MouseEvent) => {
         if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm = undefined;
         cell.inplaceEditForm = new InplaceEditor(cell);
-        console.log(cell);
         this.currentCellEditor = cell; 
         this.completeEditCell();
     }
@@ -409,7 +426,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffsetBack = 0;
     partRowCount = 10;
     columns = ko.observableArray<ITableColumn>();
-    newRow = ko.observable(undefined)
     get keyColumn(): string {
         return this.config.keyColumn;
     }

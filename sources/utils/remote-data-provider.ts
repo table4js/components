@@ -43,6 +43,11 @@ export class RemoteDataProvider implements IDataProvider {
         return true;
     }
 
+    insertData(keyName:string, modify:{}) {
+        console.log(`${keyName} => ${modify}`);
+        return true;
+    }
+
     deleteData(keyName:string, keys:any[], callback) {
         console.log(`${keyName} - ${keys}`);
         callback(true);
