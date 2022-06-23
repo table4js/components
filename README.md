@@ -3,7 +3,11 @@
 # abris-components
 JavaScript (TypeScript) components library. Contains UI Abris components.
 
-## Basic functions
+## Basic functionality
+
+### AbrisTable widget
+
+Shows data in table (grid) form. Supports infinite scrolling, array datasets, sever-side data provider, filtering, sorting and columns summary. Allows to modify data via inplace editing, create and delete rows. 
 
 ## Getting started with AbrisTable
 
