@@ -1,9 +1,11 @@
 [![Build Project](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml/badge.svg)](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml)
 
 # abris-components
-JavaScript (TypeScript) components library. Contains UI Abris components.
+JavaScript (TypeScript) components library. Contains UI Abris components: table (grid) data widget.
 
 ## Basic functionality
+
+![AbrisTable](./site/img/features/4.svg)
 
 ### AbrisTable widget
 
