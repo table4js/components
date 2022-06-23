@@ -27,14 +27,14 @@ Shows data in table (grid) form. Supports infinite scrolling, array datasets, se
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
-    <script src="https://unpkg.com/@abris-lab/components"></script>
-    <link href="https://unpkg.com/@abris-lab/components/abris-components.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+<script src="https://unpkg.com/@abris-lab/components"></script>
+<link href="https://unpkg.com/@abris-lab/components/abris-components.css" rel="stylesheet">
 ```
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
 ```HTML
-    <abris-components-table params="{ model: $data }"></abris-components-table>
+<abris-components-table params="{ model: $data }"></abris-components-table>
 ```
 
 Add the following script to make it work
