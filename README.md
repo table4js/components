@@ -73,7 +73,17 @@ ko.applyBindings(widgetModel);
 
 ### Angular JS
 
+Install components package to your application from NPM via the `npm i --save @abris-lab/components` command
+
+Add the following component wrapper
+```JS
+```
+
+Add KnockoutJS script to the scripts section of an angular.json file
+
 TODO
+
+Use the above wrapper in your Angular application
 
 For more advanced cases please check our [online demos](https://abris-platform.github.io/abris-components/examples) and [documentation](https://abris-platform.github.io/abris-components/docs)
 
