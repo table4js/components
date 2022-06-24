@@ -53,11 +53,13 @@
                         <span class="sample__code-headline headline__text">Source code</span>
                         <div class="sample__code">
                             <div class="sample__code-files">
-                                <div class="sample__code-file sample__code-file--active" data-bind="text: file"></div>
-                                <div class="sample__code-file" data-bind="text: file"></div>
-                                <div class="sample__code-file" data-bind="text: file"></div>
+                                <!-- ko foreach: files -->
+                                <div data-bind="text: name, 
+                                class: name == $parent.current_tab_file() ? 'sample__code-file sample__code-file--active' : 'sample__code-file',
+                                click: (_ => $parent.current_tab_file(name))"></div>
+                                <!-- /ko -->
                             </div>
-                            <pre class="sample__code-text four-column" data-bind="attr: { id: name + '-' + file }, text: populatePre(name + '/' + file, name + '-' + file)"></pre>
+                            <pre class="sample__code-text four-column" data-bind="attr: { id: name + '-' + current_tab_file() }, text: populatePre(name + '/' + current_tab_file(), name + '-' + current_tab_file())"></pre>
                         </div>
                     </div>
                     <!-- /ko -->

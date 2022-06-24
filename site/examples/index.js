@@ -12,20 +12,54 @@ var examples = [
         name: "basic",
         title: "TableWidget basic usage",
         description: "TableWidget basic usage description",
-        file: "index.js"
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js"
+            },
+            {
+                name: "index.html"
+            },
+            {
+                name: "data.js"
+            }
+        ]
     },
     {
         name: "server-basic",
         title: "Universal Declaration of Human Rights",
         description: "Universal Declaration of Human Rights description",
-        file: "index.js"
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js"
+            },
+            {
+                name: "index.html"
+            }
+        ]
     },
     {
         name: "basic-two",
         title: "Two tables on the same page",
         description: "Two tables on the same page",
-        file: "index.js"
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js"
+            },
+            {
+                name: "index.html"
+            },
+            {
+                name: "data1.js"
+            },
+            {
+                name: "data2.js"
+            }
+        ]
     }
 ];
+
 
 ko.applyBindings(examples);
