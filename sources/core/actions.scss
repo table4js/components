@@ -5,6 +5,10 @@ abris-actions {
   position: relative;
 }
 
+.abris-table-actions {
+  display: flex;
+}
+
 button.action-button.action-checked {
   border: 1px solid var(--abc-primary-0-op-65, $abc-primary-0-op-65) !important;
 }
