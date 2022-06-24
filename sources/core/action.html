@@ -15,6 +15,6 @@
     </svg>
     <!-- /ko -->
     <!-- ko ifnot: $parents[1].short -->
-    <span class="abris-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel)"></span>
+    <span class="abris-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}" ></span>
     <!-- /ko -->
 </button>

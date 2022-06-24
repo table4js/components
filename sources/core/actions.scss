@@ -103,7 +103,6 @@ button.action-button.action-checked {
 
 .abris-action-button .abris-action-button__icon {
   fill: var(--abc-primary-4, $abc-primary-4);
-  margin-right: 5px;
 }
 
 .abris-action-button__label {
@@ -113,6 +112,7 @@ button.action-button.action-checked {
   font-size: 13px;
   line-height: 17px;
   font-weight: lighter;
+  margin-left: 5px;
 }
 
 .abris-button-toggle__dropdown-menu {
