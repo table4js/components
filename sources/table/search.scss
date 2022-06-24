@@ -24,11 +24,13 @@ abris-search {
 }
 
 .abris-search__button {
-    &:hover {
-        fill: var(--abc-primary-4, $abc-primary-4);
+    .abris-search__icon {
+        fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40) ;
     }
-}
 
-.abris-search__icon {
-    fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40) !important;
+    &:hover {
+        .abris-search__icon {
+            fill: var(--abc-primary-4, $abc-primary-4);
+        }
+    }
 }
