@@ -70,7 +70,7 @@
         </tr>
         <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
-        <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}">
+        <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}, style: {'background-color': 'none' }">
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
             <div class="abris-table-technical-cell__container">
               <!-- ko if: $parent.isNumber -->
@@ -87,7 +87,7 @@
           </td>
           <!-- ko foreach: cells -->
           <td class="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
-            style: {'background-color': count > 1 ? null : $parent.color || color }, css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
+            css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
             visible: (count > 0) || !$parents[1].isMergedСells">
             <!-- ko ifnot: inplaceEditForm -->
             <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
@@ -121,6 +121,7 @@
               </svg>
             </div>
             <div class="abris-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
+            <div class="abris-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
           </td>
         </tr>
         <!-- /ko -->

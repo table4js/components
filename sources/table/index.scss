@@ -229,7 +229,7 @@ button {
 }
 
 .abris-table__row {
-  background: var(--abc-primary-1, $abc-primary-1);
+  //background: var(--abc-primary-1, $abc-primary-1);
   position: relative;
 
   &:hover {
@@ -369,6 +369,15 @@ button {
   border: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
   background: var(--abc-primary-0-op-03, $abc-primary-0-op-03);
   pointer-events: none;
+}
+
+.abris-table__row--colored {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  height: calc(100% );
+  width: calc(100% - 60px);
+  z-index: -1;
 }
 
 .abris-table__footer {
