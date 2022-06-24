@@ -2,6 +2,7 @@ function populatePre(url, id) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         document.getElementById(id).textContent = this.responseText;
+        hljs.highlightAll();
     };
     xhr.open('GET', url);
     xhr.send();
@@ -15,13 +16,16 @@ var examples = [
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
-                name:"index.js"
+                name:"index.js",
+                lang: "language-js" 
             },
             {
-                name: "index.html"
+                name: "index.html",
+                lang: "language-html"
             },
             {
-                name: "data.js"
+                name: "data.js",
+                lang: "language-js"
             }
         ]
     },
@@ -32,10 +36,12 @@ var examples = [
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
-                name:"index.js"
+                name:"index.js",
+                lang: "language-js"
             },
             {
-                name: "index.html"
+                name: "index.html",
+                lang: "language-html"
             }
         ]
     },
@@ -46,16 +52,20 @@ var examples = [
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
-                name:"index.js"
+                name:"index.js",
+                lang: "language-js"
             },
             {
-                name: "index.html"
+                name: "index.html",
+                lang: "language-html"
             },
             {
-                name: "data1.js"
+                name: "data1.js",
+                lang: "language-js"
             },
             {
-                name: "data2.js"
+                name: "data2.js",
+                lang: "language-js"
             }
         ]
     }
