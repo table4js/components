@@ -34,7 +34,7 @@ Add the following scripts to HEAD part of your HTML file
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
 ```HTML
-<abris-components-table params="{ model: $data }"></abris-components-table>
+<abris-components-table params="{ model: widgetModel }"></abris-components-table>
 ```
 
 Add the following script to make it work

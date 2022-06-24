@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 
 <body>
@@ -59,7 +63,11 @@
                                 click: (_ => $parent.current_tab_file(name))"></div>
                                 <!-- /ko -->
                             </div>
-                            <pre class="sample__code-text four-column" data-bind="attr: { id: name + '-' + current_tab_file() }, text: populatePre(name + '/' + current_tab_file(), name + '-' + current_tab_file())"></pre>
+                            <pre class="sample__code-text four-column" >
+                            <!-- ko foreach: files -->
+                                <code data-bind="visible: name == $parent.current_tab_file(), class: lang, attr: { id: $parent.name + '-' + name }, text: populatePre($parent.name + '/' + name, $parent.name + '-' + name)"></code>
+                            <!-- /ko -->
+                        </pre>
                         </div>
                     </div>
                     <!-- /ko -->

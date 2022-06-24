@@ -533,6 +533,13 @@ textarea.form-back__field {
     border-radius: 10px;
     margin: 0;
     max-width: 768px;
+    display: flex;
+    width: 875px;
+}
+
+pre code.hljs {
+    background: none;
+    width: 100%;
 }
 
 .sample__code-file {
