@@ -33,6 +33,6 @@ jobs:
           key: ${{ secrets.DEPLOY_ABRIS_KEY }}
           source: "${{ env.BUILD_SCRIPT_OUTPUT }}/*"
           target: ${{ env.DEPLOY_PATH }}
-          # strip_components: 1
+          strip_components: 1
       - name: Print Info
         run: echo "Deployed at https://demo.abris.site/"
