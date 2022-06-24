@@ -23,8 +23,13 @@ jobs:
       - run: |
           pwd
           ls -l
-          mkdir -p site/dist
-          cp -R dist/* site/dist
+      
+      - run: ls -l site/
+      - run: mkdir -p site/dist
+      - run: ls -l site/
+      - run: ls -l site/dist
+      - run: cp -R dist/* site/dist
+      - run: ls -l site/dist
 
       - uses: actions/checkout@v3
       - name: copy files via ssh password
