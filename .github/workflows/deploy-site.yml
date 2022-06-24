@@ -21,8 +21,8 @@ jobs:
       - run: npm run build
       - run: npm run doc:gen
       - run: |
-          mkdir -p ./site/dist
-          cp -R ./dist/* ./site/dist
+          mkdir -p site/dist
+          cp -R dist/* site/dist
 
       - uses: actions/checkout@v3
       - name: copy files via ssh password
@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.DEPLOY_ABRIS_USERNAME }}
           key: ${{ secrets.DEPLOY_ABRIS_KEY }}
           source: ${{ env.BUILD_SCRIPT_OUTPUT }}
-          target: ${{ env.DEPLOY_PATH }}/
+          target: ${{ env.DEPLOY_PATH }}
           # strip_components: 1
       - name: Print Info
         run: echo "Deployed at https://demo.abris.site/"
