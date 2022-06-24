@@ -31,7 +31,6 @@ jobs:
       - run: cp -R dist/* site/dist
       - run: ls -l site/dist
 
-      - uses: actions/checkout@v3
       - name: copy files via ssh password
         uses: appleboy/scp-action@master
         with:
