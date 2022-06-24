@@ -14,6 +14,7 @@ abris-search {
     border-radius: 15px;
     background: var(--abc-primary-1, $abc-primary-1);
     padding: 0 8px;
+    margin-right: 20px;
 }
 
 .abris-search__value {
@@ -29,5 +30,5 @@ abris-search {
 }
 
 .abris-search__icon {
-    fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40);
+    fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40) !important;
 }
