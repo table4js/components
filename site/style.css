@@ -538,6 +538,7 @@ textarea.form-back__field {
 }
 
 pre code.hljs {
+    background: none;
     width: 100%;
 }
 
