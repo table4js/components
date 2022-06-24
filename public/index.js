@@ -9,13 +9,7 @@ var options = {
         {
             name: "color",
             visible: false,
-            row_color: false,
-        },
-        {
-            name: "cs",
-            visible: false,
             row_color: true,
-            concatPrev: true,
         },
         {
             name: "word",
@@ -29,7 +23,13 @@ var options = {
         {
             name: "text",
             title: "Text",
-        }
+        },
+        {
+            name: "cs",
+            visible: false,
+            row_color: true,
+            concatPrev: true,
+        },
     ],
     // getData: function (limit, offset, order, filters, key, back, callback) {
     //     sampleDataProvider.getData(limit, offset, order, filters, key, back, callback);

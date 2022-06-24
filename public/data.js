@@ -1,5 +1,5 @@
 var sampleData = [
-    { key: 1, color: "#dfdeaa", word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!", cs: null },
+    { key: 1, color: null, word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!", cs: "#d0e3e3" },
     { key: 2, color: "#dfdeaa", word: "there ", num: 24, text: "Their bearing, although they were not completely calm, with its ease, full of dignity and humility at the same time, aroused admiration", cs: null },
     { key: 3, color: null, word: "there ", num: 18, text: "I'm to blame, I'm to blame, because I choose my own people.", cs: null },
     { key: 4, color: null, word: "where ", num: 34, text: "The captain's last words were greeted with a murmur of satisfaction, and two or three heads, in a fit of rapture, poked their way between the curtains.", cs: null },
