@@ -182,6 +182,16 @@ body {
     align-items: flex-start;
 }
 
+.semple .features__reason {
+    margin-bottom: 20px;
+}
+
+.semple__img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
 .steps {
     display: flex;
     flex-direction: column;
