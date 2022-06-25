@@ -2,6 +2,7 @@ var options = {
     enableSearch: true,
     enableSummary: true,
     keyColumn: "key",
+    selectCellColor: "#ffd9d9",
     columns: [
         {   name: "key",
             visible: false,
@@ -19,6 +20,12 @@ var options = {
             name: "num",
             title: "Number",
             type: "number"
+        },
+        {
+            name: "clnun",
+            type: "bool",
+            row_color: true,
+            concatPrev: true,
         },
         {
             name: "text",

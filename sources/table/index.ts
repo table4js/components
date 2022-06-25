@@ -36,12 +36,22 @@ export interface ITableRow {
     click: (data: ITableRow, event) => void
 }
 
-export interface ITableConfig extends IDataProvider {
+/**
+ * Parameters for customizing the table view.
+ */
+ export interface ITableConfig extends IDataProvider {
+    /** Description of columns */
     columns: Array<ITableColumnDescription>;
+    /** Permission to display the search bar */
     enableSearch?: boolean;
+    /** Permission to display summary panel */
     enableSummary?: boolean;
+    /** Permission to display the table actions panel */
     actions?: Array<IAction>;
+    /** The key field of the table. Needed to edit the table. */
     keyColumn?: string;
+    /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
+    selectCellColor?: string;
 }
 
 interface ITableFilter {
@@ -330,7 +340,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             if(col.visible) cell.initialize(col, back, data, text, colorCell);
             lastText = (col.concatPrev && !col.row_color) ? text : null;
             colorRow = (col.row_color && !col.concatPrev) ? ko.unwrap(data[col.name]) : colorRow;
-            colorCell = (col.row_color && col.concatPrev) ? ko.unwrap(data[col.name]) : null;
+            colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( ko.unwrap(data[col.name]) ? this.config.selectCellColor : null) : ko.unwrap(data[col.name])) : null;
             if(col.visible) rowCells.push(cell);
         });
         this.columns().reverse();
