@@ -45,7 +45,7 @@
                     <!-- ko foreach: $data -->
                     <div class="sample__container" data-bind="">
                         <span class="sample__headline headline__text" data-bind="text: title, attr: { id: name }"></span>
-                        <span class="sample__description" data-bind="text: description + description + description + description + description + description + description + description + description + description + description"></span>
+                        <span class="sample__description" data-bind="html: description"></span>
                         <div class="sample__table">
                             <a class="sample__new-window" target="_blank" data-bind="attr: { href: name + '/index.html' }">
                                 <span>Open in new window</span>
