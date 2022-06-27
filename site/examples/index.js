@@ -50,6 +50,26 @@ var examples = [
         ]
     },
     {
+        name: "basic-edit",
+        title: "Editing to cells",
+        description: "Editing to cells.",
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js",
+                lang: "language-js" 
+            },
+            {
+                name: "index.html",
+                lang: "language-html"
+            },
+            {
+                name: "data.js",
+                lang: "language-js"
+            }
+        ]
+    },
+    {
         name: "basic-search",
         title: "Searche",
         description: `Display the data search bar. Allows you to filter the data in the table by all columns.\

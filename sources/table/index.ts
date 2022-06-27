@@ -50,6 +50,8 @@ export interface ITableRow {
     enableMergedСellsToggle ?: boolean;
     /** The primary value of the parameter for merging cells */
     enableMergedСells ?: boolean;
+    /** Permission to edit data */
+    enableEdit ?: boolean;
     /** Permission to display the table actions panel */
     actions?: Array<IAction>;
     /** The key field of the table. Needed to edit the table. */
@@ -207,50 +209,51 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 container: "top"
             });
         }
-        this.innerActions.push(
-        {
-            name: "save-action",
-            action: () => {
-                let isInsert = false;
-                this.rows().forEach(r=>{
-                    let modify = {};
-                    if(r.number>0) {
-                        r.cells().forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
-                        if(!isEmpty(modify)) {
-                            if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells().forEach(c=>c.data = c.text)
+        if(config.enableEdit === true){
+            this.innerActions.push({
+                name: "save-action",
+                action: () => {
+                    let isInsert = false;
+                    this.rows().forEach(r=>{
+                        let modify = {};
+                        if(r.number>0) {
+                            r.cells().forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
+                            if(!isEmpty(modify)) {
+                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells().forEach(c=>c.data = c.text)
+                            }
+                        } else {
+                            r.cells().forEach(c => modify[c.name] = c.text); 
+                            if(this.dataProvider.insertData(this.keyColumn, modify)) isInsert = true;
                         }
-                    } else {
-                        r.cells().forEach(c => modify[c.name] = c.text); 
-                        if(this.dataProvider.insertData(this.keyColumn, modify)) isInsert = true;
-                    }
-                });
-                if (isInsert) this.refresh();
+                    });
+                    if (isInsert) this.refresh();
+                },
+                svg: "icon_save",
+                container: "bottom"
             },
-            svg: "icon_save",
-            container: "bottom"
-        },
-        {
-            name: "delete-action",
-            action: () => {
-                this.selectedRows().forEach(r => {
-                    if (r.number>0) this.rows.slice(this.rows.indexOf(r), 1);
-                })
-                this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
+            {
+                name: "delete-action",
+                action: () => {
+                    this.selectedRows().forEach(r => {
+                        if (r.number>0) this.rows.slice(this.rows.indexOf(r), 1);
+                    })
+                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
+                },
+                svg: "icon_delete",
+                container: "bottom"
             },
-            svg: "icon_delete",
-            container: "bottom"
-        },
-        {
-            name: "new-action",
-            action: () => {
-                this.scrollerElement.scrollTop = 0;
-                let newRow:ITableRowData = {};
-                this.columns().forEach(c => c.visible && (newRow[c.name]=""));
-                this.rows.unshift(this.createRow(newRow, -1, null));
-            },
-            svg: "icon_add",
-            container: "bottom"
-        });
+            {
+                name: "newRow-action",
+                action: () => {
+                    this.scrollerElement.scrollTop = 0;
+                    let newRow:ITableRowData = {};
+                    this.columns().forEach(c => c.visible && (newRow[c.name]=""));
+                    this.rows.unshift(this.createRow(newRow, -1, null));
+                },
+                svg: "icon_add",
+                container: "bottom"
+            }
+        )}
     }
 
     private _dataProvider: IDataProvider = undefined;

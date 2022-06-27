@@ -92,7 +92,7 @@
             css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
             visible: (count > 0) || !$parents[1].isMergedСells,
             style: {'background-color': color} ">
-            <!-- ko ifnot: inplaceEditForm -->
+            <!-- ko ifnot: (inplaceEditForm && $parents[1].config.enableEdit) -->
             <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
             <div class="abris-table-cell__container" data-bind="css: css, click: $parents[1].startEditCell">
               <span
@@ -109,7 +109,7 @@
             </div>
             <!-- /ko -->
             <!-- /ko -->
-            <!-- ko if: inplaceEditForm -->
+            <!-- ko if: (inplaceEditForm && $parents[1].config.enableEdit) -->
             <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>
             <!-- /ko -->
           </td>

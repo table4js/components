@@ -5,6 +5,7 @@ var options = {
     enableMergedСells: false,
     keyColumn: "key",
     selectCellColor: "#ffd9d9",
+    enableEdit: true,
     columns: [
         {   name: "key",
             visible: false,
