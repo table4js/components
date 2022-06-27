@@ -1,6 +1,8 @@
 var options = {
     enableSearch: true,
     enableSummary: true,
+    enableMergedСellsToggle: true,
+    enableMergedСells: false,
     keyColumn: "key",
     selectCellColor: "#ffd9d9",
     columns: [
