@@ -7,6 +7,10 @@ body {
     line-height: 1.5;
 }
 
+*, ::after, ::before {
+    box-sizing: content-box !important;
+}
+
 .one-column {
     width: 168px;
 }
@@ -28,7 +32,9 @@ body {
 .unique-selling,
 .features,
 .crossbrow,
-.form-back {
+.form-back,
+.sale__offer,
+.faq {
     margin-bottom: 70px;
 }
 
@@ -379,6 +385,7 @@ textarea.form-back__field {
 
 .footer__container {
     display: flex;
+    margin-top: 60px;
 }
 
 .footer__column:not(:last-child) {
@@ -576,4 +583,108 @@ pre code.hljs {
 
 .form-back__succes--hidden {
     display: none;
+}
+
+.buy-title__contaier {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 180px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buy-title__contaier .tagline__line-one .tagline__text {
+    font-size: 3.6em;
+}
+
+.buy-title__contaier .main-title__logo {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.buy__description {
+    color: rgba(255,255,255, 0.7);
+    margin: auto;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.buy__sale-cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sale-card {
+    width: 300px;
+    border: 1px solid #A59EFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    margin-right: 30px;
+}
+
+.sale-card__header {
+    margin: -20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #A59EFF;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 14px 14px 0 0;
+}
+
+.sale-card__body {
+    margin-bottom: 10px;
+}
+
+.sale-card__reason {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.sale-card__reason--missing {
+    opacity: 0.3;
+}
+
+.sale-card__icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.sale-card__header .headline__text {
+    margin: 0;
+    color: #263769;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.accordion  * {
+    box-sizing: border-box !important;
+}
+
+.faq .accordion {
+    width: 80%;
+    margin: auto;
+}
+
+.faq .headline .headline__text:last-child {
+    align-self: center;
+}
+
+.faq .accordion-button:not(.collapsed) {
+    color: #443BC2;
+    background-color: #D4D0FF;
+    box-shadow: none;
+}
+
+.faq .accordion-button:focus {
+    box-shadow: none;
+    background-color: #e2e0ff;
 }
