@@ -14,13 +14,14 @@
   "typings": "abris-components.d.ts",
   "keywords": [
     "JavaScript",
-    "components"
+    "component",
+    "widget",
+    "table",
+    "grid"
   ],
   "moduleType": "umd",
   "ignore": [
-    "index.html",
-    "index.debug.html",
-    "webpack-pascal-case-name.js"
+    "index.html"
   ],
   "repository": {
     "type": "git",
@@ -29,8 +30,6 @@
   "scripts": {
   },
   "dependencies": {
-    "jquery": "^3.5.0",
-    "knockout": "^3.5.0"
   },
   "devDependencies": {
   }

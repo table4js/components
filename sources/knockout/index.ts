@@ -8,6 +8,8 @@ export * from "./table/search";
 
 export * from "..";
 
+export const KnockoutInstance = ko;
+
 export class KnockoutHashTableStorage extends HashTableStorage {
     public getValue(name: string) {
         if(!ko.isObservable(this.hash[name])) {
@@ -37,3 +39,18 @@ ko.components.register("abris-components-table", {
     },
     template: tableWidgetTemplate
 });
+
+function renderTableWidget(element: string | Element) {
+    let el: Element = element as Element;
+    if(typeof element === "string") {
+        el = document.querySelectorAll(element)[0];
+    }
+    el.innerHTML = `<abris-components-table params="{ model: $data }"></abris-components-table>`;
+    ko.utils.domNodeDisposal.addDisposeCallback(el, (node: Node) => {
+        ko.cleanNode(node);
+        el.innerHTML = "";
+    });
+    ko.applyBindings(this, el);
+}
+
+TableWidget.prototype["render"] = renderTableWidget;

@@ -44,14 +44,14 @@ const BASE_CFG = {
       }
     ]
   },
-  externals: {
-    knockout: {
-      root: "ko",
-      commonjs2: "knockout",
-      commonjs: "knockout",
-      amd: "knockout"
-    },
-  },
+  // externals: {
+  //   knockout: {
+  //     root: "ko",
+  //     commonjs2: "knockout",
+  //     commonjs: "knockout",
+  //     amd: "knockout"
+  //   },
+  // },
   entry: {
     [packageJson.name]: './sources/knockout/index.ts',
   }
