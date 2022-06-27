@@ -1,4 +1,6 @@
 var options = {
+    enableSearch: true,
+    enableSummary: true,
     columns: [
         {
             name: "word",
@@ -10,6 +12,11 @@ var options = {
             type: "number"
         },
         {
+            name: "color",
+            row_color: true,
+            visible: false,
+        },        
+        {
             name: "text",
             title: "Text",
         }
@@ -17,7 +24,5 @@ var options = {
 };
 
 var widgetModel = new AbrisComponents.TableWidget(options);
-// var sampleDataProvider = new ArrayDataProvider(sampleData);
 widgetModel.data = sampleData;
-
 ko.applyBindings(widgetModel);

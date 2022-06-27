@@ -339,7 +339,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             let cell = new TableCell();
             if(col.visible) cell.initialize(col, back, data, text, colorCell);
             lastText = (col.concatPrev && !col.row_color) ? text : null;
-            colorRow = (col.row_color && !col.concatPrev) ? ko.unwrap(data[col.name]) : colorRow;
+            colorRow = (col.row_color && !col.concatPrev) ? (col.type === "bool" ? ( ko.unwrap(data[col.name]) ? this.config.selectCellColor : null) : ko.unwrap(data[col.name])) : colorRow;
             colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( ko.unwrap(data[col.name]) ? this.config.selectCellColor : null) : ko.unwrap(data[col.name])) : null;
             if(col.visible) rowCells.push(cell);
         });
