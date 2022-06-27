@@ -12,9 +12,11 @@
                   <!-- /ko -->
                   <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'topActions' }">
                   </abris-actions>
+                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->
                   <abris-dropdown-actions class="abris-table-dropdown abris-table-actions-menu"
                     params="data: $data, actions: 'dropdownActions'">
                   </abris-dropdown-actions>
+                  <!-- /ko -->
                 </div>
               </div>
               <div class="abris-table-filter" data-bind="visible: viewFilterTable">

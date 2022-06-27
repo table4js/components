@@ -30,6 +30,48 @@ var examples = [
         ]
     },
     {
+        name: "basic-search",
+        title: "Searche",
+        description: `Display the data search bar. Allows you to filter the data in the table by all columns.\
+        <br>Set by the 'enableSearch' option to true`,
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js",
+                lang: "language-js" 
+            },
+            {
+                name: "index.html",
+                lang: "language-html"
+            },
+            {
+                name: "data.js",
+                lang: "language-js"
+            }
+        ]
+    },
+    {
+        name: "basic-summary",
+        title: "Summary",
+        description: `Displays a switch that shows/hides the column totals calculation panel.\
+        <br>Set by the 'enableSummary' option to true`,
+        current_tab_file: ko.observable("index.js"),
+        files: [ 
+            {
+                name:"index.js",
+                lang: "language-js" 
+            },
+            {
+                name: "index.html",
+                lang: "language-html"
+            },
+            {
+                name: "data.js",
+                lang: "language-js"
+            }
+        ]
+    },
+    {
         name: "server-basic",
         title: "Getting data from the server",
         description: "Universal Declaration of Human Rights description",

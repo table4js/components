@@ -1,4 +1,5 @@
 var options = {
+    enableSearch: true,
     columns: [
         {
             name: "word",

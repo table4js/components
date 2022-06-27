@@ -1,4 +1,5 @@
 var options = {
+    enableSummary: true,
     columns: [
         {
             name: "word",
@@ -17,7 +18,5 @@ var options = {
 };
 
 var widgetModel = new AbrisComponents.TableWidget(options);
-// var sampleDataProvider = new ArrayDataProvider(sampleData);
 widgetModel.data = sampleData;
-
 ko.applyBindings(widgetModel);
