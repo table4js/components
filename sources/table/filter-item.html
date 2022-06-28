@@ -21,9 +21,7 @@
   <!-- /ko -->
   <div class="abris-filter__remove"
     data-bind="click: function(viewModel) { $parent.removeFilterItem($parent, viewModel); }, clickBubble: false">
-    <svg class="abris-filter__remove-icon svg-icon">
-      <use xlink:href='spritemap.svg#sprite-icon_cross'></use>
-    </svg>
+    <div class="abris-filter__remove-icon svg-icon" data-bind="html: $root.icons.cross"></div>
   </div>
   <!-- /ko -->
 </div>

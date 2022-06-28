@@ -45,15 +45,9 @@
             <div class="abris-table-title">
               <span class="abris-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
               <div class="abris-table-title__tools">
-                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === false">
-                  <use xlink:href="spritemap.svg#sprite-icon_sort-up"></use>
-                </svg>
-                <svg class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === true">
-                  <use xlink:href="spritemap.svg#sprite-icon_sort-down"></use>
-                </svg>
-                <svg class="abris-svg-icon abris-table-title__filter" data-bind="click: $parent.clickFilter">
-                  <use xlink:href='spritemap.svg#sprite-icon_filter'></use>
-                </svg>
+                <div class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === false, html: $root.icons.sortup"></div>
+                <div class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === true, html: $root.icons.sortdown"></div>
+                <div class="abris-svg-icon abris-table-title__filter" data-bind="click: $parent.clickFilter, html: $root.icons.filter"></div>
               </div>
             </div>
             <div class="abris-table-title_resize"
@@ -80,9 +74,7 @@
               <!-- /ko -->
               <!-- ko if: !$parent.isNumber -->
               <div class="abris-table__check">
-                <svg class="abris-svg-icon abris-table__icon-check" data-bind="visible: selected">
-                  <use xlink:href="spritemap.svg#sprite-icon_check"></use>
-                </svg>
+                <div class="abris-svg-icon abris-table__icon-check" data-bind="visible: selected, html: $root.icons.check"></div>
               </div>
               <!-- /ko -->
             </div>
@@ -116,12 +108,8 @@
           <!-- /ko -->
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: click">
             <div class="abris-table-technical-cell__container">
-              <svg class="abris-svg-icon abris-table-icon-row-tools abris-table__more">
-                <use xlink:href="spritemap.svg#sprite-icon_more"></use>
-              </svg>
-              <svg class="abris-svg-icon abris-table-icon-row-tools abris-table__edit">
-                <use xlink:href="spritemap.svg#sprite-icon_edit"></use>
-              </svg>
+              <div class="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
+              <div class="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
             </div>
             <div class="abris-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
             <div class="abris-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
@@ -133,9 +121,7 @@
         <tr class="abris-table-footer-summary" data-bind="visible: showTableSummary">
           <th class="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
             <div class="abris-table-technical-cell__container">
-              <svg class="abris-svg-icon abris-table-icon-equal">
-                <use xlink:href="spritemap.svg#sprite-icon_equal"></use>
-              </svg>
+              <div class="abris-svg-icon abris-table-icon-equal" data-bind="html: $root.icons.equal"></div>
             </div>
           </th>
           <!-- ko foreach: columns -->
@@ -161,9 +147,7 @@
                   <span class="abris-table-go-to__text abris-table-info__text">Перейти к </span>
                   <input class="abris-table-go-to__value" data-bind="value: startRow">
                   <button class="abris-btn-transparent">
-                    <svg class="abris-svg-icon">
-                      <use xlink:href="spritemap.svg#sprite-icon_arrow-right"></use>
-                    </svg>
+                    <div class="abris-svg-icon" data-bind="html: $root.icons.arrowright"></div>
                   </button>
                 </div>
               </div>

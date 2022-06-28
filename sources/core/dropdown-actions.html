@@ -1,8 +1,6 @@
 <button class="abris-action-button abris-button--transparent abris-button-toggle" type="button"
     data-bind="click: toggle, attr: { title: title }">
-    <svg class="abris-button__svg-icon abris-action-button__icon">
-        <use xlink:href='spritemap.svg#sprite-icon_more_sq'></use>
-    </svg>
+    <div data-bind="html: $root.icons.more_sq"></div>
     <span class="abris-action-button__label" data-bind="text: moreText"></span>
 </button>
 <!-- ko if: isOpen -->

@@ -10,9 +10,7 @@
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->
     <!-- ko if: $data.svg -->
-    <svg class="abris-action-button__icon abris-button__svg-icon" data-bind="css: ko.unwrap($data.cssImage)">
-        <use data-bind="attr:{'xlink:href':'spritemap.svg#sprite-'+svg}" xlink:href=''></use>
-    </svg>
+    <div class="abris-action-button__icon abris-button__svg-icon" data-bind="html: svg"></div>
     <!-- /ko -->
     <!-- ko ifnot: $parents[1].short -->
     <span class="abris-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}" ></span>

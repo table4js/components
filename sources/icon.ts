@@ -1,0 +1,17 @@
+export const add = require('./base-icons/icon_add.svg');
+export const equal = require('./base-icons/icon_equal.svg');
+export const table = require('./base-icons/icon_table.svg');
+export const save = require('./base-icons/icon_save.svg');
+export const del = require('./base-icons/icon_delete.svg');
+export const paste = require('./base-icons/icon_paste.svg');
+export const more_sq = require('./base-icons/icon_more_sq.svg');
+export const check = require('./base-icons/icon_check.svg');
+export const sortup = require('./base-icons/icon_sort-up.svg');
+export const sortdown = require('./base-icons/icon_sort-down.svg');
+export const filter = require('./base-icons/icon_filter.svg');
+export const more = require('./base-icons/icon_more.svg');
+export const edit = require('./base-icons/icon_edit.svg');
+export const arrowright = require('./base-icons/icon_arrow-right.svg');
+export const search = require('./base-icons/icon_search.svg');
+export const cross = require('./base-icons/icon_cross.svg');
+export const arrowdown = require('./base-icons/icon_arrow-down.svg');

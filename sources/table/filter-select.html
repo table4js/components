@@ -2,15 +2,11 @@
     <!-- ko foreach: selectedItems -->
     <div class="abris-select-selection-item">
         <span class="abris-select-item-title" data-bind="text: $data"></span>
-        <svg class="abris-svg-icon abris-select-item-close" data-bind="click: $parent.deleteItems">
-            <use xlink:href='spritemap.svg#sprite-icon_cross'></use>
-        </svg>
+        <div class="abris-svg-icon abris-select-item-close" data-bind="click: $parent.deleteItems, html: $root.icons.cross"></div>
     </div>
     <!-- /ko -->
 </div>
-<svg class="abris-select-button abris-svg-icon" data-bind="click: toggle, attr: { title: title }">
-    <use xlink:href='spritemap.svg#sprite-icon_arrow-down'></use>
-</svg>
+<div class="abris-select-button abris-svg-icon" data-bind="click: toggle, attr: { title: title }, html: $root.icons.arrowdown"></div>
 <!-- ko if: isOpen -->
 <ul class="abris-select__dropdown-menu abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
     <div class="abris-select__dropdown-search-container">
@@ -19,9 +15,7 @@
     <!-- ko foreach: foundItems -->
     <div class="abris-select__dropdown-item" data-bind="click: $parent.clickItem">
         <input class="abris-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
-        <svg class="abris-svg-icon abris-select__dropdown-check">
-            <use xlink:href='spritemap.svg#sprite-icon_check'></use>
-        </svg>
+        <div class="abris-svg-icon abris-select__dropdown-check" data-bind="html: $root.icons.check"></div>
         <span class="abris-select__dropdown-label" data-bind="text: $data"></span>
     </div>
     <!-- /ko -->

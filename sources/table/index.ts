@@ -7,6 +7,7 @@ import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 import { SearchModel } from "./search";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
+import * as Icons from "../icon"
 
 import "./index.scss";
 
@@ -76,6 +77,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     private tableElement: HTMLTableElement;
 
     private innerActions: Array<IAction> = [];
+    private icons = Icons;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
 
@@ -195,7 +197,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 action: () => {
                     this.showTableSummary = !this.showTableSummary;
                 },
-                svg: "icon_equal",
+                svg: this.icons.equal,
                 container: "top"
             });
         }
@@ -205,7 +207,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 action: () => {
                     this.isMergedСells = !this.isMergedСells;
                 },
-                svg: "icon_table",
+                svg: this.icons.table,
                 container: "top"
             });
         }
@@ -228,7 +230,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     });
                     if (isInsert) this.refresh();
                 },
-                svg: "icon_save",
+                svg: this.icons.save,
                 container: "bottom"
             },
             {
@@ -239,7 +241,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     })
                     this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
                 },
-                svg: "icon_delete",
+                svg: this.icons.del,
                 container: "bottom"
             },
             {
@@ -250,7 +252,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     this.columns().forEach(c => c.visible && (newRow[c.name]=""));
                     this.rows.unshift(this.createRow(newRow, -1, null));
                 },
-                svg: "icon_add",
+                svg: this.icons.add,
                 container: "bottom"
             }
         )}
