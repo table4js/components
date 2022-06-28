@@ -12,7 +12,7 @@ abris-table-summary {
   border: none;
   cursor: pointer;
   color: var(--abc-primary-0, $abc-primary-0);
-  width: 20%;
+  width: min-content;
 }
 
 .abris-table-summary__value {
