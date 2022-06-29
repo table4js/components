@@ -5,6 +5,10 @@ import { TableWidget } from "../table";
 export * from "./table/cell-editor";
 export * from "./table/summary";
 export * from "./table/search";
+export * from "./widgets/action";
+export * from "./widgets/actions";
+export * from "./widgets/dropdown-actions";
+
 
 export * from "..";
 
