@@ -1,8 +1,8 @@
-export const add = require('./base-icons/icon_add.svg');
+export const add = require('./base-icons/icon_item-add.svg');
 export const equal = require('./base-icons/icon_equal.svg');
-export const table = require('./base-icons/icon_table.svg');
-export const save = require('./base-icons/icon_save.svg');
-export const del = require('./base-icons/icon_delete.svg');
+export const table = require('./base-icons/icon_table-merge.svg');
+export const save = require('./base-icons/icon_item-save.svg');
+export const del = require('./base-icons/icon_item-delete.svg');
 export const paste = require('./base-icons/icon_paste.svg');
 export const more_sq = require('./base-icons/icon_more_sq.svg');
 export const check = require('./base-icons/icon_check.svg');
