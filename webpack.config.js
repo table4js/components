@@ -80,7 +80,7 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
     library: '[pc-name]',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/dist',
+    path: __dirname + '/site/dist',
     filename: '[name].js'
   },
   devtool: 'inline-source-map'
@@ -113,7 +113,7 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     library: '[pc-name]',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/dist',
+    path: __dirname + '/site/dist',
     filename: '[name].min.js'
   }
 });

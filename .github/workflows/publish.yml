@@ -25,16 +25,12 @@ jobs:
       - run: npm run doc:gen
       - run: npm run build:types
 
-      - run: npm publish dist --access public
+      - run: npm publish ./site/dist --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-      - run: |
-          mkdir -p ./docs/examples
-          cp -R ./examples/* ./docs/examples
 
       - uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
-          folder: docs
+          folder: site
           token: ${{secrets.GHP_TOKEN}}
