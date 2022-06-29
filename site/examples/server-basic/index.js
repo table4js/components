@@ -9,7 +9,7 @@ function getColumns(name, baseUrl) {
 
         var widgetModel = new AbrisComponents.TableWidget(options);
         widgetModel.dataProvider = new AbrisComponents.RemoteDataProvider(name, baseUrl);
-        ko.applyBindings(widgetModel);
+        widgetModel.render("#table-container");
     });
 }
 getColumns("declaration", "https://abris.site:3334/");

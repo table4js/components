@@ -20,6 +20,7 @@ var options1 = {
 
 var table1 = new AbrisComponents.TableWidget(options1);
 table1.data = sampleData1;
+table1.render("#table-container1");
 
 var options2 = {
     enableSearch: true,
@@ -51,5 +52,4 @@ var options2 = {
 
 var table2 = new AbrisComponents.TableWidget(options2);
 table2.data = sampleData2;
-
-ko.applyBindings({ table_top: table1, table_down: table2 });
+table2.render("#table-container2");
