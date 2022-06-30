@@ -8,6 +8,9 @@ export * from "./table/search";
 export * from "./widgets/action";
 export * from "./widgets/actions";
 export * from "./widgets/dropdown-actions";
+export * from "./widgets/filter-default";
+export * from "./widgets/filter-item";
+export * from "./widgets/filter-select";
 
 
 export * from "..";
