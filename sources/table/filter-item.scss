@@ -57,13 +57,13 @@
   display: flex;
   cursor: pointer;
   margin-left: 5px;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 .abris-filter__remove-icon {
-  width: 10px;
-  height: 10px !important;
+  width: 12px;
+  height: 12px !important;
   fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 
   &:hover {
