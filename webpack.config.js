@@ -4,7 +4,6 @@ const packageJson = require('./package.json');
 const publishPackageJson = require('./publish/package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PascalCaseNamePlugin = require('./webpack-pascal-case-name');
 const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
@@ -73,14 +72,13 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
       template: './public/index.html',
       scriptLoading: "blocking"
     }),
-    new webpack.BannerPlugin(banner),
-    new PascalCaseNamePlugin()
+    new webpack.BannerPlugin(banner)
   ],
   output: {
-    library: '[pc-name]',
+    library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/dist',
+    path: __dirname + '/site/dist',
     filename: '[name].js'
   },
   devtool: 'inline-source-map'
@@ -100,7 +98,6 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     //   scriptLoading: "blocking"
     // }),
     new webpack.BannerPlugin(banner),
-    new PascalCaseNamePlugin(),
     //new webpack.optimize.UglifyJsPlugin()
     new GeneratePackageJsonPlugin(publishPackageJson),
     new CopyPlugin({
@@ -110,10 +107,10 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     })
   ],
   output: {
-    library: '[pc-name]',
+    library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/dist',
+    path: __dirname + '/site/dist',
     filename: '[name].min.js'
   }
 });

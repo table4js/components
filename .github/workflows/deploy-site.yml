@@ -21,9 +21,6 @@ jobs:
       - run: npm run build
       - run: npm run doc:gen
       
-      - run: mkdir -p site/dist
-      - run: cp -R dist/* site/dist
-
       - name: copy files via ssh password
         uses: appleboy/scp-action@master
         with:
