@@ -81,12 +81,12 @@ header > .tsd-page-toolbar.tsd-page-toolbar--hide {
 
 .tsd-navigation.secondary,
 .tsd-navigation.secondary.tsd-navigation--toolbar-hide {
-    top: 95px;
+    top: 155px;
 }
 
 .container-main .tsd-navigation.secondary,
 .container-main .tsd-navigation.secondary.tsd-navigation--toolbar-hide {
-    max-height: calc(100vh - 125px);
+    max-height: calc(100vh - 210px);
 }
 
 .container-main .tsd-navigation.secondary {
@@ -166,7 +166,7 @@ header {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
     background: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     top: 60px;
 }
 
@@ -184,4 +184,8 @@ header {
 
 .tsd-page-toolbar  a {
     display: none;
+}
+
+code {
+    background: transparent;
 }
