@@ -10,8 +10,8 @@ test("TableWidget constructor", () => {
     const tableWidget = new TableWidget(<any>{ columns: [ { name: "col1" } ], getData: () => {} }, rootWidgetElement);
     // expect(result).toMatchSnapshot();
     expect(tableWidget).toBeDefined();
-    expect(tableWidget.columns().length).toBe(1);
-    expect(tableWidget.columns()[0].name).toBe("col1");
+    expect(tableWidget.columns.length).toBe(1);
+    expect(tableWidget.columns[0].name).toBe("col1");
 });
 
 test("TableWidget pass key field", () => {
