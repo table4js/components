@@ -26,7 +26,7 @@ export interface ITableColumn extends ITableColumnDescription {
     // type: string;
     // visible: boolean;
     filter: any;
-    filterContext: any,
+    filterContext: FilterContext,
     order: string,
     summaryValue: any,
     summaryParams: IAggregate,

@@ -470,4 +470,3 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return this.getActions('bottom');
     }
 }
-
