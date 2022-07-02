@@ -217,10 +217,10 @@ export class TableWidget extends Base implements ITableColumnOwner {
             {
                 name: "delete-action",
                 action: () => {
-                    this.selectedRows().forEach(r => {
+                    this.selectedRows.forEach(r => {
                         if (r.number>0) this.rows.slice(this.rows.indexOf(r), 1);
                     })
-                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
+                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows.map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
                 },
                 svg: this.icons.del,
                 container: "bottom"
@@ -299,7 +299,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     protected clickRow(row: ITableRow, event) {
-        this.selectedRows().forEach(r => r.selected = false);
+        this.selectedRows.forEach(r => r.selected = false);
         row.selected = true;
     }
 
@@ -312,7 +312,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             .forEach(e => e.selected = true);
         } 
         if (row.selected) this.lastSelectRow = row;
-        if (this.selectedRows().length !== 1) this.hideDetail();
+        if (this.selectedRows.length !== 1) this.hideDetail();
     }
 
     public clickColumn = (column: ITableColumn, event) => {
@@ -445,8 +445,9 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return this.config.keyColumn;
     }
     rows = ko.observableArray<ITableRow>();
-    selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected));
-    // @property() selectedRows: Array<ITableRow> = new ComputedUpdater<Array<ITableRow>>(() => this.rows().filter(r => r.selected)) as any;
+    get selectedRows() {
+        return this.rows().filter(r => r.selected);
+    }
     @property({ defaultValue: false }) showTableSummary: boolean;
     @property({ defaultValue: false }) showSearch: boolean;
     @property({ onSet: (newValue: number, target: TableWidget) => {
