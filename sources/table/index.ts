@@ -11,6 +11,7 @@ import * as Icons from "../icon"
 
 import "./index.scss";
 import { ITableRow, ITableRowData, TableRow } from "./row";
+import { isEmpty } from "../utils/utils";
 
 /**
  * Parameters for customizing the table view.
@@ -468,12 +469,5 @@ export class TableWidget extends Base implements ITableColumnOwner {
     get bottomActions() {
         return this.getActions('bottom');
     }
-}
-
-function isEmpty(obj: {}) {
-    for (let key in obj) {
-        return false;
-    }
-    return true;
 }
 
