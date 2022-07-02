@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { Base } from "../core/base";
 import { IAction } from "../core/action";
 import { property } from "../core/property";
+import { ComputedUpdater } from "../core/dependencies";
 import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
@@ -54,8 +55,28 @@ export class TableWidget extends Base implements ITableColumnOwner {
 
     private innerActions: Array<IAction> = [];
     private icons = Icons;
+    private filterUpdater: ComputedUpdater;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
+
+    private updateByFilter() {
+        const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
+        this.tableFilter = [];
+        if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
+        this.columns.forEach(column => {
+            let columnFilterValue = column.filterContext.value;
+            if(columnFilterValue) {
+                columnFilterValue.forEach(e => {
+                    if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
+                    this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
+                })
+            }
+        });
+        if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
+            this.searchModel.prevSearchValue = this.searchModel.searchValue;
+            this.refresh();
+        }
+    }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
@@ -63,24 +84,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.createActions(this.config);
         this.createColumns(this.config);
 
-        ko.computed(() => {
-            const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
-            this.tableFilter = [];
-            if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
-            this.columns.forEach(column => {
-                let columnFilterValue = column.filterContext.value;
-                if(columnFilterValue) {
-                    columnFilterValue.forEach(e => {
-                        if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
-                        this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
-                    })
-                }
-            });
-            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
-                this.searchModel.prevSearchValue = this.searchModel.searchValue;
-                this.refresh();
-            }
-        });    
+        this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
+        this.filterUpdater.observe(this, "__filterUpdaterValue");
 
         if(!!element) {
             this.initialize(element);
@@ -433,12 +438,15 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffset = 0;
     lastOffsetBack = 0;
     partRowCount = 10;
-    @property({ defaultValue: [] }) columns: Array<ITableColumn>;
+    @property({ defaultValue: [], onSet: (val, target: TableWidget) => {
+        target.viewFilterTable = new ComputedUpdater(() => target.columns.filter(c => c.filterContext.showFilter).length > 0) as any;
+    } }) columns: Array<ITableColumn>;
     get keyColumn(): string {
         return this.config.keyColumn;
     }
     rows = ko.observableArray<ITableRow>();
     selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected));
+    // @property() selectedRows: Array<ITableRow> = new ComputedUpdater<Array<ITableRow>>(() => this.rows().filter(r => r.selected)) as any;
     @property({ defaultValue: false }) showTableSummary: boolean;
     @property({ defaultValue: false }) showSearch: boolean;
     @property({ onSet: (newValue: number, target: TableWidget) => {
@@ -448,7 +456,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     @property({ defaultValue: 0 }) totalCount: number;
     @property({ defaultValue: 0 }) tableHeadHeight: number;
     @property({ defaultValue: true }) showTableFilter: boolean;
-    viewFilterTable = ko.computed(() => this.columns.filter(c => c.filterContext.showFilter).length > 0); 
+    @property({ defaultValue: false }) viewFilterTable: boolean;
     tableFilter: ITableFilter[];
     currentCellEditor: ITableCell;
     @property({ defaultValue: false }) isShowDetail: boolean;
