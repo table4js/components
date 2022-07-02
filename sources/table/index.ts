@@ -7,11 +7,11 @@ import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 import { SearchModel } from "./search";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
-import * as Icons from "../icon"
-
-import "./index.scss";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { isEmpty } from "../utils/utils";
+
+import * as Icons from "../icon"
+import "./index.scss";
 
 /**
  * Parameters for customizing the table view.
