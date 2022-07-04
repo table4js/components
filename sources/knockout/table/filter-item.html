@@ -1,4 +1,4 @@
-﻿<!-- ko if: filterItems().length > 0 -->
+﻿<!-- ko if: filterItems.length > 0 -->
 <div class="abris-filter-item">
   <div class="abris-filter__title abris-filter-text" data-bind="text: column.title + ':'"></div>
   <!-- ko foreach: filterItems -->
@@ -10,12 +10,12 @@
   <!-- ko if: showOperand -->
   <!-- ko if: operation.op == "EQ" -->
   <abris-filter-select class="abrs-filter__value"
-    params="value: filterItemValue.value, columnName: column.name, getColumnData: getColumnData">
+    params="value: filterItemValue, columnName: column.name, getColumnData: getColumnData">
   </abris-filter-select>
   <!-- /ko -->
   <!-- ko if: operation.op != "EQ" -->
   <div class="abris-filter__operand" data-bind="component: { name: filterEditorName, 
-      params: { value: filterItemValue.value, column: column } }">
+      params: { value: filterItemValue, column: column } }">
   </div>
   <!-- /ko -->
   <!-- /ko -->

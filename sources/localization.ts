@@ -12,6 +12,7 @@ export class Localization {
         filterdateequal: "Equal",
         filterdategreater: "From",
         filterdateless: "To",
+        noData: "No Data"
     };
     static getString = (stringId: string) => {
         return this.englishStrings[stringId];

@@ -15,5 +15,5 @@ export * from "./table/filter-select";
 
 export * from "./utils/array-data-provider";
 export * from "./utils/remote-data-provider";
+export * from "./utils/utils";
 export * from "./icon"
-

@@ -19,15 +19,31 @@ export * from "..";
 export const KnockoutInstance = ko;
 
 export class KnockoutHashTableStorage extends HashTableStorage {
-    public getValue(name: string) {
-        if(!ko.isObservable(this.hash[name])) {
-            this.hash[name] = ko.observable(this.hash[name]);
+    private linkArrayToObservable(observableArray: ko.ObservableArray) {
+        const result = [].concat(observableArray());
+        ["pop", "push", "splice", "slice", "shift", "unshift"].forEach(funcName => result[funcName] = function () { return observableArray[funcName].apply(observableArray, arguments); });
+        return result;
+    }
+    private createObservable(value: any) {
+        if(Array.isArray(value)) {
+            return ko.observableArray(value);
         }
-        return this.hash[name]();
+        return ko.observable(value);
+    }
+    public getValue(name: string, defaultValue?: any) {
+        const value = super.getValue(name, defaultValue);
+        if(!ko.isObservable(value)) {
+            this.hash[name] = this.createObservable(value);
+        }
+        const observable = this.hash[name];
+        if(ko.isObservableArray(observable)) {
+            return this.linkArrayToObservable(observable);
+        }
+        return observable();
     }
     public setValue(name: string, val: any) {
         if(!ko.isObservable(this.hash[name])) {
-            this.hash[name] = ko.observable(this.hash[name]);
+            this.hash[name] = this.createObservable(this.hash[name]);
         }
         this.hash[name](val);
     }

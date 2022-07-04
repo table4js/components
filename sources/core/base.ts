@@ -1,9 +1,14 @@
+import { isEqual } from "../utils/utils";
 import { Dependencies } from "./dependencies";
 
 export class HashTableStorage {
     protected hash = {};
-    public getValue(name: string) {
-        return this.hash[name];
+    public getValue(name: string, defaultValue?: any) {
+        const value = this.hash[name];
+        if(value === undefined) {
+            return defaultValue;
+        }
+        return value;
     }
     public setValue(name: string, val: any) {
         this.hash[name] = val;
@@ -47,10 +52,7 @@ export class Base {
 
     protected getPropertyValueCore(propertyName: string, defaultValue?: any) {
         Base.collectDependency(this, propertyName);
-        const value = this.storage.getValue(propertyName);
-        if(value === undefined) {
-            return defaultValue;
-        }
+        const value = this.storage.getValue(propertyName, defaultValue);
         return value;
     }
     protected setPropertyValueCore(propertyName: string, newValue: any) {
@@ -60,9 +62,9 @@ export class Base {
     public getPropertyValue(propertyName: string, defaultValue?: any) {
         return this.getPropertyValueCore(propertyName, defaultValue);
     }
-    public setPropertyValue(propertyName: string, newValue: any) {
-        const oldValue = this.getPropertyValue(propertyName);
-        if(oldValue !== newValue) {
+    public setPropertyValue(propertyName: string, newValue: any, defaultValue?: any) {
+        const oldValue = this.getPropertyValue(propertyName, defaultValue);
+        if(!isEqual(oldValue, newValue)) {
             this.setPropertyValueCore(propertyName, newValue);
             this.onPropertyValueChanged(propertyName, oldValue, newValue);
         }

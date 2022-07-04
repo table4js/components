@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import { Base } from "../core/base";
 import { IAction } from "../core/action";
 import { property } from "../core/property";
@@ -10,9 +9,11 @@ import { SearchModel } from "./search";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { isEmpty } from "../utils/utils";
+import { Localization } from "../localization";
 
 import * as Icons from "../icon"
 import "./index.scss";
+import { FilterItemValue } from "./filter-item";
 
 /**
  * Parameters for customizing the table view.
@@ -62,13 +63,17 @@ export class TableWidget extends Base implements ITableColumnOwner {
     private updateByFilter() {
         const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
         this.tableFilter = [];
-        if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
+        if (this.searchModel.searchValue) {
+            this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
+        }
         this.columns.forEach(column => {
             let columnFilterValue = column.filterContext.value;
             if(columnFilterValue) {
-                columnFilterValue.forEach(e => {
-                    if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
-                    this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
+                columnFilterValue.forEach((fiv: FilterItemValue) => {
+                    const op = fiv.op;
+                    const val = fiv.value;
+                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN"))
+                    this.tableFilter.push({value: val, op: op, field: fiv.field});
                 })
             }
         });
@@ -85,7 +90,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.createColumns(this.config);
 
         this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
-        this.filterUpdater.observe(this, "__filterUpdaterValue");
+        this.filterUpdater.observe(this, "__filterUpdaterValue"); // TODO: make it elegant
 
         if(!!element) {
             this.initialize(element);
@@ -137,8 +142,9 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     calculateSummary(column: ITableColumn): void {
-        if(column.summaryParams && column.summaryParams.field === column.name && column.summaryParams.func)
+        if(column.summaryParams && column.summaryParams.field === column.name && column.summaryParams.func) {
             this.dataProvider.getSummary(column.summaryParams.func, column.summaryParams.field, this.tableFilter, (data) => column.summaryValue = data);
+        }
     }
 
     protected showDetail(rowData: ITableRowData) {
@@ -155,8 +161,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
             this.lastOffsetBack = startRow - 1;
             this.lastOffset = startRow - 1;
             this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
-            this.rows.removeAll();
-            this.drawRows(this.partRowCount, startRow - 1, false, true);
+            this.rows = [];
+            this.drawRows(this.partRowCount, startRow - 1, false);
             this.hideDetail();
         }
     }
@@ -197,12 +203,12 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 name: "save-action",
                 action: () => {
                     let isInsert = false;
-                    this.rows().forEach(r=>{
+                    this.rows.forEach(r => {
                         let modify = {};
                         if(r.number>0) {
                             r.cells.forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
                             if(!isEmpty(modify)) {
-                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells.forEach(c=>c.data = c.text)
+                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells.forEach(c => c.data = c.text)
                             }
                         } else {
                             r.cells.forEach(c => modify[c.name] = c.text); 
@@ -259,12 +265,12 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.lastOffsetBack = 0;
         this.lastOffset = 0;
         this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
-        this.rows.removeAll();
-        this.drawRows(this.partRowCount, 0, false, true);
+        this.rows = [];
+        this.drawRows(this.partRowCount, 0, false);
         this.hideDetail();
     }
 
-    drawRows(limit: number, offset: number, back = false, refresh = false) {
+    drawRows(limit: number, offset: number, back = false) {
         if(!this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(
@@ -283,10 +289,11 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     this.loadMoreBack = this.lastOffsetBack > 0;
                     this.totalCount = totalCount;
                     this.loadMore = this.lastOffset <= totalCount;
-                    (data || []).forEach((d, i) => {
-                        var newRow = this.createRow(back ? data[data.length - 1 - Number(i)] : data[i], back?data.length - 1 - Number(i) + offset : Number(i) + offset, back);
-                        if(back) { this.rows.unshift(newRow); }
-                        else { this.rows.push(newRow); }
+                    const currentRows = this.rows;
+                    (data || []).forEach((dataItem, index) => {
+                        var newRow = this.createRow(back ? data[data.length - 1 - Number(index)] : dataItem, back ? data.length - 1 - Number(index) + offset : Number(index) + offset, back);
+                        if(back) { currentRows.unshift(newRow); }
+                        else { currentRows.push(newRow); }
                     });
                     this.loadingMutex = false;
                 });
@@ -308,7 +315,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         event.stopPropagation();
 
         if (event.shiftKey && this.lastSelectRow) {
-            this.rows().filter(e => e.number >= Math.min(this.lastSelectRow.number, row.number) && e.number <= Math.max(this.lastSelectRow.number, row.number))
+            this.rows.filter(e => e.number >= Math.min(this.lastSelectRow.number, row.number) && e.number <= Math.max(this.lastSelectRow.number, row.number))
             .forEach(e => e.selected = true);
         } 
         if (row.selected) this.lastSelectRow = row;
@@ -346,7 +353,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
             colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : null;
             if(col.visible) rowCells.push(cell);
         });
-        this.columns.reverse();
         let row_id = data[this.keyColumn];
         const row = new TableRow();
         row.cells = rowCells.reverse();
@@ -357,7 +363,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         row.color = colorRow;
         row.select = (data, event) => this.selectRow(data, event),
         row.click = (data, event) => this.clickRow(data, event)
-    return row;
+        return row;
     }
 
     protected rowExpanded(id) {
@@ -439,14 +445,14 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffsetBack = 0;
     partRowCount = 10;
     @property({ defaultValue: [], onSet: (val, target: TableWidget) => {
-        target.viewFilterTable = new ComputedUpdater(() => target.columns.filter(c => c.filterContext.showFilter).length > 0) as any;
+        target.viewFilterTable = new ComputedUpdater(() => val.filter(c => c.filterContext.showFilter).length > 0) as any;
     } }) columns: Array<ITableColumn>;
     get keyColumn(): string {
         return this.config.keyColumn;
     }
-    rows = ko.observableArray<ITableRow>();
+    @property({ defaultValue: [] }) rows: Array<ITableRow>;
     get selectedRows() {
-        return this.rows().filter(r => r.selected);
+        return this.rows.filter(r => r.selected);
     }
     @property({ defaultValue: false }) showTableSummary: boolean;
     @property({ defaultValue: false }) showSearch: boolean;
@@ -477,5 +483,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
     get bottomActions() {
         return this.getActions('bottom');
+    }
+    get noDataText() {
+        return Localization.getString("noData");
     }
 }

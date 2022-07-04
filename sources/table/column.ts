@@ -61,7 +61,7 @@ export class TableColumn extends Base implements ITableColumn {
     }
 
     filter: any;
-    filterContext: any = new FilterContext();
+    filterContext = new FilterContext();
     @property() order: string;
     @property() summaryValue: any;
     @property({ onSet: (val: IAggregate, target: TableColumn) => {

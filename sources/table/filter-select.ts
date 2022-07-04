@@ -1,5 +1,6 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
+import { FilterItemValue } from "./filter-item";
 
 import "./filter-select.scss";
 
@@ -7,7 +8,7 @@ export class TableFilterSelect extends Base {
     private limit: number = 10;
     private offset: number = 0;
 
-    constructor(private value: (val?: any) => any,  private columnName: string, private getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback : (items: any[]) => void) => void, isOpen?: boolean, public title: string = "", public moreText: string = "") {
+    constructor(private value: FilterItemValue,  private columnName: string, private getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback : (items: any[]) => void) => void, isOpen?: boolean, public title: string = "", public moreText: string = "") {
         super();
         if(isOpen !== undefined) {
             this.isOpen = isOpen;
@@ -38,7 +39,7 @@ export class TableFilterSelect extends Base {
     }
     @property({ defaultValue: [], onSet: (val, target: TableFilterSelect) => {
         console.log("Set filter value to " + JSON.stringify(val));
-        target.value(target.selectedItems);
+        target.value.value = target.selectedItems;
     } }) selectedItems: Array<any>;
     @property({ defaultValue: [] }) foundItems: Array<any>;
     @property({ onSet: (val, target: TableFilterSelect) => {

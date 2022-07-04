@@ -10,4 +10,3 @@ ko.components.register("abris-icon", {
 });
 
 export var AbrisIconWidget;
-
