@@ -29,6 +29,13 @@ export class Dependencies {
   
   export class ComputedUpdater<T = any> {
     public static readonly ComputedUpdaterType = "__dependency_computed";
+    public static CollectDependencies<U = any>(obj: Base, computedUpdater: ComputedUpdater<U>, propertyName: string): U {
+      Base.startCollectDependencies(() => obj[propertyName] = computedUpdater.updater(), obj, propertyName);
+      const result = computedUpdater.updater();
+      const dependencies = Base.finishCollectDependencies();
+      computedUpdater.setDependencies(dependencies);
+      return result;
+    }
     private dependencies: Dependencies = undefined;
     constructor(private _updater: () => T) {
     }
@@ -42,6 +49,9 @@ export class Dependencies {
     }
     protected getDependencies(): Dependencies {
       return this.dependencies;
+    }
+    public observe(target: Base, propertyName: string) {
+      ComputedUpdater.CollectDependencies(target, this, propertyName);
     }
     private clearDependencies() {
       if (this.dependencies) {

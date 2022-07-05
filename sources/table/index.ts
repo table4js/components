@@ -2,40 +2,17 @@ import * as ko from "knockout";
 import { Base } from "../core/base";
 import { IAction } from "../core/action";
 import { property } from "../core/property";
+import { ComputedUpdater } from "../core/dependencies";
 import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
 import { SearchModel } from "./search";
 import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
+import { ITableRow, ITableRowData, TableRow } from "./row";
+import { isEmpty } from "../utils/utils";
+
 import * as Icons from "../icon"
-
 import "./index.scss";
-
-/**
- * The collection of data for a table row. The key is the name of the column. The value is the content of the table cell.
- */
-export interface ITableRowData {
-    /** Table cell content */
-    [key: string]: string | number
-}
-
-/**
- * Information needed to render a table row
- */
-export interface ITableRow {
-    /** Array containing observable table cells */
-    cells: ko.ObservableArray<ITableCell>,
-    /** The collection of data for a table row */
-    rowData: ITableRowData,
-    /**  */
-    id: any,
-    /**  */
-    number: number,
-    selected: ko.Observable<boolean>,
-    color: any,
-    select: (data: ITableRow, event) => void,
-    click: (data: ITableRow, event) => void
-}
 
 /**
  * Parameters for customizing the table view.
@@ -78,8 +55,28 @@ export class TableWidget extends Base implements ITableColumnOwner {
 
     private innerActions: Array<IAction> = [];
     private icons = Icons;
+    private filterUpdater: ComputedUpdater;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
+
+    private updateByFilter() {
+        const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
+        this.tableFilter = [];
+        if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
+        this.columns.forEach(column => {
+            let columnFilterValue = column.filterContext.value;
+            if(columnFilterValue) {
+                columnFilterValue.forEach(e => {
+                    if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
+                    this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
+                })
+            }
+        });
+        if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
+            this.searchModel.prevSearchValue = this.searchModel.searchValue;
+            this.refresh();
+        }
+    }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
@@ -87,24 +84,8 @@ export class TableWidget extends Base implements ITableColumnOwner {
         this.createActions(this.config);
         this.createColumns(this.config);
 
-        ko.computed(() => {
-            const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
-            this.tableFilter = [];
-            if (this.searchModel.searchValue) this.tableFilter.push({value: this.searchModel.searchValue, op: "C", field: null});
-            this.columns().forEach(column => {
-                let columnFilterValue = column.filterContext.value;
-                if(columnFilterValue) {
-                    columnFilterValue.forEach(e => {
-                        if ((e.op() === "EQ" && e.value()) || (e.op() === "C" && e.value()) || (e.op() === "ISN") || (e.op() === "ISNN"))
-                        this.tableFilter.push({value: e.value(), op: e.op(), field: e.field()});
-                    })
-                }
-            });
-            if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
-                this.searchModel.prevSearchValue = this.searchModel.searchValue;
-                this.refresh();
-            }
-        });    
+        this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
+        this.filterUpdater.observe(this, "__filterUpdaterValue");
 
         if(!!element) {
             this.initialize(element);
@@ -173,7 +154,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         if(startRow) {
             this.lastOffsetBack = startRow - 1;
             this.lastOffset = startRow - 1;
-            this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
+            this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
             this.rows.removeAll();
             this.drawRows(this.partRowCount, startRow - 1, false, true);
             this.hideDetail();
@@ -185,9 +166,9 @@ export class TableWidget extends Base implements ITableColumnOwner {
     }
 
     protected createColumns(config: ITableConfig) {
-        this.columns(config.columns.map(column => 
+        this.columns = config.columns.map(column => 
             this.createColumn(column, config)
-        ));
+        );
     }
 
     protected createActions(config: ITableConfig) {
@@ -219,12 +200,12 @@ export class TableWidget extends Base implements ITableColumnOwner {
                     this.rows().forEach(r=>{
                         let modify = {};
                         if(r.number>0) {
-                            r.cells().forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
+                            r.cells.forEach(c => c.text !== c.data && (modify[c.name] = c.text)); 
                             if(!isEmpty(modify)) {
-                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells().forEach(c=>c.data = c.text)
+                                if(this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells.forEach(c=>c.data = c.text)
                             }
                         } else {
-                            r.cells().forEach(c => modify[c.name] = c.text); 
+                            r.cells.forEach(c => modify[c.name] = c.text); 
                             if(this.dataProvider.insertData(this.keyColumn, modify)) isInsert = true;
                         }
                     });
@@ -236,10 +217,10 @@ export class TableWidget extends Base implements ITableColumnOwner {
             {
                 name: "delete-action",
                 action: () => {
-                    this.selectedRows().forEach(r => {
+                    this.selectedRows.forEach(r => {
                         if (r.number>0) this.rows.slice(this.rows.indexOf(r), 1);
                     })
-                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows().map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
+                    this.dataProvider.deleteData(this.keyColumn, this.selectedRows.map(r => r.number>0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
                 },
                 svg: this.icons.del,
                 container: "bottom"
@@ -249,7 +230,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 action: () => {
                     this.scrollerElement.scrollTop = 0;
                     let newRow:ITableRowData = {};
-                    this.columns().forEach(c => c.visible && (newRow[c.name]=""));
+                    this.columns.forEach(c => c.visible && (newRow[c.name]=""));
                     this.rows.unshift(this.createRow(newRow, -1, null));
                 },
                 svg: this.icons.add,
@@ -277,7 +258,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     protected refresh() {
         this.lastOffsetBack = 0;
         this.lastOffset = 0;
-        this.columns().forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
+        this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows.removeAll();
         this.drawRows(this.partRowCount, 0, false, true);
         this.hideDetail();
@@ -289,7 +270,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
             this.dataProvider.getData(
                 limit, 
                 offset,
-                this.columns().filter(c => c.order !== undefined).map(c => <any>{field: c.name, desc: c.order}),
+                this.columns.filter(c => c.order !== undefined).map(c => <any>{field: c.name, desc: c.order}),
                 this.tableFilter,
                 null /*&& this.pinnedRowKey()*/, 
                 back, 
@@ -317,21 +298,21 @@ export class TableWidget extends Base implements ITableColumnOwner {
         event.stopPropagation();
     }
 
-    protected clickRow(data, event) {
-        this.selectedRows().map(r => r.selected(false));
-        data.selected(true);
+    protected clickRow(row: ITableRow, event) {
+        this.selectedRows.forEach(r => r.selected = false);
+        row.selected = true;
     }
 
-    protected selectRow(data, event) {
-        data.selected(!data.selected());
+    protected selectRow(row: ITableRow, event) {
+        row.selected = !row.selected;
         event.stopPropagation();
 
         if (event.shiftKey && this.lastSelectRow) {
-            this.rows().filter(e => e.number >= Math.min(this.lastSelectRow.number, data.number) && e.number <= Math.max(this.lastSelectRow.number, data.number))
-            .forEach(e => e.selected(true));
+            this.rows().filter(e => e.number >= Math.min(this.lastSelectRow.number, row.number) && e.number <= Math.max(this.lastSelectRow.number, row.number))
+            .forEach(e => e.selected = true);
         } 
-        if (data.selected()) this.lastSelectRow = data;
-        if (this.selectedRows().length !== 1) this.hideDetail();
+        if (row.selected) this.lastSelectRow = row;
+        if (this.selectedRows.length !== 1) this.hideDetail();
     }
 
     public clickColumn = (column: ITableColumn, event) => {
@@ -340,7 +321,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
         }
         var newOrder = column.order === undefined ? false : !column.order;
         if (!event.shiftKey) {
-            this.columns().map((c) => c.order = undefined)
+            this.columns.map((c) => c.order = undefined)
         } 
         column.order = newOrder as any; // TODO: something wrong is here
         this.refresh();
@@ -355,28 +336,28 @@ export class TableWidget extends Base implements ITableColumnOwner {
         let rowCells = [];
         let lastText = null;
         let colorCell = null, colorRow = null;
-        this.columns().reverse().forEach(col => {
+        this.columns.reverse().forEach(col => {
             let text = this.getCellText(data, col);
             text = lastText ? text + "/" + lastText : text; 
             let cell = new TableCell();
             if(col.visible) cell.initialize(col, back, data, text, colorCell);
             lastText = (col.concatPrev && !col.row_color) ? text : null;
-            colorRow = (col.row_color && !col.concatPrev) ? (col.type === "bool" ? ( ko.unwrap(data[col.name]) ? this.config.selectCellColor : null) : ko.unwrap(data[col.name])) : colorRow;
-            colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( ko.unwrap(data[col.name]) ? this.config.selectCellColor : null) : ko.unwrap(data[col.name])) : null;
+            colorRow = (col.row_color && !col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : colorRow;
+            colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : null;
             if(col.visible) rowCells.push(cell);
         });
-        this.columns().reverse();
-        let row_id = ko.unwrap(data[this.keyColumn]);
-        return {
-            cells: ko.observableArray(rowCells.reverse()),
-            rowData: ko.toJS(data),
-            id: row_id,
-            number: num + 1,
-            selected: ko.observable(row_id && (this.expandedRowKey === row_id)),
-            color: colorRow,
-            select: (data, event) => this.selectRow(data, event),
-            click: (data, event) => this.clickRow(data, event)
-        };
+        this.columns.reverse();
+        let row_id = data[this.keyColumn];
+        const row = new TableRow();
+        row.cells = rowCells.reverse();
+        row.rowData = data;
+        row.id = row_id;
+        row.number = num + 1;
+        row.selected = row_id && (this.expandedRowKey === row_id);
+        row.color = colorRow;
+        row.select = (data, event) => this.selectRow(data, event),
+        row.click = (data, event) => this.clickRow(data, event)
+    return row;
     }
 
     protected rowExpanded(id) {
@@ -457,12 +438,16 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffset = 0;
     lastOffsetBack = 0;
     partRowCount = 10;
-    columns = ko.observableArray<ITableColumn>();
+    @property({ defaultValue: [], onSet: (val, target: TableWidget) => {
+        target.viewFilterTable = new ComputedUpdater(() => target.columns.filter(c => c.filterContext.showFilter).length > 0) as any;
+    } }) columns: Array<ITableColumn>;
     get keyColumn(): string {
         return this.config.keyColumn;
     }
     rows = ko.observableArray<ITableRow>();
-    selectedRows = ko.computed<Array<ITableRow>>(() => this.rows().filter(r => r.selected()));
+    get selectedRows() {
+        return this.rows().filter(r => r.selected);
+    }
     @property({ defaultValue: false }) showTableSummary: boolean;
     @property({ defaultValue: false }) showSearch: boolean;
     @property({ onSet: (newValue: number, target: TableWidget) => {
@@ -472,7 +457,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     @property({ defaultValue: 0 }) totalCount: number;
     @property({ defaultValue: 0 }) tableHeadHeight: number;
     @property({ defaultValue: true }) showTableFilter: boolean;
-    viewFilterTable = ko.computed(() => this.columns().filter(c => c.filterContext.showFilter).length > 0); 
+    @property({ defaultValue: false }) viewFilterTable: boolean;
     tableFilter: ITableFilter[];
     currentCellEditor: ITableCell;
     @property({ defaultValue: false }) isShowDetail: boolean;
@@ -494,11 +479,3 @@ export class TableWidget extends Base implements ITableColumnOwner {
         return this.getActions('bottom');
     }
 }
-
-function isEmpty(obj: {}) {
-    for (let key in obj) {
-        return false;
-    }
-    return true;
-}
-

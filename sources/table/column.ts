@@ -10,13 +10,13 @@ export interface ITableColumnDescription {
     type: string;
     visible: boolean;
     // filter: any;
-    // filterContext: any,
-    // order: ko.Observable<string>,
+    // filterContext: FilterContext,
+    // order: string,
     // count: number,
-    // prev: any,
+    // prev: ITableCell,
     // prevValue: any,
     // concatPrev: boolean,
-    // last: any,
+    // last: ITableCell,
     // row_color: string
 }
 
@@ -26,7 +26,7 @@ export interface ITableColumn extends ITableColumnDescription {
     // type: string;
     // visible: boolean;
     filter: any;
-    filterContext: any,
+    filterContext: FilterContext,
     order: string,
     summaryValue: any,
     summaryParams: IAggregate,

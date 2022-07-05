@@ -11,11 +11,7 @@ export function property(options?: IPropertyDecoratorOptions) {
     return function (target: any, key: string) {
         let processComputedUpdater = (obj: any, val: any) => {
             if (!!val && typeof val === "object" && val.type === ComputedUpdater.ComputedUpdaterType) {
-                Base.startCollectDependencies(() => obj[key] = val.updater(), obj, key);
-                const result = val.updater();
-                const dependencies = Base.finishCollectDependencies();
-                val.setDependencies(dependencies);
-                return result;
+                return ComputedUpdater.CollectDependencies(obj, val, key);
             }
             return val;
         };
