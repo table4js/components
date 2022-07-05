@@ -21,9 +21,9 @@
                 <div class="header__pages">
                     <a class="header__link-page" href="/">Main</a>
                     <span class="header__link-page header__link-page--active">Examples</span>
-                    <span class="header__link-page">Buy</span>
+                    <span class="header__link-page" href="/buy/">Buy</span>
                     <a class="header__link-page" href="/docs">Documentaion</a>
-                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
+                    <a class="header__link-page" href="#contact-form">Contact us</a>
                     <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
                 </div>
             </div>
@@ -33,7 +33,7 @@
         <div class="page-size">
             <div class="examples__container">
                 <div class="examples__sticky-list one-column">
-                    <img class="examples__list-logo one-column" src="/img/logo/logo-components.svg" alt="abris-logo">
+                    <!--<img class="examples__list-logo one-column" src="/img/logo/logo-components.svg" alt="abris-logo">-->
                     <ul class="examples__list" data-bind="foreach: $data">
                         <li class="examples__page">
                             <a class="examples__page-link" data-bind="text: title, attr: { href: '#' + name }"></a>
@@ -76,6 +76,37 @@
 
         </div>
     </section>
+
+    <section class="form-back">
+        <div class="page-size">
+            <div class="form-back__container" id="contact-form">
+                <div class="headline three-column">
+                    <span class="headline__text">Do you still have questions?</span>
+                </div>
+                <form role="form" id="contactForm" class="form-back__form three-column">
+                    <span for="form-back__label">Name</span>
+                    <input type="text" class="form-back__field" id="name" placeholder="Name" required>
+                    <span for="form-back__label">E-mail</span>
+                    <input type="email" class="form-back__field" id="email" placeholder="E-mail" required>
+                    <span for="form-back__label">Message</span>
+                    <textarea id="message" class="form-back__field" rows="5" placeholder="Enter your message.."
+                        required></textarea>
+                    <button id="form-submit" class="button button--accent form-back__button" onclick="formSuccess()"
+                        type="button">Send</button>
+                </form>
+            </div>
+            <div class="features__reason reason-left form-back__succes form-back__succes--hidden" id="contact-succes">
+                <img class="reason-img" src="img/form-back/1.svg">
+                <div class="reason-column">
+                    <span class="headline__text three-column">Your message has been sent successfully!</span>
+                    <span class="reason__description two-column">We will contact you soon</span>
+                    <button id="new-letter" class="button button--accent form-back__button" onclick="newletter()">Send a
+                        new message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="footer blue-top-background">
         <div class="page-size">
             <div class="footer__container">
@@ -85,11 +116,10 @@
                 </div>
                 <div class="footer__column one-column">
                     <a class="header__link-page" href="/">Main</a>
-                    <span class="header__link-page header__link-page--active">Examples</span>
-                    <span class="header__link-page">Buy</span>
+                    <span class="header__link-page header__link-page--active" href="/examples">Examples</span>
+                    <span class="header__link-page" href="/buy">Buy</span>
                     <a class="header__link-page" href="/docs">Documentaion</a>
-                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
-                    <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
+                    <a class="header__link-page" href="#contact-form">Contact us</a>
                 </div>
                 <div class="footer__column two-column">
                     <a href="mailto:info@abrisplatform.com" class="social">
@@ -117,7 +147,6 @@
             </div>
         </div>
     </section>
-
     <script src="index.js"></script>
 </body>
 

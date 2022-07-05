@@ -231,6 +231,7 @@ body {
     color: #7469FF;
     box-shadow: 0 5px 0 #A59EFF;
     font-size: 1.1em;
+    text-decoration: none;
 }
 
 .button:hover {
