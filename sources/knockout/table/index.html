@@ -60,9 +60,14 @@
         </tr>
       </thead>
       <tbody class="abris-table__body">
-        <!-- ko if: rows().length == 0 -->
+        <!-- ko if: rows().length == 0 && loadingMutex == false  -->
         <tr class="abris-table__row">
-          <th class="abris-table-cell" colspan="100%">Данных нет</th>
+          <th class="abris-table-cell" colspan="100%">No data</th>
+        </tr>
+        <!-- /ko -->
+        <!-- ko if: loadingMutex -->
+        <tr class="abris-table__row">
+          <th class="abris-table-cell" colspan="100%">Data is loading</th>
         </tr>
         <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
