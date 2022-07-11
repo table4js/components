@@ -1,7 +1,7 @@
-body * {
+body *:not(code) {
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: lighter;
     font-size: 1em;
     line-height: 1.5;
@@ -168,19 +168,16 @@ body {
 .headline {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .headline__text {
-    font-family: Consolas, monaco, monospace;
-    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5em;
     font-weight: bold;
     color: #7469FF;
-    text-shadow: 2px 2px 0 #F5D4F9;
-}
-
-.headline__text:last-child {
-    align-self: flex-end;
+    line-height: 1.25;
+    /*text-shadow: 2px 2px 0 #F5D4F9;*/
 }
 
 .headline-description {
@@ -234,15 +231,17 @@ body {
     padding: 15px 25px;
     background: #fff;
     color: #7469FF;
-    box-shadow: 0 5px 0 #A59EFF;
+    /*box-shadow: 0 5px 0 #A59EFF;*/
     font-size: 1.1em;
     text-decoration: none;
 }
 
 .button:hover {
-    box-shadow: 0 5px 0 #716bce;
+    /*box-shadow: 0 5px 0 #716bce;*/
+    background: #e9e8ff;
     text-decoration: underline;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .button:not(:last-child) {
@@ -251,12 +250,14 @@ body {
 
 .button--accent {
     background: #7469FF;
-    box-shadow: 0 5px 0 #443BC2;
+    /*box-shadow: 0 5px 0 #443BC2;*/
     color: #fff;
 }
 
 .button--accent:hover {
-    box-shadow: 0 5px 0 #2e2692;
+    /*box-shadow: 0 5px 0 #2e2692;*/
+    background: #6459ff;
+    border-color: #6459ff;
 }
 
 .unique-selling__container {
@@ -349,7 +350,7 @@ body {
 }
 
 .form-back__label {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .form-back__field {
@@ -357,7 +358,7 @@ body {
     border: 1px solid #A59EFF;
     border-radius: 5px;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 textarea.form-back__field {
@@ -374,6 +375,7 @@ textarea.form-back__field {
 
 .form-back__button {
     margin: auto;
+    width: 100px;
 }
 
 .form-back__succes .reason__description {
@@ -428,6 +430,7 @@ textarea.form-back__field {
     color: #263769;
 }
 
+
 .examples__container {
     display: flex;
     padding: 30px 0;
@@ -474,7 +477,7 @@ textarea.form-back__field {
 .examples__samples {
     display: flex;
     flex-direction: column;
-    margin-top: -6px;
+    margin-top: 5px;
 }
 
 .examples__headline {
@@ -577,6 +580,7 @@ pre code.hljs {
 
 .sample__code-headline {
     margin-bottom: -45px;
+    font-size: 2em;
 }
 
 .form-back__succes {
@@ -693,4 +697,8 @@ pre code.hljs {
 .faq .accordion-button:focus {
     box-shadow: none;
     background-color: #e2e0ff;
+}
+
+pre code {
+    font-family: consolas;
 }
