@@ -1,8 +1,13 @@
 function populatePre(url, id) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
-        document.getElementById(id).textContent = this.responseText;
-        hljs.highlightAll();
+        let text = this.responseText;
+
+        document.getElementById("text").text = text;
+
+        el = document.getElementById(id);
+        el.textContent = document.getElementById("text").text;
+        hljs.highlightElement(el);
     };
     xhr.open('GET', url);
     xhr.send();
@@ -21,7 +26,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -41,7 +46,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -61,7 +66,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -82,7 +87,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -103,7 +108,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -123,7 +128,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             }
         ]
     },
@@ -141,7 +146,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data1.js",
@@ -175,7 +180,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -206,7 +211,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -236,7 +241,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
@@ -268,7 +273,7 @@ var examples = [
             },
             {
                 name: "index.html",
-                lang: "language-html"
+                lang: "lang-html"
             },
             {
                 name: "data.js",
