@@ -1,4 +1,4 @@
-name: Deploy to demo.abris.site
+name: Deploy to abris.site
 
 on:
   push:
