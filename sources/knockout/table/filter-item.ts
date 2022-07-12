@@ -1,13 +1,12 @@
 import * as ko from "knockout";
-import { TableFilter } from "../../table/filter-item";
+import { FilterContext } from "../../table/filter-context";
 
 var filterTemplate = require("./filter-item.html").default;
 
 ko.components.register("abris-filter-item", {
   viewModel: {
     createViewModel: function(params, componentInfo) {
-      var viewModel = new TableFilter(params.context, params.column, params.table);
-      return viewModel;
+      return params.context as FilterContext;
     }
   },
   template: filterTemplate

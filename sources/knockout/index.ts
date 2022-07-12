@@ -21,12 +21,19 @@ export const KnockoutInstance = ko;
 export class KnockoutHashTableStorage extends HashTableStorage {
     private linkArrayToObservable(observableArray: ko.ObservableArray) {
         const result = [].concat(observableArray());
-        ["pop", "push", "splice", "slice", "shift", "unshift"].forEach(funcName => result[funcName] = function () { return observableArray[funcName].apply(observableArray, arguments); });
+        ["pop", "push", "splice", "slice", "shift", "unshift"].forEach(funcName => {
+            const prevFunc = result[funcName];
+            result[funcName] = function () {
+                prevFunc.apply(result, arguments);
+                return observableArray[funcName].apply(observableArray, arguments);
+            }
+        });
         return result;
     }
     private createObservable(value: any) {
         if(Array.isArray(value)) {
-            return ko.observableArray(value);
+            const newValue = [].concat(Array.isArray(value) ? value : []);
+            return ko.observableArray(newValue);
         }
         return ko.observable(value);
     }
@@ -45,6 +52,7 @@ export class KnockoutHashTableStorage extends HashTableStorage {
         if(!ko.isObservable(this.hash[name])) {
             this.hash[name] = this.createObservable(this.hash[name]);
         }
+        const observable = this.hash[name];
         this.hash[name](val);
     }
 }

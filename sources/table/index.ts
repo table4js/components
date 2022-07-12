@@ -4,9 +4,10 @@ import { property } from "../core/property";
 import { ComputedUpdater } from "../core/dependencies";
 import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
-import { ITableColumn, ITableColumnDescription, ITableColumnOwner, TableColumn } from "./column";
+import { ITableColumn, ITableColumnDescription, TableColumn } from "./column";
 import { SearchModel } from "./search";
-import { ArrayDataProvider, IDataProvider } from "../utils/array-data-provider";
+import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
+import { ArrayDataProvider } from "../utils/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { isEmpty } from "../utils/utils";
 import { Localization } from "../localization";
@@ -49,7 +50,7 @@ interface ITableFilter {
  * Creates TableWidget class.
  * @param config - table options.
  */
-export class TableWidget extends Base implements ITableColumnOwner {
+export class TableWidget extends Base implements IDataProviderOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
@@ -138,12 +139,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
                 }
             });
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
-        }
-    }
-
-    calculateSummary(column: ITableColumn): void {
-        if(column.summaryParams && column.summaryParams.field === column.name && column.summaryParams.func) {
-            this.dataProvider.getSummary(column.summaryParams.func, column.summaryParams.field, this.tableFilter, (data) => column.summaryValue = data);
         }
     }
 
@@ -300,11 +295,6 @@ export class TableWidget extends Base implements ITableColumnOwner {
         }
     }
 
-    public clickFilter = (column: ITableColumn, event) => {
-        column.filterContext.addItem(column);
-        event.stopPropagation();
-    }
-
     protected clickRow(row: ITableRow, event) {
         this.selectedRows.forEach(r => r.selected = false);
         row.selected = true;
@@ -444,7 +434,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     lastOffset = 0;
     lastOffsetBack = 0;
     partRowCount = 10;
-    @property({ defaultValue: [], onSet: (val, target: TableWidget) => {
+    @property({ defaultValue: [], onSet: (val: ITableColumn[], target: TableWidget) => {
         target.viewFilterTable = new ComputedUpdater(() => val.filter(c => c.filterContext.showFilter).length > 0) as any;
     } }) columns: Array<ITableColumn>;
     get keyColumn(): string {

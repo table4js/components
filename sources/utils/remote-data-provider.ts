@@ -1,4 +1,4 @@
-import { IDataProvider } from "./array-data-provider";
+import { IDataProvider } from "./data-provider";
 
 export async function postData(url = '', data = {}) {
     // Default options are marked with *
