@@ -340,11 +340,36 @@ button {
   padding: 5px;
 }
 
+.abris-table-cell__container--loading {
+  background: linear-gradient(90deg, var(--abc-primary-1-dark-8, $abc-primary-1-dark-8), var(--abc-primary-0-op-30, $abc-primary-0-op-30), var(--abc-primary-1-dark-8, $abc-primary-1-dark-8));
+  background-size: 150% 150%;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  margin: auto;
+  border-radius: 5px;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .abris-table-cell__text {
   max-width: 280px;
   margin: auto 0;
   z-index: 1;
 }
+
 .abris-table-cell__text__modified {
   font-weight: bold;
 }
@@ -375,7 +400,7 @@ button {
   position: absolute;
   top: 0;
   left: 30px;
-  height: calc(100% );
+  height: calc(100%);
   width: calc(100% - 60px);
   z-index: -1;
 }

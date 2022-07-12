@@ -60,10 +60,37 @@
         </tr>
       </thead>
       <tbody class="abris-table__body">
-        <!-- ko if: rows.length == 0 -->
+        <!-- ko if: rows.length == 0 && loadingMutex == false  -->
         <tr class="abris-table__row">
           <th class="abris-table-cell" colspan="100%" data-bind="text: noDataText"></th>
         </tr>
+        <!-- /ko -->
+        <!-- ko if: loadingMutex -->
+        <!-- ko foreach: columns -->
+        <tr class="abris-table__row"></tr>
+          <td class="abris-table-cell abris-table-technical-cell" >
+            <div class="abris-table-technical-cell__container">
+              <div class="abris-table__check">
+                <div class="abris-svg-icon abris-table__icon-check"></div>
+              </div>
+            </div>
+          </td>
+        <!-- ko foreach: $parent.columns -->
+        <!-- ko if: visible -->
+          <td class="abris-table-cell abris-table-technical-cell">
+            <div class="abris-table-cell__container abris-table-cell__container--loading">
+            </div>
+          </td>
+        <!-- /ko -->
+        <!-- /ko -->
+        <td class="abris-table-cell abris-table-technical-cell">
+          <div class="abris-table-technical-cell__container">
+            <div class="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
+            <div class="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
+          </div>
+        </td>
+        </tr>
+        <!-- /ko -->
         <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
         <tr class="abris-table__row" data-bind=" css: {'abris-table__row--selected': selected}, style: {'background-color': 'none' }">

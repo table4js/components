@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Welcome to Abris Components</title>
+    <title>Main | Abris Components</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="style.css">
@@ -16,13 +16,15 @@
     <section class="header">
         <div class="page-size">
             <div class="header__contaier">
-                <img class="header__logo" src="/img/logo/logo-long.svg" alt="abris-logo">
+                <a href="/">
+                    <img class="header__logo" src="/img/logo/logo-long.svg" alt="abris-logo">
+                </a>
                 <div class="header__pages">
-                    <span class="header__link-page header__link-page--active">Main</span>
+                    <a class="header__link-page header__link-page--active" href="/">Main</a>
                     <a class="header__link-page" href="/examples">Examples</a>
-                    <a class="header__link-page" href="/buy">Buy</a>
-                    <a class="header__link-page" href="/docs">Documentaion</a>
-                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
+                    <a class="header__link-page" href="/buy/">Buy</a>
+                    <a class="header__link-page" href="/docs">Documentation</a>
+                    <a class="header__link-page" href="#contact-form">Contact us</a>
                     <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
                 </div>
             </div>
@@ -42,7 +44,7 @@
                     </div>
                     <div class="tagline__line-two">
                         <span class="tagline__text">Just </span>
-                        <span class="tagline__text tagline__link">install</span>
+                        <a class="tagline__text tagline__link" href="/docs/">install</a>
                         <span class="tagline__text">&nbsp;and use</span>
                     </div>
                 </div>
@@ -53,9 +55,8 @@
     <section class="quick-start">
         <div class="page-size">
             <div class="quick-start__container">
-                <div class="headline three-column">
-                    <span class="headline__text">&lt;abris-components-table&gt; … </span>
-                    <span class="headline__text">&lt;/abris-components-table&gt;</span>
+                <div class="headline">
+                    <h1 class="headline__text"> Try the power of abris-components-table <br> in your browser</h1>
                 </div>
                 
                 <div class="semple">
@@ -99,8 +100,8 @@
                         <span class="steps__code">cd abris-components<br>npm i<br>npm test<br>npm run build</span>
                         <span class="steps__description">3 Add your data in abris-table and enjoy result </span>-->
                         <div class="buttons">
-                            <button class="button button--accent">Buy</button>
-                            <button class="button">Getting Started guide</button>
+                            <a class="button button--accent" href="/buy">Buy</a>
+                            <a class="button" href="/docs/" >Getting Started guide</a>
                         </div>
 
                     </div>
@@ -115,11 +116,11 @@
         <div class="page-size">
             <div class="unique-selling__container">
                 <div class="unique-selling__column three-column">
-                    <span class="headline__text text-right">We guarantee that you will enjoy using your
-                        abris-table!</span>
-                    <span class="unique-selling__description text-right">if not, we will unconditionally refund your
+                    <h2 class="headline__text text-right">We guarantee that you<br> will enjoy using your<br>
+                        abris-table!</h2>
+                    <span class="unique-selling__description text-right">If not, we will unconditionally refund your
                         money within 90 days.</span>
-                    <button class="button button--accent">Go to shopping!</button>
+                    <button class="button button--accent" href="/buy">Go to shopping!</button>
                 </div>
                 <img class="two-column" src="img/usp/1.svg">
             </div>
@@ -129,21 +130,21 @@
     <section class="features">
         <div class="page-size">
             <div class="features__container">
-                <div class="headline four-column">
+                <!--<div class="headline four-column">
                     <span class="headline__text">&lt;abris-components-table&gt;</span>
                     <span class="headline__text">- it's not just a table, it's...</span>
-                </div>
+                </div>-->
                 <div class="features__reason reason-left">
                     <img class="reason-img" src="img/features/1.svg">
                     <div class="reason-column">
-                        <span class="headline__text three-column">Convenient data viewing</span>
+                        <h2 class="headline__text three-column">Convenient data viewing</h2>
                         <span class="reason__description two-column">Viewing data without pagination is much more
                             convenient and does not require switching pages and all that.</span>
                     </div>
                 </div>
                 <div class="features__reason reason-right">
                     <div class="reason-column">
-                        <span class="headline__text three-column text-right">Instant search and filters</span>
+                        <h2 class="headline__text three-column text-right">Instant search and filters</h2>
                         <span class="reason__description two-column text-right">You can search data in your table
                             without using additional libraries and scripts.</span>
                     </div>
@@ -152,7 +153,7 @@
                 <div class="features__reason reason-left">
                     <img class="reason-img" src="img/features/3.svg">
                     <div class="reason-column">
-                        <span class="headline__text three-column">Standard and advanced Features</span>
+                        <h2 class="headline__text three-column">Standard and advanced Features</h2>
                         <span class="reason__description two-column">Use the built-in table functions such as sorting,
                             filtering, searching, totals, etc. and create your own functions for convenient work with
                             the table.</span>
@@ -160,7 +161,7 @@
                 </div>
                 <div class="features__reason reason-right">
                     <div class="reason-column">
-                        <span class="headline__text three-column text-right">Edit data right in the table</span>
+                        <h2 class="headline__text three-column text-right">Edit data right in the table</h2>
                         <span class="reason__description two-column text-right">Edit data directly in the table without
                             leaving the cash register.</span>
                     </div>
@@ -169,7 +170,7 @@
                 <div class="features__reason reason-left">
                     <img class="reason-img" src="img/features/5.svg">
                     <div class="reason-column">
-                        <span class="headline__text three-column">Use almost any data source</span>
+                        <h2 class="headline__text three-column">Use almost any data source</h2>
                         <span class="reason__description two-column">Fill the table with data from various sources that
                             come to your mind.</span>
                     </div>
@@ -181,9 +182,9 @@
     <section class="crossbrow">
         <div class="page-size">
             <div class="crossbrow__container">
-                <div class="headline three-column">
-                    <span class="headline__text">&lt;abris-components-table&gt;</span>
-                    <span class="headline__text">support cross browser</span>
+                <div class="headline">
+                    <h2 class="headline__text">abris-components-table support cross browser</h2>
+                    <span class="headline__text"></span>
                 </div>
                 <div class="crossbrow__browsers">
                     <img class="crossbrow__item one-column" src="/img/crossbrow/1.svg">
@@ -199,15 +200,15 @@
     <section class="form-back">
         <div class="page-size">
             <div class="form-back__container" id="contact-form">
-                <div class="headline three-column">
-                    <span class="headline__text">Do you still have questions?</span>
+                <div class="headline">
+                    <h2 class="headline__text">Do you still have questions?</h2>
                 </div>
                 <form role="form" id="contactForm" class="form-back__form three-column">
-                    <span for="form-back__label">Name</span>
+                    <span class="form-back__label">Name</span>
                     <input type="text" class="form-back__field" id="name" placeholder="Name" required>
-                    <span for="form-back__label">E-mail</span>
+                    <span class="form-back__label">E-mail</span>
                     <input type="email" class="form-back__field" id="email" placeholder="E-mail" required>
-                    <span for="form-back__label">Message</span>
+                    <span class="form-back__label">Message</span>
                     <textarea id="message" class="form-back__field" rows="5" placeholder="Enter your message.."
                         required></textarea>
                     <button id="form-submit" class="button button--accent form-back__button" onclick="formSuccess()"
@@ -217,7 +218,7 @@
             <div class="features__reason reason-left form-back__succes form-back__succes--hidden" id="contact-succes">
                 <img class="reason-img" src="img/form-back/1.svg">
                 <div class="reason-column">
-                    <span class="headline__text three-column">Your message has been sent successfully!</span>
+                    <h2 class="headline__text three-column">Your message has been sent successfully!</h2>
                     <span class="reason__description two-column">We will contact you soon</span>
                     <button id="new-letter" class="button button--accent form-back__button" onclick="newletter()">Send a
                         new message</button>
@@ -231,14 +232,14 @@
             <div class="footer__container">
                 <div class="footer__column two-column">
                     <img class="footer__logo two-column" src="/img/logo/logo.svg">
-                    <span class="footer__ltd">© 2020 Research laboratory ABRIS Ltd</span>
+                    <span class="footer__ltd">© 2022 Research laboratory ABRIS Ltd</span>
                 </div>
                 <div class="footer__column one-column">
                     <span class="header__link-page header__link-page--active">Main</span>
-                    <a class="header__link-page" href="examples">Examples</a>
-                    <span class="header__link-page">Buy</span>
-                    <a class="header__link-page" href="docs">Documentaion</a>
-                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
+                    <a class="header__link-page" href="/examples">Examples</a>
+                    <a class="header__link-page" href="/buy">Buy</a>
+                    <a class="header__link-page" href="/docs">Documentation</a>
+                    <a class="header__link-page" href="#contact-form">Contact us</a>
                 </div>
                 <div class="footer__column two-column">
                     <a href="mailto:info@abrisplatform.com" class="social">

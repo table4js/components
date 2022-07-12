@@ -27,7 +27,7 @@
     --dark-color-secondary-background: #fff;
     --dark-color-text: #323232;
     --dark-color-text-aside: #8e87e0;
-    --dark-color-link: #4da6ff;
+    --dark-color-link: #177ce2;
     --dark-color-menu-divider: #eee;
     --dark-color-menu-divider-focus: #000;
     --dark-color-menu-label: #707070;
@@ -52,28 +52,32 @@ body.dark {
 }
 
 
-footer.with-border-bottom > .container > h2:last-of-type, 
-footer.with-border-bottom > .container > p,
+footer > .container > h2:last-of-type, 
+footer > .container > p,
 header > .tsd-page-toolbar > .container > .table-wrap > .table-cell:last-of-type,
-footer.with-border-bottom + .container.tsd-generator,
+footer + .container.tsd-generator,
 .tsd-navigation.primary {
     display: none;
 }
 
+footer {
+    border: none;
+}
+
 header {
-    /* position: sticky;
+    position: sticky;
     top: 0;
-    z-index: 10; */
+    z-index: 10;
 }
 
 header > .tsd-page-toolbar.tsd-page-toolbar--hide {
     transform: none;
 }
 
-header > .tsd-page-title {
+/*header > .tsd-page-title {
     padding-top: 51px;
     padding-bottom: 10px;
-}
+}*/
 
 .tsd-panel {
     box-shadow: none;
@@ -81,12 +85,12 @@ header > .tsd-page-title {
 
 .tsd-navigation.secondary,
 .tsd-navigation.secondary.tsd-navigation--toolbar-hide {
-    top: 8.5rem;
+    top: 160px;
 }
 
 .container-main .tsd-navigation.secondary,
 .container-main .tsd-navigation.secondary.tsd-navigation--toolbar-hide {
-    max-height: calc(100vh - 11rem);
+    max-height: calc(100vh - 210px);
 }
 
 .container-main .tsd-navigation.secondary {
@@ -105,10 +109,17 @@ header > .tsd-page-title {
 }
 
 h1, h2 {
-    font-family: Consolas, monaco, monospace;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: #7469FF;
-    text-shadow: 2px 2px 0 #F5D4F9;
+    padding: 0;
+    /*text-shadow: 2px 2px 0 #F5D4F9;*/
+}
+
+p, a, span {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
 }
 
 h2 {
@@ -126,7 +137,6 @@ h2 {
 
 .tsd-page-toolbar {
     border: none;
-    position: static;
 } 
 
 *::-webkit-scrollbar {
@@ -145,4 +155,100 @@ h2 {
 
 * {
     scrollbar-width: thin;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.tsd-page-toolbar .container,
+.tsd-page-title .container {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    max-width: 1000px;
+    padding: 10px calc((100% - 1000px) / 2);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+    background: #fff;
+    margin-bottom: 20px;
+    top: 60px;
+}
+
+.tsd-page-toolbar {
+    width: 300px;
+    position: static;
+    align-self: center;
+}
+
+.tsd-page-title {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+.tsd-page-toolbar  a {
+    display: none;
+}
+
+code {
+    background: transparent;
+}
+
+:root {
+    --light-hl-0: #800000;
+    --dark-hl-0: #800000;
+    --light-hl-1: #800000;
+    --dark-hl-1: #800000;
+    --light-hl-2: #000000FF;
+    --dark-hl-2: #000000FF;
+    --light-hl-3: #FF0000;
+    --dark-hl-3: #FF0000;
+    --light-hl-4: #0000FF;
+    --dark-hl-4: #0000FF;
+    --light-hl-5: #000000;
+    --dark-hl-5: #000000;
+    --light-hl-6: #0000FF;
+    --dark-hl-6: #0000FF;
+    --light-hl-7: #001080;
+    --dark-hl-7: #001080;
+    --light-hl-8: #A31515;
+    --dark-hl-8: #A31515;
+    --light-hl-9: #795E26;
+    --dark-hl-9: #795E26;
+    --light-hl-10: #098658;
+    --dark-hl-10: #098658;
+    --light-code-background: #eeecff;
+    --dark-code-background: #eeecff;
+}
+
+.tsd-panel {
+    padding: 0;
+}
+
+.tsd-panel-group > h1, .tsd-panel-group > h2, .tsd-panel-group > h3 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.toggle-inherited .tsd-is-inherited, .toggle-public .tsd-is-private, .toggle-public .tsd-is-protected, .toggle-public .tsd-is-private-protected {
+    display: block;
+}
+
+footer .tsd-legend {
+    margin: 0;
+    width: max-content;
+    margin-right: 45px;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+footer .tsd-legend:last-child {
+    margin-right: 0;
 }

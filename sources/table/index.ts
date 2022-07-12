@@ -438,7 +438,7 @@ export class TableWidget extends Base implements ITableColumnOwner {
     protected rootLevel: any = true;
     @property({ defaultValue: false }) isNumber: boolean;
     @property({ defaultValue: false }) isMergedСells: boolean;
-    loadingMutex = false;
+    @property({ defaultValue: false }) loadingMutex: boolean;
     @property({ defaultValue: true }) loadMore: boolean;
     @property({ defaultValue: false }) loadMoreBack: boolean;
     lastOffset = 0;

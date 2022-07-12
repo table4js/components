@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <title>Welcome to Abris Components</title>
+    <title>Buy | Abris Components</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/ico" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
@@ -18,13 +18,15 @@
     <section class="header">
         <div class="page-size">
             <div class="header__contaier">
-                <img class="header__logo" src="/img/logo/logo-long.svg" alt="abris-logo">
+                <a href="/">
+                    <img class="header__logo" src="/img/logo/logo-long.svg" alt="abris-logo">
+                </a>
                 <div class="header__pages">
-                    <span class="header__link-page">Main</span>
+                    <a class="header__link-page" href="/">Main</a>
                     <a class="header__link-page" href="/examples">Examples</a>
-                    <span class="header__link-page header__link-page--active">Buy</span>
-                    <a class="header__link-page" href="/docs">Documentaion</a>
-                    <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
+                    <a class="header__link-page header__link-page--active" href="/buy/">Buy</a>
+                    <a class="header__link-page" href="/docs">Documentation</a>
+                    <a class="header__link-page" href="#contact-form">Contact us</a>
                     <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
                 </div>
             </div>
@@ -33,10 +35,10 @@
     <section class="main-title blue-background">
         <div class="page-size">
             <div class="buy-title__contaier">
-                <img class="main-title__logo" src="img/logo/logo-components.svg" alt="abris-logo">
+                <img class="main-title__logo" src="../img/logo/logo-components.svg" alt="abris-logo">
                 <div class="tagline">
                     <div class="tagline__line-one">
-                        <span class="tagline__text tagline__accent">Buy </span>
+                        <h1 class="tagline__text tagline__accent" style=" display:inline-block; margin-right: 10px;">Buy </h1>
                         <span class="tagline__text"> and </span>
                         <span class="tagline__text tagline__accent">Use </span>
                         <span class="tagline__text"> with Confidence </span>
@@ -54,7 +56,7 @@
             <div class="buy__sale-cards">
                 <div class="sale-card">
                     <div class="sale-card__header">
-                        <span class="headline__text">123</span>
+                        <h2 class="headline__text">123</h2>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__reason">
@@ -74,7 +76,7 @@
                 </div>
                 <div class="sale-card">
                     <div class="sale-card__header">
-                        <span class="headline__text">123</span>
+                        <h2 class="headline__text">123</h2>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__reason">
@@ -94,7 +96,7 @@
                 </div>
                 <div class="sale-card">
                     <div class="sale-card__header">
-                        <span class="headline__text">123</span>
+                        <h2 class="headline__text">123</h2>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__reason sale-card__reason--missing">
@@ -119,7 +121,7 @@
     <section class="faq">
         <div class="page-size">
             <div class="headline">
-                <span class="headline__text">We are ready to answer your questions!</span>
+                <h2 class="headline__text">We are ready to answer your questions!</h2>
             </div>
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
@@ -166,7 +168,7 @@
         <div class="page-size">
             <div class="form-back__container" id="contact-form">
                 <div class="headline three-column">
-                    <span class="headline__text">Do you still have questions?</span>
+                    <h2 class="headline__text">Do you still have questions?</h2>
                 </div>
                 <form role="form" id="contactForm" class="form-back__form three-column">
                     <span for="form-back__label">Name</span>
@@ -203,7 +205,7 @@
                     <span class="header__link-page header__link-page--active">Main</span>
                     <a class="header__link-page" href="examples">Examples</a>
                     <span class="header__link-page">Buy</span>
-                    <a class="header__link-page" href="docs">Documentaion</a>
+                    <a class="header__link-page" href="docs">Documentation</a>
                     <a class="header__link-page" href="mailto:info@abris.site">Contact us</a>
                 </div>
                 <div class="footer__column two-column">
