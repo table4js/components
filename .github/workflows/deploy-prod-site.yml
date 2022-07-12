@@ -1,11 +1,11 @@
-name: Deploy to demo.abris.site
+name: Deploy to abris.site
 
 on:
   push:
     branches: [ master ]
 
 env:
-  DEPLOY_PATH: /home/github-deploy-components/www
+  DEPLOY_PATH: /home/github-deploy-components/prod_www
   BUILD_SCRIPT_OUTPUT: site
 
 jobs:
@@ -20,6 +20,8 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run doc:gen
+      - run: sed  -i "/<head>/r site/ga4.txt" site/index.html
+      - run: rm -rf site/ga4.txt
       
       - name: copy files via ssh password
         uses: appleboy/scp-action@master
@@ -32,4 +34,4 @@ jobs:
           target: ${{ env.DEPLOY_PATH }}
           strip_components: 1
       - name: Print Info
-        run: echo "Deployed at https://demo.abris.site/"
+        run: echo "Deployed at https://abris.site/"
