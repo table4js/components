@@ -75,7 +75,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
                     const val = fiv.value;
                     if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN"))
                     this.tableFilter.push({value: val, op: op, field: fiv.field});
-                })
+                });
             }
         });
         if((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {

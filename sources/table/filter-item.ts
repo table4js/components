@@ -11,8 +11,8 @@ export class FilterItemValue extends Base {
     this.field = column.name;
   }
   @property({ onSet: (val, target: FilterItemValue) => target.column.filterContext.apply() }) value: any;
-  @property() op: string;
-  @property() field: string;
+  @property({ onSet: (val, target: FilterItemValue) => target.column.filterContext.apply() }) op: string;
+  field: string;
 }
 
 export class TableFilterItem extends Base {
@@ -47,4 +47,12 @@ export class TableFilterItem extends Base {
     target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
   } }) operation: IFindOperation;
   @property({ defaultValue: false }) showOperand: boolean;
+
+  getFilterValue() {
+    return {
+      field: this.filterItemValue.field,
+      op: this.filterItemValue.op,
+      value: this.filterItemValue.value
+    }
+  }
 }

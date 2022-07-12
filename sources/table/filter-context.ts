@@ -23,7 +23,7 @@ export class FilterContext extends Base {
     @property({ defaultValue: [] }) filterItems: Array<TableFilterItem>;
   
     apply() {
-      this.value = this.filterItems.map(i => i.filterItemValue);
+      this.value = this.filterItems.map(item => item.getFilterValue());
     }
     addItem = (column: ITableColumn) => {
       // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
