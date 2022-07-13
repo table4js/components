@@ -342,11 +342,12 @@ button {
 .abris-table-cell__container--loading {
   background: linear-gradient(90deg, var(--abc-primary-1-dark-8, $abc-primary-1-dark-8), var(--abc-primary-0-op-30, $abc-primary-0-op-30), var(--abc-primary-1-dark-8, $abc-primary-1-dark-8));
   background-size: 150% 150%;
-  width: calc(100% - 6px);
-  height: calc(100% - 6px);
-  margin: auto;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  margin: 6px;
   border-radius: 5px;
   animation: gradient 5s ease infinite;
+  opacity: 0.8;
 }
 
 @keyframes gradient {
