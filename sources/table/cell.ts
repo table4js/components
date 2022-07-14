@@ -60,7 +60,7 @@ export class TableCell extends Base implements ITableCell {
             }
             else {
                 if (col.last === null) col.last = this;
-                if(col.prevValue === this.text) {
+                if(col.prevValue && (col.prevValue === this.text)) {
                     col.count++;
                     this.count = 0;
                     col.prev.count = col.count;
