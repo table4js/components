@@ -1,13 +1,7 @@
 const _ = require('underscore');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
-const publishPackageJson = require('./publish/package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
-
-publishPackageJson.version = packageJson.version;
 
 const libraryName = 'AbrisComponents';
 const banner = [
@@ -19,8 +13,11 @@ const banner = [
 const BASE_CFG = {
   target: 'web',
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
   },
+  plugins: [
+    new webpack.BannerPlugin(banner)
+  ],
   module: {
     rules: [
       {
@@ -65,14 +62,7 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
   plugins: [
     new MiniCssExtractPlugin(
       { filename: '[name].css' }
-    ),
-    new HtmlWebpackPlugin({
-      title: libraryName,
-      inject: 'head',
-      template: './public/index.html',
-      scriptLoading: "blocking"
-    }),
-    new webpack.BannerPlugin(banner)
+    )
   ],
   output: {
     library: libraryName,
@@ -90,21 +80,7 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     new MiniCssExtractPlugin(
       { filename: '[name].min.css' }
     ),
-    // new HtmlWebpackPlugin({
-    //   title: libraryName,
-    //   filename: 'index.html',
-    //   inject: 'head',
-    //   template: './public/index.html',
-    //   scriptLoading: "blocking"
-    // }),
-    new webpack.BannerPlugin(banner),
     //new webpack.optimize.UglifyJsPlugin()
-    new GeneratePackageJsonPlugin(publishPackageJson),
-    new CopyPlugin({
-      patterns: [
-        { from: "publish/doc-index.md", to: "README.md" }
-      ],
-    })
   ],
   output: {
     library: libraryName,

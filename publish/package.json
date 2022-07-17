@@ -20,9 +20,6 @@
     "grid"
   ],
   "moduleType": "umd",
-  "ignore": [
-    "index.html"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/abris-platform/abris-components.git"
