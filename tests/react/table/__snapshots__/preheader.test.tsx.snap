@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table preheader render test 1`] = `
+<div
+  class="abris-table-preheader"
+>
+  <div
+    class="abris-table-search-group"
+  >
+    mock-table-search
+  </div>
+</div>
+`;

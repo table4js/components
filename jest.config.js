@@ -15,4 +15,6 @@ module.exports = {
     "json",
     "node"
   ],
+  "verbose": true,
+  "testEnvironment": "jsdom"
 }
