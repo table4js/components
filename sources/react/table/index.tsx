@@ -10,7 +10,7 @@ export interface IAbrisComponentsTableProps {
 function EmptyTable() {
     return (
     <tr className="abris-table__row">
-        <td className="abris-table-cell" colSpan={"100%" as any} data-bind="text: noDataText"></td>
+        <td className="abris-table-cell" colSpan={"100%" as any} data-bind="text: noDataText">noData</td>
     </tr>
     );
 }
@@ -35,8 +35,8 @@ function LoadingIndicator(table: TableWidget) {
                 )}
                 <td className="abris-table-cell abris-table-technical-cell">
                     <div className="abris-table-technical-cell__container">
-                        <div className="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
-                        <div className="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
+                        <div className="abris-svg-icon abris-table-icon-row-tools abris-table__more" dangerouslySetInnerHTML={{__html: table.icons.more}} ></div>
+                        <div className="abris-svg-icon abris-table-icon-row-tools abris-table__edit" dangerouslySetInnerHTML={{__html: table.icons.edit}} ></div>
                     </div>
                 </td>
             </tr>)}
@@ -48,18 +48,18 @@ function CellContent(table: TableWidget, row: ITableRow, cell: ITableCell) {
     if(!(cell.inplaceEditForm && table.config.enableEdit)) {
         if(!(cell.count > 1 && table.isMergedСells)) {
             return (<>
-                <div className="abris-table-cell__container" data-bind="css: css, click: $parents[1].startEditCell">
+                <div className={cell.css || "abris-table-cell__container"} data-bind="click: $parents[1].startEditCell">
                 <span
-                    data-bind="html: text,
-                    css: text!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
+                    className={cell.text!==cell.data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'}
+                    dangerouslySetInnerHTML={{__html: cell.text}}></span>
                 </div>
             </>);
         } else {
-            return <div className="abris-table-cell__container"
-                data-bind="css: (count > 1) && $parents[1].isMergedСells ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight - 2 + 'px'},
-                    click: $parents[1].startEditCell">
+            return <div className={(cell.count > 1) && table.isMergedСells ? 'cell__sticky-text ' + cell.css : cell.css}    //"abris-table-cell__container"
+                style={{top: table[1].tableHeadHeight - 2 + 'px'}}
+                data-bind="click: $parents[1].startEditCell">
                 <span className="abris-table-cell__merged-text"
-                    data-bind="html: text"></span>
+                    dangerouslySetInnerHTML={{__html: cell.text}}></span>
                 </div>;
         }
     }
@@ -72,32 +72,34 @@ function TableContent(table: TableWidget) {
     return (
         <>
         {table.rows.map(r => 
-            <tr className="abris-table__row" data-bind="css: {'abris-table__row--selected': selected}, style: {'background-color': 'none' }">
+            <tr className={r.selected?'abris-table__row--selected':"abris-table__row"} style={{background: "none" }}>
             <td className="abris-table-cell abris-table-technical-cell" data-bind="click: select">
                 <div className="abris-table-technical-cell__container">
                 {
-                    table.isNumber ? <div className="abris-table__number" data-bind="text: number"></div>
+                    table.isNumber ? <div className="abris-table__number">{r.number}</div>
                     : <div className="abris-table__check">
-                        <div className="abris-svg-icon abris-table__icon-check" data-bind="visible: selected, html: $root.icons.check"></div>
+                        {r.selected &&<div className="abris-svg-icon abris-table__icon-check" dangerouslySetInnerHTML={{__html: table.icons.check}}></div>}
                     </div>
                 }
                 </div>
             </td>
-            {r.cells.map(cell => 
-                <td className="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
-                css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
-                visible: (count > 0) || !$parents[1].isMergedСells,
-                style: {'background-color': color} ">
+            {r.cells.map(cell => <>
+                { ((cell.count > 0) || !table.isMergedСells) && 
+                <td className="abris-table-cell" 
+                style = {{background: cell.color}}
+                data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
+                css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : ''">
                 {CellContent(table, r, cell)}
-            </td>
+                </td> }
+            </>
             )}
             <td className="abris-table-cell abris-table-technical-cell" data-bind="click: click">
                 <div className="abris-table-technical-cell__container">
-                <div className="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
-                <div className="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
+                <div className="abris-svg-icon abris-table-icon-row-tools abris-table__more" dangerouslySetInnerHTML={{__html: table.icons.more}}></div>
+                <div className="abris-svg-icon abris-table-icon-row-tools abris-table__edit" dangerouslySetInnerHTML={{__html: table.icons.edit}}></div>
                 </div>
-                <div className="abris-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
-                <div className="abris-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
+                {!table.hasActiveInplaceEditor && <div className="abris-table__row--select" ></div>}
+                <div className="abris-table__row--colored" style = {{ 'background': r.color ? r.color : 'rgba(248,249,253)' }}></div>
             </td>
             </tr>
         )}
@@ -126,21 +128,21 @@ export function AbrisComponentsTable(props: IAbrisComponentsTableProps): React.R
                             </abris-dropdown-actions> : null}) */}
                             </div>
                         </div>
-                        <div className="abris-table-filter" data-bind="visible: viewFilterTable">
+                        {props.model.viewFilterTable && <div className="abris-table-filter" >
                             <div className="abris-table-filter__container">
                             {/* <!-- ko foreach: columns -->
                             <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext } } -->
                             <!-- /ko -->
                             <!-- /ko --> */}
                             </div>
-                        </div>
+                        </div>}
                         </div>
                     </th>
                     </tr>
                     <tr className="abris-table-header-title">
                     <th className="abris-table-header-title__cell abris-table-switch">
-                        <div className="abris-table-switch__text"
-                        data-bind="css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber">#
+                        <div className={props.model.isNumber?'switch__text--selected':"abris-table-switch__text"}
+                        data-bind="click: () => $data.isNumber = !$data.isNumber">#
                         </div>
                     </th>
                     {
@@ -148,11 +150,11 @@ export function AbrisComponentsTable(props: IAbrisComponentsTableProps): React.R
                     <th className="abris-table-header-title__cell"
                         data-bind="event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}">
                         <div className="abris-table-title">
-                        <span className="abris-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
+                        <span className="abris-table-title__text" onClick={(e)=>{props.model.clickColumn(c, e)}} data-bind="click: $parent.clickColumn">{c.title}</span>
                         <div className="abris-table-title__tools">
-                            <div className="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === false, html: $root.icons.sortup"></div>
-                            <div className="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === true, html: $root.icons.sortdown"></div>
-                            <div className="abris-svg-icon abris-table-title__filter" data-bind="click: clickFilter, html: $root.icons.filter"></div>
+                            <div className="abris-svg-icon abris-table-title__sorter"  style={{visibility:  (c.order === false)?"visible":"hidden"}}  dangerouslySetInnerHTML={{__html: props.model.icons.sortup}} ></div>
+                            <div className="abris-svg-icon abris-table-title__sorter" style={{visibility:  (c.order === true)?"visible":"hidden"}} dangerouslySetInnerHTML={{__html: props.model.icons.sortdown}}></div>
+                            <div className="abris-svg-icon abris-table-title__filter" data-bind="click: clickFilter" dangerouslySetInnerHTML={{__html: props.model.icons.filter}}></div>
                         </div>
                         </div>
                         <div className="abris-table-title_resize"
@@ -168,10 +170,10 @@ export function AbrisComponentsTable(props: IAbrisComponentsTableProps): React.R
                     { props.model.loadingMutex ? LoadingIndicator(props.model) : TableContent(props.model) }
                 </tbody>
                 <tfoot className="abris-table__footer abris-table-sticky-component">
-                    <tr className="abris-table-footer-summary" data-bind="visible: showTableSummary">
+                    {props.model.showTableSummary && <tr className="abris-table-footer-summary" >
                     <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
                         <div className="abris-table-technical-cell__container">
-                        <div className="abris-svg-icon abris-table-icon-equal" data-bind="html: $root.icons.equal"></div>
+                        <div className="abris-svg-icon abris-table-icon-equal" dangerouslySetInnerHTML={{__html: props.model.icons.equal}}></div>
                         </div>
                     </th>
                     {
@@ -181,7 +183,7 @@ export function AbrisComponentsTable(props: IAbrisComponentsTableProps): React.R
                     </th>)
                     }
                     <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>
-                    </tr>
+                    </tr>}
                     <tr className="abris-table-footer-tools">
                     <th className="abris-table-footer-tools__cell" colSpan={"100%" as any}>
                         <div className="abris-table-footer-tools__container abris-table-group-header-technical-cell">
@@ -190,13 +192,12 @@ export function AbrisComponentsTable(props: IAbrisComponentsTableProps): React.R
                             </abris-actions> */}
                         </div>
                         <div className="abris-table-info">
-                            <span className="abris-table-info__total abris-table-info__text"
-                            data-bind="text: 'Всего: ' + totalCount"></span>
+                            <span className="abris-table-info__total abris-table-info__text">{'Всего: ' + props.model.totalCount}</span>
                             <div className="abris-table-info__go-to">
                             <span className="abris-table-go-to__text abris-table-info__text">Перейти к </span>
                             <input className="abris-table-go-to__value" data-bind="value: startRow"/>
                             <button className="abris-btn-transparent">
-                                <div className="abris-svg-icon abris-table-go-to__icon" data-bind="html: $root.icons.arrowright"></div>
+                                <div className="abris-svg-icon abris-table-go-to__icon" dangerouslySetInnerHTML={{__html: props.model.icons.arrowright}}></div>
                             </button>
                             </div>
                         </div>

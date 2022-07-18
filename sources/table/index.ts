@@ -56,7 +56,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
     private tableElement: HTMLTableElement;
 
     private innerActions: Array<IAction> = [];
-    private icons = Icons;
+    public icons = Icons;
     private filterUpdater: ComputedUpdater;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand

@@ -33,11 +33,11 @@ export class ArrayDataProvider implements IDataProvider {
         for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
             result.push(filteredData[i]);
         }
-        setTimeout(function(){
-            console.log('2-секундная задержка прошла');
-            callback(result, offset + limit, filteredData.length, back)
-        }, 2000);
-        // callback(result, offset + limit, filteredData.length, back);
+        // setTimeout(function(){
+        //     console.log('2-секундная задержка прошла');
+        //     callback(result, offset + limit, filteredData.length, back)
+        // }, 2000);
+        callback(result, offset + limit, filteredData.length, back);
     }
 
     getSummary(func, field, filters, callback) {

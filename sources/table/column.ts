@@ -28,7 +28,7 @@ export interface ITableColumn extends ITableColumnDescription {
     // visible: boolean;
     filter: any;
     filterContext: FilterContext,
-    order: string,
+    order: boolean,
     summaryValue: any,
     summaryParams: IAggregate,
     count: number,
@@ -56,7 +56,7 @@ export class TableColumn extends Base implements ITableColumn {
 
     filter: any;
     filterContext: FilterContext;
-    @property() order: string;
+    @property() order: boolean;
     @property() summaryValue: any;
     @property({ onSet: (val: IAggregate, target: TableColumn) => {
         target.calculateSummary(target);
