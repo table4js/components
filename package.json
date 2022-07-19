@@ -34,10 +34,12 @@
     "test": "jest",
     "test:dev": "jest --watch",
     "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name '@abris/components' --includeVersion  --customCss ./publish/abris-theme.css --plugin ./publish/abris-theme.js --hideGenerator",
-    "release": "standard-version --message \"Release: %s\""
+    "release": "standard-version --message \"Release: %s\"",
+    "format": "prettier --write ./sources/react"
   },
   "dependencies": {
     "knockout": "^3.5.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
