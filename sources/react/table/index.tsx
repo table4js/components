@@ -6,6 +6,8 @@ import { ITableRow } from "../../table/row";
 import { TableSummary } from "../../table/summary";
 import { ITableColumn } from "../../table/column";
 import { makeReactive } from "../reactivity";
+import { AbrisActions } from "../widgets/actions";
+import { AbrisDropdownActions } from "../widgets/dropdown-actions";
 
 function EmptyTable() {
   return (
@@ -52,106 +54,6 @@ function AbrisSearch(table: TableWidget) {
           dangerouslySetInnerHTML={{ __html: table.icons.search }}
         ></div>
       </div>
-    </div>
-  );
-}
-
-function AbrisAction({action}:{action: {
-  icon: string;
-  svg: string;
-  visible: boolean;
-  formId: string;
-  name: string;
-  title: string;
-  cssLabel: string;
-  cssClasses: string;
-  active: boolean;}
-}) {
-  return (
-    <button
-      data-bind="click: $data.formId !== undefined ? undefined : action, 
-                enable: !$data.enabled || ko.unwrap(enabled)"
-      className={
-        "abris-button--transparent action-button abris-action-button " +
-        action.cssClasses +
-        (action.active === true ? " abris-action--active" : "")
-      }
-      type={action.formId !== undefined ? "submit" : "button"}
-      title={action.title || action.name}
-      form={action.formId}
-    >
-      {action.svg && (
-        <div
-          className="abris-action-button__icon abris-button__svg-icon"
-          dangerouslySetInnerHTML={{ __html: action.svg }}
-        ></div>
-      )}
-      <span
-        className={"abris-action-button__label " + action.cssLabel}
-        style={{ display: action.title ? "block" : "none" }}
-      >
-        {action.title}
-      </span>
-    </button>
-  );
-}
-
-function AbrisActions({
-  className,
-  actions,
-}: {
-  className: string;
-  actions: any[];
-}) {
-  return (
-    <div className={className}>
-      {/* <!-- ko foreach: actions --> */}
-      {/* <!-- ko ifnot: ko.unwrap($data.actions) --> */}
-      {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
-      {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
-      {actions.map((a) => ( <AbrisAction action={a}/> ))}
-
-      {/* <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 --> */}
-      {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
-      {actions && actions.length > 0 && (
-        <div className="abris-nested-actions abris-action-context-button">
-          <div data-bind="html: $root.icons.paste"></div>
-          <span className="abris-button__label" data-bind="text: title"></span>
-          <div className="abris-nested-actions__dropdown">
-            {/* <!-- ko foreach: actions --> */}
-            {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
-            {actions.map((a) => ( <AbrisAction action={a}/> ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function AbrisDropdownActions({
-  className,
-  actions,
-}: {
-  className: string;
-  actions: any[];
-}) {
-  return (
-    <div className={className}>
-      <button
-        className="abris-action-button abris-button--transparent abris-button-toggle"
-        type="button"
-        data-bind="click: toggle, attr: { title: title }"
-      >
-        <div data-bind="html: $root.icons.more_sq"></div>
-        <span
-          className="abris-action-button__label"
-          data-bind="text: moreText"
-        ></span>
-      </button>
-      {/* <!-- ko if: isOpen --> */}
-      <ul className="abris-button-toggle__dropdown-menu">
-        <AbrisActions className="abris-context-actions" actions={actions} />
-      </ul>
     </div>
   );
 }

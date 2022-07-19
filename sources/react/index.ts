@@ -8,9 +8,9 @@ export * from "./table";
 // export * from "./table/filter-default";
 // export * from "./table/filter-item";
 // export * from "./table/filter-select";
-// export * from "./widgets/action";
-// export * from "./widgets/actions";
-// export * from "./widgets/dropdown-actions";
+export * from "./widgets/action";
+export * from "./widgets/actions";
+export * from "./widgets/dropdown-actions";
 // export * from "./widgets/icon";
 
 export * from "..";
