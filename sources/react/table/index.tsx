@@ -6,10 +6,6 @@ import { ITableRow } from "../../table/row";
 import { TableSummary } from "../../table/summary";
 import { ITableColumn } from "../../table/column";
 
-export interface IAbrisComponentsTableProps {
-  model: TableWidget;
-}
-
 function EmptyTable() {
   return (
     <tr className="abris-table__row">
@@ -241,7 +237,6 @@ function CellContent(table: TableWidget, row: ITableRow, cell: ITableCell) {
 
 function TableContent(table: TableWidget, isNumber: boolean) {
   const visibleColumns = table.columns.filter((c) => c.visible);
-  console.log("table.rows", table.rows);
   return (
     <>
       {table.rows.map((r) => (
@@ -318,12 +313,9 @@ function TableContent(table: TableWidget, isNumber: boolean) {
   );
 }
 
-export function AbrisComponentsTable(
-  props: IAbrisComponentsTableProps
-): React.ReactNode {
-  const dropdownActions = props.model.getActions("dropdownActions");
-  const [isNumber, setIsNumber] = useState<boolean>(props.model.isNumber);
-  console.log("props.model", props.model);
+export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactNode {
+  const dropdownActions = model.getActions("dropdownActions");
+  const [isNumber, setIsNumber] = useState<boolean>(model.isNumber);
   return (
     <div className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
@@ -337,20 +329,20 @@ export function AbrisComponentsTable(
                 <div className="abris-table-header-tools__container abris-table-group-header-technical-cell">
                   <div className="abris-table-preheader">
                     <div className="abris-table-search-group">
-                      {props.model.showSearch ? AbrisSearch(props.model) : null}
+                      {model.showSearch ? AbrisSearch(model) : null}
                       <AbrisActions
                         className="abris-table-actions"
-                        actions={props.model.topActions}
+                        actions={model.topActions}
                       />
-                      {props.model.dropdownActions.length > 0 && (
+                      {model.dropdownActions.length > 0 && (
                         <AbrisDropdownActions
                           className="abris-table-dropdown abris-table-actions-menu"
-                          actions={props.model.dropdownActions}
+                          actions={model.dropdownActions}
                         />
                       )}
                     </div>
                   </div>
-                  {props.model.viewFilterTable && (
+                  {model.viewFilterTable && (
                     <div className="abris-table-filter">
                       <div className="abris-table-filter__container">
                         {/* <!-- ko foreach: columns -->
@@ -376,7 +368,7 @@ export function AbrisComponentsTable(
                   #
                 </div>
               </th>
-              {props.model.columns
+              {model.columns
                 .filter((c) => c.visible)
                 .map((c) => (
                   <th
@@ -387,7 +379,7 @@ export function AbrisComponentsTable(
                       <span
                         className="abris-table-title__text"
                         onClick={(e) => {
-                          props.model.clickColumn(c, e);
+                          model.clickColumn(c, e);
                         }}
                         data-bind="click: $parent.clickColumn"
                       >
@@ -401,7 +393,7 @@ export function AbrisComponentsTable(
                               c.order === false ? "visible" : "hidden",
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: props.model.icons.sortup,
+                            __html: model.icons.sortup,
                           }}
                         ></div>
                         <div
@@ -410,14 +402,14 @@ export function AbrisComponentsTable(
                             visibility: c.order === true ? "visible" : "hidden",
                           }}
                           dangerouslySetInnerHTML={{
-                            __html: props.model.icons.sortdown,
+                            __html: model.icons.sortdown,
                           }}
                         ></div>
                         <div
                           className="abris-svg-icon abris-table-title__filter"
                           data-bind="click: clickFilter"
                           dangerouslySetInnerHTML={{
-                            __html: props.model.icons.filter,
+                            __html: model.icons.filter,
                           }}
                         ></div>
                       </div>
@@ -432,27 +424,27 @@ export function AbrisComponentsTable(
             </tr>
           </thead>
           <tbody className="abris-table__body">
-            {props.model.rows.length == 0 && props.model.loadingMutex == false
+            {model.rows.length == 0 && model.loadingMutex == false
               ? EmptyTable()
               : null}
-            {props.model.loadingMutex
-              ? LoadingIndicator(props.model)
-              : TableContent(props.model, isNumber)}
+            {model.loadingMutex
+              ? LoadingIndicator(model)
+              : TableContent(model, isNumber)}
           </tbody>
           <tfoot className="abris-table__footer abris-table-sticky-component">
-            {props.model.showTableSummary && (
+            {model.showTableSummary && (
               <tr className="abris-table-footer-summary">
                 <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
                   <div className="abris-table-technical-cell__container">
                     <div
                       className="abris-svg-icon abris-table-icon-equal"
                       dangerouslySetInnerHTML={{
-                        __html: props.model.icons.equal,
+                        __html: model.icons.equal,
                       }}
                     ></div>
                   </div>
                 </th>
-                {props.model.columns
+                {model.columns
                   .filter((c) => c.visible)
                   .map((c) => (
                     <th className="abris-table-cell abris-table-footer__cell">
@@ -471,12 +463,12 @@ export function AbrisComponentsTable(
                   <div className="abris-table-row-management">
                     <AbrisActions
                       className="abris-table-actions"
-                      actions={props.model.bottomActions}
+                      actions={model.bottomActions}
                     />
                   </div>
                   <div className="abris-table-info">
                     <span className="abris-table-info__total abris-table-info__text">
-                      {"Всего: " + props.model.totalCount}
+                      {"Всего: " + model.totalCount}
                     </span>
                     <div className="abris-table-info__go-to">
                       <span className="abris-table-go-to__text abris-table-info__text">
@@ -490,7 +482,7 @@ export function AbrisComponentsTable(
                         <div
                           className="abris-svg-icon abris-table-go-to__icon"
                           dangerouslySetInnerHTML={{
-                            __html: props.model.icons.arrowright,
+                            __html: model.icons.arrowright,
                           }}
                         ></div>
                       </button>
