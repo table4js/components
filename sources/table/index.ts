@@ -1,5 +1,5 @@
 import { Base } from "../core/base";
-import { IAction } from "../core/action";
+import { Action, IAction } from "../core/action";
 import { property } from "../core/property";
 import { ComputedUpdater } from "../core/dependencies";
 import { InplaceEditor } from "./cell-editor";
@@ -174,27 +174,27 @@ export class TableWidget extends Base implements IDataProviderOwner {
 
     protected createActions(config: ITableConfig) {
         if(config.enableSummary === true) {
-            this.innerActions.push({
+            this.innerActions.push(new Action({
                 name: "summary-action",
                 action: () => {
                     this.showTableSummary = !this.showTableSummary;
                 },
                 svg: this.icons.equal,
                 container: "top"
-            });
+            }));
         }
         if(config.enableMergedСellsToggle === true) {
-            this.innerActions.push({
+            this.innerActions.push(new Action({
                 name: "mergedСells-action",
                 action: () => {
                     this.isMergedСells = !this.isMergedСells;
                 },
                 svg: this.icons.table,
                 container: "top"
-            });
+            }));
         }
         if(config.enableEdit === true){
-            this.innerActions.push({
+            this.innerActions.push(new Action({
                 name: "save-action",
                 action: () => {
                     let isInsert = false;
@@ -214,8 +214,8 @@ export class TableWidget extends Base implements IDataProviderOwner {
                 },
                 svg: this.icons.save,
                 container: "bottom"
-            },
-            {
+            }),
+            new Action({
                 name: "delete-action",
                 action: () => {
                     this.selectedRows.forEach(r => {
@@ -225,8 +225,8 @@ export class TableWidget extends Base implements IDataProviderOwner {
                 },
                 svg: this.icons.del,
                 container: "bottom"
-            },
-            {
+            }),
+            new Action({
                 name: "newRow-action",
                 action: () => {
                     this.scrollerElement.scrollTop = 0;
@@ -236,7 +236,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
                 },
                 svg: this.icons.add,
                 container: "bottom"
-            }
+            })
         )}
     }
 

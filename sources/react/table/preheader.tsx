@@ -2,10 +2,12 @@ import * as React from "react";
 import { TableWidget } from "../../table";
 import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
-import { AbrisComponentsTableSearch } from "./search";
+import { AbrisSearch } from "./search";
+
 export interface IAbrisComponentsTableProps {
     model: TableWidget;
 }
+
 export function AbrisComponentsTablePreheader (props: IAbrisComponentsTableProps) {
     const searchModel = props.model.searchModel as SearchModel;
     makeReactive(searchModel);
@@ -13,7 +15,7 @@ export function AbrisComponentsTablePreheader (props: IAbrisComponentsTableProps
     return (
         <div className="abris-table-preheader">
             <div className="abris-table-search-group">
-                <AbrisComponentsTableSearch model={searchModel}></AbrisComponentsTableSearch>
+                <AbrisSearch icon={props.model.icons.search} searchModel={searchModel}></AbrisSearch>
             </div>
         </div>
     );

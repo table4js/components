@@ -25,7 +25,7 @@ export function AbrisActions({
             <div className="abris-nested-actions__dropdown">
               {/* <!-- ko foreach: actions --> */}
               {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
-              {actions.map((a) => ( <AbrisAction action={a}/> ))}
+              {actions.map((a) => ( <AbrisAction key={a.id} action={a}/> ))}
             </div>
           </div>
         )}

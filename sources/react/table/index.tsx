@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { TableWidget } from "../../table";
-import { ITableCell } from "../../table/cell";
-import { ITableRow } from "../../table/row";
-import { TableSummary } from "../../table/summary";
-import { ITableColumn } from "../../table/column";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
+import { TableRow } from "./row";
+import { TableSummary } from "../../table/summary";
+import { AbrisTableSummary } from "./summary";
+import { AbrisSearch } from "./search";
 
 function EmptyTable() {
   return (
@@ -20,41 +20,6 @@ function EmptyTable() {
         noData
       </td>
     </tr>
-  );
-}
-
-function AbrisSummary({ column }: { column: ITableColumn }) {
-  const sum = new TableSummary(column);
-  return (
-    <>
-      <span className="abris-table-summary__value">{sum.value}</span>
-      <select className="abris-table-summary__select" value={sum.func}>
-        {sum.summaryItems &&
-          sum.summaryItems.map((s) => (
-            <option value={s.value} title={s.title}>
-              {s.title}
-            </option>
-          ))}
-      </select>
-    </>
-  );
-}
-
-function AbrisSearch(table: TableWidget) {
-  return (
-    <div className="abris-search">
-      <input
-        className="abris-search__value"
-        placeholder="Search..."
-        data-bind="value: value"
-      />
-      <div className="abris-search__button" title="Search">
-        <div
-          className="abris-svg-icon abris-search__icon"
-          dangerouslySetInnerHTML={{ __html: table.icons.search }}
-        ></div>
-      </div>
-    </div>
   );
 }
 
@@ -94,129 +59,11 @@ function LoadingIndicator(table: TableWidget) {
   );
 }
 
-function CellContent(table: TableWidget, row: ITableRow, cell: ITableCell) {
-  if (!(cell.inplaceEditForm && table.config.enableEdit)) {
-    if (!(cell.count > 1 && table.isMergedСells)) {
-      return (
-        <>
-          <div
-            className={cell.css || "abris-table-cell__container"}
-            data-bind="click: $parents[1].startEditCell"
-          >
-            <span
-              className={
-                cell.text !== cell.data
-                  ? "abris-table-cell__text abris-table-cell__text__modified"
-                  : "abris-table-cell__text"
-              }
-              dangerouslySetInnerHTML={{ __html: cell.text }}
-            ></span>
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <div
-          className={
-            "abris-table-cell__container " +
-            (cell.count > 1 && table.isMergedСells
-              ? "cell__sticky-text " + cell.css
-              : cell.css)
-          }
-          style={{ top: table[1].tableHeadHeight - 2 + "px" }}
-          data-bind="click: $parents[1].startEditCell"
-        >
-          <span
-            className="abris-table-cell__merged-text"
-            dangerouslySetInnerHTML={{ __html: cell.text }}
-          ></span>
-        </div>
-      );
-    }
-  }
-  // return <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>;
-  return null;
+export interface ITableWidgetProps {
+    model: TableWidget;
 }
 
-function TableContent(table: TableWidget, isNumber: boolean) {
-  const visibleColumns = table.columns.filter((c) => c.visible);
-  return (
-    <>
-      {table.rows.map((r) => (
-        <tr
-          className={
-            r.selected
-              ? "abris-table__row abris-table__row--selected"
-              : "abris-table__row"
-          }
-          style={{ background: "none" }}
-        >
-          <td
-            className="abris-table-cell abris-table-technical-cell"
-            data-bind="click: select"
-          >
-            <div className="abris-table-technical-cell__container">
-              {isNumber ? (
-                <div className="abris-table__number">{r.number}</div>
-              ) : (
-                <div className="abris-table__check">
-                  {r.selected && (
-                    <div
-                      className="abris-svg-icon abris-table__icon-check"
-                      dangerouslySetInnerHTML={{ __html: table.icons.check }}
-                    ></div>
-                  )}
-                </div>
-              )}
-            </div>
-          </td>
-          {r.cells.map((cell) => (
-            <>
-              {(cell.count > 0 || !table.isMergedСells) && (
-                <td
-                  className={
-                    "abris-table-cell " +
-                    (cell.count > 1 && table.isMergedСells
-                      ? "abris-table-cell--merged "
-                      : "")
-                  }
-                  style={{ background: cell.color }}
-                  rowSpan={table.isMergedСells ? cell.count : 1}
-                >
-                  {CellContent(table, r, cell)}
-                </td>
-              )}
-            </>
-          ))}
-          <td
-            className="abris-table-cell abris-table-technical-cell"
-            data-bind="click: click"
-          >
-            <div className="abris-table-technical-cell__container">
-              <div
-                className="abris-svg-icon abris-table-icon-row-tools abris-table__more"
-                dangerouslySetInnerHTML={{ __html: table.icons.more }}
-              ></div>
-              <div
-                className="abris-svg-icon abris-table-icon-row-tools abris-table__edit"
-                dangerouslySetInnerHTML={{ __html: table.icons.edit }}
-              ></div>
-            </div>
-            {!table.hasActiveInplaceEditor && (
-              <div className="abris-table__row--select"></div>
-            )}
-            <div
-              className="abris-table__row--colored"
-              style={{ background: r.color ? r.color : "rgba(248,249,253)" }}
-            ></div>
-          </td>
-        </tr>
-      ))}
-    </>
-  );
-}
-
-export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactNode {
+export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
   makeReactive(model);  
   return (
@@ -232,7 +79,7 @@ export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactN
                 <div className="abris-table-header-tools__container abris-table-group-header-technical-cell">
                   <div className="abris-table-preheader">
                     <div className="abris-table-search-group">
-                      {model.showSearch ? AbrisSearch(model) : null}
+                      {model.showSearch ? <AbrisSearch icon={model.icons.search} searchModel={model.searchModel}></AbrisSearch> : null}
                       <AbrisActions
                         className="abris-table-actions"
                         actions={model.topActions}
@@ -332,7 +179,7 @@ export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactN
               : null}
             {model.loadingMutex
               ? LoadingIndicator(model)
-              : TableContent(model, model.isNumber)}
+              : model.rows.map((r) => <TableRow table={model} row={r}></TableRow>)}
           </tbody>
           <tfoot className="abris-table__footer abris-table-sticky-component">
             {model.showTableSummary && (
@@ -351,7 +198,7 @@ export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactN
                   .filter((c) => c.visible)
                   .map((c) => (
                     <th className="abris-table-cell abris-table-footer__cell">
-                      <AbrisSummary column={c} />
+                      <AbrisTableSummary summary={new TableSummary(c)} />
                     </th>
                   ))}
                 <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>

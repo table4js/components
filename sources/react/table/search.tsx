@@ -1,41 +1,33 @@
 import * as React from "react";
+import { useState } from "react";
+import { TableWidget } from "../../table";
 import { SearchModel } from "../../table/search";
+import { makeReactive } from "../reactivity";
 
-export interface IAbrisComponentsTableSearchProps {
-    model: SearchModel;
+export interface IAbrisSearchProps {
+    icon: any;
+    searchModel: SearchModel;
 }
-export interface IAbrisComponentsTableSearchState {
-    value: string;
-}
 
+export function AbrisSearch({icon, searchModel}: IAbrisSearchProps) {
+    makeReactive(searchModel);
+    const [text, updateText] = useState<string>();
 
-
-export class AbrisComponentsTableSearch extends React.Component <IAbrisComponentsTableSearchProps, IAbrisComponentsTableSearchState> {
-    constructor(props: IAbrisComponentsTableSearchProps) {
-        super(props);
-
-        // TODO: rewrite with auto-reactivity
-        this.state = {value: ''};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
- 
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-    
-    handleClick(event) {
-        this.props.model.search(this.state.value);
-    }
-    
-    render() {
-        return (
-            <div className="abris-search">
-                <input className="abris-search__value" value = {this.props.model.searchValue}  onChange={this.handleChange} placeholder = {'Search...'}/>
-                <div className="abris-search__button" onClick={this.handleClick} title= 'Search'>
-                    <div className="abris-svg-icon abris-search__icon"></div>
-                </div>
-            </div>
-        );
-    }
-}
+    return (
+      <div className="abris-search">
+        <input
+            value={text}
+            onChange={(event) => updateText(event.target.value)} 
+            className="abris-search__value"
+            placeholder="Search..."
+        />
+        <div className="abris-search__button" title="Search" onClick={() => searchModel.search(text)}>
+          <div
+            className="abris-svg-icon abris-search__icon"
+            dangerouslySetInnerHTML={{ __html: icon }}
+          ></div>
+        </div>
+      </div>
+    );
+  }
+  
