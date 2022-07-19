@@ -5,6 +5,7 @@ import { ITableCell } from "../../table/cell";
 import { ITableRow } from "../../table/row";
 import { TableSummary } from "../../table/summary";
 import { ITableColumn } from "../../table/column";
+import { makeReactive } from "../reactivity";
 
 function EmptyTable() {
   return (
@@ -315,7 +316,7 @@ function TableContent(table: TableWidget, isNumber: boolean) {
 
 export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
-  const [isNumber, setIsNumber] = useState<boolean>(model.isNumber);
+  makeReactive(model);  
   return (
     <div className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
@@ -359,11 +360,11 @@ export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactN
               <th className="abris-table-header-title__cell abris-table-switch">
                 <div
                   className={
-                    isNumber
+                    model.isNumber
                       ? "abris-table-switch__text switch__text--selected"
                       : "abris-table-switch__text"
                   }
-                  onClick={(_) => setIsNumber(!isNumber)}
+                  onClick={(_) => model.isNumber = !model.isNumber}
                 >
                   #
                 </div>
@@ -429,7 +430,7 @@ export function AbrisComponentsTable({model}:{model: TableWidget}): React.ReactN
               : null}
             {model.loadingMutex
               ? LoadingIndicator(model)
-              : TableContent(model, isNumber)}
+              : TableContent(model, model.isNumber)}
           </tbody>
           <tfoot className="abris-table__footer abris-table-sticky-component">
             {model.showTableSummary && (

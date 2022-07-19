@@ -14,3 +14,15 @@ export * from "./table";
 // export * from "./widgets/icon";
 
 export * from "..";
+
+export class ReactHashTableStorage extends HashTableStorage {
+
+    public setValue(name: string, val: any) {
+        super.setValue(name, val);
+        if(typeof this.owner.__triggerUpdate === "function") {
+            this.owner.__triggerUpdate();
+        }
+    }
+}
+
+Base.createPropertiesStorage = () => new ReactHashTableStorage();

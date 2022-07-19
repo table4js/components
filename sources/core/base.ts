@@ -3,6 +3,7 @@ import { Dependencies } from "./dependencies";
 
 export class HashTableStorage {
     protected hash = {};
+    public owner: any;
     public getValue(name: string, defaultValue?: any) {
         const value = this.hash[name];
         if(value === undefined) {
@@ -40,7 +41,7 @@ export class Base {
     }
   
     constructor(private storage = Base.createPropertiesStorage()) {
-
+        this.storage.owner = this;
     }
 
     protected onPropertyValueChanged(propertyName: string, oldValue: any, newValue: any) {
