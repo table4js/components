@@ -36,7 +36,8 @@ export interface ITableColumn extends ITableColumnDescription {
     prevValue: any,
     concatPrev: boolean,
     last: ITableCell,
-    row_color: string
+    row_color: string,
+    clickFilter: (column: ITableColumn, event: MouseEvent|any) => void,
 }
 
 export class TableColumn extends Base implements ITableColumn {
@@ -72,7 +73,7 @@ export class TableColumn extends Base implements ITableColumn {
     type: string = "string";
     visible: boolean = true;
 
-    public clickFilter = (column: ITableColumn, event: MouseEvent) => {
+    public clickFilter = (column: ITableColumn, event: MouseEvent|any) => {
         column.filterContext.addItem(column);
         event.stopPropagation();
     }

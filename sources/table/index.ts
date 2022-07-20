@@ -361,7 +361,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
         return false;
     }
 
-    public startEditCell = (cell: ITableCell, event: MouseEvent) => {
+    public startEditCell = (cell: ITableCell) => {
         if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm = undefined;
         cell.inplaceEditForm = new InplaceEditor(cell);
         this.currentCellEditor = cell; 
@@ -385,20 +385,20 @@ export class TableWidget extends Base implements IDataProviderOwner {
     nxtColWidth = undefined;
     curColWidth = undefined
 
-    protected logMouseOver = (d, e) => {
+    public logMouseOver = (d, e) => {
         e.target.style.borderRight = '2px solid rgba(255, 255, 255, 0.5)';
     }
-    protected logMouseOut = (d, e) => {
+    public logMouseOut = (d, e) => {
         e.target.style.borderRight = '';
     }
-    protected logMouseMove = (d, e) => {
+    public logMouseMove = (d, e) => {
         if (this.curCol && e.buttons) {
             var diffX = e.pageX - this.pageX;
             this.nxtCol && (this.nxtCol.style.width = (this.nxtColWidth - (diffX))+'px');
             this.curCol.style.width = (this.curColWidth + diffX)+'px';
         }
     }
-    protected logMouseDown = (d, e) => {
+    public logMouseDown = (d, e) => {
         this.curCol = e.target.parentElement;
         this.nxtCol = this.curCol.nextElementSibling.nextElementSibling ? this.curCol.nextElementSibling : undefined;
         this.pageX = e.pageX; 
@@ -406,7 +406,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
         this.curColWidth = this.curCol.offsetWidth - padding;
         if (this.nxtCol) this.nxtColWidth = this.nxtCol.offsetWidth - padding;    
     }
-    protected logMouseUp = (d, e) => {
+    public logMouseUp = (d, e) => {
         this.curCol = undefined;
         this.nxtCol = undefined;
         this.pageX = undefined;

@@ -60,12 +60,14 @@ function LoadingIndicator(table: TableWidget) {
 }
 
 export interface ITableWidgetProps {
-    model: TableWidget;
+  model: TableWidget;
 }
 
-export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactNode {
+export function AbrisComponentsTable({
+  model,
+}: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
-  makeReactive(model);  
+  makeReactive(model);
   return (
     <div className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
@@ -79,7 +81,12 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                 <div className="abris-table-header-tools__container abris-table-group-header-technical-cell">
                   <div className="abris-table-preheader">
                     <div className="abris-table-search-group">
-                      {model.showSearch ? <AbrisSearch icon={model.icons.search} searchModel={model.searchModel}></AbrisSearch> : null}
+                      {model.showSearch ? (
+                        <AbrisSearch
+                          icon={model.icons.search}
+                          searchModel={model.searchModel}
+                        ></AbrisSearch>
+                      ) : null}
                       <AbrisActions
                         className="abris-table-actions"
                         actions={model.topActions}
@@ -113,7 +120,7 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                       ? "abris-table-switch__text switch__text--selected"
                       : "abris-table-switch__text"
                   }
-                  onClick={(_) => model.isNumber = !model.isNumber}
+                  onClick={(_) => (model.isNumber = !model.isNumber)}
                 >
                   #
                 </div>
@@ -123,7 +130,9 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                 .map((c) => (
                   <th
                     className="abris-table-header-title__cell"
-                    data-bind="event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}"
+                    onMouseOut={(e) => model.logMouseOut(c, e)}
+                    onMouseMove={(e) => model.logMouseMove(c, e)}
+                    onMouseUp={(e) => model.logMouseUp(c, e)}
                   >
                     <div className="abris-table-title">
                       <span
@@ -131,7 +140,6 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                         onClick={(e) => {
                           model.clickColumn(c, e);
                         }}
-                        data-bind="click: $parent.clickColumn"
                       >
                         {c.title}
                       </span>
@@ -157,7 +165,7 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                         ></div>
                         <div
                           className="abris-svg-icon abris-table-title__filter"
-                          data-bind="click: clickFilter"
+                          onClick={(e) => c.clickFilter(c, e)}
                           dangerouslySetInnerHTML={{
                             __html: model.icons.filter,
                           }}
@@ -166,7 +174,11 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                     </div>
                     <div
                       className="abris-table-title_resize"
-                      data-bind="event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}"
+                      onMouseOver={(e) => model.logMouseOver(c, e)}
+                      onMouseOut={(e) => model.logMouseOut(c, e)}
+                      onMouseMove={(e) => model.logMouseMove(c, e)}
+                      onMouseUp={(e) => model.logMouseUp(c, e)}
+                      onMouseDown={(e) => model.logMouseDown(c, e)}
                     ></div>
                   </th>
                 ))}
@@ -179,7 +191,9 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
               : null}
             {model.loadingMutex
               ? LoadingIndicator(model)
-              : model.rows.map((r) => <TableRow table={model} row={r}></TableRow>)}
+              : model.rows.map((r) => (
+                  <TableRow table={model} row={r}></TableRow>
+                ))}
           </tbody>
           <tfoot className="abris-table__footer abris-table-sticky-component">
             {model.showTableSummary && (
@@ -226,7 +240,7 @@ export function AbrisComponentsTable({ model }: ITableWidgetProps): React.ReactN
                       </span>
                       <input
                         className="abris-table-go-to__value"
-                        data-bind="value: startRow"
+                        value={model.startRow}
                       />
                       <button className="abris-btn-transparent">
                         <div
