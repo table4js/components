@@ -343,6 +343,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
             colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : null;
             if(col.visible) rowCells.push(cell);
         });
+        this.columns.reverse();
         let row_id = data[this.keyColumn];
         const row = new TableRow();
         row.cells = rowCells.reverse();
