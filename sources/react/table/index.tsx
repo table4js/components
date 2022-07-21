@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { TableWidget } from "../../table";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
+import { AbrisFilterItem } from "../widgets/filter-item";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
 import { TableRow } from "./row";
 import { TableSummary } from "../../table/summary";
@@ -102,6 +103,12 @@ export function AbrisComponentsTable({
                   {model.viewFilterTable && (
                     <div className="abris-table-filter">
                       <div className="abris-table-filter__container">
+                        {model.columns.map((c) => (
+                          <>
+                            <AbrisFilterItem filterContext={c.filterContext} />
+                            {/* {c.filterContext} */}
+                          </>
+                        ))}
                         {/* <!-- ko foreach: columns -->
                             <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext } } -->
                             <!-- /ko -->
