@@ -34,6 +34,7 @@ export class TableFilterSelect extends Base {
     @property({ defaultValue: false }) isOpen: boolean;
     @property({ defaultValue: false }) isLoadMore: boolean;
     toggle = (_, event) => {
+        console.log("toggle");
         this.isOpen = !this.isOpen;
         event.stopPropagation();
     }
@@ -48,7 +49,7 @@ export class TableFilterSelect extends Base {
     isChecked = (item) => {
         return this.selectedItems.indexOf(item) !== -1;
     }
-    clickItem = (item, event) => {
+    clickItem = (item) => {
         const currentSelectedItems = [].concat(this.selectedItems);
         const itemIndex = currentSelectedItems.indexOf(item);
         if(itemIndex !== -1) {
