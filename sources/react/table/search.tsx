@@ -10,8 +10,7 @@ export interface IAbrisSearchProps {
 }
 
 export function AbrisSearch({ icon, searchModel }: IAbrisSearchProps) {
-  makeReactive(searchModel);
-  const [text, updateText] = useState<string>();
+  const [text, updateText] = useState<string>("");
 
   return (
     <div className="abris-search">

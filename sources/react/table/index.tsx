@@ -28,8 +28,8 @@ function LoadingIndicator(table: TableWidget) {
   const visibleColumns = table.columns.filter((c) => c.visible);
   return (
     <>
-      {visibleColumns.map((c) => (
-        <tr className="abris-table__row">
+      {visibleColumns.map((c, index) => (
+        <tr key={index} className="abris-table__row">
           <td className="abris-table-cell abris-table-technical-cell">
             <div className="abris-table-technical-cell__container">
               <div className="abris-table__check">
@@ -69,12 +69,13 @@ export function AbrisComponentsTable({
 }: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
   makeReactive(model);
+  // makeReactive(model.searchModel);
   return (
     <div className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
         <table className="abris-table">
           <thead className="abris-table__header abris-table-sticky-component">
-            <tr className="abris-table-header-tools">
+            <tr key="header-tools" className="abris-table-header-tools">
               <th
                 className="abris-table-header-tools__cell"
                 colSpan={"100%" as any}
@@ -105,7 +106,7 @@ export function AbrisComponentsTable({
                       <div className="abris-table-filter__container">
                         {model.columns.map((c) => (
                           <>
-                            <AbrisFilterItem filterContext={c.filterContext} />
+                            <AbrisFilterItem key={c.name} filterContext={c.filterContext} />
                             {/* {c.filterContext} */}
                           </>
                         ))}
@@ -119,8 +120,8 @@ export function AbrisComponentsTable({
                 </div>
               </th>
             </tr>
-            <tr className="abris-table-header-title">
-              <th className="abris-table-header-title__cell abris-table-switch">
+            <tr key="header-title" className="abris-table-header-title">
+              <th key="row-selection-cell" className="abris-table-header-title__cell abris-table-switch">
                 <div
                   className={
                     model.isNumber
@@ -135,7 +136,7 @@ export function AbrisComponentsTable({
               {model.columns
                 .filter((c) => c.visible)
                 .map((c) => (
-                  <th
+                  <th key={c.name}
                     className="abris-table-header-title__cell"
                     onMouseOut={(e) => model.logMouseOut(c, e)}
                     onMouseMove={(e) => model.logMouseMove(c, e)}
@@ -189,7 +190,7 @@ export function AbrisComponentsTable({
                     ></div>
                   </th>
                 ))}
-              <th className="abris-table-header-title__cell"></th>
+              <th key="row-context-menu-cell" className="abris-table-header-title__cell"></th>
             </tr>
           </thead>
           <tbody className="abris-table__body">
@@ -199,13 +200,13 @@ export function AbrisComponentsTable({
             {model.loadingMutex
               ? LoadingIndicator(model)
               : model.rows.map((r) => (
-                  <TableRow table={model} row={r}></TableRow>
+                  <TableRow key={r.id || r.number} table={model} row={r}></TableRow>
                 ))}
           </tbody>
           <tfoot className="abris-table__footer abris-table-sticky-component">
             {model.showTableSummary && (
-              <tr className="abris-table-footer-summary">
-                <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
+              <tr key="footer-summary" className="abris-table-footer-summary">
+                <th key="footer-tech-cell" className="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
                   <div className="abris-table-technical-cell__container">
                     <div
                       className="abris-svg-icon abris-table-icon-equal"
@@ -218,14 +219,14 @@ export function AbrisComponentsTable({
                 {model.columns
                   .filter((c) => c.visible)
                   .map((c) => (
-                    <th className="abris-table-cell abris-table-footer__cell">
+                    <th key={c.name} className="abris-table-cell abris-table-footer__cell">
                       <AbrisTableSummary summary={new TableSummary(c)} />
                     </th>
                   ))}
-                <th className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>
+                <th key="footer-context-menu-cell" className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>
               </tr>
             )}
-            <tr className="abris-table-footer-tools">
+            <tr key="footer-tools" className="abris-table-footer-tools">
               <th
                 className="abris-table-footer-tools__cell"
                 colSpan={"100%" as any}

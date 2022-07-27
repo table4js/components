@@ -17,6 +17,28 @@ export * from "./widgets/dropdown-actions";
 export * from "..";
 
 export class ReactHashTableStorage extends HashTableStorage {
+  private linkArrayToObservable(array: Array<any>) {
+    const result = [].concat(array);
+    const self = this;
+    ["pop", "push", "splice", "slice", "shift", "unshift"].forEach(funcName => {
+        result[funcName] = function () {
+          const funcRes = Array.prototype[funcName].apply(result, arguments);
+          Array.prototype[funcName].apply(array, arguments);
+          if (typeof self.owner.__triggerUpdate === "function") {
+            self.owner.__triggerUpdate();
+          }
+          return funcRes;
+        }
+    });
+    return result;
+}
+public getValue(name: string, defaultValue?: any) {
+    const value = super.getValue(name, defaultValue);
+    if(Array.isArray(value)) {
+        return this.linkArrayToObservable(value);
+    }
+    return value;
+}
   public setValue(name: string, val: any) {
     super.setValue(name, val);
     if (typeof this.owner.__triggerUpdate === "function") {

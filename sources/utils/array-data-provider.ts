@@ -10,7 +10,7 @@ export class ArrayDataProvider implements IDataProvider {
             filters.every(f => {
                 switch(f.op) {
                     case "EQ": return f.value.includes(row[f.field]); 
-                    case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.keys(row).some(k => ~row[k].toString().toUpperCase().indexOf(f.value.toUpperCase()));
+                    case "C": return f.field ? ~row[f.field].toString().toUpperCase().indexOf(f.value.toUpperCase()) : Object.keys(row).some(k => !!(row[k] && row[k].toString().toUpperCase().indexOf(f.value.toUpperCase()) !== -1));
                     case "ISN":  return !(row[f.field]); 
                     case "ISNN":  return !!(row[f.field]); 
                     default: return true; 

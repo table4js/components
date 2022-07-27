@@ -15,6 +15,7 @@ export function TableRow({ table, row }: ITableRowProps) {
   const visibleColumns = table.columns.filter((c) => c.visible);
   return (
     <tr
+      key={row.id || row.number}
       className={
         row.selected
           ? "abris-table__row abris-table__row--selected"
@@ -22,7 +23,7 @@ export function TableRow({ table, row }: ITableRowProps) {
       }
       style={{ background: "none" }}
     >
-      <td
+      <td key="technical-cell"
         className="abris-table-cell abris-table-technical-cell"
         onClick={(e) => row.select(row, e)}
       >
@@ -42,9 +43,8 @@ export function TableRow({ table, row }: ITableRowProps) {
         </div>
       </td>
       {row.cells.map((cell) => (
-        <>
-          {(cell.count > 0 || !table.isMergedСells) && (
-            <td
+          (cell.count > 0 || !table.isMergedСells) && (
+            <td key={cell.name}
               className={
                 "abris-table-cell " +
                 (cell.count > 1 && table.isMergedСells
@@ -60,10 +60,9 @@ export function TableRow({ table, row }: ITableRowProps) {
                 cell={cell}
               ></AbrisTableCell>
             </td>
-          )}
-        </>
+          )
       ))}
-      <td
+      <td key="context-menu-cell"
         className="abris-table-cell abris-table-technical-cell"
         onClick={(e) => row.click(row, e)}
       >

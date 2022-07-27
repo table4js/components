@@ -5,7 +5,7 @@ import { makeReactive } from "../reactivity";
 export function AbrisAction({ action }: { action: Action }) {
   makeReactive(action);
   return (
-    <button
+    <button key={action.name}
       data-bind="click: $data.formId !== undefined ? undefined : action, 
                   enable: !$data.enabled || ko.unwrap(enabled)"
       onClick={() => action.action()}

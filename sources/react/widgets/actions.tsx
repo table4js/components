@@ -16,7 +16,7 @@ export function AbrisActions({
       {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
       {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
       {actions.map((a) => (
-        <AbrisAction action={a} />
+        <AbrisAction key={a.name} action={a} />
       ))}
 
       {/* <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 --> */}
@@ -33,7 +33,7 @@ export function AbrisActions({
             {/* <!-- ko foreach: actions --> */}
             {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
             {actions.map((a) => (
-              <AbrisAction key={a.id} action={a} />
+              <AbrisAction key={a.name} action={a} />
             ))}
           </div>
         </div>

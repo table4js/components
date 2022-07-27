@@ -92,6 +92,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
 
         this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
         this.filterUpdater.observe(this, "__filterUpdaterValue"); // TODO: make it elegant
+        this.searchModel.updater = () => this.updateByFilter();
 
         if(!!element) {
             this.initialize(element);

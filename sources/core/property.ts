@@ -17,6 +17,7 @@ export function property(options?: IPropertyDecoratorOptions) {
         if (!!options) {
             if (options.defaultValue !== undefined) {
                 defaultValue = options.defaultValue;
+                defaultValue = Array.isArray(defaultValue) ? [].concat(defaultValue) : defaultValue;
             }
         }
         Object.defineProperty(target, key, {
