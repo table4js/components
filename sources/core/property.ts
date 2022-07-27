@@ -13,20 +13,23 @@ export function property(options?: IPropertyDecoratorOptions) {
             }
             return val;
         };
-        let defaultValue = undefined;
-        if (!!options) {
-            if (options.defaultValue !== undefined) {
-                defaultValue = options.defaultValue;
-                defaultValue = Array.isArray(defaultValue) ? [].concat(defaultValue) : defaultValue;
+        const getDefaultValue = () => {
+            let defaultValue = undefined;
+            if (!!options) {
+                if (options.defaultValue !== undefined) {
+                    defaultValue = options.defaultValue;
+                    defaultValue = Array.isArray(defaultValue) ? [].concat(defaultValue) : defaultValue;
+                }
             }
+            return defaultValue;
         }
         Object.defineProperty(target, key, {
             get: function () {
-                return this.getPropertyValue(key, defaultValue);
+                return this.getPropertyValue(key, getDefaultValue());
             },
             set: function (val: any) {
                 const newValue = processComputedUpdater(this, val);
-                this.setPropertyValue(key, newValue, defaultValue);
+                this.setPropertyValue(key, newValue, getDefaultValue());
                 if (!!options && options.onSet) {
                     options.onSet(newValue, this);
                 }

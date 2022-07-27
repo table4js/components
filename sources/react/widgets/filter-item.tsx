@@ -14,7 +14,7 @@ export function AbrisFilterItem({
   return (
     <>
       {filterContext.filterItems.length > 0 && (
-        <div className="abris-filter-item">
+        <div key={filterContext.column.name} className="abris-filter-item">
           <div className="abris-filter__title abris-filter-text">
             {filterContext.column.title + ":"}
           </div>
@@ -28,7 +28,7 @@ export function AbrisFilterItem({
               )}
               <select
                 className="abris-filter___operation"
-                value={f.operation?.op ?? null}
+                value={f.operation?.op ?? ""}
               >
                 {filterContext.operations.map((s) => (
                   <>
@@ -68,6 +68,7 @@ export function AbrisFilterItem({
               <div
                 className="abris-filter__remove"
                 data-bind="click: $parent.removeItem, clickBubble: false"
+                onClick={(e) => filterContext.removeItem(f)}
               >
                 <div
                   className="abris-filter__remove-icon abris-svg-icon"

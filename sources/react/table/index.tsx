@@ -105,10 +105,7 @@ export function AbrisComponentsTable({
                     <div className="abris-table-filter">
                       <div className="abris-table-filter__container">
                         {model.columns.map((c) => (
-                          <>
-                            <AbrisFilterItem key={c.name} filterContext={c.filterContext} />
-                            {/* {c.filterContext} */}
-                          </>
+                          <AbrisFilterItem key={c.name} filterContext={c.filterContext} />
                         ))}
                         {/* <!-- ko foreach: columns -->
                             <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext } } -->
@@ -173,7 +170,7 @@ export function AbrisComponentsTable({
                         ></div>
                         <div
                           className="abris-svg-icon abris-table-title__filter"
-                          onClick={(e) => c.clickFilter(c, e)}
+                          onClick={(e) => c.clickFilter(c, e.nativeEvent)}
                           dangerouslySetInnerHTML={{
                             __html: model.icons.filter,
                           }}

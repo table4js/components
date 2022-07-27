@@ -34,6 +34,9 @@ export class ReactHashTableStorage extends HashTableStorage {
 }
 public getValue(name: string, defaultValue?: any) {
     const value = super.getValue(name, defaultValue);
+    if(value === defaultValue) {
+      this.hash[name] = value;
+    }
     if(Array.isArray(value)) {
         return this.linkArrayToObservable(value);
     }
