@@ -50,14 +50,12 @@ export class TableFilterSelect extends Base {
         return this.selectedItems.indexOf(item) !== -1;
     }
     clickItem = (item) => {
-        const currentSelectedItems = [].concat(this.selectedItems);
-        const itemIndex = currentSelectedItems.indexOf(item);
+        const itemIndex = this.selectedItems.indexOf(item);
         if(itemIndex !== -1) {
-            currentSelectedItems.splice(itemIndex, 1);
+            this.selectedItems.splice(itemIndex, 1);
         } else {
-            currentSelectedItems.push(item);
+            this.selectedItems.push(item);
         }
-        this.selectedItems = currentSelectedItems;
     }
     deleteItems = (name) => {
         const itemIndex = this.selectedItems.indexOf(name);

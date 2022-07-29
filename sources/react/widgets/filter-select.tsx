@@ -9,12 +9,11 @@ export function AbrisFilterSelect({
   viewModel: TableFilterSelect;
 }) {
   makeReactive(viewModel);
-  console.log("viewModel", viewModel);
   return (
     <div className="abrs-filter__value">
       <div className="abris-select-selection">
         {viewModel.selectedItems.map((i) => (
-          <div className="abris-select-selection-item">
+          <div className="abris-select-selection-item" key={i}>
             <span className="abris-select-item-title">{i}</span>
             <div
               className="abris-svg-icon abris-select-item-close"
@@ -48,8 +47,9 @@ export function AbrisFilterSelect({
               //   data-bind="valueUpdate: 'afterkeydown'"
             />
           </div>
-          {viewModel.foundItems.map((fi) => (
+          {viewModel.foundItems.map((fi, i) => (
             <div
+              key={i}
               className="abris-select__dropdown-item"
               onClick={(e) => viewModel.clickItem(fi)}
             >
@@ -57,6 +57,7 @@ export function AbrisFilterSelect({
                 className="abris-select__dropdown-hide-check"
                 type="checkbox"
                 checked={viewModel.isChecked(fi)}
+                onChange={(e) => {}}
               />
               <div
                 className="abris-svg-icon abris-select__dropdown-check"

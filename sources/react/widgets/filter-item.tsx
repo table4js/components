@@ -19,7 +19,7 @@ export function AbrisFilterItem({
             {filterContext.column.title + ":"}
           </div>
           {filterContext.filterItems.map((f, index) => (
-            <>
+            <div key={index} className="abris-filter__content">
               {/* <!-- ko foreach: filterItems --> */}
               {index > 0 && (
                 <div className="abris-filter__operator abris-filter-text">
@@ -28,18 +28,17 @@ export function AbrisFilterItem({
               )}
               <select
                 className="abris-filter___operation"
-                value={f.operation?.op ?? ""}
+                value={f.operation?.text}
+                onChange={e=>{f.operation=filterContext.operations.find((o)=>o.text === e.target.value)}}
               >
                 {filterContext.operations.map((s) => (
-                  <>
-                    <option value={s.op} title={s.text}>
-                      {s.text}
-                    </option>
-                  </>
+                  <option key={s.op} title={s.text}>
+                    {s.text}
+                  </option>
                 ))}
               </select>
               {
-                true && ( //f.showOperand && f.operation.op == "EQ"
+                f.showOperand && f.operation.op == "EQ" && (
                   <AbrisFilterSelect
                     viewModel={
                       new TableFilterSelect(
@@ -48,10 +47,6 @@ export function AbrisFilterItem({
                         f.getColumnData
                       )
                     }
-                    // className="abrs-filter__value"
-                    // value={f.filterItemValue}
-                    // columnName={f.column.name}
-                    // getColumnData={f.getColumnData}
                   />
                 )
 
@@ -63,7 +58,10 @@ export function AbrisFilterItem({
                 <div
                   className="abris-filter__operand"
                   data-bind="component: { name: filterEditorName, params: { value: filterItemValue, column: column } }"
-                ></div>
+                >
+                  <input style={{width: "100%"}} placeholder="*" defaultValue={f.filterItemValue.value} onChange={(e)=>f.filterItemValue.value=e.target.value}/>
+
+                </div>
               )}
               <div
                 className="abris-filter__remove"
@@ -77,7 +75,7 @@ export function AbrisFilterItem({
                   }}
                 ></div>
               </div>
-            </>
+            </div>
           ))}
         </div>
       )}
