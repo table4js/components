@@ -7,7 +7,7 @@ exports[`Table search render test 1`] = `
   <input
     class="abris-search__value"
     placeholder="Search..."
-    value=""
+    value="something"
   />
   <div
     class="abris-search__button"
