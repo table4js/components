@@ -10,20 +10,21 @@ export interface IAbrisSearchProps {
 }
 
 export function AbrisSearch({ icon, searchModel }: IAbrisSearchProps) {
-  const [text, updateText] = useState<string>("");
-
+  makeReactive(searchModel);
   return (
     <div className="abris-search">
       <input
-        value={text}
-        onChange={(event) => updateText(event.target.value)}
+        defaultValue={searchModel.searchValue}
+        onChange={(event) => {
+          searchModel.searchValue = event.target.value;
+        }}
         className="abris-search__value"
         placeholder="Search..."
       />
       <div
         className="abris-search__button"
         title="Search"
-        onClick={() => searchModel.search(text)}
+        onClick={(e) => searchModel.search(searchModel.searchValue)}
       >
         <div
           className="abris-svg-icon abris-search__icon"
