@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { TableWidget } from "../../table";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
@@ -69,10 +69,14 @@ export function AbrisComponentsTable({
 }: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
   const [startRow, setStartRow] = useState<number | undefined>(undefined);
+  const rootRef = useRef(null);
   makeReactive(model);
   // makeReactive(model.searchModel);
+  useEffect(() => {
+    model.initialize(rootRef.current.parentElement);
+  })
   return (
-    <div className="abris-table-resizable-container">
+    <div ref={rootRef} className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
         <table className="abris-table">
           <thead className="abris-table__header abris-table-sticky-component">
