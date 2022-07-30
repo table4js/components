@@ -39,7 +39,7 @@ export function AbrisTableCell({ table, cell }: ITableCellProps) {
               ? "cell__sticky-text " + cell.css
               : cell.css)
           }
-          style={{ top: table[1].tableHeadHeight - 2 + "px" }}
+          // style={{ top: table[1].tableHeadHeight - 2 + "px" }}
           onClick={(e) => table.startEditCell(cell)}
         >
           <span

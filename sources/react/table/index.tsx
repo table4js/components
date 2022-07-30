@@ -68,6 +68,7 @@ export function AbrisComponentsTable({
   model,
 }: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
+  const [startRow, setStartRow] = useState<number | undefined>(undefined);
   makeReactive(model);
   // makeReactive(model.searchModel);
   return (
@@ -260,15 +261,21 @@ export function AbrisComponentsTable({
                   </div>
                   <div className="abris-table-info">
                     <span className="abris-table-info__total abris-table-info__text">
-                      {"Всего: " + model.totalCount}
+                      {"Total: " + model.totalCount}
                     </span>
                     <div className="abris-table-info__go-to">
                       <span className="abris-table-go-to__text abris-table-info__text">
-                        Перейти к{" "}
+                        Go to:
                       </span>
                       <input
                         className="abris-table-go-to__value"
-                        value={model.startRow}
+                        defaultValue={model.startRow}
+                        onChange={(e) => setStartRow(+e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.code === "Enter") {
+                            model.startRow = +e.target.value;
+                          }
+                        }}
                       />
                       <button className="abris-btn-transparent">
                         <div
@@ -276,6 +283,7 @@ export function AbrisComponentsTable({
                           dangerouslySetInnerHTML={{
                             __html: model.icons.arrowright,
                           }}
+                          onClick={(_) => (model.startRow = startRow)}
                         ></div>
                       </button>
                     </div>
