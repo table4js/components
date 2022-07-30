@@ -93,7 +93,6 @@ export class TableWidget extends Base implements IDataProviderOwner {
         this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
         this.filterUpdater.observe(this, "__filterUpdaterValue"); // TODO: make it elegant
         this.searchModel.updater = () => this.updateByFilter();
-
         if(!!element) {
             this.initialize(element);
         }
@@ -230,7 +229,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
             new Action({
                 name: "newRow-action",
                 action: () => {
-                    this.scrollerElement.scrollTop = 0;
+                    // this.scrollerElement.scrollTop = 0;
                     let newRow:ITableRowData = {};
                     this.columns.forEach(c => c.visible && (newRow[c.name]=""));
                     this.rows.unshift(this.createRow(newRow, -1, null));

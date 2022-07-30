@@ -29,7 +29,11 @@ export function AbrisFilterItem({
               <select
                 className="abris-filter___operation"
                 value={f.operation?.text}
-                onChange={e=>{f.operation=filterContext.operations.find((o)=>o.text === e.target.value)}}
+                onChange={(e) => {
+                  f.operation = filterContext.operations.find(
+                    (o) => o.text === e.target.value
+                  );
+                }}
               >
                 {filterContext.operations.map((s) => (
                   <option key={s.op} title={s.text}>
@@ -59,8 +63,12 @@ export function AbrisFilterItem({
                   className="abris-filter__operand"
                   data-bind="component: { name: filterEditorName, params: { value: filterItemValue, column: column } }"
                 >
-                  <input style={{width: "100%"}} placeholder="*" defaultValue={f.filterItemValue.value} onChange={(e)=>f.filterItemValue.value=e.target.value}/>
-
+                  <input
+                    style={{ width: "100%" }}
+                    placeholder="*"
+                    defaultValue={f.filterItemValue.value}
+                    onChange={(e) => (f.filterItemValue.value = e.target.value)}
+                  />
                 </div>
               )}
               <div

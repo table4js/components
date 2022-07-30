@@ -16,7 +16,7 @@ export function AbrisTableCell({ table, cell }: ITableCellProps) {
       return (
         <>
           <div
-            className={cell.css || "abris-table-cell__container"}
+            className={"abris-table-cell__container " + cell.css}
             onClick={(e) => table.startEditCell(cell)}
           >
             <span
@@ -49,7 +49,22 @@ export function AbrisTableCell({ table, cell }: ITableCellProps) {
         </div>
       );
     }
+  } else {
+    return (
+      <div className="abris-table__sell-editor">
+        <input
+          defaultValue={cell.text}
+          onKeyDown={(e) => {
+            if (e.code === "Enter") {
+              cell.text = e.target.value;
+              cell.inplaceEditForm = null;
+            }
+            if (e.code === "Escape") {
+              cell.inplaceEditForm = null;
+            }
+          }}
+        />
+      </div>
+    );
   }
-  // return <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>;
-  return null;
 }
