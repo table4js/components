@@ -76,6 +76,7 @@ export function AbrisComponentsTable({
     model.initialize(rootRef.current.parentElement);
   })
   return (
+    <div className="AbrisComponentTable">
     <div ref={rootRef} className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
         <table className="abris-table">
@@ -298,6 +299,7 @@ export function AbrisComponentsTable({
           </tfoot>
         </table>
       </div>
+    </div>
     </div>
   );
 }
