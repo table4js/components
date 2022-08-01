@@ -1,6 +1,6 @@
 @import "../_colors";
 
-.AbrisComponentTable *, abris-components-table * {
+abris-components-table * {
   box-sizing: border-box;
   outline: none;
   scrollbar-width: thin;
@@ -520,8 +520,7 @@ button {
 }
 
 abris-table,
-abris-components-table,
-.AbrisComponentTable {
+abris-components-table {
   display: inline-block;
   height: 100%;
 

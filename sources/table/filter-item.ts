@@ -45,8 +45,8 @@ export class TableFilterItem extends Base {
       target.filterItemValue.op = val.op;
     }
     target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
-  } }) operation: IFindOperation;
-  @property({ defaultValue: false }) showOperand: boolean;
+  }, defaultValue: { op: "C", text: "Contains"} }) operation: IFindOperation;
+  @property({ defaultValue: true }) showOperand: boolean;
 
   getFilterValue() {
     return {

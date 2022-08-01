@@ -75,8 +75,9 @@ export function AbrisComponentsTable({
   useEffect(() => {
     model.initialize(rootRef.current.parentElement);
   })
+  const CustomTag = `abris-components-table` as keyof JSX.IntrinsicElements;
   return (
-    <div className="AbrisComponentTable">
+    <CustomTag>
     <div ref={rootRef} className="abris-table-resizable-container">
       <div className="abris-table-scroll-container">
         <table className="abris-table">
@@ -300,6 +301,6 @@ export function AbrisComponentsTable({
         </table>
       </div>
     </div>
-    </div>
+    </CustomTag>
   );
 }
