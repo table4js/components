@@ -10,6 +10,11 @@ function conversionByType(value:any, columnType: string):string{
     return value;
 }
 
+function filterSearchByType(columnType: string):boolean{
+    if(columnType ==="bool") return false;
+    return true;
+}
+
 
 export class TableFilterSelect extends Base {
     private limit: number = 10;
@@ -20,13 +25,14 @@ export class TableFilterSelect extends Base {
         if(isOpen !== undefined) {
             this.isOpen = isOpen;
         }
-        this.updateFoundItems(null)
+        this.updateFoundItems(null);
+        this.isFilterSearchByType = filterSearchByType(columnType);
     }
     private updateFoundItems(filterValue: any) {
         this.foundItems = [];
         this.offset = 0;
         this.getColumnData(this.columnName, filterValue, this.limit, this.offset, items => {
-            this.foundItems = items.map(i => conversionByType(i, this.columnType));
+            this.foundItems = items.map(i => {return {name: conversionByType(i, this.columnType), value: i}});
             this.isLoadMore = items.length === this.limit;
             this.offset += 10;
         });
@@ -39,9 +45,9 @@ export class TableFilterSelect extends Base {
         });
     }
     @property({ defaultValue: false }) isOpen: boolean;
+    @property({ defaultValue: false }) isFilterSearchByType: boolean;
     @property({ defaultValue: false }) isLoadMore: boolean;
     toggle = (_, event) => {
-        console.log("toggle");
         this.isOpen = !this.isOpen;
         event.stopPropagation();
     }
@@ -63,7 +69,8 @@ export class TableFilterSelect extends Base {
         } else {
             this.selectedItems.push(item);
         }
-        this.value.value = this.selectedItems;
+        this.value.value = this.selectedItems.map(i=>i.value);
+        if(Array.isArray(this.value.value) && this.value.value.length === 0) this.value.value = undefined;
     }
     deleteItems = (name) => {
         const itemIndex = this.selectedItems.indexOf(name);

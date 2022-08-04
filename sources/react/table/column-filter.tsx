@@ -6,13 +6,9 @@ import { AbrisFilterSelect } from "./filter-select";
 import { TableFilterSelect } from "../../table/filter-select";
 import { AbrisColumnFilterItem } from "./column-filter-item";
 
-export function AbrisColumnFilter({
-  context,
-}: {
-  context: FilterContext;
-}) {
+export function AbrisColumnFilter({ context }: { context: FilterContext }) {
   makeReactive(context);
-  if(context.filterItems.length === 0) {
+  if (context.filterItems.length === 0) {
     return null;
   }
   return (
@@ -23,11 +19,11 @@ export function AbrisColumnFilter({
       {context.filterItems.map((filterItem, index) => (
         <div key={index} className="abris-filter__content">
           {index > 0 && (
-            <div className="abris-filter__operator abris-filter-text">
-              &
-            </div>
+            <div className="abris-filter__operator abris-filter-text">&</div>
           )}
-          <AbrisColumnFilterItem filterItem={filterItem}></AbrisColumnFilterItem>
+          <AbrisColumnFilterItem
+            filterItem={filterItem}
+          ></AbrisColumnFilterItem>
           <div
             className="abris-filter__remove"
             data-bind="click: $parent.removeItem, clickBubble: false"

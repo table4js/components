@@ -8,7 +8,7 @@ export interface IAbrisComponentsTableProps {
   model: TableWidget;
 }
 
-export function AbrisComponentsTablePreheader (
+export function AbrisComponentsTablePreheader(
   props: IAbrisComponentsTableProps
 ) {
   const searchModel = props.model.searchModel as SearchModel;

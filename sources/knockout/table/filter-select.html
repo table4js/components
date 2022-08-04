@@ -1,7 +1,7 @@
 ﻿<div class="abris-select-selection">
     <!-- ko foreach: selectedItems -->
     <div class="abris-select-selection-item">
-        <span class="abris-select-item-title" data-bind="text: $data"></span>
+        <span class="abris-select-item-title" data-bind="text: name"></span>
         <div class="abris-svg-icon abris-select-item-close" data-bind="click: $parent.deleteItems, html: $root.icons.cross"></div>
     </div>
     <!-- /ko -->
@@ -9,14 +9,16 @@
 <div class="abris-select-button abris-svg-icon" data-bind="click: toggle, attr: { title: title }, html: $root.icons.arrowdown"></div>
 <!-- ko if: isOpen -->
 <ul class="abris-select__dropdown-menu abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
+    <!-- ko if: isFilterSearchByType -->
     <div class="abris-select__dropdown-search-container">
         <input class="abris-select__dropdown-search" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
     </div>
+    <!-- /ko -->
     <!-- ko foreach: foundItems -->
     <div class="abris-select__dropdown-item" data-bind="click: $parent.clickItem">
         <input class="abris-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
         <div class="abris-svg-icon abris-select__dropdown-check" data-bind="html: $root.icons.check"></div>
-        <span class="abris-select__dropdown-label" data-bind="text: $data"></span>
+        <span class="abris-select__dropdown-label" data-bind="text: name"></span>
     </div>
     <!-- /ko -->
     <!-- ko if: isLoadMore -->

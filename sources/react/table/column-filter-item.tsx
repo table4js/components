@@ -8,17 +8,19 @@ import { TableFilterSelect } from "../../table/filter-select";
 import { ColumnFilterItem } from "../../table/column-filter-item";
 
 export function AbrisColumnFilterItem({
-  filterItem
+  filterItem,
 }: {
-  filterItem: ColumnFilterItem
+  filterItem: ColumnFilterItem;
 }) {
   makeReactive(filterItem);
-  const [tableFilterSelect, seTableFilterSelect] = useState<TableFilterSelect>(new TableFilterSelect(
-    filterItem.filterItemValue,
-    filterItem.column.name,
-    filterItem.column.type,
-    filterItem.getColumnData
-  ));
+  const [tableFilterSelect, seTableFilterSelect] = useState<TableFilterSelect>(
+    new TableFilterSelect(
+      filterItem.filterItemValue,
+      filterItem.column.name,
+      filterItem.column.type,
+      filterItem.getColumnData
+    )
+  );
 
   return (
     <>
@@ -39,9 +41,7 @@ export function AbrisColumnFilterItem({
       </select>
       {
         filterItem.showOperand && filterItem.operation.op == "EQ" && (
-          <AbrisFilterSelect
-            viewModel={tableFilterSelect}
-          />
+          <AbrisFilterSelect viewModel={tableFilterSelect} />
         )
 
         /* <abris-filter-select class="abrs-filter__value"
@@ -57,7 +57,9 @@ params="value: filterItemValue, columnName: column.name, getColumnData: getColum
             style={{ width: "100%" }}
             placeholder="*"
             defaultValue={filterItem.filterItemValue.value}
-            onChange={(e) => (filterItem.filterItemValue.value = e.target.value)}
+            onChange={(e) =>
+              (filterItem.filterItemValue.value = e.target.value)
+            }
           />
         </div>
       )}

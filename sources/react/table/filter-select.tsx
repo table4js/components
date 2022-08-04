@@ -14,8 +14,8 @@ export function AbrisFilterSelect({
     <CustomTag className="abrs-filter__value">
       <div className="abris-select-selection">
         {viewModel.selectedItems.map((i) => (
-          <div className="abris-select-selection-item" key={i}>
-            <span className="abris-select-item-title">{i}</span>
+          <div className="abris-select-selection-item" key={i.name}>
+            <span className="abris-select-item-title">{i.name}</span>
             <div
               className="abris-svg-icon abris-select-item-close"
               onClick={(e) => viewModel.deleteItems(i)}
@@ -39,15 +39,17 @@ export function AbrisFilterSelect({
           className="abris-select__dropdown-menu abris-button-toggle__dropdown-menu"
           onClick={(e) => e.stopPropagation}
         >
-          <div className="abris-select__dropdown-search-container">
-            <input
-              className="abris-select__dropdown-search"
-              value={viewModel.filterText}
-              onChange={(v) => (viewModel.filterText = v.target.value)}
-              placeholder="*"
-              //   data-bind="valueUpdate: 'afterkeydown'"
-            />
-          </div>
+          {viewModel.isFilterSearchByType && (
+            <div className="abris-select__dropdown-search-container">
+              <input
+                className="abris-select__dropdown-search"
+                value={viewModel.filterText}
+                onChange={(v) => (viewModel.filterText = v.target.value)}
+                placeholder="*"
+                //   data-bind="valueUpdate: 'afterkeydown'"
+              />
+            </div>
+          )}
           {viewModel.foundItems.map((fi, i) => (
             <div
               key={i}
@@ -66,7 +68,7 @@ export function AbrisFilterSelect({
                   __html: Icons.check,
                 }}
               ></div>
-              <span className="abris-select__dropdown-label">{fi}</span>
+              <span className="abris-select__dropdown-label">{fi.name}</span>
             </div>
           ))}
           {viewModel.isLoadMore && (
