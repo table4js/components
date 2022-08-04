@@ -3,12 +3,12 @@ import { useState, useEffect, useRef } from "react";
 import { TableWidget } from "../../table";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
-import { AbrisFilterItem } from "../widgets/filter-item";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
 import { TableRow } from "./row";
 import { TableSummary } from "../../table/summary";
 import { AbrisTableSummary } from "./summary";
 import { AbrisSearch } from "./search";
+import { AbrisColumnFilter } from "./column-filter";
 
 function EmptyTable() {
   return (
@@ -112,15 +112,11 @@ export function AbrisComponentsTable({
                     <div className="abris-table-filter">
                       <div className="abris-table-filter__container">
                         {model.columns.map((c) => (
-                          <AbrisFilterItem
+                          <AbrisColumnFilter
                             key={c.name}
-                            filterContext={c.filterContext}
+                            context={c.filterContext}
                           />
                         ))}
-                        {/* <!-- ko foreach: columns -->
-                            <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext } } -->
-                            <!-- /ko -->
-                            <!-- /ko --> */}
                       </div>
                     </div>
                   )}

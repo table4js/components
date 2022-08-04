@@ -5,6 +5,8 @@ import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ITableColumn } from "./column";
 import { FilterItemValue, TableFilterItem } from "./filter-item";
 
+import "./column-filter.scss";
+
 export class FilterContext extends Base {
     constructor(public column: ITableColumn, private dataProviderOwner: IDataProviderOwner) {
         super();

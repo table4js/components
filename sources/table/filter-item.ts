@@ -3,8 +3,6 @@ import { property } from "../core/property";
 import { IFindOperation } from "../find";
 import { ITableColumn } from "./column";
 
-import "./filter-item.scss";
-
 export class FilterItemValue extends Base {
   constructor(private column: ITableColumn) {
     super();

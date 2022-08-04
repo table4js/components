@@ -8,7 +8,7 @@ export * from "./table/cell";
 export * from "./table/column";
 export * from "./table/summary";
 export * from "./table/number";
-export * from "./table/filter-context";
+export * from "./table/column-filter";
 export * from "./table/filter-default";
 export * from "./table/filter-item";
 export * from "./table/filter-select";

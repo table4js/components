@@ -3,7 +3,7 @@ import { property } from "../core/property";
 import { IAggregate } from "../find";
 import { IDataProviderOwner } from "../utils/data-provider";
 import { ITableCell } from "./cell";
-import { FilterContext } from "./filter-context";
+import { FilterContext } from "./column-filter";
 
 export interface ITableColumnDescription {
     name: string;

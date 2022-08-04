@@ -19,14 +19,16 @@
                   <!-- /ko -->
                 </div>
               </div>
-              <div class="abris-table-filter" data-bind="visible: viewFilterTable">
+              <!-- ko if: viewFilterTable -->
+              <div class="abris-table-filter">
                 <div class="abris-table-filter__container">
                   <!-- ko foreach: columns -->
-                  <!-- ko component: { name: 'abris-filter-item', params: { context: filterContext } } -->
+                  <!-- ko component: { name: 'abris-column-filter', params: { context: filterContext } } -->
                   <!-- /ko -->
                   <!-- /ko -->
                 </div>
               </div>
+              <!-- /ko -->
             </div>
           </th>
         </tr>
