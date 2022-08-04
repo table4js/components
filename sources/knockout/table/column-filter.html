@@ -2,26 +2,11 @@
 <div class="abris-filter-item">
   <div class="abris-filter__title abris-filter-text" data-bind="text: column.title + ':'"></div>
   <!-- ko foreach: filterItems -->
-  <!-- ko if: $index() > 0 -->
-  <div class="abris-filter__operator abris-filter-text" data-bind="text: '&'"></div>
-  <!-- /ko -->
-  <select class="abris-filter___operation"
-    data-bind="options: $parent.operations, value: operation, optionsText: 'text'"></select>
-  <!-- ko if: showOperand -->
-    <!-- ko if: operation.op == "EQ" -->
-    <abris-filter-select class="abrs-filter__value"
-      params="value: filterItemValue, columnName: column.name, getColumnData: getColumnData">
-    </abris-filter-select>
+    <!-- ko if: $index() > 0 -->
+    <div class="abris-filter__operator abris-filter-text" data-bind="text: '&'"></div>
     <!-- /ko -->
-    <!-- ko if: operation.op != "EQ" -->
-    <div class="abris-filter__operand" data-bind="component: { name: filterEditorName, params: { value: filterItemValue, column: column } }">
-    </div>
+    <!-- ko component: { name: 'abris-column-filter-item', params: { filterItem: $data, context: $parent } } -->
     <!-- /ko -->
-  <!-- /ko -->
-  <div class="abris-filter__remove"
-    data-bind="click: $parent.removeItem, clickBubble: false">
-    <div class="abris-filter__remove-icon abris-svg-icon" data-bind="html: $root.icons.cross"></div>
-  </div>
   <!-- /ko -->
 </div>
 <!-- /ko -->

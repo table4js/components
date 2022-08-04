@@ -3,7 +3,7 @@ import { property } from "../core/property";
 import { operationsMap } from "../find";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ITableColumn } from "./column";
-import { FilterItemValue, ColumnFilterItem } from "./filter-item";
+import { FilterItemValue, ColumnFilterItem } from "./column-filter-item";
 
 import "./column-filter.scss";
 

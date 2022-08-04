@@ -1,6 +1,6 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { FilterItemValue } from "./filter-item";
+import { FilterItemValue } from "./column-filter-item";
 
 import "./filter-select.scss";
 

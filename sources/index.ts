@@ -9,8 +9,8 @@ export * from "./table/column";
 export * from "./table/summary";
 export * from "./table/number";
 export * from "./table/column-filter";
+export * from "./table/column-filter-item";
 export * from "./table/filter-default";
-export * from "./table/filter-item";
 export * from "./table/filter-select";
 
 export * from "./utils/array-data-provider";

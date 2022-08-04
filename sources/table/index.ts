@@ -11,10 +11,10 @@ import { ArrayDataProvider } from "../utils/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { isEmpty } from "../utils/utils";
 import { Localization } from "../localization";
+import { FilterItemValue } from "./column-filter-item";
 
 import * as Icons from "../icon"
 import "./index.scss";
-import { FilterItemValue } from "./filter-item";
 
 /**
  * Parameters for customizing the table view.

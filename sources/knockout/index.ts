@@ -7,6 +7,7 @@ export * from "./table/summary";
 export * from "./table/search";
 export * from "./table/filter-default";
 export * from "./table/column-filter";
+export * from "./table/column-filter-item";
 export * from "./table/filter-select";
 export * from "./widgets/action";
 export * from "./widgets/actions";
