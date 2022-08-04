@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { FilterContext } from "../../table/column-filter";
 import { makeReactive } from "../reactivity";
 import * as Icons from "../../icon";
@@ -12,6 +13,13 @@ export function AbrisColumnFilterItem({
   filterItem: ColumnFilterItem
 }) {
   makeReactive(filterItem);
+  const [tableFilterSelect, seTableFilterSelect] = useState<TableFilterSelect>(new TableFilterSelect(
+    filterItem.filterItemValue,
+    filterItem.column.name,
+    filterItem.column.type,
+    filterItem.getColumnData
+  ));
+
   return (
     <>
       <select
@@ -32,13 +40,7 @@ export function AbrisColumnFilterItem({
       {
         filterItem.showOperand && filterItem.operation.op == "EQ" && (
           <AbrisFilterSelect
-            viewModel={
-              new TableFilterSelect(
-                filterItem.filterItemValue,
-                filterItem.column.name,
-                filterItem.getColumnData
-              )
-            }
+            viewModel={tableFilterSelect}
           />
         )
 

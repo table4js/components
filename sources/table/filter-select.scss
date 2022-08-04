@@ -7,6 +7,12 @@ abris-filter-select {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  min-width: 105px;
+  height: 24px;
+  border: none;
+  border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+
 }
 
 .abris-select-selection {
@@ -34,10 +40,10 @@ abris-filter-select {
   max-width: 100px;
 }
 
-.abris-select-item-close {
+.abris-select-item-close.abris-select-item-close {
   fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
   width: 8px;
-  height: 8px;
+  height: 16px;
   cursor: pointer;
 
   &:hover {
@@ -45,7 +51,7 @@ abris-filter-select {
   }
 }
 
-.abris-select-button {
+.abris-select-button.abris-select-button {
   fill: var(--abc-primary-0, $abc-primary-0);
   width: 12px;
   height: 12px;

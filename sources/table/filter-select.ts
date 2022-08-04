@@ -4,11 +4,18 @@ import { FilterItemValue } from "./column-filter-item";
 
 import "./filter-select.scss";
 
+
+function conversionByType(value:any, columnType: string):string{
+    if(columnType ==="bool") return value?"Yes":"No";
+    return value;
+}
+
+
 export class TableFilterSelect extends Base {
     private limit: number = 10;
     private offset: number = 0;
 
-    constructor(private value: FilterItemValue,  private columnName: string, private getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback : (items: any[]) => void) => void, isOpen?: boolean, public title: string = "", public moreText: string = "") {
+    constructor(private value: FilterItemValue,  private columnName: string, private columnType: string, private getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback : (items: any[]) => void) => void, isOpen?: boolean, public title: string = "", public moreText: string = "") {
         super();
         if(isOpen !== undefined) {
             this.isOpen = isOpen;
@@ -19,7 +26,7 @@ export class TableFilterSelect extends Base {
         this.foundItems = [];
         this.offset = 0;
         this.getColumnData(this.columnName, filterValue, this.limit, this.offset, items => {
-            this.foundItems = items;
+            this.foundItems = items.map(i => conversionByType(i, this.columnType));
             this.isLoadMore = items.length === this.limit;
             this.offset += 10;
         });
@@ -52,10 +59,11 @@ export class TableFilterSelect extends Base {
     clickItem = (item) => {
         const itemIndex = this.selectedItems.indexOf(item);
         if(itemIndex !== -1) {
-            this.selectedItems.splice(itemIndex, 1);
+            this.deleteItems(item);
         } else {
             this.selectedItems.push(item);
         }
+        this.value.value = this.selectedItems;
     }
     deleteItems = (name) => {
         const itemIndex = this.selectedItems.indexOf(name);
