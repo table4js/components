@@ -5,8 +5,12 @@
     <!-- ko if: $index() > 0 -->
     <div class="abris-filter__operator abris-filter-text" data-bind="text: '&'"></div>
     <!-- /ko -->
-    <!-- ko component: { name: 'abris-column-filter-item', params: { filterItem: $data, context: $parent } } -->
+    <!-- ko component: { name: 'abris-column-filter-item', params: { filterItem: $data } } -->
     <!-- /ko -->
+    <div class="abris-filter__remove"
+      data-bind="click: $parent.removeItem, clickBubble: false">
+      <div class="abris-filter__remove-icon abris-svg-icon" data-bind="html: $root.icons.cross"></div>
+    </div>
   <!-- /ko -->
 </div>
 <!-- /ko -->

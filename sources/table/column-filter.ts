@@ -1,6 +1,5 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { operationsMap } from "../find";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ITableColumn } from "./column";
 import { FilterItemValue, ColumnFilterItem } from "./column-filter-item";
@@ -10,15 +9,7 @@ import "./column-filter.scss";
 export class FilterContext extends Base {
     constructor(public column: ITableColumn, private dataProviderOwner: IDataProviderOwner) {
         super();
-    
-        if(operationsMap[this.column.type]) {
-          this.operations = operationsMap[this.column.type];
-        }
-        else {
-          this.operations = operationsMap["string"];
-        }
     }
-    operations: Array<any>;
 
     @property({ defaultValue: false }) showFilter: boolean;
     @property() value: any;

@@ -1,6 +1,6 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { IFindOperation } from "../find";
+import { IFindOperation, operationsMap } from "../find";
 import { ITableColumn } from "./column";
 
 export class FilterItemValue extends Base {
@@ -20,7 +20,17 @@ export class ColumnFilterItem extends Base {
   ) {
     super();
     this.filterItemValue = new FilterItemValue(column);
+    if(operationsMap[this.column.type]) {
+      this.operations = operationsMap[this.column.type];
+    }
+    else {
+      this.operations = operationsMap["string"];
+    }
+    this.operation = this.operations[0];
   }
+
+  operations: Array<any>;
+  
   get filterEditorName() {
     // if (this.column.type === "bool") {
     //   return "abris-table-filter-bool";
@@ -43,7 +53,7 @@ export class ColumnFilterItem extends Base {
       target.filterItemValue.op = val.op;
     }
     target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
-  }, defaultValue: { op: "C", text: "Contains"} }) operation: IFindOperation;
+  }}) operation: IFindOperation;
   @property({ defaultValue: true }) showOperand: boolean;
 
   getFilterValue() {

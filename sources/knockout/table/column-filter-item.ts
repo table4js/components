@@ -6,7 +6,7 @@ var filterTemplate = require("./column-filter-item.html").default;
 ko.components.register("abris-column-filter-item", {
   viewModel: {
     createViewModel: function(params, componentInfo) {
-      return params;
+      return params.filterItem as ColumnFilterItem;
     }
   },
   template: filterTemplate

@@ -1,17 +1,12 @@
-﻿<select class="abris-filter___operation"
-  data-bind="options: context.operations, value: filterItem.operation, optionsText: 'text'"></select>
-<!-- ko if: filterItem.showOperand -->
-  <!-- ko if: filterItem.operation.op == "EQ" -->
+﻿<select class="abris-filter___operation" data-bind="options: operations, value: operation, optionsText: 'text'"></select>
+<!-- ko if: showOperand -->
+  <!-- ko if: operation.op == "EQ" -->
   <abris-filter-select class="abrs-filter__value"
-    params="value: filterItem.filterItemValue, columnName: filterItem.column.name, getColumnData: filterItem.getColumnData">
+    params="value: filterItemValue, columnName: column.name, getColumnData: getColumnData">
   </abris-filter-select>
   <!-- /ko -->
-  <!-- ko if: filterItem.operation.op != "EQ" -->
-  <div class="abris-filter__operand" data-bind="component: { name: filterItem.filterEditorName, params: { value: filterItem.filterItemValue, column: filterItem.column } }">
+  <!-- ko if: operation.op != "EQ" -->
+  <div class="abris-filter__operand" data-bind="component: { name: filterEditorName, params: { value: filterItemValue, column: column } }">
   </div>
   <!-- /ko -->
 <!-- /ko -->
-<div class="abris-filter__remove"
-  data-bind="click: context.removeItem, clickBubble: false">
-  <div class="abris-filter__remove-icon abris-svg-icon" data-bind="html: $root.icons.cross"></div>
-</div>

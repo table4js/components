@@ -27,7 +27,19 @@ export function AbrisColumnFilter({
               &
             </div>
           )}
-          <AbrisColumnFilterItem filterItem={filterItem} context={context}></AbrisColumnFilterItem>
+          <AbrisColumnFilterItem filterItem={filterItem}></AbrisColumnFilterItem>
+          <div
+            className="abris-filter__remove"
+            data-bind="click: $parent.removeItem, clickBubble: false"
+            onClick={(e) => context.removeItem(filterItem)}
+          >
+            <div
+              className="abris-filter__remove-icon abris-svg-icon"
+              dangerouslySetInnerHTML={{
+                __html: Icons.cross,
+              }}
+            ></div>
+          </div>
         </div>
       ))}
     </div>

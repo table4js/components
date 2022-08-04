@@ -7,10 +7,9 @@ import { TableFilterSelect } from "../../table/filter-select";
 import { ColumnFilterItem } from "../../table/column-filter-item";
 
 export function AbrisColumnFilterItem({
-  filterItem, context
+  filterItem
 }: {
-  filterItem: ColumnFilterItem,
-  context: FilterContext
+  filterItem: ColumnFilterItem
 }) {
   makeReactive(filterItem);
   return (
@@ -19,12 +18,12 @@ export function AbrisColumnFilterItem({
         className="abris-filter___operation"
         value={filterItem.operation?.text}
         onChange={(e) => {
-          filterItem.operation = context.operations.find(
+          filterItem.operation = filterItem.operations.find(
             (o) => o.text === e.target.value
           );
         }}
       >
-        {context.operations.map((s) => (
+        {filterItem.operations.map((s) => (
           <option key={s.op} title={s.text}>
             {s.text}
           </option>
@@ -60,18 +59,6 @@ params="value: filterItemValue, columnName: column.name, getColumnData: getColum
           />
         </div>
       )}
-      <div
-        className="abris-filter__remove"
-        data-bind="click: $parent.removeItem, clickBubble: false"
-        onClick={(e) => context.removeItem(filterItem)}
-      >
-        <div
-          className="abris-filter__remove-icon abris-svg-icon"
-          dangerouslySetInnerHTML={{
-            __html: Icons.cross,
-          }}
-        ></div>
-      </div>
     </>
   );
 }
