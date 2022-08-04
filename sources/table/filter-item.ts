@@ -13,7 +13,7 @@ export class FilterItemValue extends Base {
   field: string;
 }
 
-export class TableFilterItem extends Base {
+export class ColumnFilterItem extends Base {
   constructor(
     public column: any,
     public getColumnData
@@ -38,7 +38,7 @@ export class TableFilterItem extends Base {
     return "abris-table-filter-default";
   }
   public filterItemValue: FilterItemValue;
-  @property({ onSet: (val: IFindOperation, target: TableFilterItem) => {
+  @property({ onSet: (val: IFindOperation, target: ColumnFilterItem) => {
     if(!!val) {
       target.filterItemValue.op = val.op;
     }

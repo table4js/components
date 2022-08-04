@@ -3,7 +3,7 @@ import { property } from "../core/property";
 import { operationsMap } from "../find";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ITableColumn } from "./column";
-import { FilterItemValue, TableFilterItem } from "./filter-item";
+import { FilterItemValue, ColumnFilterItem } from "./filter-item";
 
 import "./column-filter.scss";
 
@@ -22,19 +22,19 @@ export class FilterContext extends Base {
 
     @property({ defaultValue: false }) showFilter: boolean;
     @property() value: any;
-    @property({ defaultValue: [] }) filterItems: Array<TableFilterItem>;
+    @property({ defaultValue: [] }) filterItems: Array<ColumnFilterItem>;
   
     apply() {
       this.value = this.filterItems.map(item => item.getFilterValue());
     }
     addItem = (column: ITableColumn) => {
       // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
-      this.filterItems.push(new TableFilterItem(this.column, (column, filter, limit, offset, callback) => {
+      this.filterItems.push(new ColumnFilterItem(this.column, (column, filter, limit, offset, callback) => {
         this.dataProviderOwner.dataProvider.getColumnData(column, filter, limit, offset, callback);
       }));
       this.showFilter = true;
     };
-    removeItem = (item: TableFilterItem) => {
+    removeItem = (item: ColumnFilterItem) => {
       const currentFilterItems = this.filterItems;
       currentFilterItems.splice(currentFilterItems.indexOf(item), 1);
       this.showFilter = !!currentFilterItems.length;    
