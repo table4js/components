@@ -362,8 +362,8 @@ export class TableWidget extends Base implements IDataProviderOwner {
     }
 
     public startEditCell = (cell: ITableCell) => {
-        if (this.currentCellEditor) this.currentCellEditor.inplaceEditForm = undefined;
-        cell.inplaceEditForm = new InplaceEditor(cell);
+        if (this.currentCellEditor) this.currentCellEditor.inplaceEditor = undefined;
+        cell.inplaceEditor = new InplaceEditor(cell);
         this.currentCellEditor = cell; 
         this.completeEditCell();
     }

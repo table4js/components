@@ -4,6 +4,7 @@ import { TableWidget } from "../table";
 
 export * from "./table/cell";
 export * from "./table/cell-editor";
+export * from "./table/cell-viewer";
 export * from "./table/summary";
 export * from "./table/search";
 export * from "./table/filter-default";

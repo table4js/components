@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TableWidget } from "../../table";
-import { ITableCell } from "../../table/cell";
+import { ITableCell, TableCell } from "../../table/cell";
+import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 import { AbrisTableCellEditor } from "./cell-editor";
 
@@ -12,47 +13,23 @@ export interface ITableCellProps {
 export function AbrisTableCell({ table, cell }: ITableCellProps) {
   makeReactive(cell);
 
-  if (!(cell.inplaceEditForm && table.config.enableEdit)) {
-    if (!(cell.count > 1 && table.isMergedСells)) {
-      return (
-        <>
-          <div
-            className={"abris-table-cell__container " + cell.css}
-            onClick={(e) => table.startEditCell(cell)}
-          >
-            <span
-              className={
-                cell.text !== cell.data
-                  ? "abris-table-cell__text abris-table-cell__text__modified"
-                  : "abris-table-cell__text"
-              }
-              dangerouslySetInnerHTML={{ __html: cell.text }}
-            ></span>
-          </div>
-        </>
-      );
-    } else {
-      return (
-        <div
-          className={
-            "abris-table-cell__container " +
-            (cell.count > 1 && table.isMergedСells
-              ? "cell__sticky-text " + cell.css
-              : cell.css)
-          }
-          // style={{ top: table[1].tableHeadHeight - 2 + "px" }}
-          onClick={(e) => table.startEditCell(cell)}
-        >
-          <span
-            className="abris-table-cell__merged-text"
-            dangerouslySetInnerHTML={{ __html: cell.text }}
-          ></span>
-        </div>
-      );
-    }
+  const isEditMode = !!cell.inplaceEditor && table.config.enableEdit;
+  const isMergedCell = cell.count > 1 && table.isMergedСells;
+
+  if (!isEditMode) {
+    return (
+      <div
+        className={TableCell.getContainerCss(cell, isMergedCell)}
+        style={{ top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }}
+        onClick={(e) => table.startEditCell(cell)}
+      >
+        <AbrisComponent componentName={cell.viewer} componentProps={{ cell: cell, className: TableCell.getContentCss(cell, isMergedCell) }}/>
+      </div>
+    );
+    
   } else {
     return (
-      <AbrisTableCellEditor model={cell.inplaceEditForm}></AbrisTableCellEditor>
+      <AbrisComponent componentName={cell.editor} componentProps={{ model: cell.inplaceEditor }}/>
     );
   }
 }

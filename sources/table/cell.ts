@@ -11,10 +11,12 @@ export interface ITableCell {
     data: any;
     name: string;
     text: string;
-    inplaceEditForm: any;
     count: number;
     color: string;
     css: string;
+    inplaceEditor: any;
+    editor?: string;
+    viewer?: string;
 }
 
 export class TableCell extends Base implements ITableCell {
@@ -27,13 +29,30 @@ export class TableCell extends Base implements ITableCell {
         TableCell.cellTypes[cellType.name] = cellType;
     }
 
+    public static getContainerCss(cell: ITableCell, isMergedCell: boolean) {
+        let containerCss = "abris-table-cell__container " + cell.css;
+        if(isMergedCell) {
+          containerCss += " cell__sticky-text";
+        }
+        return containerCss;        
+    }
+    public static getContentCss(cell: ITableCell, isMergedCell: boolean) {
+        let contentCss = isMergedCell ? "abris-table-cell__text--merged" : "abris-table-cell__text";
+        if(cell.text !== cell.data) {
+          contentCss += " abris-table-cell__text--modified";
+        }
+        return contentCss;        
+    }
+
     @property() data: any;
     @property() text: string; 
     @property({ defaultValue: 1 }) count: number;
     @property() color: string;
     @property() name: string;
-    @property() inplaceEditForm: any;
+    @property() inplaceEditor: any;
     @property() css: string;
+    editor = "abris-cell-editor";
+    viewer = "abris-cell-viewer";
 
     protected getCellCss(data: any, column: ITableColumnDescription): string {
         const cellTypeDescription = TableCell.cellTypes[column.type] || TableCell.cellTypes["default"];

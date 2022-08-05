@@ -1,8 +1,10 @@
 import { Base, HashTableStorage } from "../core/base";
 
+export * from "./abris-component";
 export * from "./table";
-export * from "./table/cell-editor";
 export * from "./table/cell";
+export * from "./table/cell-editor";
+export * from "./table/cell-viewer";
 export * from "./table/row";
 export * from "./table/summary";
 export * from "./table/search";

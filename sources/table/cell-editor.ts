@@ -15,6 +15,11 @@ export class InplaceEditor extends Base {
         if(commit) {
             this.cell.text = this.value;
         }
-        this.cell.inplaceEditForm = undefined;
+        this.cell.inplaceEditor = undefined;
+    }
+    processKeyUp(event: KeyboardEvent) {
+        if(event.keyCode === 13 || event.keyCode === 27) {
+            this.complete(event.keyCode === 13);
+        }        
     }
 }
