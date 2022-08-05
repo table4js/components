@@ -8,12 +8,12 @@ import "./cell-editor.scss";
 export class InplaceEditor extends Base {
     constructor(private cell: ITableCell) {
         super();
-        this.value = this.cell.text;
+        this.value = this.cell.data;
     }
     @property() value: any;
     complete(commit: boolean) {
         if(commit) {
-            this.cell.text = this.value;
+            this.cell.data = this.value;
         }
         this.cell.inplaceEditor = undefined;
     }

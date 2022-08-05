@@ -7,11 +7,13 @@ export * from "./table";
 export * from "./table/cell";
 export * from "./table/column";
 export * from "./table/summary";
-export * from "./table/number";
 export * from "./table/column-filter";
 export * from "./table/column-filter-item";
 export * from "./table/filter-default";
 export * from "./table/filter-select";
+
+export * from "./table/number";
+export * from "./table/bool";
 
 export * from "./utils/array-data-provider";
 export * from "./utils/remote-data-provider";

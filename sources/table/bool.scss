@@ -1,0 +1,21 @@
+.abris-table__bool-cell-viewer {
+    display: inline-block;    
+    text-align: center;
+    width: 100%;
+}
+
+.abris-table__bool-cell-viewer-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.abris-table__bool-cell-editor {
+    text-align: center;
+}
+
+.abris-table__bool-cell-editor input {
+    width: 20px;
+    height: 20px;
+}

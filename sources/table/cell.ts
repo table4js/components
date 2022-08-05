@@ -4,7 +4,9 @@ import { ITableColumn, ITableColumnDescription } from "./column";
 
 export interface ITableCellType {
     name: string;
-    css: string;
+    css?: string;
+    editor?: string;
+    viewer?: string;
 }
 
 export interface ITableCell {
@@ -22,7 +24,9 @@ export interface ITableCell {
 export class TableCell extends Base implements ITableCell {
     public static cellTypes = {
         "default": {
-            css: "abris-table-cell--left"
+            css: "abris-table-cell--left",
+            editor: "abris-cell-editor",
+            viewer: "abris-cell-viewer"
         },
     };
     public static registerCellType(cellType: ITableCellType) {
@@ -36,35 +40,55 @@ export class TableCell extends Base implements ITableCell {
         }
         return containerCss;        
     }
-    public static getContentCss(cell: ITableCell, isMergedCell: boolean) {
+    public static getContentCss(cell: ITableCell | TableCell, isMergedCell: boolean) {
         let contentCss = isMergedCell ? "abris-table-cell__text--merged" : "abris-table-cell__text";
-        if(cell.text !== cell.data) {
+        if(cell instanceof TableCell && cell.isModified) {
           contentCss += " abris-table-cell__text--modified";
         }
         return contentCss;        
     }
 
-    @property() data: any;
+    @property({ defaultValue: false }) isModified: boolean;
+    @property({ onSet: (val, target: TableCell) => { 
+        if(target.text !== val) {
+            target.text = target.getCellText(val);
+            target.isModified = true;
+        }
+    } }) data: any;
     @property() text: string; 
     @property({ defaultValue: 1 }) count: number;
     @property() color: string;
     @property() name: string;
     @property() inplaceEditor: any;
     @property() css: string;
-    editor = "abris-cell-editor";
-    viewer = "abris-cell-viewer";
+    editor: string;
+    viewer: string;
 
+    protected getCellTypeDescription(type: string) {
+        return TableCell.cellTypes[type] || TableCell.cellTypes["default"]
+    }
     protected getCellCss(data: any, column: ITableColumnDescription): string {
-        const cellTypeDescription = TableCell.cellTypes[column.type] || TableCell.cellTypes["default"];
-        return cellTypeDescription.css;
+        return this.getCellTypeDescription(column.type).css;
+    }
+    protected getCellEditor(data: any, column: ITableColumnDescription): string {
+        return this.getCellTypeDescription(column.type).editor || TableCell.cellTypes["default"].editor;
+    }
+    protected getCellViewer(data: any, column: ITableColumnDescription): string {
+        return this.getCellTypeDescription(column.type).viewer || TableCell.cellTypes["default"].viewer;
+    }
+    // TODO - it should be one function here not in table - find getCellText
+    protected getCellText(val: any): string {
+        return val as string;
     }
 
     public initialize(col: ITableColumn, back: boolean, data: any, text: string, color: string) {
         this.data = data[col.name],
-        this.text = text, 
+        this.text = text;
         this.color = color;
         this.name = col.name;
         this.css = this.getCellCss(data, col);
+        this.editor = this.getCellEditor(data, col);
+        this.viewer = this.getCellViewer(data, col);
         if(back !== null) {
             if (back) {
                 if (col.last && col.last.text === this.text) {
@@ -91,5 +115,6 @@ export class TableCell extends Base implements ITableCell {
                 }
             }
         }
+        this.isModified = false;
     }
 }

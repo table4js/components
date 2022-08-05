@@ -16,6 +16,8 @@ export * from "./widgets/actions";
 export * from "./widgets/dropdown-actions";
 export * from "./widgets/icon";
 
+export * from "./table/bool-cell-editor";
+export * from "./table/bool-cell-viewer";
 
 export * from "..";
 

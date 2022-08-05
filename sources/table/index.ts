@@ -328,7 +328,6 @@ export class TableWidget extends Base implements IDataProviderOwner {
         return data[column.name] as string;
     }
 
-
     protected createRow(data: {[key: string]: string|number}, num: number, back: boolean): ITableRow {
         let rowCells = [];
         let lastText = null;
