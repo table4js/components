@@ -1,0 +1,25 @@
+<td class="abris-table-cell" data-bind="attr: {rowspan: table.isMergedСells ? cell.count : 1},
+  css: (cell.count > 1) && table.isMergedСells ? 'abris-table-cell--merged ' : '',
+  visible: (cell.count > 0) || !table.isMergedСells,
+  style: {'background-color': cell.color} ">
+  <!-- ko ifnot: (cell.inplaceEditForm && table.config.enableEdit) -->
+  <!-- ko ifnot: (cell.count > 1) && table.isMergedСells -->
+  <div class="abris-table-cell__container" data-bind="css: cell.css, click: startEdit">
+    <span
+      data-bind="html: cell.text,
+      css: cell.text !== cell.data ? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: (cell.count > 1) && table.isMergedСells -->
+  <div class="abris-table-cell__container"
+    data-bind="css: (cell.count > 1) && table.isMergedСells ? 'cell__sticky-text ' + cell.css : cell.css, style: {top: table.tableHeadHeight - 2 + 'px'},
+      click: startEdit">
+    <span class="abris-table-cell__merged-text"
+      data-bind="html: cell.text"></span>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+  <!-- ko if: (cell.inplaceEditForm && table.config.enableEdit) -->
+  <abris-cell-editor params="model: cell.inplaceEditForm"></abris-cell-editor>
+  <!-- /ko -->
+</td>

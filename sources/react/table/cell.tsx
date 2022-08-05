@@ -2,6 +2,7 @@ import * as React from "react";
 import { TableWidget } from "../../table";
 import { ITableCell } from "../../table/cell";
 import { makeReactive } from "../reactivity";
+import { AbrisTableCellEditor } from "./cell-editor";
 
 export interface ITableCellProps {
   table: TableWidget;
@@ -51,20 +52,7 @@ export function AbrisTableCell({ table, cell }: ITableCellProps) {
     }
   } else {
     return (
-      <div className="abris-table__sell-editor">
-        <input
-          defaultValue={cell.text}
-          onKeyDown={(e) => {
-            if (e.code === "Enter") {
-              cell.text = e.target.value;
-              cell.inplaceEditForm = null;
-            }
-            if (e.code === "Escape") {
-              cell.inplaceEditForm = null;
-            }
-          }}
-        />
-      </div>
+      <AbrisTableCellEditor model={cell.inplaceEditForm}></AbrisTableCellEditor>
     );
   }
 }

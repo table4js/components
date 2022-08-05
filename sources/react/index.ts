@@ -1,7 +1,7 @@
 import { Base, HashTableStorage } from "../core/base";
 
 export * from "./table";
-// export * from "./table/cell-editor";
+export * from "./table/cell-editor";
 export * from "./table/cell";
 export * from "./table/row";
 export * from "./table/summary";

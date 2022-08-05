@@ -107,31 +107,8 @@
             </div>
           </td>
           <!-- ko foreach: cells -->
-          <td class="abris-table-cell" data-bind="attr: {rowspan: $parents[1].isMergedСells ? count : 1},
-            css: (count > 1) && $parents[1].isMergedСells ? 'abris-table-cell--merged ' : '',
-            visible: (count > 0) || !$parents[1].isMergedСells,
-            style: {'background-color': color} ">
-            <!-- ko ifnot: (inplaceEditForm && $parents[1].config.enableEdit) -->
-            <!-- ko ifnot: (count > 1) && $parents[1].isMergedСells -->
-            <div class="abris-table-cell__container" data-bind="css: css, click: $parents[1].startEditCell">
-              <span
-                data-bind="html: text,
-                css: text!==data? 'abris-table-cell__text abris-table-cell__text__modified' : 'abris-table-cell__text'"></span>
-            </div>
-            <!-- /ko -->
-            <!-- ko if: (count > 1) && $parents[1].isMergedСells -->
-            <div class="abris-table-cell__container"
-              data-bind="css: (count > 1) && $parents[1].isMergedСells ? 'cell__sticky-text ' + css : css, style: {top: $parents[1].tableHeadHeight - 2 + 'px'},
-                click: $parents[1].startEditCell">
-              <span class="abris-table-cell__merged-text"
-                data-bind="html: text"></span>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
-            <!-- ko if: (inplaceEditForm && $parents[1].config.enableEdit) -->
-            <abris-cell-editor params="model: inplaceEditForm"></abris-cell-editor>
-            <!-- /ko -->
-          </td>
+          <!-- ko component: { name: 'abris-table-cell', params: { cell: $data, table: $parents[1] } } -->
+          <!-- /ko -->
           <!-- /ko -->
           <td class="abris-table-cell abris-table-technical-cell" data-bind="click: click">
             <div class="abris-table-technical-cell__container">
