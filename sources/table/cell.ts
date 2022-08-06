@@ -76,14 +76,12 @@ export class TableCell extends Base implements ITableCell {
     protected getCellViewer(data: any, column: ITableColumnDescription): string {
         return this.getCellTypeDescription(column.type).viewer || TableCell.cellTypes["default"].viewer;
     }
-    // TODO - it should be one function here not in table - find getCellText
     protected getCellText(val: any): string {
         return val as string;
     }
 
-    public initialize(col: ITableColumn, back: boolean, data: any, text: string, color: string) {
+    public initialize(col: ITableColumn, back: boolean, data: any, color: string) {
         this.data = data[col.name],
-        this.text = text;
         this.color = color;
         this.name = col.name;
         this.css = this.getCellCss(data, col);

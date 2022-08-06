@@ -324,20 +324,17 @@ export class TableWidget extends Base implements IDataProviderOwner {
         this.refresh();
     }
 
-    protected getCellText(data: any, column: ITableColumnDescription): string {
-        return data[column.name] as string;
-    }
-
     protected createRow(data: {[key: string]: string|number}, num: number, back: boolean): ITableRow {
         let rowCells = [];
         let lastText = null;
         let colorCell = null, colorRow = null;
         this.columns.reverse().forEach(col => {
-            let text = this.getCellText(data, col);
-            text = lastText ? text + "/" + lastText : text; 
             let cell = new TableCell();
-            if(col.visible) cell.initialize(col, back, data, text, colorCell);
-            lastText = (col.concatPrev && !col.row_color) ? text : null;
+            cell.initialize(col, back, data, colorCell);
+            if(!!lastText) {
+                cell.text += ("/" + lastText);
+            }
+            lastText = (col.concatPrev && !col.row_color) ? cell.text : null;
             colorRow = (col.row_color && !col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : colorRow;
             colorCell = (col.row_color && col.concatPrev) ? (col.type === "bool" ? ( data[col.name] ? this.config.selectCellColor : null) : data[col.name]) : null;
             if(col.visible) rowCells.push(cell);
