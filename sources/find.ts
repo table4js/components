@@ -30,17 +30,11 @@ export interface IAggregate {
     func: string,
     field: string,
 }
-  
+
 export interface IFindLogic {
     strict: boolean;
     operands: IFindOperand[];
     aggregate?: IAggregate[];
-}
-
-export interface IFindProperty {
-    operation: KnockoutObservable<string>;
-    val1: KnockoutObservable<any>;
-    val2: KnockoutObservable<any>;
 }
 
 export var operationsMap: { [index: string]: IFindOperation[] } = {};

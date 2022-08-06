@@ -24,7 +24,7 @@ export * from "..";
 export const KnockoutInstance = ko;
 
 export class KnockoutHashTableStorage extends HashTableStorage {
-    private linkArrayToObservable(observableArray: ko.ObservableArray) {
+    private linkArrayToObservable(observableArray: KnockoutObservableArray<any>) {
         const result = [].concat(observableArray());
         ["pop", "push", "splice", "slice", "shift", "unshift"].forEach(funcName => {
             result[funcName] = function () {
@@ -46,7 +46,7 @@ export class KnockoutHashTableStorage extends HashTableStorage {
             this.hash[name] = this.createObservable(value);
         }
         const observable = this.hash[name];
-        if(ko.isObservableArray(observable)) {
+        if((ko as any).isObservableArray(observable)) { // TODO - remove any cast
             return this.linkArrayToObservable(observable);
         }
         return observable();

@@ -1,11 +1,8 @@
-const _ = require('underscore');
 const packageJson = require('./package.json');
 const publishPackageJson = require('./publish/package.json');
 const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
-const [ dev, prod ] = require('./webpack.config.js');
 
-const libraryName = 'AbrisComponents';
+const [ dev, prod ] = require('./webpack.config.js');
 
 publishPackageJson.name = "@abris-lab/abris-components-react";
 publishPackageJson.version = packageJson.version;
@@ -35,29 +32,15 @@ const externals = {
   }
 }
 
-const output = {
-  library: libraryName,
-  libraryTarget: 'umd',
-  umdNamedDefine: true,
-  path: __dirname + '/dist/react',
-  filename: '[name].js'
-};
-
 dev.entry = entry;
 prod.entry = entry;
 
 dev.externals = externals;
 prod.externals = externals;
 
-dev.output = _.extend({}, output);
-prod.output = _.extend({}, output, {filename: '[name].rect.min.js'});
+dev.output.path = __dirname + '/site/dist/react';
+prod.output.path = __dirname + '/site/dist/react';
 
 prod.plugins.push(new GeneratePackageJsonPlugin(publishPackageJson));
-prod.plugins.push(new CopyPlugin({
-    patterns: [
-      { from: "publish/doc-index.md", to: "README.md" }
-    ],
-  })
-);
 
 module.exports = [ dev, prod ];

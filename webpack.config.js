@@ -2,6 +2,7 @@ const _ = require('underscore');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const libraryName = 'AbrisComponents';
 const banner = [
@@ -44,14 +45,6 @@ const BASE_CFG = {
       }
     ]
   },
-  // externals: {
-  //   knockout: {
-  //     root: "ko",
-  //     commonjs2: "knockout",
-  //     commonjs: "knockout",
-  //     amd: "knockout"
-  //   },
-  // },
   entry: {
     [packageJson.name]: './sources/knockout/index.ts',
   }
@@ -68,7 +61,7 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/site/dist',
+    path: __dirname + '/site/dist/standalone',
     filename: '[name].js'
   },
   devtool: 'inline-source-map'
@@ -80,13 +73,18 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     new MiniCssExtractPlugin(
       { filename: '[name].min.css' }
     ),
+    new CopyPlugin({
+      patterns: [
+        { from: "publish/doc-index.md", to: "README.md" }
+      ],
+    })    
     //new webpack.optimize.UglifyJsPlugin()
   ],
   output: {
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    path: __dirname + '/site/dist',
+    path: __dirname + '/site/dist/standalone',
     filename: '[name].min.js'
   }
 });
