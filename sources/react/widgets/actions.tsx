@@ -23,11 +23,6 @@ export function AbrisActions({
       {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
       {actions && actions.length > 0 && (
         <div className="abris-nested-actions abris-action-context-button">
-          <div
-            dangerouslySetInnerHTML={{
-              __html: Icons.paste,
-            }}
-          ></div>
           <span className="abris-button__label" data-bind="text: title"></span>
           <div className="abris-nested-actions__dropdown">
             {/* <!-- ko foreach: actions --> */}

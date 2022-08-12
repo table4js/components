@@ -8,7 +8,6 @@
 <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->
 <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
 <div class="abris-nested-actions abris-action-context-button">
-    <div data-bind="html: $root.icons.paste"></div>
     <span class="abris-button__label" data-bind="text: title"></span>
     <div class="abris-nested-actions__dropdown">
         <!-- ko foreach: actions -->
