@@ -11,7 +11,7 @@ export function AbrisTableBoolCellEditor({ model }: ITableCellEditorProps) {
       <input type="checkbox"
         checked={model.value}
         onChange={(e) => {
-          model.value = e.target.value;
+          model.value = e.target.checked;
           model.complete(true);
         }}
       />
