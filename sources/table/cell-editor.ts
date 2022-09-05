@@ -1,4 +1,3 @@
-import * as ko from "knockout";
 import { Base } from "../core/base";
 import { property } from "../core/property";
 import { ITableCell } from "./cell";

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cellEditorTemplate } from "../../knockout";
 import { TableWidget } from "../../table";
 import { ITableRow } from "../../table/row";
 import { makeReactive } from "../reactivity";

@@ -7,16 +7,14 @@ export function AbrisAction({ action }: { action: Action }) {
   return (
     <button
       key={action.name}
-      data-bind="click: $data.formId !== undefined ? undefined : action, 
-                  enable: !$data.enabled || ko.unwrap(enabled)"
+      // disabled={action.enabled === false}
       onClick={() => action.action()}
-      // disabled={!action.enabled}
       className={
         "abris-button--transparent action-button abris-action-button " +
         action.cssClasses +
         (action.active === true ? " abris-action--active" : "")
       }
-      // type={action.formId !== undefined ? "submit" : "button"}
+      type={action["formId"] !== undefined ? "submit" : "button"}
       title={action.title || action.name}
       // form={action.formId}
     >

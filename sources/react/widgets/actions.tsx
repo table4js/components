@@ -11,28 +11,21 @@ export function AbrisActions({
 }) {
   return (
     <div className={className}>
-      {/* <!-- ko foreach: actions --> */}
-      {/* <!-- ko ifnot: ko.unwrap($data.actions) --> */}
-      {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
-      {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
-      {actions.map((a) => (
-        <AbrisAction key={a.name} action={a} />
-      ))}
-
-      {/* <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 --> */}
-      {/* <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  --> */}
-      {actions && actions.length > 0 && (
-        <div className="abris-nested-actions abris-action-context-button">
-          <span className="abris-button__label" data-bind="text: title"></span>
-          <div className="abris-nested-actions__dropdown">
-            {/* <!-- ko foreach: actions --> */}
-            {/* <!-- ko component: { name: 'abris-action-item', params: $data } --> */}
-            {actions.map((a) => (
-              <AbrisAction key={a.name} action={a} />
-            ))}
-          </div>
-        </div>
-      )}
+      {actions.map((action) => {
+        if(!action.actions) {
+          return <AbrisAction key={action.name} action={action} />
+        }
+        if(action.actions && action.actions.length > 0) {
+          return (<div className="abris-nested-actions abris-action-context-button">
+            <span className="abris-button__label" data-bind="text: title"></span>
+            <div className="abris-nested-actions__dropdown">
+              {action.actions.map((a) => (
+                <AbrisAction key={a.name} action={a} />
+              ))}
+            </div>
+          </div>);
+        }
+      })}
     </div>
   );
 }
