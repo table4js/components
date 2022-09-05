@@ -2,13 +2,12 @@
 <html>
 
 <head>
-    <title>Main | Abris Components</title>
+    <title>Main | Abris Table For JS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/ico" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
     <script src="./index.js"></script>
 </head>
 
@@ -22,7 +21,7 @@
                 <div class="header__pages">
                     <a class="header__link-page header__link-page--active" href="/">Main</a>
                     <a class="header__link-page" href="/examples">Examples</a>
-                    <a class="header__link-page" href="/buy/">Buy</a>
+                    <a class="header__link-page" href="/buy/">Get support</a>
                     <a class="header__link-page" href="/docs">Documentation</a>
                     <a class="header__link-page" href="#contact-form">Contact us</a>
                     <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
@@ -36,16 +35,16 @@
                 <img class="main-title__logo" src="img/logo/logo-components.svg" alt="abris-logo">
                 <div class="tagline">
                     <div class="tagline__line-one">
-                        <span class="tagline__text">No </span>
-                        <span class="tagline__text tagline__accent">&lt;code&gt;</span>
-                        <span class="tagline__text">, no special </span>
-                        <span class="tagline__text tagline__accent">design</span>
+                        <span class="tagline__text">We created JavaScript table widget for our projects </span>
+                        <span class="tagline__text">and share it with you for </span>
+                        <span class="tagline__text tagline__accent">free</span>
                         <img class="tagline__blink" src="img/logo/1.svg">
                     </div>
                     <div class="tagline__line-two">
-                        <span class="tagline__text">Just </span>
+                        <span class="tagline__text">Simply </span>
                         <a class="tagline__text tagline__link" href="/docs/">install</a>
-                        <span class="tagline__text">&nbsp;and use</span>
+                        <span class="tagline__text">&nbsp;and </span>
+                        <a class="tagline__text tagline__link" href="/examples/">use</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +55,12 @@
         <div class="page-size">
             <div class="quick-start__container">
                 <div class="headline">
-                    <h1 class="headline__text"> Try the power of abris-components-table <br> in your browser</h1>
+                    <h1 class="headline__text"><a href="/examples/">Try the table4js right now</a></h1>
+                    <p class="">For a ten years we are developing entarprise-level web applications: managerial accounting, document management systems, 
+                        technical references documentation management systems and so on. We were developing web applications with many table views and forms.
+                        We used 3rd party libraries to show data as table/grid and finally we decided to create our own table based on our experience 
+                        of real life web applications development. We decided to share our experience with you and will be glad if it helps you</p>
+                    <p class="">Sincerily yours, Abris Team.</p>                        
                 </div>
                 
                 <div class="semple">
@@ -71,27 +75,31 @@
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/array.svg">
-                            <span> Supports array datasets</span>
+                            <span> Works with array datasets</span>
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/db.svg">
-                            <span> Supports sever-side data provider</span>
+                            <span> Accompanied with sever-side data provider</span>
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/icon_filter.svg">
-                            <span> Supports filtering</span>
+                            <span> Out-of-the-box filtering</span>
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/icon_sort-down.svg">
-                            <span> Supports sorting</span>
+                            <span> Out-of-the-box sorting</span>
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/icon_equal.svg">
-                            <span> Supports columns summary</span>
+                            <span> Out-of-the-box columns summary</span>
                         </div>
                         <div class="features__reason">
                             <img class="semple__img" src="/img/icons/icon_edit.svg">
                             <span> Allows to modify data via inplace editing, create and delete rows</span>
+                        </div>
+                        <div class="features__reason">
+                            <img class="semple__img" src="/img/icons/icon_edit.svg">
+                            <span> Ready for TypeScript projects</span>
                         </div>
                        <!-- <span class="steps__description">1 Clone repo from github</span>
                         <span class="steps__code">git clone
@@ -100,29 +108,14 @@
                         <span class="steps__code">cd abris-components<br>npm i<br>npm test<br>npm run build</span>
                         <span class="steps__description">3 Add your data in abris-table and enjoy result </span>-->
                         <div class="buttons">
-                            <a class="button button--accent" href="/buy">Buy</a>
                             <a class="button" href="/docs/" >Getting Started guide</a>
+                            <a class="button button--accent" href="/buy">Get support</a>
                         </div>
 
                     </div>
                     <iframe class="three-column" style="min-height: 500px; border: none; outline: none;"
-                        src="/examples/basic/index.html"></iframe>
+                        src="/examples/standalone/basic/index.html"></iframe>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="unique-selling">
-        <div class="page-size">
-            <div class="unique-selling__container">
-                <div class="unique-selling__column three-column">
-                    <h2 class="headline__text text-right">We guarantee that you<br> will enjoy using your<br>
-                        abris-table!</h2>
-                    <span class="unique-selling__description text-right">If not, we will unconditionally refund your
-                        money within 90 days.</span>
-                    <button class="button button--accent" href="/buy">Go to shopping!</button>
-                </div>
-                <img class="two-column" src="img/usp/1.svg">
             </div>
         </div>
     </section>
@@ -161,9 +154,9 @@
                 </div>
                 <div class="features__reason reason-right">
                     <div class="reason-column">
-                        <h2 class="headline__text three-column text-right">Edit data right in the table</h2>
+                        <h2 class="headline__text three-column text-right">Inplace editing</h2>
                         <span class="reason__description two-column text-right">Edit data directly in the table without
-                            leaving the cash register.</span>
+                            leaving the context.</span>
                     </div>
                     <img class="reason-img" src="img/features/4.svg">
                 </div>
@@ -183,8 +176,8 @@
         <div class="page-size">
             <div class="crossbrow__container">
                 <div class="headline">
-                    <h2 class="headline__text">abris-components-table support cross browser</h2>
-                    <span class="headline__text"></span>
+                    <h2 class="headline__text">table4js works with</h2>
+                    <span class="headline__text">ReactJS and KnockoutJS frameworks. It also is usable in VanillaJS projects</span>
                 </div>
                 <div class="crossbrow__browsers">
                     <img class="crossbrow__item one-column" src="/img/crossbrow/1.svg">
@@ -237,7 +230,7 @@
                 <div class="footer__column one-column">
                     <span class="header__link-page header__link-page--active">Main</span>
                     <a class="header__link-page" href="/examples">Examples</a>
-                    <a class="header__link-page" href="/buy">Buy</a>
+                    <a class="header__link-page" href="/buy">Get support</a>
                     <a class="header__link-page" href="/docs">Documentation</a>
                     <a class="header__link-page" href="#contact-form">Contact us</a>
                 </div>
