@@ -4,12 +4,12 @@ import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
 import { AbrisSearch } from "./search";
 
-export interface IAbrisComponentsTableProps {
+export interface ITable4TableProps {
   model: TableWidget;
 }
 
-export function AbrisComponentsTablePreheader(
-  props: IAbrisComponentsTableProps
+export function Table4TablePreheader(
+  props: ITable4TableProps
 ) {
   const searchModel = props.model.searchModel as SearchModel;
   makeReactive(searchModel);

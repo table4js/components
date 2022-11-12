@@ -2,7 +2,7 @@ import * as React from "react";
 import { TableWidget } from "../../table";
 import { ITableRow } from "../../table/row";
 import { makeReactive } from "../reactivity";
-import { AbrisTableCell } from "./cell";
+import { Table4Cell } from "./cell";
 
 export interface ITableRowProps {
   table: TableWidget;
@@ -56,11 +56,11 @@ export function TableRow({ table, row }: ITableRowProps) {
               style={{ background: cell.color }}
               rowSpan={table.isMergedСells ? cell.count : 1}
             >
-              <AbrisTableCell
+              <Table4Cell
                 key={cell.name}
                 table={table}
                 cell={cell}
-              ></AbrisTableCell>
+              ></Table4Cell>
             </td>
           )
       )}

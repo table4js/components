@@ -3,7 +3,7 @@ import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 import { ITableCellEditorProps } from "./cell-editor";
 
-export function AbrisTableBoolCellEditor({ model }: ITableCellEditorProps) {
+export function Table4BoolCellEditor({ model }: ITableCellEditorProps) {
   makeReactive(model);
 
   return (
@@ -19,4 +19,4 @@ export function AbrisTableBoolCellEditor({ model }: ITableCellEditorProps) {
   );
 }
 
-registerComponent("bool-cell-editor", AbrisTableBoolCellEditor);
+registerComponent("bool-cell-editor", Table4BoolCellEditor);

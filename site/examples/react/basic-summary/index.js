@@ -17,9 +17,9 @@ var options = {
     ],
 };
 
-var widgetModel = new AbrisComponents.TableWidget(options);
-widgetModel.dataProvider = new AbrisComponents.ArrayDataProvider(sampleData);
+var widgetModel = new Table4.TableWidget(options);
+widgetModel.dataProvider = new Table4.ArrayDataProvider(sampleData);
 
 const root = ReactDOM.createRoot(document.getElementById("table-container"));
-root.render(<AbrisComponents.AbrisComponentsTable model={widgetModel}/>);
+root.render(<Table4.Table4Table model={widgetModel}/>);
 

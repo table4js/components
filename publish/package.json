@@ -1,7 +1,7 @@
 {
-  "name": "@abris-lab/components",
+  "name": "table4",
   "version": "0.0.0",
-  "description": "JavaScript components library",
+  "description": "JavaScript Table/Grid library",
   "homepage": "https://github.com/abris-platform/abris-components",
   "authors": [
     "Serge T <@domain.com>",
@@ -10,8 +10,8 @@
   ],
   "private": false,
   "license": "MIT",
-  "main": "abris-components.js",
-  "typings": "abris-components.d.ts",
+  "main": "table4.js",
+  "typings": "table4.d.ts",
   "keywords": [
     "JavaScript",
     "component",
@@ -24,10 +24,7 @@
     "type": "git",
     "url": "https://github.com/abris-platform/abris-components.git"
   },
-  "scripts": {
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
 }

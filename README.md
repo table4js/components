@@ -15,20 +15,20 @@ JavaScript (TypeScript) components library. Contains UI Abris components: table 
 
 ## Basic functionality
 
-![AbrisTable](./site/img/features/4.svg)
+![Table4](./site/img/features/4.svg)
 
-### AbrisTable widget
+### Table4 widget
 
 Shows data in table (grid) form. Supports infinite scrolling, array datasets, sever-side data provider, filtering, sorting and columns summary. Allows to modify data via inplace editing, create and delete rows. 
 
-## Getting started with AbrisTable
+## Getting started with Table4
 
 ### Vanilla JS / jQuery / KnockoutJS - no modules
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML
 <script src="https://unpkg.com/@abris-lab/components"></script>
-<link href="https://unpkg.com/@abris-lab/components/abris-components.css" rel="stylesheet">
+<link href="https://unpkg.com/@abris-lab/components/table4.css" rel="stylesheet">
 ```
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
@@ -58,7 +58,7 @@ var options = {
     ],
 };
 
-var widgetModel = new AbrisComponents.TableWidget(options);
+var widgetModel = new Table4.TableWidget(options);
 
 var sampleData = [
     { word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!" },

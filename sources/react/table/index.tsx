@@ -6,7 +6,7 @@ import { AbrisActions } from "../widgets/actions";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
 import { TableRow } from "./row";
 import { TableSummary } from "../../table/summary";
-import { AbrisTableSummary } from "./summary";
+import { Table4Summary } from "./summary";
 import { AbrisSearch } from "./search";
 import { AbrisColumnFilter } from "./column-filter";
 
@@ -64,7 +64,7 @@ export interface ITableWidgetProps {
   model: TableWidget;
 }
 
-export function AbrisComponentsTable({
+export function Table4Table({
   model,
 }: ITableWidgetProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
@@ -211,12 +211,12 @@ export function AbrisComponentsTable({
               {model.loadingMutex
                 ? LoadingIndicator(model)
                 : model.rows.map((r) => (
-                    <TableRow
-                      key={r.id || r.number}
-                      table={model}
-                      row={r}
-                    ></TableRow>
-                  ))}
+                  <TableRow
+                    key={r.id || r.number}
+                    table={model}
+                    row={r}
+                  ></TableRow>
+                ))}
             </tbody>
             <tfoot className="abris-table__footer abris-table-sticky-component">
               {model.showTableSummary && (
@@ -241,7 +241,7 @@ export function AbrisComponentsTable({
                         key={c.name}
                         className="abris-table-cell abris-table-footer__cell"
                       >
-                        <AbrisTableSummary summary={new TableSummary(c)} />
+                        <Table4Summary summary={new TableSummary(c)} />
                       </th>
                     ))}
                   <th

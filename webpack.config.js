@@ -4,9 +4,9 @@ const packageJson = require('./package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
-const libraryName = 'AbrisComponents';
+const libraryName = 'Table4';
 const banner = [
-  "@abris-lab/components - JavaScript components library v" + packageJson.version,
+  "table4 - JavaScript Table/Grid library v" + packageJson.version,
   "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
   "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
@@ -46,7 +46,7 @@ const BASE_CFG = {
     ]
   },
   entry: {
-    [packageJson.name]: './sources/knockout/index.ts',
+    table4: './sources/knockout/index.ts',
   }
 };
 

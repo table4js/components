@@ -17,6 +17,6 @@ var options = {
     ],
 };
 
-var widgetModel = new AbrisComponents.TableWidget(options);
+var widgetModel = new Table4.TableWidget(options);
 widgetModel.data = sampleData;
 widgetModel.render("#table-container");

@@ -46,11 +46,11 @@ var options2 = {
     ],
 };
 
-var widgetModel1 = new AbrisComponents.TableWidget(options1);
-widgetModel1.dataProvider = new AbrisComponents.ArrayDataProvider(sampleData1);
+var widgetModel1 = new Table4.TableWidget(options1);
+widgetModel1.dataProvider = new Table4.ArrayDataProvider(sampleData1);
 
-var widgetModel2 = new AbrisComponents.TableWidget(options2);
-widgetModel2.dataProvider = new AbrisComponents.ArrayDataProvider(sampleData2);
+var widgetModel2 = new Table4.TableWidget(options2);
+widgetModel2.dataProvider = new Table4.ArrayDataProvider(sampleData2);
 
 
 const root = ReactDOM.createRoot(document.getElementById("table-container"));
@@ -59,11 +59,11 @@ root.render(<>
     <div style={{clear: "both"}}>
         <h1>Table 1</h1>
     </div>
-    <AbrisComponents.AbrisComponentsTable model={widgetModel1}/>
+    <Table4.Table4Table model={widgetModel1}/>
 
     <div style={{clear: "both"}}>
         <h1>Table 2</h1>
     </div>
-    <AbrisComponents.AbrisComponentsTable model={widgetModel2}/>
+    <Table4.Table4Table model={widgetModel2}/>
 </>
 );

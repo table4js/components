@@ -140,8 +140,8 @@ var options = {
     ]
 };
 
-var widgetModel = new AbrisComponents.TableWidget(options);
-// var sampleDataProvider = new AbrisComponents.ArrayDataProvider(sampleData);
-// widgetModel.dataProvider = new AbrisComponents.ArrayDataProvider(sampleData);
+var widgetModel = new Table4.TableWidget(options);
+// var sampleDataProvider = new Table4.ArrayDataProvider(sampleData);
+// widgetModel.dataProvider = new Table4.ArrayDataProvider(sampleData);
 widgetModel.data = sampleData;
 widgetModel.render("#table-container");

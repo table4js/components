@@ -7,7 +7,7 @@ export interface ITableCellEditorProps {
   model: InplaceEditor;
 }
 
-export function AbrisTableCellEditor({ model }: ITableCellEditorProps) {
+export function Table4CellEditor({ model }: ITableCellEditorProps) {
   makeReactive(model);
 
   return (
@@ -21,4 +21,4 @@ export function AbrisTableCellEditor({ model }: ITableCellEditorProps) {
   );
 }
 
-registerComponent("abris-cell-editor", AbrisTableCellEditor);
+registerComponent("abris-cell-editor", Table4CellEditor);

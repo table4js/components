@@ -1,7 +1,7 @@
 
 
 function getColumns(name, baseUrl) {
-    AbrisComponents.postData(baseUrl + "getoptions", { name: name }).then((data) => {
+    Table4.postData(baseUrl + "getoptions", { name: name }).then((data) => {
         var options = {
             name: name,
             enableSearch: true,
@@ -9,8 +9,8 @@ function getColumns(name, baseUrl) {
             columns: data,
         };
 
-        var widgetModel = new AbrisComponents.TableWidget(options);
-        widgetModel.dataProvider = new AbrisComponents.RemoteDataProvider(name, baseUrl);
+        var widgetModel = new Table4.TableWidget(options);
+        widgetModel.dataProvider = new Table4.RemoteDataProvider(name, baseUrl);
         ko.applyBindings(widgetModel);
     });
 }

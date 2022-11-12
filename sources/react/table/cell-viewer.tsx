@@ -8,7 +8,7 @@ export interface ITableCellViewerProps {
   className: string
 }
 
-export function AbrisTableCellViewer({ cell, className }: ITableCellViewerProps) {
+export function Table4CellViewer({ cell, className }: ITableCellViewerProps) {
   return (
     <span
       className={className}
@@ -17,4 +17,4 @@ export function AbrisTableCellViewer({ cell, className }: ITableCellViewerProps)
   );
 }
 
-registerComponent("abris-cell-viewer", AbrisTableCellViewer);
+registerComponent("abris-cell-viewer", Table4CellViewer);

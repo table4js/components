@@ -6,7 +6,7 @@ export interface ITableSummaryProps {
   summary: TableSummary;
 }
 
-export function AbrisTableSummary({ summary }: ITableSummaryProps) {
+export function Table4Summary({ summary }: ITableSummaryProps) {
   makeReactive(summary);
   return (
     <>

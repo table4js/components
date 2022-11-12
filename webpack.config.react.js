@@ -4,7 +4,7 @@ const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin'
 
 const [ dev, prod ] = require('./webpack.config.js');
 
-publishPackageJson.name = "@abris-lab/abris-components-react";
+publishPackageJson.name = "table4react";
 publishPackageJson.version = packageJson.version;
 publishPackageJson.dependencies = {
   "react": "^18.2.0",
@@ -12,7 +12,7 @@ publishPackageJson.dependencies = {
 }
 
 const entry = {
-  [packageJson.name]: './sources/react/index.ts',
+  table4: './sources/react/index.ts',
 };
 
 const externals = {
