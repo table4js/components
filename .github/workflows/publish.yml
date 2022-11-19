@@ -25,9 +25,18 @@ jobs:
       - run: npm run doc:gen
       - run: npm run build:types
 
-      - run: npm publish ./site/dist --access public
+      - run: npm publish ./site/dist/standalone --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - run: npm publish ./site/dist/knockout --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - run: npm publish ./site/dist/react --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
 
       - uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
