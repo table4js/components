@@ -46,11 +46,11 @@ var options2 = {
     ],
 };
 
-var widgetModel1 = new Table4.TableWidget(options1);
-widgetModel1.data = sampleData1;
+var model1 = new Table4JS.Table(options1);
+model1.data = sampleData1;
 
-var widgetModel2 = new Table4.TableWidget(options2);
-widgetModel2.data = sampleData2;
+var model2 = new Table4JS.Table(options2);
+model2.data = sampleData2;
 
-ko.applyBindings(widgetModel1);
-ko.applyBindings(widgetModel2);
+ko.applyBindings(model1);
+ko.applyBindings(model2);

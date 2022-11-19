@@ -1,7 +1,7 @@
-var widgetModel=null;
+var model=null;
 
 function getColumns(name, baseUrl) {
-    Table4.postData(baseUrl + "getoptions", { name: name }).then((data) => {
+    Table4JS.postData(baseUrl + "getoptions", { name: name }).then((data) => {
         var options = {
             name: name,
             enableSearch: true,
@@ -9,9 +9,9 @@ function getColumns(name, baseUrl) {
             columns: data,
         };
 
-        widgetModel = new Table4.TableWidget(options);
-        widgetModel.dataProvider = new Table4.RemoteDataProvider(name, baseUrl);
-        // widgetModel.render("#table-container");
+        model = new Table4JS.Table(options);
+        model.dataProvider = new Table4JS.RemoteDataProvider(name, baseUrl);
+        // model.render("#table-container");
     });
 }
 getColumns("declaration", "https://abris.site:3334/");
@@ -20,6 +20,6 @@ getColumns("declaration", "https://abris.site:3334/");
 const root = ReactDOM.createRoot(document.getElementById("table-container"));
 root.render(
     <>
-        {widgetModel && <Table4.Table4Table model={widgetModel}/>}
+        {model && <Table4JS.Table4 model={model}/>}
     </>
 ); 

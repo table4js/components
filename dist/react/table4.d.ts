@@ -454,10 +454,10 @@ declare module "table/index" {
         field: string;
     }
     /**
-     * Creates TableWidget class.
+     * Creates Table class.
      * @param config - table options.
      */
-    export class TableWidget extends Base implements IDataProviderOwner {
+    export class Table extends Base implements IDataProviderOwner {
         config: ITableConfig;
         private scrollerElement;
         private resizerElement;
@@ -567,19 +567,19 @@ declare module "react/table/cell-editor" {
     export function Table4CellEditor({ model }: ITableCellEditorProps): JSX.Element;
 }
 declare module "react/table/cell" {
-    import { TableWidget } from "table/index";
+    import { Table } from "table/index";
     import { ITableCell } from "table/cell";
     export interface ITableCellProps {
-        table: TableWidget;
+        table: Table;
         cell: ITableCell;
     }
     export function Table4Cell({ table, cell }: ITableCellProps): JSX.Element;
 }
 declare module "react/table/row" {
-    import { TableWidget } from "table/index";
+    import { Table } from "table/index";
     import { ITableRow } from "table/row";
     export interface ITableRowProps {
-        table: TableWidget;
+        table: Table;
         row: ITableRow;
     }
     export function TableRow({ table, row }: ITableRowProps): JSX.Element;
@@ -666,11 +666,11 @@ declare module "react/table/column-filter" {
 }
 declare module "react/table/index" {
     import * as React from "react";
-    import { TableWidget } from "table/index";
-    export interface ITableWidgetProps {
-        model: TableWidget;
+    import { Table } from "table/index";
+    export interface ITableProps {
+        model: Table;
     }
-    export function Table4Table({ model, }: ITableWidgetProps): React.ReactNode;
+    export function Table4({ model, }: ITableProps): React.ReactNode;
 }
 declare module "react/table/cell-viewer" {
     import { ITableCell } from "table/cell";

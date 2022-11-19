@@ -450,10 +450,10 @@ declare module "table/index" {
         field: string;
     }
     /**
-     * Creates TableWidget class.
+     * Creates Table class.
      * @param config - table options.
      */
-    export class TableWidget extends Base implements IDataProviderOwner {
+    export class Table extends Base implements IDataProviderOwner {
         config: ITableConfig;
         private scrollerElement;
         private resizerElement;
@@ -634,4 +634,4 @@ declare module "index" {
     export * from "utils/utils";
     export * from "icon";
 }
-declare module 'table4' { import main = require('index'); export = main; }
+declare module 'table4js' { import main = require('index'); export = main; }

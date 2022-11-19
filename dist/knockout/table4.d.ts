@@ -444,10 +444,10 @@ declare module "table/index" {
         field: string;
     }
     /**
-     * Creates TableWidget class.
+     * Creates Table class.
      * @param config - table options.
      */
-    export class TableWidget extends Base implements IDataProviderOwner {
+    export class Table extends Base implements IDataProviderOwner {
         config: ITableConfig;
         private scrollerElement;
         private resizerElement;
@@ -697,6 +697,6 @@ declare module "knockout/index" {
         getValue(name: string, defaultValue?: any): any;
         setValue(name: string, val: any): void;
     }
-    export var tableWidgetTemplate: any;
+    export var tableTemplate: any;
 }
 declare module 'table4ko' { import main = require('knockout/index'); export = main; }

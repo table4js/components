@@ -23,6 +23,6 @@ var options = {
     ],
 };
 
-var widgetModel = new Table4.TableWidget(options);
-widgetModel.data = sampleData;
-widgetModel.render("#table-container");
+var model = new Table4JS.Table(options);
+model.data = sampleData;
+model.render("#table-container");
