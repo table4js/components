@@ -1,12 +1,12 @@
 import * as React from "react";
-import { TableWidget } from "../../table";
+import { Table } from "../../table";
 import { ITableCell, TableCell } from "../../table/cell";
 import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 import { Table4CellEditor } from "./cell-editor";
 
 export interface ITableCellProps {
-  table: TableWidget;
+  table: Table;
   cell: ITableCell;
 }
 

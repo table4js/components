@@ -1,15 +1,15 @@
 import * as React from "react";
-import { TableWidget } from "../../table";
+import { Table } from "../../table";
 import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
 import { AbrisSearch } from "./search";
 
-export interface ITable4TableProps {
-  model: TableWidget;
+export interface ITable4Props {
+  model: Table;
 }
 
-export function Table4TablePreheader(
-  props: ITable4TableProps
+export function Table4Preheader(
+  props: ITable4Props
 ) {
   const searchModel = props.model.searchModel as SearchModel;
   makeReactive(searchModel);

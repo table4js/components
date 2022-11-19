@@ -19,8 +19,8 @@ var framework = ko.observable('react');
 var examples = ko.observableArray([
     {
         name: "basic",
-        title: "TableWidget basic usage",
-        description: "TableWidget basic usage description",
+        title: "Table basic usage",
+        description: "Table basic usage description",
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {

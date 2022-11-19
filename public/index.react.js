@@ -140,10 +140,10 @@ var options = {
     ]
 };
 
-var widgetModel = new Table4.TableWidget(options);
-// var sampleDataProvider = new Table4.ArrayDataProvider(sampleData);
-// widgetModel.dataProvider = new Table4.ArrayDataProvider(sampleData);
-widgetModel.data = sampleData;
+var model = new Table4JS.Table(options);
+// var sampleDataProvider = new Table4JS.ArrayDataProvider(sampleData);
+// model.dataProvider = new Table4JS.ArrayDataProvider(sampleData);
+model.data = sampleData;
 
 const root = ReactDOM.createRoot(document.getElementById("table-container"));
-root.render(<Table4.Table4Table model={widgetModel}/>);
+root.render(<Table4JS.Table4 model={model}/>);

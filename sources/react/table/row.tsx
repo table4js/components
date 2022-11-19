@@ -1,11 +1,11 @@
 import * as React from "react";
-import { TableWidget } from "../../table";
+import { Table } from "../../table";
 import { ITableRow } from "../../table/row";
 import { makeReactive } from "../reactivity";
 import { Table4Cell } from "./cell";
 
 export interface ITableRowProps {
-  table: TableWidget;
+  table: Table;
   row: ITableRow;
 }
 

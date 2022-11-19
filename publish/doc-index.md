@@ -1,13 +1,13 @@
-# Table4 Widget Model Classes and Objects
+# Table4JS Widget Model Classes and Objects
 It is JavaScript (TypeScript) Table/Grid library.
 
-Almost all code ralated to the Table4 widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior.
+Almost all code ralated to the Table4JS widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior.
 
 Created table widget model is passed as a parameter to the presentation layer (React, Knockout). Presentation layer contains framework-specific rendering code and controlled by model objects.
 
 Please select class in the right navigation panel to explore properties and methods of a corresponding model class.
 
-## Getting started with Table4
+## Getting started with Table4JS
 
 ### Vanilla JS - non-modular web application
 
@@ -44,16 +44,16 @@ var options = {
     ],
 };
 
-var widgetModel = new Table4.TableWidget(options);
+var model = new Table4JS.Table(options);
 
 var sampleData = [
     { word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!" },
     { word: "there ", num: 24, text: "Their bearing, although they were not completely calm, with its ease, full of dignity and humility at the same time, aroused admiration" },
     { word: "there ", num: 18, text: "I'm to blame, I'm to blame, because I choose my own people." }
 ];
-widgetModel.data = sampleData;
+model.data = sampleData;
 
-widgetModel.render("#table-container");
+model.render("#table-container");
 ```
 
 Here is the table4js [live example with the above code](https://plnkr.co/edit/wBrB0EznDixVV1ra?open=lib%2Fscript.js&preview)

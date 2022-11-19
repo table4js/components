@@ -1,7 +1,7 @@
 
 
 function getColumns(name, baseUrl) {
-    Table4.postData(baseUrl + "getoptions", { name: name }).then((data) => {
+    Table4JS.postData(baseUrl + "getoptions", { name: name }).then((data) => {
         var options = {
             name: name,
             enableSearch: true,
@@ -9,9 +9,9 @@ function getColumns(name, baseUrl) {
             columns: data,
         };
 
-        var widgetModel = new Table4.TableWidget(options);
-        widgetModel.dataProvider = new Table4.RemoteDataProvider(name, baseUrl);
-        ko.applyBindings(widgetModel);
+        var model = new Table4JS.Table(options);
+        model.dataProvider = new Table4JS.RemoteDataProvider(name, baseUrl);
+        ko.applyBindings(model);
     });
 }
 getColumns("declaration", "https://abris.site:3334/");

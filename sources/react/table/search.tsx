@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { TableWidget } from "../../table";
+import { Table } from "../../table";
 import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
 

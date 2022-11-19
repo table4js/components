@@ -140,8 +140,8 @@ var options = {
     ]
 };
 
-var widgetModel = new Table4.TableWidget(options);
-// var sampleDataProvider = new Table4.ArrayDataProvider(sampleData);
-// widgetModel.dataProvider = new Table4.ArrayDataProvider(sampleData);
-widgetModel.data = sampleData;
-widgetModel.render("#table-container");
+var model = new Table4JS.Table(options);
+// var sampleDataProvider = new Table4JS.ArrayDataProvider(sampleData);
+// model.dataProvider = new Table4JS.ArrayDataProvider(sampleData);
+model.data = sampleData;
+model.render("#table-container");

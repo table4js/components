@@ -1,6 +1,6 @@
 import * as ko from "knockout";
 import { Base, HashTableStorage } from "../core/base";
-import { TableWidget } from "../table";
+import { Table } from "../table";
 
 export * from "./table/cell";
 export * from "./table/cell-editor";
@@ -62,25 +62,25 @@ export class KnockoutHashTableStorage extends HashTableStorage {
 
 Base.createPropertiesStorage = () => new KnockoutHashTableStorage();
 
-export var tableWidgetTemplate = require("./table/index.html").default;
+export var tableTemplate = require("./table/index.html").default;
 
-ko.components.register("abris-components-table", {
+ko.components.register("table4", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            const widgetModel = params.model as TableWidget;
-            widgetModel.initialize(componentInfo.element);
-            return widgetModel;
+            const model = params.model as Table;
+            model.initialize(componentInfo.element);
+            return model;
         }
     },
-    template: tableWidgetTemplate
+    template: tableTemplate
 });
 
-function renderTableWidget(element: string | Element) {
+function renderTable(element: string | Element) {
     let el: Element = element as Element;
     if(typeof element === "string") {
         el = document.querySelectorAll(element)[0];
     }
-    el.innerHTML = `<abris-components-table params="{ model: $data }"></abris-components-table>`;
+    el.innerHTML = `<table4 params="{ model: $data }"></table4>`;
     ko.utils.domNodeDisposal.addDisposeCallback(el, (node: Node) => {
         ko.cleanNode(node);
         el.innerHTML = "";
@@ -88,4 +88,4 @@ function renderTableWidget(element: string | Element) {
     ko.applyBindings(this, el);
 }
 
-TableWidget.prototype["render"] = renderTableWidget;
+Table.prototype["render"] = renderTable;

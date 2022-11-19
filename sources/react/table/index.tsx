@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
-import { TableWidget } from "../../table";
+import { Table } from "../../table";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
@@ -24,7 +24,7 @@ function EmptyTable() {
   );
 }
 
-function LoadingIndicator(table: TableWidget) {
+function LoadingIndicator(table: Table) {
   const visibleColumns = table.columns.filter((c) => c.visible);
   return (
     <>
@@ -60,13 +60,13 @@ function LoadingIndicator(table: TableWidget) {
   );
 }
 
-export interface ITableWidgetProps {
-  model: TableWidget;
+export interface ITableProps {
+  model: Table;
 }
 
-export function Table4Table({
+export function Table4({
   model,
-}: ITableWidgetProps): React.ReactNode {
+}: ITableProps): React.ReactNode {
   const dropdownActions = model.getActions("dropdownActions");
   const [startRow, setStartRow] = useState<number | undefined>(undefined);
   const rootRef = useRef(null);
@@ -75,7 +75,7 @@ export function Table4Table({
   useEffect(() => {
     model.initialize(rootRef.current.parentElement);
   });
-  const CustomTag = `abris-components-table` as keyof JSX.IntrinsicElements;
+  const CustomTag = `table4` as keyof JSX.IntrinsicElements;
   return (
     <CustomTag>
       <div ref={rootRef} className="abris-table-resizable-container">

@@ -14,18 +14,18 @@
 This is a monorepository of JavaScript (TypeScript) components library. Right now it contains UI the only component: 
 - table (grid) widget
 
-The Table4 widget is implemented for 3 web frameworks:
+The Table4JS widget is implemented for 3 web frameworks:
 - VanillaJS (pure JavaScript package with no dependencies, with bundled Knockout engine inside) - [table4js package](https://www.npmjs.com/package/table4js)
 - React - [table4react package](https://www.npmjs.com/package/table4react)
 - Knockout - [table4ko package](https://www.npmjs.com/package/table4ko)
 
-## Table4 widget functionality
+## Table4JS widget functionality
 
-![Table4](./site/img/features/4.svg)
+![Table4JS](./site/img/features/4.svg)
 
 Table widget shows data in table (grid) form. It supports infinite scrolling, array datasets, sever-side data provider, filtering, sorting and columns summary. Widget allows to modify data via inplace editing, create and delete rows. 
 
-## Getting started with Table4
+## Getting started with Table4JS
 
 ### Vanilla JS - non-modular web application
 
@@ -62,16 +62,16 @@ var options = {
     ],
 };
 
-var widgetModel = new Table4.TableWidget(options);
+var model = new Table4JS.Table(options);
 
 var sampleData = [
     { word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!" },
     { word: "there ", num: 24, text: "Their bearing, although they were not completely calm, with its ease, full of dignity and humility at the same time, aroused admiration" },
     { word: "there ", num: 18, text: "I'm to blame, I'm to blame, because I choose my own people." }
 ];
-widgetModel.data = sampleData;
+model.data = sampleData;
 
-widgetModel.render("#table-container");
+model.render("#table-container");
 ```
 
 Here is the table4js [live example with the above code](https://plnkr.co/edit/wBrB0EznDixVV1ra?open=lib%2Fscript.js&preview)
@@ -97,7 +97,7 @@ Our official sie is [https://abris.site](https://abris.site)
 The demos are framework-specific and you can choose your framework via selector Standalone/Knockout/React in the top left corner of the navigation panel. Each demo has html/js/css tab where you can get markup, css or JavaScript code to use in your application. Each demo also can be opened in a separate window.
 
 ### Documentation
-Almost all code ralated to the Table4 widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior. Table4 model is described in our documentation:
+Almost all code ralated to the Table4JS widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior. Table4JS model is described in our documentation:
 
 [https://abris.site/docs](https://abris.site/docs)
 

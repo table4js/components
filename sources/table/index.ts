@@ -47,10 +47,10 @@ interface ITableFilter {
 }
 
 /**
- * Creates TableWidget class.
+ * Creates Table class.
  * @param config - table options.
  */
-export class TableWidget extends Base implements IDataProviderOwner {
+export class Table extends Base implements IDataProviderOwner {
     private scrollerElement: HTMLDivElement;
     private resizerElement: HTMLDivElement;
     private tableElement: HTMLTableElement;
@@ -107,8 +107,8 @@ export class TableWidget extends Base implements IDataProviderOwner {
         
         var checkLoading = () => {
             var self = this;
-            self.partRowCount = Math.round(self.scrollerElement.clientHeight / TableWidget.rowHeight);
-            if(self.scrollerElement.scrollTop < TableWidget.rowHeight && self.lastOffsetBack > 0) {
+            self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
+            if(self.scrollerElement.scrollTop < Table.rowHeight && self.lastOffsetBack > 0) {
                 if ((self.lastOffsetBack - self.partRowCount) < 0) {
                     self.drawRows(self.lastOffsetBack, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
                 } 
@@ -431,7 +431,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
     lastOffset = 0;
     lastOffsetBack = 0;
     partRowCount = 10;
-    @property({ defaultValue: [], onSet: (val: ITableColumn[], target: TableWidget) => {
+    @property({ defaultValue: [], onSet: (val: ITableColumn[], target: Table) => {
         target.viewFilterTable = new ComputedUpdater(() => val.filter(c => c.filterContext.showFilter).length > 0) as any;
     } }) columns: Array<ITableColumn>;
     get keyColumn(): string {
@@ -443,7 +443,7 @@ export class TableWidget extends Base implements IDataProviderOwner {
     }
     @property({ defaultValue: false }) showTableSummary: boolean;
     @property({ defaultValue: false }) showSearch: boolean;
-    @property({ onSet: (newValue: number, target: TableWidget) => {
+    @property({ onSet: (newValue: number, target: Table) => {
         target.navigateTo(newValue);
     } }) startRow: number;
     lastSelectRow = null;

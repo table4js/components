@@ -25,7 +25,7 @@ var options = {
     ],
 };
 
-var widgetModel = new Table4.TableWidget(options);
-widgetModel.data = sampleData;
+var model = new Table4JS.Table(options);
+model.data = sampleData;
 
-ko.applyBindings(widgetModel);
+ko.applyBindings(model);
