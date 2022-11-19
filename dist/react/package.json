@@ -1,0 +1,33 @@
+{
+  "name": "table4react",
+  "version": "0.2.2",
+  "description": "JavaScript Table/Grid library",
+  "homepage": "https://github.com/abris-platform/abris-components",
+  "authors": [
+    "Serge T <@domain.com>",
+    "Fedor D <@domain.com>",
+    "Alexey N <@domain.com>"
+  ],
+  "private": false,
+  "license": "MIT",
+  "main": "table4.js",
+  "typings": "table4.d.ts",
+  "keywords": [
+    "JavaScript",
+    "component",
+    "widget",
+    "table",
+    "grid"
+  ],
+  "moduleType": "umd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abris-platform/abris-components.git"
+  },
+  "scripts": {},
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {}
+}

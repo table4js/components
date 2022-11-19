@@ -35,22 +35,7 @@
             <div class="examples__container">
                 <div class="examples__sticky-list one-column">
                     <!--<img class="examples__list-logo one-column" src="/img/logo/logo-components.svg" alt="abris-logo">-->
-                    <framework class="examples__list" >
-                        <legend>Framework:</legend>
-                        <div>
-                            <input type="radio" id="rt" name="framework" value="react" data-bind="checked: framework">
-                            <label for="huey">React</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="st" name="framework" value="standalone" data-bind="checked: framework">
-                            <label for="dewey">Standalone</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="kn" name="framework" value="ko" data-bind="checked: framework">
-                            <label for="louie">Knockout</label>
-                        </div>
-                    </framework>
-                    <ul class="examples__list" data-bind="foreach: list">
+                    <ul class="examples__list" data-bind="foreach: $data">
                         <li class="examples__page">
                             <a class="examples__page-link" data-bind="text: title, attr: { href: '#' + name }"></a>
                         </li>
@@ -58,17 +43,17 @@
                 </div>
                 <div class="examples__samples four-column">
                     <h1 class="examples__headline headline__text">table4js live examples</h1>
-                    <!-- ko foreach: list -->
+                    <!-- ko foreach: $data -->
                     <div class="sample__container" data-bind="">
                         <h2 class="sample__headline headline__text" data-bind="text: title, attr: { id: name }"></h2>
                         <span class="sample__description" data-bind="html: description"></span>
                         <div class="sample__table">
-                            <a class="sample__new-window" target="_blank" data-bind="attr: { href: framework() +'/'+ name + '/index.html' }">
+                            <a class="sample__new-window" target="_blank" data-bind="attr: { href: name + '/index.html' }">
                                 <span>Open in new window</span>
                                 <img src="/img/icons/icon_external-link.svg">
                             </a>
                             <iframe style="min-width: 800px; min-height: 500px; border: none; outline: none;"
-                                data-bind="attr: { src: $parent.framework() +'/'+ $data.name + '/index.html' }"></iframe>
+                                data-bind="attr: { src: $data.name + '/index.html' }"></iframe>
                         </div>
                         <h3 class="sample__code-headline headline__text">Source code</h3>
                         <div class="sample__code">
@@ -80,10 +65,7 @@
                             </div>
                             <pre class="sample__code-text four-column" >
                             <!-- ko foreach: files -->
-                                <code data-bind="visible: name == $parent.current_tab_file(),
-                                    class: lang,
-                                    attr: { id: $parent.name + '-' + name },
-                                    text: populatePre($parents[1].framework() + '/' + $parent.name + '/' + name, $parent.name + '-' + name)"></code>
+                                <code data-bind="visible: name == $parent.current_tab_file(), class: lang, attr: { id: $parent.name + '-' + name }, text: populatePre($parent.name + '/' + name, $parent.name + '-' + name)"></code>
                             <!-- /ko -->
                         </pre>
                         </div>
