@@ -1,6 +1,7 @@
 const packageJson = require('./package.json');
 const publishPackageJson = require('./publish/package.json');
 const GeneratePackageJsonPlugin = require('generate-package-json-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const [ dev, prod ] = require('./webpack.config.js');
 
@@ -42,5 +43,10 @@ dev.output.path = __dirname + '/site/dist/react';
 prod.output.path = __dirname + '/site/dist/react';
 
 prod.plugins.push(new GeneratePackageJsonPlugin(publishPackageJson));
+prod.plugins.push(new CopyPlugin({
+  patterns: [
+    { from: "publish/react.md", to: "README.md" }
+  ],
+}));
 
 module.exports = [ dev, prod ];

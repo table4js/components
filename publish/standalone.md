@@ -1,33 +1,16 @@
-[![Build Project](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml/badge.svg)](https://github.com/abris-platform/abris-components/actions/workflows/webpack.yml)
-[![npm version](https://badge.fury.io/js/table4js.svg)](https://badge.fury.io/js/table4js)
+# Table4JS - JavaScript (TypeScript) Table/Grid library
 
-<a href="https://github.com/abris-platform/abris-components/pulse" alt="Activity">
-<img src="https://img.shields.io/github/commit-activity/m/abris-platform/abris-components" /></a>
-<a href="https://github.com/abris-platform/abris-components/issues">
-<img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/abris-platform/abris-components.svg">
-</a>
-<a href="https://github.com/abris-platform/abris-components/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+">
-<img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/abris-platform/abris-components.svg">
-</a>
-
-# abris-components
-This is a monorepository of JavaScript (TypeScript) components library. Right now it contains UI the only component: 
-- table (grid) widget
-
-The Table4 widget is implemented for 3 web frameworks:
-- VanillaJS (pure JavaScript package with no dependencies, with bundled Knockout engine inside) - [table4js package](https://www.npmjs.com/package/table4js)
-- React - [table4react package](https://www.npmjs.com/package/table4react)
-- Knockout - [table4ko package](https://www.npmjs.com/package/table4ko)
-
-## Table4 widget functionality
+## Basic functionality
 
 ![Table4](./site/img/features/4.svg)
 
 Table widget shows data in table (grid) form. It supports infinite scrolling, array datasets, sever-side data provider, filtering, sorting and columns summary. Widget allows to modify data via inplace editing, create and delete rows. 
 
-## Getting started with Table4
+### Table4JS Widget
 
-### Vanilla JS - non-modular web application
+Shows data in table (grid) form. Supports infinite scrolling, array datasets, sever-side data provider, filtering, sorting and columns summary. Allows to modify data via inplace editing, create and delete rows. 
+
+## Getting started with table4js package
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML
@@ -76,18 +59,6 @@ widgetModel.render("#table-container");
 
 Here is the table4js [live example with the above code](https://plnkr.co/edit/wBrB0EznDixVV1ra?open=lib%2Fscript.js&preview)
 
-### React
-
-Please check [table4react](https://www.npmjs.com/package/table4react) package readme file
-
-### Knockout
-
-Please check [table4ko](https://www.npmjs.com/package/table4ko) package readme file
-
-### More info
-
-For more advanced cases please check our [online demos](https://abris.site/examples) and [documentation](https://abris.site/docs)
-
 ## Project site and resources
 Our official sie is [https://abris.site](https://abris.site)
 
@@ -100,20 +71,3 @@ The demos are framework-specific and you can choose your framework via selector 
 Almost all code ralated to the Table4 widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior. Table4 model is described in our documentation:
 
 [https://abris.site/docs](https://abris.site/docs)
-
-## Roadmap for 2023
-In our plans we have
-- Demos and documentation improvements
-- Row editing in a separate detail form
-- Accessibility support
-- Angular and Vue frameworks support
-- Tree widget
-
-## How to compile this repo
- - git clone https://github.com/abris-platform/abris-components.git
- - cd abris-components
- - npm i
- - npm test
- - npm run build
-
-Build artifacts can be fount in the `/site/dist` subfolders: `standalone`, `react`, `knockout`

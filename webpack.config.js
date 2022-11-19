@@ -2,7 +2,6 @@ const _ = require('underscore');
 const webpack = require('webpack');
 const packageJson = require('./package.json');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
 
 const libraryName = 'Table4';
 const banner = [
@@ -73,11 +72,6 @@ const PROD_CFG = _.extend({}, BASE_CFG, {
     new MiniCssExtractPlugin(
       { filename: '[name].min.css' }
     ),
-    new CopyPlugin({
-      patterns: [
-        { from: "publish/doc-index.md", to: "README.md" }
-      ],
-    })    
     //new webpack.optimize.UglifyJsPlugin()
   ],
   output: {
