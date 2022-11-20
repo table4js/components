@@ -23,10 +23,14 @@ function header() {
     href: "/"
   }, "Main"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
+    href: "/features"
+  }, "Features"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
+    class: "header__link-page",
     href: "/examples"
-  }, "Examples"), /*#__PURE__*/ typedoc.JSX.createElement("span", {
-    class: "header__link-page"
-  }, "Buy"), /*#__PURE__*/ typedoc.JSX.createElement("span", {
+  }, "Examples"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
+    class: "header__link-page",
+    href: "/buy"
+  }, "Get support"), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "header__link-page header__link-page--active"
   }, "Documentation"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
