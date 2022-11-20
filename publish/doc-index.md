@@ -9,7 +9,7 @@ Please select class in the right navigation panel to explore properties and meth
 
 ## Getting started with Table4JS
 
-### Vanilla JS - non-modular web application
+### Pure JS - non-modular web application
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML

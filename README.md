@@ -15,7 +15,7 @@ This is a monorepository of JavaScript (TypeScript) components library. Right no
 - table (grid) widget
 
 The Table4JS widget is implemented for 3 web frameworks:
-- VanillaJS (pure JavaScript package with no dependencies, with bundled Knockout engine inside) - [table4js package](https://www.npmjs.com/package/table4js)
+- PureJS (pure JavaScript package with no dependencies, with bundled Knockout engine inside) - [table4js package](https://www.npmjs.com/package/table4js)
 - React - [table4react package](https://www.npmjs.com/package/table4react)
 - Knockout - [table4ko package](https://www.npmjs.com/package/table4ko)
 
@@ -27,7 +27,7 @@ Table widget shows data in table (grid) form. It supports infinite scrolling, ar
 
 ## Getting started with Table4JS
 
-### Vanilla JS - non-modular web application
+### Pure JS - non-modular web application
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML

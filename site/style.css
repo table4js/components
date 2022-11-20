@@ -34,7 +34,7 @@ body {
 .quick-start,
 .unique-selling,
 .features,
-.crossbrow,
+.frameworks,
 .form-back,
 .sale__offer,
 .faq {
@@ -148,7 +148,7 @@ body {
     align-self: flex-end;
 }
 
-.tagline__line-two .tagline__text {
+.tagline__line-two .tagline__text:not(.tagline__accent) {
     color: #263769;
 }
 
@@ -176,6 +176,13 @@ body {
     line-height: 1.25;
     margin: 0;
     /*text-shadow: 2px 2px 0 #F5D4F9;*/
+}
+
+.headline__para {
+    font-family: Consolas, monaco, monospace;
+    font-size: 1.25em;
+    color: #fff;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.08);
 }
 
 .headline-description {
@@ -318,17 +325,35 @@ body {
     align-items: flex-end;
 }
 
-.crossbrow .headline {
+.frameworks .headline {
     margin: auto;
     margin-bottom: 20px;
 }
 
-.crossbrow__browsers {
+.frameworks__browsers {
     display: flex;
     align-items: center;
+    gap: 48px;
+    margin-top: 48px;
 }
 
-.crossbrow__item:not(:last-child) {
+.framework__text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    color: #7469FF;
+}
+
+.try-it {
+    padding-top: 200px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+}
+
+.frameworks__item {
+    display: flex;
+}
+
+.frameworks__item:not(:last-child) {
     margin-right: 40px;
 }
 
@@ -453,6 +478,7 @@ textarea.form-back__field {
 }
 
 .examples__list {
+    font-family: 'Roboto', sans-serif;
     padding-inline-start: 0;
     padding: 15px;
     margin: 0;

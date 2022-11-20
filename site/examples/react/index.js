@@ -76,7 +76,7 @@ var examples = [
     },
     {
         name: "basic-search",
-        title: "Searche",
+        title: "Search",
         description: `Display the data search bar. Allows you to filter the data in the table by all columns.\
         <br>Set by the 'enableSearch' option to true`,
         current_tab_file: ko.observable("index.js"),
