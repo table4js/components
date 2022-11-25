@@ -1,5 +1,7 @@
 body span,
-body a, body input, body textarea {
+body a,
+body input,
+body textarea {
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
     line-height: 1.5;
@@ -10,7 +12,9 @@ body {
     padding: 0;
 }
 
-*, ::after, ::before {
+*,
+::after,
+::before {
     box-sizing: content-box !important;
 }
 
@@ -189,16 +193,20 @@ body {
     margin-bottom: 20px;
 }
 
-.semple {
+.sample {
     display: flex;
     align-items: flex-start;
 }
 
-.semple .features__reason {
+.sample .features__reason {
     margin-bottom: 20px;
 }
 
-.semple__img {
+.sample .features__reason span {
+    margin-right: 10px;
+}
+
+.sample__img {
     width: 30px;
     height: 30px;
     margin-right: 10px;
@@ -420,7 +428,7 @@ textarea.form-back__field {
 
 .footer__column:not(:last-child) {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     margin-right: 40px;
 }
 
@@ -642,7 +650,7 @@ pre code.hljs {
 }
 
 .buy__description {
-    color: rgba(255,255,255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
     margin: auto;
     font-size: 1.2em;
     text-align: center;
@@ -701,7 +709,7 @@ pre code.hljs {
     text-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
-.accordion  * {
+.accordion * {
     box-sizing: border-box !important;
 }
 
@@ -737,4 +745,59 @@ pre {
 
 .footer__docs {
     margin-top: 50px;
+}
+
+.hover-prompt {
+    position: relative;
+}
+
+.promt__img {
+    background: #e2e0ff;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promt__img:hover + .promt {
+    display: block;
+}
+
+.promt__img img {
+    width: 17px;
+    height: 17px;
+}
+
+.promt {
+    position: absolute;
+    width: 250px;
+    padding: 8px;
+    background: #e2e0ff;
+    border: 1px solid #7469FF;
+    border-radius: 8px;
+    right: -280px;
+    display: none;
+    transition: display 10s ease-out;
+    z-index: 10;
+}
+
+.promt::before,
+.promt::after {
+    content: '';
+    border: 8px solid transparent;
+    border-right: 8px solid #7469FF;
+    position: absolute;
+    left: 20px;
+    margin-left: -37px;
+    top: calc(100% / 2 - 8px);
+    width: 0;
+
+}
+
+.promt::after {
+    border-right-color: #e2e0ff;
+    margin-left: -35px;
 }

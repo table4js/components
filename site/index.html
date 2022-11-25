@@ -9,6 +9,8 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./index.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -26,6 +28,23 @@
                     <a class="header__link-page" href="/docs">Documentation</a>
                     <a class="header__link-page" href="#contact-form">Contact us</a>
                     <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="main-title blue-background">
+        <div class="page-size">
+            <div class="main-title__contaier">
+                <!-- <img class="main-title__logo" src="img/logo/logo-components.svg" alt="abris-logo"> -->
+                <div class="headline">
+                    <h1 class="headline__text">Table4JS</h1>
+                    <p class="headline__para">Бесплатная таблица для ваших проектов. Table4JS поддерживает React,
+                        Knockout и Pure JS.</p>
+                </div>
+                <div class="buttons">
+                    <a class="button  button--accent" href="/docs/">Getting Started Guide</a>
+                    <a class="button" href="/buy">Get Support</a>
                 </div>
             </div>
         </div>
@@ -57,47 +76,145 @@
 
     <section class="quick-start">
         <div class="page-size">
-            <div class="headline">
-                <h2 class="headline__text">Main Features</h2>
-            </div>
+
+
             <div class="quick-start__container">
-                <div class="semple">
+                <div class="sample">
                     <div class="steps two-column">
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_table.svg">
+                            <img class="sample__img" src="/img/icons/icon_table.svg">
                             <span>Shows data in table (grid) form</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/scroll.svg">
+                            <img class="sample__img" src="/img/icons/scroll.svg">
                             <span> Supports infinite scrolling</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_filter.svg">
+                            <img class="sample__img" src="/img/icons/icon_filter.svg">
                             <span> Out-of-the-box filtering</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -30px;">
+                                    <span>
+                                        You can search data in your table without using additional libraries and
+                                        scripts.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_sort-down.svg">
+                            <img class="sample__img" src="/img/icons/icon_sort-down.svg">
                             <span> Out-of-the-box sorting</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_equal.svg">
+                            <img class="sample__img" src="/img/icons/icon_equal.svg">
                             <span> Out-of-the-box columns summary</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_edit.svg">
-                            <span> Allows to modify data via inplace editing, create and delete rows</span>
+                            <img class="sample__img" src="/img/icons/icon_edit.svg">
+                            <span> Inplace editing </span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -18px;">
+                                    <span>
+                                        Allows to modify data via inplace editing, create and delete rows without
+                                        leaving the context table.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/array.svg">
+                            <img class="sample__img" src="/img/icons/array.svg">
                             <span> Works with array datasets</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/db.svg">
+                            <img class="sample__img" src="/img/icons/db.svg">
                             <span> Accompanied with sever-side data provider</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_edit.svg">
+                            <img class="sample__img" src="/img/icons/icon_edit.svg">
                             <span> Ready for TypeScript projects</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -42px;">
+                                    <span>
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <!-- <span class="steps__description">1 Clone repo from github</span>
                         <span class="steps__code">git clone
@@ -121,29 +238,183 @@
                 </div>
                 <div class="steps">
                     <div class="framework__text">
-                        <!-- <img class="semple__img" src="/img/icons/icon_table.svg"> -->
+                        <!-- <img class="sample__img" src="/img/icons/icon_table.svg"> -->
                         <a class="" href="https://www.npmjs.com/package/table4react">React</a>
                     </div>
                     <div class="framework__text">
-                        <!-- <img class="semple__img" src="/img/icons/icon_table.svg"> -->
+                        <!-- <img class="sample__img" src="/img/icons/icon_table.svg"> -->
                         <a class="" href="https://www.npmjs.com/package/table4ko">Knockout</a>
                     </div>
                     <div class="framework__text">
-                        <!-- <img class="semple__img" src="/img/icons/icon_table.svg"> -->
+                        <!-- <img class="sample__img" src="/img/icons/icon_table.svg"> -->
                         <a class="" href="https://www.npmjs.com/package/table4js">Pure JS, no dependencies</a>
                     </div>
                     <div class="framework__text">
-                        <!-- <img class="semple__img" src="/img/icons/icon_table.svg"> -->
+                        <!-- <img class="sample__img" src="/img/icons/icon_table.svg"> -->
                         <span class="">TypeScript ready, .d.ts files are generated for all packages</span>
                     </div>
                 </div>
                 <div class="frameworks__browsers">
-                    <img class="frameworks__item one-column" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K">
-                    <img class="frameworks__item one-column" src="data:image/png;base64,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">
-                    <img class="frameworks__item one-column" src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTAwIiBoZWlnaHQ9IjI1MDAiIHZpZXdCb3g9IjAgMCAxMDUyIDEwNTIiPjxwYXRoIGZpbGw9IiNmMGRiNGYiIGQ9Ik0wIDBoMTA1MnYxMDUySDB6Ii8+PHBhdGggZD0iTTk2NS45IDgwMS4xYy03LjctNDgtMzktODguMy0xMzEuNy0xMjUuOS0zMi4yLTE0LjgtNjguMS0yNS4zOTktNzguOC00OS44LTMuOC0xNC4yLTQuMy0yMi4yLTEuOS0zMC44IDYuOS0yNy45IDQwLjItMzYuNiA2Ni42LTI4LjYgMTcgNS43IDMzLjEgMTguODAxIDQyLjggMzkuNyA0NS40LTI5LjM5OSA0NS4zLTI5LjIgNzctNDkuMzk5LTExLjYtMTgtMTcuOC0yNi4zMDEtMjUuNC0zNC0yNy4zLTMwLjUtNjQuNS00Ni4yLTEyNC00NS0xMC4zIDEuMy0yMC42OTkgMi42OTktMzEgNC0yOS42OTkgNy41LTU4IDIzLjEtNzQuNiA0NC00OS44IDU2LjUtMzUuNiAxNTUuMzk5IDI1IDE5Ni4xIDU5LjcgNDQuOCAxNDcuNCA1NSAxNTguNiA5Ni45IDEwLjkgNTEuMy0zNy42OTkgNjcuODk5LTg2IDYyLTM1LjYtNy40LTU1LjM5OS0yNS41LTc2LjgtNTguNC0zOS4zOTkgMjIuOC0zOS4zOTkgMjIuOC03OS44OTkgNDYuMSA5LjYgMjEgMTkuNjk5IDMwLjUgMzUuOCA0OC43IDc2LjIgNzcuMyAyNjYuODk5IDczLjUgMzAxLjEtNDMuNSAxLjM5OS00LjAwMSAxMC42LTMwLjgwMSAzLjE5OS03Mi4xMDF6bS0zOTQtMzE3LjZoLTk4LjRjMCA4NS0uMzk5IDE2OS40LS4zOTkgMjU0LjQgMCA1NC4xIDIuOCAxMDMuNy02IDExOC45LTE0LjQgMjkuODk5LTUxLjcgMjYuMi02OC43IDIwLjM5OS0xNy4zLTguNS0yNi4xLTIwLjYtMzYuMy0zNy42OTktMi44LTQuOS00LjktOC43LTUuNjAxLTktMjYuNjk5IDE2LjMtNTMuMyAzMi42OTktODAgNDkgMTMuMzAxIDI3LjMgMzIuOSA1MSA1OCA2Ni4zOTkgMzcuNSAyMi41IDg3LjkgMjkuNCAxNDAuNjAxIDE3LjMgMzQuMy0xMCA2My44OTktMzAuNjk5IDc5LjM5OS02Mi4xOTkgMjIuNC00MS4zIDE3LjYtOTEuMyAxNy40LTE0Ni42LjUtOTAuMiAwLTE4MC40IDAtMjcwLjl6IiBmaWxsPSIjMzIzMzMwIi8+PC9zdmc+'/>
-                    <img class="frameworks__item one-column" src='data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iIzMxNzhjNiIgaGVpZ2h0PSIxMjgiIHJ4PSI2IiB3aWR0aD0iMTI4Ii8+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNzQuMjYyMiA5OS40Njh2MTQuMDI2YzIuMjcyNCAxLjE2OCA0Ljk1OTggMi4wNDUgOC4wNjI1IDIuNjI5IDMuMTAyNy41ODUgNi4zNzI4Ljg3NyA5LjgxMDUuODc3IDMuMzUwMyAwIDYuNTMzLS4zMjEgOS41NDc4LS45NjQgMy4wMTYtLjY0MyA1LjY1OS0xLjcwMiA3LjkzMi0zLjE3OCAyLjI3Mi0xLjQ3NiA0LjA3MS0zLjQwNCA1LjM5Ny01Ljc4NiAxLjMyNS0yLjM4MSAxLjk4OC01LjMyNSAxLjk4OC04LjgzMTMgMC0yLjU0MjEtLjM3OS00Ljc3MDEtMS4xMzYtNi42ODQxLS43NTgtMS45MTM5LTEuODUtMy42MTU5LTMuMjc4LTUuMTA2Mi0xLjQyNy0xLjQ5MDItMy4xMzktMi44MjctNS4xMzQtNC4wMTA0LTEuOTk2LTEuMTgzNC00LjI0Ni0yLjMwMTEtNi43NTItMy4zNTMtMS44MzUyLS43NTk3LTMuNDgxMi0xLjQ5NzUtNC45Mzc4LTIuMjEzNC0xLjQ1NjctLjcxNTktMi42OTQ4LTEuNDQ2NC0zLjcxNDQtMi4xOTE1LTEuMDE5Ny0uNzQ1Mi0xLjgwNjMtMS41MzQxLTIuMzU5OC0yLjM2NjktLjU1MzUtLjgzMjctLjgzMDMtMS43NzUxLS44MzAzLTIuODI3IDAtLjk2NDMuMjQ3Ni0xLjgzMzYuNzQyOS0yLjYwNzlzMS4xOTQ1LTEuNDM5MSAyLjA5NzYtMS45OTQzYy45MDMxLS41NTUxIDIuMDEwMS0uOTg2MSAzLjMyMTEtMS4yOTI5IDEuMzExLS4zMDY5IDIuNzY3Ni0uNDYwMyA0LjM2OTktLjQ2MDMgMS4xNjU4IDAgMi4zOTU4LjA4NzcgMy42OTI4LjI2MyAxLjI5Ni4xNzUzIDIuNi40NDU2IDMuOTExLjgxMDkgMS4zMTEuMzY1MiAyLjU4NS44MjU0IDMuODI0IDEuMzgwNiAxLjIzOC41NTUyIDIuMzgxIDEuMTk4IDMuNDMgMS45Mjg1di0xMy4xMDUxYy0yLjEyNy0uODE4Mi00LjQ1LTEuNDI0NS02Ljk3LTEuODE5cy01LjQxMS0uNTkxNy04LjY3NDQtLjU5MTdjLTMuMzIxMSAwLTYuNDY3NC4zNTc5LTkuNDM5IDEuMDczOC0yLjk3MTUuNzE1OS01LjU4NjIgMS44MzM2LTcuODQ0IDMuMzUzLTIuMjU3OCAxLjUxOTUtNC4wNDIyIDMuNDU1My01LjM1MzEgNS44MDc1LTEuMzExIDIuMzUyMi0xLjk2NjUgNS4xNjQ2LTEuOTY2NSA4LjQzNzMgMCA0LjE3ODUgMS4yMDE3IDcuNzQzMyAzLjYwNTIgMTAuNjk0NSAyLjQwMzUgMi45NTEzIDYuMDUyMyA1LjQ0OTYgMTAuOTQ2NiA3LjQ5NSAxLjkyMjguNzg4OSAzLjcxNDUgMS41NjMzIDUuMzc1IDIuMzIzIDEuNjYwNi43NTk3IDMuMDk1NCAxLjU0ODYgNC4zMDQ0IDIuMzY2OHMyLjE2MjggMS43MDk0IDIuODYxOCAyLjY3MzZjLjcuOTY0MyAxLjA0OSAyLjA2IDEuMDQ5IDMuMjg3MyAwIC45MDYyLS4yMTggMS43NDYyLS42NTUgMi41MjAycy0xLjEgMS40NDYtMS45ODg1IDIuMDE2Yy0uODg4Ni41Ny0xLjk5NTYgMS4wMTYtMy4zMjEyIDEuMzM3LTEuMzI1NS4zMjEtMi44NzY4LjQ4Mi00LjY1MzkuNDgyLTMuMDI5OSAwLTYuMDMwNS0uNTMzLTkuMDAyMS0xLjYtMi45NzE1LTEuMDY2LTUuNzI0NS0yLjY2Ni04LjI1OTEtNC43OTl6bS0yMy41NTk2LTM0LjkxMzZoMTguMjk3NHYtMTEuNTU0NGgtNTF2MTEuNTU0NGgxOC4yMDc5djUxLjQ0NTZoMTQuNDk0N3oiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg=='/>
+                    <img class="frameworks__item one-column"
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K">
+                    <img class="frameworks__item one-column"
+                        src="data:image/png;base64,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">
+                    <img class="frameworks__item one-column"
+                        src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTAwIiBoZWlnaHQ9IjI1MDAiIHZpZXdCb3g9IjAgMCAxMDUyIDEwNTIiPjxwYXRoIGZpbGw9IiNmMGRiNGYiIGQ9Ik0wIDBoMTA1MnYxMDUySDB6Ii8+PHBhdGggZD0iTTk2NS45IDgwMS4xYy03LjctNDgtMzktODguMy0xMzEuNy0xMjUuOS0zMi4yLTE0LjgtNjguMS0yNS4zOTktNzguOC00OS44LTMuOC0xNC4yLTQuMy0yMi4yLTEuOS0zMC44IDYuOS0yNy45IDQwLjItMzYuNiA2Ni42LTI4LjYgMTcgNS43IDMzLjEgMTguODAxIDQyLjggMzkuNyA0NS40LTI5LjM5OSA0NS4zLTI5LjIgNzctNDkuMzk5LTExLjYtMTgtMTcuOC0yNi4zMDEtMjUuNC0zNC0yNy4zLTMwLjUtNjQuNS00Ni4yLTEyNC00NS0xMC4zIDEuMy0yMC42OTkgMi42OTktMzEgNC0yOS42OTkgNy41LTU4IDIzLjEtNzQuNiA0NC00OS44IDU2LjUtMzUuNiAxNTUuMzk5IDI1IDE5Ni4xIDU5LjcgNDQuOCAxNDcuNCA1NSAxNTguNiA5Ni45IDEwLjkgNTEuMy0zNy42OTkgNjcuODk5LTg2IDYyLTM1LjYtNy40LTU1LjM5OS0yNS41LTc2LjgtNTguNC0zOS4zOTkgMjIuOC0zOS4zOTkgMjIuOC03OS44OTkgNDYuMSA5LjYgMjEgMTkuNjk5IDMwLjUgMzUuOCA0OC43IDc2LjIgNzcuMyAyNjYuODk5IDczLjUgMzAxLjEtNDMuNSAxLjM5OS00LjAwMSAxMC42LTMwLjgwMSAzLjE5OS03Mi4xMDF6bS0zOTQtMzE3LjZoLTk4LjRjMCA4NS0uMzk5IDE2OS40LS4zOTkgMjU0LjQgMCA1NC4xIDIuOCAxMDMuNy02IDExOC45LTE0LjQgMjkuODk5LTUxLjcgMjYuMi02OC43IDIwLjM5OS0xNy4zLTguNS0yNi4xLTIwLjYtMzYuMy0zNy42OTktMi44LTQuOS00LjktOC43LTUuNjAxLTktMjYuNjk5IDE2LjMtNTMuMyAzMi42OTktODAgNDkgMTMuMzAxIDI3LjMgMzIuOSA1MSA1OCA2Ni4zOTkgMzcuNSAyMi41IDg3LjkgMjkuNCAxNDAuNjAxIDE3LjMgMzQuMy0xMCA2My44OTktMzAuNjk5IDc5LjM5OS02Mi4xOTkgMjIuNC00MS4zIDE3LjYtOTEuMyAxNy40LTE0Ni42LjUtOTAuMiAwLTE4MC40IDAtMjcwLjl6IiBmaWxsPSIjMzIzMzMwIi8+PC9zdmc+' />
+                    <img class="frameworks__item one-column"
+                        src='data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iIzMxNzhjNiIgaGVpZ2h0PSIxMjgiIHJ4PSI2IiB3aWR0aD0iMTI4Ii8+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNzQuMjYyMiA5OS40Njh2MTQuMDI2YzIuMjcyNCAxLjE2OCA0Ljk1OTggMi4wNDUgOC4wNjI1IDIuNjI5IDMuMTAyNy41ODUgNi4zNzI4Ljg3NyA5LjgxMDUuODc3IDMuMzUwMyAwIDYuNTMzLS4zMjEgOS41NDc4LS45NjQgMy4wMTYtLjY0MyA1LjY1OS0xLjcwMiA3LjkzMi0zLjE3OCAyLjI3Mi0xLjQ3NiA0LjA3MS0zLjQwNCA1LjM5Ny01Ljc4NiAxLjMyNS0yLjM4MSAxLjk4OC01LjMyNSAxLjk4OC04LjgzMTMgMC0yLjU0MjEtLjM3OS00Ljc3MDEtMS4xMzYtNi42ODQxLS43NTgtMS45MTM5LTEuODUtMy42MTU5LTMuMjc4LTUuMTA2Mi0xLjQyNy0xLjQ5MDItMy4xMzktMi44MjctNS4xMzQtNC4wMTA0LTEuOTk2LTEuMTgzNC00LjI0Ni0yLjMwMTEtNi43NTItMy4zNTMtMS44MzUyLS43NTk3LTMuNDgxMi0xLjQ5NzUtNC45Mzc4LTIuMjEzNC0xLjQ1NjctLjcxNTktMi42OTQ4LTEuNDQ2NC0zLjcxNDQtMi4xOTE1LTEuMDE5Ny0uNzQ1Mi0xLjgwNjMtMS41MzQxLTIuMzU5OC0yLjM2NjktLjU1MzUtLjgzMjctLjgzMDMtMS43NzUxLS44MzAzLTIuODI3IDAtLjk2NDMuMjQ3Ni0xLjgzMzYuNzQyOS0yLjYwNzlzMS4xOTQ1LTEuNDM5MSAyLjA5NzYtMS45OTQzYy45MDMxLS41NTUxIDIuMDEwMS0uOTg2MSAzLjMyMTEtMS4yOTI5IDEuMzExLS4zMDY5IDIuNzY3Ni0uNDYwMyA0LjM2OTktLjQ2MDMgMS4xNjU4IDAgMi4zOTU4LjA4NzcgMy42OTI4LjI2MyAxLjI5Ni4xNzUzIDIuNi40NDU2IDMuOTExLjgxMDkgMS4zMTEuMzY1MiAyLjU4NS44MjU0IDMuODI0IDEuMzgwNiAxLjIzOC41NTUyIDIuMzgxIDEuMTk4IDMuNDMgMS45Mjg1di0xMy4xMDUxYy0yLjEyNy0uODE4Mi00LjQ1LTEuNDI0NS02Ljk3LTEuODE5cy01LjQxMS0uNTkxNy04LjY3NDQtLjU5MTdjLTMuMzIxMSAwLTYuNDY3NC4zNTc5LTkuNDM5IDEuMDczOC0yLjk3MTUuNzE1OS01LjU4NjIgMS44MzM2LTcuODQ0IDMuMzUzLTIuMjU3OCAxLjUxOTUtNC4wNDIyIDMuNDU1My01LjM1MzEgNS44MDc1LTEuMzExIDIuMzUyMi0xLjk2NjUgNS4xNjQ2LTEuOTY2NSA4LjQzNzMgMCA0LjE3ODUgMS4yMDE3IDcuNzQzMyAzLjYwNTIgMTAuNjk0NSAyLjQwMzUgMi45NTEzIDYuMDUyMyA1LjQ0OTYgMTAuOTQ2NiA3LjQ5NSAxLjkyMjguNzg4OSAzLjcxNDUgMS41NjMzIDUuMzc1IDIuMzIzIDEuNjYwNi43NTk3IDMuMDk1NCAxLjU0ODYgNC4zMDQ0IDIuMzY2OHMyLjE2MjggMS43MDk0IDIuODYxOCAyLjY3MzZjLjcuOTY0MyAxLjA0OSAyLjA2IDEuMDQ5IDMuMjg3MyAwIC45MDYyLS4yMTggMS43NDYyLS42NTUgMi41MjAycy0xLjEgMS40NDYtMS45ODg1IDIuMDE2Yy0uODg4Ni41Ny0xLjk5NTYgMS4wMTYtMy4zMjEyIDEuMzM3LTEuMzI1NS4zMjEtMi44NzY4LjQ4Mi00LjY1MzkuNDgyLTMuMDI5OSAwLTYuMDMwNS0uNTMzLTkuMDAyMS0xLjYtMi45NzE1LTEuMDY2LTUuNzI0NS0yLjY2Ni04LjI1OTEtNC43OTl6bS0yMy41NTk2LTM0LjkxMzZoMTguMjk3NHYtMTEuNTU0NGgtNTF2MTEuNTU0NGgxOC4yMDc5djUxLjQ0NTZoMTQuNDk0N3oiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==' />
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="try-it blue-top-background">
+        <div class="page-size">
+            <div class="tagline">
+                <div class="tagline__line-one">
+                    <span class="tagline__text">Мы создаваем наши продукты с любовью и бережностью, будем рады если он
+                        поможет в ваших проектах. Если вам нравится наш продукт вы можете <a>
+                            <!-- ссылка для донатов-->помочь материально</a> или оставить лайк нашему репозиторию.
+                            Если вам не хватает функционала нашей таблицы, пожалуйста приобретите подписку и задайте вопрос.
+                    </span>
+                </div>
+                <div class="tagline__line-two">
+                    <a class="tagline__text tagline__link" href="/examples/">Try Table4JS right now</a>
+                    <span class="tagline__text">&nbsp;for&nbsp;</span>
+                    <span class="tagline__text tagline__accent">free</span>
+                    <img class="tagline__blink" src="img/logo/1.svg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sale__offer">
+        <div class="page-size">
+            <div class="buy__sale-cards">
+                <div class="sale-card">
+                    <div class="sale-card__header">
+                        <h2 class="headline__text">Coder</h2>
+                        <span class="sale-card__text">Free</span>
+                    </div>
+                    <div class="sale-card__body">
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">React package</span>
+                        </div>
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">Standalone package</span>
+                        </div>
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">Knockout package</span>
+                        </div>
+                        <div class="sale-card__reason sale-card__reason--missing">
+                            <img class="sale-card__icon" src="/img/icons/icon_no.svg">
+                            <span class="sale-card__text">Support</span>
+                        </div>
+                    </div>
+                    <button class="button button--accent">Get for Free</button>
+                </div>
+                <div class="sale-card">
+                    <div class="sale-card__header">
+                        <h2 class="headline__text">Assistent</h2>
+                        <span class="sale-card__text">20 $/mo</span>
+                    </div>
+                    <div class="sale-card__body">
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">React package</span>
+                        </div>
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">Standalone package</span>
+                        </div>
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">Knockout package</span>
+                        </div>
+                        <div class="sale-card__reason">
+                            <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                            <span class="sale-card__text">Support, 10 questions/month</span>
+                        </div>
+                    </div>
+                    <button class="button button--accent">Buy</button>
+                </div>
+                <div class="sale-card">
+                    <div class="sale-card__header">
+                        <h2 class="headline__text">Pro Team</h2>
+                        <span class="sale-card__text">200 $/mo</span>
+                    </div>
+                    <div class="sale-card__body">
+                        <div class="sale-card__body">
+                            <div class="sale-card__reason">
+                                <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                                <span class="sale-card__text">React package</span>
+                            </div>
+                            <div class="sale-card__reason">
+                                <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                                <span class="sale-card__text">Standalone package</span>
+                            </div>
+                            <div class="sale-card__reason">
+                                <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                                <span class="sale-card__text">Knockout package</span>
+                            </div>
+                            <div class="sale-card__reason">
+                                <img class="sale-card__icon" src="/img/icons/icon_check.svg">
+                                <span class="sale-card__text">Support, unlimited questions/month</span>
+                            </div>
+                        </div>
+                        </div>
+                    <button class="button button--accent">Buy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="page-size">
+            <div class="headline">
+                <h2 class="headline__text">We are ready to answer your questions!</h2>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Do we need to buy a license, if I want to use your products?
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>No.</strong> You can use our products for free. All of them are under the MIT license.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      What is the support service model?
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>Via question/bug private issues.</strong> A person wich has a license, ask us a question or report a bug at the support site. Our team will answer a question or fix a bug.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      How many support subscriptions should I buy?
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>Our support service provided per developer.</strong> You need support subscriptions for every developer that want to get assistance during work with our products
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </section>
 
