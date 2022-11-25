@@ -663,10 +663,9 @@ pre code.hljs {
 
 .sale-card {
     width: 300px;
-    border: 1px solid #A59EFF;
+    border: 3px solid #A59EFF;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
@@ -674,14 +673,8 @@ pre code.hljs {
 }
 
 .sale-card__header {
-    margin: -20px;
-    margin-bottom: 20px;
-    padding: 20px;
-    background: #A59EFF;
+    margin-bottom: 28px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    border-radius: 14px 14px 0 0;
 }
 
 .sale-card__body {
@@ -690,7 +683,8 @@ pre code.hljs {
 
 .sale-card__reason {
     display: flex;
-    margin-bottom: 10px;
+    align-items: flex-start;
+    margin-bottom: 16px;
 }
 
 .sale-card__reason--missing {
@@ -698,15 +692,28 @@ pre code.hljs {
 }
 
 .sale-card__icon {
-    width: 25px;
-    height: 25px;
-    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
 }
 
 .sale-card__header .headline__text {
     margin: 0;
+}
+
+.sale-card .sale-card__price {
+    text-align: center;
     color: #263769;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    font-size: 2em;
+    margin-right: 2px;
+}
+
+.sale-card__price-div {
+    margin-bottom: 16px;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
 }
 
 .accordion * {

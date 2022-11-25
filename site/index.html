@@ -9,8 +9,11 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./index.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -76,8 +79,6 @@
 
     <section class="quick-start">
         <div class="page-size">
-
-
             <div class="quick-start__container">
                 <div class="sample">
                     <div class="steps two-column">
@@ -275,7 +276,7 @@
                     <span class="tagline__text">Мы создаваем наши продукты с любовью и бережностью, будем рады если он
                         поможет в ваших проектах. Если вам нравится наш продукт вы можете <a>
                             <!-- ссылка для донатов-->помочь материально</a> или оставить лайк нашему репозиторию.
-                            Если вам не хватает функционала нашей таблицы, пожалуйста приобретите подписку и задайте вопрос.
+                        Если вам не хватает функционала нашей таблицы, пожалуйста приобретите подписку и задайте вопрос.
                     </span>
                 </div>
                 <div class="tagline__line-two">
@@ -294,7 +295,6 @@
                 <div class="sale-card">
                     <div class="sale-card__header">
                         <h2 class="headline__text">Coder</h2>
-                        <span class="sale-card__text">Free</span>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__reason">
@@ -314,12 +314,14 @@
                             <span class="sale-card__text">Support</span>
                         </div>
                     </div>
-                    <button class="button button--accent">Get for Free</button>
+                    <div class="sale-card__price-div">
+                        <span class="sale-card__price headline__text">Free</span>
+                    </div>
+                    <button class="button button--accent">Get Table4JS</button>
                 </div>
                 <div class="sale-card">
                     <div class="sale-card__header">
                         <h2 class="headline__text">Assistent</h2>
-                        <span class="sale-card__text">20 $/mo</span>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__reason">
@@ -339,12 +341,15 @@
                             <span class="sale-card__text">Support, 10 questions/month</span>
                         </div>
                     </div>
+                    <div class="sale-card__price-div">
+                        <span class="sale-card__price headline__text">20$</span><span
+                            class="sale-card__text"></span>/mounth</span>
+                    </div>
                     <button class="button button--accent">Buy</button>
                 </div>
                 <div class="sale-card">
                     <div class="sale-card__header">
                         <h2 class="headline__text">Pro Team</h2>
-                        <span class="sale-card__text">200 $/mo</span>
                     </div>
                     <div class="sale-card__body">
                         <div class="sale-card__body">
@@ -365,7 +370,11 @@
                                 <span class="sale-card__text">Support, unlimited questions/month</span>
                             </div>
                         </div>
-                        </div>
+                    </div>
+                    <div class="sale-card__price-div">
+                        <span class="sale-card__price headline__text">200$</span><span
+                            class="sale-card__text"></span>/mounth</span>
+                    </div>
                     <button class="button button--accent">Buy</button>
                 </div>
             </div>
@@ -379,42 +388,51 @@
             </div>
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Do we need to buy a license, if I want to use your products?
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>No.</strong> You can use our products for free. All of them are under the MIT license.
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Do we need to buy a license, if I want to use your products?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>No.</strong> You can use our products for free. All of them are under the MIT
+                            license.
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      What is the support service model?
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>Via question/bug private issues.</strong> A person wich has a license, ask us a question or report a bug at the support site. Our team will answer a question or fix a bug.
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            What is the support service model?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Via question/bug private issues.</strong> A person wich has a license, ask us a
+                            question or report a bug at the support site. Our team will answer a question or fix a bug.
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      How many support subscriptions should I buy?
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>Our support service provided per developer.</strong> You need support subscriptions for every developer that want to get assistance during work with our products
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How many support subscriptions should I buy?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Our support service provided per developer.</strong> You need support subscriptions
+                            for every developer that want to get assistance during work with our products
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
         </div>
     </section>
 
