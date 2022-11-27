@@ -32,6 +32,7 @@
     "build:types:react": "tsc sources/react/index.ts --declaration --emitDeclarationOnly --skipLibCheck --jsx react --target es5 --moduleResolution node --experimentalDecorators true --outFile site/dist/react/table4.d.ts && echo \"declare module 'table4react' { import main = require('react/index'); export = main; }\" >> site/dist/react/table4.d.ts",
     "test": "jest",
     "test:dev": "jest --watch",
+    "e2e": "playwright test",
     "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name 'abris-components' --includeVersion  --customCss ./publish/abris-theme.css --plugin ./publish/abris-theme.js --hideGenerator",
     "release": "standard-version --message \"Release: %s\"",
     "format": "prettier --write ./sources/react"
@@ -42,6 +43,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.28.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^27.1.5",
