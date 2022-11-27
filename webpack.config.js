@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const libraryName = 'Table4JS';
 const banner = [
   "table4js - JavaScript Table/Grid library v" + packageJson.version,
-  "Copyright (c) 2018-2021 Abris LTD - https://github.com/abris-platform/components",
+  "Copyright (c) 2018-2023 Abris LTD - https://github.com/abris-platform/components",
   "License: MIT (http://www.opensource.org/licenses/mit-license.php)",
 ].join("\n");
 
