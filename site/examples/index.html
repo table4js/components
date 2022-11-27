@@ -60,16 +60,18 @@
                 <div class="examples__samples four-column">
                     <h1 class="examples__headline headline__text">table4js live examples</h1>
                     <!-- ko foreach: list -->
-                    <div class="sample__container" data-bind="">
-                        <h2 class="sample__headline headline__text" data-bind="text: title, attr: { id: name }"></h2>
+                    <div class="sample__container" data-bind="attr: { id: name }">
+                        <h2 class="sample__headline headline__text" data-bind="text: title"></h2>
                         <span class="sample__description" data-bind="html: description"></span>
                         <div class="sample__table">
                             <a class="sample__new-window" target="_blank" data-bind="attr: { href: framework() +'/'+ name + '/index.html' }">
                                 <span>Open in new window</span>
                                 <img src="/img/icons/icon_external-link.svg">
                             </a>
+                            <!-- ko if: show -->
                             <iframe style="min-width: 800px; min-height: 500px; border: none; outline: none;"
                                 data-bind="attr: { src: $parent.framework() +'/'+ $data.name + '/index.html' }"></iframe>
+                            <!-- /ko -->
                         </div>
                         <h3 class="sample__code-headline headline__text">Source code</h3>
                         <div class="sample__code">

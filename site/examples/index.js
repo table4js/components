@@ -21,6 +21,7 @@ var examples = ko.observableArray([
         name: "basic",
         title: "Table basic usage",
         description: "Table basic usage description",
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -41,6 +42,7 @@ var examples = ko.observableArray([
         name: "basic-merged",
         title: "Merged Сells",
         description: "Enabling/hidden mode of merging cells with the same values.",
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -61,6 +63,7 @@ var examples = ko.observableArray([
         name: "basic-edit",
         title: "Editing to cells",
         description: "Editing to cells.",
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -82,6 +85,7 @@ var examples = ko.observableArray([
         title: "Search",
         description: `Display the data search bar. Allows you to filter the data in the table by all columns.\
         <br>Set by the 'enableSearch' option to true`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -103,6 +107,7 @@ var examples = ko.observableArray([
         title: "Summary",
         description: `Displays a switch that shows/hides the column totals calculation panel.\
         <br>Set by the 'enableSummary' option to true`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -123,6 +128,7 @@ var examples = ko.observableArray([
         name: "server-basic",
         title: "Getting data from the server",
         description: "Universal Declaration of Human Rights description",
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -141,6 +147,7 @@ var examples = ko.observableArray([
         description: `Two tables on the same page\
         Variables options1 and options2 are used to describe tables.\
         <br><br>The data is stored in the variables "sampleData1" and "sampleData2" files "data1.js" and "data2.js"`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -175,6 +182,7 @@ var examples = ko.observableArray([
         <br>}\
         <br>
         <br>The column name can be anything.`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -206,6 +214,7 @@ var examples = ko.observableArray([
         <br>}\
         <br>
         <br>The column name can be anything.`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -236,6 +245,7 @@ var examples = ko.observableArray([
         <br>}\
         <br>
         <br>The column name can be anything.`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -268,6 +278,7 @@ var examples = ko.observableArray([
         <br>}\
         <br>
         <br>The column name can be anything.`,
+        show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
             {
@@ -287,9 +298,22 @@ var examples = ko.observableArray([
 
 ]);
 
-var myViewModel = {
+var examplesViewModel = {
     list: examples,
     framework: framework
 };
 
-ko.applyBindings(myViewModel);
+ko.applyBindings(examplesViewModel);
+
+setTimeout(function() {
+    document.querySelectorAll('.sample__container').forEach(function(element) {
+        var intersectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.intersectionRatio <= 0) return;
+                ko.dataFor(entry.target).show(true);
+                intersectionObserver.disconnect();
+            });
+        });
+        intersectionObserver.observe(element);
+    });
+}, 100);
