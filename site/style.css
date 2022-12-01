@@ -19,19 +19,19 @@ body {
 }
 
 .one-column {
-    width: 168px;
+    max-width: 168px;
 }
 
 .two-column {
-    width: 376px;
+    max-width: 376px;
 }
 
 .three-column {
-    width: 584px;
+    max-width: 584px;
 }
 
 .four-column {
-    width: 792px;
+    max-width: 792px;
 }
 
 .section-container {
@@ -39,11 +39,11 @@ body {
 }
 
 .page-size {
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
     margin: 0 auto;
 }
- /*gutter 40px*/
-
+ 
 /*header-menu*/
 .header {
     position: sticky;
@@ -128,7 +128,7 @@ body {
     color: #263769;
     line-height: 1.2;
     margin: 0;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     text-align: center;
 }
 
@@ -147,11 +147,15 @@ body {
     color: #263769;
 }
 
-.big-text {
+.text--centered {
+    text-align: center;
+}
+
+.text--big {
     font-size: 1.25em;
 }
 
-.small-text {
+.text--small {
     font-size: 1em;
     line-height: 1.2;
 }
@@ -204,7 +208,7 @@ body {
 .main__title-container {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 32px;
+    margin-bottom: 64px;
     text-align: center;
 }
 
@@ -216,7 +220,6 @@ body {
 
 .feature__block {
     display: flex;
-    align-items: center;
     margin-bottom: 16px;  
 }
 
@@ -291,20 +294,21 @@ body {
 .vertical-cards {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 32px;
 }
 
 .v-card {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+}
+
+.framework-card {
     align-items: center;
-    width: 215px;
 }
 
-.v-card--long {
-    width: 100%;
-}
-
-.v-card img {
+.framework-card img {
     margin-bottom: 16px;
     height: 168px;
     border-radius: 8px;
@@ -318,19 +322,19 @@ body {
 .h-card__img {
     margin-right: 40px;
 }
+@media (max-width: 750px) {
+    .h-card__img {
+        display: none;
+    }
+}    
 
 .h-card .title-h3 {
     margin-top: 16px;
     text-align: end;
 }
 
-.buy__sale-cards {
-    display: flex;
-    justify-content: space-around;
-}
-
 .sale-card {
-    width: 320px;
+    max-width: 320px;
     border: 3px solid #263769;
     display: flex;
     flex-direction: column;
@@ -376,7 +380,9 @@ body {
     align-items: flex-start;
 }
 
-
+.headline {
+    margin-bottom: 32px;
+}
 
 .form-back .headline__text {
     align-self: center;
