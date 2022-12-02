@@ -97,7 +97,11 @@ header > .tsd-page-toolbar.tsd-page-toolbar--hide {
     padding: 10px;
     padding-right: 20px;
     border-radius: 8px;
-    background: #D4D0FF;
+    background: url(../../img/background/color.svg) rgba(255, 255, 255, 0.7);
+    background-blend-mode: lighten;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .tsd-navigation.secondary li.current {
@@ -109,17 +113,23 @@ header > .tsd-page-toolbar.tsd-page-toolbar--hide {
 }
 
 h1, h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: Consolas, monaco, monospace;
     font-weight: bold;
-    color: #7469FF;
-    padding: 0;
-    /*text-shadow: 2px 2px 0 #F5D4F9;*/
+    color: #263769;
+    line-height: 120%;
+    margin: 0;
+    margin-bottom: 16px;
+    text-align: left;
 }
 
 p, a, span {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1em;
-    line-height: 1.5;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif !important;
+    font-size: 1.15em;
+    color: #263769;
+}
+
+.tsd-kind-icon {
+    font-size: 1.15em;
 }
 
 h2 {
@@ -224,8 +234,8 @@ code {
     --dark-hl-9: #795E26;
     --light-hl-10: #098658;
     --dark-hl-10: #098658;
-    --light-code-background: #eeecff;
-    --dark-code-background: #eeecff;
+    --light-code-background: #2637691e;
+    --dark-code-background: #2637691e;
 }
 
 .tsd-panel {
