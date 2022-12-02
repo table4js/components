@@ -178,7 +178,16 @@ body {
     line-height: 1.2;
 }
 
+.text--code {
+    padding: 8px 16px;
+    background: #a3bcff86;
+    border: 3px solid #35488031;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
 .hide-link {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
     color: #263769;
 }
 
@@ -703,4 +712,8 @@ pre {
 
 *::-webkit-scrollbar-thumb:hover {
     background: #A6A6A6;
+}
+
+#buy-title {
+    display: none;
 }
