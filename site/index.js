@@ -14,13 +14,13 @@ function newletter() {
 
 function buy20() {
     buyTitle();
-    $("#message").val('Добрый день! Я хочу приобрести поддержку по тарифному плану Assistent.');
+    $("#message").val('Hello! I want to get support according the "Assistent" plan.');
     document.getElementById("contact-form").scrollIntoView();
 }
 
 function buy200() {
     buyTitle();
-    $("#message").val('Добрый день! Я хочу приобрести поддержку по тарифному плану Pro Team.');
+    $("#message").val('Hello! I want to get support according the "Pro Team" plan.');
     document.getElementById("contact-form").scrollIntoView();
 }
 
