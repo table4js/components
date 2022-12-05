@@ -246,6 +246,24 @@ body {
     margin-right: 10px;
 }
 
+.sample {
+    display: flex;
+    align-items: flex-start;
+    padding: 50px 0;
+    position: relative;
+}
+
+.absolute-block {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.svg-line {
+    fill: red;
+    stroke-width: 5px;
+}
+
 .feature__block {
     display: flex;
     margin-bottom: 16px;
@@ -316,8 +334,8 @@ body {
     background: #fff;
     border-radius: 16px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+    max-width: 960px;
 }
-
 
 .vertical-cards {
     display: flex;
@@ -399,12 +417,6 @@ body {
 .accordion-button:focus {
     box-shadow: none;
     background-color: #e2e0ff;
-}
-
-
-.sample {
-    display: flex;
-    align-items: flex-start;
 }
 
 .headline {
@@ -521,7 +533,7 @@ textarea.form-back__field {
     align-items: center;
 }
 
-.social__icon {
+.social__icon small-icon {
     margin-right: 8px;
 }
 

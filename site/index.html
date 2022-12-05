@@ -29,11 +29,60 @@
                     <a class="header__link-page text" href="/docs">Documentation</a>
                     <a class="header__link-page text" href="#contact-form">Contact us</a>
                     <a class="header__link-page text" href="https://github.com/abris-platform/abris-components"><img
-                            class="social__icon" src="/img/footer/github.svg"></a>
+                            class="social__icon small-icon" src="/img/footer/github.svg"></a>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="two-column v-card">
+        
+        
+        <div class="feature__block absolute-block">
+            <img class="small-icon" src="/img/icons/icon_table.svg">
+            <span class="text">Shows data in table (grid) form</span>
+            <div class="hover-prompt">
+                <div class="promt__img">
+                    <img src="/img/icons/icon_hint.svg">
+                </div>
+                <div class="promt" style="top: -18px;">
+                    <span class="text text--small">
+                        Table is a conviniet tool to visualize your data.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature__block absolute-block">
+            <img class="small-icon" src="/img/icons/array.svg">
+            <span class="text">Works with any datasets: array and remote</span>
+            <div class="hover-prompt">
+                <div class="promt__img">
+                    <img src="/img/icons/icon_hint.svg">
+                </div>
+                <div class="promt" style="top: -67px;">
+                    <span class="text text--small">
+                        Table4JS ready for large datatests. Only visible data are loaded and shown on the screen.
+                        Other data will be lazy loaded as you will scroll table content to them.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature__block absolute-block">
+            <img class="small-icon" src="/img/icons/db.svg">
+            <span class="text">Accompanied with sever-side data provider</span>
+            <div class="hover-prompt">
+                <div class="promt__img">
+                    <img src="/img/icons/icon_hint.svg">
+                </div>
+                <div class="promt" style="top: -54px;">
+                    <span class="text text--small">
+                        Fill the table with data from various sources that come to your mind. На данный момент мы поддерживаем
+                         node js sql хранилища и многое другое.
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="section-container color-background">
         <div class="page-size">
@@ -47,127 +96,77 @@
                     </div>
                 </div>
                 <div class="sample vertical-cards">
-                    <div class="two-column v-card">
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/icon_table.svg">
-                            <span class="text">Shows data in table (grid) form</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -18px;">
-                                    <span class="text text--small">
-                                        Table is a conviniet tool to visualize your data.
-                                    </span>
-                                </div>
+                    <div class="feature__block absolute-block" style="display: none;">
+                        <span class="text">Infinite scrolling</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
                             </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/scroll.svg">
-                            <span class="text">Infinite scrolling</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -54px;">
-                                    <span class="text text--small">
-                                        Viewing data without pagination is much more
-                                        convenient and does not require switching pages and all that.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/icon_filter.svg">
-                            <span class="text">Out-of-the-box filtering</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -78px;">
-                                    <span class="text text--small">
-                                        You can search data in your table without using additional libraries and
-                                        scripts. Чтобы начать фильтровать данные наведите на заголовок колонки и нажмите иконку фильтра.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/icon_sort-down.svg">
-                            <span class="text">Out-of-the-box sorting</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -66px;">
-                                    <span class="text text--small">
-                                        In order to sort table column simply click on the column header. Subsequent click reverses the sort order. Supported for text and number columns.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/icon_equal.svg">
-                            <span class="text">Out-of-the-box columns summary</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -91px;">
-                                    <span class="text text--small">
-                                        To get column summary click on the sum icon in a table header: summary row will appear in the table footer.
-                                        Then select summary type for the certain column. Supported count, average, min, max and other functions.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/icon_edit.svg">
-                            <span class="text">Inplace editing</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -42px;">
-                                    <span class="text text--small">
-                                        Allows to modify data via inplace editing, create and delete rows without
-                                        leaving the context table.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/array.svg">
-                            <span class="text">Works with any datasets: array and remote</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -67px;">
-                                    <span class="text text--small">
-                                        Table4JS ready for large datatests. Only visible data are loaded and shown on the screen.
-                                        Other data will be lazy loaded as you will scroll table content to them.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="feature__block">
-                            <img class="small-icon" src="/img/icons/db.svg">
-                            <span class="text">Accompanied with sever-side data provider</span>
-                            <div class="hover-prompt">
-                                <div class="promt__img">
-                                    <img src="/img/icons/icon_hint.svg">
-                                </div>
-                                <div class="promt" style="top: -54px;">
-                                    <span class="text text--small">
-                                        Fill the table with data from various sources that come to your mind. На данный момент мы поддерживаем
-                                         node js sql хранилища и многое другое.
-                                    </span>
-                                </div>
+                            <div class="promt" style="top: -54px;">
+                                <span class="text text--small">
+                                    Viewing data without pagination is much more
+                                    convenient and does not require switching pages and all that.
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <iframe class="iframe-table three-column v-card" style="min-height: 450px; border: none; outline: none;"
+                    <div class="feature__block absolute-block">
+                        <img class="small-icon" src="/img/icons/icon_filter.svg">
+                        <span class="text">Out-of-the-box filtering and sorting</span>
+                        <!--<svg class="svg-line" width="150" height="50">
+                            <path d="M 10 10 L 50 0 "></path>
+                        </svg>-->
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt" style="top: -78px;">
+                                <span class="text text--small">
+                                    You can search data in your table without using additional libraries and
+                                    scripts. To start filtering data, hover over the column heading and click the filter icon.
+                                    In order to sort table column simply click on the column header. Subsequent click reverses the sort order. Supported for text and number columns.
+                                </span>
+                            </div>
+                        </div>
+                        <!--<svg class="svg-line" width="200" height="180">
+                            <path stroke="green" stroke-width="3" fill="none"
+                              d="M 5,5
+                              L 200,5 С 300,5 300,50 200,50 
+                                 "/>
+                          </svg>-->
+                    </div>
+                    <div class="feature__block absolute-block" style="display: none;">
+                        <img class="small-icon" src="/img/icons/icon_equal.svg">
+                        <span class="text">Out-of-the-box columns summary</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt" style="top: -91px;">
+                                <span class="text text--small">
+                                    To get column summary click on the sum icon in a table header: summary row will appear in the table footer.
+                                    Then select summary type for the certain column. Supported count, average, min, max and other functions.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature__block absolute-block" style="display: none;">
+                        <img class="small-icon" src="/img/icons/icon_edit.svg">
+                        <span class="text">Inplace editing</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt" style="top: -42px;">
+                                <span class="text text--small">
+                                    Allows to modify data via inplace editing, create and delete rows without
+                                    leaving the context table.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                                        
+                    <iframe class="iframe-table v-card" style="min-height: 600px; border: none; outline: none;"
                         src="/examples/standalone/features/index.html"></iframe>
                 </div>
             </div>
@@ -223,7 +222,7 @@
                         technical references documentation management systems and so on. We were developing web
                         applications with many table views and forms. We used 3rd party libraries to show data as
                         table/grid and finally we decided to create our
-                        own table based on our experience of real life web applications development. We decided to
+                        own table based on our experience of real life web applications readydevelopment. We decided to
                         share our experience with you and will be glad if it help you.</span>
                     <h3 class="title-h3" style="margin-bottom: 0;">Sincerily yours, <a class="hide-link"
                             href="https://www.abrisplatform.com">Abris Lab Team</a></h3>
@@ -248,7 +247,7 @@
                     <div class="v-card framework-card two-column">
                         <img class="one-column"
                             src='data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iIzMxNzhjNiIgaGVpZ2h0PSIxMjgiIHJ4PSI2IiB3aWR0aD0iMTI4Ii8+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNzQuMjYyMiA5OS40Njh2MTQuMDI2YzIuMjcyNCAxLjE2OCA0Ljk1OTggMi4wNDUgOC4wNjI1IDIuNjI5IDMuMTAyNy41ODUgNi4zNzI4Ljg3NyA5LjgxMDUuODc3IDMuMzUwMyAwIDYuNTMzLS4zMjEgOS41NDc4LS45NjQgMy4wMTYtLjY0MyA1LjY1OS0xLjcwMiA3LjkzMi0zLjE3OCAyLjI3Mi0xLjQ3NiA0LjA3MS0zLjQwNCA1LjM5Ny01Ljc4NiAxLjMyNS0yLjM4MSAxLjk4OC01LjMyNSAxLjk4OC04LjgzMTMgMC0yLjU0MjEtLjM3OS00Ljc3MDEtMS4xMzYtNi42ODQxLS43NTgtMS45MTM5LTEuODUtMy42MTU5LTMuMjc4LTUuMTA2Mi0xLjQyNy0xLjQ5MDItMy4xMzktMi44MjctNS4xMzQtNC4wMTA0LTEuOTk2LTEuMTgzNC00LjI0Ni0yLjMwMTEtNi43NTItMy4zNTMtMS44MzUyLS43NTk3LTMuNDgxMi0xLjQ5NzUtNC45Mzc4LTIuMjEzNC0xLjQ1NjctLjcxNTktMi42OTQ4LTEuNDQ2NC0zLjcxNDQtMi4xOTE1LTEuMDE5Ny0uNzQ1Mi0xLjgwNjMtMS41MzQxLTIuMzU5OC0yLjM2NjktLjU1MzUtLjgzMjctLjgzMDMtMS43NzUxLS44MzAzLTIuODI3IDAtLjk2NDMuMjQ3Ni0xLjgzMzYuNzQyOS0yLjYwNzlzMS4xOTQ1LTEuNDM5MSAyLjA5NzYtMS45OTQzYy45MDMxLS41NTUxIDIuMDEwMS0uOTg2MSAzLjMyMTEtMS4yOTI5IDEuMzExLS4zMDY5IDIuNzY3Ni0uNDYwMyA0LjM2OTktLjQ2MDMgMS4xNjU4IDAgMi4zOTU4LjA4NzcgMy42OTI4LjI2MyAxLjI5Ni4xNzUzIDIuNi40NDU2IDMuOTExLjgxMDkgMS4zMTEuMzY1MiAyLjU4NS44MjU0IDMuODI0IDEuMzgwNiAxLjIzOC41NTUyIDIuMzgxIDEuMTk4IDMuNDMgMS45Mjg1di0xMy4xMDUxYy0yLjEyNy0uODE4Mi00LjQ1LTEuNDI0NS02Ljk3LTEuODE5cy01LjQxMS0uNTkxNy04LjY3NDQtLjU5MTdjLTMuMzIxMSAwLTYuNDY3NC4zNTc5LTkuNDM5IDEuMDczOC0yLjk3MTUuNzE1OS01LjU4NjIgMS44MzM2LTcuODQ0IDMuMzUzLTIuMjU3OCAxLjUxOTUtNC4wNDIyIDMuNDU1My01LjM1MzEgNS44MDc1LTEuMzExIDIuMzUyMi0xLjk2NjUgNS4xNjQ2LTEuOTY2NSA4LjQzNzMgMCA0LjE3ODUgMS4yMDE3IDcuNzQzMyAzLjYwNTIgMTAuNjk0NSAyLjQwMzUgMi45NTEzIDYuMDUyMyA1LjQ0OTYgMTAuOTQ2NiA3LjQ5NSAxLjkyMjguNzg4OSAzLjcxNDUgMS41NjMzIDUuMzc1IDIuMzIzIDEuNjYwNi43NTk3IDMuMDk1NCAxLjU0ODYgNC4zMDQ0IDIuMzY2OHMyLjE2MjggMS43MDk0IDIuODYxOCAyLjY3MzZjLjcuOTY0MyAxLjA0OSAyLjA2IDEuMDQ5IDMuMjg3MyAwIC45MDYyLS4yMTggMS43NDYyLS42NTUgMi41MjAycy0xLjEgMS40NDYtMS45ODg1IDIuMDE2Yy0uODg4Ni41Ny0xLjk5NTYgMS4wMTYtMy4zMjEyIDEuMzM3LTEuMzI1NS4zMjEtMi44NzY4LjQ4Mi00LjY1MzkuNDgyLTMuMDI5OSAwLTYuMDMwNS0uNTMzLTkuMDAyMS0xLjYtMi45NzE1LTEuMDY2LTUuNzI0NS0yLjY2Ni04LjI1OTEtNC43OTl6bS0yMy41NTk2LTM0LjkxMzZoMTguMjk3NHYtMTEuNTU0NGgtNTF2MTEuNTU0NGgxOC4yMDc5djUxLjQ0NTZoMTQuNDk0N3oiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==' />
-                        <h3 class="title-h3">Ready for TypeScript projects</h3>
+                        <h3 class="title-h3">Ready for TS projects</h3>
                         <span class="text">TypeScript ready, .d.ts files are generated for all
                             packages.</span>
                     </div>
@@ -261,7 +260,7 @@
                     <div class="v-card framework-card two-column">
                         <img class="one-column"
                             src='../img/features/3.svg' />
-                        <h3 class="title-h3">Standard and advanced Features</h3>
+                        <h3 class="title-h3">Lots of features</h3>
                         <span class="text">Use the built-in table functions such as sorting,
                             filtering, searching, totals, etc. without using additional libraries and scripts and create your own functions for convenient work with
                             the table.</span>
@@ -273,8 +272,8 @@
 
     <section class="section-container color-background">
         <div class="page-size">
-            <div class="h-card" style="align-items: flex-end;">
-                <img class="h-card__img two-column" src="../img/usp/devs.svg">
+            <div class="h-card" style="align-items: center;">
+                <img class="h-card__img two-column" style="height: 250px;" src="../img/usp/devs.svg">
                 <div class="v-card">
                     <span class="text text--big three-column">We create our products with love and care, we will be glad if it helps in your projects.
                         If you like our product, you can help financially or star our <a class="hide-link" href="https://github.com/abris-platform/abris-components">repository on GitHub</a>.
@@ -289,7 +288,7 @@
             <h2 class="title-h2">Get Support</h2>
             <div class="vertical-cards">
                 <div class="v-card sale-card">
-                    <h2 class="title-h2">Coder</h2>
+                    <h2 class="title-h3">Coder</h2>
                     <div class="sale-card__body">
                         <div class="feature__block">
                             <img class="small-icon" src="/img/icons/icon_check.svg">
@@ -314,7 +313,7 @@
                     <a class="button  button--accent" href="/#get">Get Table4JS</a>
                 </div>
                 <div class="v-card sale-card">
-                    <h2 class="title-h2">Assistent</h2>
+                    <h2 class="title-h3">Assistent</h2>
                     <div class="sale-card__body">
                         <div class="feature__block">
                             <img class="small-icon" src="/img/icons/icon_check.svg">
@@ -335,12 +334,12 @@
                     </div>
                     <div class="sale-card__price">
                         <span class="title-h2">20$</span>
-                        <span class="text">/mounth</span>
+                        <span class="text">/month</span>
                     </div>
                     <button class="button button--accent" onclick="buy20()">Buy</button>
                 </div>
                 <div class="v-card sale-card">
-                    <h2 class="title-h2">Pro Team</h2>
+                    <h2 class="title-h3">Pro Team</h2>
                     <div class="sale-card__body">
                         <div class="feature__block">
                             <img class="small-icon" src="/img/icons/icon_check.svg">
@@ -361,7 +360,7 @@
                     </div>
                     <div class="sale-card__price">
                         <span class="title-h2">200$</span>
-                        <span class="text">/mounth</span>
+                        <span class="text">/month</span>
                     </div>
                     <button class="button button--accent" href onclick="buy200()">Buy</button>
                 </div>
@@ -486,7 +485,9 @@
             <div class="h-card">
                 <img class="h-card__img two-column" src="../img/features/4.svg">
                 <div class="v-card">
-                    <h2 class="title-h2">Still thinking about Table4JS? Try it now, it's free!</h2>
+                    <h2 class="title-h2">Try Table4JS now</h2>
+                    <p class="text text--centered">Table4JS - free table/grid JavaScript library for your project. 
+                        Supports pure JS, React and Knockout and distributed under the MIT license.</p>
                     <div class="buttons">
                         <a class="button  button--accent" href="/#get">Get Table4JS</a>
                         <a class="button" href="/docs/">Getting Started Guide</a>
@@ -530,7 +531,7 @@
             <div class="footer__container">
                 <div class="footer__column two-column">
                     <img class="footer__logo two-column" src="/img/logo/logo.svg">
-                    <span class="footer__ltd text">© 2022 Research laboratory ABRIS Ltd</span>
+                    <span class="footer__ltd text">© 2022 Research Laboratory ABRIS Ltd</span>
                 </div>
                 <div class="footer__column one-column">
                     <span class="header__link-page text header__link-page--active">Main</span>
@@ -540,23 +541,23 @@
                 </div>
                 <div class="footer__column two-column">
                     <a href="mailto:table4js@gmail.com" class="social">
-                        <img class="social__icon" src="/img/footer/email.svg">
+                        <img class="social__icon small-icon" src="/img/footer/email.svg">
                         <span class="social__link text">table4js@gmail.com</span>
                     </a>
                     <a href="https://www.youtube.com/channel/UCkENTPqm7neTGbysFQV6mfw" class="social">
-                        <img class="social__icon" src="/img/footer/youtube.svg">
-                        <span class="social__link text">Abris Platform on youtube</span>
+                        <img class="social__icon small-icon" src="/img/footer/youtube.svg">
+                        <span class="social__link text">Abris Platform on YouTube</span>
                     </a>
                     <a href="https://github.com/abris-platform/abris-components" class="social">
-                        <img class="social__icon" src="/img/footer/github.svg">
+                        <img class="social__icon small-icon" src="/img/footer/github.svg">
                         <span class="social__link text">Abris Platform GitHub repo</span>
                     </a>
                     <a href="https://www.facebook.com/abrisplatform/" class="social">
-                        <img class="social__icon" src="/img/footer/facebook.svg">
+                        <img class="social__icon small-icon" src="/img/footer/facebook.svg">
                         <span class="social__link text">Abris Platform on Facebook</span>
                     </a>
                     <a href="https://www.linkedin.com/in/abris-platform-9149361ab/" class="social">
-                        <img class="social__icon" src="/img/footer/linkedin.svg">
+                        <img class="social__icon small-icon" src="/img/footer/linkedin.svg">
                         <span class="social__link text">Abris Platform on LinkedIn</span>
                     </a>
                 </div>

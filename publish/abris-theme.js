@@ -30,7 +30,7 @@ function header() {
     class: "header__link-page",
     href: "#contact-form"
   }, "Contact us"), /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/github.svg"
   })))));
 }
@@ -114,7 +114,7 @@ function footer() {
     src: "/img/logo/logo.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "footer__ltd"
-  }, "\xA9 2022 Research laboratory ABRIS Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
+  }, "\xA9 2022 Research Laboratory ABRIS Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "footer__column one-column"
   }, /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
@@ -137,7 +137,7 @@ function footer() {
     href: "mailto:info@abrisplatform.com",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/email.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
@@ -145,15 +145,15 @@ function footer() {
     href: "https://www.youtube.com/channel/UCkENTPqm7neTGbysFQV6mfw",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/youtube.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
-  }, "Abris Platform on youtube")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
+  }, "Abris Platform on YouTube")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     href: "https://github.com/abris-platform/abris-components",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/github.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
@@ -161,7 +161,7 @@ function footer() {
     href: "https://www.facebook.com/abrisplatform/",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/facebook.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
@@ -169,7 +169,7 @@ function footer() {
     href: "https://www.linkedin.com/in/abris-platform-9149361ab/",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon",
+    class: "social__icon small-icon",
     src: "/img/footer/linkedin.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
