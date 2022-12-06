@@ -19,7 +19,7 @@ Add the following scripts to HEAD part of your HTML file
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
 ```HTML
-<div id="table-container" style="height: 80vh;"></div>
+<div id="table-container" style="height: calc(100vh - 16px);"></div>
 ```
 
 Add the following script to make it work

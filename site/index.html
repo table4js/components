@@ -35,55 +35,6 @@
         </div>
     </section>
 
-    <div class="two-column v-card">
-        
-        
-        <div class="feature__block absolute-block">
-            <img class="small-icon" src="/img/icons/icon_table.svg">
-            <span class="text">Shows data in table (grid) form</span>
-            <div class="hover-prompt">
-                <div class="promt__img">
-                    <img src="/img/icons/icon_hint.svg">
-                </div>
-                <div class="promt" style="top: -18px;">
-                    <span class="text text--small">
-                        Table is a conviniet tool to visualize your data.
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="feature__block absolute-block">
-            <img class="small-icon" src="/img/icons/array.svg">
-            <span class="text">Works with any datasets: array and remote</span>
-            <div class="hover-prompt">
-                <div class="promt__img">
-                    <img src="/img/icons/icon_hint.svg">
-                </div>
-                <div class="promt" style="top: -67px;">
-                    <span class="text text--small">
-                        Table4JS ready for large datatests. Only visible data are loaded and shown on the screen.
-                        Other data will be lazy loaded as you will scroll table content to them.
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="feature__block absolute-block">
-            <img class="small-icon" src="/img/icons/db.svg">
-            <span class="text">Accompanied with sever-side data provider</span>
-            <div class="hover-prompt">
-                <div class="promt__img">
-                    <img src="/img/icons/icon_hint.svg">
-                </div>
-                <div class="promt" style="top: -54px;">
-                    <span class="text text--small">
-                        Fill the table with data from various sources that come to your mind. На данный момент мы поддерживаем
-                         node js sql хранилища и многое другое.
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <section class="section-container color-background">
         <div class="page-size">
             <div class="main-contaier">
@@ -96,86 +47,128 @@
                     </div>
                 </div>
                 <div class="sample vertical-cards">
-                    <div class="feature__block absolute-block" style="display: none;">
-                        <span class="text">Infinite scrolling</span>
-                        <div class="hover-prompt">
-                            <div class="promt__img">
-                                <img src="/img/icons/icon_hint.svg">
+                    <div class="feature__block absolute-block absolute-block--one">
+                        <div class="absolute-block__inner">
+                            <!--<img class="small-icon" src="/img/icons/icon_filter.svg">-->
+                            <span class="text text--big">Out-of-the-box filtering and sorting</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -55px;">
+                                    <span class="text text--small">
+                                        To start filtering data, hover over the column heading and click the filter icon.
+                                        In order to sort table column simply click on the column header.
+                                        Subsequent click reverses the sort order.
+                                    </span>
+                                </div>
                             </div>
-                            <div class="promt" style="top: -54px;">
-                                <span class="text text--small">
-                                    Viewing data without pagination is much more
-                                    convenient and does not require switching pages and all that.
-                                </span>
-                            </div>
+                            <svg class="svg-line" width="400" height="110" viewBox="auto" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+                                <path d="M 1 5 L 340 5 C 406 5 406 103 345 95 L 355 85 L 345 95 L 355 105"/>
+                            </svg>
                         </div>
                     </div>
-                    <div class="feature__block absolute-block">
-                        <img class="small-icon" src="/img/icons/icon_filter.svg">
-                        <span class="text">Out-of-the-box filtering and sorting</span>
-                        <!--<svg class="svg-line" width="150" height="50">
-                            <path d="M 10 10 L 50 0 "></path>
-                        </svg>-->
-                        <div class="hover-prompt">
-                            <div class="promt__img">
-                                <img src="/img/icons/icon_hint.svg">
+                    <div class="feature__block absolute-block absolute-block--two">
+                        <div class="absolute-block__inner">                  
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt promt--left" style="top: -30px;">
+                                    <span class="text text--small">
+                                        Viewing data without pagination is much more
+                                        convenient and does not require switching pages and all that.
+                                    </span>
+                                </div>
                             </div>
-                            <div class="promt" style="top: -78px;">
-                                <span class="text text--small">
-                                    You can search data in your table without using additional libraries and
-                                    scripts. To start filtering data, hover over the column heading and click the filter icon.
-                                    In order to sort table column simply click on the column header. Subsequent click reverses the sort order. Supported for text and number columns.
-                                </span>
-                            </div>
-                        </div>
-                        <!--<svg class="svg-line" width="200" height="180">
-                            <path stroke="green" stroke-width="3" fill="none"
-                              d="M 5,5
-                              L 200,5 С 300,5 300,50 200,50 
-                                 "/>
-                          </svg>-->
-                    </div>
-                    <div class="feature__block absolute-block" style="display: none;">
-                        <img class="small-icon" src="/img/icons/icon_equal.svg">
-                        <span class="text">Out-of-the-box columns summary</span>
-                        <div class="hover-prompt">
-                            <div class="promt__img">
-                                <img src="/img/icons/icon_hint.svg">
-                            </div>
-                            <div class="promt" style="top: -91px;">
-                                <span class="text text--small">
-                                    To get column summary click on the sum icon in a table header: summary row will appear in the table footer.
-                                    Then select summary type for the certain column. Supported count, average, min, max and other functions.
-                                </span>
-                            </div>
+                            <span class="text text--big">Infinite scrolling</span>
+                            <svg class="svg-line svg-line--bottom" width="200" height="100" viewBox="auto" xmlns="http://www.w3.org/2000/svg" style="transform: scaleY(-1);">
+                                <path d="M 1 5 L 146 5 C 213 5 210 92 156 81 L 171 71 L 156 81 L 171 91"/> 
+                            </svg>
                         </div>
                     </div>
-                    <div class="feature__block absolute-block" style="display: none;">
-                        <img class="small-icon" src="/img/icons/icon_edit.svg">
-                        <span class="text">Inplace editing</span>
-                        <div class="hover-prompt">
-                            <div class="promt__img">
-                                <img src="/img/icons/icon_hint.svg">
+                    <div class="feature__block absolute-block absolute-block--three">
+                        <div class="absolute-block__inner">
+                            <!--<img class="small-icon" src="/img/icons/icon_equal.svg">-->
+                            <span class="text">Out-of-the-box columns summary</span>
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt" style="top: -67px;">
+                                    <span class="text text--small">
+                                        To get column summary click on the sum icon in a table header: summary row will appear in the table footer.
+                                        Then select summary type for the certain column. Supported count, average, min, max and other functions.
+                                    </span>
+                                </div>
                             </div>
-                            <div class="promt" style="top: -42px;">
-                                <span class="text text--small">
-                                    Allows to modify data via inplace editing, create and delete rows without
-                                    leaving the context table.
-                                </span>
-                            </div>
+                            <svg class="svg-line svg-line--left-bottom" width="400" height="140" viewBox="auto" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1) scaleY(-1);">
+                                <path d="M 1 5 L 300 5 C 367 5 399 125 310 125 L 325 115 L 310 125 L 325 135"/>
+                            </svg>
                         </div>
                     </div>
-                                        
-                    <iframe class="iframe-table v-card" style="min-height: 600px; border: none; outline: none;"
+                    <div class="feature__block absolute-block absolute-block--four">
+                        <div class="absolute-block__inner">
+                            <!--<img class="small-icon" src="/img/icons/icon_edit.svg">-->
+                            <div class="hover-prompt">
+                                <div class="promt__img">
+                                    <img src="/img/icons/icon_hint.svg">
+                                </div>
+                                <div class="promt promt--left" style="top: -30px;">
+                                    <span class="text text--small">
+                                        Allows to modify data via inplace editing, create and delete rows without
+                                        leaving the context table.
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="text">Inplace editing</span>
+                            <svg class="svg-line svg-line--right" width="230" height="170" viewBox="auto" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 1 5 L 146 5 C 230 5 232 151 146 150 L 161 140 L 146 150 L 161 160"/> 
+                            </svg>
+                        </div>
+                    </div>                 
+                    <iframe class="iframe-table v-card" style="min-height: 450px; border: none; outline: none;"
                         src="/examples/standalone/features/index.html"></iframe>
+                </div>
+                <div class="horizontal-cards">
+                    <div class="h-card">
+                        <img class="small-icon" src="/img/icons/icon_table.svg">
+                        <div class="v-card">
+                            <h4 class="title-h4">Shows data in table (grid) form</h4>
+                            <span class="text three-column">Table is a conviniet tool to visualize your data.</span>
+                        </div>
+                    </div>
+                    <div class="h-card">
+                        <img class="small-icon" src="/img/icons/db.svg">
+                        <div class="v-card">
+                            <h4 class="title-h4">Sever-side data provider</h4>
+                            <span class="text three-column">Fill the table with data from various sources that come to your mind.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="horizontal-cards">
+                    <div class="h-card">
+                        <img class="small-icon" src="/img/icons/array.svg">
+                        <div class="v-card">
+                            <h4 class="title-h4">Works with any datasets</h4>
+                            <span class="text three-column">Table4JS ready for large datatests: array and remote. Only visible data are loaded and shown on the screen.
+                                Other data will be lazy loaded as you will scroll table content to them.</span>
+                        </div>
+                    </div>
+                    <div class="h-card">
+                        <img class="small-icon" src="/img/icons/icon_table.svg">
+                        <div class="v-card">
+                            <h4 class="title-h4">Out-of-the-box functions</h4>
+                            <span class="text three-column">You can search, filtering and order to sort data in your table without using additional libraries and scripts.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="section-container" id="get">
-        <div class="page-size">
-            <div>
+            <div class="page-size">
                 <div class="headline">
                     <h2 class="title-h2">Table4JS Packages</h2>
                     <p class="text text--big text--centered">Get libraries from NPM registry:</p>
@@ -231,7 +224,7 @@
         </div>
     </section>
 
-    <section class="section-container" id="get">
+    <section class="section-container">
         <div class="page-size">
             <div>
                 <div class="headline">
@@ -270,7 +263,7 @@
         </div>
     </section>
 
-    <section class="section-container color-background">
+    <section class="section-container color-background color-background--1">
         <div class="page-size">
             <div class="h-card" style="align-items: center;">
                 <img class="h-card__img two-column" style="height: 250px;" src="../img/usp/devs.svg">
@@ -480,7 +473,7 @@
         </div>
     </section>
 
-    <section class="section-container color-middle-background">
+    <section class="section-container color-middle-background ">
         <div class="page-size">
             <div class="h-card">
                 <img class="h-card__img two-column" src="../img/features/4.svg">
@@ -526,7 +519,7 @@
         </div>
     </section>
 
-    <section class="section-container color-middle-background">
+    <section class="section-container color-middle-background color-middle-background--1">
         <div class="page-size">
             <div class="footer__container">
                 <div class="footer__column two-column">

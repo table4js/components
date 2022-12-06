@@ -48,7 +48,7 @@ body {
 .header {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 15;
     background: #fff;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.08);
 }
@@ -112,6 +112,11 @@ body {
     /*border-radius: 32px 0 0 0;*/
 }
 
+.color-background--1 {
+    background-position: center;
+    border-radius: 32px 0 0 0;
+}
+
 .color-middle-background {
     background: url(img/background/color.svg);
     background-repeat: no-repeat;
@@ -119,6 +124,15 @@ body {
     background-size: cover;
     border-radius: 0 32px 0 0;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    margin: 50px 0;
+}
+
+.color-middle-background:last-of-type {
+    margin-bottom: 0;
+}
+
+.color-middle-background--1 {
+    background-position: right bottom;
 }
 
 .color-nocover-background {
@@ -155,7 +169,7 @@ body {
 }
 
 .title-h4 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 8px;
 }
 
@@ -247,21 +261,67 @@ body {
 }
 
 .sample {
-    display: flex;
-    align-items: flex-start;
     padding: 50px 0;
     position: relative;
+    margin-bottom: 40px;
 }
 
 .absolute-block {
     position: absolute;
-    left: 0;
+}
+
+.absolute-block--one {
+    left: 20px;
     top: 0;
 }
 
+.absolute-block--two {
+    right: 20px;
+    bottom: -16px;
+}
+
+.absolute-block--three {
+    left: 20px;
+    bottom: -16px;
+}
+
+.absolute-block--four {
+    right: 20px;
+    top: 0;
+}
+
+.absolute-block__inner {
+    position: relative;
+    display: flex;
+}
+
 .svg-line {
-    fill: red;
-    stroke-width: 5px;
+    stroke: #263769;
+    stroke-width: 3px;
+    fill: none;
+    position: absolute;
+    right: 41px;
+    top: 100%;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.svg-line--right {
+    left: 41px;
+    right: auto;
+}
+
+.svg-line--bottom {
+    right: auto;
+    top: auto;
+    bottom: -8px;
+    left: 41px;
+}
+
+.svg-line--left-bottom {
+    right: 41px;
+    top: auto;
+    bottom: -8px;
 }
 
 .feature__block {
@@ -276,6 +336,7 @@ body {
 .hover-prompt {
     position: relative;
     margin-left: 8px;
+    margin-right: 8px;
 }
 
 .promt__img {
@@ -300,12 +361,12 @@ body {
 
 .promt {
     position: absolute;
-    width: 250px;
+    width: 350px;
     padding: 8px;
     background: #e2e0ff;
     border: 1px solid #7469FF;
     border-radius: 8px;
-    right: -280px;
+    right: -380px;
     display: none;
     transition: display 10s ease-out;
     z-index: 10;
@@ -329,13 +390,56 @@ body {
     margin-left: -35px;
 }
 
+.promt--left {
+    right: inherit;
+    left: -380px;
+}
+
+
+.promt--left::before,
+.promt--left::after {
+    content: '';
+    border: 8px solid transparent;
+    border-left: 8px solid #7469FF;
+    position: absolute;
+    right: -20px;
+    left: unset;
+    margin-right: 3px;
+    top: calc(100% / 2 - 8px);
+    width: 0;
+
+}
+
+.promt--left::after {
+    border-left-color: #e2e0ff;
+    margin-right: 4px;
+}
+
 .iframe-table {
     padding: 2px;
     background: #fff;
     border-radius: 16px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
     max-width: 960px;
+    z-index: 9;
 }
+
+.horizontal-cards {
+    display: flex;
+    text-align: left;
+    justify-content: space-evenly;
+    margin-bottom: 24px;
+}
+
+.horizontal-cards .h-card {
+    align-items: flex-start;
+    flex-basis: 40%;
+}
+
+.horizontal-cards .title-h4 {
+    text-align: left;
+}
+
 
 .vertical-cards {
     display: flex;
