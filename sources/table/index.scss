@@ -9,7 +9,7 @@ table4 * {
   // padding: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  font-weight: lighter;
+  font-weight: normal;
 
 
   &::-webkit-scrollbar {
@@ -200,7 +200,7 @@ button {
   flex-grow: 1;
   margin-right: 30px;
   color: var(--abc-primary-2, $abc-primary-2);
-  font-weight: lighter;
+  font-weight: normal;
   text-align: left;
 }
 
