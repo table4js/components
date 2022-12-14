@@ -42,6 +42,177 @@ body {
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+}
+
+@media only screen and (max-width: 1150px) {
+    .page-size {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    body .section-container {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .main__title-container .h-card__img {
+        display: none;
+    }
+
+    .svg-line {
+        display: none;
+    }
+
+    .feature__block.absolute-block {
+        position: relative;
+        left: inherit !important;
+        top: inherit !important;
+        right: inherit !important;
+        bottom: inherit !important;
+    }
+
+    body .sample .feature__block .small-icon {
+        display: block;
+    }
+
+    .absolute-block--two .absolute-block__inner, .absolute-block--four .absolute-block__inner {
+        flex-direction: row-reverse;
+    }
+
+    .horizontal-cards {
+        flex-direction: column;
+    }
+
+    body .sample {
+        flex-direction: column-reverse;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sample > div {
+        margin-top: 24px;
+        position: relative;
+    }
+
+    .sample .feature__block {
+        max-width: 280px;
+    }
+
+    .sample + .horizontal-cards {
+        margin-bottom: 0;
+    }
+
+    .main-contaier .horizontal-cards {
+        max-width: 280px;
+    }
+
+    .sample > div > .mobile-two-column {
+        right: 0px;
+        position: absolute;
+        max-width: 280px;
+        top: 0;
+    }
+
+    .main-contaier .horizontal-cards:last-child {
+        right: 12px;
+        position: absolute;
+        margin-top: -108px;
+    }
+
+    body .one-column,
+    body .framework-card img {
+        max-height: 100px;
+
+    }
+
+    body .title-h2 {
+        font-size: 2em;
+    }
+
+    body .title-h1 {
+        font-size: 3em;
+    }
+
+    body .title-h3 {
+        font-size: 1.5em;
+    }
+
+    body .title-h4 {
+        font-size: 1em;
+    }
+
+    body .text {
+        font-size: 1em;
+    }
+
+    body .text--big {
+        font-size: 1.15em;
+    }
+
+    body .text--small {
+        font-size: 0.95em;
+    }
+
+    body .vertical-cards {
+        gap: 22px;
+    }
+
+    body .h-card {
+        flex-direction: column;
+    }
+
+    body .h-card__img {
+        margin: 0 auto;
+        margin-bottom: 16px;
+    }
+
+    body .two-column {
+        max-width: 280px;
+    }
+
+    body .accordion {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    body .buttons {
+        flex-direction: column;
+    }
+
+    body .buttons .button {
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+    body .main__title-container {
+        margin-bottom: 32px;
+    }
+
+    body .footer__container {
+        flex-direction: column;
+    }
+
+    body .footer__column {
+        margin: 0;
+        margin-bottom: 24px;
+        max-height: 100%;
+    }
+
+    .sample > div > .mobile-two-column,
+    .main-contaier .horizontal-cards:last-child {
+        position: relative;
+        margin: 0;
+        right: inherit;
+    }
+
+    .sample .feature__block,
+    .main-contaier .horizontal-cards,
+    .sample > div > .mobile-two-column {
+        max-width: 100%;
+    }
 }
 
 /*header-menu*/
@@ -266,6 +437,14 @@ body {
     margin-bottom: 40px;
 }
 
+.sample .feature__block .small-icon {
+    display: none;
+}
+
+.sample.vertical-cards {
+    gap: 0;
+}
+
 .absolute-block {
     position: absolute;
 }
@@ -443,7 +622,7 @@ body {
 
 .vertical-cards {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
 }
@@ -467,16 +646,13 @@ body {
 .h-card {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .h-card__img {
     margin-right: 40px;
-}
-
-@media (max-width: 750px) {
-    .h-card__img {
-        display: none;
-    }
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .h-card .title-h3 {
@@ -603,7 +779,7 @@ textarea.form-back__field {
 
 .footer__container {
     display: flex;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .footer__column:not(:last-child) {
