@@ -14,7 +14,7 @@ function header() {
   }, 
   typedoc.JSX.createElement("img", {
     class: "header__logo",
-    src: "/img/logo/logo-long.svg",
+    src: "/img/logo/long-logo-table.svg",
     alt: "abris-logo"
   })), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "header__pages"
@@ -28,7 +28,7 @@ function header() {
     class: "header__link-page header__link-page--active"
   }, "Documentation"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
-    href: "#contact-form"
+    href: "/doc/#contact-form"
   }, "Contact us"), /*#__PURE__*/ typedoc.JSX.createElement("img", {
     class: "social__icon small-icon",
     src: "/img/footer/github.svg"
@@ -110,11 +110,11 @@ function footer() {
   }, /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "footer__column two-column"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "footer__logo two-column",
-    src: "/img/logo/logo.svg"
+    class: "footer__logo two-column h-card__img",
+    src: "/img/logo/logo-table.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "footer__ltd"
-  }, "\xA9 2022 Research Laboratory ABRIS Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
+  }, "\xA9 2022 Table4JS Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "footer__column one-column"
   }, /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
@@ -124,17 +124,14 @@ function footer() {
     href: "/examples"
   }, "Examples"), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "header__link-page",
-    href: "/buy"
-  }, "Buy"), /*#__PURE__*/ typedoc.JSX.createElement("span", {
-    class: "header__link-page",
     href: "/docs"
   }, "Documentation"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
-    href: "mailto:info@abris.site"
+    href: "mailto:table4js@gmail.com"
   }, "Contact us")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "footer__column two-column"
   }, /*#__PURE__*/ typedoc.JSX.createElement("a", {
-    href: "mailto:info@abrisplatform.com",
+    href: "mailto:table4js@gmail.com",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
     class: "social__icon small-icon",
@@ -142,38 +139,14 @@ function footer() {
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
   }, "info@abrisplatform.com")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
-    href: "https://www.youtube.com/channel/UCkENTPqm7neTGbysFQV6mfw",
-    class: "social"
-  }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon small-icon",
-    src: "/img/footer/youtube.svg"
-  }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
-    class: "social__link"
-  }, "Abris Platform on YouTube")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
-    href: "https://github.com/abris-platform/abris-components",
+    href: "https://github.com/table4js/components",
     class: "social"
   }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
     class: "social__icon small-icon",
     src: "/img/footer/github.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
-  }, "Abris Platform GitHub repo")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
-    href: "https://www.facebook.com/abrisplatform/",
-    class: "social"
-  }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon small-icon",
-    src: "/img/footer/facebook.svg"
-  }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
-    class: "social__link"
-  }, "Abris Platform on Facebook")), /*#__PURE__*/ typedoc.JSX.createElement("a", {
-    href: "https://www.linkedin.com/in/abris-platform-9149361ab/",
-    class: "social"
-  }, /*#__PURE__*/ typedoc.JSX.createElement("img", {
-    class: "social__icon small-icon",
-    src: "/img/footer/linkedin.svg"
-  }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
-    class: "social__link"
-  }, "Abris Platform on LinkedIn")))))));
+  }, "Abris Platform GitHub repo")))))));
 }
 
 function load(app) {
