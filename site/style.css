@@ -121,7 +121,6 @@ body {
         margin-top: -108px;
     }
 
-    body .one-column,
     body .framework-card img {
         max-height: 100px;
 
@@ -175,9 +174,48 @@ body {
     body .accordion {
         width: 100%;
     }
+
+    body .header__contaier {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    body .header__pages {
+        margin-left: 10px;
+        margin-right: 10px;
+        overflow: auto;
+    }
+
+    body .header__pages .header__link-page {
+        white-space: nowrap;
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+}
+
+@media only screen and (max-width: 675px) {
+    .sample > div > .mobile-two-column,
+    .main-contaier .horizontal-cards:last-child {
+        position: relative;
+        margin: 0;
+        right: inherit;
+        white-space: nowrap;
+    }
+
+    .sample .feature__block,
+    .main-contaier .horizontal-cards,
+    .sample > div > .mobile-two-column {
+        max-width: 100%;
+        white-space: nowrap;
+    }
 }
 
 @media only screen and (max-width: 450px) {
+    body .section-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
     body .buttons {
         flex-direction: column;
     }
@@ -196,22 +234,25 @@ body {
     }
 
     body .footer__column {
-        margin: 0;
+        margin: 0 !important;
         margin-bottom: 24px;
         max-height: 100%;
-    }
-
-    .sample > div > .mobile-two-column,
-    .main-contaier .horizontal-cards:last-child {
-        position: relative;
-        margin: 0;
-        right: inherit;
-    }
-
-    .sample .feature__block,
-    .main-contaier .horizontal-cards,
-    .sample > div > .mobile-two-column {
         max-width: 100%;
+    }
+
+    body .header__pages {
+        align-self: flex-start;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: calc(100vw - 40px);
+        overflow: auto;
+    }
+
+    body .header__pages .header__link-page {
+        white-space: nowrap;
+        margin-right: 8px;
+        margin-left: 8px;
+        padding-bottom: 8px;
     }
 }
 
