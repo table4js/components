@@ -1,5 +1,3 @@
-const { noConflict } = require("underscore");
-
 function formSuccess() {
     jQuery("#contact-form").addClass('form-back__container--hidden');
     jQuery("#contact-succes").removeClass('form-back__succes--hidden');

@@ -63,7 +63,7 @@
                     </div>
                     
                 </div>
-                <div class="examples__samples four-column">
+                <div class="examples__samples">
                     <h2 class="examples__headline title-h2">table4js live examples</h2>
                     <!-- ko foreach: list -->
                     <div class="sample__container" data-bind="attr: { id: name }">
@@ -86,7 +86,7 @@
                                 click: (_ => $parent.current_tab_file(name))"><span class="text" data-bind="text: name"></span> </div>
                                 <!-- /ko -->
                             </div>
-                            <pre class="sample__code-text four-column" >
+                            <pre class="sample__code-text" >
                             <!-- ko foreach: files -->
                                 <code data-bind="visible: name == $parent.current_tab_file(),
                                     class: lang,
