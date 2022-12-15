@@ -1,4 +1,4 @@
-name: Deploy to abris.site
+name: Deploy to table4js.com
 
 on:
   push:
@@ -34,4 +34,4 @@ jobs:
           target: ${{ env.DEPLOY_PATH }}
           strip_components: 1
       - name: Print Info
-        run: echo "Deployed at https://abris.site/"
+        run: echo "Deployed at https://table4js.com/"
