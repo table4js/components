@@ -28,7 +28,7 @@ function header() {
     class: "header__link-page header__link-page--active"
   }, "Documentation"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
-    href: "/doc/#contact-form"
+    href: "#contact-form"
   }, "Contact us"), /*#__PURE__*/ typedoc.JSX.createElement("img", {
     class: "social__icon small-icon",
     src: "/img/footer/github.svg"
