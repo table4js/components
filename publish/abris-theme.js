@@ -29,10 +29,17 @@ function header() {
   }, "Documentation"), /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
     href: "#contact-form"
-  }, "Contact us"), /*#__PURE__*/ typedoc.JSX.createElement("img", {
+  }, "Contact us"), 
+  typedoc.JSX.createElement("a", {
+    class: "header__link-page",
+    href: "https://github.com/table4js/components"
+  }, 
+  /*#__PURE__*/ typedoc.JSX.createElement("img", {
     class: "social__icon small-icon",
     src: "/img/footer/github.svg"
-  })))));
+  }))
+  
+  ))));
 }
 
 
