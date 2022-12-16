@@ -1,8 +1,8 @@
 {
   "name": "table4ko",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "JavaScript Table/Grid library",
-  "homepage": "https://github.com/abris-platform/abris-components",
+  "homepage": "https://github.com/table4js/components",
   "authors": [
     "Serge T <@domain.com>",
     "Fedor D <@domain.com>",
@@ -22,7 +22,7 @@
   "moduleType": "umd",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abris-platform/abris-components.git"
+    "url": "https://github.com/table4js/components.git"
   },
   "scripts": {},
   "dependencies": {

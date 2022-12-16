@@ -2,13 +2,18 @@
 <html>
 
 <head>
-    <title>Main | Abris Table For JS</title>
+    <title>Table4JS | Main</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/ico" href="favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./index.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -16,252 +21,583 @@
         <div class="page-size">
             <div class="header__contaier">
                 <a href="/">
-                    <img class="header__logo" src="/img/logo/logo-long.svg" alt="abris-logo">
+                    <img class="header__logo" src="/img/logo/long-logo-table.svg" alt="table4js-logo">
                 </a>
                 <div class="header__pages">
-                    <a class="header__link-page header__link-page--active" href="/">Main</a>
-                    <a class="header__link-page" href="/examples">Examples</a>
-                    <a class="header__link-page" href="/buy/">Get support</a>
-                    <a class="header__link-page" href="/docs">Documentation</a>
-                    <a class="header__link-page" href="#contact-form">Contact us</a>
-                    <a class="header__link-page" href="https://github.com/abris-platform/abris-components">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="main-title blue-background">
-        <div class="page-size">
-            <div class="main-title__contaier">
-                <img class="main-title__logo" src="img/logo/logo-components.svg" alt="abris-logo">
-                <div class="tagline">
-                    <div class="tagline__line-one">
-                        <span class="tagline__text">We created JavaScript table widget for our projects </span>
-                        <span class="tagline__text">and share it with you for </span>
-                        <span class="tagline__text tagline__accent">free</span>
-                        <img class="tagline__blink" src="img/logo/1.svg">
-                    </div>
-                    <div class="tagline__line-two">
-                        <span class="tagline__text">Simply </span>
-                        <a class="tagline__text tagline__link" href="/docs/">install</a>
-                        <span class="tagline__text">&nbsp;and </span>
-                        <a class="tagline__text tagline__link" href="/examples/">use</a>
-                    </div>
+                    <a class="header__link-page header__link-page--active text" href="/">Main</a>
+                    <a class="header__link-page text" href="/examples">Examples</a>
+                    <a class="header__link-page text" href="/docs">Documentation</a>
+                    <a class="header__link-page text" href="#contact-form">Contact us</a>
+                    <a class="header__link-page text" href="https://github.com/table4js/components"><img
+                            class="social__icon small-icon" src="/img/footer/github.svg"></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="quick-start">
+    <section class="section-container color-background">
         <div class="page-size">
-            <div class="quick-start__container">
-                <div class="headline">
-                    <h1 class="headline__text"><a href="/examples/">Try the table4js right now</a></h1>
-                    <p class="">For a ten years we are developing entarprise-level web applications: managerial
-                        accounting, document management systems,
-                        technical references documentation management systems and so on. We were developing web
-                        applications with many table views and forms.
-                        We used 3rd party libraries to show data as table/grid and finally we decided to create our own
-                        table based on our experience
-                        of real life web applications development. We decided to share our experience with you and will
-                        be glad if it helps you</p>
-                    <p class="">Sincerily yours, Abris Team.</p>
-                </div>
-
-                <div class="semple">
-                    <div class="steps two-column">
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_table.svg">
-                            <span>Shows data in table (grid) form</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/scroll.svg">
-                            <span> Supports infinite scrolling</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/array.svg">
-                            <span> Works with array datasets</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/db.svg">
-                            <span> Accompanied with sever-side data provider</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_filter.svg">
-                            <span> Out-of-the-box filtering</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_sort-down.svg">
-                            <span> Out-of-the-box sorting</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_equal.svg">
-                            <span> Out-of-the-box columns summary</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_edit.svg">
-                            <span> Allows to modify data via inplace editing, create and delete rows</span>
-                        </div>
-                        <div class="features__reason">
-                            <img class="semple__img" src="/img/icons/icon_edit.svg">
-                            <span> Ready for TypeScript projects</span>
-                        </div>
-                        <!-- <span class="steps__description">1 Clone repo from github</span>
-                        <span class="steps__code">git clone
-                            https://github.com/abris-platform/abris-components.git</span>
-                        <span class="steps__description">2 Call this command </span>
-                        <span class="steps__code">cd abris-components<br>npm i<br>npm test<br>npm run build</span>
-                        <span class="steps__description">3 Add your data in abris-table and enjoy result </span>-->
+            <div class="main-contaier">
+                <div class="main__title-container four-column">
+                    <div class="v-card">
+                        <h1 class="title-h1">Table4JS</h1>
+                        <p class="text text--big">Free table/grid JavaScript library.<br />Supports pure JS, React
+                            and Knockout.</p>
                         <div class="buttons">
-                            <a class="button" href="/docs/">Getting Started guide</a>
-                            <a class="button button--accent" href="/buy">Get support</a>
+                            <a class="button  button--accent" href="/#get">Get Table4JS</a>
+                            <a class="button" href="/docs/">Getting Started Guide</a>
                         </div>
-
                     </div>
-                    <iframe class="three-column" style="min-height: 500px; border: none; outline: none;"
-                        src="/examples/standalone/basic/index.html"></iframe>
+                </div>
+                <div class="sample vertical-cards">
+                    <div>
+                        <div class="feature__block absolute-block absolute-block--one">
+                            <div class="absolute-block__inner">
+                                <img class="small-icon" src="/img/icons/icon_filter.svg">
+                                <span class="text">Out-of-the-box filtering and sorting</span>
+                                <div class="hover-prompt">
+                                    <div class="promt__img">
+                                        <img src="/img/icons/icon_hint.svg">
+                                    </div>
+                                    <div class="promt" style="top: -55px;">
+                                        <span class="text text--small">
+                                            To start filtering data, hover over the column heading and click the filter
+                                            icon.
+                                            In order to sort table column simply click on the column header.
+                                            Subsequent click reverses the sort order.
+                                        </span>
+                                    </div>
+                                </div>
+                                <svg class="svg-line" width="400" height="110" viewBox="auto"
+                                    xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+                                    <path d="M 1 5 L 340 5 C 406 5 406 103 345 95 L 355 85 L 345 95 L 355 105" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="feature__block absolute-block absolute-block--two">
+                            <div class="absolute-block__inner">
+                                <div class="hover-prompt">
+                                    <div class="promt__img">
+                                        <img src="/img/icons/icon_hint.svg">
+                                    </div>
+                                    <div class="promt promt--left" style="top: -30px;">
+                                        <span class="text text--small">
+                                            Viewing data without pagination is much more
+                                            convenient and does not require switching pages and all that.
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="text">Infinite scrolling</span>
+                                <img class="small-icon" src="/img/icons/scroll.svg">
+                                <svg class="svg-line svg-line--bottom" width="200" height="100" viewBox="auto"
+                                    xmlns="http://www.w3.org/2000/svg" style="transform: scaleY(-1);">
+                                    <path d="M 1 5 L 146 5 C 213 5 210 92 156 81 L 171 71 L 156 81 L 171 91" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mobile-two-column">
+                            <div class="feature__block absolute-block absolute-block--three">
+                                <div class="absolute-block__inner">
+                                    <img class="small-icon" src="/img/icons/icon_equal.svg">
+                                    <span class="text">Out-of-the-box columns summary</span>
+                                    <div class="hover-prompt">
+                                        <div class="promt__img">
+                                            <img src="/img/icons/icon_hint.svg">
+                                        </div>
+                                        <div class="promt" style="top: -67px;">
+                                            <span class="text text--small">
+                                                To get column summary click on the sum icon in a table header: summary row
+                                                will
+                                                appear in the table footer.
+                                                Then select summary type for the certain column. Supported count, average,
+                                                min,
+                                                max and other functions.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <svg class="svg-line svg-line--left-bottom" width="400" height="140" viewBox="auto"
+                                        xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1) scaleY(-1);">
+                                        <path d="M 1 5 L 300 5 C 367 5 399 125 310 125 L 325 115 L 310 125 L 325 135" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="feature__block absolute-block absolute-block--four">
+                                <div class="absolute-block__inner">
+                                    <div class="hover-prompt">
+                                        <div class="promt__img">
+                                            <img src="/img/icons/icon_hint.svg">
+                                        </div>
+                                        <div class="promt promt--left" style="top: -30px;">
+                                            <span class="text text--small">
+                                                Allows to modify data via inplace editing, create and delete rows without
+                                                leaving the context table.
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="text">Inplace editing</span>
+                                    <img class="small-icon" src="/img/icons/icon_edit.svg">
+                                    <svg class="svg-line svg-line--right" width="230" height="170" viewBox="auto"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M 1 5 L 146 5 C 230 5 232 151 146 150 L 161 140 L 146 150 L 161 160" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <iframe class="iframe-table v-card" style="min-height: 450px; border: none; outline: none;"
+                        src="/examples/standalone/features/index.html"></iframe>
+                </div>
+                <div class="horizontal-cards">
+                    <div class="feature__block">
+                        <img class="small-icon" src="/img/icons/icon_table.svg">
+                        <span class="text">Shows data in table (grid) form</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt promt" style="top: -18px;">
+                                <span class="text text--small">
+                                    Table is a conviniet tool to visualize your data.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature__block">
+                        <img class="small-icon" src="/img/icons/db.svg">
+                        <span class="text">Sever-side data provider</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt promt" style="top: -18px;">
+                                <span class="text text--small">
+                                    Fill the table with data from various sources that come to
+                                    your mind.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="horizontal-cards">
+                    <div class="feature__block">
+                        <img class="small-icon" src="/img/icons/array.svg">
+                        <span class="text">Works with any datasets</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt promt" style="top: -55px;">
+                                <span class="text text--small">
+                                    Table4JS ready for large datatests: array and remote. Only
+                                    visible data are loaded and shown on the screen.
+                                    Other data will be lazy loaded as you will scroll table content to them.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature__block">
+                        <img class="small-icon" src="/img/icons/icon_table.svg">
+                        <span class="text">Out-of-the-box functions</span>
+                        <div class="hover-prompt">
+                            <div class="promt__img">
+                                <img src="/img/icons/icon_hint.svg">
+                            </div>
+                            <div class="promt promt" style="top: -30px;">
+                                <span class="text text--small">
+                                    You can search, filtering and order to sort data in your
+                                    table without using additional libraries and scripts.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="features">
+    <section class="section-container" id="get">
         <div class="page-size">
-            <div class="features__container">
-                <!--<div class="headline four-column">
-                    <span class="headline__text">&lt;table4&gt;</span>
-                    <span class="headline__text">- it's not just a table, it's...</span>
-                </div>-->
-                <div class="features__reason reason-left">
-                    <img class="reason-img" src="img/features/1.svg">
-                    <div class="reason-column">
-                        <h2 class="headline__text three-column">Convenient data viewing</h2>
-                        <span class="reason__description two-column">Viewing data without pagination is much more
-                            convenient and does not require switching pages and all that.</span>
-                    </div>
+            <div class="headline">
+                <h2 class="title-h2">Table4JS Packages</h2>
+                <p class="text text--big text--centered">Get libraries from NPM registry:</p>
+            </div>
+            <div class="vertical-cards">
+                <div class="v-card framework-card">
+                    <img class="one-column"
+                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K">
+                    <span class="text text--big text--code">npm i table4react</span>
+                    <a class="text text--big hide-link" href="https://www.npmjs.com/package/table4react"
+                        title="https://www.npmjs.com/package/table4react">table4react npm page</a>
                 </div>
-                <div class="features__reason reason-right">
-                    <div class="reason-column">
-                        <h2 class="headline__text three-column text-right">Instant search and filters</h2>
-                        <span class="reason__description two-column text-right">You can search data in your table
-                            without using additional libraries and scripts.</span>
-                    </div>
-                    <img class="reason-img" src="img/features/2.svg">
+                <div class="v-card framework-card">
+                    <img class="one-column"
+                        src="data:image/png;base64,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">
+                    <span class="text text--big text--code">npm i table4ko</span>
+                    <a class="text text--big hide-link" href="https://www.npmjs.com/package/table4ko"
+                        title="https://www.npmjs.com/package/table4ko">table4ko npm page</a>
                 </div>
-                <div class="features__reason reason-left">
-                    <img class="reason-img" src="img/features/3.svg">
-                    <div class="reason-column">
-                        <h2 class="headline__text three-column">Standard and advanced Features</h2>
-                        <span class="reason__description two-column">Use the built-in table functions such as sorting,
-                            filtering, searching, totals, etc. and create your own functions for convenient work with
+                <div class="v-card framework-card">
+                    <img class="one-column"
+                        src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTAwIiBoZWlnaHQ9IjI1MDAiIHZpZXdCb3g9IjAgMCAxMDUyIDEwNTIiPjxwYXRoIGZpbGw9IiNmMGRiNGYiIGQ9Ik0wIDBoMTA1MnYxMDUySDB6Ii8+PHBhdGggZD0iTTk2NS45IDgwMS4xYy03LjctNDgtMzktODguMy0xMzEuNy0xMjUuOS0zMi4yLTE0LjgtNjguMS0yNS4zOTktNzguOC00OS44LTMuOC0xNC4yLTQuMy0yMi4yLTEuOS0zMC44IDYuOS0yNy45IDQwLjItMzYuNiA2Ni42LTI4LjYgMTcgNS43IDMzLjEgMTguODAxIDQyLjggMzkuNyA0NS40LTI5LjM5OSA0NS4zLTI5LjIgNzctNDkuMzk5LTExLjYtMTgtMTcuOC0yNi4zMDEtMjUuNC0zNC0yNy4zLTMwLjUtNjQuNS00Ni4yLTEyNC00NS0xMC4zIDEuMy0yMC42OTkgMi42OTktMzEgNC0yOS42OTkgNy41LTU4IDIzLjEtNzQuNiA0NC00OS44IDU2LjUtMzUuNiAxNTUuMzk5IDI1IDE5Ni4xIDU5LjcgNDQuOCAxNDcuNCA1NSAxNTguNiA5Ni45IDEwLjkgNTEuMy0zNy42OTkgNjcuODk5LTg2IDYyLTM1LjYtNy40LTU1LjM5OS0yNS41LTc2LjgtNTguNC0zOS4zOTkgMjIuOC0zOS4zOTkgMjIuOC03OS44OTkgNDYuMSA5LjYgMjEgMTkuNjk5IDMwLjUgMzUuOCA0OC43IDc2LjIgNzcuMyAyNjYuODk5IDczLjUgMzAxLjEtNDMuNSAxLjM5OS00LjAwMSAxMC42LTMwLjgwMSAzLjE5OS03Mi4xMDF6bS0zOTQtMzE3LjZoLTk4LjRjMCA4NS0uMzk5IDE2OS40LS4zOTkgMjU0LjQgMCA1NC4xIDIuOCAxMDMuNy02IDExOC45LTE0LjQgMjkuODk5LTUxLjcgMjYuMi02OC43IDIwLjM5OS0xNy4zLTguNS0yNi4xLTIwLjYtMzYuMy0zNy42OTktMi44LTQuOS00LjktOC43LTUuNjAxLTktMjYuNjk5IDE2LjMtNTMuMyAzMi42OTktODAgNDkgMTMuMzAxIDI3LjMgMzIuOSA1MSA1OCA2Ni4zOTkgMzcuNSAyMi41IDg3LjkgMjkuNCAxNDAuNjAxIDE3LjMgMzQuMy0xMCA2My44OTktMzAuNjk5IDc5LjM5OS02Mi4xOTkgMjIuNC00MS4zIDE3LjYtOTEuMyAxNy40LTE0Ni42LjUtOTAuMiAwLTE4MC40IDAtMjcwLjl6IiBmaWxsPSIjMzIzMzMwIi8+PC9zdmc+' />
+                    <span class="text text--big text--code">npm i table4js</span>
+                    <a class="text text--big hide-link" href="https://www.npmjs.com/package/table4js"
+                        title="https://www.npmjs.com/package/table4js">table4js npm page</a>
+                </div>
+                <!--<div class="v-card framework-card">
+                        <img class="one-column"
+                            src='data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iIzMxNzhjNiIgaGVpZ2h0PSIxMjgiIHJ4PSI2IiB3aWR0aD0iMTI4Ii8+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNzQuMjYyMiA5OS40Njh2MTQuMDI2YzIuMjcyNCAxLjE2OCA0Ljk1OTggMi4wNDUgOC4wNjI1IDIuNjI5IDMuMTAyNy41ODUgNi4zNzI4Ljg3NyA5LjgxMDUuODc3IDMuMzUwMyAwIDYuNTMzLS4zMjEgOS41NDc4LS45NjQgMy4wMTYtLjY0MyA1LjY1OS0xLjcwMiA3LjkzMi0zLjE3OCAyLjI3Mi0xLjQ3NiA0LjA3MS0zLjQwNCA1LjM5Ny01Ljc4NiAxLjMyNS0yLjM4MSAxLjk4OC01LjMyNSAxLjk4OC04LjgzMTMgMC0yLjU0MjEtLjM3OS00Ljc3MDEtMS4xMzYtNi42ODQxLS43NTgtMS45MTM5LTEuODUtMy42MTU5LTMuMjc4LTUuMTA2Mi0xLjQyNy0xLjQ5MDItMy4xMzktMi44MjctNS4xMzQtNC4wMTA0LTEuOTk2LTEuMTgzNC00LjI0Ni0yLjMwMTEtNi43NTItMy4zNTMtMS44MzUyLS43NTk3LTMuNDgxMi0xLjQ5NzUtNC45Mzc4LTIuMjEzNC0xLjQ1NjctLjcxNTktMi42OTQ4LTEuNDQ2NC0zLjcxNDQtMi4xOTE1LTEuMDE5Ny0uNzQ1Mi0xLjgwNjMtMS41MzQxLTIuMzU5OC0yLjM2NjktLjU1MzUtLjgzMjctLjgzMDMtMS43NzUxLS44MzAzLTIuODI3IDAtLjk2NDMuMjQ3Ni0xLjgzMzYuNzQyOS0yLjYwNzlzMS4xOTQ1LTEuNDM5MSAyLjA5NzYtMS45OTQzYy45MDMxLS41NTUxIDIuMDEwMS0uOTg2MSAzLjMyMTEtMS4yOTI5IDEuMzExLS4zMDY5IDIuNzY3Ni0uNDYwMyA0LjM2OTktLjQ2MDMgMS4xNjU4IDAgMi4zOTU4LjA4NzcgMy42OTI4LjI2MyAxLjI5Ni4xNzUzIDIuNi40NDU2IDMuOTExLjgxMDkgMS4zMTEuMzY1MiAyLjU4NS44MjU0IDMuODI0IDEuMzgwNiAxLjIzOC41NTUyIDIuMzgxIDEuMTk4IDMuNDMgMS45Mjg1di0xMy4xMDUxYy0yLjEyNy0uODE4Mi00LjQ1LTEuNDI0NS02Ljk3LTEuODE5cy01LjQxMS0uNTkxNy04LjY3NDQtLjU5MTdjLTMuMzIxMSAwLTYuNDY3NC4zNTc5LTkuNDM5IDEuMDczOC0yLjk3MTUuNzE1OS01LjU4NjIgMS44MzM2LTcuODQ0IDMuMzUzLTIuMjU3OCAxLjUxOTUtNC4wNDIyIDMuNDU1My01LjM1MzEgNS44MDc1LTEuMzExIDIuMzUyMi0xLjk2NjUgNS4xNjQ2LTEuOTY2NSA4LjQzNzMgMCA0LjE3ODUgMS4yMDE3IDcuNzQzMyAzLjYwNTIgMTAuNjk0NSAyLjQwMzUgMi45NTEzIDYuMDUyMyA1LjQ0OTYgMTAuOTQ2NiA3LjQ5NSAxLjkyMjguNzg4OSAzLjcxNDUgMS41NjMzIDUuMzc1IDIuMzIzIDEuNjYwNi43NTk3IDMuMDk1NCAxLjU0ODYgNC4zMDQ0IDIuMzY2OHMyLjE2MjggMS43MDk0IDIuODYxOCAyLjY3MzZjLjcuOTY0MyAxLjA0OSAyLjA2IDEuMDQ5IDMuMjg3MyAwIC45MDYyLS4yMTggMS43NDYyLS42NTUgMi41MjAycy0xLjEgMS40NDYtMS45ODg1IDIuMDE2Yy0uODg4Ni41Ny0xLjk5NTYgMS4wMTYtMy4zMjEyIDEuMzM3LTEuMzI1NS4zMjEtMi44NzY4LjQ4Mi00LjY1MzkuNDgyLTMuMDI5OSAwLTYuMDMwNS0uNTMzLTkuMDAyMS0xLjYtMi45NzE1LTEuMDY2LTUuNzI0NS0yLjY2Ni04LjI1OTEtNC43OTl6bS0yMy41NTk2LTM0LjkxMzZoMTguMjk3NHYtMTEuNTU0NGgtNTF2MTEuNTU0NGgxOC4yMDc5djUxLjQ0NTZoMTQuNDk0N3oiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==' />
+                        <span class="text" style="text-align: center;">.d.ts in package</span>
+                    </div>-->
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section-container color-middle-background">
+        <div class="page-size">
+            <div class="h-card" style="align-items: flex-end;">
+                <img class="h-card__img two-column" src="../img/logo/logo-table.svg">
+                <div class="v-card">
+                    <span class="text three-column">For a ten years we have been
+                        developing web applications: managerial accounting, document management systems,
+                        technical references documentation management systems and so on. We were developing web
+                        applications with many table views and forms. We used 3rd party libraries to show data as
+                        table/grid and finally we decided to create our
+                        own table based on our experience of real life web applications readydevelopment. We decided to
+                        share our experience with you and will be glad if it help you.</span>
+                    <h3 class="title-h3" style="margin-bottom: 0;">Sincerily yours,<br>Table4JS Team</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container">
+        <div class="page-size">
+            <div>
+                <div class="headline">
+                    <h2 class="title-h2">The features you need, automatically</h2>
+                </div>
+                <div class="vertical-cards">
+                    <div class="v-card framework-card two-column">
+                        <img class="one-column" src="../img/features/7.svg">
+                        <h3 class="title-h3">Framework support</h3>
+                        <span class="text">We provide client-side components for React, Knockout, JS and
+                            TypeScript.</span>
+                    </div>
+                    <div class="v-card framework-card two-column">
+                        <img class="one-column"
+                            src='data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iIzMxNzhjNiIgaGVpZ2h0PSIxMjgiIHJ4PSI2IiB3aWR0aD0iMTI4Ii8+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJtNzQuMjYyMiA5OS40Njh2MTQuMDI2YzIuMjcyNCAxLjE2OCA0Ljk1OTggMi4wNDUgOC4wNjI1IDIuNjI5IDMuMTAyNy41ODUgNi4zNzI4Ljg3NyA5LjgxMDUuODc3IDMuMzUwMyAwIDYuNTMzLS4zMjEgOS41NDc4LS45NjQgMy4wMTYtLjY0MyA1LjY1OS0xLjcwMiA3LjkzMi0zLjE3OCAyLjI3Mi0xLjQ3NiA0LjA3MS0zLjQwNCA1LjM5Ny01Ljc4NiAxLjMyNS0yLjM4MSAxLjk4OC01LjMyNSAxLjk4OC04LjgzMTMgMC0yLjU0MjEtLjM3OS00Ljc3MDEtMS4xMzYtNi42ODQxLS43NTgtMS45MTM5LTEuODUtMy42MTU5LTMuMjc4LTUuMTA2Mi0xLjQyNy0xLjQ5MDItMy4xMzktMi44MjctNS4xMzQtNC4wMTA0LTEuOTk2LTEuMTgzNC00LjI0Ni0yLjMwMTEtNi43NTItMy4zNTMtMS44MzUyLS43NTk3LTMuNDgxMi0xLjQ5NzUtNC45Mzc4LTIuMjEzNC0xLjQ1NjctLjcxNTktMi42OTQ4LTEuNDQ2NC0zLjcxNDQtMi4xOTE1LTEuMDE5Ny0uNzQ1Mi0xLjgwNjMtMS41MzQxLTIuMzU5OC0yLjM2NjktLjU1MzUtLjgzMjctLjgzMDMtMS43NzUxLS44MzAzLTIuODI3IDAtLjk2NDMuMjQ3Ni0xLjgzMzYuNzQyOS0yLjYwNzlzMS4xOTQ1LTEuNDM5MSAyLjA5NzYtMS45OTQzYy45MDMxLS41NTUxIDIuMDEwMS0uOTg2MSAzLjMyMTEtMS4yOTI5IDEuMzExLS4zMDY5IDIuNzY3Ni0uNDYwMyA0LjM2OTktLjQ2MDMgMS4xNjU4IDAgMi4zOTU4LjA4NzcgMy42OTI4LjI2MyAxLjI5Ni4xNzUzIDIuNi40NDU2IDMuOTExLjgxMDkgMS4zMTEuMzY1MiAyLjU4NS44MjU0IDMuODI0IDEuMzgwNiAxLjIzOC41NTUyIDIuMzgxIDEuMTk4IDMuNDMgMS45Mjg1di0xMy4xMDUxYy0yLjEyNy0uODE4Mi00LjQ1LTEuNDI0NS02Ljk3LTEuODE5cy01LjQxMS0uNTkxNy04LjY3NDQtLjU5MTdjLTMuMzIxMSAwLTYuNDY3NC4zNTc5LTkuNDM5IDEuMDczOC0yLjk3MTUuNzE1OS01LjU4NjIgMS44MzM2LTcuODQ0IDMuMzUzLTIuMjU3OCAxLjUxOTUtNC4wNDIyIDMuNDU1My01LjM1MzEgNS44MDc1LTEuMzExIDIuMzUyMi0xLjk2NjUgNS4xNjQ2LTEuOTY2NSA4LjQzNzMgMCA0LjE3ODUgMS4yMDE3IDcuNzQzMyAzLjYwNTIgMTAuNjk0NSAyLjQwMzUgMi45NTEzIDYuMDUyMyA1LjQ0OTYgMTAuOTQ2NiA3LjQ5NSAxLjkyMjguNzg4OSAzLjcxNDUgMS41NjMzIDUuMzc1IDIuMzIzIDEuNjYwNi43NTk3IDMuMDk1NCAxLjU0ODYgNC4zMDQ0IDIuMzY2OHMyLjE2MjggMS43MDk0IDIuODYxOCAyLjY3MzZjLjcuOTY0MyAxLjA0OSAyLjA2IDEuMDQ5IDMuMjg3MyAwIC45MDYyLS4yMTggMS43NDYyLS42NTUgMi41MjAycy0xLjEgMS40NDYtMS45ODg1IDIuMDE2Yy0uODg4Ni41Ny0xLjk5NTYgMS4wMTYtMy4zMjEyIDEuMzM3LTEuMzI1NS4zMjEtMi44NzY4LjQ4Mi00LjY1MzkuNDgyLTMuMDI5OSAwLTYuMDMwNS0uNTMzLTkuMDAyMS0xLjYtMi45NzE1LTEuMDY2LTUuNzI0NS0yLjY2Ni04LjI1OTEtNC43OTl6bS0yMy41NTk2LTM0LjkxMzZoMTguMjk3NHYtMTEuNTU0NGgtNTF2MTEuNTU0NGgxOC4yMDc5djUxLjQ0NTZoMTQuNDk0N3oiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==' />
+                        <h3 class="title-h3">Ready for TS projects</h3>
+                        <span class="text">TypeScript ready, .d.ts files are generated for all
+                            packages.</span>
+                    </div>
+                    <div class="v-card framework-card two-column">
+                        <img class="one-column" src='../img/features/6.svg' />
+                        <h3 class="title-h3">Secure</h3>
+                        <span class="text">Securely embed through the provided APIs and libraries, ensuring that your
+                            data remains yours alone!</span>
+                    </div>
+                    <div class="v-card framework-card two-column">
+                        <img class="one-column" src='../img/features/3.svg' />
+                        <h3 class="title-h3">Lots of features</h3>
+                        <span class="text">Use the built-in table functions such as sorting,
+                            filtering, searching, totals, etc. without using additional libraries and scripts and create
+                            your own functions for convenient work with
                             the table.</span>
                     </div>
                 </div>
-                <div class="features__reason reason-right">
-                    <div class="reason-column">
-                        <h2 class="headline__text three-column text-right">Inplace editing</h2>
-                        <span class="reason__description two-column text-right">Edit data directly in the table without
-                            leaving the context.</span>
-                    </div>
-                    <img class="reason-img" src="img/features/4.svg">
-                </div>
-                <div class="features__reason reason-left">
-                    <img class="reason-img" src="img/features/5.svg">
-                    <div class="reason-column">
-                        <h2 class="headline__text three-column">Use almost any data source</h2>
-                        <span class="reason__description two-column">Fill the table with data from various sources that
-                            come to your mind.</span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <section class="crossbrow">
+    <section class="section-container color-background color-background--1">
         <div class="page-size">
-            <div class="crossbrow__container">
-                <div class="headline">
-                    <h2 class="headline__text">table4js works with</h2>
-                    <span class="headline__text">ReactJS and KnockoutJS frameworks. It also is usable in VanillaJS
-                        projects</span>
-                </div>
-                <div class="crossbrow__browsers">
-                    <img class="crossbrow__item one-column" src="/img/crossbrow/1.svg">
-                    <img class="crossbrow__item one-column" src="/img/crossbrow/2.svg">
-                    <img class="crossbrow__item one-column" src="/img/crossbrow/3.svg">
-                    <img class="crossbrow__item one-column" src="/img/crossbrow/4.svg">
-                    <img class="crossbrow__item one-column" src="/img/crossbrow/5.svg">
+            <div class="h-card" style="align-items: center;">
+                <img class="h-card__img two-column" style="height: 250px;" src="../img/usp/devs.svg">
+                <div class="v-card">
+                    <span class="text text--big three-column">We create our products with love and care, we will be glad
+                        if it helps in your projects.
+                        If you like our product, you can help financially or star our <a class="hide-link"
+                            href="https://github.com/table4js/components">repository on GitHub</a>.
+                        If you do not have enough functionality please feel free to create an issue on <a
+                            class="hide-link"
+                            href="https://github.com/table4js/components/issues">GitHub</a>.</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="form-back">
+    <section class="section-container">
+        <div class="page-size">
+            <h2 class="title-h2">Get Support</h2>
+            <div class="vertical-cards">
+                <div class="v-card sale-card">
+                    <h2 class="title-h3">Coder</h2>
+                    <div class="sale-card__body">
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">React package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Standalone package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Knockout package</span>
+                        </div>
+                        <div class="feature__block feature__block--missing">
+                            <img class="small-icon" src="/img/icons/icon_no.svg">
+                            <span class="text">No support provided</span>
+                        </div>
+                    </div>
+                    <div class="sale-card__price">
+                        <span class="title-h2">Free</span>
+                    </div>
+                    <a class="button  button--accent" href="/#get">Get Table4JS</a>
+                </div>
+                <div class="v-card sale-card">
+                    <h2 class="title-h3">Assistent</h2>
+                    <div class="sale-card__body">
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">React package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Standalone package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Knockout package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">10 questions/month</span>
+                        </div>
+                    </div>
+                    <div class="sale-card__price">
+                        <span class="title-h2">20$</span>
+                        <span class="text">/month</span>
+                    </div>
+                    <button class="button button--accent" onclick="buy20()">Buy</button>
+                </div>
+                <div class="v-card sale-card">
+                    <h2 class="title-h3">Pro Team</h2>
+                    <div class="sale-card__body">
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">React package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Standalone package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Knockout package</span>
+                        </div>
+                        <div class="feature__block">
+                            <img class="small-icon" src="/img/icons/icon_check.svg">
+                            <span class="text">Unlimited support</span>
+                        </div>
+                    </div>
+                    <div class="sale-card__price">
+                        <span class="title-h2">200$</span>
+                        <span class="text">/month</span>
+                    </div>
+                    <button class="button button--accent" href onclick="buy200()">Buy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section-container">
+        <div class="page-size">
+            <div class="headline">
+                <h2 class="title-h2">We are ready to answer your questions!</h2>
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Can I use Table4JS for free?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            <strong>Yes</strong>, Table4JS is a free open source JavaScript library under the MIT
+                            license.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            How to get started?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            Choose your library and just follow the gettings started instructions.
+                            You can find <a class="hide-link" href="https://table4js.com/examples">live examples</a> for
+                            each feature on our site.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            What if I've found a bug or need some missing functionality?
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            Please create an issue in our <a class="hide-link"
+                                href="https://github.com/table4js/components/issues">GitHub</a> repository.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingSeven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            How can I control table look and feel?
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            You can customize colors via CSS variables. Here the live example.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingEight">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            What if I'm experiencing troubles with passing data to table widget?
+                        </button>
+                    </h2>
+                    <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            Please create an issue in our <a class="hide-link"
+                                href="https://github.com/table4js/components/issues">GitHub</a> repository.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            What is the support service model?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            <strong>Via question/bug private issues.</strong> A person wich has a license, ask us a
+                            question or report a bug at the support site. Our team will answer a question or fix a bug.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header text" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How many support subscriptions should I buy?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body text">
+                            <strong>Our support service provided per developer.</strong> You need support subscriptions
+                            for every developer that want to get assistance during work with our products
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container color-middle-background ">
+        <div class="page-size">
+            <div class="h-card">
+                <img class="h-card__img two-column" src="../img/logo/1.svg">
+                <div class="v-card three-column">
+                    <h2 class="title-h2">Try Table4JS now</h2>
+                    <p class="text text--centered">Table4JS - free table/grid JavaScript library for your project.
+                        Supports pure JS, React and Knockout and distributed under the MIT license.</p>
+                    <div class="buttons">
+                        <a class="button  button--accent" href="/#get">Get Table4JS</a>
+                        <a class="button" href="/docs/">Getting Started Guide</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container">
         <div class="page-size">
             <div class="form-back__container" id="contact-form">
-                <div class="headline">
-                    <h2 class="headline__text">Do you still have questions?</h2>
-                </div>
+                <h2 class="title-h2" id="question-title">Do you have questions?</h2>
+                <h2 class="title-h2" id="buy-title">Get support Table4JS</h2>
                 <form role="form" id="contactForm" class="form-back__form three-column">
-                    <span class="form-back__label">Name</span>
-                    <input type="text" class="form-back__field" id="name" placeholder="Name" required>
-                    <span class="form-back__label">E-mail</span>
-                    <input type="email" class="form-back__field" id="email" placeholder="E-mail" required>
-                    <span class="form-back__label">Message</span>
-                    <textarea id="message" class="form-back__field" rows="5" placeholder="Enter your message.."
+                    <span class="text">Name</span>
+                    <input type="text" class="form-back__field text" id="name" placeholder="Name" required>
+                    <span class="text">E-mail</span>
+                    <input type="email" class="form-back__field text" id="email" placeholder="E-mail" required>
+                    <span class="text">Message</span>
+                    <textarea id="message" class="form-back__field text" rows="5" placeholder="Enter your message.."
                         required></textarea>
-                    <button id="form-submit" class="button button--accent form-back__button" onclick="formSuccess()"
-                        type="button">Send</button>
+                    <button id="form-submit" class="button button--accent form-back__button one-column"
+                        onclick="formSuccess()" type="button">Send</button>
                 </form>
             </div>
-            <div class="features__reason reason-left form-back__succes form-back__succes--hidden" id="contact-succes">
-                <img class="reason-img" src="img/form-back/1.svg">
-                <div class="reason-column">
-                    <h2 class="headline__text three-column">Your message has been sent successfully!</h2>
-                    <span class="reason__description two-column">We will contact you soon</span>
-                    <button id="new-letter" class="button button--accent form-back__button" onclick="newletter()">Send a
-                        new message</button>
+            <div class="h-card form-back__succes form-back__succes--hidden" id="contact-succes">
+                <img class="h-card__img two-column" src="img/form-back/1.svg">
+                <div class="v-card two-column">
+                    <h2 class="title-h3">Your message has been sent successfully!</h2>
+                    <span class="text" style="margin-bottom: 8px; text-align: center;">We will contact you soon</span>
+                    <button id="new-letter" class="button button--accent" onclick="newletter()">Send a new
+                        message</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="footer blue-top-background">
+    <section class="section-container color-middle-background color-middle-background--1">
         <div class="page-size">
             <div class="footer__container">
                 <div class="footer__column two-column">
-                    <img class="footer__logo two-column" src="/img/logo/logo.svg">
-                    <span class="footer__ltd">© 2022 Research laboratory ABRIS Ltd</span>
+                    <img class="footer__logo two-column h-card__img" src="/img/logo/logo-table.svg">
+                    <span class="footer__ltd text">© 2022 Abris Lab Ltd</span>
                 </div>
                 <div class="footer__column one-column">
-                    <span class="header__link-page header__link-page--active">Main</span>
-                    <a class="header__link-page" href="/examples">Examples</a>
-                    <a class="header__link-page" href="/buy">Get support</a>
-                    <a class="header__link-page" href="/docs">Documentation</a>
-                    <a class="header__link-page" href="#contact-form">Contact us</a>
+                    <span class="header__link-page text header__link-page--active">Main</span>
+                    <a class="header__link-page text" href="/examples">Examples</a>
+                    <a class="header__link-page text" href="/docs">Documentation</a>
+                    <a class="header__link-page text" href="#contact-form">Contact us</a>
                 </div>
                 <div class="footer__column two-column">
-                    <a href="mailto:info@abrisplatform.com" class="social">
-                        <img class="social__icon" src="/img/footer/email.svg">
-                        <span class="social__link">info@abrisplatform.com</span>
+                    <a href="mailto:table4js@gmail.com" class="social">
+                        <img class="social__icon small-icon" src="/img/footer/email.svg">
+                        <span class="social__link text">table4js@gmail.com</span>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCkENTPqm7neTGbysFQV6mfw" class="social">
-                        <img class="social__icon" src="/img/footer/youtube.svg">
-                        <span class="social__link">Abris Platform on youtube</span>
-                    </a>
-                    <a href="https://github.com/abris-platform/abris-components" class="social">
-                        <img class="social__icon" src="/img/footer/github.svg">
-                        <span class="social__link">Abris Platform GitHub repo</span>
-                    </a>
-                    <a href="https://www.facebook.com/abrisplatform/" class="social">
-                        <img class="social__icon" src="/img/footer/facebook.svg">
-                        <span class="social__link">Abris Platform on Facebook</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/abris-platform-9149361ab/" class="social">
-                        <img class="social__icon" src="/img/footer/linkedin.svg">
-                        <span class="social__link">Abris Platform on LinkedIn</span>
+                    <a href="https://github.com/table4js/components" class="social">
+                        <img class="social__icon small-icon" src="/img/footer/github.svg">
+                        <span class="social__link text">Table4JS GitHub repo</span>
                     </a>
                 </div>
-
             </div>
         </div>
     </section>

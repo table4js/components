@@ -52,5 +52,5 @@ model1.data = sampleData1;
 var model2 = new Table4JS.Table(options2);
 model2.data = sampleData2;
 
-ko.applyBindings(model1);
-ko.applyBindings(model2);
+ko.applyBindings({ mode: model1 }, document.getElementById("table1"));
+ko.applyBindings({ mode: model2 }, document.getElementById("table2"));
