@@ -1,8 +1,8 @@
 {
-  "name": "abris-components",
+  "name": "table4js-components",
   "version": "0.2.3",
-  "description": "JavaScript components library - @abris-lab",
-  "homepage": "https://github.com/abris-platform/abris-components",
+  "description": "JavaScript table components library - table4js",
+  "homepage": "https://github.com/table4js/components",
   "authors": [
     "Serge T <@domain.com>",
     "Fedor D <@domain.com>",
@@ -12,12 +12,14 @@
   "license": "MIT",
   "keywords": [
     "JavaScript",
+    "table",
+    "grid",
     "components"
   ],
   "moduleType": "umd",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abris-platform/abris-components.git"
+    "url": "https://github.com/table4js/components.git"
   },
   "scripts": {
     "start": "webpack serve --config ./webpack.config.dev.js",
