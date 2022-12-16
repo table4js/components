@@ -14,7 +14,7 @@ function getColumns(name, baseUrl) {
         // model.render("#table-container");
     });
 }
-getColumns("declaration", "https://abris.site:3334/");
+getColumns("declaration", "https://table4js.com:3334/");
 
 
 const root = ReactDOM.createRoot(document.getElementById("table-container"));

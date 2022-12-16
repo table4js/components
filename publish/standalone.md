@@ -60,14 +60,14 @@ model.render("#table-container");
 Here is the table4js [live example with the above code](https://plnkr.co/edit/wBrB0EznDixVV1ra?open=lib%2Fscript.js&preview)
 
 ## Project site and resources
-Our official sie is [https://abris.site](https://abris.site)
+Our official sie is [https://table4js.com](https://table4js.com)
 
 ### Online demos
-[https://abris.site/examples](https://abris.site/examples)
+[https://table4js.com/examples](https://table4js.com/examples)
 
 The demos are framework-specific and you can choose your framework via selector Standalone/Knockout/React in the top left corner of the navigation panel. Each demo has html/js/css tab where you can get markup, css or JavaScript code to use in your application. Each demo also can be opened in a separate window.
 
 ### Documentation
 Almost all code ralated to the Table4JS widget core functionality is cross-framework and used as a model for platform-specific rendering. You need to create widget model and set it properties or subscribe events to control table widget behavior. Table4JS model is described in our documentation:
 
-[https://abris.site/docs](https://abris.site/docs)
+[https://table4js.com/docs](https://table4js.com/docs)
