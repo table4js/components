@@ -1,15 +1,15 @@
 ﻿<!-- ko if: filterItems.length > 0 -->
-<div class="abris-filter-item">
-  <div class="abris-filter__title abris-filter-text" data-bind="text: column.title + ':'"></div>
+<div class="table4js-filter-item">
+  <div class="table4js-filter__title table4js-filter-text" data-bind="text: column.title + ':'"></div>
   <!-- ko foreach: filterItems -->
     <!-- ko if: $index() > 0 -->
-    <div class="abris-filter__operator abris-filter-text" data-bind="text: '&'"></div>
+    <div class="table4js-filter__operator table4js-filter-text" data-bind="text: '&'"></div>
     <!-- /ko -->
-    <!-- ko component: { name: 'abris-column-filter-item', params: { filterItem: $data } } -->
+    <!-- ko component: { name: 'table4js-column-filter-item', params: { filterItem: $data } } -->
     <!-- /ko -->
-    <div class="abris-filter__remove"
+    <div class="table4js-filter__remove"
       data-bind="click: $parent.removeItem, clickBubble: false">
-      <div class="abris-filter__remove-icon abris-svg-icon" data-bind="html: $root.icons.cross"></div>
+      <div class="table4js-filter__remove-icon table4js-svg-icon" data-bind="html: $root.icons.cross"></div>
     </div>
   <!-- /ko -->
 </div>

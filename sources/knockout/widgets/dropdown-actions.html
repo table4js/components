@@ -1,11 +1,11 @@
-<button class="abris-action-button abris-button--transparent abris-button-toggle" type="button"
+<button class="table4js-action-button table4js-button--transparent table4js-button-toggle" type="button"
     data-bind="click: toggle, attr: { title: title }">
     <div data-bind="html: $root.icons.more_sq"></div>
-    <span class="abris-action-button__label" data-bind="text: moreText"></span>
+    <span class="table4js-action-button__label" data-bind="text: moreText"></span>
 </button>
 <!-- ko if: isOpen -->
-<ul class="abris-button-toggle__dropdown-menu">
-    <abris-actions class="abris-context-actions" params="model: data, options: { action: actions }">
-    </abris-actions>
+<ul class="table4js-button-toggle__dropdown-menu">
+    <table4js-actions class="table4js-context-actions" params="model: data, options: { action: actions }">
+    </table4js-actions>
 </ul>
 <!-- /ko -->

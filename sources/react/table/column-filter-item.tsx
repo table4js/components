@@ -25,7 +25,7 @@ export function AbrisColumnFilterItem({
   return (
     <>
       <select
-        className="abris-filter___operation"
+        className="table4js-filter___operation"
         value={filterItem.operation?.text}
         onChange={(e) => {
           filterItem.operation = filterItem.operations.find(
@@ -44,13 +44,13 @@ export function AbrisColumnFilterItem({
           <AbrisFilterSelect viewModel={tableFilterSelect} />
         )
 
-        /* <abris-filter-select class="abrs-filter__value"
+        /* <table4js-filter-select class="abrs-filter__value"
 params="value: filterItemValue, columnName: column.name, getColumnData: getColumnData">
-</abris-filter-select> */
+</table4js-filter-select> */
       }
       {filterItem.showOperand && filterItem.operation.op != "EQ" && (
         <div
-          className="abris-filter__operand"
+          className="table4js-filter__operand"
           data-bind="component: { name: filterEditorName, params: { value: filterItemValue, column: column } }"
         >
           <input

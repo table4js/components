@@ -20,7 +20,7 @@ export class ColumnFilterItem extends Base {
   ) {
     super();
     this.filterItemValue = new FilterItemValue(column);
-    if(operationsMap[this.column.type]) {
+    if (operationsMap[this.column.type]) {
       this.operations = operationsMap[this.column.type];
     }
     else {
@@ -30,30 +30,32 @@ export class ColumnFilterItem extends Base {
   }
 
   operations: Array<any>;
-  
+
   get filterEditorName() {
     // if (this.column.type === "bool") {
-    //   return "abris-table-filter-bool";
+    //   return "table4js-table-filter-bool";
     // } else if (["string", "caption", "plain"].indexOf(this.column.type) !== -1 ) {
-    //   return "abris-table-filter-autocomplete";
+    //   return "table4js-table-filter-autocomplete";
     // } else if (this.column.type === "date") {
-    //   return "abris-table-filter-date";
+    //   return "table4js-table-filter-date";
     // } else if (this.column.type === "datetime") {
-    //   return "abris-table-filter-date-time";
+    //   return "table4js-table-filter-date-time";
     // } else if (this.column.type === "piketposition") {
-    //   return "abris-table-filter-kmpktm";
+    //   return "table4js-table-filter-kmpktm";
     // } else if (!!this.params.propertyInfo.relation) {
-    //   return "abris-table-filter-autocomplete";
+    //   return "table4js-table-filter-autocomplete";
     // }
-    return "abris-table-filter-default";
+    return "table4js-table-filter-default";
   }
   public filterItemValue: FilterItemValue;
-  @property({ onSet: (val: IFindOperation, target: ColumnFilterItem) => {
-    if(!!val) {
-      target.filterItemValue.op = val.op;
+  @property({
+    onSet: (val: IFindOperation, target: ColumnFilterItem) => {
+      if (!!val) {
+        target.filterItemValue.op = val.op;
+      }
+      target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
     }
-    target.showOperand = val && val.op !== "ISN" && val.op !== "ISNN";
-  }}) operation: IFindOperation;
+  }) operation: IFindOperation;
   @property({ defaultValue: true }) showOperand: boolean;
 
   getFilterValue() {

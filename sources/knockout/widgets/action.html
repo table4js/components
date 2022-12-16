@@ -2,7 +2,7 @@
                 visible: !$data.visible || ko.unwrap(visible),
                 enable: !$data.enabled || ko.unwrap(enabled),
                 attr: {
-                        class: 'abris-button--transparent action-button abris-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' abris-action--active' : ''),
+                        class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),
                         title: $data.title || $data.name, form: $data.formId,
                         type: $data.formId !== undefined ? 'submit' : 'button'
                     }">
@@ -10,9 +10,9 @@
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->
     <!-- ko if: $data.svg -->
-    <div class="abris-action-button__icon abris-button__svg-icon" data-bind="html: svg"></div>
+    <div class="table4js-action-button__icon table4js-button__svg-icon" data-bind="html: svg"></div>
     <!-- /ko -->
     <!-- ko ifnot: $parents[1].short -->
-    <span class="abris-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}" ></span>
+    <span class="table4js-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}" ></span>
     <!-- /ko -->
 </button>

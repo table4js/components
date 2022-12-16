@@ -12,9 +12,9 @@ import { AbrisColumnFilter } from "./column-filter";
 
 function EmptyTable() {
   return (
-    <tr className="abris-table__row">
+    <tr className="table4js-table__row">
       <td
-        className="abris-table-cell"
+        className="table4js-table-cell"
         colSpan={"100%" as any}
         data-bind="text: noDataText"
       >
@@ -29,27 +29,27 @@ function LoadingIndicator(table: Table) {
   return (
     <>
       {visibleColumns.map((c, index) => (
-        <tr key={index} className="abris-table__row">
-          <td className="abris-table-cell abris-table-technical-cell">
-            <div className="abris-table-technical-cell__container">
-              <div className="abris-table__check">
-                <div className="abris-svg-icon abris-table__icon-check"></div>
+        <tr key={index} className="table4js-table__row">
+          <td className="table4js-table-cell table4js-table-technical-cell">
+            <div className="table4js-table-technical-cell__container">
+              <div className="table4js-table__check">
+                <div className="table4js-svg-icon table4js-table__icon-check"></div>
               </div>
             </div>
           </td>
           {visibleColumns.map((vc) => (
-            <td className="abris-table-cell abris-table-technical-cell">
-              <div className="abris-table-cell__container abris-table-cell__container--loading"></div>
+            <td className="table4js-table-cell table4js-table-technical-cell">
+              <div className="table4js-table-cell__container table4js-table-cell__container--loading"></div>
             </td>
           ))}
-          <td className="abris-table-cell abris-table-technical-cell">
-            <div className="abris-table-technical-cell__container">
+          <td className="table4js-table-cell table4js-table-technical-cell">
+            <div className="table4js-table-technical-cell__container">
               <div
-                className="abris-svg-icon abris-table-icon-row-tools abris-table__more"
+                className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more"
                 dangerouslySetInnerHTML={{ __html: table.icons.more }}
               ></div>
               <div
-                className="abris-svg-icon abris-table-icon-row-tools abris-table__edit"
+                className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit"
                 dangerouslySetInnerHTML={{ __html: table.icons.edit }}
               ></div>
             </div>
@@ -78,18 +78,18 @@ export function Table4({
   const CustomTag = `table4` as keyof JSX.IntrinsicElements;
   return (
     <CustomTag>
-      <div ref={rootRef} className="abris-table-resizable-container">
-        <div className="abris-table-scroll-container">
-          <table className="abris-table">
-            <thead className="abris-table__header abris-table-sticky-component">
-              <tr key="header-tools" className="abris-table-header-tools">
+      <div ref={rootRef} className="table4js-table-resizable-container">
+        <div className="table4js-table-scroll-container">
+          <table className="table4js-table">
+            <thead className="table4js-table__header table4js-table-sticky-component">
+              <tr key="header-tools" className="table4js-table-header-tools">
                 <th
-                  className="abris-table-header-tools__cell"
+                  className="table4js-table-header-tools__cell"
                   colSpan={"100%" as any}
                 >
-                  <div className="abris-table-header-tools__container abris-table-group-header-technical-cell">
-                    <div className="abris-table-preheader">
-                      <div className="abris-table-search-group">
+                  <div className="table4js-table-header-tools__container table4js-table-group-header-technical-cell">
+                    <div className="table4js-table-preheader">
+                      <div className="table4js-table-search-group">
                         {model.showSearch ? (
                           <AbrisSearch
                             icon={model.icons.search}
@@ -97,20 +97,20 @@ export function Table4({
                           ></AbrisSearch>
                         ) : null}
                         <AbrisActions
-                          className="abris-table-actions"
+                          className="table4js-table-actions"
                           actions={model.topActions}
                         />
                         {model.dropdownActions.length > 0 && (
                           <AbrisDropdownActions
-                            className="abris-table-dropdown abris-table-actions-menu"
+                            className="table4js-table-dropdown table4js-table-actions-menu"
                             actions={model.dropdownActions}
                           />
                         )}
                       </div>
                     </div>
                     {model.viewFilterTable && (
-                      <div className="abris-table-filter">
-                        <div className="abris-table-filter__container">
+                      <div className="table4js-table-filter">
+                        <div className="table4js-table-filter__container">
                           {model.columns.map((c) => (
                             <AbrisColumnFilter
                               key={c.name}
@@ -123,16 +123,16 @@ export function Table4({
                   </div>
                 </th>
               </tr>
-              <tr key="header-title" className="abris-table-header-title">
+              <tr key="header-title" className="table4js-table-header-title">
                 <th
                   key="row-selection-cell"
-                  className="abris-table-header-title__cell abris-table-switch"
+                  className="table4js-table-header-title__cell table4js-table-switch"
                 >
                   <div
                     className={
                       model.isNumber
-                        ? "abris-table-switch__text switch__text--selected"
-                        : "abris-table-switch__text"
+                        ? "table4js-table-switch__text switch__text--selected"
+                        : "table4js-table-switch__text"
                     }
                     onClick={(_) => (model.isNumber = !model.isNumber)}
                   >
@@ -144,23 +144,23 @@ export function Table4({
                   .map((c) => (
                     <th
                       key={c.name}
-                      className="abris-table-header-title__cell"
+                      className="table4js-table-header-title__cell"
                       onMouseOut={(e) => model.logMouseOut(c, e)}
                       onMouseMove={(e) => model.logMouseMove(c, e)}
                       onMouseUp={(e) => model.logMouseUp(c, e)}
                     >
-                      <div className="abris-table-title">
+                      <div className="table4js-table-title">
                         <span
-                          className="abris-table-title__text"
+                          className="table4js-table-title__text"
                           onClick={(e) => {
                             model.clickColumn(c, e);
                           }}
                         >
                           {c.title}
                         </span>
-                        <div className="abris-table-title__tools">
+                        <div className="table4js-table-title__tools">
                           <div
-                            className="abris-svg-icon abris-table-title__sorter"
+                            className="table4js-svg-icon table4js-table-title__sorter"
                             style={{
                               visibility:
                                 c.order === false ? "visible" : "hidden",
@@ -170,7 +170,7 @@ export function Table4({
                             }}
                           ></div>
                           <div
-                            className="abris-svg-icon abris-table-title__sorter"
+                            className="table4js-svg-icon table4js-table-title__sorter"
                             style={{
                               visibility:
                                 c.order === true ? "visible" : "hidden",
@@ -180,7 +180,7 @@ export function Table4({
                             }}
                           ></div>
                           <div
-                            className="abris-svg-icon abris-table-title__filter"
+                            className="table4js-svg-icon table4js-table-title__filter"
                             onClick={(e) => c.clickFilter(c, e.nativeEvent)}
                             dangerouslySetInnerHTML={{
                               __html: model.icons.filter,
@@ -189,7 +189,7 @@ export function Table4({
                         </div>
                       </div>
                       <div
-                        className="abris-table-title_resize"
+                        className="table4js-table-title_resize"
                         onMouseOver={(e) => model.logMouseOver(c, e)}
                         onMouseOut={(e) => model.logMouseOut(c, e)}
                         onMouseMove={(e) => model.logMouseMove(c, e)}
@@ -200,11 +200,11 @@ export function Table4({
                   ))}
                 <th
                   key="row-context-menu-cell"
-                  className="abris-table-header-title__cell"
+                  className="table4js-table-header-title__cell"
                 ></th>
               </tr>
             </thead>
-            <tbody className="abris-table__body">
+            <tbody className="table4js-table__body">
               {model.rows.length == 0 && model.loadingMutex == false
                 ? EmptyTable()
                 : null}
@@ -218,16 +218,16 @@ export function Table4({
                   ></TableRow>
                 ))}
             </tbody>
-            <tfoot className="abris-table__footer abris-table-sticky-component">
+            <tfoot className="table4js-table__footer table4js-table-sticky-component">
               {model.showTableSummary && (
-                <tr key="footer-summary" className="abris-table-footer-summary">
+                <tr key="footer-summary" className="table4js-table-footer-summary">
                   <th
                     key="footer-tech-cell"
-                    className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"
+                    className="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"
                   >
-                    <div className="abris-table-technical-cell__container">
+                    <div className="table4js-table-technical-cell__container">
                       <div
-                        className="abris-svg-icon abris-table-icon-equal"
+                        className="table4js-svg-icon table4js-table-icon-equal"
                         dangerouslySetInnerHTML={{
                           __html: model.icons.equal,
                         }}
@@ -239,39 +239,39 @@ export function Table4({
                     .map((c) => (
                       <th
                         key={c.name}
-                        className="abris-table-cell abris-table-footer__cell"
+                        className="table4js-table-cell table4js-table-footer__cell"
                       >
                         <Table4Summary summary={new TableSummary(c)} />
                       </th>
                     ))}
                   <th
                     key="footer-context-menu-cell"
-                    className="abris-table-cell abris-table-technical-cell abris-table-footer__cell"
+                    className="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"
                   ></th>
                 </tr>
               )}
-              <tr key="footer-tools" className="abris-table-footer-tools">
+              <tr key="footer-tools" className="table4js-table-footer-tools">
                 <th
-                  className="abris-table-footer-tools__cell"
+                  className="table4js-table-footer-tools__cell"
                   colSpan={"100%" as any}
                 >
-                  <div className="abris-table-footer-tools__container abris-table-group-header-technical-cell">
-                    <div className="abris-table-row-management">
+                  <div className="table4js-table-footer-tools__container table4js-table-group-header-technical-cell">
+                    <div className="table4js-table-row-management">
                       <AbrisActions
-                        className="abris-table-actions"
+                        className="table4js-table-actions"
                         actions={model.bottomActions}
                       />
                     </div>
-                    <div className="abris-table-info">
-                      <span className="abris-table-info__total abris-table-info__text">
+                    <div className="table4js-table-info">
+                      <span className="table4js-table-info__total table4js-table-info__text">
                         {"Total: " + model.totalCount}
                       </span>
-                      <div className="abris-table-info__go-to">
-                        <span className="abris-table-go-to__text abris-table-info__text">
+                      <div className="table4js-table-info__go-to">
+                        <span className="table4js-table-go-to__text table4js-table-info__text">
                           Go to:
                         </span>
                         <input
-                          className="abris-table-go-to__value"
+                          className="table4js-table-go-to__value"
                           defaultValue={model.startRow}
                           onChange={(e) => setStartRow(+e.target.value)}
                           onKeyDown={(e) => {
@@ -280,9 +280,9 @@ export function Table4({
                             }
                           }}
                         />
-                        <button className="abris-btn-transparent">
+                        <button className="table4js-btn-transparent">
                           <div
-                            className="abris-svg-icon abris-table-go-to__icon"
+                            className="table4js-svg-icon table4js-table-go-to__icon"
                             dangerouslySetInnerHTML={{
                               __html: model.icons.arrowright,
                             }}

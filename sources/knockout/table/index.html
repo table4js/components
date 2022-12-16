@@ -1,29 +1,29 @@
-<div class="abris-table-resizable-container">
-  <div class="abris-table-scroll-container">
-    <table class="abris-table">
-      <thead class="abris-table__header abris-table-sticky-component">
-        <tr class="abris-table-header-tools">
-          <th class="abris-table-header-tools__cell" colspan="100%">
-            <div class="abris-table-header-tools__container abris-table-group-header-technical-cell">
-              <div class="abris-table-preheader">
-                <div class="abris-table-search-group">
+<div class="table4js-table-resizable-container">
+  <div class="table4js-table-scroll-container">
+    <table class="table4js-table">
+      <thead class="table4js-table__header table4js-table-sticky-component">
+        <tr class="table4js-table-header-tools">
+          <th class="table4js-table-header-tools__cell" colspan="100%">
+            <div class="table4js-table-header-tools__container table4js-table-group-header-technical-cell">
+              <div class="table4js-table-preheader">
+                <div class="table4js-table-search-group">
                   <!-- ko if: showSearch -->
-                  <abris-search params="model: searchModel"></abris-search>
+                  <table4js-search params="model: searchModel"></table4js-search>
                   <!-- /ko -->
-                  <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'topActions' }">
-                  </abris-actions>
+                  <table4js-actions class="table4js-table-actions" params="model: $data, options: { action: 'topActions' }">
+                  </table4js-actions>
                   <!-- ko if: $data.getActions('dropdownActions').length > 0 -->
-                  <abris-dropdown-actions class="abris-table-dropdown abris-table-actions-menu"
+                  <table4js-dropdown-actions class="table4js-table-dropdown table4js-table-actions-menu"
                     params="data: $data, actions: 'dropdownActions'">
-                  </abris-dropdown-actions>
+                  </table4js-dropdown-actions>
                   <!-- /ko -->
                 </div>
               </div>
               <!-- ko if: viewFilterTable -->
-              <div class="abris-table-filter">
-                <div class="abris-table-filter__container">
+              <div class="table4js-table-filter">
+                <div class="table4js-table-filter__container">
                   <!-- ko foreach: columns -->
-                  <!-- ko component: { name: 'abris-column-filter', params: { context: filterContext } } -->
+                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->
                   <!-- /ko -->
                   <!-- /ko -->
                 </div>
@@ -32,126 +32,126 @@
             </div>
           </th>
         </tr>
-        <tr class="abris-table-header-title">
-          <th class="abris-table-header-title__cell abris-table-switch">
-            <div class="abris-table-switch__text"
+        <tr class="table4js-table-header-title">
+          <th class="table4js-table-header-title__cell table4js-table-switch">
+            <div class="table4js-table-switch__text"
               data-bind="css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber">#
             </div>
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
-          <th class="abris-table-header-title__cell"
+          <th class="table4js-table-header-title__cell"
             data-bind="event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}">
-            <div class="abris-table-title">
-              <span class="abris-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
-              <div class="abris-table-title__tools">
-                <div class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === false, html: $root.icons.sortup"></div>
-                <div class="abris-svg-icon abris-table-title__sorter" data-bind="visible: order === true, html: $root.icons.sortdown"></div>
-                <div class="abris-svg-icon abris-table-title__filter" data-bind="click: clickFilter, html: $root.icons.filter"></div>
+            <div class="table4js-table-title">
+              <span class="table4js-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
+              <div class="table4js-table-title__tools">
+                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === false, html: $root.icons.sortup"></div>
+                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === true, html: $root.icons.sortdown"></div>
+                <div class="table4js-svg-icon table4js-table-title__filter" data-bind="click: clickFilter, html: $root.icons.filter"></div>
               </div>
             </div>
-            <div class="abris-table-title_resize"
+            <div class="table4js-table-title_resize"
               data-bind="event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}">
             </div>
           </th>
           <!-- /ko -->
           <!-- /ko -->
-          <th class="abris-table-header-title__cell"></th>
+          <th class="table4js-table-header-title__cell"></th>
         </tr>
       </thead>
-      <tbody class="abris-table__body">
+      <tbody class="table4js-table__body">
         <!-- ko if: rows.length == 0 && loadingMutex == false  -->
-        <tr class="abris-table__row">
-          <th class="abris-table-cell" colspan="100%" data-bind="text: noDataText"></th>
+        <tr class="table4js-table__row">
+          <th class="table4js-table-cell" colspan="100%" data-bind="text: noDataText"></th>
         </tr>
         <!-- /ko -->
         <!-- ko if: loadingMutex -->
         <!-- ko foreach: columns -->
-        <tr class="abris-table__row"></tr>
-          <td class="abris-table-cell abris-table-technical-cell" >
-            <div class="abris-table-technical-cell__container">
-              <div class="abris-table__check">
-                <div class="abris-svg-icon abris-table__icon-check"></div>
+        <tr class="table4js-table__row"></tr>
+          <td class="table4js-table-cell table4js-table-technical-cell" >
+            <div class="table4js-table-technical-cell__container">
+              <div class="table4js-table__check">
+                <div class="table4js-svg-icon table4js-table__icon-check"></div>
               </div>
             </div>
           </td>
         <!-- ko foreach: $parent.columns -->
         <!-- ko if: visible -->
-          <td class="abris-table-cell abris-table-technical-cell">
-            <div class="abris-table-cell__container abris-table-cell__container--loading">
+          <td class="table4js-table-cell table4js-table-technical-cell">
+            <div class="table4js-table-cell__container table4js-table-cell__container--loading">
             </div>
           </td>
         <!-- /ko -->
         <!-- /ko -->
-        <td class="abris-table-cell abris-table-technical-cell">
-          <div class="abris-table-technical-cell__container">
-            <div class="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
-            <div class="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
+        <td class="table4js-table-cell table4js-table-technical-cell">
+          <div class="table4js-table-technical-cell__container">
+            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $root.icons.more"></div>
+            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $root.icons.edit"></div>
           </div>
         </td>
         </tr>
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko foreach: {data: rows} -->
-        <tr class="abris-table__row" data-bind="css: {'abris-table__row--selected': selected}, style: {'background-color': 'none' }">
-          <td class="abris-table-cell abris-table-technical-cell" data-bind="click: select">
-            <div class="abris-table-technical-cell__container">
+        <tr class="table4js-table__row" data-bind="css: {'table4js-table__row--selected': selected}, style: {'background-color': 'none' }">
+          <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: select">
+            <div class="table4js-table-technical-cell__container">
               <!-- ko if: $parent.isNumber -->
-              <div class="abris-table__number" data-bind="text: number"></div>
+              <div class="table4js-table__number" data-bind="text: number"></div>
               <!-- /ko -->
               <!-- ko if: !$parent.isNumber -->
-              <div class="abris-table__check">
-                <div class="abris-svg-icon abris-table__icon-check" data-bind="visible: selected, html: $root.icons.check"></div>
+              <div class="table4js-table__check">
+                <div class="table4js-svg-icon table4js-table__icon-check" data-bind="visible: selected, html: $root.icons.check"></div>
               </div>
               <!-- /ko -->
             </div>
           </td>
           <!-- ko foreach: cells -->
-          <!-- ko component: { name: 'abris-table-cell', params: { cell: $data, table: $parents[1] } } -->
+          <!-- ko component: { name: 'table4js-table-cell', params: { cell: $data, table: $parents[1] } } -->
           <!-- /ko -->
           <!-- /ko -->
-          <td class="abris-table-cell abris-table-technical-cell" data-bind="click: click">
-            <div class="abris-table-technical-cell__container">
-              <div class="abris-svg-icon abris-table-icon-row-tools abris-table__more" data-bind="html: $root.icons.more"></div>
-              <div class="abris-svg-icon abris-table-icon-row-tools abris-table__edit" data-bind="html: $root.icons.edit"></div>
+          <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: click">
+            <div class="table4js-table-technical-cell__container">
+              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $root.icons.more"></div>
+              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $root.icons.edit"></div>
             </div>
-            <div class="abris-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
-            <div class="abris-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
+            <div class="table4js-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
+            <div class="table4js-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
           </td>
         </tr>
         <!-- /ko -->
       </tbody>
-      <tfoot class="abris-table__footer abris-table-sticky-component">
-        <tr class="abris-table-footer-summary" data-bind="visible: showTableSummary">
-          <th class="abris-table-cell abris-table-technical-cell abris-table-footer__cell">
-            <div class="abris-table-technical-cell__container">
-              <div class="abris-svg-icon abris-table-icon-equal" data-bind="html: $root.icons.equal"></div>
+      <tfoot class="table4js-table__footer table4js-table-sticky-component">
+        <tr class="table4js-table-footer-summary" data-bind="visible: showTableSummary">
+          <th class="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell">
+            <div class="table4js-table-technical-cell__container">
+              <div class="table4js-svg-icon table4js-table-icon-equal" data-bind="html: $root.icons.equal"></div>
             </div>
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
-          <th class="abris-table-cell abris-table-footer__cell">
-            <abris-table-summary params='column: $data'></abris-table-summary>
+          <th class="table4js-table-cell table4js-table-footer__cell">
+            <table4js-table-summary params='column: $data'></table4js-table-summary>
           </th>
           <!-- /ko -->
           <!-- /ko -->
-          <th class="abris-table-cell abris-table-technical-cell abris-table-footer__cell"></th>
+          <th class="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"></th>
         </tr>
-        <tr class="abris-table-footer-tools">
-          <th class="abris-table-footer-tools__cell" colspan="100%">
-            <div class="abris-table-footer-tools__container abris-table-group-header-technical-cell">
-              <div class="abris-table-row-management">
-                <abris-actions class="abris-table-actions" params="model: $data, options: { action: 'bottomActions' }">
-                </abris-actions>
+        <tr class="table4js-table-footer-tools">
+          <th class="table4js-table-footer-tools__cell" colspan="100%">
+            <div class="table4js-table-footer-tools__container table4js-table-group-header-technical-cell">
+              <div class="table4js-table-row-management">
+                <table4js-actions class="table4js-table-actions" params="model: $data, options: { action: 'bottomActions' }">
+                </table4js-actions>
               </div>
-              <div class="abris-table-info">
-                <span class="abris-table-info__total abris-table-info__text"
+              <div class="table4js-table-info">
+                <span class="table4js-table-info__total table4js-table-info__text"
                   data-bind="text: 'Total: ' + totalCount"></span>
-                <div class="abris-table-info__go-to">
-                  <span class="abris-table-go-to__text abris-table-info__text">Go to: </span>
-                  <input class="abris-table-go-to__value" data-bind="value: startRow"/>
-                  <button class="abris-btn-transparent">
-                    <div class="abris-svg-icon abris-table-go-to__icon" data-bind="html: $root.icons.arrowright"></div>
+                <div class="table4js-table-info__go-to">
+                  <span class="table4js-table-go-to__text table4js-table-info__text">Go to: </span>
+                  <input class="table4js-table-go-to__value" data-bind="value: startRow"/>
+                  <button class="table4js-btn-transparent">
+                    <div class="table4js-svg-icon table4js-table-go-to__icon" data-bind="html: $root.icons.arrowright"></div>
                   </button>
                 </div>
               </div>

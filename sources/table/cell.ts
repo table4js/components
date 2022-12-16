@@ -24,9 +24,9 @@ export interface ITableCell {
 export class TableCell extends Base implements ITableCell {
     public static cellTypes = {
         "default": {
-            css: "abris-table-cell--left",
-            editor: "abris-cell-editor",
-            viewer: "abris-cell-viewer"
+            css: "table4js-table-cell--left",
+            editor: "table4js-cell-editor",
+            viewer: "table4js-cell-viewer"
         },
     };
     public static registerCellType(cellType: ITableCellType) {
@@ -34,28 +34,30 @@ export class TableCell extends Base implements ITableCell {
     }
 
     public static getContainerCss(cell: ITableCell, isMergedCell: boolean) {
-        let containerCss = "abris-table-cell__container " + cell.css;
-        if(isMergedCell) {
-          containerCss += " cell__sticky-text";
+        let containerCss = "table4js-table-cell__container " + cell.css;
+        if (isMergedCell) {
+            containerCss += " cell__sticky-text";
         }
-        return containerCss;        
+        return containerCss;
     }
     public static getContentCss(cell: ITableCell | TableCell, isMergedCell: boolean) {
-        let contentCss = isMergedCell ? "abris-table-cell__text--merged" : "abris-table-cell__text";
-        if(cell instanceof TableCell && cell.isModified) {
-          contentCss += " abris-table-cell__text--modified";
+        let contentCss = isMergedCell ? "table4js-table-cell__text--merged" : "table4js-table-cell__text";
+        if (cell instanceof TableCell && cell.isModified) {
+            contentCss += " table4js-table-cell__text--modified";
         }
-        return contentCss;        
+        return contentCss;
     }
 
     @property({ defaultValue: false }) isModified: boolean;
-    @property({ onSet: (val, target: TableCell) => { 
-        if(target.text !== val) {
-            target.text = target.getCellText(val);
-            target.isModified = true;
+    @property({
+        onSet: (val, target: TableCell) => {
+            if (target.text !== val) {
+                target.text = target.getCellText(val);
+                target.isModified = true;
+            }
         }
-    } }) data: any;
-    @property() text: string; 
+    }) data: any;
+    @property() text: string;
     @property({ defaultValue: 1 }) count: number;
     @property() color: string;
     @property() name: string;
@@ -82,12 +84,12 @@ export class TableCell extends Base implements ITableCell {
 
     public initialize(col: ITableColumn, back: boolean, data: any, color: string) {
         this.data = data[col.name],
-        this.color = color;
+            this.color = color;
         this.name = col.name;
         this.css = this.getCellCss(data, col);
         this.editor = this.getCellEditor(data, col);
         this.viewer = this.getCellViewer(data, col);
-        if(back !== null) {
+        if (back !== null) {
             if (back) {
                 if (col.last && col.last.text === this.text) {
                     this.count = col.last.count + 1;
@@ -101,7 +103,7 @@ export class TableCell extends Base implements ITableCell {
             }
             else {
                 if (col.last === null) col.last = this;
-                if(col.prevValue && (col.prevValue === this.text)) {
+                if (col.prevValue && (col.prevValue === this.text)) {
                     col.count++;
                     this.count = 0;
                     col.prev.count = col.count;

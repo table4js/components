@@ -17,24 +17,24 @@ export function TableRow({ table, row }: ITableRowProps) {
       key={row.id || row.number}
       className={
         row.selected
-          ? "abris-table__row abris-table__row--selected"
-          : "abris-table__row"
+          ? "table4js-table__row table4js-table__row--selected"
+          : "table4js-table__row"
       }
       style={{ background: "none" }}
     >
       <td
         key="technical-cell"
-        className="abris-table-cell abris-table-technical-cell"
+        className="table4js-table-cell table4js-table-technical-cell"
         onClick={(e) => row.select(row, e)}
       >
-        <div className="abris-table-technical-cell__container">
+        <div className="table4js-table-technical-cell__container">
           {table.isNumber ? (
-            <div className="abris-table__number">{row.number}</div>
+            <div className="table4js-table__number">{row.number}</div>
           ) : (
-            <div className="abris-table__check">
+            <div className="table4js-table__check">
               {row.selected && (
                 <div
-                  className="abris-svg-icon abris-table__icon-check"
+                  className="table4js-svg-icon table4js-table__icon-check"
                   dangerouslySetInnerHTML={{ __html: table.icons.check }}
                 ></div>
               )}
@@ -48,9 +48,9 @@ export function TableRow({ table, row }: ITableRowProps) {
             <td
               key={cell.name}
               className={
-                "abris-table-cell " +
+                "table4js-table-cell " +
                 (cell.count > 1 && table.isMergedСells
-                  ? "abris-table-cell--merged "
+                  ? "table4js-table-cell--merged "
                   : "")
               }
               style={{ background: cell.color }}
@@ -66,24 +66,24 @@ export function TableRow({ table, row }: ITableRowProps) {
       )}
       <td
         key="context-menu-cell"
-        className="abris-table-cell abris-table-technical-cell"
+        className="table4js-table-cell table4js-table-technical-cell"
         onClick={(e) => row.click(row, e)}
       >
-        <div className="abris-table-technical-cell__container">
+        <div className="table4js-table-technical-cell__container">
           <div
-            className="abris-svg-icon abris-table-icon-row-tools abris-table__more"
+            className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more"
             dangerouslySetInnerHTML={{ __html: table.icons.more }}
           ></div>
           <div
-            className="abris-svg-icon abris-table-icon-row-tools abris-table__edit"
+            className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit"
             dangerouslySetInnerHTML={{ __html: table.icons.edit }}
           ></div>
         </div>
         {!table.hasActiveInplaceEditor && (
-          <div className="abris-table__row--select"></div>
+          <div className="table4js-table__row--select"></div>
         )}
         <div
-          className="abris-table__row--colored"
+          className="table4js-table__row--colored"
           style={{ background: row.color ? row.color : "rgba(248,249,253)" }}
         ></div>
       </td>

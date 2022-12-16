@@ -1,12 +1,12 @@
 @import "../_colors";
 
-abris-table-summary {
+table4js-table-summary {
   display: flex;
   justify-content: end;
   padding: 5px;
 }
 
-.abris-table-summary__select {
+.table4js-table-summary__select {
   margin-left: 5px;
   background: none;
   border: none;
@@ -16,7 +16,7 @@ abris-table-summary {
   box-shadow: inset 0 0 0 1px #f0f0f0 !important;
 }
 
-.abris-table-summary__value {
+.table4js-table-summary__value {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 }

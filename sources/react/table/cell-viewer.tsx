@@ -17,4 +17,4 @@ export function Table4CellViewer({ cell, className }: ITableCellViewerProps) {
   );
 }
 
-registerComponent("abris-cell-viewer", Table4CellViewer);
+registerComponent("table4js-cell-viewer", Table4CellViewer);

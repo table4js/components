@@ -10,9 +10,9 @@ export function AbrisAction({ action }: { action: Action }) {
       // disabled={action.enabled === false}
       onClick={() => action.action()}
       className={
-        "abris-button--transparent action-button abris-action-button " +
+        "table4js-button--transparent action-button table4js-action-button " +
         action.cssClasses +
-        (action.active === true ? " abris-action--active" : "")
+        (action.active === true ? " table4js-action--active" : "")
       }
       type={action["formId"] !== undefined ? "submit" : "button"}
       title={action.title || action.name}
@@ -20,12 +20,12 @@ export function AbrisAction({ action }: { action: Action }) {
     >
       {action.svg && (
         <div
-          className="abris-action-button__icon abris-button__svg-icon"
+          className="table4js-action-button__icon table4js-button__svg-icon"
           dangerouslySetInnerHTML={{ __html: action.svg }}
         ></div>
       )}
       <span
-        className={"abris-action-button__label " + action.cssLabel}
+        className={"table4js-action-button__label " + action.cssLabel}
         style={{ display: action.title ? "block" : "none" }}
       >
         {action.title}

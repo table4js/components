@@ -3,9 +3,9 @@ import { ITableCell } from "../../table/cell";
 
 export var cellViewerTemplate = require("./cell-viewer.html").default;
 
-ko.components.register("abris-cell-viewer", {
+ko.components.register("table4js-cell-viewer", {
     viewModel: {
-        createViewModel: function(params, componentInfo) {
+        createViewModel: function (params, componentInfo) {
             return params;
         }
     },

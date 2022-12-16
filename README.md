@@ -2,15 +2,15 @@
 [![npm version](https://badge.fury.io/js/table4js.svg)](https://badge.fury.io/js/table4js)
 
 <a href="https://github.com/table4js/components/pulse" alt="Activity">
-<img src="https://img.shields.io/github/commit-activity/m/abris-platform/abris-components" /></a>
+<img src="https://img.shields.io/github/commit-activity/m/table4js/components" /></a>
 <a href="https://github.com/table4js/components/issues">
-<img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/abris-platform/abris-components.svg">
+<img alt="Issues" title="Open Issues" src="https://img.shields.io/github/issues/table4js/components.svg">
 </a>
 <a href="https://github.com/table4js/components/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aclosed+">
-<img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/abris-platform/abris-components.svg">
+<img alt="Closed issues" title="Closed Issues" src="https://img.shields.io/github/issues-closed/platform/components.svg">
 </a>
 
-# abris-components
+# components
 This is a monorepository of JavaScript (TypeScript) components library. Right now it contains UI the only component: 
 - table (grid) widget
 
@@ -111,7 +111,7 @@ In our plans we have
 
 ## How to compile this repo
  - git clone https://github.com/table4js/components.git
- - cd abris-components
+ - cd components
  - npm i
  - npm test
  - npm run build

@@ -1,17 +1,17 @@
 ﻿<!-- ko foreach: actions -->
 <!-- ko ifnot: ko.unwrap($data.actions) -->
 <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
-<!-- ko component: { name: 'abris-action-item', params: $data } -->
+<!-- ko component: { name: 'table4js-action-item', params: $data } -->
 <!-- /ko -->
 <!-- /ko -->
 <!-- /ko -->
 <!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->
 <!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->
-<div class="abris-nested-actions abris-action-context-button">
-    <span class="abris-button__label" data-bind="text: title"></span>
-    <div class="abris-nested-actions__dropdown">
+<div class="table4js-nested-actions table4js-action-context-button">
+    <span class="table4js-button__label" data-bind="text: title"></span>
+    <div class="table4js-nested-actions__dropdown">
         <!-- ko foreach: actions -->
-        <!-- ko component: { name: 'abris-action-item', params: $data } -->
+        <!-- ko component: { name: 'table4js-action-item', params: $data } -->
         <!-- /ko -->
         <!-- /ko -->
     </div>

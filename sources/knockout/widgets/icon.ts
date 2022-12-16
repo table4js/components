@@ -1,9 +1,9 @@
 import * as ko from "knockout";
 
-ko.components.register("abris-icon", {
+ko.components.register("table4js-icon", {
     viewModel: {
-        createViewModel: function(params, componentInfo) {
-            return params;     
+        createViewModel: function (params, componentInfo) {
+            return params;
         }
     },
     template: require("./icon.html").default

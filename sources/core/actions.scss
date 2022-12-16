@@ -1,11 +1,11 @@
 @import "../_colors";
 
-abris-actions {
+table4js-actions {
   display: block;
   position: relative;
 }
 
-.abris-table-actions {
+.table4js-table-actions {
   display: flex;
 }
 
@@ -13,15 +13,15 @@ button.action-button.action-checked {
   border: 1px solid var(--abc-primary-0-op-65, $abc-primary-0-op-65) !important;
 }
 
-.abris-nested-actions {
+.table4js-nested-actions {
   &:hover {
-    .abris-nested-actions__dropdown {
+    .table4js-nested-actions__dropdown {
       display: block;
     }
   }
 }
 
-.abris-nested-actions__dropdown {
+.table4js-nested-actions__dropdown {
   display: none;
   position: absolute;
   padding: 5px;
@@ -54,18 +54,18 @@ button.action-button.action-checked {
 }
 
 .row.detail {
-  abris-actions.abris-view-top-actions {
+  table4js-actions.table4js-view-top-actions {
     right: 5px;
   }
 }
 
 @media print {
-  abris-actions {
+  table4js-actions {
     display: none;
   }
 }
 
-.abris-report-designer__actions-row {
+.table4js-report-designer__actions-row {
   margin: 10px 0;
 }
 
@@ -76,12 +76,12 @@ button.action-button.action-checked {
   .btn-green,
   .btn-red,
   .btn-blue,
-  .abris-btn-transparent {
+  .table4js-btn-transparent {
     margin-bottom: 0;
   }
 }
 
-.abris-button--transparent {
+.table4js-button--transparent {
   display: flex;
   align-items: center;
   height: 30px;
@@ -105,11 +105,11 @@ button.action-button.action-checked {
   }
 }
 
-.abris-action-button .abris-action-button__icon {
+.table4js-action-button .table4js-action-button__icon {
   fill: var(--abc-primary-4, $abc-primary-4);
 }
 
-.abris-action-button__label {
+.table4js-action-button__label {
   font-weight: normal;
   text-align: center;
   white-space: nowrap;
@@ -119,7 +119,7 @@ button.action-button.action-checked {
   margin-left: 5px;
 }
 
-.abris-button-toggle__dropdown-menu {
+.table4js-button-toggle__dropdown-menu {
   position: absolute;
   padding: 8px;
   padding-right: 3px;
@@ -134,11 +134,11 @@ button.action-button.action-checked {
   box-shadow: 0 3px 6px var(--abc-primary-3-op-20, $abc-primary-3-op-20);
 }
 
-.abris-context-actions {
+.table4js-context-actions {
   display: flex;
 }
 
-.abris-context-button {
+.table4js-context-button {
   justify-content: center;
   flex-direction: column;
   width: 80px;
@@ -152,13 +152,13 @@ button.action-button.action-checked {
     background: var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   }
 
-  .abris-action-button__icon {
+  .table4js-action-button__icon {
     height: 35px;
     width: 35px;
     margin-bottom: 5px;
   }
 
-  .abris-action-button__label {
+  .table4js-action-button__label {
     line-height: 14px;
     white-space: break-spaces;
   }

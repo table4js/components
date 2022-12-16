@@ -11,7 +11,7 @@ export function Table4CellEditor({ model }: ITableCellEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="abris-table__cell-editor">
+    <div className="table4js-table__cell-editor">
       <input
         defaultValue={model.value}
         onChange={(e) => model.value = e.target.value}
@@ -21,4 +21,4 @@ export function Table4CellEditor({ model }: ITableCellEditorProps) {
   );
 }
 
-registerComponent("abris-cell-editor", Table4CellEditor);
+registerComponent("table4js-cell-editor", Table4CellEditor);

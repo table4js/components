@@ -1,29 +1,29 @@
-﻿<div class="abris-select-selection">
+﻿<div class="table4js-select-selection">
     <!-- ko foreach: selectedItems -->
-    <div class="abris-select-selection-item">
-        <span class="abris-select-item-title" data-bind="text: name"></span>
-        <div class="abris-svg-icon abris-select-item-close" data-bind="click: $parent.deleteItems, html: $root.icons.cross"></div>
+    <div class="table4js-select-selection-item">
+        <span class="table4js-select-item-title" data-bind="text: name"></span>
+        <div class="table4js-svg-icon table4js-select-item-close" data-bind="click: $parent.deleteItems, html: $root.icons.cross"></div>
     </div>
     <!-- /ko -->
 </div>
-<div class="abris-select-button abris-svg-icon" data-bind="click: toggle, attr: { title: title }, html: $root.icons.arrowdown"></div>
+<div class="table4js-select-button table4js-svg-icon" data-bind="click: toggle, attr: { title: title }, html: $root.icons.arrowdown"></div>
 <!-- ko if: isOpen -->
-<ul class="abris-select__dropdown-menu abris-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
+<ul class="table4js-select__dropdown-menu table4js-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
     <!-- ko if: isFilterSearchByType -->
-    <div class="abris-select__dropdown-search-container">
-        <input class="abris-select__dropdown-search" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
+    <div class="table4js-select__dropdown-search-container">
+        <input class="table4js-select__dropdown-search" placeholder="*" data-bind="value: filterText, valueUpdate: 'afterkeydown'" />
     </div>
     <!-- /ko -->
     <!-- ko foreach: foundItems -->
-    <div class="abris-select__dropdown-item" data-bind="click: $parent.clickItem">
-        <input class="abris-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
-        <div class="abris-svg-icon abris-select__dropdown-check" data-bind="html: $root.icons.check"></div>
-        <span class="abris-select__dropdown-label" data-bind="text: name"></span>
+    <div class="table4js-select__dropdown-item" data-bind="click: $parent.clickItem">
+        <input class="table4js-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
+        <div class="table4js-svg-icon table4js-select__dropdown-check" data-bind="html: $root.icons.check"></div>
+        <span class="table4js-select__dropdown-label" data-bind="text: name"></span>
     </div>
     <!-- /ko -->
     <!-- ko if: isLoadMore -->
-    <button class="abris-select__dropdown-button" data-bind="click: loadMore">
-        <span class="abris-action-button__label">More</span>
+    <button class="table4js-select__dropdown-button" data-bind="click: loadMore">
+        <span class="table4js-action-button__label">More</span>
     </button>
     <!-- /ko -->
 </ul>

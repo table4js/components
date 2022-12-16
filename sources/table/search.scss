@@ -1,10 +1,10 @@
 @import "../colors";
 
-abris-search {
+table4js-search {
     margin-right: 10px;
 }
 
-.abris-search {
+.table4js-search {
     display: flex;
     align-items: center;
     height: 30px;
@@ -17,19 +17,19 @@ abris-search {
     margin-right: 20px;
 }
 
-.abris-search__value {
+.table4js-search__value {
     width: 100%;
     border: none;
     background: none;
 }
 
-.abris-search__button {
-    .abris-search__icon {
+.table4js-search__button {
+    .table4js-search__icon {
         fill: var(--abc-primary-3-op-40, $abc-primary-3-op-40) ;
     }
 
     &:hover {
-        .abris-search__icon {
+        .table4js-search__icon {
             fill: var(--abc-primary-4, $abc-primary-4);
         }
     }

@@ -15,7 +15,7 @@ function header() {
   typedoc.JSX.createElement("img", {
     class: "header__logo",
     src: "/img/logo/long-logo-table.svg",
-    alt: "abris-logo"
+    alt: "table4js-logo"
   })), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "header__pages"
   }, /*#__PURE__*/ typedoc.JSX.createElement("a", {
@@ -121,7 +121,7 @@ function footer() {
     src: "/img/logo/logo-table.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "footer__ltd"
-  }, "\xA9 2022 Table4JS Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
+  }, "\xA9 2022 Abris Lab Ltd")), /*#__PURE__*/ typedoc.JSX.createElement("div", {
     class: "footer__column one-column"
   }, /*#__PURE__*/ typedoc.JSX.createElement("a", {
     class: "header__link-page",
@@ -153,7 +153,7 @@ function footer() {
     src: "/img/footer/github.svg"
   }), /*#__PURE__*/ typedoc.JSX.createElement("span", {
     class: "social__link"
-  }, "Abris Platform GitHub repo")))))));
+  }, "Table4JS GitHub repo")))))));
 }
 
 function load(app) {

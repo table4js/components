@@ -35,7 +35,7 @@
     "test": "jest",
     "test:dev": "jest --watch",
     "e2e": "playwright test",
-    "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name 'abris-components' --includeVersion  --customCss ./publish/abris-theme.css --plugin ./publish/abris-theme.js --hideGenerator",
+    "doc:gen": "typedoc ./sources/index.ts --out ./site/docs --readme ./publish/doc-index.md --name 'table4js-components' --includeVersion  --customCss ./publish/table4js-theme.css --plugin ./publish/table4js-theme.js --hideGenerator",
     "release": "standard-version --message \"Release: %s\"",
     "format": "prettier --write ./sources/react"
   },

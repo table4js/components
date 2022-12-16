@@ -15,8 +15,8 @@ export function Table4Preheader(
   makeReactive(searchModel);
 
   return (
-    <div className="abris-table-preheader">
-      <div className="abris-table-search-group">
+    <div className="table4js-table-preheader">
+      <div className="table4js-table-search-group">
         <AbrisSearch
           icon={props.model.icons.search}
           searchModel={searchModel}

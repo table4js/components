@@ -12,25 +12,25 @@ export function AbrisColumnFilter({ context }: { context: FilterContext }) {
     return null;
   }
   return (
-    <div key={context.column.name} className="abris-filter-item">
-      <div className="abris-filter__title abris-filter-text">
+    <div key={context.column.name} className="table4js-filter-item">
+      <div className="table4js-filter__title table4js-filter-text">
         {context.column.title + ":"}
       </div>
       {context.filterItems.map((filterItem, index) => (
-        <div key={index} className="abris-filter__content">
+        <div key={index} className="table4js-filter__content">
           {index > 0 && (
-            <div className="abris-filter__operator abris-filter-text">&</div>
+            <div className="table4js-filter__operator table4js-filter-text">&</div>
           )}
           <AbrisColumnFilterItem
             filterItem={filterItem}
           ></AbrisColumnFilterItem>
           <div
-            className="abris-filter__remove"
+            className="table4js-filter__remove"
             data-bind="click: $parent.removeItem, clickBubble: false"
             onClick={(e) => context.removeItem(filterItem)}
           >
             <div
-              className="abris-filter__remove-icon abris-svg-icon"
+              className="table4js-filter__remove-icon table4js-svg-icon"
               dangerouslySetInnerHTML={{
                 __html: Icons.cross,
               }}

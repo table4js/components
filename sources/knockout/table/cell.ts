@@ -3,9 +3,9 @@ import { TableCell } from "../../table/cell";
 
 export var cellTemplate = require("./cell.html").default;
 
-ko.components.register("abris-table-cell", {
+ko.components.register("table4js-table-cell", {
     viewModel: {
-        createViewModel: function(params, componentInfo) {
+        createViewModel: function (params, componentInfo) {
             const isMergedCell = ko.computed(() => params.cell.count > 1 && params.table.isMergedСells);
             return {
                 ...params,

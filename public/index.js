@@ -98,7 +98,7 @@ var options = {
     //             alert(this.title);
     //         },
     //         svg: "icon_add-column",
-    //         cssClasses: "abris-context-button",
+    //         cssClasses: "table4js-context-button",
     //         cssImage: "my-custom-class",
     //         cssLabel: "my-custom-class",
     //         container: "dropdown"
@@ -110,7 +110,7 @@ var options = {
     //             alert(this.title);
     //         },
     //         svg: "icon_add-column",
-    //         cssClasses: "abris-context-button",
+    //         cssClasses: "table4js-context-button",
     //         container: "dropdown"
     //     }
     // ]
@@ -122,7 +122,7 @@ var options = {
         //         alert(this.name);
         //     },
         //     svg: "icon_add-column",
-        //     // cssClasses: "abris-context-button",
+        //     // cssClasses: "table4js-context-button",
         //     // cssImage: "my-custom-class",
         //     // cssLabel: "my-custom-class",
         //     container: "bottom"
@@ -134,7 +134,7 @@ var options = {
         //         alert(this.title);
         //     },
         //     svg: "icon_add-column",
-        //     cssClasses: "abris-context-button",
+        //     cssClasses: "table4js-context-button",
         //     container: "dropdown"
         // }
     ]

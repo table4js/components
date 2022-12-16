@@ -9,15 +9,15 @@ export function AbrisFilterSelect({
   viewModel: TableFilterSelect;
 }) {
   makeReactive(viewModel);
-  const CustomTag = `abris-filter-select` as keyof JSX.IntrinsicElements;
+  const CustomTag = `table4js-filter-select` as keyof JSX.IntrinsicElements;
   return (
     <CustomTag className="abrs-filter__value">
-      <div className="abris-select-selection">
+      <div className="table4js-select-selection">
         {viewModel.selectedItems.map((i) => (
-          <div className="abris-select-selection-item" key={i.name}>
-            <span className="abris-select-item-title">{i.name}</span>
+          <div className="table4js-select-selection-item" key={i.name}>
+            <span className="table4js-select-item-title">{i.name}</span>
             <div
-              className="abris-svg-icon abris-select-item-close"
+              className="table4js-svg-icon table4js-select-item-close"
               onClick={(e) => viewModel.deleteItems(i)}
               dangerouslySetInnerHTML={{
                 __html: Icons.cross,
@@ -27,7 +27,7 @@ export function AbrisFilterSelect({
         ))}
       </div>
       <div
-        className="abris-select-button abris-svg-icon"
+        className="table4js-select-button table4js-svg-icon"
         title={viewModel.title}
         onClick={(e) => viewModel.toggle(null, e)}
         dangerouslySetInnerHTML={{
@@ -36,13 +36,13 @@ export function AbrisFilterSelect({
       ></div>
       {viewModel.isOpen && (
         <ul
-          className="abris-select__dropdown-menu abris-button-toggle__dropdown-menu"
+          className="table4js-select__dropdown-menu table4js-button-toggle__dropdown-menu"
           onClick={(e) => e.stopPropagation}
         >
           {viewModel.isFilterSearchByType && (
-            <div className="abris-select__dropdown-search-container">
+            <div className="table4js-select__dropdown-search-container">
               <input
-                className="abris-select__dropdown-search"
+                className="table4js-select__dropdown-search"
                 value={viewModel.filterText}
                 onChange={(v) => (viewModel.filterText = v.target.value)}
                 placeholder="*"
@@ -53,30 +53,30 @@ export function AbrisFilterSelect({
           {viewModel.foundItems.map((fi, i) => (
             <div
               key={i}
-              className="abris-select__dropdown-item"
+              className="table4js-select__dropdown-item"
               onClick={(e) => viewModel.clickItem(fi)}
             >
               <input
-                className="abris-select__dropdown-hide-check"
+                className="table4js-select__dropdown-hide-check"
                 type="checkbox"
                 checked={viewModel.isChecked(fi)}
                 onChange={(e) => {}}
               />
               <div
-                className="abris-svg-icon abris-select__dropdown-check"
+                className="table4js-svg-icon table4js-select__dropdown-check"
                 dangerouslySetInnerHTML={{
                   __html: Icons.check,
                 }}
               ></div>
-              <span className="abris-select__dropdown-label">{fi.name}</span>
+              <span className="table4js-select__dropdown-label">{fi.name}</span>
             </div>
           ))}
           {viewModel.isLoadMore && (
             <button
-              className="abris-select__dropdown-button"
+              className="table4js-select__dropdown-button"
               onClick={(e) => viewModel.loadMore()}
             >
-              <span className="abris-action-button__label">More</span>
+              <span className="table4js-action-button__label">More</span>
             </button>
           )}
         </ul>

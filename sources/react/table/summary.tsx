@@ -10,8 +10,8 @@ export function Table4Summary({ summary }: ITableSummaryProps) {
   makeReactive(summary);
   return (
     <>
-      <span className="abris-table-summary__value">{summary.value}</span>
-      <select className="abris-table-summary__select" value={summary.func}>
+      <span className="table4js-table-summary__value">{summary.value}</span>
+      <select className="table4js-table-summary__select" value={summary.func}>
         {summary.summaryItems &&
           summary.summaryItems.map((s) => (
             <option value={s.value} title={s.title}>

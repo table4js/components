@@ -1,6 +1,6 @@
 @import "../_colors";
 
-.abris-filter-item {
+.table4js-filter-item {
   display: flex;
   align-items: center;
   min-width: max-content;
@@ -11,7 +11,7 @@
   border-radius: 20px;
 }
 
-.abris-filter-text {
+.table4js-filter-text {
   color: var(--abc-primary-0, $abc-primary-0);
   font-weight: bold;
   font-size: 14px;
@@ -20,12 +20,12 @@
   min-width: fit-content;
 }
 
-.abris-filter__operator {
+.table4js-filter__operator {
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.abris-filter___operation {
+.table4js-filter___operation {
   height: 24px;
   background: none;
   border: none;
@@ -34,7 +34,7 @@
   padding: 2px 0;
 }
 
-.abris-filter__operand input {
+.table4js-filter__operand input {
   width: 105px !important;
   max-width: 105px;
   height: 24px;
@@ -47,7 +47,7 @@
 }
 
 
-.abris-filter__remove {
+.table4js-filter__remove {
   display: flex;
   cursor: pointer;
   margin-left: 5px;
@@ -55,7 +55,7 @@
   height: 12px;
 }
 
-.abris-filter__remove-icon.abris-filter__remove-icon {
+.table4js-filter__remove-icon.table4js-filter__remove-icon {
   width: 12px;
   height: 12px;
   fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
@@ -67,6 +67,6 @@
 }
 
 
-.abris-filter__content {
+.table4js-filter__content {
   display: flex;
 }

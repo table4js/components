@@ -12,22 +12,22 @@ export interface IAbrisSearchProps {
 export function AbrisSearch({ icon, searchModel }: IAbrisSearchProps) {
   makeReactive(searchModel);
   return (
-    <div className="abris-search">
+    <div className="table4js-search">
       <input
         defaultValue={searchModel.searchValue}
         onChange={(event) => {
           searchModel.searchValue = event.target.value;
         }}
-        className="abris-search__value"
+        className="table4js-search__value"
         placeholder="Search..."
       />
       <div
-        className="abris-search__button"
+        className="table4js-search__button"
         title="Search"
         onClick={(e) => searchModel.search(searchModel.searchValue)}
       >
         <div
-          className="abris-svg-icon abris-search__icon"
+          className="table4js-svg-icon table4js-search__icon"
           dangerouslySetInnerHTML={{ __html: icon }}
         ></div>
       </div>

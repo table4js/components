@@ -1,6 +1,6 @@
 @import "../_colors";
 
-abris-filter-select {
+table4js-filter-select {
   white-space: nowrap;
   padding: 2px;
 
@@ -15,12 +15,12 @@ abris-filter-select {
 
 }
 
-.abris-select-selection {
+.table4js-select-selection {
   flex-grow: 1;
   display: flex;
 }
 
-.abris-select-selection-item {
+.table4js-select-selection-item {
   display: flex;
   align-items: center;
   width: min-content;
@@ -31,7 +31,7 @@ abris-filter-select {
   margin-right: 5px;
 }
 
-.abris-select-item-title {
+.table4js-select-item-title {
   margin-right: 5px;
   font-size: 12px;
   white-space: nowrap;
@@ -40,7 +40,7 @@ abris-filter-select {
   max-width: 100px;
 }
 
-.abris-select-item-close.abris-select-item-close {
+.table4js-select-item-close.table4js-select-item-close {
   fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
   width: 8px;
   height: 16px;
@@ -51,13 +51,13 @@ abris-filter-select {
   }
 }
 
-.abris-select-button.abris-select-button {
+.table4js-select-button.table4js-select-button {
   fill: var(--abc-primary-0, $abc-primary-0);
   width: 12px;
   height: 12px;
 }
 
-.abris-select__dropdown-menu {
+.table4js-select__dropdown-menu {
   display: flex;
   flex-direction: column;
   width: auto;
@@ -66,7 +66,7 @@ abris-filter-select {
   overflow-y: auto;
 }
 
-.abris-select__dropdown-search-container {
+.table4js-select__dropdown-search-container {
   position: sticky;
   top: -5px;
   background: linear-gradient(0deg, transparent, var(--abc-primary-1, $abc-primary-1) 10%);
@@ -75,7 +75,7 @@ abris-filter-select {
   padding: 5px;
 }
 
-.abris-select__dropdown-search {
+.table4js-select__dropdown-search {
   @include mx-form-control;
 
   &:focus {
@@ -83,7 +83,7 @@ abris-filter-select {
   }
 }
 
-.abris-select__dropdown-item {
+.table4js-select__dropdown-item {
   display: flex;
   padding: 5px;
   border-bottom: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
@@ -95,15 +95,15 @@ abris-filter-select {
 
 
 
-.abris-select__dropdown-hide-check {
+.table4js-select__dropdown-hide-check {
   display: none;
 
-  &:checked + .abris-select__dropdown-check {
+  &:checked + .table4js-select__dropdown-check {
     fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
   }
 }
 
-.abris-select__dropdown-check {
+.table4js-select__dropdown-check {
   border: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
   border-radius: 4px;
   margin-right: 5px;
@@ -112,7 +112,7 @@ abris-filter-select {
   fill: transparent;
 }
 
-.abris-select__dropdown-button {
+.table4js-select__dropdown-button {
   border: none;
   background: none;
   padding: 5px;
@@ -124,7 +124,7 @@ abris-filter-select {
   }
 }
 
-.abris-select__dropdown-label {
+.table4js-select__dropdown-label {
   max-width: 300px;
   white-space: break-spaces;
   text-align: left;
