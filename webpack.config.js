@@ -63,7 +63,7 @@ const DEV_CFG = _.extend({}, BASE_CFG, {
     path: __dirname + '/site/dist/standalone',
     filename: '[name].js'
   },
-  devtool: 'inline-source-map'
+  devtool: 'source-map'
 });
 
 const PROD_CFG = _.extend({}, BASE_CFG, {
