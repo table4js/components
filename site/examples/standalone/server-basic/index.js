@@ -12,4 +12,4 @@ function getColumns(name, baseUrl) {
         model.render("#table-container");
     });
 }
-getColumns("declaration", "https://table4js.com:3334/");
+getColumns("declaration", "/");
