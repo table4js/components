@@ -14,7 +14,7 @@ Shows data in table (grid) form. Supports infinite scrolling, array datasets, se
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+    <script src="https://knockoutjs.com/downloads/knockout-3.5.1.debug.js"></script>
     <script src="https://unpkg.com/table4ko"></script>
     <link href="https://unpkg.com/table4ko/table4.css" rel="stylesheet">
 ```
