@@ -9,9 +9,8 @@ export function AbrisFilterSelect({
   viewModel: TableFilterSelect;
 }) {
   makeReactive(viewModel);
-  const CustomTag = `table4js-filter-select` as keyof JSX.IntrinsicElements;
   return (
-    <CustomTag className="abrs-filter__value">
+    <div className="table4js-filter-select abrs-filter__value">
       <div className="table4js-select-selection">
         {viewModel.selectedItems.map((i) => (
           <div className="table4js-select-selection-item" key={i.name}>
@@ -81,6 +80,6 @@ export function AbrisFilterSelect({
           )}
         </ul>
       )}
-    </CustomTag>
+    </div>
   );
 }

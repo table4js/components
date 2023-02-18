@@ -75,9 +75,8 @@ export function Table4({
   useEffect(() => {
     model.initialize(rootRef.current.parentElement);
   });
-  const CustomTag = `table4` as keyof JSX.IntrinsicElements;
   return (
-    <CustomTag>
+    <div className="table4js-table">
       <div ref={rootRef} className="table4js-table-resizable-container">
         <div className="table4js-table-scroll-container">
           <table className="table4js-table">
@@ -298,6 +297,6 @@ export function Table4({
           </table>
         </div>
       </div>
-    </CustomTag>
+    </div>
   );
 }
