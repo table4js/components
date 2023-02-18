@@ -241,7 +241,7 @@ export function Table4({
                         key={c.name}
                         className="table4js-table-cell table4js-table-footer__cell"
                       >
-                        <Table4Summary summary={new TableSummary(c)} />
+                        <Table4Summary column={c} />
                       </th>
                     ))}
                   <th

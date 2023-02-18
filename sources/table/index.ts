@@ -12,6 +12,7 @@ import { ITableRow, ITableRowData, TableRow } from "./row";
 import { isEmpty } from "../utils/utils";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
+import { TableSummaryPlugin } from "./summary";
 
 import * as Icons from "../icon"
 import "./index.scss";
@@ -32,18 +33,27 @@ export interface ITableConfig extends IDataProvider {
     enableMergedСells?: boolean;
     /** Permission to edit data */
     enableEdit?: boolean;
-    /** Permission to display the table actions panel */
+    /** Actions to display in the table actions panel */
     actions?: Array<IAction>;
     /** The key field of the table. Needed to edit the table. */
     keyColumn?: string;
     /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
     selectCellColor?: string;
+    /** Table plugins array */
+    plugins?: Array<ITablePlugin>;
 }
 
-interface ITableFilter {
+export interface ITableFilter {
     value: string,
     op: string,
     field: string,
+}
+
+export interface ITablePlugin {
+    name: string;
+    init(table: Table): void;
+    getActions(): Array<IAction>;
+    onColumnCreated(column: ITableColumn): void;
 }
 
 /**
@@ -86,6 +96,13 @@ export class Table extends Base implements IDataProviderOwner {
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
+        this.plugins = config.plugins || [];
+        if (config.enableSummary === true) {
+            if(this.plugins.length === 0) {
+                this.plugins.push(new TableSummaryPlugin());
+            }
+        }
+        this.plugins.forEach(plugin => plugin.init(this));
         this.showSearch = config.enableSearch === true;
         this.createActions(this.config);
         this.createColumns(this.config);
@@ -167,22 +184,15 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     protected createColumns(config: ITableConfig) {
-        this.columns = config.columns.map(column =>
-            this.createColumn(column, config)
-        );
+        this.columns = config.columns.map(column => {
+            const tableColumn = this.createColumn(column, config);
+            this.plugins.forEach(plugin => plugin.onColumnCreated(tableColumn));
+            return tableColumn;
+        });
     }
 
     protected createActions(config: ITableConfig) {
-        if (config.enableSummary === true) {
-            this.innerActions.push(new Action({
-                name: "summary-action",
-                action: () => {
-                    this.showTableSummary = !this.showTableSummary;
-                },
-                svg: this.icons.equal,
-                container: "top"
-            }));
-        }
+        this.plugins.forEach(plugin => this.innerActions.push.apply(this.innerActions, plugin.getActions()));
         if (config.enableMergedСellsToggle === true) {
             this.innerActions.push(new Action({
                 name: "mergedСells-action",
@@ -250,9 +260,6 @@ export class Table extends Base implements IDataProviderOwner {
         this.refresh();
     }
 
-    // get data() {
-    //     return [];
-    // }
     set data(_data: Array<any>) {
         this.dataProvider = new ArrayDataProvider(_data);
     }
@@ -350,7 +357,7 @@ export class Table extends Base implements IDataProviderOwner {
         row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
         row.select = (data, event) => this.selectRow(data, event),
-            row.click = (data, event) => this.clickRow(data, event)
+        row.click = (data, event) => this.clickRow(data, event)
         return row;
     }
 
@@ -478,5 +485,27 @@ export class Table extends Base implements IDataProviderOwner {
     }
     get noDataText() {
         return Localization.getString("noData");
+    }
+
+    private plugins: Array<ITablePlugin> = [];
+    public registerPlugin(plugin: ITablePlugin): ITablePlugin {
+        const oldOne: ITablePlugin = this.unregisterPlugin(plugin.name);
+        plugin.init(this);
+        this.plugins.push(plugin);
+        return oldOne;
+    }
+    public unregisterPlugin(pluginName: string): ITablePlugin {
+        let oldOneIndex = -1;
+        for(let i=0; i<this.plugins.length; i++) {
+            if(this.plugins[i].name === pluginName) {
+                oldOneIndex = i;
+                break;
+            }
+        }
+        let oldOne: ITablePlugin = undefined;
+        if(oldOneIndex >= 0) {
+            oldOne = this.plugins.splice(oldOneIndex, 1)[0];
+        }
+        return oldOne;
     }
 }

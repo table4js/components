@@ -1,5 +1,7 @@
+import { ITablePlugin, Table } from ".";
 import { Base } from "../core/base";
 import { property } from "../core/property";
+import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
 
 import "./summary.scss";
@@ -20,20 +22,42 @@ export class TableSummaryItem {
 }
 
 export class TableSummary extends Base {
-  constructor(private column: ITableColumn) {
+  constructor(private table: Table, private column: ITableColumn) {
     super();
     this.summaryItems = Functions.filter(funcDescription => {
         return !funcDescription.types || funcDescription.types.indexOf(column.type) !== -1
       }).map(funcDescription => new TableSummaryItem (funcDescription.title, funcDescription.value));
   }
-  get value() {
-    return this.column.summaryValue;
+  calculateSummary(): void {
+    this.value = undefined;
+    if(!!this.func) {
+        this.table.dataProvider.getSummary(this.func, this.column.name, this.table["tableFilter"], (data) => this.value = data);
+    }
   }
-  set value(val: any) {
-    this.column.summaryValue = val;
-  }
+  @property() value: number;
   @property({ defaultValue: null, onSet: (val, target: TableSummary) => {
-    target.column.summaryParams = { func: val, field: target.column.name };
+    target.calculateSummary();
   } }) func: any;
   summaryItems: Array<TableSummaryItem>;
+}
+
+export class TableSummaryPlugin implements ITablePlugin {
+  private _table: Table;
+  name: string = "summary";
+  init(table: Table): void {
+    this._table = table;
+  }
+  getActions(): IAction[] {
+    return [new Action({
+        name: "summary-action",
+        action: () => {
+            this._table.showTableSummary = !this._table.showTableSummary;
+        },
+        svg: this._table.icons.equal,
+        container: "top"
+    })];
+  }
+  onColumnCreated(column: ITableColumn): void {
+    column.summary = new TableSummary(this._table, column);
+  }
 }

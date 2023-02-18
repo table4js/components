@@ -137,7 +137,8 @@ var options = {
         //     cssClasses: "table4js-context-button",
         //     container: "dropdown"
         // }
-    ]
+    ],
+    // plugins: [ new Table4JS.TableSummaryPlugin() ]
 };
 
 var model = new Table4JS.Table(options);
