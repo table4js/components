@@ -1,12 +1,10 @@
 import * as React from "react";
 import { FilterContext } from "../../table/column-filter";
 import { makeReactive } from "../reactivity";
+import { Table4ColumnFilterItem } from "./column-filter-item";
 import * as Icons from "../../icon";
-import { AbrisFilterSelect } from "./filter-select";
-import { TableFilterSelect } from "../../table/filter-select";
-import { AbrisColumnFilterItem } from "./column-filter-item";
 
-export function AbrisColumnFilter({ context }: { context: FilterContext }) {
+export function Table4ColumnFilter({ context }: { context: FilterContext }) {
   makeReactive(context);
   if (context.filterItems.length === 0) {
     return null;
@@ -21,9 +19,9 @@ export function AbrisColumnFilter({ context }: { context: FilterContext }) {
           {index > 0 && (
             <div className="table4js-filter__operator table4js-filter-text">&</div>
           )}
-          <AbrisColumnFilterItem
+          <Table4ColumnFilterItem
             filterItem={filterItem}
-          ></AbrisColumnFilterItem>
+          ></Table4ColumnFilterItem>
           <div
             className="table4js-filter__remove"
             data-bind="click: $parent.removeItem, clickBubble: false"

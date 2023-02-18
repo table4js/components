@@ -3,11 +3,11 @@ import { useState } from "react";
 import { FilterContext } from "../../table/column-filter";
 import { makeReactive } from "../reactivity";
 import * as Icons from "../../icon";
-import { AbrisFilterSelect } from "./filter-select";
+import { Table4FilterSelect } from "./filter-select";
 import { TableFilterSelect } from "../../table/filter-select";
 import { ColumnFilterItem } from "../../table/column-filter-item";
 
-export function AbrisColumnFilterItem({
+export function Table4ColumnFilterItem({
   filterItem,
 }: {
   filterItem: ColumnFilterItem;
@@ -41,7 +41,7 @@ export function AbrisColumnFilterItem({
       </select>
       {
         filterItem.showOperand && filterItem.operation.op == "EQ" && (
-          <AbrisFilterSelect viewModel={tableFilterSelect} />
+          <Table4FilterSelect viewModel={tableFilterSelect} />
         )
 
         /* <table4js-filter-select class="abrs-filter__value"

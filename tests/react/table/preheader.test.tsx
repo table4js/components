@@ -5,7 +5,7 @@ import { Table4Preheader } from '../../../sources/react/table/preheader';
 import { ITableConfig, Table } from '../../../sources/table';
 
 jest.mock("../../../sources/react/table/search", () => ({
-  AbrisSearch: (props) => {
+  Table4Search: (props) => {
     return "mock-table-search";
   }
 }));

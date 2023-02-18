@@ -5,10 +5,9 @@ import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
 import { TableRow } from "./row";
-import { TableSummary } from "../../table/summary";
 import { Table4Summary } from "./summary";
-import { AbrisSearch } from "./search";
-import { AbrisColumnFilter } from "./column-filter";
+import { Table4Search } from "./search";
+import { Table4ColumnFilter } from "./column-filter";
 
 function EmptyTable() {
   return (
@@ -90,10 +89,10 @@ export function Table4({
                     <div className="table4js-table-preheader">
                       <div className="table4js-table-search-group">
                         {model.showSearch ? (
-                          <AbrisSearch
+                          <Table4Search
                             icon={model.icons.search}
                             searchModel={model.searchModel}
-                          ></AbrisSearch>
+                          ></Table4Search>
                         ) : null}
                         <AbrisActions
                           className="table4js-table-actions"
@@ -111,7 +110,7 @@ export function Table4({
                       <div className="table4js-table-filter">
                         <div className="table4js-table-filter__container">
                           {model.columns.map((c) => (
-                            <AbrisColumnFilter
+                            <Table4ColumnFilter
                               key={c.name}
                               context={c.filterContext}
                             />

@@ -3,7 +3,7 @@ import { TableFilterSelect } from "../../table/filter-select";
 import { makeReactive } from "../reactivity";
 import * as Icons from "../../icon";
 
-export function AbrisFilterSelect({
+export function Table4FilterSelect({
   viewModel,
 }: {
   viewModel: TableFilterSelect;

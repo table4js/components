@@ -4,12 +4,12 @@ import { Table } from "../../table";
 import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
 
-export interface IAbrisSearchProps {
+export interface ITable4SearchProps {
   icon: any;
   searchModel: SearchModel;
 }
 
-export function AbrisSearch({ icon, searchModel }: IAbrisSearchProps) {
+export function Table4Search({ icon, searchModel }: ITable4SearchProps) {
   makeReactive(searchModel);
   return (
     <div className="table4js-search">
