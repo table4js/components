@@ -1,16 +1,9 @@
 @import "../_colors";
 
-table4 * {
-  box-sizing: border-box;
-  outline: none;
-  scrollbar-width: thin;
-  box-sizing: border-box;
-  // margin: 0;
-  // padding: 0;
+table4, .table4js-root {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: normal;
-
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -25,6 +18,12 @@ table4 * {
       background: #A6A6A6;
     }
   }
+}
+
+table4 *, .table4js-root * {
+  scrollbar-width: thin;
+  box-sizing: border-box;
+  outline: none;
 }
 
 button {
@@ -519,8 +518,7 @@ button {
   }
 }
 
-table4js-table,
-table4 {
+table4, .table4js-root {
   display: inline-block;
   height: 100%;
 

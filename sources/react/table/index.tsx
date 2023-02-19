@@ -75,7 +75,7 @@ export function Table4({
     model.initialize(rootRef.current.parentElement);
   });
   return (
-    <div className="table4js-table">
+    <div className="table4js-root">
       <div ref={rootRef} className="table4js-table-resizable-container">
         <div className="table4js-table-scroll-container">
           <table className="table4js-table">
