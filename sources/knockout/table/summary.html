@@ -1,6 +1,8 @@
-﻿<span class="table4js-table-summary__value" data-bind="text: value"></span>
+﻿<!-- ko if: $data -->
+<span class="table4js-table-summary__value" data-bind="text: $data.value"></span>
 <select class="table4js-table-summary__select"  data-bind="value: func">
   <!-- ko foreach: summaryItems -->
-    <option data-bind="text: title, value: value, attr: {title: title}"></option>
+    <option data-bind="text: title, value: value, attr: { title: title }"></option>
   <!-- /ko -->  
 </select>
+<!-- /ko -->

@@ -14,6 +14,7 @@ ko.components.register("table4js-search", {
             };
             componentInfo.element.addEventListener('keyup', process);
             return {
+                icon: params.icon,
                 value: searchText,
                 refresh: () => { searchModel.search(searchText()); },
                 dispose: () => componentInfo.element.removeEventListener('keyup', process)

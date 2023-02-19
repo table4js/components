@@ -1,15 +1,12 @@
 import * as React from "react";
+import { ITableProps } from ".";
 import { Table } from "../../table";
 import { SearchModel } from "../../table/search";
 import { makeReactive } from "../reactivity";
 import { Table4Search } from "./search";
 
-export interface ITable4Props {
-  model: Table;
-}
-
 export function Table4Preheader(
-  props: ITable4Props
+  props: ITableProps
 ) {
   const searchModel = props.model.searchModel as SearchModel;
   makeReactive(searchModel);

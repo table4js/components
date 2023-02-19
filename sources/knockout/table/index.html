@@ -8,7 +8,7 @@
               <div class="table4js-table-preheader">
                 <div class="table4js-table-search-group">
                   <!-- ko if: showSearch -->
-                  <table4js-search params="model: searchModel"></table4js-search>
+                  <table4js-search params="model: searchModel, icon: icons.search"></table4js-search>
                   <!-- /ko -->
                   <table4js-actions class="table4js-table-actions" params="model: $data, options: { action: 'topActions' }">
                   </table4js-actions>
@@ -45,9 +45,9 @@
             <div class="table4js-table-title">
               <span class="table4js-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
               <div class="table4js-table-title__tools">
-                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === false, html: $root.icons.sortup"></div>
-                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === true, html: $root.icons.sortdown"></div>
-                <div class="table4js-svg-icon table4js-table-title__filter" data-bind="click: clickFilter, html: $root.icons.filter"></div>
+                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === false, html: $parent.icons.sortup"></div>
+                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === true, html: $parent.icons.sortdown"></div>
+                <div class="table4js-svg-icon table4js-table-title__filter" data-bind="click: clickFilter, html: $parent.icons.filter"></div>
               </div>
             </div>
             <div class="table4js-table-title_resize"
@@ -85,14 +85,14 @@
         <!-- /ko -->
         <td class="table4js-table-cell table4js-table-technical-cell">
           <div class="table4js-table-technical-cell__container">
-            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $root.icons.more"></div>
-            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $root.icons.edit"></div>
+            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $parent.icons.more"></div>
+            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $parent.icons.edit"></div>
           </div>
         </td>
         </tr>
         <!-- /ko -->
         <!-- /ko -->
-        <!-- ko foreach: {data: rows} -->
+        <!-- ko foreach: { data: rows } -->
         <tr class="table4js-table__row" data-bind="css: {'table4js-table__row--selected': selected}, style: {'background-color': 'none' }">
           <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: select">
             <div class="table4js-table-technical-cell__container">
@@ -101,7 +101,7 @@
               <!-- /ko -->
               <!-- ko if: !$parent.isNumber -->
               <div class="table4js-table__check">
-                <div class="table4js-svg-icon table4js-table__icon-check" data-bind="visible: selected, html: $root.icons.check"></div>
+                <div class="table4js-svg-icon table4js-table__icon-check" data-bind="visible: selected, html: $parent.icons.check"></div>
               </div>
               <!-- /ko -->
             </div>
@@ -112,8 +112,8 @@
           <!-- /ko -->
           <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: click">
             <div class="table4js-table-technical-cell__container">
-              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $root.icons.more"></div>
-              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $root.icons.edit"></div>
+              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $parent.icons.more"></div>
+              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $parent.icons.edit"></div>
             </div>
             <div class="table4js-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
             <div class="table4js-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
@@ -125,7 +125,7 @@
         <tr class="table4js-table-footer-summary" data-bind="visible: showTableSummary">
           <th class="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell">
             <div class="table4js-table-technical-cell__container">
-              <div class="table4js-svg-icon table4js-table-icon-equal" data-bind="html: $root.icons.equal"></div>
+              <div class="table4js-svg-icon table4js-table-icon-equal" data-bind="html: icons.equal"></div>
             </div>
           </th>
           <!-- ko foreach: columns -->
@@ -151,7 +151,7 @@
                   <span class="table4js-table-go-to__text table4js-table-info__text">Go to: </span>
                   <input class="table4js-table-go-to__value" data-bind="value: startRow"/>
                   <button class="table4js-btn-transparent">
-                    <div class="table4js-svg-icon table4js-table-go-to__icon" data-bind="html: $root.icons.arrowright"></div>
+                    <div class="table4js-svg-icon table4js-table-go-to__icon" data-bind="html: icons.arrowright"></div>
                   </button>
                 </div>
               </div>

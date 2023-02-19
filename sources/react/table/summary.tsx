@@ -9,6 +9,9 @@ export interface ITableSummaryProps {
 
 export function Table4Summary({ column }: ITableSummaryProps) {
   const summary: TableSummary = column.summary;
+  if(!summary) {
+    return null;
+  }
   makeReactive(summary);
   return (
     <>
