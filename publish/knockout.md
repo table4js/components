@@ -21,7 +21,7 @@ Add the following scripts to HEAD part of your HTML file
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
 ```HTML
-    <div id="app-container" style="height: 80vh;">
+    <div id="app-container" style="height: calc(100vh - 16px);">
         <table4 params="{ model: $data }"></table4>
     </div>
 ```
