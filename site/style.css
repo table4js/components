@@ -984,6 +984,7 @@ pre {
     display: flex;
     flex-direction: column;
     border-radius: 8px;
+    min-width: 200px;
 }
 
 .examples__list {
@@ -1031,6 +1032,7 @@ pre {
     display: flex;
     flex-direction: column;
     padding: 16px;
+    min-width: 180px;
 }
 
 *::-webkit-scrollbar {
@@ -1065,7 +1067,6 @@ pre {
         flex-direction: column;
         margin: 0;
         margin-bottom: 32px;
-        
     }
 
     body .examples__sticky-list * {

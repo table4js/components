@@ -19,8 +19,8 @@ var framework = ko.observable('react');
 var examples = ko.observableArray([
     {
         name: "basic",
-        title: "Table basic usage",
-        description: "Table basic usage description",
+        title: "Basic usage",
+        description: "Basic usage description",
         show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
@@ -40,7 +40,7 @@ var examples = ko.observableArray([
     },
     {
         name: "basic-merged",
-        title: "Merged Сells",
+        title: "Сell merging",
         description: "Enabling/hidden mode of merging cells with the same values.",
         show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
@@ -61,8 +61,8 @@ var examples = ko.observableArray([
     },
     {
         name: "basic-edit",
-        title: "Editing to cells",
-        description: "Editing to cells.",
+        title: "Inplace editing",
+        description: "Inplace editing.",
         show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
@@ -82,7 +82,7 @@ var examples = ko.observableArray([
     },
     {
         name: "basic-search",
-        title: "Search",
+        title: "Search and filtering",
         description: `Display the data search bar. Allows you to filter the data in the table by all columns.\
         <br>Set by the 'enableSearch' option to true`,
         show: ko.observable(false),
@@ -170,8 +170,8 @@ var examples = ko.observableArray([
     },
     {
         name: "color-row",
-        title: "Highlight table rows",
-        description: `Highlight table rows in different colors depending on the column with the row color.\
+        title: "Highlight rows",
+        description: `Highlight rows in different colors depending on the column with the row color.\
         There is a color column in the 'data.js' file, in which the color value of the line is stored in the html specification.\
         The table options contain the following description.\
         <br>
@@ -201,8 +201,8 @@ var examples = ko.observableArray([
     },
     {
         name: "color-cell",
-        title: "Highlight table cells",
-        description: `Highlight table cells in different colors depending on the column with the cell color.\
+        title: "Highlight cells",
+        description: `Highlight cells in different colors depending on the column with the cell color.\
         There is a color column in the 'data.js' file, in which the color value of the line is stored in the html specification.\
         The table options contain the following description.\
         <br>
@@ -233,7 +233,7 @@ var examples = ko.observableArray([
     },
     {
         name: "selection-row",
-        title: "Selection table rows",
+        title: "Rows selection",
         description: `The rows of the table are highlighted depending on the column with the sign of the need for highlighting.\
         There is a column in the data.js file that stores the highlight sign (true).
         The "selectCellColor" option stores the color value in the html specification.\
