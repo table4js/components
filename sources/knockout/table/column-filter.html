@@ -2,6 +2,7 @@
 <div class="table4js-filter-item">
   <div class="table4js-filter__title table4js-filter-text" data-bind="text: column.title + ':'"></div>
   <!-- ko foreach: filterItems -->
+  <div class="table4js-filter__content">
     <!-- ko if: $index() > 0 -->
     <div class="table4js-filter__operator table4js-filter-text" data-bind="text: '&'"></div>
     <!-- /ko -->
@@ -11,6 +12,7 @@
       data-bind="click: $parent.removeItem, clickBubble: false">
       <div class="table4js-filter__remove-icon table4js-svg-icon" data-bind="html: $root.icons.cross"></div>
     </div>
+  </div>
   <!-- /ko -->
 </div>
 <!-- /ko -->
