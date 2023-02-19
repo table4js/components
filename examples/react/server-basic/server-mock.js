@@ -1,0 +1,68 @@
+var sampleData = [
+    { word: "here ", num: 5, text: "O gentlemen, there is no need for you to confess your happiness, no one requires you to confess - who does not know your modesty!" },
+    { word: "there ", num: 24, text: "Their bearing, although they were not completely calm, with its ease, full of dignity and humility at the same time, aroused admiration" },
+    { word: "there ", num: 18, text: "I'm to blame, I'm to blame, because I choose my own people." },
+    { word: "where ", num: 34, text: "The captain's last words were greeted with a murmur of satisfaction, and two or three heads, in a fit of rapture, poked their way between the curtains." },
+    { word: "inside ", num: 43, text: "The events that took place interrupted the thread of his thoughts." },
+    { word: "above ", num: 72, text: "Our young nobles, even the most distinguished and wealthy, often seek admission there in vain." },
+    { word: "here ", num: 77, text: "No matter how slowly the stranger moved, he managed to disappear from sight or go into some house." },
+    { word: "below ", num: 86, text: "He would have forgiven me... of course he would, if I hadn't stuck with him with that damned baldric." },
+    { word: "below ", num: 49, text: "And you know, I am ridiculously valuing my head." },
+    { word: "where ", num: 54, text: "So don't think that this will make things easier for you: I am equally free to use both hands." },
+    { word: "nowhere", num: 35, text: "Sir, I am very fond of people of your stock, and I see that if we do not kill each other, it will be very pleasant for me to talk with you later." },
+    { word: "there ", num: 74, text: "But on this audience, as it seemed to his Gascon imagination, his whole future depended." },
+    { word: "nowhere", num: 46, text: "The nobleman received money from the hands of the king and did not feel humiliated at all." },
+    { word: "above ", num: 14, text: "He therefore made every effort to surpass him even in the richness of his attire." },
+    { word: "there ", num: 70, text: "Otherwise, he was mute, blind and deaf, and his loyalty could withstand any test." },
+    { word: "somewhere", num: 30, text: "But it was never possible to find him at home, he never invited anyone to go upstairs with him." },
+    { word: "here ", num: 25, text: "For under these nicknames they all hid their names." },
+    { word: "inside ", num: 88, text: "Young people gradually began to live a common life." },
+    { word: "outside ", num: 36, text: "His preoccupied mind was active." },
+    { word: "there ", num: 28, text: "And in fact, four people like them, four people who are ready to sacrifice everything for each other." },
+    { word: "somewhere", num: 92, text: "He thought about the atom, and even quite thoroughly, racking his brains in search of ways." },
+    { word: "below ", num: 94, text: "You can still leave without revealing anything to me." },
+    { word: "somewhere", num: 21, text: "Believe me, I am full of gratitude for such treatment and consider it my duty if I can be of any help to you." },
+    { word: "here ", num: 67, text: "I believe only what I have seen, and since I have never seen ghosts, I do not believe in them." },
+    { word: "here ", num: 65, text: "The voice became more and more muffled. There was some noisy noise." },
+    { word: "somewhere", num: 19, text: "Struck by their example, yet muttering something to himself, he held out his hand." },
+    { word: "below ", num: 62, text: "I knew he was incapable of protecting me." },
+    { word: "outside ", num: 43, text: "I do not require promises and will honestly do everything in my power." },
+    { word: "where ", num: 7, text: "And besides, we are in such a position that we can neglect decorum." },
+];
+
+var columns = [
+    {
+        name: "word",
+        title: "Word"
+    },
+    {
+        name: "num",
+        title: "Number",
+        type: "number"
+    },
+    {
+        name: "text",
+        title: "Text",
+    }
+];
+
+var handlers = [
+    // MockServiceWorker.rest.get('/some', null),
+
+    MockServiceWorker.rest.post('/getoptions', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json(columns),
+        );
+    }),
+
+    MockServiceWorker.rest.post('/getData', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({data: sampleData, count: sampleData.length}),
+        );
+    }),
+];
+
+var worker = MockServiceWorker.setupWorker(handlers[0], handlers[1]);
+worker.start();

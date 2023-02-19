@@ -6,22 +6,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+    <script src="https://knockoutjs.com/downloads/knockout-3.5.1.debug.js"></script>
     <script src="/dist/knockout/table4.js"></script>
     <link href="/dist/knockout/table4.css" rel="stylesheet">
 </head>
 
 <body>
-    <div id="app-container" style="height: 80vh;">
-        <div style="clear: both;">
+    <div id="app-container">
+        <div id="table1">
             <h1>Table 1</h1>
+            <table4 style="height: 80vh;" params="{ model: model }"></table4>
         </div>
-        <table4 id="table1" params="{ model: model1 }"></table4>
-        <div style="clear: both;">
+        <div id="table2">
             <h1>Table 2</h1>
+            <table4 style="height: 80vh;" params="{ model: model }"></table4>
         </div>
-        <table4 id="table2" params="{ model: model2 }"></table4>
-
     </div>
     <script src="data1.js"></script>
     <script src="data2.js"></script>

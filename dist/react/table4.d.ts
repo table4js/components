@@ -109,6 +109,19 @@ declare module "core/action" {
         cssLabel: string;
     }
 }
+declare module "utils/data-provider" {
+    export interface IDataProvider {
+        getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
+        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): any;
+        getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
+        saveData: (keyName: string, key: any, modify: {}) => boolean;
+        insertData: (keyName: string, modify: {}) => boolean;
+        deleteData: (keyName: string, keys: any[], callback: any) => void;
+    }
+    export interface IDataProviderOwner {
+        get dataProvider(): IDataProvider;
+    }
+}
 declare module "localization" {
     export class Localization {
         static englishStrings: {
@@ -166,19 +179,6 @@ declare module "find" {
         [index: string]: IFindOperation[];
     };
 }
-declare module "utils/data-provider" {
-    export interface IDataProvider {
-        getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
-        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): any;
-        getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
-        saveData: (keyName: string, key: any, modify: {}) => boolean;
-        insertData: (keyName: string, modify: {}) => boolean;
-        deleteData: (keyName: string, keys: any[], callback: any) => void;
-    }
-    export interface IDataProviderOwner {
-        get dataProvider(): IDataProvider;
-    }
-}
 declare module "table/column-filter-item" {
     import { Base } from "core/base";
     import { IFindOperation } from "find";
@@ -226,7 +226,6 @@ declare module "table/column-filter" {
 }
 declare module "table/column" {
     import { Base } from "core/base";
-    import { IAggregate } from "find";
     import { IDataProviderOwner } from "utils/data-provider";
     import { ITableCell } from "table/cell";
     import { FilterContext } from "table/column-filter";
@@ -240,8 +239,6 @@ declare module "table/column" {
         filter: any;
         filterContext: FilterContext;
         order: boolean;
-        summaryValue: any;
-        summaryParams: IAggregate;
         count: number;
         prev: ITableCell;
         prevValue: any;
@@ -249,6 +246,7 @@ declare module "table/column" {
         last: ITableCell;
         row_color: string;
         clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
+        [name: string]: any;
     }
     export class TableColumn extends Base implements ITableColumn {
         private table;
@@ -256,8 +254,6 @@ declare module "table/column" {
         filter: any;
         filterContext: FilterContext;
         order: boolean;
-        summaryValue: any;
-        summaryParams: IAggregate;
         count: number;
         prev: any;
         prevValue: any;
@@ -269,7 +265,6 @@ declare module "table/column" {
         type: string;
         visible: boolean;
         clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
-        calculateSummary(column: ITableColumn): void;
         dispose(): void;
     }
 }
@@ -396,6 +391,34 @@ declare module "table/row" {
         click: (data: ITableRow, event: any) => void;
     }
 }
+declare module "table/summary" {
+    import { ITablePlugin, Table } from "table/index";
+    import { Base } from "core/base";
+    import { IAction } from "core/action";
+    import { ITableColumn } from "table/column";
+    import "./summary.scss";
+    export class TableSummaryItem {
+        title: string;
+        value: string;
+        constructor(title: string, value: string);
+    }
+    export class TableSummary extends Base {
+        private table;
+        private column;
+        constructor(table: Table, column: ITableColumn);
+        calculateSummary(): void;
+        value: number;
+        func: any;
+        summaryItems: Array<TableSummaryItem>;
+    }
+    export class TableSummaryPlugin implements ITablePlugin {
+        private _table;
+        name: string;
+        init(table: Table): void;
+        getActions(): IAction[];
+        onColumnCreated(column: ITableColumn): void;
+    }
+}
 declare module "icon" {
     export const add: any;
     export const equal: any;
@@ -441,17 +464,25 @@ declare module "table/index" {
         enableMergedСells?: boolean;
         /** Permission to edit data */
         enableEdit?: boolean;
-        /** Permission to display the table actions panel */
+        /** Actions to display in the table actions panel */
         actions?: Array<IAction>;
         /** The key field of the table. Needed to edit the table. */
         keyColumn?: string;
         /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
         selectCellColor?: string;
+        /** Table plugins array */
+        plugins?: Array<ITablePlugin>;
     }
-    interface ITableFilter {
+    export interface ITableFilter {
         value: string;
         op: string;
         field: string;
+    }
+    export interface ITablePlugin {
+        name: string;
+        init(table: Table): void;
+        getActions(): Array<IAction>;
+        onColumnCreated(column: ITableColumn): void;
     }
     /**
      * Creates Table class.
@@ -535,6 +566,9 @@ declare module "table/index" {
         get dropdownActions(): any[];
         get bottomActions(): any[];
         get noDataText(): any;
+        private plugins;
+        registerPlugin(plugin: ITablePlugin): ITablePlugin;
+        unregisterPlugin(pluginName: string): ITablePlugin;
     }
 }
 declare module "react/reactivity" {
@@ -584,38 +618,20 @@ declare module "react/table/row" {
     }
     export function TableRow({ table, row }: ITableRowProps): JSX.Element;
 }
-declare module "table/summary" {
-    import { Base } from "core/base";
-    import { ITableColumn } from "table/column";
-    import "./summary.scss";
-    export class TableSummaryItem {
-        title: string;
-        value: string;
-        constructor(title: string, value: string);
-    }
-    export class TableSummary extends Base {
-        private column;
-        constructor(column: ITableColumn);
-        get value(): any;
-        set value(val: any);
-        func: any;
-        summaryItems: Array<TableSummaryItem>;
-    }
-}
 declare module "react/table/summary" {
-    import { TableSummary } from "table/summary";
+    import { ITableColumn } from "table/column";
     export interface ITableSummaryProps {
-        summary: TableSummary;
+        column: ITableColumn;
     }
-    export function Table4Summary({ summary }: ITableSummaryProps): JSX.Element;
+    export function Table4Summary({ column }: ITableSummaryProps): JSX.Element;
 }
 declare module "react/table/search" {
     import { SearchModel } from "table/search";
-    export interface IAbrisSearchProps {
+    export interface ITable4SearchProps {
         icon: any;
         searchModel: SearchModel;
     }
-    export function AbrisSearch({ icon, searchModel }: IAbrisSearchProps): JSX.Element;
+    export function Table4Search({ icon, searchModel }: ITable4SearchProps): JSX.Element;
 }
 declare module "table/filter-select" {
     import { Base } from "core/base";
@@ -648,19 +664,19 @@ declare module "table/filter-select" {
 }
 declare module "react/table/filter-select" {
     import { TableFilterSelect } from "table/filter-select";
-    export function AbrisFilterSelect({ viewModel, }: {
+    export function Table4FilterSelect({ viewModel, }: {
         viewModel: TableFilterSelect;
     }): JSX.Element;
 }
 declare module "react/table/column-filter-item" {
     import { ColumnFilterItem } from "table/column-filter-item";
-    export function AbrisColumnFilterItem({ filterItem, }: {
+    export function Table4ColumnFilterItem({ filterItem, }: {
         filterItem: ColumnFilterItem;
     }): JSX.Element;
 }
 declare module "react/table/column-filter" {
     import { FilterContext } from "table/column-filter";
-    export function AbrisColumnFilter({ context }: {
+    export function Table4ColumnFilter({ context }: {
         context: FilterContext;
     }): JSX.Element;
 }

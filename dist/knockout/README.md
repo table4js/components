@@ -14,14 +14,14 @@ Shows data in table (grid) form. Supports infinite scrolling, array datasets, se
 
 Add the following scripts to HEAD part of your HTML file
 ```HTML
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.debug.js"></script>
+    <script src="https://knockoutjs.com/downloads/knockout-3.5.1.debug.js"></script>
     <script src="https://unpkg.com/table4ko"></script>
     <link href="https://unpkg.com/table4ko/table4.css" rel="stylesheet">
 ```
 
 Add the following markup to BODY part of your HTML file - where you want to see a table
 ```HTML
-    <div id="app-container" style="height: 80vh;">
+    <div id="app-container" style="height: calc(100vh - 16px);">
         <table4 params="{ model: $data }"></table4>
     </div>
 ```

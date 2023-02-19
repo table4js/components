@@ -16,7 +16,7 @@ Add the following scripts to HEAD part of your HTML file
 ```HTML
 <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone@7.2.5/babel.js"></script>    
+<script src="https://unpkg.com/@babel/standalone/babel.js"></script>    
 <script src="https://unpkg.com/table4react"></script>
 <link href="https://unpkg.com/table4react/table4.css" rel="stylesheet">
 ```

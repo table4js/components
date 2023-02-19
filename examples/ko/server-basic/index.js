@@ -14,5 +14,5 @@ function getColumns(name, baseUrl) {
         ko.applyBindings(model);
     });
 }
-getColumns("declaration", "https://table4js.com:3334/");
+getColumns("declaration", "/");
 
