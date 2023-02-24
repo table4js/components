@@ -1,4 +1,5 @@
 import * as React from "react";
+import { registerComponent } from "../abris-component";
 import { Table } from "../../table";
 import { ITableCell, TableCell } from "../../table/cell";
 import { AbrisComponent } from "../abris-component";
@@ -14,7 +15,7 @@ export function Table4Cell({ table, cell }: ITableCellProps) {
   makeReactive(cell);
 
   const isEditMode = !!cell.inplaceEditor && table.config.enableEdit;
-  const isMergedCell = cell.count > 1 && table.isMergedСells;
+  const isMergedCell = cell.count > 1 && table.isMergedCells;
 
   if (!isEditMode) {
     return (
@@ -29,7 +30,14 @@ export function Table4Cell({ table, cell }: ITableCellProps) {
 
   } else {
     return (
-      <AbrisComponent componentName={cell.editor} componentProps={{ model: cell.inplaceEditor }} />
+      <div
+        className={TableCell.getContainerCss(cell, isMergedCell)}
+        style={{ top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }}
+      >
+        <AbrisComponent componentName={cell.editor} componentProps={{ model: cell.inplaceEditor }} />
+      </div>
     );
   }
 }
+
+registerComponent("table4js-cell", Table4Cell);

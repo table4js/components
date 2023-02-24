@@ -1,7 +1,3 @@
-<td class="table4js-table-cell" data-bind="attr: {rowspan: table.isMergedСells ? cell.count : 1},
-  css: (cell.count > 1) && table.isMergedСells ? 'table4js-table-cell--merged ' : '',
-  visible: (cell.count > 0) || !table.isMergedСells,
-  style: {'background-color': cell.color} ">
   <!-- ko ifnot: (cell.inplaceEditor && table.config.enableEdit) -->
     <div class="table4js-table-cell__container" data-bind="css: containerCss, style: {top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined}, click: startEdit">
       <!-- ko component: { name: cell.viewer, params: { cell: cell, className: contentCss } } -->
@@ -9,7 +5,8 @@
     </div>
   <!-- /ko -->
   <!-- ko if: (cell.inplaceEditor && table.config.enableEdit) -->
+    <div class="table4js-table-cell__container" data-bind="css: containerCss">
     <!-- ko component: { name: cell.editor, params: { model: cell.inplaceEditor } } -->
     <!-- /ko -->
+    </div>
   <!-- /ko -->
-</td>

@@ -26,11 +26,11 @@ import { ITableCell } from "./cell";
     selected: boolean,
     color: string,
     select: (data: ITableRow, event) => void,
-    click: (data: ITableRow, event) => void
+    click: (data: ITableRow, event) => void,
+    getCellComponent(cell: ITableCell): string
 }
 
 export class TableRow extends Base implements ITableRow {
-    @property({ defaultValue: [] }) cells: ITableCell[];
     rowData: ITableRowData;
     id: any;
     number: number;
@@ -38,4 +38,8 @@ export class TableRow extends Base implements ITableRow {
     @property() color: string;
     select: (data: ITableRow, event: any) => void;
     click: (data: ITableRow, event: any) => void;
+    @property({ defaultValue: [] }) cells: ITableCell[];
+    public getCellComponent(cell: ITableCell): string {
+        return "table4js-cell";
+    }
 }

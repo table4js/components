@@ -6,9 +6,9 @@
 
 .table4js-table__bool-cell-viewer-circle {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.5em;
 }
 
 .table4js-table__bool-cell-editor {
@@ -16,6 +16,7 @@
 }
 
 .table4js-table__bool-cell-editor input {
-    width: 20px;
-    height: 20px;
+    width: 1em;
+    height: 1em;
+    margin: 1px;
 }

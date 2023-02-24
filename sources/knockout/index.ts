@@ -2,6 +2,7 @@ import * as ko from "knockout";
 import { Base, HashTableStorage } from "../core/base";
 import { Table } from "../table";
 
+export * from "./table/row";
 export * from "./table/cell";
 export * from "./table/cell-editor";
 export * from "./table/cell-viewer";

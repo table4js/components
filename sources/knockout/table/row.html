@@ -1,0 +1,32 @@
+<tr class="table4js-table__row" data-bind="css: {'table4js-table__row--selected': row.selected}, style: {'background-color': 'none' }">
+  <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: row.select">
+    <div class="table4js-table-technical-cell__container">
+      <!-- ko if: table.isNumber -->
+      <div class="table4js-table__number" data-bind="text: number"></div>
+      <!-- /ko -->
+      <!-- ko if: !table.isNumber -->
+      <div class="table4js-table__check">
+        <div class="table4js-svg-icon table4js-table__icon-check" data-bind="visible: row.selected, html: table.icons.check"></div>
+      </div>
+      <!-- /ko -->
+    </div>
+  </td>
+  <!-- ko foreach: row.cells -->
+  <td class="table4js-table-cell" data-bind="attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },
+    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-table-cell--merged ' : '',
+    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } ">
+    <!-- ko component: { name: $parent.row.getCellComponent($data), params: { cell: $data, table: $parent.table } } -->
+    <!-- /ko -->
+  </td>
+  <!-- /ko -->
+  <td class="table4js-table-cell table4js-table-technical-cell">
+    <div class="table4js-table-technical-cell__container">
+      <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: table.icons.more"></div>
+      <!-- ko foreach: table.rowActions -->
+      <div class="table4js-svg-icon table4js-table-icon-row-tools" data-bind="html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }"></div>
+      <!-- /ko -->
+    </div>
+    <div class="table4js-table__row--select" data-bind="visible: !table.hasActiveInplaceEditor"></div>
+    <div class="table4js-table__row--colored" data-bind="style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }"></div>
+  </td>
+</tr>

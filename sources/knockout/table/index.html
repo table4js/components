@@ -86,39 +86,14 @@
         <td class="table4js-table-cell table4js-table-technical-cell">
           <div class="table4js-table-technical-cell__container">
             <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $parent.icons.more"></div>
-            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $parent.icons.edit"></div>
           </div>
         </td>
         </tr>
         <!-- /ko -->
         <!-- /ko -->
-        <!-- ko foreach: { data: rows } -->
-        <tr class="table4js-table__row" data-bind="css: {'table4js-table__row--selected': selected}, style: {'background-color': 'none' }">
-          <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: select">
-            <div class="table4js-table-technical-cell__container">
-              <!-- ko if: $parent.isNumber -->
-              <div class="table4js-table__number" data-bind="text: number"></div>
-              <!-- /ko -->
-              <!-- ko if: !$parent.isNumber -->
-              <div class="table4js-table__check">
-                <div class="table4js-svg-icon table4js-table__icon-check" data-bind="visible: selected, html: $parent.icons.check"></div>
-              </div>
-              <!-- /ko -->
-            </div>
-          </td>
-          <!-- ko foreach: cells -->
-          <!-- ko component: { name: 'table4js-table-cell', params: { cell: $data, table: $parents[1] } } -->
-          <!-- /ko -->
-          <!-- /ko -->
-          <td class="table4js-table-cell table4js-table-technical-cell" data-bind="click: click">
-            <div class="table4js-table-technical-cell__container">
-              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $parent.icons.more"></div>
-              <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit" data-bind="html: $parent.icons.edit"></div>
-            </div>
-            <div class="table4js-table__row--select" data-bind="visible: !$parent.hasActiveInplaceEditor"></div>
-            <div class="table4js-table__row--colored" data-bind="style: { 'background': color ? color : 'rgba(248,249,253)' }"></div>
-          </td>
-        </tr>
+        <!-- ko foreach: rows -->
+        <!-- ko component: { name: "table4js-row", params: { table: $parent, row: $data } } -->
+        <!-- /ko -->
         <!-- /ko -->
       </tbody>
       <tfoot class="table4js-table__footer table4js-table-sticky-component">

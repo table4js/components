@@ -4,7 +4,7 @@ import { Table } from "../../table";
 import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../widgets/actions";
 import { AbrisDropdownActions } from "../widgets/dropdown-actions";
-import { TableRow } from "./row";
+import { Table4Row } from "./row";
 import { Table4Summary } from "./summary";
 import { Table4Search } from "./search";
 import { Table4ColumnFilter } from "./column-filter";
@@ -209,11 +209,11 @@ export function Table4({
               {model.loadingMutex
                 ? LoadingIndicator(model)
                 : model.rows.map((r) => (
-                  <TableRow
+                  <Table4Row
                     key={r.id || r.number}
                     table={model}
                     row={r}
-                  ></TableRow>
+                  ></Table4Row>
                 ))}
             </tbody>
             <tfoot className="table4js-table__footer table4js-table-sticky-component">

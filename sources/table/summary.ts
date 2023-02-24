@@ -3,6 +3,7 @@ import { Base } from "../core/base";
 import { property } from "../core/property";
 import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
+import { ITableRow } from "./row";
 
 import "./summary.scss";
 
@@ -41,7 +42,7 @@ export class TableSummary extends Base {
   summaryItems: Array<TableSummaryItem>;
 }
 
-export class TableSummaryPlugin implements ITablePlugin {
+export class SummaryPlugin implements ITablePlugin {
   private _table: Table;
   name: string = "summary";
   init(table: Table): void {
@@ -59,5 +60,7 @@ export class TableSummaryPlugin implements ITablePlugin {
   }
   onColumnCreated(column: ITableColumn): void {
     column.summary = new TableSummary(this._table, column);
+  }
+  onRowCreated(row: ITableRow): void {
   }
 }

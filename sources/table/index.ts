@@ -1,6 +1,6 @@
 import { Base } from "../core/base";
-import { Action, IAction } from "../core/action";
 import { property } from "../core/property";
+import { Action, IAction } from "../core/action";
 import { ComputedUpdater } from "../core/dependencies";
 import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
@@ -9,10 +9,10 @@ import { SearchModel } from "./search";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ArrayDataProvider } from "../utils/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
-import { isEmpty } from "../utils/utils";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
-import { TableSummaryPlugin } from "./summary";
+import { SummaryPlugin } from "./summary";
+import { InplaceEditingPlugin } from "./inplace-editing";
 
 import * as Icons from "../icon"
 import "./index.scss";
@@ -28,9 +28,9 @@ export interface ITableConfig extends IDataProvider {
     /** Permission to display summary panel */
     enableSummary?: boolean;
     /** Permission to display merged cells toggle */
-    enableMergedСellsToggle?: boolean;
+    enableMergedCellsToggle?: boolean;
     /** The primary value of the parameter for merging cells */
-    enableMergedСells?: boolean;
+    enableMergedCells?: boolean;
     /** Permission to edit data */
     enableEdit?: boolean;
     /** Actions to display in the table actions panel */
@@ -54,6 +54,7 @@ export interface ITablePlugin {
     init(table: Table): void;
     getActions(): Array<IAction>;
     onColumnCreated(column: ITableColumn): void;
+    onRowCreated(row: ITableRow): void;
 }
 
 /**
@@ -97,11 +98,15 @@ export class Table extends Base implements IDataProviderOwner {
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
         this.plugins = config.plugins || [];
-        if (config.enableSummary === true) {
-            if(this.plugins.length === 0) {
-                this.plugins.push(new TableSummaryPlugin());
+        if(this.plugins.length === 0) {
+            if (config.enableSummary === true) {
+                this.plugins.push(new SummaryPlugin());
+            }
+            if (config.enableEdit === true) {
+                this.plugins.push(new InplaceEditingPlugin());
             }
         }
+
         this.plugins.forEach(plugin => plugin.init(this));
         this.showSearch = config.enableSearch === true;
         this.createActions(this.config);
@@ -114,7 +119,7 @@ export class Table extends Base implements IDataProviderOwner {
             this.initialize(element);
         }
 
-        this.isMergedСells = config.enableMergedСells;
+        this.isMergedCells = config.enableMergedCells;
     }
 
     initialize(element: HTMLElement) {
@@ -193,61 +198,15 @@ export class Table extends Base implements IDataProviderOwner {
 
     protected createActions(config: ITableConfig) {
         this.plugins.forEach(plugin => this.innerActions.push.apply(this.innerActions, plugin.getActions()));
-        if (config.enableMergedСellsToggle === true) {
+        if (config.enableMergedCellsToggle === true) {
             this.innerActions.push(new Action({
                 name: "mergedСells-action",
                 action: () => {
-                    this.isMergedСells = !this.isMergedСells;
+                    this.isMergedCells = !this.isMergedCells;
                 },
                 svg: this.icons.table,
                 container: "top"
             }));
-        }
-        if (config.enableEdit === true) {
-            this.innerActions.push(new Action({
-                name: "save-action",
-                action: () => {
-                    let isInsert = false;
-                    this.rows.forEach(r => {
-                        let modify = {};
-                        if (r.number > 0) {
-                            r.cells.forEach(c => c.text !== c.data && (modify[c.name] = c.text));
-                            if (!isEmpty(modify)) {
-                                if (this.dataProvider.saveData(this.keyColumn, r.rowData[this.keyColumn], modify)) r.cells.forEach(c => c.data = c.text)
-                            }
-                        } else {
-                            r.cells.forEach(c => modify[c.name] = c.text);
-                            if (this.dataProvider.insertData(this.keyColumn, modify)) isInsert = true;
-                        }
-                    });
-                    if (isInsert) this.refresh();
-                },
-                svg: this.icons.save,
-                container: "bottom"
-            }),
-                new Action({
-                    name: "delete-action",
-                    action: () => {
-                        this.selectedRows.forEach(r => {
-                            if (r.number > 0) this.rows.slice(this.rows.indexOf(r), 1);
-                        })
-                        this.dataProvider.deleteData(this.keyColumn, this.selectedRows.map(r => r.number > 0 && r.rowData[this.keyColumn]), (_ => this.refresh()))
-                    },
-                    svg: this.icons.del,
-                    container: "bottom"
-                }),
-                new Action({
-                    name: "newRow-action",
-                    action: () => {
-                        // this.scrollerElement.scrollTop = 0;
-                        let newRow: ITableRowData = {};
-                        this.columns.forEach(c => c.visible && (newRow[c.name] = ""));
-                        this.rows.unshift(this.createRow(newRow, -1, null));
-                    },
-                    svg: this.icons.add,
-                    container: "bottom"
-                })
-            )
         }
     }
 
@@ -264,7 +223,7 @@ export class Table extends Base implements IDataProviderOwner {
         this.dataProvider = new ArrayDataProvider(_data);
     }
 
-    protected refresh() {
+    public refresh() {
         this.lastOffsetBack = 0;
         this.lastOffset = 0;
         this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
@@ -294,7 +253,9 @@ export class Table extends Base implements IDataProviderOwner {
                     this.loadMore = this.lastOffset <= totalCount;
                     const currentRows = this.rows;
                     (data || []).forEach((dataItem, index) => {
-                        var newRow = this.createRow(back ? data[data.length - 1 - Number(index)] : dataItem, back ? data.length - 1 - Number(index) + offset : Number(index) + offset, back);
+                        var rowData = back ? data[data.length - 1 - Number(index)] : dataItem;
+                        var rowNumber = back ? data.length - 1 - Number(index) + offset : Number(index) + offset;
+                        var newRow = this.createRow(rowData, rowNumber, back);
                         if (back) { currentRows.unshift(newRow); }
                         else { currentRows.push(newRow); }
                     });
@@ -332,7 +293,7 @@ export class Table extends Base implements IDataProviderOwner {
         this.refresh();
     }
 
-    protected createRow(data: { [key: string]: string | number }, num: number, back: boolean): ITableRow {
+    createRow(data: { [key: string]: string | number }, num: number, back: boolean = false): ITableRow {
         let rowCells = [];
         let lastText = null;
         let colorCell = null, colorRow = null;
@@ -356,8 +317,10 @@ export class Table extends Base implements IDataProviderOwner {
         row.number = num + 1;
         row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
-        row.select = (data, event) => this.selectRow(data, event),
-        row.click = (data, event) => this.clickRow(data, event)
+        row.select = (data, event) => this.selectRow(data, event);
+        row.click = (data, event) => this.clickRow(data, event);
+
+        this.plugins.forEach(plugin => plugin.onRowCreated(row));
         return row;
     }
 
@@ -432,7 +395,7 @@ export class Table extends Base implements IDataProviderOwner {
 
     protected rootLevel: any = true;
     @property({ defaultValue: false }) isNumber: boolean;
-    @property({ defaultValue: false }) isMergedСells: boolean;
+    @property({ defaultValue: false }) isMergedCells: boolean;
     @property({ defaultValue: false }) loadingMutex: boolean;
     @property({ defaultValue: true }) loadMore: boolean;
     @property({ defaultValue: false }) loadMoreBack: boolean;
@@ -482,6 +445,9 @@ export class Table extends Base implements IDataProviderOwner {
     }
     get bottomActions() {
         return this.getActions('bottom');
+    }
+    get rowActions() {
+        return this.getActions('row');
     }
     get noDataText() {
         return Localization.getString("noData");

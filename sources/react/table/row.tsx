@@ -1,15 +1,15 @@
 import * as React from "react";
 import { Table } from "../../table";
 import { ITableRow } from "../../table/row";
+import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { Table4Cell } from "./cell";
 
 export interface ITableRowProps {
   table: Table;
   row: ITableRow;
 }
 
-export function TableRow({ table, row }: ITableRowProps) {
+export function Table4Row({ table, row }: ITableRowProps) {
   makeReactive(row);
   const visibleColumns = table.columns.filter((c) => c.visible);
   return (
@@ -44,23 +44,19 @@ export function TableRow({ table, row }: ITableRowProps) {
       </td>
       {row.cells.map(
         (cell) =>
-          (cell.count > 0 || !table.isMergedСells) && (
+          (cell.count > 0 || !table.isMergedCells) && (
             <td
               key={cell.name}
               className={
                 "table4js-table-cell " +
-                (cell.count > 1 && table.isMergedСells
+                (cell.count > 1 && table.isMergedCells
                   ? "table4js-table-cell--merged "
                   : "")
               }
               style={{ background: cell.color }}
-              rowSpan={table.isMergedСells ? cell.count : 1}
+              rowSpan={table.isMergedCells ? cell.count : 1}
             >
-              <Table4Cell
-                key={cell.name}
-                table={table}
-                cell={cell}
-              ></Table4Cell>
+              <AbrisComponent componentName={row.getCellComponent(cell)} componentProps={{ key: cell.name, table: table, cell: cell }} />
             </td>
           )
       )}

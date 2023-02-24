@@ -3,7 +3,7 @@ import { property } from "./property";
 
 export interface IAction {
     name: string;
-    action: () => void;
+    action: (context?: any) => void;
     title?: string;
     visible?: boolean;
     enabled?: boolean;
@@ -22,7 +22,7 @@ export class Action extends Base implements IAction {
         Object.keys(source || {}).forEach(key => this[key] = source[key]);
     }
     @property() name: string;
-    @property() action: () => void;
+    @property() action: (context?: any) => void;
     @property() title: string;
     @property() visible: boolean;
     @property() enabled: boolean;
