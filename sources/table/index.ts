@@ -123,9 +123,9 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     initialize(element: HTMLElement) {
-        this.scrollerElement = element.getElementsByClassName("table4js-table-scroll-container")[0] as HTMLDivElement;
+        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0] as HTMLDivElement;
         this.tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
-        this.resizerElement = element.getElementsByClassName("table4js-table")[0] as HTMLDivElement;
+        this.resizerElement = element.getElementsByClassName("table4js")[0] as HTMLDivElement;
 
         var checkLoading = () => {
             var self = this;
@@ -151,10 +151,10 @@ export class Table extends Base implements IDataProviderOwner {
                 for (let entry of entries) {
                     if (entry.target.tagName === "THEAD") {
                         if (entry.contentRect.width < 700) {
-                            entry.target.parentElement.classList.add("table4js-table--small");
+                            entry.target.parentElement.classList.add("table4js--small");
                         }
                         else {
-                            entry.target.parentElement.classList.remove("table4js-table--small");
+                            entry.target.parentElement.classList.remove("table4js--small");
                         }
                         this.tableHeadHeight = entry.contentRect.height + 5;
                     }

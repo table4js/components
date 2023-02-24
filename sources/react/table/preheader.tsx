@@ -12,8 +12,8 @@ export function Table4Preheader(
   makeReactive(searchModel);
 
   return (
-    <div className="table4js-table-preheader">
-      <div className="table4js-table-search-group">
+    <div className="table4js-preheader">
+      <div className="table4js-search-group">
         <Table4Search
           icon={props.model.icons.search}
           searchModel={searchModel}

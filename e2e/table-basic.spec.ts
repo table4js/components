@@ -12,9 +12,9 @@ test.describe('Basic functionality', () => {
   test('number column', async ({ page }) => {
     await page.goto('http://localhost:8080/');
     await page.getByRole('cell', { name: '#' }).isVisible();
-    await expect(page.locator('.table4js-table__check').first()).toBeVisible();
+    await expect(page.locator('.table4js__check').first()).toBeVisible();
     await page.getByRole('cell', { name: '#' }).click();
-    await expect(page.locator('.table4js-table__number').first()).toHaveText('1');
+    await expect(page.locator('.table4js__number').first()).toHaveText('1');
   });
 
 });

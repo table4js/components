@@ -11,7 +11,7 @@ export function Table4CellEditor({ model }: ITableCellEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="table4js-table__cell-editor">
+    <div className="table4js__cell-editor">
       <input
         defaultValue={model.value}
         onChange={(e) => model.value = e.target.value}

@@ -37,12 +37,12 @@ button {
   fill: var(--abc-primary-2, $abc-primary-2);
 }
 
-.table4js-table-resizable-container {
+.table4js-resizable-container {
   min-height: 100px;
   height: 100%;
 }
 
-.table4js-table-scroll-container {
+.table4js-scroll-container {
   overflow-y: auto;
   min-height: 100%;
   max-height: calc(100% - 180px);
@@ -50,79 +50,79 @@ button {
   width: 100%;
 }
 
-.table4js-table-scroll-container__narrow {
+.table4js-scroll-container__narrow {
   display: inline-block;
   max-width: 500px;
 }
 
-.table4js-table-scroll-container--unlocked {
+.table4js-scroll-container--unlocked {
   width: fit-content;
 }
 
-.table4js-table-scroll-container--locked {
+.table4js-scroll-container--locked {
   overflow-y: visible;
 }
 
-.table4js-table-scroll-container--loadmore {
+.table4js-scroll-container--loadmore {
   display: none;
 }
 
 @-moz-document url-prefix() {
-  .table4js-table-resizable-container {
+  .table4js-resizable-container {
     padding-right: 8px;
   }
 
-  .table4js-table-scroll-container {
+  .table4js-scroll-container {
     width: calc(100% + 8px);
   }
 }
 
-.table4js-table {
+.table4js {
   border-collapse: separate;
   border-spacing: 0;
 }
 
-.table4js-table--small {
+.table4js--small {
   min-width: 400px;
 }
 
-.table4js-table-sticky-component {
+.table4js-sticky-component {
   z-index: 10;
   position: sticky;
   background: var(--abc-primary-1, $abc-primary-1);
 }
 
-.table4js-table__header {
+.table4js__header {
   top: 0;
 }
 
-.table4js-table-header-tools__cell {
+.table4js-header-tools__cell {
   padding: 0;
   border-bottom: none;
 }
 
-.table4js-table-header-tools__container {
+.table4js-header-tools__container {
   border-radius: 10px 10px 0 0;
 }
 
-.table4js-table-group-header-technical-cell {
+.table4js-group-header-technical-cell {
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
 }
 
-.table4js-table-preheader {
+.table4js-preheader {
   display: flex;
   align-items: center;
   padding: 6px;
 }
 
-.table4js-table-search-group {
+.table4js-search-group {
   display: flex;
   flex-grow: 1;
   margin-right: 25px;
 }
 
-.table4js-table-advanced-settings {
+.table4js-advanced-settings {
   display: flex;
   align-items: center;
 }
@@ -131,7 +131,7 @@ button {
   margin-left: 15px;
 }
 
-.table4js-table-filter {
+.table4js-filter {
   display: flex;
   align-items: center;
   border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
@@ -152,7 +152,7 @@ button {
   }
 }
 
-.table4js-table-filter__container {
+.table4js-filter__container {
   //position: absolute;
   display: flex;
   height: fit-content;
@@ -161,41 +161,41 @@ button {
   overflow-x: auto;
 }
 
-.table4js-table-header-title__cell {
+.table4js-header-title__cell {
   padding: 14px 6px;
   background: var(--abc-primary-0, $abc-primary-0);
   border-right: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
   position: relative;
 
   &:hover {
-    .table4js-table-title__filter {
+    .table4js-title__filter {
       display: block;
     }
   }
 }
 
-.table4js-table-switch {
+.table4js-switch {
   width: 15px;
 }
 
-.table4js-table-switch__text {
+.table4js-switch__text {
   font-weight: lighter;
   text-align: center;
   color: var(--abc-primary-2-op-50, $abc-primary-2-op-50);
 }
 
-.table4js-table-switch__text--selected {
+.table4js-switch__text--selected {
   color: var(--abc-primary-2, $abc-primary-2);
 }
 
-.table4js-table-title {
+.table4js-title {
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
 }
 
-.table4js-table-title__text {
+.table4js-title__text {
   flex-grow: 1;
   margin-right: 30px;
   color: var(--abc-primary-2, $abc-primary-2);
@@ -203,7 +203,7 @@ button {
   text-align: left;
 }
 
-.table4js-table-title__tools {
+.table4js-title__tools {
   display: flex;
   align-items: center;
   height: 100%;
@@ -212,13 +212,13 @@ button {
   background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, $abc-primary-0) 20%);
 }
 
-.table4js-table-title__filter {
+.table4js-title__filter {
   margin-left: 3px;
   display: none;
   cursor: pointer;
 }
 
-.table4js-table-title_resize {
+.table4js-title_resize {
   height: 100%;
   width: 10px;
   position: absolute;
@@ -227,53 +227,53 @@ button {
   cursor: col-resize;
 }
 
-.table4js-table__row {
+.table4js__row {
   //background: var(--abc-primary-1, $abc-primary-1);
   position: relative;
 
   &:hover {
-    .table4js-table__more {
+    .table4js__more {
       display: none;
     }
 
-    .table4js-table__edit {
+    .table4js__edit {
       display: block;
     }
 
-    .table4js-table__row--select {
+    .table4js__row--select {
       display: block;
     }
   }
 
   &:last-child {
-    .table4js-table-cell {
+    .table4js-cell {
       border-bottom: none;
     }
   }
 }
 
-.table4js-table__row--selected {
-  .table4js-table__check {
+.table4js__row--selected {
+  .table4js__check {
     border-color: var(--abc-primary-4, $abc-primary-4);
   }
 
-  .table4js-table__more {
+  .table4js__more {
     display: none;
   }
 
-  .table4js-table__edit {
+  .table4js__edit {
     display: block;
     fill: var(--abc-primary-4, $abc-primary-4);
   }
 
-  .table4js-table__row--select {
+  .table4js__row--select {
     display: block;
     border-color: var(--abc-primary-0-op-20, $abc-primary-0-op-20);
     background: var(--abc-primary-0-op-10, $abc-primary-0-op-10);
   }
 }
 
-.table4js-table-cell {
+.table4js-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   vertical-align: top;
@@ -283,11 +283,11 @@ button {
   }
 }
 
-.table4js-table-cell--merged {
+.table4js-cell--merged {
   vertical-align: text-top;
 }
 
-.table4js-table-technical-cell {
+.table4js-technical-cell {
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   max-width: 35px;
   width: 30px;
@@ -295,18 +295,18 @@ button {
   padding: 0;
 }
 
-.table4js-table-technical-cell__container {
+.table4js-technical-cell__container {
   display: flex;
   padding: 6px;
   z-index: 1;
   position: relative;
 }
 
-.table4js-table__number {
+.table4js__number {
   margin: auto;
 }
 
-.table4js-table__check {
+.table4js__check {
   width: 20px;
   height: 20px;
   display: flex;
@@ -317,28 +317,28 @@ button {
   margin: auto;
 }
 
-.table4js-table__icon-check {
+.table4js__icon-check {
   height: 100%;
   width: 100%;
   fill: var(--abc-primary-4, $abc-primary-4);
 }
 
-.table4js-table-icon-row-tools {
+.table4js-icon-row-tools {
   height: 20px;
   width: 20px;
   fill: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
   margin: auto;
 }
 
-.table4js-table__edit {
+.table4js__edit {
   display: none;
 }
 
-.table4js-table-cell__container {
+.table4js-cell__container {
   padding: 8px 6px;
 }
 
-.table4js-table-cell__container--loading {
+.table4js-cell__container--loading {
   background: linear-gradient(90deg, var(--abc-primary-1-dark-8, $abc-primary-1-dark-8), var(--abc-primary-0-op-30, $abc-primary-0-op-30), var(--abc-primary-1-dark-8, $abc-primary-1-dark-8));
   background-size: 150% 150%;
   width: calc(100% - 12px);
@@ -363,17 +363,17 @@ button {
   }
 }
 
-.table4js-table-cell__text {
+.table4js-cell__text {
   max-width: 280px;
   margin: auto 0;
   z-index: 1;
 }
 
-.table4js-table-cell__text--modified {
+.table4js-cell__text--modified {
   font-weight: bold;
 }
 
-.table4js-table-cell__text--merged {
+.table4js-cell__text--merged {
   z-index: 1;
   position: relative;
 }
@@ -382,7 +382,7 @@ button {
   position: sticky;
 }
 
-.table4js-table__row--select {
+.table4js__row--select {
   display: none;
   position: absolute;
   top: 0;
@@ -395,7 +395,7 @@ button {
   pointer-events: none;
 }
 
-.table4js-table__row--colored {
+.table4js__row--colored {
   position: absolute;
   top: 0;
   left: 30px;
@@ -404,39 +404,39 @@ button {
   z-index: -1;
 }
 
-.table4js-table__footer {
+.table4js__footer {
   bottom: 0;
   z-index: 9;
 }
 
-.table4js-table-icon-equal {
+.table4js-icon-equal {
   fill: var(--abc-primary-0, $abc-primary-0);
   margin: 0 auto;
 }
 
-.table4js-table-footer__cell {
+.table4js-footer__cell {
   border-bottom: none;
   padding: 0;
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
 }
 
-.table4js-table-footer-tools__cell {
+.table4js-footer-tools__cell {
   padding: 0px;
 }
 
-.table4js-table-footer-tools__container {
+.table4js-footer-tools__container {
   display: flex;
   padding: 6px;
   border-radius: 0 0 10px 10px;
 }
 
-.table4js-table-row-management {
+.table4js-row-management {
   margin-right: 25px;
   flex-grow: 1;
 }
 
-.table4js-table-row-management__actions .actions {
+.table4js-row-management__actions .actions {
   display: flex;
 
   button {
@@ -444,30 +444,30 @@ button {
   }
 }
 
-.table4js-table-info {
+.table4js-info {
   display: flex;
   align-items: center;
 }
 
-.table4js-table-info__total {
+.table4js-info__total {
   margin-right: 15px;
 }
 
-.table4js-table-info__text {
+.table4js-info__text {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
 }
 
-.table4js-table-info__go-to {
+.table4js-info__go-to {
   display: flex;
   align-items: center;
 }
 
-.table4js-table-go-to__text {
+.table4js-go-to__text {
   margin-right: 5px;
 }
 
-.table4js-table-go-to__value {
+.table4js-go-to__value {
   @include mx-form-control;
   width: 40px;
   height: 24px;
@@ -498,10 +498,10 @@ button {
   }
 }
 
-.table4js-table--small {
+.table4js--small {
 
   .table-bottom-actions,
-  .table4js-table-actions {
+  .table4js-actions {
     button.action-button {
       .table4js-button__svg-icon {
         margin-right: 0;
@@ -526,7 +526,7 @@ table4, .table4js-root {
     height: 100%;
   }
 
-  .table4js-table-scroll-container__locked {
+  .table4js-scroll-container__locked {
     >table {
       >tr {
         visibility: collapse;
@@ -543,8 +543,8 @@ table4, .table4js-root {
   }
 
   .abrs-table-side-edit {
-    .table4js-table-extended {
-      .table4js-table-resizable-container>.btn-ref-line {
+    .table4js-extended {
+      .table4js-resizable-container>.btn-ref-line {
         display: block;
       }
     }
@@ -579,7 +579,7 @@ table4, .table4js-root {
     display: flex;
     flex-direction: column;
 
-    .table4js-table-scroll-container {
+    .table4js-scroll-container {
       width: 100%;
       height: inherit;
       margin-top: 5px;
@@ -594,7 +594,7 @@ table4, .table4js-root {
 
 @-moz-document url-prefix() {
   .abrs-table-container-side {
-    .table4js-table-scroll-container {
+    .table4js-scroll-container {
       width: calc(100% + 8px);
     }
   }
@@ -604,15 +604,15 @@ table4, .table4js-root {
   padding-right: 10px;
 }
 
-.table4js-table-cell--left {
+.table4js-cell--left {
   text-align: left;
 }
 
-.table4js-table-cell--right {
+.table4js-cell--right {
   text-align: right;
 }
 
-.table4js-svg-icon.table4js-table-go-to__icon {
+.table4js-svg-icon.table4js-go-to__icon {
   width: 16px;
   height: 16px;
 }

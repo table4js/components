@@ -2,10 +2,10 @@
 
 exports[`Table preheader render test 1`] = `
 <div
-  class="table4js-table-preheader"
+  class="table4js-preheader"
 >
   <div
-    class="table4js-table-search-group"
+    class="table4js-search-group"
   >
     mock-table-search
   </div>

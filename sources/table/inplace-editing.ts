@@ -74,7 +74,7 @@ export class InplaceEditingPlugin implements ITablePlugin {
             name: "edit-action",
             action: (row: any) => { debugger; },
             svg: Icons.edit,
-            cssClasses: "table4js-table__edit",
+            cssClasses: "table4js__edit",
             container: "row"
         })
       ];

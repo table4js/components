@@ -1,11 +1,11 @@
   <!-- ko ifnot: (cell.inplaceEditor && table.config.enableEdit) -->
-    <div class="table4js-table-cell__container" data-bind="css: containerCss, style: {top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined}, click: startEdit">
+    <div class="table4js-cell__container" data-bind="css: containerCss, style: {top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined}, click: startEdit">
       <!-- ko component: { name: cell.viewer, params: { cell: cell, className: contentCss } } -->
       <!-- /ko -->
     </div>
   <!-- /ko -->
   <!-- ko if: (cell.inplaceEditor && table.config.enableEdit) -->
-    <div class="table4js-table-cell__container" data-bind="css: containerCss">
+    <div class="table4js-cell__container" data-bind="css: containerCss">
     <!-- ko component: { name: cell.editor, params: { model: cell.inplaceEditor } } -->
     <!-- /ko -->
     </div>

@@ -6,7 +6,7 @@ import { Table } from "../sources/table";
 
 test("Table constructor", () => {
     const rootWidgetElement = document.createElement("div");
-    rootWidgetElement.innerHTML = `<div class="table4js-table-resizable-container"><div class="table4js-table-scroll-container"><table class="table4js-table"></div></div></div>`;
+    rootWidgetElement.innerHTML = `<div class="table4js-resizable-container"><div class="table4js-scroll-container"><table class="table4js"></div></div></div>`;
     const table = new Table(<any>{ columns: [{ name: "col1" }], getData: () => { } }, rootWidgetElement);
     // expect(result).toMatchSnapshot();
     expect(table).toBeDefined();

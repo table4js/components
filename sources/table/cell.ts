@@ -24,7 +24,7 @@ export interface ITableCell {
 export class TableCell extends Base implements ITableCell {
     public static cellTypes = {
         "default": {
-            css: "table4js-table-cell--left",
+            css: "table4js-cell--left",
             editor: "table4js-cell-editor",
             viewer: "table4js-cell-viewer"
         },
@@ -34,16 +34,16 @@ export class TableCell extends Base implements ITableCell {
     }
 
     public static getContainerCss(cell: ITableCell, isMergedCell: boolean) {
-        let containerCss = "table4js-table-cell__container " + cell.css;
+        let containerCss = "table4js-cell__container " + cell.css;
         if (isMergedCell) {
             containerCss += " cell__sticky-text";
         }
         return containerCss;
     }
     public static getContentCss(cell: ITableCell | TableCell, isMergedCell: boolean) {
-        let contentCss = isMergedCell ? "table4js-table-cell__text--merged" : "table4js-table-cell__text";
+        let contentCss = isMergedCell ? "table4js-cell__text--merged" : "table4js-cell__text";
         if (cell instanceof TableCell && cell.isModified) {
-            contentCss += " table4js-table-cell__text--modified";
+            contentCss += " table4js-cell__text--modified";
         }
         return contentCss;
     }

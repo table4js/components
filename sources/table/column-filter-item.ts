@@ -33,19 +33,19 @@ export class ColumnFilterItem extends Base {
 
   get filterEditorName() {
     // if (this.column.type === "bool") {
-    //   return "table4js-table-filter-bool";
+    //   return "table4js-filter-bool";
     // } else if (["string", "caption", "plain"].indexOf(this.column.type) !== -1 ) {
-    //   return "table4js-table-filter-autocomplete";
+    //   return "table4js-filter-autocomplete";
     // } else if (this.column.type === "date") {
-    //   return "table4js-table-filter-date";
+    //   return "table4js-filter-date";
     // } else if (this.column.type === "datetime") {
-    //   return "table4js-table-filter-date-time";
+    //   return "table4js-filter-date-time";
     // } else if (this.column.type === "piketposition") {
-    //   return "table4js-table-filter-kmpktm";
+    //   return "table4js-filter-kmpktm";
     // } else if (!!this.params.propertyInfo.relation) {
-    //   return "table4js-table-filter-autocomplete";
+    //   return "table4js-filter-autocomplete";
     // }
-    return "table4js-table-filter-default";
+    return "table4js-filter-default";
   }
   public filterItemValue: FilterItemValue;
   @property({

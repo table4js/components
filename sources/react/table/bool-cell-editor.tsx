@@ -7,7 +7,7 @@ export function Table4BoolCellEditor({ model }: ITableCellEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="table4js-table__bool-cell-editor">
+    <div className="table4js__bool-cell-editor">
       <input type="checkbox"
         checked={model.value}
         onChange={(e) => {

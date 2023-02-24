@@ -1,27 +1,27 @@
-<div class="table4js-table-resizable-container">
-  <div class="table4js-table-scroll-container">
-    <table class="table4js-table">
-      <thead class="table4js-table__header table4js-table-sticky-component">
-        <tr class="table4js-table-header-tools">
-          <th class="table4js-table-header-tools__cell" colspan="100%">
-            <div class="table4js-table-header-tools__container table4js-table-group-header-technical-cell">
-              <div class="table4js-table-preheader">
-                <div class="table4js-table-search-group">
+<div class="table4js-resizable-container">
+  <div class="table4js-scroll-container">
+    <table class="table4js">
+      <thead class="table4js__header table4js-sticky-component">
+        <tr class="table4js-header-tools">
+          <th class="table4js-header-tools__cell" colspan="100%">
+            <div class="table4js-header-tools__container table4js-group-header-technical-cell">
+              <div class="table4js-preheader">
+                <div class="table4js-search-group">
                   <!-- ko if: showSearch -->
                   <table4js-search params="model: searchModel, icon: icons.search"></table4js-search>
                   <!-- /ko -->
-                  <table4js-actions class="table4js-table-actions" params="model: $data, options: { action: 'topActions' }">
+                  <table4js-actions class="table4js-actions" params="model: $data, options: { action: 'topActions' }">
                   </table4js-actions>
                   <!-- ko if: $data.getActions('dropdownActions').length > 0 -->
-                  <table4js-dropdown-actions class="table4js-table-dropdown table4js-table-actions-menu"
+                  <table4js-dropdown-actions class="table4js-dropdown table4js-actions-menu"
                     params="data: $data, actions: 'dropdownActions'">
                   </table4js-dropdown-actions>
                   <!-- /ko -->
                 </div>
               </div>
               <!-- ko if: viewFilterTable -->
-              <div class="table4js-table-filter">
-                <div class="table4js-table-filter__container">
+              <div class="table4js-filter">
+                <div class="table4js-filter__container">
                   <!-- ko foreach: columns -->
                   <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->
                   <!-- /ko -->
@@ -32,60 +32,60 @@
             </div>
           </th>
         </tr>
-        <tr class="table4js-table-header-title">
-          <th class="table4js-table-header-title__cell table4js-table-switch">
-            <div class="table4js-table-switch__text"
+        <tr class="table4js-header-title">
+          <th class="table4js-header-title__cell table4js-switch">
+            <div class="table4js-switch__text"
               data-bind="css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber">#
             </div>
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
-          <th class="table4js-table-header-title__cell"
+          <th class="table4js-header-title__cell"
             data-bind="event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}">
-            <div class="table4js-table-title">
-              <span class="table4js-table-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
-              <div class="table4js-table-title__tools">
-                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === false, html: $parent.icons.sortup"></div>
-                <div class="table4js-svg-icon table4js-table-title__sorter" data-bind="visible: order === true, html: $parent.icons.sortdown"></div>
-                <div class="table4js-svg-icon table4js-table-title__filter" data-bind="click: clickFilter, html: $parent.icons.filter"></div>
+            <div class="table4js-title">
+              <span class="table4js-title__text" data-bind="html: title, click: $parent.clickColumn"></span>
+              <div class="table4js-title__tools">
+                <div class="table4js-svg-icon table4js-title__sorter" data-bind="visible: order === false, html: $parent.icons.sortup"></div>
+                <div class="table4js-svg-icon table4js-title__sorter" data-bind="visible: order === true, html: $parent.icons.sortdown"></div>
+                <div class="table4js-svg-icon table4js-title__filter" data-bind="click: clickFilter, html: $parent.icons.filter"></div>
               </div>
             </div>
-            <div class="table4js-table-title_resize"
+            <div class="table4js-title_resize"
               data-bind="event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}">
             </div>
           </th>
           <!-- /ko -->
           <!-- /ko -->
-          <th class="table4js-table-header-title__cell"></th>
+          <th class="table4js-header-title__cell"></th>
         </tr>
       </thead>
-      <tbody class="table4js-table__body">
+      <tbody class="table4js__body">
         <!-- ko if: rows.length == 0 && loadingMutex == false  -->
-        <tr class="table4js-table__row">
-          <th class="table4js-table-cell" colspan="100%" data-bind="text: noDataText"></th>
+        <tr class="table4js__row">
+          <th class="table4js-cell" colspan="100%" data-bind="text: noDataText"></th>
         </tr>
         <!-- /ko -->
         <!-- ko if: loadingMutex -->
         <!-- ko foreach: columns -->
-        <tr class="table4js-table__row"></tr>
-          <td class="table4js-table-cell table4js-table-technical-cell" >
-            <div class="table4js-table-technical-cell__container">
-              <div class="table4js-table__check">
-                <div class="table4js-svg-icon table4js-table__icon-check"></div>
+        <tr class="table4js__row"></tr>
+          <td class="table4js-cell table4js-technical-cell" >
+            <div class="table4js-technical-cell__container">
+              <div class="table4js__check">
+                <div class="table4js-svg-icon table4js__icon-check"></div>
               </div>
             </div>
           </td>
         <!-- ko foreach: $parent.columns -->
         <!-- ko if: visible -->
-          <td class="table4js-table-cell table4js-table-technical-cell">
-            <div class="table4js-table-cell__container table4js-table-cell__container--loading">
+          <td class="table4js-cell table4js-technical-cell">
+            <div class="table4js-cell__container table4js-cell__container--loading">
             </div>
           </td>
         <!-- /ko -->
         <!-- /ko -->
-        <td class="table4js-table-cell table4js-table-technical-cell">
-          <div class="table4js-table-technical-cell__container">
-            <div class="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more" data-bind="html: $parent.icons.more"></div>
+        <td class="table4js-cell table4js-technical-cell">
+          <div class="table4js-technical-cell__container">
+            <div class="table4js-svg-icon table4js-icon-row-tools table4js__more" data-bind="html: $parent.icons.more"></div>
           </div>
         </td>
         </tr>
@@ -96,37 +96,37 @@
         <!-- /ko -->
         <!-- /ko -->
       </tbody>
-      <tfoot class="table4js-table__footer table4js-table-sticky-component">
-        <tr class="table4js-table-footer-summary" data-bind="visible: showTableSummary">
-          <th class="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell">
-            <div class="table4js-table-technical-cell__container">
-              <div class="table4js-svg-icon table4js-table-icon-equal" data-bind="html: icons.equal"></div>
+      <tfoot class="table4js__footer table4js-sticky-component">
+        <tr class="table4js-footer-summary" data-bind="visible: showTableSummary">
+          <th class="table4js-cell table4js-technical-cell table4js-footer__cell">
+            <div class="table4js-technical-cell__container">
+              <div class="table4js-svg-icon table4js-icon-equal" data-bind="html: icons.equal"></div>
             </div>
           </th>
           <!-- ko foreach: columns -->
           <!-- ko if: visible -->
-          <th class="table4js-table-cell table4js-table-footer__cell">
-            <table4js-table-summary params='column: $data'></table4js-table-summary>
+          <th class="table4js-cell table4js-footer__cell">
+            <table4js-summary params='column: $data'></table4js-summary>
           </th>
           <!-- /ko -->
           <!-- /ko -->
-          <th class="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"></th>
+          <th class="table4js-cell table4js-technical-cell table4js-footer__cell"></th>
         </tr>
-        <tr class="table4js-table-footer-tools">
-          <th class="table4js-table-footer-tools__cell" colspan="100%">
-            <div class="table4js-table-footer-tools__container table4js-table-group-header-technical-cell">
-              <div class="table4js-table-row-management">
-                <table4js-actions class="table4js-table-actions" params="model: $data, options: { action: 'bottomActions' }">
+        <tr class="table4js-footer-tools">
+          <th class="table4js-footer-tools__cell" colspan="100%">
+            <div class="table4js-footer-tools__container table4js-group-header-technical-cell">
+              <div class="table4js-row-management">
+                <table4js-actions class="table4js-actions" params="model: $data, options: { action: 'bottomActions' }">
                 </table4js-actions>
               </div>
-              <div class="table4js-table-info">
-                <span class="table4js-table-info__total table4js-table-info__text"
+              <div class="table4js-info">
+                <span class="table4js-info__total table4js-info__text"
                   data-bind="text: 'Total: ' + totalCount"></span>
-                <div class="table4js-table-info__go-to">
-                  <span class="table4js-table-go-to__text table4js-table-info__text">Go to: </span>
-                  <input class="table4js-table-go-to__value" data-bind="value: startRow"/>
+                <div class="table4js-info__go-to">
+                  <span class="table4js-go-to__text table4js-info__text">Go to: </span>
+                  <input class="table4js-go-to__value" data-bind="value: startRow"/>
                   <button class="table4js-btn-transparent">
-                    <div class="table4js-svg-icon table4js-table-go-to__icon" data-bind="html: icons.arrowright"></div>
+                    <div class="table4js-svg-icon table4js-go-to__icon" data-bind="html: icons.arrowright"></div>
                   </button>
                 </div>
               </div>

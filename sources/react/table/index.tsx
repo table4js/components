@@ -11,9 +11,9 @@ import { Table4ColumnFilter } from "./column-filter";
 
 function EmptyTable() {
   return (
-    <tr className="table4js-table__row">
+    <tr className="table4js__row">
       <td
-        className="table4js-table-cell"
+        className="table4js-cell"
         colSpan={"100%" as any}
         data-bind="text: noDataText"
       >
@@ -28,27 +28,27 @@ function LoadingIndicator(table: Table) {
   return (
     <>
       {visibleColumns.map((c, index) => (
-        <tr key={index} className="table4js-table__row">
-          <td className="table4js-table-cell table4js-table-technical-cell">
-            <div className="table4js-table-technical-cell__container">
-              <div className="table4js-table__check">
-                <div className="table4js-svg-icon table4js-table__icon-check"></div>
+        <tr key={index} className="table4js__row">
+          <td className="table4js-cell table4js-technical-cell">
+            <div className="table4js-technical-cell__container">
+              <div className="table4js__check">
+                <div className="table4js-svg-icon table4js__icon-check"></div>
               </div>
             </div>
           </td>
           {visibleColumns.map((vc) => (
-            <td className="table4js-table-cell table4js-table-technical-cell">
-              <div className="table4js-table-cell__container table4js-table-cell__container--loading"></div>
+            <td className="table4js-cell table4js-technical-cell">
+              <div className="table4js-cell__container table4js-cell__container--loading"></div>
             </td>
           ))}
-          <td className="table4js-table-cell table4js-table-technical-cell">
-            <div className="table4js-table-technical-cell__container">
+          <td className="table4js-cell table4js-technical-cell">
+            <div className="table4js-technical-cell__container">
               <div
-                className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__more"
+                className="table4js-svg-icon table4js-icon-row-tools table4js__more"
                 dangerouslySetInnerHTML={{ __html: table.icons.more }}
               ></div>
               <div
-                className="table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit"
+                className="table4js-svg-icon table4js-icon-row-tools table4js__edit"
                 dangerouslySetInnerHTML={{ __html: table.icons.edit }}
               ></div>
             </div>
@@ -76,18 +76,18 @@ export function Table4({
   });
   return (
     <div className="table4js-root">
-      <div ref={rootRef} className="table4js-table-resizable-container">
-        <div className="table4js-table-scroll-container">
-          <table className="table4js-table">
-            <thead className="table4js-table__header table4js-table-sticky-component">
-              <tr key="header-tools" className="table4js-table-header-tools">
+      <div ref={rootRef} className="table4js-resizable-container">
+        <div className="table4js-scroll-container">
+          <table className="table4js">
+            <thead className="table4js__header table4js-sticky-component">
+              <tr key="header-tools" className="table4js-header-tools">
                 <th
-                  className="table4js-table-header-tools__cell"
+                  className="table4js-header-tools__cell"
                   colSpan={"100%" as any}
                 >
-                  <div className="table4js-table-header-tools__container table4js-table-group-header-technical-cell">
-                    <div className="table4js-table-preheader">
-                      <div className="table4js-table-search-group">
+                  <div className="table4js-header-tools__container table4js-group-header-technical-cell">
+                    <div className="table4js-preheader">
+                      <div className="table4js-search-group">
                         {model.showSearch ? (
                           <Table4Search
                             icon={model.icons.search}
@@ -95,20 +95,20 @@ export function Table4({
                           ></Table4Search>
                         ) : null}
                         <AbrisActions
-                          className="table4js-table-actions"
+                          className="table4js-actions"
                           actions={model.topActions}
                         />
                         {model.dropdownActions.length > 0 && (
                           <AbrisDropdownActions
-                            className="table4js-table-dropdown table4js-table-actions-menu"
+                            className="table4js-dropdown table4js-actions-menu"
                             actions={model.dropdownActions}
                           />
                         )}
                       </div>
                     </div>
                     {model.viewFilterTable && (
-                      <div className="table4js-table-filter">
-                        <div className="table4js-table-filter__container">
+                      <div className="table4js-filter">
+                        <div className="table4js-filter__container">
                           {model.columns.map((c) => (
                             <Table4ColumnFilter
                               key={c.name}
@@ -121,16 +121,16 @@ export function Table4({
                   </div>
                 </th>
               </tr>
-              <tr key="header-title" className="table4js-table-header-title">
+              <tr key="header-title" className="table4js-header-title">
                 <th
                   key="row-selection-cell"
-                  className="table4js-table-header-title__cell table4js-table-switch"
+                  className="table4js-header-title__cell table4js-switch"
                 >
                   <div
                     className={
                       model.isNumber
-                        ? "table4js-table-switch__text switch__text--selected"
-                        : "table4js-table-switch__text"
+                        ? "table4js-switch__text switch__text--selected"
+                        : "table4js-switch__text"
                     }
                     onClick={(_) => (model.isNumber = !model.isNumber)}
                   >
@@ -142,23 +142,23 @@ export function Table4({
                   .map((c) => (
                     <th
                       key={c.name}
-                      className="table4js-table-header-title__cell"
+                      className="table4js-header-title__cell"
                       onMouseOut={(e) => model.logMouseOut(c, e)}
                       onMouseMove={(e) => model.logMouseMove(c, e)}
                       onMouseUp={(e) => model.logMouseUp(c, e)}
                     >
-                      <div className="table4js-table-title">
+                      <div className="table4js-title">
                         <span
-                          className="table4js-table-title__text"
+                          className="table4js-title__text"
                           onClick={(e) => {
                             model.clickColumn(c, e);
                           }}
                         >
                           {c.title}
                         </span>
-                        <div className="table4js-table-title__tools">
+                        <div className="table4js-title__tools">
                           <div
-                            className="table4js-svg-icon table4js-table-title__sorter"
+                            className="table4js-svg-icon table4js-title__sorter"
                             style={{
                               visibility:
                                 c.order === false ? "visible" : "hidden",
@@ -168,7 +168,7 @@ export function Table4({
                             }}
                           ></div>
                           <div
-                            className="table4js-svg-icon table4js-table-title__sorter"
+                            className="table4js-svg-icon table4js-title__sorter"
                             style={{
                               visibility:
                                 c.order === true ? "visible" : "hidden",
@@ -178,7 +178,7 @@ export function Table4({
                             }}
                           ></div>
                           <div
-                            className="table4js-svg-icon table4js-table-title__filter"
+                            className="table4js-svg-icon table4js-title__filter"
                             onClick={(e) => c.clickFilter(c, e.nativeEvent)}
                             dangerouslySetInnerHTML={{
                               __html: model.icons.filter,
@@ -187,7 +187,7 @@ export function Table4({
                         </div>
                       </div>
                       <div
-                        className="table4js-table-title_resize"
+                        className="table4js-title_resize"
                         onMouseOver={(e) => model.logMouseOver(c, e)}
                         onMouseOut={(e) => model.logMouseOut(c, e)}
                         onMouseMove={(e) => model.logMouseMove(c, e)}
@@ -198,11 +198,11 @@ export function Table4({
                   ))}
                 <th
                   key="row-context-menu-cell"
-                  className="table4js-table-header-title__cell"
+                  className="table4js-header-title__cell"
                 ></th>
               </tr>
             </thead>
-            <tbody className="table4js-table__body">
+            <tbody className="table4js__body">
               {model.rows.length == 0 && model.loadingMutex == false
                 ? EmptyTable()
                 : null}
@@ -216,16 +216,16 @@ export function Table4({
                   ></Table4Row>
                 ))}
             </tbody>
-            <tfoot className="table4js-table__footer table4js-table-sticky-component">
+            <tfoot className="table4js__footer table4js-sticky-component">
               {model.showTableSummary && (
-                <tr key="footer-summary" className="table4js-table-footer-summary">
+                <tr key="footer-summary" className="table4js-footer-summary">
                   <th
                     key="footer-tech-cell"
-                    className="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"
+                    className="table4js-cell table4js-technical-cell table4js-footer__cell"
                   >
-                    <div className="table4js-table-technical-cell__container">
+                    <div className="table4js-technical-cell__container">
                       <div
-                        className="table4js-svg-icon table4js-table-icon-equal"
+                        className="table4js-svg-icon table4js-icon-equal"
                         dangerouslySetInnerHTML={{
                           __html: model.icons.equal,
                         }}
@@ -237,39 +237,39 @@ export function Table4({
                     .map((c) => (
                       <th
                         key={c.name}
-                        className="table4js-table-cell table4js-table-footer__cell"
+                        className="table4js-cell table4js-footer__cell"
                       >
                         <Table4Summary column={c} />
                       </th>
                     ))}
                   <th
                     key="footer-context-menu-cell"
-                    className="table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell"
+                    className="table4js-cell table4js-technical-cell table4js-footer__cell"
                   ></th>
                 </tr>
               )}
-              <tr key="footer-tools" className="table4js-table-footer-tools">
+              <tr key="footer-tools" className="table4js-footer-tools">
                 <th
-                  className="table4js-table-footer-tools__cell"
+                  className="table4js-footer-tools__cell"
                   colSpan={"100%" as any}
                 >
-                  <div className="table4js-table-footer-tools__container table4js-table-group-header-technical-cell">
-                    <div className="table4js-table-row-management">
+                  <div className="table4js-footer-tools__container table4js-group-header-technical-cell">
+                    <div className="table4js-row-management">
                       <AbrisActions
-                        className="table4js-table-actions"
+                        className="table4js-actions"
                         actions={model.bottomActions}
                       />
                     </div>
-                    <div className="table4js-table-info">
-                      <span className="table4js-table-info__total table4js-table-info__text">
+                    <div className="table4js-info">
+                      <span className="table4js-info__total table4js-info__text">
                         {"Total: " + model.totalCount}
                       </span>
-                      <div className="table4js-table-info__go-to">
-                        <span className="table4js-table-go-to__text table4js-table-info__text">
+                      <div className="table4js-info__go-to">
+                        <span className="table4js-go-to__text table4js-info__text">
                           Go to:
                         </span>
                         <input
-                          className="table4js-table-go-to__value"
+                          className="table4js-go-to__value"
                           defaultValue={model.startRow}
                           onChange={(e) => setStartRow(+e.target.value)}
                           onKeyDown={(e) => {
@@ -280,7 +280,7 @@ export function Table4({
                         />
                         <button className="table4js-btn-transparent">
                           <div
-                            className="table4js-svg-icon table4js-table-go-to__icon"
+                            className="table4js-svg-icon table4js-go-to__icon"
                             dangerouslySetInnerHTML={{
                               __html: model.icons.arrowright,
                             }}
