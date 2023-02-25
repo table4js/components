@@ -7,7 +7,7 @@ export interface IEditorProps {
   model: Editor;
 }
 
-export function Table4CellEditor({ model }: IEditorProps) {
+export function Table4DefaultCellEditor({ model }: IEditorProps) {
   makeReactive(model);
 
   return (
@@ -21,4 +21,4 @@ export function Table4CellEditor({ model }: IEditorProps) {
   );
 }
 
-registerComponent("table4js-default-editor", Table4CellEditor);
+registerComponent("table4js-default-editor", Table4DefaultCellEditor);

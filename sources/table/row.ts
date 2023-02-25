@@ -25,6 +25,7 @@ import { ITableCell } from "./cell";
     number: number,
     selected: boolean,
     color: string,
+    mode: string;
     select: (data: ITableRow, event) => void,
     click: (data: ITableRow, event) => void,
     getCellComponent(cell: ITableCell): string
@@ -43,4 +44,11 @@ export class TableRow extends Base implements ITableRow {
     public getCellComponent(cell: ITableCell): string {
         return "table4js-cell";
     }
-}
+    get css() {
+        let result = "table4js__row--" + this.mode;
+        if(this.selected) {
+            result += " table4js__row--selected";
+        }
+        return result;
+    }
+}   

@@ -15,8 +15,10 @@ export * from "./core/action";
 export * from "./core/actions";
 export * from "./core/dropdown-actions";
 
-// export * from "./table/bool-cell-editor";
-// export * from "./table/bool-cell-viewer";
+export * from "./table/cell-editor";
+
+export * from "./widgets/default";
+export * from "./widgets/bool";
 
 export * from "..";
 

@@ -273,6 +273,18 @@ button {
   }
 }
 
+.table4js__row--edit-inplace {
+
+  .table4js__more {
+    display: none;
+  }
+
+  .table4js__edit {
+    display: block;
+    fill: var(--abc-primary-4, $abc-primary-4);
+  }
+}
+
 .table4js-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);

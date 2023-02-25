@@ -16,9 +16,10 @@ export function Table4Row({ table, row }: ITableRowProps) {
     <tr
       key={row.id || row.number}
       className={
-        row.selected
+        "table4js__row--" + row.mode + " " +
+        (row.selected
           ? "table4js__row table4js__row--selected"
-          : "table4js__row"
+          : "table4js__row")
       }
       style={{ background: "none" }}
     >
@@ -70,10 +71,19 @@ export function Table4Row({ table, row }: ITableRowProps) {
             className="table4js-svg-icon table4js-icon-row-tools table4js__more"
             dangerouslySetInnerHTML={{ __html: table.icons.more }}
           ></div>
-          <div
-            className="table4js-svg-icon table4js-icon-row-tools table4js__edit"
-            dangerouslySetInnerHTML={{ __html: table.icons.edit }}
-          ></div>
+          {
+            table.rowActions.map(action => {
+              return <div
+                className={"table4js-svg-icon table4js-icon-row-tools " + action.cssClasses}
+                dangerouslySetInnerHTML={{ __html: action.svg }}
+                onClick={(e) => {
+                  action.action(row);
+                  e.stopPropagation();
+                }}
+                title={action.title}
+              ></div>;
+            })
+          }
         </div>
         {table.allowRowSelection && (
           <div className="table4js__row--select"></div>

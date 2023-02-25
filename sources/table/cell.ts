@@ -51,6 +51,8 @@ export class TableCell extends Base implements ITableCell {
 
     private type: string = "default";
 
+    public rowData = {};
+
     @property({ defaultValue: false }) isModified: boolean;
     @property({
         onSet: (val, target: TableCell) => {
@@ -91,6 +93,7 @@ export class TableCell extends Base implements ITableCell {
 
     public initialize(col: ITableColumn, back: boolean, rowData: any, color: string) {
         this.type = col.type;
+        this.rowData = rowData;
         this.data = rowData[col.name];
         this.color = color;
         this.name = col.name;

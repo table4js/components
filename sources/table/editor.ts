@@ -7,9 +7,11 @@ import { ITableColumn } from "./column";
 
 import * as Icons from "../icon"
 import { ITableRow, ITableRowData } from "./row";
+import { ITableCell } from "./cell";
 
 export class EditorPlugin implements ITablePlugin {
     private _table: Table;
+    private _editedRow: ITableRow = undefined;
     name: string = "editor";
     init(table: Table): void {
       this._table = table;
@@ -72,7 +74,17 @@ export class EditorPlugin implements ITablePlugin {
         }),
         new Action({
             name: "edit-action",
-            action: (row: any) => { debugger; },
+            action: (row: any) => {
+                if(!!this._editedRow) {
+                    this._editedRow.mode = "default";
+                }
+                if(this._editedRow !== row) {
+                    row.mode = "edit-inplace";
+                    this._editedRow = row
+                } else {
+                    this._editedRow = undefined;
+                }
+            },
             svg: Icons.edit,
             cssClasses: "table4js__edit",
             container: "row"
@@ -82,13 +94,12 @@ export class EditorPlugin implements ITablePlugin {
     onColumnCreated(column: ITableColumn): void {
     }
     onRowCreated(row: ITableRow): void {
+        const prev = row.getCellComponent;
+        row.getCellComponent = (cell: ITableCell) => {
+            if(row.mode === "edit-inplace") {
+                return "table4js-cell-editor";
+            }
+            return prev(cell);
+        }
     }
-    // public startEditCell = (cell: ITableCell) => {
-    //     if (this.currentCellEditor) this.currentCellEditor.inplaceEditor = undefined;
-    //     cell.inplaceEditor = new InplaceEditor(cell);
-    //     this.currentCellEditor = cell;
-    //     this.completeEditCell();
-    // }
-    // public completeEditCell() {
-    // }
   }

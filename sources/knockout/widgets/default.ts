@@ -1,7 +1,7 @@
 import * as ko from "knockout";
 import { Editor } from "../../widgets/editor";
 
-export var cellEditorTemplate = require("./cell-editor.html").default;
+export var defaultEditorTemplate = require("./default.html").default;
 
 ko.components.register("table4js-default-editor", {
     viewModel: {
@@ -15,5 +15,5 @@ ko.components.register("table4js-default-editor", {
             return model;
         }
     },
-    template: cellEditorTemplate
+    template: defaultEditorTemplate
 });
