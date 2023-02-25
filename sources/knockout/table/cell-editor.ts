@@ -12,7 +12,8 @@ ko.components.register("table4js-cell-editor", {
             return {
                 ...params,
                 editor,
-                component: "table4js-default-editor",
+                inputType: Editor.getInputType(params.cell.type),
+                component: Editor.editors[params.cell.type] || Editor.editors.default,
                 containerCss: ko.computed(() => TableCell.getContainerCss(params.cell, isMergedCell())),
                 contentCss: ko.computed(() => TableCell.getContentCss(params.cell, isMergedCell())),
                 isMergedCell

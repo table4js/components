@@ -4,6 +4,17 @@ import { property } from "../core/property";
 import "./editor.scss";
 
 export class Editor extends Base {
+    public static inputTypes = {
+        number: "number",
+    };
+    public static getInputType(type: string) {
+      return Editor.inputTypes[type];
+    }
+    public static editors = {
+        default: "table4js-default-editor",
+        bool: "table4js-bool-editor",
+    };
+
     constructor(private data: any, private name: string) {
         super();
         this.value = this.data[name];

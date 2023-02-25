@@ -49,7 +49,7 @@ export class TableCell extends Base implements ITableCell {
         return contentCss;
     }
 
-    private type: string = "default";
+    type: string = "default";
 
     public rowData = {};
 

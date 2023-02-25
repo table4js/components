@@ -5,14 +5,17 @@ import { makeReactive } from "../reactivity";
 
 export interface IEditorProps {
   model: Editor;
+  className: string;
+  inputType?: string;
 }
 
-export function Table4DefaultCellEditor({ model }: IEditorProps) {
+export function Table4DefaultCellEditor({ model, className, inputType }: IEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="table4js__editor">
+    <div className={"table4js__editor " + className}>
       <input
+        type={inputType}
         defaultValue={model.value}
         onChange={(e) => model.value = e.target.value}
         onKeyUp={e => model.processKeyUp(e.nativeEvent)}

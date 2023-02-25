@@ -18,7 +18,7 @@ export function Table4CellEditor({ table, cell }: ITableCellProps) {
       className={TableCell.getContainerCss(cell, isMergedCell)}
       style={{ top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }}
     >
-      <AbrisComponent componentName={"table4js-default-editor"} componentProps={{ model: editor, className: TableCell.getContentCss(cell, isMergedCell) }} />
+      <AbrisComponent componentName={Editor.editors[cell.type] || Editor.editors.default} componentProps={{ model: editor, className: TableCell.getContentCss(cell, isMergedCell), inputType: Editor.getInputType(cell.type) }} />
     </div>
   );
 }
