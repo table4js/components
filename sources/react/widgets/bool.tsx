@@ -1,9 +1,9 @@
 import * as React from "react";
 import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { ITableCellEditorProps } from "./cell-editor";
+import { IEditorProps } from "./default";
 
-export function Table4BoolCellEditor({ model }: ITableCellEditorProps) {
+export function Table4BoolCellEditor({ model }: IEditorProps) {
   makeReactive(model);
 
   return (
@@ -19,4 +19,4 @@ export function Table4BoolCellEditor({ model }: ITableCellEditorProps) {
   );
 }
 
-registerComponent("bool-cell-editor", Table4BoolCellEditor);
+registerComponent("table4js-bool-editor", Table4BoolCellEditor);

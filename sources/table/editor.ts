@@ -8,9 +8,9 @@ import { ITableColumn } from "./column";
 import * as Icons from "../icon"
 import { ITableRow, ITableRowData } from "./row";
 
-export class InplaceEditingPlugin implements ITablePlugin {
+export class EditorPlugin implements ITablePlugin {
     private _table: Table;
-    name: string = "inplace-editing";
+    name: string = "editor";
     init(table: Table): void {
       this._table = table;
     }
@@ -83,4 +83,12 @@ export class InplaceEditingPlugin implements ITablePlugin {
     }
     onRowCreated(row: ITableRow): void {
     }
+    // public startEditCell = (cell: ITableCell) => {
+    //     if (this.currentCellEditor) this.currentCellEditor.inplaceEditor = undefined;
+    //     cell.inplaceEditor = new InplaceEditor(cell);
+    //     this.currentCellEditor = cell;
+    //     this.completeEditCell();
+    // }
+    // public completeEditCell() {
+    // }
   }

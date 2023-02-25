@@ -1,20 +1,18 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { ITableCell } from "./cell";
 
-import "./cell-editor.scss";
+import "./editor.scss";
 
-export class InplaceEditor extends Base {
-    constructor(private cell: ITableCell) {
+export class Editor extends Base {
+    constructor(private data: any, private name: string) {
         super();
-        this.value = this.cell.data;
+        this.value = this.data[name];
     }
     @property() value: any;
     complete(commit: boolean) {
         if(commit) {
-            this.cell.data = this.value;
+            this.data[this.name] = this.value;
         }
-        this.cell.inplaceEditor = undefined;
     }
     processKeyUp(event: KeyboardEvent) {
         if(event.keyCode === 13 || event.keyCode === 27) {

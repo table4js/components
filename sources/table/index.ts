@@ -2,7 +2,6 @@ import { Base } from "../core/base";
 import { property } from "../core/property";
 import { Action, IAction } from "../core/action";
 import { ComputedUpdater } from "../core/dependencies";
-import { InplaceEditor } from "./cell-editor";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, ITableColumnDescription, TableColumn } from "./column";
 import { SearchModel } from "./search";
@@ -12,7 +11,7 @@ import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
 import { SummaryPlugin } from "./summary";
-import { InplaceEditingPlugin } from "./inplace-editing";
+import { EditorPlugin } from "./editor";
 
 import * as Icons from "../icon"
 import "./index.scss";
@@ -103,7 +102,7 @@ export class Table extends Base implements IDataProviderOwner {
                 this.plugins.push(new SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                this.plugins.push(new InplaceEditingPlugin());
+                this.plugins.push(new EditorPlugin());
             }
         }
 
@@ -324,33 +323,15 @@ export class Table extends Base implements IDataProviderOwner {
         return row;
     }
 
-    protected rowExpanded(id) {
-        return false;
+    public get allowRowSelection() {
+        return true;
     }
 
-    public startEditCell = (cell: ITableCell) => {
-        if (this.currentCellEditor) this.currentCellEditor.inplaceEditor = undefined;
-        cell.inplaceEditor = new InplaceEditor(cell);
-        this.currentCellEditor = cell;
-        this.completeEditCell();
-    }
-
-    public completeEditCell() {
-    }
-
-    protected hasActiveInplaceEditorCore() {
-        return false;
-    }
-
-    public get hasActiveInplaceEditor() {
-        return this.hasActiveInplaceEditorCore();
-    }
-
-    curCol = undefined;
-    nxtCol = undefined;
-    pageX = undefined;
-    nxtColWidth = undefined;
-    curColWidth = undefined
+    private curCol = undefined;
+    private nxtCol = undefined;
+    private pageX = undefined;
+    private nxtColWidth = undefined;
+    private curColWidth = undefined
 
     public logMouseOver = (d, e) => {
         e.target.style.borderRight = '2px solid rgba(255, 255, 255, 0.5)';
@@ -427,7 +408,6 @@ export class Table extends Base implements IDataProviderOwner {
     @property({ defaultValue: true }) showTableFilter: boolean;
     @property({ defaultValue: false }) viewFilterTable: boolean;
     tableFilter: ITableFilter[];
-    currentCellEditor: ITableCell;
     @property({ defaultValue: false }) isShowDetail: boolean;
     expandedRowKey;
 

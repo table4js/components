@@ -26,7 +26,7 @@
       <div class="table4js-svg-icon table4js-icon-row-tools" data-bind="html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }"></div>
       <!-- /ko -->
     </div>
-    <div class="table4js__row--select" data-bind="visible: !table.hasActiveInplaceEditor"></div>
+    <div class="table4js__row--select" data-bind="visible: table.allowRowSelection"></div>
     <div class="table4js__row--colored" data-bind="style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }"></div>
   </td>
 </tr>

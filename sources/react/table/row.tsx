@@ -75,7 +75,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
             dangerouslySetInnerHTML={{ __html: table.icons.edit }}
           ></div>
         </div>
-        {!table.hasActiveInplaceEditor && (
+        {table.allowRowSelection && (
           <div className="table4js__row--select"></div>
         )}
         <div

@@ -6,7 +6,7 @@ import "./filter-select.scss";
 
 
 function conversionByType(value:any, columnType: string):string{
-    if(columnType ==="bool") return value?"Yes":"No";
+    if(columnType ==="bool") return value? "Yes" : "No";
     return value;
 }
 
@@ -52,7 +52,7 @@ export class TableFilterSelect extends Base {
         event.stopPropagation();
     }
     @property({ defaultValue: [], onSet: (val, target: TableFilterSelect) => {
-        console.log("Set filter value to " + JSON.stringify(val));
+        // console.log("Set filter value to " + JSON.stringify(val));
         target.value.value = target.selectedItems;
     } }) selectedItems: Array<any>;
     @property({ defaultValue: [] }) foundItems: Array<any>;

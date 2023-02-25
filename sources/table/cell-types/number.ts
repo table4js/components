@@ -1,4 +1,4 @@
-import { ITableCellType, TableCell } from "./cell";
+import { ITableCellType, TableCell } from "../cell";
 
 export class NumberCell implements ITableCellType {
     name: string = "number";

@@ -34,6 +34,7 @@ export class TableRow extends Base implements ITableRow {
     rowData: ITableRowData;
     id: any;
     number: number;
+    @property({ defaultValue: "default" }) mode: string;
     @property({ defaultValue: false }) selected: boolean;
     @property() color: string;
     select: (data: ITableRow, event: any) => void;

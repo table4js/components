@@ -5,8 +5,8 @@ import { ITableColumn, ITableColumnDescription } from "./column";
 export interface ITableCellType {
     name: string;
     css?: string;
-    editor?: string;
-    viewer?: string;
+    component?: string;
+    getCellText?: (val: any) => string;
 }
 
 export interface ITableCell {
@@ -22,11 +22,12 @@ export interface ITableCell {
 }
 
 export class TableCell extends Base implements ITableCell {
-    public static cellTypes = {
+    private static cellTypes: {[name: string]: ITableCellType} = {
         "default": {
+            name: "default",
             css: "table4js-cell--left",
-            editor: "table4js-cell-editor",
-            viewer: "table4js-cell-viewer"
+            getCellText: (val: any): string => typeof val === "object" ? JSON.stringify(val) : val as string,
+            component: "table4js-cell-default"
         },
     };
     public static registerCellType(cellType: ITableCellType) {
@@ -48,6 +49,8 @@ export class TableCell extends Base implements ITableCell {
         return contentCss;
     }
 
+    private type: string = "default";
+
     @property({ defaultValue: false }) isModified: boolean;
     @property({
         onSet: (val, target: TableCell) => {
@@ -63,8 +66,6 @@ export class TableCell extends Base implements ITableCell {
     @property() name: string;
     @property() inplaceEditor: any;
     @property() css: string;
-    editor: string;
-    viewer: string;
 
     protected getCellTypeDescription(type: string) {
         return TableCell.cellTypes[type] || TableCell.cellTypes["default"]
@@ -72,23 +73,28 @@ export class TableCell extends Base implements ITableCell {
     protected getCellCss(data: any, column: ITableColumnDescription): string {
         return this.getCellTypeDescription(column.type).css;
     }
-    protected getCellEditor(data: any, column: ITableColumnDescription): string {
-        return this.getCellTypeDescription(column.type).editor || TableCell.cellTypes["default"].editor;
-    }
-    protected getCellViewer(data: any, column: ITableColumnDescription): string {
-        return this.getCellTypeDescription(column.type).viewer || TableCell.cellTypes["default"].viewer;
-    }
     protected getCellText(val: any): string {
-        return val as string;
+        const cellTypeDescription = this.getCellTypeDescription(this.type);
+        if(!!cellTypeDescription && typeof cellTypeDescription.getCellText === "function") {
+            return cellTypeDescription.getCellText(val);
+        } 
+        return this.getCellTypeDescription("default").getCellText(val);
     }
 
-    public initialize(col: ITableColumn, back: boolean, data: any, color: string) {
-        this.data = data[col.name],
-            this.color = color;
+    get component() {
+        const cellTypeDescription = this.getCellTypeDescription(this.type);
+        if(!!cellTypeDescription && !!cellTypeDescription.component) {
+            return cellTypeDescription.component;
+        }
+        return this.getCellTypeDescription("default").component;
+    }
+
+    public initialize(col: ITableColumn, back: boolean, rowData: any, color: string) {
+        this.type = col.type;
+        this.data = rowData[col.name];
+        this.color = color;
         this.name = col.name;
-        this.css = this.getCellCss(data, col);
-        this.editor = this.getCellEditor(data, col);
-        this.viewer = this.getCellViewer(data, col);
+        this.css = this.getCellCss(rowData, col);
         if (back !== null) {
             if (back) {
                 if (col.last && col.last.text === this.text) {

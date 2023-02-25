@@ -1,12 +1,12 @@
 import * as ko from "knockout";
-import { InplaceEditor } from "../../table/cell-editor";
+import { Editor } from "../../widgets/editor";
 
 export var cellEditorTemplate = require("./cell-editor.html").default;
 
-ko.components.register("table4js-cell-editor", {
+ko.components.register("table4js-default-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            var model: InplaceEditor = ko.unwrap(params.model);
+            var model: Editor = ko.unwrap(params.model);
             // setTimeout(() => {
             //     const input = componentInfo.element.querySelectorAll("input")[0];
             //     input.focus();

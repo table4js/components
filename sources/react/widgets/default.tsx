@@ -1,17 +1,17 @@
 import * as React from "react";
-import { InplaceEditor } from "../../table/cell-editor";
+import { Editor } from "../../widgets/editor";
 import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 
-export interface ITableCellEditorProps {
-  model: InplaceEditor;
+export interface IEditorProps {
+  model: Editor;
 }
 
-export function Table4CellEditor({ model }: ITableCellEditorProps) {
+export function Table4CellEditor({ model }: IEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="table4js__cell-editor">
+    <div className="table4js__editor">
       <input
         defaultValue={model.value}
         onChange={(e) => model.value = e.target.value}
@@ -21,4 +21,4 @@ export function Table4CellEditor({ model }: ITableCellEditorProps) {
   );
 }
 
-registerComponent("table4js-cell-editor", Table4CellEditor);
+registerComponent("table4js-default-editor", Table4CellEditor);
