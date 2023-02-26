@@ -8,6 +8,7 @@ export class Editor extends Base {
         number: "number",
         currency: "number",
         indicator: "number",
+        progress: "number",
     };
     public static getInputType(type: string) {
       return Editor.inputTypes[type];

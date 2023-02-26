@@ -1,0 +1,15 @@
+.table4js__progress-cell {
+    display: inline-block;    
+    text-align: center;
+    width: 100%;
+    height: 1em;
+    position: relative;
+    border: 1px solid green;    
+}
+
+.table4js__progress-cell-value {
+    position: absolute;
+    height: 100%;
+    background-color: green;
+    font-size: 0.75em;
+}

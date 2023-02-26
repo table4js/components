@@ -16,6 +16,7 @@ export * from "./table/cell-types/bool";
 export * from "./table/cell-types/currency";
 export * from "./table/cell-types/indicator";
 export * from "./table/cell-types/number";
+export * from "./table/cell-types/progress";
 
 export * from "./widgets/editor";
 

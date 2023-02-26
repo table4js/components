@@ -5,6 +5,7 @@ export * from "./table";
 export * from "./table/cell";
 export * from "./table/cell-types/default";
 export * from "./table/cell-types/indicator";
+export * from "./table/cell-types/progress";
 export * from "./table/row";
 export * from "./table/summary";
 export * from "./table/search";
