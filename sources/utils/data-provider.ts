@@ -4,7 +4,7 @@ export interface IListDataProvider {
     getColumnData: (column, value, limit, offset, callback) => void;
 }
 export interface ICRUDDataProvider {
-    saveData: (keyName: string,  key:any, modify: { } ) => boolean;
+    saveData: (keyName: string,  key: any, modify: { } ) => boolean;
     insertData: (keyName: string, modify: {} ) => boolean;
     deleteData: (keyName: string, keys: any[], callback) => void;
 }

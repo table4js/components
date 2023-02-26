@@ -1,11 +1,11 @@
-import { ITableCellType, TableCell } from "./cell";
+import { ITableCellType, TableCell } from "../cell";
 
 import "./bool.scss";
 
 export class BoolCell implements ITableCellType {
     name: string = "bool";
-    editor: string = "bool-cell-editor";
-    viewer: string = "bool-cell-viewer";
+    css: string = "table4js-cell--center"
+    component: string = "table4js-cell-bool";
 }
 
 TableCell.registerCellType(new BoolCell());

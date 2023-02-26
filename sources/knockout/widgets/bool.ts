@@ -1,12 +1,12 @@
 import * as ko from "knockout";
-import { InplaceEditor } from "../../table/cell-editor";
+import { Editor } from "../../widgets/editor";
 
-export var boolCellEditorTemplate = require("./bool-cell-editor.html").default;
+export var boolEditorTemplate = require("./bool.html").default;
 
-ko.components.register("bool-cell-editor", {
+ko.components.register("table4js-bool-editor", {
     viewModel: {
         createViewModel: function(params, componentInfo) {
-            var model: InplaceEditor = ko.unwrap(params.model);
+            var model: Editor = ko.unwrap(params.model);
             // setTimeout(() => {
             //     const input = componentInfo.element.querySelectorAll("input")[0];
             //     input.focus();
@@ -15,5 +15,5 @@ ko.components.register("bool-cell-editor", {
             return model;
         }
     },
-    template: boolCellEditorTemplate
+    template: boolEditorTemplate
 });

@@ -1,3 +1,4 @@
-<div class="table4js__cell-editor">
-  <input data-bind="value: value, event: { keyup: function(_, e) { $data.processKeyUp(e); } }" />
+<div class="table4js-cell__container" data-bind="css: containerCss, style: { top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined }">
+  <!-- ko component: { name: component, params: { model: editor, className: contentCss, inputType: inputType } } -->
+  <!-- /ko -->
 </div>

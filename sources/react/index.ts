@@ -3,21 +3,22 @@ import { Base, HashTableStorage } from "../core/base";
 export * from "./abris-component";
 export * from "./table";
 export * from "./table/cell";
-export * from "./table/cell-editor";
-export * from "./table/cell-viewer";
+export * from "./table/cell-types/default";
+export * from "./table/cell-types/bool";
 export * from "./table/row";
 export * from "./table/summary";
 export * from "./table/search";
 // export * from "./table/filter-default";
 export * from "./table/column-filter";
 export * from "./table/filter-select";
-export * from "./widgets/action";
-export * from "./widgets/actions";
-export * from "./widgets/dropdown-actions";
-// export * from "./widgets/icon";
+export * from "./core/action";
+export * from "./core/actions";
+export * from "./core/dropdown-actions";
 
-export * from "./table/bool-cell-editor";
-export * from "./table/bool-cell-viewer";
+export * from "./table/cell-editor";
+
+export * from "./widgets/default";
+export * from "./widgets/bool";
 
 export * from "..";
 

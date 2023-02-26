@@ -1,6 +1,6 @@
 var options = {
-    enableMergedСellsToggle: true,
-    enableMergedСells: true,
+    enableMergedCellsToggle: true,
+    enableMergedCells: true,
     columns: [
         {
             name: "word",

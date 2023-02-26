@@ -40,6 +40,7 @@ button {
 .table4js-resizable-container {
   min-height: 100px;
   height: 100%;
+  width: 100%;
 }
 
 .table4js-scroll-container {
@@ -80,6 +81,7 @@ button {
 .table4js {
   border-collapse: separate;
   border-spacing: 0;
+  min-width: 100%;
 }
 
 .table4js--small {
@@ -273,6 +275,18 @@ button {
   }
 }
 
+.table4js__row--edit-inplace {
+
+  .table4js__more {
+    display: none;
+  }
+
+  .table4js__edit {
+    display: block;
+    fill: var(--abc-primary-4, $abc-primary-4);
+  }
+}
+
 .table4js-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
@@ -364,7 +378,6 @@ button {
 }
 
 .table4js-cell__text {
-  max-width: 280px;
   margin: auto 0;
   z-index: 1;
 }
@@ -521,6 +534,7 @@ button {
 table4, .table4js-root {
   display: inline-block;
   height: 100%;
+  width: 100%;
 
   &.abrs-table-child-view {
     height: 100%;
@@ -606,10 +620,23 @@ table4, .table4js-root {
 
 .table4js-cell--left {
   text-align: left;
+  input {
+    text-align: left;
+  }
+}
+
+.table4js-cell--center {
+  text-align: center;
+  input {
+    text-align: center;
+  }
 }
 
 .table4js-cell--right {
   text-align: right;
+  input {
+    text-align: right;
+  }
 }
 
 .table4js-svg-icon.table4js-go-to__icon {

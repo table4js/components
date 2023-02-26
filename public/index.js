@@ -33,8 +33,8 @@ var sampleData = [
 var options = {
     enableSearch: true,
     enableSummary: true,
-    enableMergedСellsToggle: true,
-    enableMergedСells: false,
+    enableMergedCellsToggle: true,
+    enableMergedCells: false,
     keyColumn: "key",
     selectCellColor: "#ffd9d9",
     enableEdit: true,

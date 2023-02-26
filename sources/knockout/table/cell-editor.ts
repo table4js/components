@@ -1,18 +1,23 @@
 import * as ko from "knockout";
-import { InplaceEditor } from "../../table/cell-editor";
+import { TableCell } from "../../table/cell";
+import { Editor } from "../../widgets/editor";
 
 export var cellEditorTemplate = require("./cell-editor.html").default;
 
 ko.components.register("table4js-cell-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            var model: InplaceEditor = ko.unwrap(params.model);
-            // setTimeout(() => {
-            //     const input = componentInfo.element.querySelectorAll("input")[0];
-            //     input.focus();
-            //     input.select();
-            // }, 0);
-            return model;
+            const isMergedCell = ko.computed(() => params.cell.count > 1 && params.table.isMergedСells);
+            const editor = params.editor;
+            return {
+                ...params,
+                editor,
+                inputType: Editor.getInputType(params.cell.type),
+                component: Editor.editors[params.cell.type] || Editor.editors.default,
+                containerCss: ko.computed(() => TableCell.getContainerCss(params.cell, isMergedCell())),
+                contentCss: ko.computed(() => TableCell.getContentCss(params.cell, isMergedCell())),
+                isMergedCell
+            };
         }
     },
     template: cellEditorTemplate

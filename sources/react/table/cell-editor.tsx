@@ -1,22 +1,26 @@
 import * as React from "react";
-import { InplaceEditor } from "../../table/cell-editor";
 import { registerComponent } from "../abris-component";
+import { Table } from "../../table";
+import { ITableCell, TableCell } from "../../table/cell";
+import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
+import { Editor } from "../../widgets/editor";
+import { ITableCellProps } from "./cell";
 
-export interface ITableCellEditorProps {
-  model: InplaceEditor;
+export interface ITableCellEditorProps extends ITableCellProps {
+  editor: Editor;
 }
 
-export function Table4CellEditor({ model }: ITableCellEditorProps) {
-  makeReactive(model);
+export function Table4CellEditor({ table, cell, editor }: ITableCellEditorProps) {
+  makeReactive(cell);
 
+  const isMergedCell = cell.count > 1 && table.isMergedCells;
   return (
-    <div className="table4js__cell-editor">
-      <input
-        defaultValue={model.value}
-        onChange={(e) => model.value = e.target.value}
-        onKeyUp={e => model.processKeyUp(e.nativeEvent)}
-      />
+    <div
+      className={TableCell.getContainerCss(cell, isMergedCell)}
+      style={{ top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }}
+    >
+      <AbrisComponent componentName={Editor.editors[cell.type] || Editor.editors.default} componentProps={{ model: editor, className: TableCell.getContentCss(cell, isMergedCell), inputType: Editor.getInputType(cell.type) }} />
     </div>
   );
 }
