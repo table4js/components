@@ -14,6 +14,9 @@ export class HashTableStorage {
     public setValue(name: string, val: any) {
         this.hash[name] = val;
     }
+    public peekValue(name: string, defaultValue?: any) {
+        return this.getValue(name, defaultValue);
+    }
 }
 
 export class Base {
@@ -64,7 +67,7 @@ export class Base {
         return this.getPropertyValueCore(propertyName, defaultValue);
     }
     public setPropertyValue(propertyName: string, newValue: any, defaultValue?: any) {
-        const oldValue = this.getPropertyValue(propertyName, defaultValue);
+        const oldValue = this.storage.peekValue(propertyName, defaultValue);
         if(!isEqual(oldValue, newValue)) {
             this.setPropertyValueCore(propertyName, newValue);
             this.onPropertyValueChanged(propertyName, oldValue, newValue);

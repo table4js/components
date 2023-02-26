@@ -15,12 +15,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
   return (
     <tr
       key={row.id || row.number}
-      className={
-        "table4js__row--" + row.mode + " " +
-        (row.selected
-          ? "table4js__row table4js__row--selected"
-          : "table4js__row")
-      }
+      className={row.css}
       style={{ background: "none" }}
     >
       <td
@@ -57,7 +52,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
               style={{ background: cell.color }}
               rowSpan={table.isMergedCells ? cell.count : 1}
             >
-              <AbrisComponent componentName={row.getCellComponent(cell)} componentProps={{ key: cell.name, table: table, cell: cell }} />
+              <AbrisComponent componentName={row.getCellComponent(cell)} componentProps={row.getCellComponentParams({ key: cell.name, table: table, cell: cell })} />
             </td>
           )
       )}

@@ -10,6 +10,7 @@ export interface ITableCellType {
 }
 
 export interface ITableCell {
+    rowData: any;
     data: any;
     name: string;
     text: string;

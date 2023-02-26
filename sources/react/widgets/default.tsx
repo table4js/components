@@ -15,10 +15,12 @@ export function Table4DefaultCellEditor({ model, className, inputType }: IEditor
   return (
     <div className={"table4js__editor " + className}>
       <input
+        className={model.css}
         type={inputType}
         defaultValue={model.value}
-        onChange={(e) => model.value = e.target.value}
-        onKeyUp={e => model.processKeyUp(e.nativeEvent)}
+        onChange={(e) => {
+          model.value = e.target.value;
+        }}
       />
     </div>
   );

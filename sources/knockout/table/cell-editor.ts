@@ -8,7 +8,7 @@ ko.components.register("table4js-cell-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             const isMergedCell = ko.computed(() => params.cell.count > 1 && params.table.isMergedСells);
-            const editor = new Editor(params.cell.rowData, params.cell.name);
+            const editor = params.editor;
             return {
                 ...params,
                 editor,

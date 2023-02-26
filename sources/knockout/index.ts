@@ -61,6 +61,14 @@ export class KnockoutHashTableStorage extends HashTableStorage {
         const observable = this.hash[name];
         this.hash[name](val);
     }
+    public peekValue(name: string, defaultValue?: any) {
+        const value = super.getValue(name, defaultValue);
+        if(!ko.isObservable(value)) {
+            this.hash[name] = this.createObservable(value);
+        }
+        const observable = this.hash[name];
+        return observable.peek();
+    }
 }
 
 Base.createPropertiesStorage = () => new KnockoutHashTableStorage();

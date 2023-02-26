@@ -7,12 +7,14 @@ import { makeReactive } from "../reactivity";
 import { Editor } from "../../widgets/editor";
 import { ITableCellProps } from "./cell";
 
+export interface ITableCellEditorProps extends ITableCellProps {
+  editor: Editor;
+}
 
-export function Table4CellEditor({ table, cell }: ITableCellProps) {
+export function Table4CellEditor({ table, cell, editor }: ITableCellEditorProps) {
   makeReactive(cell);
 
   const isMergedCell = cell.count > 1 && table.isMergedCells;
-  const editor = new Editor(cell.rowData, cell.name);
   return (
     <div
       className={TableCell.getContainerCss(cell, isMergedCell)}

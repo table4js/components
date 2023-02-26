@@ -15,7 +15,7 @@
   <td class="table4js-cell" data-bind="attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },
     css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',
     visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } ">
-    <!-- ko component: { name: $parent.row.getCellComponent($data), params: { cell: $data, table: $parent.table } } -->
+    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->
     <!-- /ko -->
   </td>
   <!-- /ko -->

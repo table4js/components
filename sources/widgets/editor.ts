@@ -15,19 +15,30 @@ export class Editor extends Base {
         bool: "table4js-bool-editor",
     };
 
-    constructor(private data: any, private name: string) {
+    constructor(private data: any, private name: string, private onComplete?: (value: any, commit: boolean) => void) {
         super();
-        this.value = this.data[name];
+        this.value = this.data[this.name];
     }
     @property() value: any;
     complete(commit: boolean) {
         if(commit) {
             this.data[this.name] = this.value;
         }
+        !!this.onComplete && this.onComplete(this.value, commit);
     }
-    processKeyUp(event: KeyboardEvent) {
-        if(event.keyCode === 13 || event.keyCode === 27) {
-            this.complete(event.keyCode === 13);
-        }        
+    get isModified() {
+        return this.value !== this.data[this.name];
     }
+    get css() {
+        let result = "table4js-editor";
+        if(this.isModified) {
+            result += " table4js-editor--modified";
+        }
+        return result;
+    }
+    // processKeyUp(event: KeyboardEvent) {
+    //     if(event.keyCode === 13 || event.keyCode === 27) {
+    //         this.complete(event.keyCode === 13);
+    //     }        
+    // }
 }
