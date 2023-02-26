@@ -179,7 +179,7 @@ export function Table4({
                           ></div>
                           <div
                             className="table4js-svg-icon table4js-title__filter"
-                            onClick={(e) => c.clickFilter(c, e.nativeEvent)}
+                            onClick={(e) => c.filterContext.clickFilter(c, e.nativeEvent)}
                             dangerouslySetInnerHTML={{
                               __html: model.icons.filter,
                             }}

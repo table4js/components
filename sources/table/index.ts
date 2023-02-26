@@ -13,7 +13,7 @@ import { FilterItemValue } from "./column-filter-item";
 import { SummaryPlugin } from "./summary";
 import { EditorPlugin } from "./editor";
 
-import * as Icons from "../icon"
+import * as Icons from "../icons"
 import "./index.scss";
 
 /**

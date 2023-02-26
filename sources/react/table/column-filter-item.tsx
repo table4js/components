@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { FilterContext } from "../../table/column-filter";
 import { makeReactive } from "../reactivity";
-import * as Icons from "../../icon";
+import * as Icons from "../../icons";
 import { Table4FilterSelect } from "./filter-select";
 import { TableFilterSelect } from "../../table/filter-select";
 import { ColumnFilterItem } from "../../table/column-filter-item";

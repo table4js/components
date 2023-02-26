@@ -12,7 +12,6 @@ export interface ITableColumnDescription {
 }
 
 export interface ITableColumn extends ITableColumnDescription {
-    filter: any;
     filterContext: FilterContext,
     order: boolean,
     count: number,
@@ -21,7 +20,6 @@ export interface ITableColumn extends ITableColumnDescription {
     concatPrev: boolean,
     last: ITableCell,
     row_color: string,
-    clickFilter: (column: ITableColumn, event: MouseEvent|any) => void,
     [name: string]: any;
 }
 
@@ -40,7 +38,6 @@ export class TableColumn extends Base implements ITableColumn {
         this.filterContext = new FilterContext(this, table);
     }
 
-    filter: any;
     filterContext: FilterContext;
     @property() order: boolean;
     count: number;
@@ -53,11 +50,6 @@ export class TableColumn extends Base implements ITableColumn {
     title: string;
     type: string = "string";
     visible: boolean = true;
-
-    public clickFilter = (column: ITableColumn, event: MouseEvent|any) => {
-        column.filterContext.addItem(column);
-        event.stopPropagation();
-    }
 
     dispose() {
     }

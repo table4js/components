@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AbrisAction } from "./action";
-import * as Icons from "../../icon";
+import * as Icons from "../../icons";
 
 export function AbrisActions({
   className,

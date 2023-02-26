@@ -30,5 +30,9 @@ export class FilterContext extends Base {
       currentFilterItems.splice(currentFilterItems.indexOf(item), 1);
       this.showFilter = !!currentFilterItems.length;    
       this.value = currentFilterItems.map(i => i.filterItemValue);
-    }    
+    }
+    public clickFilter = (column: ITableColumn, event: MouseEvent|any) => {
+      column.filterContext.addItem(column);
+      event.stopPropagation();
+  }
 }

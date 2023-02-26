@@ -8,7 +8,7 @@ import { ITableRow, ITableRowData } from "./row";
 import { ITableCell } from "./cell";
 import { Editor } from "../widgets/editor";
 
-import * as Icons from "../icon"
+import * as Icons from "../icons"
 
 export class EditorPlugin implements ITablePlugin {
     private _table: Table;
