@@ -4,7 +4,7 @@ export * from "./abris-component";
 export * from "./table";
 export * from "./table/cell";
 export * from "./table/cell-types/default";
-export * from "./table/cell-types/bool";
+export * from "./table/cell-types/indicator";
 export * from "./table/row";
 export * from "./table/summary";
 export * from "./table/search";
@@ -18,7 +18,7 @@ export * from "./core/dropdown-actions";
 export * from "./table/cell-editor";
 
 export * from "./widgets/default";
-export * from "./widgets/bool";
+export * from "./widgets/checkbox";
 
 export * from "..";
 

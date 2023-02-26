@@ -12,8 +12,10 @@ export * from "./table/column-filter-item";
 export * from "./table/filter-default";
 export * from "./table/filter-select";
 
-export * from "./table/cell-types/number";
 export * from "./table/cell-types/bool";
+export * from "./table/cell-types/currency";
+export * from "./table/cell-types/indicator";
+export * from "./table/cell-types/number";
 
 export * from "./widgets/editor";
 

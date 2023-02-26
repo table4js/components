@@ -36,10 +36,12 @@ export class EditorPlugin implements ITablePlugin {
     }
     private add() {
         // this.scrollerElement.scrollTop = 0;
-        let newRow: ITableRowData = {};
-        this._table.columns.forEach(c => c.visible && (newRow[c.name] = ""));
-        this._table.rows.unshift(this._table.createRow(newRow, -1));
-        this._table.dataProvider.insertData(this._table.keyColumn, newRow);
+        const newRowData: ITableRowData = {};
+        this._table.columns.forEach(c => c.visible && (newRowData[c.name] = ""));
+        const newRow = this._table.createRow(newRowData, -1);
+        this._table.rows.unshift(newRow);
+        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
+        return newRow;
     }
     private save() {
         let isInsert = false;
@@ -100,7 +102,12 @@ export class EditorPlugin implements ITablePlugin {
         }),
         new Action({
             name: "add-action",
-            action: () => this.add(),
+            action: () => {
+                const newRow = this.add();
+                this.startEditRow
+                this.endEditRow(false);
+                this.startEditRow(newRow);
+            },
             svg: Icons.add,
             container: "bottom"
         }),
@@ -137,4 +144,4 @@ export class EditorPlugin implements ITablePlugin {
             return params;
         }
     }
-  }
+}

@@ -6,13 +6,15 @@ import "./editor.scss";
 export class Editor extends Base {
     public static inputTypes = {
         number: "number",
+        currency: "number",
+        indicator: "number",
     };
     public static getInputType(type: string) {
       return Editor.inputTypes[type];
     }
     public static editors = {
         default: "table4js-default-editor",
-        bool: "table4js-bool-editor",
+        bool: "table4js-checkbox-editor",
     };
 
     constructor(private data: any, private name: string, private onComplete?: (value: any, commit: boolean) => void) {
