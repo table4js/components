@@ -3,11 +3,11 @@ import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 import { IEditorProps } from "./default";
 
-export function Table4BoolCellEditor({ model }: IEditorProps) {
+export function Table4CheckboxEditor({ model }: IEditorProps) {
   makeReactive(model);
 
   return (
-    <div className="table4js__bool-cell-editor">
+    <div className="table4js__checkbox-editor">
       <input type="checkbox"
         checked={model.value}
         onChange={(e) => {
@@ -19,4 +19,4 @@ export function Table4BoolCellEditor({ model }: IEditorProps) {
   );
 }
 
-registerComponent("table4js-bool-editor", Table4BoolCellEditor);
+registerComponent("table4js-checkbox-editor", Table4CheckboxEditor);

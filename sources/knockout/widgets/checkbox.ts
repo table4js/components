@@ -1,9 +1,9 @@
 import * as ko from "knockout";
 import { Editor } from "../../widgets/editor";
 
-export var boolEditorTemplate = require("./bool.html").default;
+export var boolEditorTemplate = require("./checkbox.html").default;
 
-ko.components.register("table4js-bool-editor", {
+ko.components.register("table4js-checkbox-editor", {
     viewModel: {
         createViewModel: function(params, componentInfo) {
             var model: Editor = ko.unwrap(params.model);
