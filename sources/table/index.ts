@@ -3,7 +3,7 @@ import { property } from "../core/property";
 import { Action, IAction } from "../core/action";
 import { ComputedUpdater } from "../core/dependencies";
 import { ITableCell, TableCell } from "./cell";
-import { ITableColumn, ITableColumnDescription, TableColumn } from "./column";
+import { ITableColumn, TableColumn } from "./column";
 import { SearchModel } from "./search";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ArrayDataProvider } from "../utils/array-data-provider";
@@ -15,13 +15,14 @@ import { EditorPlugin } from "./editor";
 
 import * as Icons from "../icons"
 import "./index.scss";
+import { IFieldDescription } from "../core/domain";
 
 /**
  * Parameters for customizing the table view.
  */
 export interface ITableConfig extends IDataProvider {
     /** Description of columns */
-    columns: Array<ITableColumnDescription>;
+    columns: Array<IFieldDescription>;
     /** Permission to display the search bar */
     enableSearch?: boolean;
     /** Permission to display summary panel */

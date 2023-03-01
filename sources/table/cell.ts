@@ -1,13 +1,7 @@
 import { Base } from "../core/base";
+import { IFieldDescription, IFieldType } from "../core/domain";
 import { property } from "../core/property";
-import { ITableColumn, ITableColumnDescription } from "./column";
-
-export interface ITableCellType {
-    name: string;
-    css?: string;
-    component?: string;
-    getCellText?: (val: any) => string;
-}
+import { ITableColumn } from "./column";
 
 export interface ITableCell {
     rowData: any;
@@ -17,21 +11,18 @@ export interface ITableCell {
     count: number;
     color: string;
     css: string;
-    inplaceEditor: any;
-    editor?: string;
-    viewer?: string;
 }
 
 export class TableCell extends Base implements ITableCell {
-    private static cellTypes: {[name: string]: ITableCellType} = {
+    private static cellTypes: {[name: string]: IFieldType} = {
         "default": {
             name: "default",
             css: "table4js-cell--left",
-            getCellText: (val: any): string => typeof val === "object" ? JSON.stringify(val) : val as string,
+            getText: (val: any): string => typeof val === "object" ? JSON.stringify(val) : val as string,
             component: "table4js-cell-default"
         },
     };
-    public static registerCellType(cellType: ITableCellType) {
+    public static registerCellType(cellType: IFieldType) {
         TableCell.cellTypes[cellType.name] = cellType;
     }
 
@@ -67,21 +58,20 @@ export class TableCell extends Base implements ITableCell {
     @property({ defaultValue: 1 }) count: number;
     @property() color: string;
     @property() name: string;
-    @property() inplaceEditor: any;
     @property() css: string;
 
     protected getCellTypeDescription(type: string) {
         return TableCell.cellTypes[type] || TableCell.cellTypes["default"]
     }
-    protected getCellCss(data: any, column: ITableColumnDescription): string {
+    protected getCellCss(data: any, column: IFieldDescription): string {
         return this.getCellTypeDescription(column.type).css;
     }
     protected getCellText(val: any): string {
         const cellTypeDescription = this.getCellTypeDescription(this.type);
-        if(!!cellTypeDescription && typeof cellTypeDescription.getCellText === "function") {
-            return cellTypeDescription.getCellText(val);
+        if(!!cellTypeDescription && typeof cellTypeDescription.getText === "function") {
+            return cellTypeDescription.getText(val);
         } 
-        return this.getCellTypeDescription("default").getCellText(val);
+        return this.getCellTypeDescription("default").getText(val);
     }
 
     get component() {
