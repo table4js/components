@@ -16,21 +16,23 @@ import { ITableCell } from "./cell";
  */
  export interface ITableRow {
     /** Array containing observable table cells */
-    cells: Array<ITableCell>,
+    cells: Array<ITableCell>;
     /** The collection of data for a table row */
-    rowData: ITableRowData,
+    rowData: ITableRowData;
     /**  */
-    id: any,
+    id: any;
     /**  */
-    number: number,
-    selected: boolean,
-    color: string,
+    number: number;
+    selected: boolean;
+    color: string;
     mode: string;
     css: string;
-    select: (data: ITableRow, event) => void,
-    click: (data: ITableRow, event) => void,
-    getCellComponent(cell: ITableCell): string
-    getCellComponentParams(params: any): any;
+    select: (data: ITableRow, event) => void;
+    click: (data: ITableRow, event) => void;
+    getRowComponent: () => string;
+    getRowComponentParams: (params: any) => any;
+    getCellComponent: (cell: ITableCell) => string;
+    getCellComponentParams: (params: any) => any;
 }
 
 export class TableRow extends Base implements ITableRow {
@@ -43,6 +45,12 @@ export class TableRow extends Base implements ITableRow {
     select: (data: ITableRow, event: any) => void;
     click: (data: ITableRow, event: any) => void;
     @property({ defaultValue: [] }) cells: ITableCell[];
+    public getRowComponent(): string {
+        return "table4js-row";
+    }
+    public getRowComponentParams(params: any): any {
+        return params;
+    }
     public getCellComponent(cell: ITableCell): string {
         return "table4js-cell";
     }

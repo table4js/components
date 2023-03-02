@@ -28,6 +28,10 @@ export * from "./table/cell-types/progress";
 
 export * from "./widgets/editor";
 
+export * from "./table/editor";
+export * from "./table/editor-inplace";
+export * from "./table/editor-row";
+
 export * from "./utils/array-data-provider";
 export * from "./utils/remote-data-provider";
 export * from "./utils/utils";

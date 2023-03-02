@@ -11,7 +11,8 @@ import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
 import { SummaryPlugin } from "./summary";
-import { EditorPlugin } from "./editor";
+import { InplaceEditorPlugin } from "./editor-inplace";
+import { RowEditorPlugin } from "./editor-row";
 
 import * as Icons from "../icons"
 import "./index.scss";
@@ -103,7 +104,7 @@ export class Table extends Base implements IDataProviderOwner {
                 this.plugins.push(new SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                this.plugins.push(new EditorPlugin());
+                this.plugins.push(new RowEditorPlugin());
             }
         }
 
