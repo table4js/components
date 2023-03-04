@@ -42,8 +42,9 @@ export class TableCell extends Base implements ITableCell {
         return contentCss;
     }
 
-    type: string = "default";
+    private _isUpdating = false;
 
+    type: string = "default";
     public rowData = {};
 
     @property({ defaultValue: false }) isModified: boolean;
@@ -51,7 +52,9 @@ export class TableCell extends Base implements ITableCell {
         onSet: (val, target: TableCell) => {
             if (target.text !== val) {
                 target.text = target.getCellText(val);
-                target.isModified = true;
+                if(!target._isUpdating) {
+                    target.isModified = true;
+                }
             }
         }
     }) data: any;
@@ -119,6 +122,8 @@ export class TableCell extends Base implements ITableCell {
         this.isModified = false;
     }
     public update(): void {
+        this._isUpdating = true;
         this.data = this.rowData[this.name];
+        this._isUpdating = false;
     }
 }

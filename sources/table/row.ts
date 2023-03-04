@@ -66,6 +66,6 @@ export class TableRow extends Base implements ITableRow {
         return result;
     }
     public update() {
-        this.cells.forEach(cell => cell.update())
+        this.cells.forEach(cell => cell.update());
     }
 }   

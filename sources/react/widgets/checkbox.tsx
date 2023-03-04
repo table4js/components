@@ -12,7 +12,6 @@ export function Table4CheckboxEditor({ model }: IEditorProps) {
         checked={model.value}
         onChange={(e) => {
           model.value = e.target.checked;
-          model.complete(true);
         }}
       />
     </div>

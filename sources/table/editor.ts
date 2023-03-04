@@ -1,13 +1,8 @@
 import { ITablePlugin, Table } from ".";
-import { Base } from "../core/base";
-import { property } from "../core/property";
 import { isEmpty } from "../utils/utils";
 import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
 import { ITableRow, ITableRowData } from "./row";
-import { ITableCell } from "./cell";
-import { Editor } from "../widgets/editor";
-import { Form } from "../widgets/form";
 
 import * as Icons from "../icons"
 
@@ -21,15 +16,16 @@ export class EditorPlugin implements ITablePlugin {
     protected saveRow(row: ITableRow) {
         let isInsert = false;
         let modifications = {};
-        if (row.number > 0) {
-            row.cells.forEach(c => c.text !== c.data && (modifications[c.name] = c.text));
-            if (!isEmpty(modifications)) {
-                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) row.cells.forEach(c => c.data = c.text)
-            }
-        } else {
-            row.cells.forEach(c => modifications[c.name] = c.text);
-            if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
-                isInsert = true;
+        row.cells.forEach(c => (<any>c).isModified && (modifications[c.name] = c.data));
+        if (!isEmpty(modifications)) {
+            if (row.number > 0) {
+                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+                    row.cells.forEach(c => (<any>c).isModified = false);
+                }
+            } else {
+                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
+                    isInsert = true;
+                }
             }
         }
         return isInsert;
