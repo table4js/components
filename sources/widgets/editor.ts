@@ -20,17 +20,11 @@ export class Editor extends Base {
         bool: "table4js-checkbox-editor",
     };
 
-    constructor(private data: any, private name: string, private onComplete?: (value: any, commit: boolean) => void) {
+    constructor(private _data: any, private name: string, private onComplete?: (value: any, commit: boolean) => void) {
         super();
-        this.value = this.data[this.name];
+        this.value = _data[this.name];
     }
     @property() value: any;
-    complete(commit: boolean) {
-        if(commit) {
-            this.data[this.name] = this.value;
-        }
-        !!this.onComplete && this.onComplete(this.value, commit);
-    }
     get isModified() {
         return this.value !== this.data[this.name];
     }
@@ -40,6 +34,19 @@ export class Editor extends Base {
             result += " table4js-editor--modified";
         }
         return result;
+    }
+    get data(): any {
+        return this._data;
+    }
+    set data(val: any) {
+        this._data = val;
+        this.value = val[this.name];
+    }
+    public complete(commit: boolean) {
+        if(commit) {
+            this.data[this.name] = this.value;
+        }
+        !!this.onComplete && this.onComplete(this.value, commit);
     }
     // processKeyUp(event: KeyboardEvent) {
     //     if(event.keyCode === 13 || event.keyCode === 27) {

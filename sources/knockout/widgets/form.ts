@@ -2,7 +2,7 @@ import * as ko from "knockout";
 import { Editor } from "../../widgets/editor";
 import { Form } from "../../widgets/form";
 
-export var propertyEditorTemplate = require("./form.html").default;
+export var formEditorTemplate = require("./form.html").default;
 
 ko.components.register("table4js-form", {
     viewModel: {
@@ -10,5 +10,5 @@ ko.components.register("table4js-form", {
             return params.form;
         }
     },
-    template: propertyEditorTemplate
+    template: formEditorTemplate
 });

@@ -3,6 +3,8 @@ import { property } from "../core/property";
 import { IFieldDescription } from "../knockout";
 import { Property } from "./property";
 
+import "./form.scss";
+
 export interface IFormElement {
     name: string;
     title?: string;
@@ -31,5 +33,8 @@ export class Form extends Base {
 
     get properties(): Array<Property> {
         return this.layout.elements.map(el => this._properties[el.name]);
+    }
+    public complete(commit: boolean) {
+        Object.keys(this._properties).forEach(name => this._properties[name].complete(commit));
     }
 }

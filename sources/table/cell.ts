@@ -11,6 +11,7 @@ export interface ITableCell {
     count: number;
     color: string;
     css: string;
+    update(): void;
 }
 
 export class TableCell extends Base implements ITableCell {
@@ -84,10 +85,10 @@ export class TableCell extends Base implements ITableCell {
 
     public initialize(col: ITableColumn, back: boolean, rowData: any, color: string) {
         this.type = col.type;
+        this.name = col.name;
         this.rowData = rowData;
         this.data = rowData[col.name];
         this.color = color;
-        this.name = col.name;
         this.css = this.getCellCss(rowData, col);
         if (back !== null) {
             if (back) {
@@ -116,5 +117,8 @@ export class TableCell extends Base implements ITableCell {
             }
         }
         this.isModified = false;
+    }
+    public update(): void {
+        this.data = this.rowData[this.name];
     }
 }

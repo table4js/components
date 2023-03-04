@@ -23,6 +23,7 @@ export * from "./table/row-editor";
 
 export * from "./widgets/default";
 export * from "./widgets/checkbox";
+export * from "./widgets/property";
 export * from "./widgets/form";
 
 export * from "..";

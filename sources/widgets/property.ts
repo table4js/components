@@ -3,6 +3,8 @@ import { IFieldDescription, IFieldType } from "../core/domain";
 import { property } from "../core/property";
 import { Editor } from "./editor";
 
+import "./property.scss";
+
 export class Property extends Base {
     private static propertyTypes: {[name: string]: IFieldType} = {
         "default": {
@@ -18,9 +20,10 @@ export class Property extends Base {
     
     constructor(private field: IFieldDescription) {
         super();
+        this.title = field.title || field.name;
         this.editor = new Editor(this.obj, this.name, (value: any, commit: boolean) => {
             if(commit) {
-                this.data = value;
+                this.value = value;
             }
         });
     }
@@ -32,18 +35,24 @@ export class Property extends Base {
     get name(): string {
         return this.field.name;
     }
-    get data(): any {
-        return this.obj??[this.name];
+    get value(): any {
+        return this.editor.value;
     }
-    set data(val: any) {
-        this.obj && (this.obj[this.name] = val);
+    set value(val: any) {
+        this.editor.value = val;
     }
 
+    get hasValue(): boolean {
+        return this.editor.value !== undefined;
+    }
+
+    @property() title: string;
     @property({ defaultValue: false }) isModified: boolean;
     @property({ defaultValue: false }) isReadOnly: boolean;
     @property({
         defaultValue: {},
         onSet: (val, target: Property) => {
+            target.editor.data = val;
             target.isModified = false;
         }
     }) obj: any;
@@ -74,5 +83,9 @@ export class Property extends Base {
     }
     get inputType() {
         return Editor.getInputType(this.type);
+    }
+
+    complete(commit: boolean): void {
+        this.editor.complete(commit);
     }
 }

@@ -33,6 +33,7 @@ import { ITableCell } from "./cell";
     getRowComponentParams: (params: any) => any;
     getCellComponent: (cell: ITableCell) => string;
     getCellComponentParams: (params: any) => any;
+    update(): void;
 }
 
 export class TableRow extends Base implements ITableRow {
@@ -63,5 +64,8 @@ export class TableRow extends Base implements ITableRow {
             result += " table4js__row--selected";
         }
         return result;
+    }
+    public update() {
+        this.cells.forEach(cell => cell.update())
     }
 }   

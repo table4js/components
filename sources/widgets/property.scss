@@ -1,0 +1,39 @@
+.table4js-form__property {
+    position: relative;
+    max-width: 320px;
+    padding-top: 24px;
+
+    input {
+        padding: 2px 3px;
+    }
+}
+
+.table4js-form__property-title {
+    position: absolute;
+    top: 26px;
+    left: 3px;
+    transition: 0.2s ease all;
+    color: gray;
+}
+
+//.table4js-form__property--with-value .table4js-form__property-title,
+.table4js__editor:focus-within ~ .table4js-form__property-title {
+    top: 7px;
+    font-size: 0.75em;
+    color: black;
+}
+
+.table4js-form__property--with-value {
+    .table4js-form__property-title {
+        display: none;
+    }
+    .table4js__editor:focus-within ~ .table4js-form__property-title {
+        display: block;
+    }
+}
+
+.table4js-form__property:not(.table4js-form__property--with-value) {
+    input:not(:focus)::-webkit-datetime-edit {
+        color: transparent;
+    }
+}
