@@ -8,8 +8,8 @@ export class IndicatorCell implements IFieldType {
     css: string = "table4js-cell--center"
     component: string = "table4js-cell-indicator";
     static threshold: number = 0.5;
-    static greaterColor: any = "green";
-    static lessColor: any = "red";
+    static greaterColor: any = "lightgreen";
+    static lessColor: any = "pink";
 }
 
 TableCell.registerCellType(new IndicatorCell());
