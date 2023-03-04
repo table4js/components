@@ -11,7 +11,7 @@ export class Property extends Base {
             name: "default",
             css: "table4js-cell--left",
             getText: (val: any): string => typeof val === "object" ? JSON.stringify(val) : val as string,
-            component: "table4js-default-editor"
+            component: "table4js-property-editor"
         },
     };
     public static registerPropertyType(propertyType: IFieldType) {
@@ -67,17 +67,17 @@ export class Property extends Base {
         return this.getPropertyTypeDescription(field.type).css;
     }
     protected getText(val: any): string {
-        const cellTypeDescription = this.getPropertyTypeDescription(this.type);
-        if(!!cellTypeDescription && typeof cellTypeDescription.getText === "function") {
-            return cellTypeDescription.getText(val);
+        const propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+        if(!!propertyTypeDescription && typeof propertyTypeDescription.getText === "function") {
+            return propertyTypeDescription.getText(val);
         } 
         return this.getPropertyTypeDescription("default").getText(val);
     }
 
     get component() {
-        const cellTypeDescription = this.getPropertyTypeDescription(this.type);
-        if(!!cellTypeDescription && !!cellTypeDescription.component) {
-            return cellTypeDescription.component;
+        const propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+        if(!!propertyTypeDescription && !!propertyTypeDescription.component) {
+            return propertyTypeDescription.component;
         }
         return this.getPropertyTypeDescription("default").component;
     }

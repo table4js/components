@@ -14,6 +14,7 @@
     left: 3px;
     transition: 0.2s ease all;
     color: gray;
+    pointer-events: none;
 }
 
 //.table4js-form__property--with-value .table4js-form__property-title,
@@ -25,10 +26,10 @@
 
 .table4js-form__property--with-value {
     .table4js-form__property-title {
-        display: none;
+        opacity: 0;
     }
     .table4js__editor:focus-within ~ .table4js-form__property-title {
-        display: block;
+        opacity: 1;
     }
 }
 
@@ -36,4 +37,12 @@
     input:not(:focus)::-webkit-datetime-edit {
         color: transparent;
     }
+}
+
+.table4js__checkbox-editor+.table4js-form__property-title {
+    top: 26px;
+    left: 26px;
+    opacity: 1;
+    color: black;
+    pointer-events: all;
 }

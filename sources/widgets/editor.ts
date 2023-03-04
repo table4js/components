@@ -48,6 +48,7 @@ export class Editor extends Base {
         }
         !!this.onComplete && this.onComplete(this.value, commit);
     }
+
     // processKeyUp(event: KeyboardEvent) {
     //     if(event.keyCode === 13 || event.keyCode === 27) {
     //         this.complete(event.keyCode === 13);
