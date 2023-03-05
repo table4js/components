@@ -136,5 +136,5 @@ var options = {
         //     container: "dropdown"
         // }
     ],
-    // plugins: [ new Table4JS.TableSummaryPlugin() ]
+    // plugins: [ new Table4JS.SummaryPlugin() ]
 };

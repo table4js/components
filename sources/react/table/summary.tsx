@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ITableColumn } from "../../table/column";
-import { TableSummary } from "../../table/summary";
+import { FieldSummary } from "../../table/summary";
 import { makeReactive } from "../reactivity";
 
 export interface ITableSummaryProps {
@@ -8,7 +8,7 @@ export interface ITableSummaryProps {
 }
 
 export function Table4Summary({ column }: ITableSummaryProps) {
-  const summary: TableSummary = column.summary;
+  const summary: FieldSummary = column.summary;
   if(!summary) {
     return null;
   }

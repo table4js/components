@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TableSummary } from "../../table/summary";
+import { FieldSummary } from "../../table/summary";
 
 export var summaryTemplate = require("./summary.html").default;
 
