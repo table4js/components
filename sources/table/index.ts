@@ -24,16 +24,18 @@ import { IFieldDescription } from "../core/domain";
 export interface ITableConfig extends IDataProvider {
     /** Description of columns */
     columns: Array<IFieldDescription>;
-    /** Permission to display the search bar */
+    /** Allows display the search bar */
     enableSearch?: boolean;
-    /** Permission to display summary panel */
+    /** Allows display summary panel */
     enableSummary?: boolean;
-    /** Permission to display merged cells toggle */
+    /** Allows display merged cells toggle */
     enableMergedCellsToggle?: boolean;
     /** The primary value of the parameter for merging cells */
     enableMergedCells?: boolean;
-    /** Permission to edit data */
+    /** Allows edit data */
     enableEdit?: boolean;
+    /** Allows row selection */
+    allowRowSelection?: boolean;
     /** Actions to display in the table actions panel */
     actions?: Array<IAction>;
     /** The key field of the table. Needed to edit the table. */
@@ -42,12 +44,6 @@ export interface ITableConfig extends IDataProvider {
     selectCellColor?: string;
     /** Table plugins array */
     plugins?: Array<ITablePlugin>;
-}
-
-export interface ITableFilter {
-    value: string,
-    op: string,
-    field: string,
 }
 
 export interface ITablePlugin {
@@ -74,10 +70,11 @@ export class Table extends Base implements IDataProviderOwner {
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
 
     private updateByFilter() {
-        const isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
-        this.tableFilter = [];
+        const dataProvider = this.dataProvider;
+        const isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
+        dataProvider.filter = [];
         if (this.searchModel.searchValue) {
-            this.tableFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
+            dataProvider.filter.push({ value: this.searchModel.searchValue, op: "C", field: null });
         }
         this.columns.forEach(column => {
             let columnFilterValue = column.filterContext.value;
@@ -85,12 +82,13 @@ export class Table extends Base implements IDataProviderOwner {
                 columnFilterValue.forEach((fiv: FilterItemValue) => {
                     const op = fiv.op;
                     const val = fiv.value;
-                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN"))
-                        this.tableFilter.push({ value: val, op: op, field: fiv.field });
+                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
+                        dataProvider.filter.push({ value: val, op: op, field: fiv.field });
+                    }
                 });
             }
         });
-        if ((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
+        if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
             this.refresh();
         }
@@ -109,7 +107,13 @@ export class Table extends Base implements IDataProviderOwner {
         }
 
         this.plugins.forEach(plugin => plugin.init(this));
-        this.showSearch = config.enableSearch === true;
+        if(config.enableSearch !== undefined) {
+            this.showSearch = config.enableSearch === true;
+        }
+        if(config.allowRowSelection !== undefined) {
+            this.allowRowSelection = config.allowRowSelection === true;
+        }
+        
         this.createActions(this.config);
         this.createColumns(this.config);
 
@@ -229,7 +233,6 @@ export class Table extends Base implements IDataProviderOwner {
                 limit,
                 offset,
                 this.columns.filter(c => c.order !== undefined).map(c => <any>{ field: c.name, desc: c.order }),
-                this.tableFilter,
                 null /*&& this.pinnedRowKey()*/,
                 back,
                 (data, newOffset: number, totalCount: number, back: boolean) => {
@@ -255,6 +258,9 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     protected clickRow(row: ITableRow, event) {
+        if(!this.allowRowSelection) {
+            return;
+        }
         this.selectedRows.forEach(r => r.selected = false);
         row.selected = true;
     }
@@ -315,10 +321,6 @@ export class Table extends Base implements IDataProviderOwner {
         return row;
     }
 
-    public get allowRowSelection() {
-        return true;
-    }
-
     private curCol = undefined;
     private nxtCol = undefined;
     private pageX = undefined;
@@ -366,7 +368,6 @@ export class Table extends Base implements IDataProviderOwner {
         return window.getComputedStyle(elm, null).getPropertyValue(css);
     }
 
-    protected rootLevel: any = true;
     @property({ defaultValue: false }) isNumber: boolean;
     @property({ defaultValue: false }) isMergedCells: boolean;
     @property({ defaultValue: false }) loadingMutex: boolean;
@@ -397,9 +398,8 @@ export class Table extends Base implements IDataProviderOwner {
     lastSelectRow = null;
     @property({ defaultValue: 0 }) totalCount: number;
     @property({ defaultValue: 0 }) tableHeadHeight: number;
-    @property({ defaultValue: true }) showTableFilter: boolean;
-    @property({ defaultValue: false }) viewFilterTable: boolean;
-    tableFilter: ITableFilter[];
+    @property({ defaultValue: false }) viewFilterTable: boolean; // TODO: rename to showTableFilter
+    @property({ defaultValue: true }) allowRowSelection: boolean;
     // expandedRowKey;
 
     searchModel = new SearchModel();
@@ -414,12 +414,16 @@ export class Table extends Base implements IDataProviderOwner {
     get dropdownActions() {
         return this.getActions('dropdown');
     }
-    get bottomActions() {
-        return this.getActions('bottom');
+    get columnHeaderActions() {
+        return this.getActions('header');
     }
     get rowActions() {
         return this.getActions('row');
     }
+    get bottomActions() {
+        return this.getActions('bottom');
+    }
+
     get noDataText() {
         return Localization.getString("noData");
     }

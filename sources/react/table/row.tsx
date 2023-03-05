@@ -27,14 +27,16 @@ export function Table4Row({ table, row }: ITableRowProps) {
           {table.isNumber ? (
             <div className="table4js__number">{row.number}</div>
           ) : (
-            <div className="table4js__check">
-              {row.selected && (
-                <div
-                  className="table4js-svg-icon table4js__icon-check"
-                  dangerouslySetInnerHTML={{ __html: table.icons.check }}
-                ></div>
-              )}
-            </div>
+            table.allowRowSelection && (
+              <div className="table4js__check">
+                {row.selected && (
+                  <div
+                    className="table4js-svg-icon table4js__icon-check"
+                    dangerouslySetInnerHTML={{ __html: table.icons.check }}
+                  ></div>
+                )}
+              </div>
+            )
           )}
         </div>
       </td>

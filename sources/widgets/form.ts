@@ -1,6 +1,6 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { IFieldDescription } from "../knockout";
+import { IFieldDescription } from "../core/domain";
 import { Property } from "./property";
 
 import "./form.scss";

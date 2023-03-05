@@ -5,7 +5,7 @@
       <div class="table4js__number" data-bind="text: row.number"></div>
       <!-- /ko -->
       <!-- ko if: !table.isNumber -->
-      <div class="table4js__check">
+      <div class="table4js__check" data-bind="visible: table.allowRowSelection">
         <div class="table4js-svg-icon table4js__icon-check" data-bind="visible: row.selected, html: table.icons.check"></div>
       </div>
       <!-- /ko -->

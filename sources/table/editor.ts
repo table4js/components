@@ -12,6 +12,7 @@ export class EditorPlugin implements ITablePlugin {
     name: string = "editor";
     init(table: Table): void {
       this._table = table;
+      this._table.allowRowSelection = true;
     }
     protected saveRow(row: ITableRow) {
         let isInsert = false;
