@@ -67,7 +67,7 @@
         <!-- /ko -->
         <!-- ko if: loadingMutex -->
         <!-- ko foreach: columns -->
-        <tr class="table4js__row"></tr>
+        <tr class="table4js__row">
           <td class="table4js-cell table4js-technical-cell" >
             <div class="table4js-technical-cell__container">
               <div class="table4js__check">
@@ -83,16 +83,16 @@
           </td>
         <!-- /ko -->
         <!-- /ko -->
-        <td class="table4js-cell table4js-technical-cell">
-          <div class="table4js-technical-cell__container">
-            <div class="table4js-svg-icon table4js-icon-row-tools table4js__more" data-bind="html: $parent.icons.more"></div>
-          </div>
-        </td>
+          <td class="table4js-cell table4js-technical-cell">
+            <div class="table4js-technical-cell__container">
+              <div class="table4js-svg-icon table4js-icon-row-tools table4js__more" data-bind="html: $parent.icons.more"></div>
+            </div>
+          </td>
         </tr>
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko foreach: rows -->
-        <!-- ko component: { name: "table4js-row", params: { table: $parent, row: $data } } -->
+        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->
         <!-- /ko -->
         <!-- /ko -->
       </tbody>

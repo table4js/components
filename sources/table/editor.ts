@@ -1,40 +1,36 @@
 import { ITablePlugin, Table } from ".";
-import { Base } from "../core/base";
-import { property } from "../core/property";
 import { isEmpty } from "../utils/utils";
 import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
 import { ITableRow, ITableRowData } from "./row";
-import { ITableCell } from "./cell";
-import { Editor } from "../widgets/editor";
 
 import * as Icons from "../icons"
 
 export class EditorPlugin implements ITablePlugin {
-    private _table: Table;
-    private _editedRow: ITableRow = undefined;
-    private _activeEditors: { [name: string]: Editor } = undefined;
+    protected _table: Table;
+    protected _editedRow: ITableRow = undefined;
     name: string = "editor";
     init(table: Table): void {
       this._table = table;
     }
-    private saveRow(row: ITableRow) {
+    protected saveRow(row: ITableRow) {
         let isInsert = false;
         let modifications = {};
-        if (row.number > 0) {
-            row.cells.forEach(c => c.text !== c.data && (modifications[c.name] = c.text));
-            if (!isEmpty(modifications)) {
-                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) row.cells.forEach(c => c.data = c.text)
-            }
-        } else {
-            row.cells.forEach(c => modifications[c.name] = c.text);
-            if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
-                isInsert = true;
+        row.cells.forEach(c => (<any>c).isModified && (modifications[c.name] = c.data));
+        if (!isEmpty(modifications)) {
+            if (row.number > 0) {
+                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+                    row.cells.forEach(c => (<any>c).isModified = false);
+                }
+            } else {
+                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
+                    isInsert = true;
+                }
             }
         }
         return isInsert;
     }
-    private add() {
+    protected add() {
         // this.scrollerElement.scrollTop = 0;
         const newRowData: ITableRowData = {};
         this._table.columns.forEach(c => c.visible && (newRowData[c.name] = ""));
@@ -43,7 +39,7 @@ export class EditorPlugin implements ITablePlugin {
         this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
         return newRow;
     }
-    private save() {
+    protected save() {
         let isInsert = false;
         this._table.rows.forEach(row => {
             isInsert = this.saveRow(row);
@@ -52,7 +48,7 @@ export class EditorPlugin implements ITablePlugin {
             this._table.refresh();
         }
     }
-    private delete() {
+    protected delete() {
         this._table.selectedRows.forEach(row => {
             if (row.number > 0) {
                 this._table.rows.slice(this._table.rows.indexOf(row), 1);
@@ -61,30 +57,9 @@ export class EditorPlugin implements ITablePlugin {
         const keys = this._table.selectedRows.map(r => r.number > 0 && r.rowData[this._table.keyColumn]);
         this._table.dataProvider.deleteData(this._table.keyColumn, keys, (_ => this._table.refresh()));
     }
-    private startEditRow(row: ITableRow) {
-        this._activeEditors = {};
-        row.cells.forEach(cell => {
-            this._activeEditors[cell.name] = new Editor(cell.rowData, cell.name, (value: any, commit: boolean) => {
-                if(commit) {
-                    cell.data = value;
-                }
-            });
-        });
-        this._editedRow = row;
-        row.mode = "edit-inplace";
+    protected startEditRow(row: ITableRow) {
     }
-    private endEditRow(commit: boolean) {
-        Object.keys(this._activeEditors || {}).forEach(name => {
-            this._activeEditors[name].complete(commit);
-        });
-        if(!!this._editedRow) {
-            if(commit) {
-                this.saveRow(this._editedRow);
-            }
-            this._editedRow.mode = "default";
-            this._editedRow = undefined;
-        }
-        this._activeEditors = undefined;
+    protected endEditRow(commit: boolean) {
     }
     getActions(): IAction[] {
       return [
@@ -104,7 +79,6 @@ export class EditorPlugin implements ITablePlugin {
             name: "add-action",
             action: () => {
                 const newRow = this.add();
-                this.startEditRow
                 this.endEditRow(false);
                 this.startEditRow(newRow);
             },
@@ -130,18 +104,5 @@ export class EditorPlugin implements ITablePlugin {
     onColumnCreated(column: ITableColumn): void {
     }
     onRowCreated(row: ITableRow): void {
-        const prev = row.getCellComponent;
-        row.getCellComponent = (cell: ITableCell) => {
-            if(row.mode === "edit-inplace") {
-                return "table4js-cell-editor";
-            }
-            return prev(cell);
-        }
-        row.getCellComponentParams = (params: any) => {
-            if(row.mode === "edit-inplace") {
-                params.editor = this._activeEditors[params.cell.name];
-            }
-            return params;
-        }
     }
 }

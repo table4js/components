@@ -1,6 +1,12 @@
 export * from "./core/action";
 export * from "./core/actions";
 export * from "./core/dropdown-actions";
+export * from "./core/domain";
+export * from "./core/field-types/bool";
+export * from "./core/field-types/currency";
+export * from "./core/field-types/date";
+export * from "./core/field-types/datetime";
+export * from "./core/field-types/number";
 
 export * from "./find";
 export * from "./table";
@@ -21,6 +27,10 @@ export * from "./table/cell-types/number";
 export * from "./table/cell-types/progress";
 
 export * from "./widgets/editor";
+
+export * from "./table/editor";
+export * from "./table/editor-inplace";
+export * from "./table/editor-row";
 
 export * from "./utils/array-data-provider";
 export * from "./utils/remote-data-provider";

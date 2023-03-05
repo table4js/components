@@ -1,7 +1,7 @@
 import { IFieldType } from "../../core/domain";
 import { DateTimeField } from "../../core/field-types/datetime";
 import { Localization } from "../../localization";
-import { TableCell } from "../cell";
+import { Property } from "../property";
 
 
-TableCell.registerCellType(new DateTimeField());
+Property.registerPropertyType(new DateTimeField());

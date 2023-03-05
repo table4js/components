@@ -1,6 +1,6 @@
 import { IFieldType } from "../../core/domain";
 import { NumberField } from "../../core/field-types/number";
-import { TableCell } from "../cell";
+import { Property } from "../property";
 
 
-TableCell.registerCellType(new NumberField());
+Property.registerPropertyType(new NumberField());

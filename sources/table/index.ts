@@ -3,7 +3,7 @@ import { property } from "../core/property";
 import { Action, IAction } from "../core/action";
 import { ComputedUpdater } from "../core/dependencies";
 import { ITableCell, TableCell } from "./cell";
-import { ITableColumn, ITableColumnDescription, TableColumn } from "./column";
+import { ITableColumn, TableColumn } from "./column";
 import { SearchModel } from "./search";
 import { IDataProvider, IDataProviderOwner } from "../utils/data-provider";
 import { ArrayDataProvider } from "../utils/array-data-provider";
@@ -11,17 +11,19 @@ import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
 import { SummaryPlugin } from "./summary";
-import { EditorPlugin } from "./editor";
+import { InplaceEditorPlugin } from "./editor-inplace";
+import { RowEditorPlugin } from "./editor-row";
 
 import * as Icons from "../icons"
 import "./index.scss";
+import { IFieldDescription } from "../core/domain";
 
 /**
  * Parameters for customizing the table view.
  */
 export interface ITableConfig extends IDataProvider {
     /** Description of columns */
-    columns: Array<ITableColumnDescription>;
+    columns: Array<IFieldDescription>;
     /** Permission to display the search bar */
     enableSearch?: boolean;
     /** Permission to display summary panel */
@@ -102,7 +104,7 @@ export class Table extends Base implements IDataProviderOwner {
                 this.plugins.push(new SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                this.plugins.push(new EditorPlugin());
+                this.plugins.push(new RowEditorPlugin());
             }
         }
 

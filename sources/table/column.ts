@@ -1,17 +1,11 @@
 import { Base } from "../core/base";
+import { IFieldDescription } from "../core/domain";
 import { property } from "../core/property";
 import { IDataProviderOwner } from "../utils/data-provider";
 import { ITableCell } from "./cell";
 import { FilterContext } from "./column-filter";
 
-export interface ITableColumnDescription {
-    name: string;
-    title: string;
-    type: string;
-    visible: boolean;
-}
-
-export interface ITableColumn extends ITableColumnDescription {
+export interface ITableColumn extends IFieldDescription {
     filterContext: FilterContext,
     order: boolean,
     count: number,
@@ -25,7 +19,7 @@ export interface ITableColumn extends ITableColumnDescription {
 
 export class TableColumn extends Base implements ITableColumn {
 
-    constructor(columnDescription: ITableColumnDescription, private table: IDataProviderOwner) {
+    constructor(columnDescription: IFieldDescription, private table: IDataProviderOwner) {
         super();
         Object.keys(columnDescription || {}).forEach(key => {
             if(columnDescription[key] !== undefined) {

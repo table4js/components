@@ -1,7 +1,7 @@
 import { IFieldType } from "../../core/domain";
 import { BoolField } from "../../core/field-types/bool";
 import { Localization } from "../../localization";
-import { TableCell } from "../cell";
+import { Property } from "../property";
 
 
-TableCell.registerCellType(new BoolField());
+Property.registerPropertyType(new BoolField());

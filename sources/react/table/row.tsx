@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Table } from "../../table";
 import { ITableRow } from "../../table/row";
-import { AbrisComponent } from "../abris-component";
+import { AbrisComponent, registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 
 export interface ITableRowProps {
@@ -68,7 +68,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
           ></div>
           {
             table.rowActions.map(action => {
-              return <div
+              return <div key={action.name}
                 className={"table4js-svg-icon table4js-icon-row-tools " + action.cssClasses}
                 dangerouslySetInnerHTML={{ __html: action.svg }}
                 onClick={(e) => {
@@ -91,3 +91,5 @@ export function Table4Row({ table, row }: ITableRowProps) {
     </tr>
   );
 }
+
+registerComponent("table4js-row", Table4Row);

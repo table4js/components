@@ -8,6 +8,8 @@ import { Table4Row } from "./row";
 import { Table4Summary } from "./summary";
 import { Table4Search } from "./search";
 import { Table4ColumnFilter } from "./column-filter";
+import { AbrisComponent } from "../abris-component";
+import { Table4RowWrapper } from "./row-wrapper";
 
 function EmptyTable() {
   return (
@@ -208,12 +210,8 @@ export function Table4({
                 : null}
               {model.loadingMutex
                 ? LoadingIndicator(model)
-                : model.rows.map((r) => (
-                  <Table4Row
-                    key={r.id || r.number}
-                    table={model}
-                    row={r}
-                  ></Table4Row>
+                : model.rows.map((row, index) => (
+                  <Table4RowWrapper key={"row" + index + "_" + (row.id || row.number)} table={model} row={row} />
                 ))}
             </tbody>
             <tfoot className="table4js__footer table4js-sticky-component">
