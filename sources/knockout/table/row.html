@@ -1,5 +1,5 @@
 <tr class="table4js__row" data-bind="css: $data.row.css, style: { 'background-color': 'none' }">
-  <td class="table4js-cell table4js-technical-cell" data-bind="click: function() { $data.row.select($data.row); }">
+  <td class="table4js-cell table4js-technical-cell" data-bind="click: function(_, event) { $data.row.select($data.row, event); }">
     <div class="table4js-technical-cell__container">
       <!-- ko if: table.isNumber -->
       <div class="table4js__number" data-bind="text: row.number"></div>
