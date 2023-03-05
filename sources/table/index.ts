@@ -271,7 +271,12 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     public clickColumn = (column: ITableColumn, event) => {
-        var newOrder = column.order === undefined ? false : !column.order;
+        var newOrder = undefined;
+        if(column.order === undefined) {
+            newOrder = false;
+        } else if (column.order === false) {
+            newOrder = true;
+        }
         if (!event.shiftKey) {
             this.columns.map((c) => c.order = undefined)
         }
