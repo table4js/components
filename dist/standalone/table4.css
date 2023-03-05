@@ -1,17 +1,3 @@
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-editor.scss ***!
-  \*********************************************************************************************************************************************************************************/
-@charset "UTF-8";
-/* Fallback colors for variables */
-/* Основной Цвет */
-/* Вторичный Цвет A */
-/* Вторичный Цвет B */
-/* Дополнительный Цвет */
-.table4js-table__cell-editor input {
-  height: 100%;
-  width: 100%;
-  padding: 3px;
-}
 /*!***********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/column-filter.scss ***!
   \***********************************************************************************************************************************************************************************/
@@ -135,13 +121,13 @@ table4js-search {
 /* Вторичный Цвет A */
 /* Вторичный Цвет B */
 /* Дополнительный Цвет */
-table4js-table-summary {
+table4js-summary {
   display: flex;
   justify-content: end;
   padding: 5px;
 }
 
-.table4js-table-summary__select {
+.table4js-summary__select {
   margin-left: 5px;
   background: none;
   border: none;
@@ -151,9 +137,30 @@ table4js-table-summary {
   box-shadow: inset 0 0 0 1px #f0f0f0 !important;
 }
 
-.table4js-table-summary__value {
+.table4js-summary__value {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, rgba(38, 55, 105, 0.65));
+}
+/*!******************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/editor.scss ***!
+  \******************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* Fallback colors for variables */
+/* Основной Цвет */
+/* Вторичный Цвет A */
+/* Вторичный Цвет B */
+/* Дополнительный Цвет */
+.table4js__editor input {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  border: none;
+  background: transparent;
+  box-shadow: 0px 3px 3px -3px #111;
+  width: 100%;
+}
+.table4js__editor input.table4js-editor--modified {
+  box-shadow: 0px 3px 3px -3px yellow;
 }
 /*!***************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/index.scss ***!
@@ -198,12 +205,12 @@ button {
   fill: var(--abc-primary-2, #ffffff);
 }
 
-.table4js-table-resizable-container {
+.table4js-resizable-container {
   min-height: 100px;
   height: 100%;
 }
 
-.table4js-table-scroll-container {
+.table4js-scroll-container {
   overflow-y: auto;
   min-height: 100%;
   max-height: calc(100% - 180px);
@@ -211,77 +218,77 @@ button {
   width: 100%;
 }
 
-.table4js-table-scroll-container__narrow {
+.table4js-scroll-container__narrow {
   display: inline-block;
   max-width: 500px;
 }
 
-.table4js-table-scroll-container--unlocked {
+.table4js-scroll-container--unlocked {
   width: fit-content;
 }
 
-.table4js-table-scroll-container--locked {
+.table4js-scroll-container--locked {
   overflow-y: visible;
 }
 
-.table4js-table-scroll-container--loadmore {
+.table4js-scroll-container--loadmore {
   display: none;
 }
 
 @-moz-document url-prefix() {
-  .table4js-table-resizable-container {
+  .table4js-resizable-container {
     padding-right: 8px;
   }
-  .table4js-table-scroll-container {
+  .table4js-scroll-container {
     width: calc(100% + 8px);
   }
 }
-.table4js-table {
+.table4js {
   border-collapse: separate;
   border-spacing: 0;
 }
 
-.table4js-table--small {
+.table4js--small {
   min-width: 400px;
 }
 
-.table4js-table-sticky-component {
+.table4js-sticky-component {
   z-index: 10;
   position: sticky;
   background: var(--abc-primary-1, #f8f9fd);
 }
 
-.table4js-table__header {
+.table4js__header {
   top: 0;
 }
 
-.table4js-table-header-tools__cell {
+.table4js-header-tools__cell {
   padding: 0;
   border-bottom: none;
 }
 
-.table4js-table-header-tools__container {
+.table4js-header-tools__container {
   border-radius: 10px 10px 0 0;
 }
 
-.table4js-table-group-header-technical-cell {
+.table4js-group-header-technical-cell {
   background: var(--abc-primary-1-dark-2, #f0f2fb);
   border: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
 }
 
-.table4js-table-preheader {
+.table4js-preheader {
   display: flex;
   align-items: center;
   padding: 6px;
 }
 
-.table4js-table-search-group {
+.table4js-search-group {
   display: flex;
   flex-grow: 1;
   margin-right: 25px;
 }
 
-.table4js-table-advanced-settings {
+.table4js-advanced-settings {
   display: flex;
   align-items: center;
 }
@@ -290,7 +297,7 @@ button {
   margin-left: 15px;
 }
 
-.table4js-table-filter {
+.table4js-filter {
   display: flex;
   align-items: center;
   border-top: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
@@ -298,7 +305,7 @@ button {
   height: 50px;
   position: relative;
 }
-.table4js-table-filter::after {
+.table4js-filter::after {
   content: "";
   display: block;
   position: absolute;
@@ -310,7 +317,7 @@ button {
   z-index: 10;
 }
 
-.table4js-table-filter__container {
+.table4js-filter__container {
   display: flex;
   height: fit-content;
   padding: 5px;
@@ -318,38 +325,38 @@ button {
   overflow-x: auto;
 }
 
-.table4js-table-header-title__cell {
+.table4js-header-title__cell {
   padding: 14px 6px;
   background: var(--abc-primary-0, #263769);
   border-right: 1px solid var(--abc-primary-2-op-30, rgba(255, 255, 255, 0.3));
   position: relative;
 }
-.table4js-table-header-title__cell:hover .table4js-table-title__filter {
+.table4js-header-title__cell:hover .table4js-title__filter {
   display: block;
 }
 
-.table4js-table-switch {
+.table4js-switch {
   width: 15px;
 }
 
-.table4js-table-switch__text {
+.table4js-switch__text {
   font-weight: lighter;
   text-align: center;
   color: var(--abc-primary-2-op-50, rgba(255, 255, 255, 0.5));
 }
 
-.table4js-table-switch__text--selected {
+.table4js-switch__text--selected {
   color: var(--abc-primary-2, #ffffff);
 }
 
-.table4js-table-title {
+.table4js-title {
   display: flex;
   align-items: center;
   cursor: pointer;
   position: relative;
 }
 
-.table4js-table-title__text {
+.table4js-title__text {
   flex-grow: 1;
   margin-right: 30px;
   color: var(--abc-primary-2, #ffffff);
@@ -357,7 +364,7 @@ button {
   text-align: left;
 }
 
-.table4js-table-title__tools {
+.table4js-title__tools {
   display: flex;
   align-items: center;
   height: 100%;
@@ -366,13 +373,13 @@ button {
   background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, #263769) 20%);
 }
 
-.table4js-table-title__filter {
+.table4js-title__filter {
   margin-left: 3px;
   display: none;
   cursor: pointer;
 }
 
-.table4js-table-title_resize {
+.table4js-title_resize {
   height: 100%;
   width: 10px;
   position: absolute;
@@ -381,52 +388,60 @@ button {
   cursor: col-resize;
 }
 
-.table4js-table__row {
+.table4js__row {
   position: relative;
 }
-.table4js-table__row:hover .table4js-table__more {
+.table4js__row:hover .table4js__more {
   display: none;
 }
-.table4js-table__row:hover .table4js-table__edit {
+.table4js__row:hover .table4js__edit {
   display: block;
 }
-.table4js-table__row:hover .table4js-table__row--select {
+.table4js__row:hover .table4js__row--select {
   display: block;
 }
-.table4js-table__row:last-child .table4js-table-cell {
+.table4js__row:last-child .table4js-cell {
   border-bottom: none;
 }
 
-.table4js-table__row--selected .table4js-table__check {
+.table4js__row--selected .table4js__check {
   border-color: var(--abc-primary-4, #263769);
 }
-.table4js-table__row--selected .table4js-table__more {
+.table4js__row--selected .table4js__more {
   display: none;
 }
-.table4js-table__row--selected .table4js-table__edit {
+.table4js__row--selected .table4js__edit {
   display: block;
   fill: var(--abc-primary-4, #263769);
 }
-.table4js-table__row--selected .table4js-table__row--select {
+.table4js__row--selected .table4js__row--select {
   display: block;
   border-color: var(--abc-primary-0-op-20, rgba(38, 55, 105, 0.2));
   background: var(--abc-primary-0-op-10, rgba(38, 55, 105, 0.1));
 }
 
-.table4js-table-cell {
+.table4js__row--edit-inplace .table4js__more {
+  display: none;
+}
+.table4js__row--edit-inplace .table4js__edit {
+  display: block;
+  fill: var(--abc-primary-4, #263769);
+}
+
+.table4js-cell {
   border-right: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
   border-bottom: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
   vertical-align: top;
 }
-.table4js-table-cell:first-child {
+.table4js-cell:first-child {
   border-left: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
 }
 
-.table4js-table-cell--merged {
+.table4js-cell--merged {
   vertical-align: text-top;
 }
 
-.table4js-table-technical-cell {
+.table4js-technical-cell {
   background: var(--abc-primary-1-dark-2, #f0f2fb);
   max-width: 35px;
   width: 30px;
@@ -434,18 +449,18 @@ button {
   padding: 0;
 }
 
-.table4js-table-technical-cell__container {
+.table4js-technical-cell__container {
   display: flex;
   padding: 6px;
   z-index: 1;
   position: relative;
 }
 
-.table4js-table__number {
+.table4js__number {
   margin: auto;
 }
 
-.table4js-table__check {
+.table4js__check {
   width: 20px;
   height: 20px;
   display: flex;
@@ -456,28 +471,28 @@ button {
   margin: auto;
 }
 
-.table4js-table__icon-check {
+.table4js__icon-check {
   height: 100%;
   width: 100%;
   fill: var(--abc-primary-4, #263769);
 }
 
-.table4js-table-icon-row-tools {
+.table4js-icon-row-tools {
   height: 20px;
   width: 20px;
   fill: var(--abc-primary-0-op-40, rgba(38, 55, 105, 0.4));
   margin: auto;
 }
 
-.table4js-table__edit {
+.table4js__edit {
   display: none;
 }
 
-.table4js-table-cell__container {
+.table4js-cell__container {
   padding: 8px 6px;
 }
 
-.table4js-table-cell__container--loading {
+.table4js-cell__container--loading {
   background: linear-gradient(90deg, var(--abc-primary-1-dark-8, #d8def4), var(--abc-primary-0-op-30, rgba(38, 55, 105, 0.3)), var(--abc-primary-1-dark-8, #d8def4));
   background-size: 150% 150%;
   width: calc(100% - 12px);
@@ -499,17 +514,16 @@ button {
     background-position: 0% 50%;
   }
 }
-.table4js-table-cell__text {
-  max-width: 280px;
+.table4js-cell__text {
   margin: auto 0;
   z-index: 1;
 }
 
-.table4js-table-cell__text--modified {
+.table4js-cell__text--modified {
   font-weight: bold;
 }
 
-.table4js-table-cell__text--merged {
+.table4js-cell__text--merged {
   z-index: 1;
   position: relative;
 }
@@ -518,7 +532,7 @@ button {
   position: sticky;
 }
 
-.table4js-table__row--select {
+.table4js__row--select {
   display: none;
   position: absolute;
   top: 0;
@@ -531,7 +545,7 @@ button {
   pointer-events: none;
 }
 
-.table4js-table__row--colored {
+.table4js__row--colored {
   position: absolute;
   top: 0;
   left: 30px;
@@ -540,69 +554,69 @@ button {
   z-index: -1;
 }
 
-.table4js-table__footer {
+.table4js__footer {
   bottom: 0;
   z-index: 9;
 }
 
-.table4js-table-icon-equal {
+.table4js-icon-equal {
   fill: var(--abc-primary-0, #263769);
   margin: 0 auto;
 }
 
-.table4js-table-footer__cell {
+.table4js-footer__cell {
   border-bottom: none;
   padding: 0;
   background: var(--abc-primary-1-dark-2, #f0f2fb);
   border-top: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
 }
 
-.table4js-table-footer-tools__cell {
+.table4js-footer-tools__cell {
   padding: 0px;
 }
 
-.table4js-table-footer-tools__container {
+.table4js-footer-tools__container {
   display: flex;
   padding: 6px;
   border-radius: 0 0 10px 10px;
 }
 
-.table4js-table-row-management {
+.table4js-row-management {
   margin-right: 25px;
   flex-grow: 1;
 }
 
-.table4js-table-row-management__actions .actions {
+.table4js-row-management__actions .actions {
   display: flex;
 }
-.table4js-table-row-management__actions .actions button {
+.table4js-row-management__actions .actions button {
   margin-bottom: 0;
 }
 
-.table4js-table-info {
+.table4js-info {
   display: flex;
   align-items: center;
 }
 
-.table4js-table-info__total {
+.table4js-info__total {
   margin-right: 15px;
 }
 
-.table4js-table-info__text {
+.table4js-info__text {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, rgba(38, 55, 105, 0.65));
 }
 
-.table4js-table-info__go-to {
+.table4js-info__go-to {
   display: flex;
   align-items: center;
 }
 
-.table4js-table-go-to__text {
+.table4js-go-to__text {
   margin-right: 5px;
 }
 
-.table4js-table-go-to__value {
+.table4js-go-to__value {
   width: 100%;
   padding: 4px;
   border-radius: 4px;
@@ -615,7 +629,7 @@ button {
   margin-right: 3px;
   padding: 6px;
 }
-.table4js-table-go-to__value:focus, .table4js-table-go-to__value:focus-visible {
+.table4js-go-to__value:focus, .table4js-go-to__value:focus-visible {
   border-color: var(--abc-primary-0-op-65, rgba(38, 55, 105, 0.65));
   outline: none;
 }
@@ -636,15 +650,15 @@ button {
   fill: var(--abc-primary-0, #263769);
 }
 
-.table4js-table--small .table-bottom-actions button.action-button .table4js-button__svg-icon,
-.table4js-table--small .table4js-table-actions button.action-button .table4js-button__svg-icon {
+.table4js--small .table-bottom-actions button.action-button .table4js-button__svg-icon,
+.table4js--small .table4js-actions button.action-button .table4js-button__svg-icon {
   margin-right: 0;
 }
-.table4js-table--small .table-bottom-actions button.action-button span,
-.table4js-table--small .table4js-table-actions button.action-button span {
+.table4js--small .table-bottom-actions button.action-button span,
+.table4js--small .table4js-actions button.action-button span {
   display: none;
 }
-.table4js-table--small .table4js-action-button__icon {
+.table4js--small .table4js-action-button__icon {
   margin-right: 0;
 }
 
@@ -655,16 +669,16 @@ table4, .table4js-root {
 table4.abrs-table-child-view, .table4js-root.abrs-table-child-view {
   height: 100%;
 }
-table4 .table4js-table-scroll-container__locked > table > tr, .table4js-root .table4js-table-scroll-container__locked > table > tr {
+table4 .table4js-scroll-container__locked > table > tr, .table4js-root .table4js-scroll-container__locked > table > tr {
   visibility: collapse;
 }
-table4 .table4js-table-scroll-container__locked > table > tr.row-visible, .table4js-root .table4js-table-scroll-container__locked > table > tr.row-visible {
+table4 .table4js-scroll-container__locked > table > tr.row-visible, .table4js-root .table4js-scroll-container__locked > table > tr.row-visible {
   visibility: visible;
 }
-table4 .table4js-table-scroll-container__locked > table > tr.row-table-detail, .table4js-root .table4js-table-scroll-container__locked > table > tr.row-table-detail {
+table4 .table4js-scroll-container__locked > table > tr.row-table-detail, .table4js-root .table4js-scroll-container__locked > table > tr.row-table-detail {
   visibility: visible;
 }
-table4 .abrs-table-side-edit .table4js-table-extended .table4js-table-resizable-container > .btn-ref-line, .table4js-root .abrs-table-side-edit .table4js-table-extended .table4js-table-resizable-container > .btn-ref-line {
+table4 .abrs-table-side-edit .table4js-extended .table4js-resizable-container > .btn-ref-line, .table4js-root .abrs-table-side-edit .table4js-extended .table4js-resizable-container > .btn-ref-line {
   display: block;
 }
 table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table-side-edit .abrs-table-side-detail {
@@ -694,7 +708,7 @@ table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table
   display: flex;
   flex-direction: column;
 }
-.abrs-table-container .abrs-table-container-side .table4js-table-scroll-container {
+.abrs-table-container .abrs-table-container-side .table4js-scroll-container {
   width: 100%;
   height: inherit;
   margin-top: 5px;
@@ -705,7 +719,7 @@ table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table
 }
 
 @-moz-document url-prefix() {
-  .abrs-table-container-side .table4js-table-scroll-container {
+  .abrs-table-container-side .table4js-scroll-container {
     width: calc(100% + 8px);
   }
 }
@@ -713,17 +727,56 @@ table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table
   padding-right: 10px;
 }
 
-.table4js-table-cell--left {
+.table4js-cell--left {
+  text-align: left;
+}
+.table4js-cell--left input {
   text-align: left;
 }
 
-.table4js-table-cell--right {
+.table4js-cell--center {
+  text-align: center;
+}
+.table4js-cell--center input {
+  text-align: center;
+}
+
+.table4js-cell--right {
+  text-align: right;
+}
+.table4js-cell--right input {
   text-align: right;
 }
 
-.table4js-svg-icon.table4js-table-go-to__icon {
+.table4js-svg-icon.table4js-go-to__icon {
   width: 16px;
   height: 16px;
+}
+
+.table4js-root--fit-width {
+  width: 100%;
+}
+.table4js-root--fit-width .table4js-resizable-container {
+  width: 100%;
+}
+.table4js-root--fit-width .table4js {
+  min-width: 100%;
+  table-layout: fixed;
+}
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-types/indicator.scss ***!
+  \******************************************************************************************************************************************************************************************/
+.table4js__indicator-cell {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.table4js__indicator-cell-circle {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 0.5em;
 }
 /*!***********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/filter-select.scss ***!
@@ -874,7 +927,7 @@ table4js-actions {
   position: relative;
 }
 
-.table4js-table-actions {
+.table4js-actions {
   display: flex;
 }
 
@@ -1036,29 +1089,74 @@ table4js-dropdown-actions {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/filter-default.scss ***!
   \************************************************************************************************************************************************************************************/
 
-/*!**************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/bool.scss ***!
-  \**************************************************************************************************************************************************************************/
-.table4js-table__bool-cell-viewer {
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-types/progress.scss ***!
+  \*****************************************************************************************************************************************************************************************/
+.table4js__progress-cell {
   display: inline-block;
   text-align: center;
   width: 100%;
+  height: 1em;
+  position: relative;
+  border: 1px solid lightgreen;
 }
 
-.table4js-table__bool-cell-viewer-circle {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
+.table4js__progress-cell-value {
+  position: absolute;
+  height: 100%;
+  background-color: lightgreen;
+  font-size: 0.75em;
+}
+/*!********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/property.scss ***!
+  \********************************************************************************************************************************************************************************/
+.table4js-form__property {
+  position: relative;
+  max-width: 320px;
+  padding-top: 24px;
+}
+.table4js-form__property input {
+  padding: 2px 3px;
 }
 
-.table4js-table__bool-cell-editor {
-  text-align: center;
+.table4js-form__property-title {
+  position: absolute;
+  top: 26px;
+  left: 3px;
+  transition: 0.2s ease all;
+  color: gray;
+  pointer-events: none;
 }
 
-.table4js-table__bool-cell-editor input {
-  width: 20px;
-  height: 20px;
+.table4js__editor:focus-within ~ .table4js-form__property-title {
+  top: 7px;
+  font-size: 0.75em;
+  color: black;
+}
+
+.table4js-form__property--with-value .table4js-form__property-title {
+  opacity: 0;
+}
+.table4js-form__property--with-value .table4js__editor:focus-within ~ .table4js-form__property-title {
+  opacity: 1;
+}
+
+.table4js-form__property:not(.table4js-form__property--with-value) input:not(:focus)::-webkit-datetime-edit {
+  color: transparent;
+}
+
+.table4js__checkbox-editor + .table4js-form__property-title {
+  top: 26px;
+  left: 26px;
+  opacity: 1;
+  color: black;
+  pointer-events: all;
+}
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/form.scss ***!
+  \****************************************************************************************************************************************************************************/
+.table4js-form {
+  padding: 10px;
 }
 
 /*# sourceMappingURL=table4.css.map*/

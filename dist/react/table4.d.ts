@@ -42,6 +42,7 @@ declare module "core/base" {
         owner: any;
         getValue(name: string, defaultValue?: any): any;
         setValue(name: string, val: any): void;
+        peekValue(name: string, defaultValue?: any): any;
     }
     export class Base {
         private storage;
@@ -81,7 +82,7 @@ declare module "core/action" {
     import { Base } from "core/base";
     export interface IAction {
         name: string;
-        action: () => void;
+        action: (context?: any) => void;
         title?: string;
         visible?: boolean;
         enabled?: boolean;
@@ -96,7 +97,7 @@ declare module "core/action" {
     export class Action extends Base implements IAction {
         constructor(source?: IAction);
         name: string;
-        action: () => void;
+        action: (context?: any) => void;
         title: string;
         visible: boolean;
         enabled: boolean;
@@ -109,14 +110,32 @@ declare module "core/action" {
         cssLabel: string;
     }
 }
+declare module "core/domain" {
+    export interface IFieldDescription {
+        name: string;
+        title: string;
+        type: string;
+        visible: boolean;
+    }
+    export interface IFieldType {
+        name: string;
+        css?: string;
+        component?: string;
+        getText?: (val: any) => string;
+    }
+}
 declare module "utils/data-provider" {
-    export interface IDataProvider {
+    export interface IListDataProvider {
         getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
         getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): any;
         getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
+    }
+    export interface ICRUDDataProvider {
         saveData: (keyName: string, key: any, modify: {}) => boolean;
         insertData: (keyName: string, modify: {}) => boolean;
         deleteData: (keyName: string, keys: any[], callback: any) => void;
+    }
+    export interface IDataProvider extends IListDataProvider, ICRUDDataProvider {
     }
     export interface IDataProviderOwner {
         get dataProvider(): IDataProvider;
@@ -138,6 +157,8 @@ declare module "localization" {
             filterdategreater: string;
             filterdateless: string;
             noData: string;
+            true: string;
+            false: string;
         };
         static getString: (stringId: string) => any;
     }
@@ -222,21 +243,16 @@ declare module "table/column-filter" {
         apply(): void;
         addItem: (column: ITableColumn) => void;
         removeItem: (item: ColumnFilterItem) => void;
+        clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
     }
 }
 declare module "table/column" {
     import { Base } from "core/base";
+    import { IFieldDescription } from "core/domain";
     import { IDataProviderOwner } from "utils/data-provider";
     import { ITableCell } from "table/cell";
     import { FilterContext } from "table/column-filter";
-    export interface ITableColumnDescription {
-        name: string;
-        title: string;
-        type: string;
-        visible: boolean;
-    }
-    export interface ITableColumn extends ITableColumnDescription {
-        filter: any;
+    export interface ITableColumn extends IFieldDescription {
         filterContext: FilterContext;
         order: boolean;
         count: number;
@@ -245,13 +261,11 @@ declare module "table/column" {
         concatPrev: boolean;
         last: ITableCell;
         row_color: string;
-        clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
         [name: string]: any;
     }
     export class TableColumn extends Base implements ITableColumn {
         private table;
-        constructor(columnDescription: ITableColumnDescription, table: IDataProviderOwner);
-        filter: any;
+        constructor(columnDescription: IFieldDescription, table: IDataProviderOwner);
         filterContext: FilterContext;
         order: boolean;
         count: number;
@@ -264,69 +278,44 @@ declare module "table/column" {
         title: string;
         type: string;
         visible: boolean;
-        clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
         dispose(): void;
     }
 }
 declare module "table/cell" {
     import { Base } from "core/base";
-    import { ITableColumn, ITableColumnDescription } from "table/column";
-    export interface ITableCellType {
-        name: string;
-        css?: string;
-        editor?: string;
-        viewer?: string;
-    }
+    import { IFieldDescription, IFieldType } from "core/domain";
+    import { ITableColumn } from "table/column";
     export interface ITableCell {
+        rowData: any;
         data: any;
         name: string;
         text: string;
         count: number;
         color: string;
         css: string;
-        inplaceEditor: any;
-        editor?: string;
-        viewer?: string;
+        update(): void;
     }
     export class TableCell extends Base implements ITableCell {
-        static cellTypes: {
-            default: {
-                css: string;
-                editor: string;
-                viewer: string;
-            };
-        };
-        static registerCellType(cellType: ITableCellType): void;
+        private static cellTypes;
+        static registerCellType(cellType: IFieldType): void;
         static getContainerCss(cell: ITableCell, isMergedCell: boolean): string;
         static getContentCss(cell: ITableCell | TableCell, isMergedCell: boolean): string;
+        private _isUpdating;
+        type: string;
+        rowData: {};
         isModified: boolean;
         data: any;
         text: string;
         count: number;
         color: string;
         name: string;
-        inplaceEditor: any;
         css: string;
-        editor: string;
-        viewer: string;
-        protected getCellTypeDescription(type: string): any;
-        protected getCellCss(data: any, column: ITableColumnDescription): string;
-        protected getCellEditor(data: any, column: ITableColumnDescription): string;
-        protected getCellViewer(data: any, column: ITableColumnDescription): string;
+        protected getCellTypeDescription(type: string): IFieldType;
+        protected getCellCss(data: any, column: IFieldDescription): string;
         protected getCellText(val: any): string;
-        initialize(col: ITableColumn, back: boolean, data: any, color: string): void;
-    }
-}
-declare module "table/cell-editor" {
-    import { Base } from "core/base";
-    import { ITableCell } from "table/cell";
-    import "./cell-editor.scss";
-    export class InplaceEditor extends Base {
-        private cell;
-        constructor(cell: ITableCell);
-        value: any;
-        complete(commit: boolean): void;
-        processKeyUp(event: KeyboardEvent): void;
+        get component(): string;
+        initialize(col: ITableColumn, back: boolean, rowData: any, color: string): void;
+        update(): void;
     }
 }
 declare module "table/search" {
@@ -377,18 +366,32 @@ declare module "table/row" {
         number: number;
         selected: boolean;
         color: string;
+        mode: string;
+        css: string;
         select: (data: ITableRow, event: any) => void;
         click: (data: ITableRow, event: any) => void;
+        getRowComponent: () => string;
+        getRowComponentParams: (params: any) => any;
+        getCellComponent: (cell: ITableCell) => string;
+        getCellComponentParams: (params: any) => any;
+        update(): void;
     }
     export class TableRow extends Base implements ITableRow {
-        cells: ITableCell[];
         rowData: ITableRowData;
         id: any;
         number: number;
+        mode: string;
         selected: boolean;
         color: string;
         select: (data: ITableRow, event: any) => void;
         click: (data: ITableRow, event: any) => void;
+        cells: ITableCell[];
+        getRowComponent(): string;
+        getRowComponentParams(params: any): any;
+        getCellComponent(cell: ITableCell): string;
+        getCellComponentParams(params: any): any;
+        get css(): string;
+        update(): void;
     }
 }
 declare module "table/summary" {
@@ -396,30 +399,62 @@ declare module "table/summary" {
     import { Base } from "core/base";
     import { IAction } from "core/action";
     import { ITableColumn } from "table/column";
+    import { ITableRow } from "table/row";
+    import { IFieldDescription } from "core/domain";
     import "./summary.scss";
-    export class TableSummaryItem {
+    export class SummaryItem {
         title: string;
         value: string;
         constructor(title: string, value: string);
     }
-    export class TableSummary extends Base {
+    export class FieldSummary extends Base {
         private table;
-        private column;
-        constructor(table: Table, column: ITableColumn);
+        private field;
+        constructor(table: Table, field: IFieldDescription);
         calculateSummary(): void;
         value: number;
         func: any;
-        summaryItems: Array<TableSummaryItem>;
+        summaryItems: Array<SummaryItem>;
     }
-    export class TableSummaryPlugin implements ITablePlugin {
+    export class SummaryPlugin implements ITablePlugin {
         private _table;
         name: string;
         init(table: Table): void;
         getActions(): IAction[];
         onColumnCreated(column: ITableColumn): void;
+        onRowCreated(row: ITableRow): void;
     }
 }
-declare module "icon" {
+declare module "widgets/editor" {
+    import { Base } from "core/base";
+    import "./editor.scss";
+    export class Editor extends Base {
+        private _data;
+        private name;
+        private onComplete?;
+        static inputTypes: {
+            number: string;
+            currency: string;
+            indicator: string;
+            progress: string;
+            date: string;
+            datetime: string;
+        };
+        static getInputType(type: string): any;
+        static editors: {
+            default: string;
+            bool: string;
+        };
+        constructor(_data: any, name: string, onComplete?: (value: any, commit: boolean) => void);
+        value: any;
+        get isModified(): boolean;
+        get css(): string;
+        get data(): any;
+        set data(val: any);
+        complete(commit: boolean): void;
+    }
+}
+declare module "icons/index" {
     export const add: any;
     export const equal: any;
     export const table: any;
@@ -438,201 +473,83 @@ declare module "icon" {
     export const cross: any;
     export const arrowdown: any;
 }
-declare module "table/index" {
-    import { Base } from "core/base";
+declare module "table/editor" {
+    import { ITablePlugin, Table } from "table/index";
     import { IAction } from "core/action";
-    import { ITableCell } from "table/cell";
-    import { ITableColumn, ITableColumnDescription } from "table/column";
-    import { SearchModel } from "table/search";
-    import { IDataProvider, IDataProviderOwner } from "utils/data-provider";
-    import { ITableRow, ITableRowData } from "table/row";
-    import * as Icons from "icon";
-    import "./index.scss";
-    /**
-     * Parameters for customizing the table view.
-     */
-    export interface ITableConfig extends IDataProvider {
-        /** Description of columns */
-        columns: Array<ITableColumnDescription>;
-        /** Permission to display the search bar */
-        enableSearch?: boolean;
-        /** Permission to display summary panel */
-        enableSummary?: boolean;
-        /** Permission to display merged cells toggle */
-        enableMergedСellsToggle?: boolean;
-        /** The primary value of the parameter for merging cells */
-        enableMergedСells?: boolean;
-        /** Permission to edit data */
-        enableEdit?: boolean;
-        /** Actions to display in the table actions panel */
-        actions?: Array<IAction>;
-        /** The key field of the table. Needed to edit the table. */
-        keyColumn?: string;
-        /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
-        selectCellColor?: string;
-        /** Table plugins array */
-        plugins?: Array<ITablePlugin>;
-    }
-    export interface ITableFilter {
-        value: string;
-        op: string;
-        field: string;
-    }
-    export interface ITablePlugin {
+    import { ITableColumn } from "table/column";
+    import { ITableRow } from "table/row";
+    export class EditorPlugin implements ITablePlugin {
+        protected _table: Table;
+        protected _editedRow: ITableRow;
         name: string;
         init(table: Table): void;
-        getActions(): Array<IAction>;
+        protected saveRow(row: ITableRow): boolean;
+        protected add(): ITableRow;
+        protected save(): void;
+        protected delete(): void;
+        protected startEditRow(row: ITableRow): void;
+        protected endEditRow(commit: boolean): void;
+        getActions(): IAction[];
         onColumnCreated(column: ITableColumn): void;
-    }
-    /**
-     * Creates Table class.
-     * @param config - table options.
-     */
-    export class Table extends Base implements IDataProviderOwner {
-        config: ITableConfig;
-        private scrollerElement;
-        private resizerElement;
-        private tableElement;
-        private innerActions;
-        icons: typeof Icons;
-        private filterUpdater;
-        static rowHeight: number;
-        private updateByFilter;
-        constructor(config: ITableConfig, element?: HTMLElement);
-        initialize(element: HTMLElement): void;
-        protected showDetail(rowData: ITableRowData): void;
-        protected hideDetail(): void;
-        navigateTo(startRow: number): void;
-        protected createColumn(column: any, model: ITableConfig): ITableColumn;
-        protected createColumns(config: ITableConfig): void;
-        protected createActions(config: ITableConfig): void;
-        private _dataProvider;
-        get dataProvider(): IDataProvider;
-        set dataProvider(provider: IDataProvider);
-        set data(_data: Array<any>);
-        protected refresh(): void;
-        drawRows(limit: number, offset: number, back?: boolean): void;
-        protected clickRow(row: ITableRow, event: any): void;
-        protected selectRow(row: ITableRow, event: any): void;
-        clickColumn: (column: ITableColumn, event: any) => void;
-        protected createRow(data: {
-            [key: string]: string | number;
-        }, num: number, back: boolean): ITableRow;
-        protected rowExpanded(id: any): boolean;
-        startEditCell: (cell: ITableCell) => void;
-        completeEditCell(): void;
-        protected hasActiveInplaceEditorCore(): boolean;
-        get hasActiveInplaceEditor(): boolean;
-        curCol: any;
-        nxtCol: any;
-        pageX: any;
-        nxtColWidth: any;
-        curColWidth: any;
-        logMouseOver: (d: any, e: any) => void;
-        logMouseOut: (d: any, e: any) => void;
-        logMouseMove: (d: any, e: any) => void;
-        logMouseDown: (d: any, e: any) => void;
-        logMouseUp: (d: any, e: any) => boolean;
-        paddingDiff(col: any): number;
-        getStyleVal(elm: any, css: any): string;
-        protected rootLevel: any;
-        isNumber: boolean;
-        isMergedСells: boolean;
-        loadingMutex: boolean;
-        loadMore: boolean;
-        loadMoreBack: boolean;
-        lastOffset: number;
-        lastOffsetBack: number;
-        partRowCount: number;
-        columns: Array<ITableColumn>;
-        get keyColumn(): string;
-        rows: Array<ITableRow>;
-        get selectedRows(): ITableRow[];
-        showTableSummary: boolean;
-        showSearch: boolean;
-        startRow: number;
-        lastSelectRow: any;
-        totalCount: number;
-        tableHeadHeight: number;
-        showTableFilter: boolean;
-        viewFilterTable: boolean;
-        tableFilter: ITableFilter[];
-        currentCellEditor: ITableCell;
-        isShowDetail: boolean;
-        expandedRowKey: any;
-        searchModel: SearchModel;
-        getActions: (container?: string) => any[];
-        get topActions(): any[];
-        get dropdownActions(): any[];
-        get bottomActions(): any[];
-        get noDataText(): any;
-        private plugins;
-        registerPlugin(plugin: ITablePlugin): ITablePlugin;
-        unregisterPlugin(pluginName: string): ITablePlugin;
+        onRowCreated(row: ITableRow): void;
     }
 }
-declare module "react/reactivity" {
-    export const makeReactiveModel: (model: any, val: number, updater: (val: number) => void) => () => () => void;
-    export function makeReactive(model: any): void;
-}
-declare module "react/widgets/action" {
-    import { Action } from "core/action";
-    export function AbrisAction({ action }: {
-        action: Action;
-    }): JSX.Element;
-}
-declare module "react/widgets/actions" {
-    export function AbrisActions({ className, actions, }: {
-        className: string;
-        actions: any[];
-    }): JSX.Element;
-}
-declare module "react/widgets/dropdown-actions" {
-    export function AbrisDropdownActions({ className, actions, }: {
-        className: string;
-        actions: any[];
-    }): JSX.Element;
-}
-declare module "react/table/cell-editor" {
-    import { InplaceEditor } from "table/cell-editor";
-    export interface ITableCellEditorProps {
-        model: InplaceEditor;
-    }
-    export function Table4CellEditor({ model }: ITableCellEditorProps): JSX.Element;
-}
-declare module "react/table/cell" {
-    import { Table } from "table/index";
-    import { ITableCell } from "table/cell";
-    export interface ITableCellProps {
-        table: Table;
-        cell: ITableCell;
-    }
-    export function Table4Cell({ table, cell }: ITableCellProps): JSX.Element;
-}
-declare module "react/table/row" {
-    import { Table } from "table/index";
+declare module "table/editor-inplace" {
     import { ITableRow } from "table/row";
-    export interface ITableRowProps {
-        table: Table;
-        row: ITableRow;
+    import { EditorPlugin } from "table/editor";
+    export class InplaceEditorPlugin extends EditorPlugin {
+        private _activeEditors;
+        name: string;
+        protected startEditRow(row: ITableRow): void;
+        protected endEditRow(commit: boolean): void;
+        onRowCreated(row: ITableRow): void;
     }
-    export function TableRow({ table, row }: ITableRowProps): JSX.Element;
 }
-declare module "react/table/summary" {
-    import { ITableColumn } from "table/column";
-    export interface ITableSummaryProps {
-        column: ITableColumn;
+declare module "knockout/table/row" {
+    export var rowTemplate: any;
+}
+declare module "knockout/table/cell" {
+    export var cellTemplate: any;
+}
+declare module "knockout/table/cell-types/default" {
+    export var cellDefaultTemplate: any;
+}
+declare module "table/cell-types/indicator" {
+    import { IFieldType } from "core/domain";
+    import "./indicator.scss";
+    export class IndicatorCell implements IFieldType {
+        name: string;
+        css: string;
+        component: string;
+        static threshold: number;
+        static greaterColor: any;
+        static lessColor: any;
     }
-    export function Table4Summary({ column }: ITableSummaryProps): JSX.Element;
 }
-declare module "react/table/search" {
-    import { SearchModel } from "table/search";
-    export interface ITable4SearchProps {
-        icon: any;
-        searchModel: SearchModel;
+declare module "knockout/table/cell-types/indicator" {
+    export var cellIndicatorTemplate: any;
+}
+declare module "table/cell-types/progress" {
+    import { IFieldType } from "core/domain";
+    import "./progress.scss";
+    export class ProgressCell implements IFieldType {
+        name: string;
+        css: string;
+        component: string;
     }
-    export function Table4Search({ icon, searchModel }: ITable4SearchProps): JSX.Element;
 }
+declare module "knockout/table/cell-types/progress" {
+    export var cellProgressTemplate: any;
+}
+declare module "knockout/table/summary" {
+    export var summaryTemplate: any;
+}
+declare module "knockout/table/search" {
+    export var searchTemplate: any;
+}
+declare module "knockout/table/filter-default" { }
+declare module "knockout/table/column-filter" { }
+declare module "knockout/table/column-filter-item" { }
 declare module "table/filter-select" {
     import { Base } from "core/base";
     import { FilterItemValue } from "table/column-filter-item";
@@ -662,47 +579,65 @@ declare module "table/filter-select" {
         dispose(): void;
     }
 }
-declare module "react/table/filter-select" {
-    import { TableFilterSelect } from "table/filter-select";
-    export function Table4FilterSelect({ viewModel, }: {
-        viewModel: TableFilterSelect;
-    }): JSX.Element;
+declare module "knockout/table/filter-select" { }
+declare module "knockout/core/action" {
+    export var ActionItemWidget: any;
 }
-declare module "react/table/column-filter-item" {
-    import { ColumnFilterItem } from "table/column-filter-item";
-    export function Table4ColumnFilterItem({ filterItem, }: {
-        filterItem: ColumnFilterItem;
-    }): JSX.Element;
+declare module "knockout/core/actions" {
+    export var AbrisActionsWidget: any;
 }
-declare module "react/table/column-filter" {
-    import { FilterContext } from "table/column-filter";
-    export function Table4ColumnFilter({ context }: {
-        context: FilterContext;
-    }): JSX.Element;
+declare module "knockout/core/dropdown-actions" {
+    export var AbrisDropdownActions: any;
 }
-declare module "react/table/index" {
-    import * as React from "react";
-    import { Table } from "table/index";
-    export interface ITableProps {
-        model: Table;
+declare module "knockout/core/icon" {
+    export var AbrisIconWidget: any;
+}
+declare module "knockout/table/cell-editor" {
+    export var cellEditorTemplate: any;
+}
+declare module "knockout/table/row-editor" {
+    export var rowEditorTemplate: any;
+}
+declare module "knockout/widgets/default" {
+    export var defaultEditorTemplate: any;
+}
+declare module "knockout/widgets/checkbox" {
+    export var boolEditorTemplate: any;
+}
+declare module "widgets/property" {
+    import { Base } from "core/base";
+    import { IFieldDescription, IFieldType } from "core/domain";
+    import { Editor } from "widgets/editor";
+    import "./property.scss";
+    export class Property extends Base {
+        private field;
+        private static propertyTypes;
+        static registerPropertyType(propertyType: IFieldType): void;
+        constructor(field: IFieldDescription);
+        editor: Editor;
+        get type(): string;
+        get name(): string;
+        get value(): any;
+        set value(val: any);
+        get hasValue(): boolean;
+        title: string;
+        isModified: boolean;
+        isReadOnly: boolean;
+        obj: any;
+        get css(): string;
+        protected getPropertyTypeDescription(type: string): IFieldType;
+        protected getPropertyCss(data: any, field: IFieldDescription): string;
+        protected getText(val: any): string;
+        get component(): string;
+        get inputType(): any;
+        complete(commit: boolean): void;
     }
-    export function Table4({ model, }: ITableProps): React.ReactNode;
 }
-declare module "react/table/cell-viewer" {
-    import { ITableCell } from "table/cell";
-    export interface ITableCellViewerProps {
-        cell: ITableCell;
-        className: string;
-    }
-    export function Table4CellViewer({ cell, className }: ITableCellViewerProps): JSX.Element;
+declare module "knockout/widgets/property" {
+    export var propertyEditorTemplate: any;
 }
-declare module "react/table/bool-cell-editor" {
-    import { ITableCellEditorProps } from "react/table/cell-editor";
-    export function Table4BoolCellEditor({ model }: ITableCellEditorProps): JSX.Element;
-}
-declare module "react/table/bool-cell-viewer" {
-    import { ITableCellViewerProps } from "react/table/cell-viewer";
-    export function Table4BoolCellViewer({ cell, className }: ITableCellViewerProps): JSX.Element;
+declare module "knockout/widgets/form" {
+    export var formEditorTemplate: any;
 }
 declare module "core/actions" {
     import "./actions.scss";
@@ -710,25 +645,54 @@ declare module "core/actions" {
 declare module "core/dropdown-actions" {
     import "./dropdown-actions.scss";
 }
-declare module "table/filter-default" {
-    import "./filter-default.scss";
+declare module "core/field-types/bool" {
+    import { IFieldType } from "core/domain";
+    export class BoolField implements IFieldType {
+        name: string;
+        css: string;
+        getText: (val: any) => any;
+    }
 }
-declare module "table/number" {
-    import { ITableCellType } from "table/cell";
-    export class NumberCell implements ITableCellType {
+declare module "core/field-types/currency" {
+    import { IFieldType } from "core/domain";
+    export class CurrencyField implements IFieldType {
+        static prefix: string;
+        static suffix: string;
+        static precision: number;
+        name: string;
+        css: string;
+        getText: (val: any) => string;
+    }
+}
+declare module "core/field-types/date" {
+    import { IFieldType } from "core/domain";
+    export class DateField implements IFieldType {
+        name: string;
+        getText: (val: any) => string;
+    }
+}
+declare module "core/field-types/datetime" {
+    import { IFieldType } from "core/domain";
+    export class DateTimeField implements IFieldType {
+        name: string;
+        getText: (val: any) => string;
+    }
+}
+declare module "core/field-types/number" {
+    import { IFieldType } from "core/domain";
+    export class NumberField implements IFieldType {
         name: string;
         css: string;
     }
 }
-declare module "table/bool" {
-    import { ITableCellType } from "table/cell";
-    import "./bool.scss";
-    export class BoolCell implements ITableCellType {
-        name: string;
-        editor: string;
-        viewer: string;
-    }
+declare module "table/filter-default" {
+    import "./filter-default.scss";
 }
+declare module "table/cell-types/bool" { }
+declare module "table/cell-types/currency" { }
+declare module "table/cell-types/date" { }
+declare module "table/cell-types/datetime" { }
+declare module "table/cell-types/number" { }
 declare module "utils/remote-data-provider" {
     import { IDataProvider } from "utils/data-provider";
     export function postData(url?: string, data?: {}): Promise<any>;
@@ -748,6 +712,12 @@ declare module "index" {
     export * from "core/action";
     export * from "core/actions";
     export * from "core/dropdown-actions";
+    export * from "core/domain";
+    export * from "core/field-types/bool";
+    export * from "core/field-types/currency";
+    export * from "core/field-types/date";
+    export * from "core/field-types/datetime";
+    export * from "core/field-types/number";
     export * from "find";
     export * from "table/index";
     export * from "table/cell";
@@ -757,30 +727,381 @@ declare module "index" {
     export * from "table/column-filter-item";
     export * from "table/filter-default";
     export * from "table/filter-select";
-    export * from "table/number";
-    export * from "table/bool";
+    export * from "table/cell-types/bool";
+    export * from "table/cell-types/currency";
+    export * from "table/cell-types/date";
+    export * from "table/cell-types/datetime";
+    export * from "table/cell-types/indicator";
+    export * from "table/cell-types/number";
+    export * from "table/cell-types/progress";
+    export * from "widgets/editor";
+    export * from "table/editor";
+    export * from "table/editor-inplace";
+    export * from "table/editor-row";
     export * from "utils/array-data-provider";
     export * from "utils/remote-data-provider";
     export * from "utils/utils";
-    export * from "icon";
+    export * from "icons/index";
+}
+declare module "knockout/index" {
+    import * as ko from "knockout";
+    import { HashTableStorage } from "core/base";
+    export * from "knockout/table/row";
+    export * from "knockout/table/cell";
+    export * from "knockout/table/cell-types/default";
+    export * from "knockout/table/cell-types/indicator";
+    export * from "knockout/table/cell-types/progress";
+    export * from "knockout/table/summary";
+    export * from "knockout/table/search";
+    export * from "knockout/table/filter-default";
+    export * from "knockout/table/column-filter";
+    export * from "knockout/table/column-filter-item";
+    export * from "knockout/table/filter-select";
+    export * from "knockout/core/action";
+    export * from "knockout/core/actions";
+    export * from "knockout/core/dropdown-actions";
+    export * from "knockout/core/icon";
+    export * from "knockout/table/cell-editor";
+    export * from "knockout/table/row-editor";
+    export * from "knockout/widgets/default";
+    export * from "knockout/widgets/checkbox";
+    export * from "knockout/widgets/property";
+    export * from "knockout/widgets/form";
+    export * from "index";
+    export const KnockoutInstance: typeof ko;
+    export class KnockoutHashTableStorage extends HashTableStorage {
+        private linkArrayToObservable;
+        private createObservable;
+        getValue(name: string, defaultValue?: any): any;
+        setValue(name: string, val: any): void;
+        peekValue(name: string, defaultValue?: any): any;
+    }
+    export var tableTemplate: any;
+}
+declare module "widgets/form" {
+    import { Base } from "core/base";
+    import { IFieldDescription } from "knockout/index";
+    import { Property } from "widgets/property";
+    import "./form.scss";
+    export interface IFormElement {
+        name: string;
+        title?: string;
+    }
+    export interface IFormLayout {
+        elements: Array<IFormElement>;
+    }
+    export class Form extends Base {
+        private fields;
+        private layout?;
+        private _properties;
+        constructor(fields: Array<IFieldDescription>, layout?: IFormLayout);
+        object: any;
+        get properties(): Array<Property>;
+        complete(commit: boolean): void;
+    }
+}
+declare module "table/editor-row" {
+    import { ITableRow } from "table/row";
+    import { EditorPlugin } from "table/editor";
+    export class RowEditorPlugin extends EditorPlugin {
+        private _form;
+        name: string;
+        protected startEditRow(row: ITableRow): void;
+        protected endEditRow(commit: boolean): void;
+        onRowCreated(row: ITableRow): void;
+    }
+}
+declare module "table/index" {
+    import { Base } from "core/base";
+    import { IAction } from "core/action";
+    import { ITableColumn } from "table/column";
+    import { SearchModel } from "table/search";
+    import { IDataProvider, IDataProviderOwner } from "utils/data-provider";
+    import { ITableRow } from "table/row";
+    import * as Icons from "icons/index";
+    import "./index.scss";
+    import { IFieldDescription } from "core/domain";
+    /**
+     * Parameters for customizing the table view.
+     */
+    export interface ITableConfig extends IDataProvider {
+        /** Description of columns */
+        columns: Array<IFieldDescription>;
+        /** Permission to display the search bar */
+        enableSearch?: boolean;
+        /** Permission to display summary panel */
+        enableSummary?: boolean;
+        /** Permission to display merged cells toggle */
+        enableMergedCellsToggle?: boolean;
+        /** The primary value of the parameter for merging cells */
+        enableMergedCells?: boolean;
+        /** Permission to edit data */
+        enableEdit?: boolean;
+        /** Actions to display in the table actions panel */
+        actions?: Array<IAction>;
+        /** The key field of the table. Needed to edit the table. */
+        keyColumn?: string;
+        /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
+        selectCellColor?: string;
+        /** Table plugins array */
+        plugins?: Array<ITablePlugin>;
+    }
+    export interface ITableFilter {
+        value: string;
+        op: string;
+        field: string;
+    }
+    export interface ITablePlugin {
+        name: string;
+        init(table: Table): void;
+        getActions(): Array<IAction>;
+        onColumnCreated(column: ITableColumn): void;
+        onRowCreated(row: ITableRow): void;
+    }
+    /**
+     * Creates Table class.
+     * @param config - table options.
+     */
+    export class Table extends Base implements IDataProviderOwner {
+        config: ITableConfig;
+        private scrollerElement;
+        private resizerElement;
+        private tableElement;
+        private innerActions;
+        icons: typeof Icons;
+        private filterUpdater;
+        static rowHeight: number;
+        private updateByFilter;
+        constructor(config: ITableConfig, element?: HTMLElement);
+        initialize(element: HTMLElement): void;
+        navigateTo(startRow: number): void;
+        protected createColumn(column: any, model: ITableConfig): ITableColumn;
+        protected createColumns(config: ITableConfig): void;
+        protected createActions(config: ITableConfig): void;
+        private _dataProvider;
+        get dataProvider(): IDataProvider;
+        set dataProvider(provider: IDataProvider);
+        set data(_data: Array<any>);
+        refresh(): void;
+        drawRows(limit: number, offset: number, back?: boolean): void;
+        protected clickRow(row: ITableRow, event: any): void;
+        protected selectRow(row: ITableRow, event: any): void;
+        clickColumn: (column: ITableColumn, event: any) => void;
+        createRow(data: {
+            [key: string]: string | number;
+        }, num: number, back?: boolean): ITableRow;
+        get allowRowSelection(): boolean;
+        private curCol;
+        private nxtCol;
+        private pageX;
+        private nxtColWidth;
+        private curColWidth;
+        logMouseOver: (d: any, e: any) => void;
+        logMouseOut: (d: any, e: any) => void;
+        logMouseMove: (d: any, e: any) => void;
+        logMouseDown: (d: any, e: any) => void;
+        logMouseUp: (d: any, e: any) => boolean;
+        paddingDiff(col: any): number;
+        getStyleVal(elm: any, css: any): string;
+        protected rootLevel: any;
+        isNumber: boolean;
+        isMergedCells: boolean;
+        loadingMutex: boolean;
+        loadMore: boolean;
+        loadMoreBack: boolean;
+        lastOffset: number;
+        lastOffsetBack: number;
+        partRowCount: number;
+        columns: Array<ITableColumn>;
+        get keyColumn(): string;
+        rows: Array<ITableRow>;
+        get selectedRows(): ITableRow[];
+        showTableSummary: boolean;
+        showSearch: boolean;
+        startRow: number;
+        lastSelectRow: any;
+        totalCount: number;
+        tableHeadHeight: number;
+        showTableFilter: boolean;
+        viewFilterTable: boolean;
+        tableFilter: ITableFilter[];
+        searchModel: SearchModel;
+        getActions: (container?: string) => any[];
+        get topActions(): any[];
+        get dropdownActions(): any[];
+        get bottomActions(): any[];
+        get rowActions(): any[];
+        get noDataText(): any;
+        private plugins;
+        registerPlugin(plugin: ITablePlugin): ITablePlugin;
+        unregisterPlugin(pluginName: string): ITablePlugin;
+    }
+}
+declare module "react/reactivity" {
+    export const makeReactiveModel: (model: any, val: number, updater: (val: number) => void) => () => () => void;
+    export function makeReactive(model: any): void;
+}
+declare module "react/core/action" {
+    import { Action } from "core/action";
+    export function AbrisAction({ action }: {
+        action: Action;
+    }): JSX.Element;
+}
+declare module "react/core/actions" {
+    export function AbrisActions({ className, actions, }: {
+        className: string;
+        actions: any[];
+    }): JSX.Element;
+}
+declare module "react/core/dropdown-actions" {
+    export function AbrisDropdownActions({ className, actions, }: {
+        className: string;
+        actions: any[];
+    }): JSX.Element;
+}
+declare module "react/table/row" {
+    import { Table } from "table/index";
+    import { ITableRow } from "table/row";
+    export interface ITableRowProps {
+        table: Table;
+        row: ITableRow;
+    }
+    export function Table4Row({ table, row }: ITableRowProps): JSX.Element;
+}
+declare module "react/table/summary" {
+    import { ITableColumn } from "table/column";
+    export interface ITableSummaryProps {
+        column: ITableColumn;
+    }
+    export function Table4Summary({ column }: ITableSummaryProps): JSX.Element;
+}
+declare module "react/table/search" {
+    import { SearchModel } from "table/search";
+    export interface ITable4SearchProps {
+        icon: any;
+        searchModel: SearchModel;
+    }
+    export function Table4Search({ icon, searchModel }: ITable4SearchProps): JSX.Element;
+}
+declare module "react/table/filter-select" {
+    import { TableFilterSelect } from "table/filter-select";
+    export function Table4FilterSelect({ viewModel, }: {
+        viewModel: TableFilterSelect;
+    }): JSX.Element;
+}
+declare module "react/table/column-filter-item" {
+    import { ColumnFilterItem } from "table/column-filter-item";
+    export function Table4ColumnFilterItem({ filterItem, }: {
+        filterItem: ColumnFilterItem;
+    }): JSX.Element;
+}
+declare module "react/table/column-filter" {
+    import { FilterContext } from "table/column-filter";
+    export function Table4ColumnFilter({ context }: {
+        context: FilterContext;
+    }): JSX.Element;
+}
+declare module "react/table/row-wrapper" {
+    export function Table4RowWrapper(props: any): JSX.Element;
+}
+declare module "react/table/index" {
+    import * as React from "react";
+    import { Table } from "table/index";
+    export interface ITableProps {
+        model: Table;
+    }
+    export function Table4({ model, }: ITableProps): React.ReactNode;
+}
+declare module "react/table/cell" {
+    import { Table } from "table/index";
+    import { TableCell } from "table/cell";
+    export interface ITableCellProps {
+        table: Table;
+        cell: TableCell;
+    }
+    export function Table4Cell({ table, cell }: ITableCellProps): JSX.Element;
+}
+declare module "react/table/cell-types/default" {
+    import { ITableCell } from "table/cell";
+    export interface ITableContentCellProps {
+        cell: ITableCell;
+        className: string;
+    }
+    export function Table4DefaultCell({ cell, className }: ITableContentCellProps): JSX.Element;
+}
+declare module "react/table/cell-types/indicator" {
+    import { ITableContentCellProps } from "react/table/cell-types/default";
+    export function Table4IndicatorCell({ cell, className }: ITableContentCellProps): JSX.Element;
+}
+declare module "react/table/cell-types/progress" {
+    import { ITableContentCellProps } from "react/table/cell-types/default";
+    export function Table4ProgressCell({ cell, className }: ITableContentCellProps): JSX.Element;
+}
+declare module "react/table/cell-editor" {
+    import { Editor } from "widgets/editor";
+    import { ITableCellProps } from "react/table/cell";
+    export interface ITableCellEditorProps extends ITableCellProps {
+        editor: Editor;
+    }
+    export function Table4CellEditor({ table, cell, editor }: ITableCellEditorProps): JSX.Element;
+}
+declare module "react/widgets/form" {
+    import { Form } from "widgets/form";
+    export interface IFormProps {
+        form: Form;
+    }
+    export function Form4({ form }: IFormProps): JSX.Element;
+}
+declare module "react/table/row-editor" {
+    import { Form } from "widgets/form";
+    import { ITableRowProps } from "react/table/row";
+    export interface ITableRowEditorProps extends ITableRowProps {
+        form: Form;
+    }
+    export function Table4RowEditor({ table, row, form }: ITableRowEditorProps): JSX.Element;
+}
+declare module "react/widgets/default" {
+    import { Editor } from "widgets/editor";
+    export interface IEditorProps {
+        model: Editor;
+        className: string;
+        inputType?: string;
+    }
+    export function Table4DefaultCellEditor({ model, className, inputType }: IEditorProps): JSX.Element;
+}
+declare module "react/widgets/checkbox" {
+    import { IEditorProps } from "react/widgets/default";
+    export function Table4CheckboxEditor({ model }: IEditorProps): JSX.Element;
+}
+declare module "react/widgets/property" {
+    import { Property } from "widgets/property";
+    export interface IPropertyEditorProps {
+        property: Property;
+    }
+    export function Table4PropertyEditor({ property }: IPropertyEditorProps): JSX.Element;
 }
 declare module "react/index" {
     import { HashTableStorage } from "core/base";
     export * from "react/abris-component";
     export * from "react/table/index";
     export * from "react/table/cell";
-    export * from "react/table/cell-editor";
-    export * from "react/table/cell-viewer";
+    export * from "react/table/cell-types/default";
+    export * from "react/table/cell-types/indicator";
+    export * from "react/table/cell-types/progress";
     export * from "react/table/row";
     export * from "react/table/summary";
     export * from "react/table/search";
     export * from "react/table/column-filter";
     export * from "react/table/filter-select";
-    export * from "react/widgets/action";
-    export * from "react/widgets/actions";
-    export * from "react/widgets/dropdown-actions";
-    export * from "react/table/bool-cell-editor";
-    export * from "react/table/bool-cell-viewer";
+    export * from "react/core/action";
+    export * from "react/core/actions";
+    export * from "react/core/dropdown-actions";
+    export * from "react/table/cell-editor";
+    export * from "react/table/row-editor";
+    export * from "react/widgets/default";
+    export * from "react/widgets/checkbox";
+    export * from "react/widgets/property";
+    export * from "react/widgets/form";
     export * from "index";
     export class ReactHashTableStorage extends HashTableStorage {
         private linkArrayToObservable;

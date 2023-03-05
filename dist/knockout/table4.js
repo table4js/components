@@ -37,10 +37,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./sources/table/bool.scss":
-/*!*********************************!*\
-  !*** ./sources/table/bool.scss ***!
-  \*********************************/
+/***/ "./sources/table/cell-types/indicator.scss":
+/*!*************************************************!*\
+  !*** ./sources/table/cell-types/indicator.scss ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -50,10 +50,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./sources/table/cell-editor.scss":
-/*!****************************************!*\
-  !*** ./sources/table/cell-editor.scss ***!
-  \****************************************/
+/***/ "./sources/table/cell-types/progress.scss":
+/*!************************************************!*\
+  !*** ./sources/table/cell-types/progress.scss ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -141,25 +141,49 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./sources/knockout/table/bool-cell-editor.html":
-/*!******************************************************!*\
-  !*** ./sources/knockout/table/bool-cell-editor.html ***!
-  \******************************************************/
+/***/ "./sources/widgets/editor.scss":
+/*!*************************************!*\
+  !*** ./sources/widgets/editor.scss ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-table__bool-cell-editor\">\n  <input type=\"checkbox\"\n    data-bind=\"checked: value, event: { change: function(_, e) { $data.value = e.target.checked; $data.complete(true); } }\"\n  />\n</div>");
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
-/***/ "./sources/knockout/table/bool-cell-viewer.html":
-/*!******************************************************!*\
-  !*** ./sources/knockout/table/bool-cell-viewer.html ***!
-  \******************************************************/
+/***/ "./sources/widgets/form.scss":
+/*!***********************************!*\
+  !*** ./sources/widgets/form.scss ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/widgets/property.scss":
+/*!***************************************!*\
+  !*** ./sources/widgets/property.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/knockout/core/action.html":
+/*!*******************************************!*\
+  !*** ./sources/knockout/core/action.html ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -167,7 +191,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<span class=\"table4js-table__bool-cell-viewer\" data-bind=\"css: className\">\n    <span class=\"table4js-table__bool-cell-viewer-circle\"\n    data-bind=\"style: { backgroundColor: cell.data ? 'green' : 'red' }\" \n    ></span>\n</span>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button data-bind=\"click: $data.formId !== undefined ? undefined : action, \n                visible: !$data.visible || ko.unwrap(visible),\n                enable: !$data.enabled || ko.unwrap(enabled),\n                attr: {\n                        class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),\n                        title: $data.title || $data.name, form: $data.formId,\n                        type: $data.formId !== undefined ? 'submit' : 'button'\n                    }\">\n    <!-- ko if: $data.icon -->\n    <!-- <span data-bind=\"css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))\"></span> -->\n    <!-- /ko -->\n    <!-- ko if: $data.svg -->\n    <div class=\"table4js-action-button__icon table4js-button__svg-icon\" data-bind=\"html: svg\"></div>\n    <!-- /ko -->\n    <!-- ko ifnot: $parents[1].short -->\n    <span class=\"table4js-action-button__label\" data-bind=\"text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}\" ></span>\n    <!-- /ko -->\n</button>");
+
+/***/ }),
+
+/***/ "./sources/knockout/core/actions.html":
+/*!********************************************!*\
+  !*** ./sources/knockout/core/actions.html ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko foreach: actions -->\n<!-- ko ifnot: ko.unwrap($data.actions) -->\n<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->\n<!-- ko component: { name: 'table4js-action-item', params: $data } -->\n<!-- /ko -->\n<!-- /ko -->\n<!-- /ko -->\n<!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->\n<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->\n<div class=\"table4js-nested-actions table4js-action-context-button\">\n    <span class=\"table4js-button__label\" data-bind=\"text: title\"></span>\n    <div class=\"table4js-nested-actions__dropdown\">\n        <!-- ko foreach: actions -->\n        <!-- ko component: { name: 'table4js-action-item', params: $data } -->\n        <!-- /ko -->\n        <!-- /ko -->\n    </div>\n</div>\n<!-- /ko -->\n<!-- /ko -->\n<!-- /ko -->");
+
+/***/ }),
+
+/***/ "./sources/knockout/core/dropdown-actions.html":
+/*!*****************************************************!*\
+  !*** ./sources/knockout/core/dropdown-actions.html ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button class=\"table4js-action-button table4js-button--transparent table4js-button-toggle\" type=\"button\"\n    data-bind=\"click: toggle, attr: { title: title }\">\n    <div data-bind=\"html: $root.icons.more_sq\"></div>\n    <span class=\"table4js-action-button__label\" data-bind=\"text: moreText\"></span>\n</button>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-button-toggle__dropdown-menu\">\n    <table4js-actions class=\"table4js-context-actions\" params=\"model: data, options: { action: actions }\">\n    </table4js-actions>\n</ul>\n<!-- /ko -->");
+
+/***/ }),
+
+/***/ "./sources/knockout/core/icon.html":
+/*!*****************************************!*\
+  !*** ./sources/knockout/core/icon.html ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- <svg class=\"table4js-button__svg-icon\"><use data-bind=\"attr:{'xlink:href':'spritemap.svg#sprite-icon_'+ko.unwrap(id)}\"  xlink:href=''></use></svg> -->\n");
 
 /***/ }),
 
@@ -182,14 +251,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-table__cell-editor\">\n  <input data-bind=\"value: value, event: { keyup: function(_, e) { $data.processKeyUp(e); } }\" />\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-cell__container\" data-bind=\"css: containerCss, style: { top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined }\">\n  <!-- ko component: { name: component, params: { model: editor, className: contentCss, inputType: inputType } } -->\n  <!-- /ko -->\n</div>\n");
 
 /***/ }),
 
-/***/ "./sources/knockout/table/cell-viewer.html":
-/*!*************************************************!*\
-  !*** ./sources/knockout/table/cell-viewer.html ***!
-  \*************************************************/
+/***/ "./sources/knockout/table/cell-types/default.html":
+/*!********************************************************!*\
+  !*** ./sources/knockout/table/cell-types/default.html ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -197,7 +266,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<span data-bind=\"html: cell.text, css: className\"></span>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<span data-bind=\"html: cell.text, css: className\"></span>");
+
+/***/ }),
+
+/***/ "./sources/knockout/table/cell-types/indicator.html":
+/*!**********************************************************!*\
+  !*** ./sources/knockout/table/cell-types/indicator.html ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<span class=\"table4js__indicator-cell\" data-bind=\"css: className\">\n    <span class=\"table4js__indicator-cell-circle\" data-bind=\"style: style\"></span>\n</span>");
+
+/***/ }),
+
+/***/ "./sources/knockout/table/cell-types/progress.html":
+/*!*********************************************************!*\
+  !*** ./sources/knockout/table/cell-types/progress.html ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js__progress-cell\" data-bind=\"css: className\">\n    <div class=\"table4js__progress-cell-value\" data-bind=\"style: { width: value }, text: value\"></div>\n</div>");
 
 /***/ }),
 
@@ -212,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<td class=\"table4js-table-cell\" data-bind=\"attr: {rowspan: table.isMergedСells ? cell.count : 1},\n  css: (cell.count > 1) && table.isMergedСells ? 'table4js-table-cell--merged ' : '',\n  visible: (cell.count > 0) || !table.isMergedСells,\n  style: {'background-color': cell.color} \">\n  <!-- ko ifnot: (cell.inplaceEditor && table.config.enableEdit) -->\n    <div class=\"table4js-table-cell__container\" data-bind=\"css: containerCss, style: {top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined}, click: startEdit\">\n      <!-- ko component: { name: cell.viewer, params: { cell: cell, className: contentCss } } -->\n      <!-- /ko -->\n    </div>\n  <!-- /ko -->\n  <!-- ko if: (cell.inplaceEditor && table.config.enableEdit) -->\n    <!-- ko component: { name: cell.editor, params: { model: cell.inplaceEditor } } -->\n    <!-- /ko -->\n  <!-- /ko -->\n</td>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-cell__container\" data-bind=\"css: containerCss, style: { top: isMergedCell() ? table.tableHeadHeight - 2 + 'px' : undefined }\">\n  <!-- ko component: { name: cell.component, params: { cell: cell, className: contentCss } } -->\n  <!-- /ko -->\n</div>\n\n");
 
 /***/ }),
 
@@ -287,7 +386,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-table-resizable-container\">\n  <div class=\"table4js-table-scroll-container\">\n    <table class=\"table4js-table\">\n      <thead class=\"table4js-table__header table4js-table-sticky-component\">\n        <tr class=\"table4js-table-header-tools\">\n          <th class=\"table4js-table-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-table-header-tools__container table4js-table-group-header-technical-cell\">\n              <div class=\"table4js-table-preheader\">\n                <div class=\"table4js-table-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-table-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-table-dropdown table4js-table-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-table-filter\">\n                <div class=\"table4js-table-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-table-header-title\">\n          <th class=\"table4js-table-header-title__cell table4js-table-switch\">\n            <div class=\"table4js-table-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-table-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-table-title\">\n              <span class=\"table4js-table-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-table-title__tools\">\n                <div class=\"table4js-svg-icon table4js-table-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-table-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-table-title__filter\" data-bind=\"click: clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-table-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-table-header-title__cell\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js-table__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js-table__row\">\n          <th class=\"table4js-table-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js-table__row\"></tr>\n          <td class=\"table4js-table-cell table4js-table-technical-cell\" >\n            <div class=\"table4js-table-technical-cell__container\">\n              <div class=\"table4js-table__check\">\n                <div class=\"table4js-svg-icon table4js-table__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-table-cell table4js-table-technical-cell\">\n            <div class=\"table4js-table-cell__container table4js-table-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n        <td class=\"table4js-table-cell table4js-table-technical-cell\">\n          <div class=\"table4js-table-technical-cell__container\">\n            <div class=\"table4js-svg-icon table4js-table-icon-row-tools table4js-table__more\" data-bind=\"html: $parent.icons.more\"></div>\n            <div class=\"table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit\" data-bind=\"html: $parent.icons.edit\"></div>\n          </div>\n        </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: { data: rows } -->\n        <tr class=\"table4js-table__row\" data-bind=\"css: {'table4js-table__row--selected': selected}, style: {'background-color': 'none' }\">\n          <td class=\"table4js-table-cell table4js-table-technical-cell\" data-bind=\"click: select\">\n            <div class=\"table4js-table-technical-cell__container\">\n              <!-- ko if: $parent.isNumber -->\n              <div class=\"table4js-table__number\" data-bind=\"text: number\"></div>\n              <!-- /ko -->\n              <!-- ko if: !$parent.isNumber -->\n              <div class=\"table4js-table__check\">\n                <div class=\"table4js-svg-icon table4js-table__icon-check\" data-bind=\"visible: selected, html: $parent.icons.check\"></div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </td>\n          <!-- ko foreach: cells -->\n          <!-- ko component: { name: 'table4js-table-cell', params: { cell: $data, table: $parents[1] } } -->\n          <!-- /ko -->\n          <!-- /ko -->\n          <td class=\"table4js-table-cell table4js-table-technical-cell\" data-bind=\"click: click\">\n            <div class=\"table4js-table-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-table-icon-row-tools table4js-table__more\" data-bind=\"html: $parent.icons.more\"></div>\n              <div class=\"table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit\" data-bind=\"html: $parent.icons.edit\"></div>\n            </div>\n            <div class=\"table4js-table__row--select\" data-bind=\"visible: !$parent.hasActiveInplaceEditor\"></div>\n            <div class=\"table4js-table__row--colored\" data-bind=\"style: { 'background': color ? color : 'rgba(248,249,253)' }\"></div>\n          </td>\n        </tr>\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js-table__footer table4js-table-sticky-component\">\n        <tr class=\"table4js-table-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell\">\n            <div class=\"table4js-table-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-table-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-table-cell table4js-table-footer__cell\">\n            <table4js-table-summary params='column: $data'></table4js-table-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell\"></th>\n        </tr>\n        <tr class=\"table4js-table-footer-tools\">\n          <th class=\"table4js-table-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-table-footer-tools__container table4js-table-group-header-technical-cell\">\n              <div class=\"table4js-table-row-management\">\n                <table4js-actions class=\"table4js-table-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-table-info\">\n                <span class=\"table4js-table-info__total table4js-table-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-table-info__go-to\">\n                  <span class=\"table4js-table-go-to__text table4js-table-info__text\">Go to: </span>\n                  <input class=\"table4js-table-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-table-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
+
+/***/ }),
+
+/***/ "./sources/knockout/table/row-editor.html":
+/*!************************************************!*\
+  !*** ./sources/knockout/table/row-editor.html ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko component: { name: \"table4js-row\", params: { table: table, row: row } } -->\n<!-- /ko -->\n<!-- ko if: isEditMode -->\n<tr class=\"table4js__row\">\n  <td class=\"table4js-cell\" colspan=\"100%\">\n    <table4js-form params=\"form: form\"></table4js-form>\n  </td>\n</tr>\n<!-- /ko -->\n");
+
+/***/ }),
+
+/***/ "./sources/knockout/table/row.html":
+/*!*****************************************!*\
+  !*** ./sources/knockout/table/row.html ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<tr class=\"table4js__row\" data-bind=\"css: $data.row.css, style: { 'background-color': 'none' }\">\n  <td class=\"table4js-cell table4js-technical-cell\" data-bind=\"click: function() { $data.row.select($data.row); }\">\n    <div class=\"table4js-technical-cell__container\">\n      <!-- ko if: table.isNumber -->\n      <div class=\"table4js__number\" data-bind=\"text: row.number\"></div>\n      <!-- /ko -->\n      <!-- ko if: !table.isNumber -->\n      <div class=\"table4js__check\">\n        <div class=\"table4js-svg-icon table4js__icon-check\" data-bind=\"visible: row.selected, html: table.icons.check\"></div>\n      </div>\n      <!-- /ko -->\n    </div>\n  </td>\n  <!-- ko foreach: row.cells -->\n  <td class=\"table4js-cell\" data-bind=\"attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },\n    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',\n    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } \">\n    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->\n    <!-- /ko -->\n  </td>\n  <!-- /ko -->\n  <td class=\"table4js-cell table4js-technical-cell\">\n    <div class=\"table4js-technical-cell__container\">\n      <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: table.icons.more\"></div>\n      <!-- ko foreach: table.rowActions -->\n      <div class=\"table4js-svg-icon table4js-icon-row-tools\" data-bind=\"html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }\"></div>\n      <!-- /ko -->\n    </div>\n    <div class=\"table4js__row--select\" data-bind=\"visible: table.allowRowSelection\"></div>\n    <div class=\"table4js__row--colored\" data-bind=\"style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }\"></div>\n  </td>\n</tr>");
 
 /***/ }),
 
@@ -317,14 +446,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko if: $data -->\n<span class=\"table4js-table-summary__value\" data-bind=\"text: $data.value\"></span>\n<select class=\"table4js-table-summary__select\"  data-bind=\"value: func\">\n  <!-- ko foreach: summaryItems -->\n    <option data-bind=\"text: title, value: value, attr: { title: title }\"></option>\n  <!-- /ko -->  \n</select>\n<!-- /ko -->");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko if: $data -->\n<span class=\"table4js-summary__value\" data-bind=\"text: $data.value\"></span>\n<select class=\"table4js-summary__select\"  data-bind=\"value: func\">\n  <!-- ko foreach: summaryItems -->\n    <option data-bind=\"text: title, value: value, attr: { title: title }\"></option>\n  <!-- /ko -->  \n</select>\n<!-- /ko -->");
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/action.html":
-/*!**********************************************!*\
-  !*** ./sources/knockout/widgets/action.html ***!
-  \**********************************************/
+/***/ "./sources/knockout/widgets/checkbox.html":
+/*!************************************************!*\
+  !*** ./sources/knockout/widgets/checkbox.html ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -332,13 +461,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button data-bind=\"click: $data.formId !== undefined ? undefined : action, \n                visible: !$data.visible || ko.unwrap(visible),\n                enable: !$data.enabled || ko.unwrap(enabled),\n                attr: {\n                        class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),\n                        title: $data.title || $data.name, form: $data.formId,\n                        type: $data.formId !== undefined ? 'submit' : 'button'\n                    }\">\n    <!-- ko if: $data.icon -->\n    <!-- <span data-bind=\"css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))\"></span> -->\n    <!-- /ko -->\n    <!-- ko if: $data.svg -->\n    <div class=\"table4js-action-button__icon table4js-button__svg-icon\" data-bind=\"html: svg\"></div>\n    <!-- /ko -->\n    <!-- ko ifnot: $parents[1].short -->\n    <span class=\"table4js-action-button__label\" data-bind=\"text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}\" ></span>\n    <!-- /ko -->\n</button>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js__checkbox-editor\">\n  <input type=\"checkbox\" data-bind=\"checked: value\" />\n</div>");
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/actions.html":
+/***/ "./sources/knockout/widgets/default.html":
 /*!***********************************************!*\
-  !*** ./sources/knockout/widgets/actions.html ***!
+  !*** ./sources/knockout/widgets/default.html ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -347,28 +476,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko foreach: actions -->\n<!-- ko ifnot: ko.unwrap($data.actions) -->\n<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->\n<!-- ko component: { name: 'table4js-action-item', params: $data } -->\n<!-- /ko -->\n<!-- /ko -->\n<!-- /ko -->\n<!-- ko if: ko.unwrap($data.actions) && ko.unwrap($data.actions).length > 0 -->\n<!-- ko if: !$data.groupName && !$parent.groupName || $data.groupName == $parent.groupName  -->\n<div class=\"table4js-nested-actions table4js-action-context-button\">\n    <span class=\"table4js-button__label\" data-bind=\"text: title\"></span>\n    <div class=\"table4js-nested-actions__dropdown\">\n        <!-- ko foreach: actions -->\n        <!-- ko component: { name: 'table4js-action-item', params: $data } -->\n        <!-- /ko -->\n        <!-- /ko -->\n    </div>\n</div>\n<!-- /ko -->\n<!-- /ko -->\n<!-- /ko -->");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js__editor\" data-bind=\"css: $data.className\">\n  <input data-bind=\"css: model.css, value: model.value, valueUpdate: 'input', attr: { type: inputType }\" />\n</div>");
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/dropdown-actions.html":
-/*!********************************************************!*\
-  !*** ./sources/knockout/widgets/dropdown-actions.html ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button class=\"table4js-action-button table4js-button--transparent table4js-button-toggle\" type=\"button\"\n    data-bind=\"click: toggle, attr: { title: title }\">\n    <div data-bind=\"html: $root.icons.more_sq\"></div>\n    <span class=\"table4js-action-button__label\" data-bind=\"text: moreText\"></span>\n</button>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-button-toggle__dropdown-menu\">\n    <table4js-actions class=\"table4js-context-actions\" params=\"model: data, options: { action: actions }\">\n    </table4js-actions>\n</ul>\n<!-- /ko -->");
-
-/***/ }),
-
-/***/ "./sources/knockout/widgets/icon.html":
+/***/ "./sources/knockout/widgets/form.html":
 /*!********************************************!*\
-  !*** ./sources/knockout/widgets/icon.html ***!
+  !*** ./sources/knockout/widgets/form.html ***!
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -377,7 +491,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- <svg class=\"table4js-button__svg-icon\"><use data-bind=\"attr:{'xlink:href':'spritemap.svg#sprite-icon_'+ko.unwrap(id)}\"  xlink:href=''></use></svg> -->\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-form\">\n  <!-- ko foreach: properties -->\n    <!-- ko component: { name: \"table4js-property-editor\", params: { property: $data } } -->\n    <!-- /ko -->\n  <!-- /ko -->\n</div>\n");
+
+/***/ }),
+
+/***/ "./sources/knockout/widgets/property.html":
+/*!************************************************!*\
+  !*** ./sources/knockout/widgets/property.html ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-form__property\" data-bind=\"css: { 'table4js-form__property--with-value': property.hasValue }\">\n  <!-- ko component: { name: component, params: { model: property.editor, className: property.css, inputType: property.inputType } } -->\n  <!-- /ko -->\n  <label class=\"table4js-form__property-title\" data-bind=\"text: property.title\"></label>\n</div>\n");
 
 /***/ }),
 
@@ -689,6 +818,9 @@ var HashTableStorage = (function () {
     HashTableStorage.prototype.setValue = function (name, val) {
         this.hash[name] = val;
     };
+    HashTableStorage.prototype.peekValue = function (name, defaultValue) {
+        return this.getValue(name, defaultValue);
+    };
     return HashTableStorage;
 }());
 exports.HashTableStorage = HashTableStorage;
@@ -733,7 +865,7 @@ var Base = (function () {
         return this.getPropertyValueCore(propertyName, defaultValue);
     };
     Base.prototype.setPropertyValue = function (propertyName, newValue, defaultValue) {
-        var oldValue = this.getPropertyValue(propertyName, defaultValue);
+        var oldValue = this.storage.peekValue(propertyName, defaultValue);
         if (!(0, utils_1.isEqual)(oldValue, newValue)) {
             this.setPropertyValueCore(propertyName, newValue);
             this.onPropertyValueChanged(propertyName, oldValue, newValue);
@@ -853,6 +985,19 @@ exports.ComputedUpdater = ComputedUpdater;
 
 /***/ }),
 
+/***/ "./sources/core/domain.ts":
+/*!********************************!*\
+  !*** ./sources/core/domain.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
 /***/ "./sources/core/dropdown-actions.ts":
 /*!******************************************!*\
   !*** ./sources/core/dropdown-actions.ts ***!
@@ -863,6 +1008,155 @@ exports.ComputedUpdater = ComputedUpdater;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __webpack_require__(/*! ./dropdown-actions.scss */ "./sources/core/dropdown-actions.scss");
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/bool.ts":
+/*!******************************************!*\
+  !*** ./sources/core/field-types/bool.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BoolField = void 0;
+var localization_1 = __webpack_require__(/*! ../../localization */ "./sources/localization.ts");
+var BoolField = (function () {
+    function BoolField() {
+        this.name = "bool";
+        this.css = "table4js-cell--center";
+        this.getText = function (val) {
+            if (val === true || val === "t" || val === "true") {
+                return localization_1.Localization.getString("true");
+            }
+            return localization_1.Localization.getString("false");
+        };
+    }
+    return BoolField;
+}());
+exports.BoolField = BoolField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/currency.ts":
+/*!**********************************************!*\
+  !*** ./sources/core/field-types/currency.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CurrencyField = void 0;
+var CurrencyField = (function () {
+    function CurrencyField() {
+        this.name = "currency";
+        this.css = "table4js-cell--right";
+        this.getText = function (val) {
+            if (!val || Number.isNaN(val)) {
+                val = 0;
+            }
+            var result = !!CurrencyField.prefix ? (CurrencyField.prefix + " ") : "";
+            result += parseFloat(val).toFixed(CurrencyField.precision).toString();
+            if (!!CurrencyField.suffix) {
+                result += " " + CurrencyField.suffix;
+            }
+            return result;
+        };
+    }
+    CurrencyField.prefix = "$";
+    CurrencyField.suffix = "";
+    CurrencyField.precision = 2;
+    return CurrencyField;
+}());
+exports.CurrencyField = CurrencyField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/date.ts":
+/*!******************************************!*\
+  !*** ./sources/core/field-types/date.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DateField = void 0;
+var DateField = (function () {
+    function DateField() {
+        this.name = "date";
+        this.getText = function (val) {
+            var result = "";
+            try {
+                var date = new Date((val || "").split("T")[0]);
+                result = date.toLocaleDateString();
+            }
+            catch (_a) {
+            }
+            return result;
+        };
+    }
+    return DateField;
+}());
+exports.DateField = DateField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/datetime.ts":
+/*!**********************************************!*\
+  !*** ./sources/core/field-types/datetime.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DateTimeField = void 0;
+var DateTimeField = (function () {
+    function DateTimeField() {
+        this.name = "datetime";
+        this.getText = function (val) {
+            var result = "";
+            try {
+                var date = new Date(val || "");
+                result = date.toLocaleString();
+            }
+            catch (_a) {
+            }
+            return result;
+        };
+    }
+    return DateTimeField;
+}());
+exports.DateTimeField = DateTimeField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/number.ts":
+/*!********************************************!*\
+  !*** ./sources/core/field-types/number.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NumberField = void 0;
+var NumberField = (function () {
+    function NumberField() {
+        this.name = "number";
+        this.css = "table4js-cell--right";
+    }
+    return NumberField;
+}());
+exports.NumberField = NumberField;
 
 
 /***/ }),
@@ -991,33 +1285,33 @@ Object.keys(defaultOperationsMap).forEach(function (key) { return exports.operat
 
 /***/ }),
 
-/***/ "./sources/icon.ts":
-/*!*************************!*\
-  !*** ./sources/icon.ts ***!
-  \*************************/
+/***/ "./sources/icons/index.ts":
+/*!********************************!*\
+  !*** ./sources/icons/index.ts ***!
+  \********************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.arrowdown = exports.cross = exports.search = exports.arrowright = exports.edit = exports.more = exports.filter = exports.sortdown = exports.sortup = exports.check = exports.more_sq = exports.paste = exports.del = exports.save = exports.table = exports.equal = exports.add = void 0;
-exports.add = __webpack_require__(/*! ./icons/icon_item-add.svg */ "./sources/icons/icon_item-add.svg");
-exports.equal = __webpack_require__(/*! ./icons/icon_equal.svg */ "./sources/icons/icon_equal.svg");
-exports.table = __webpack_require__(/*! ./icons/icon_table-merge.svg */ "./sources/icons/icon_table-merge.svg");
-exports.save = __webpack_require__(/*! ./icons/icon_item-save.svg */ "./sources/icons/icon_item-save.svg");
-exports.del = __webpack_require__(/*! ./icons/icon_item-delete.svg */ "./sources/icons/icon_item-delete.svg");
-exports.paste = __webpack_require__(/*! ./icons/icon_paste.svg */ "./sources/icons/icon_paste.svg");
-exports.more_sq = __webpack_require__(/*! ./icons/icon_more_sq.svg */ "./sources/icons/icon_more_sq.svg");
-exports.check = __webpack_require__(/*! ./icons/icon_check.svg */ "./sources/icons/icon_check.svg");
-exports.sortup = __webpack_require__(/*! ./icons/icon_sort-up.svg */ "./sources/icons/icon_sort-up.svg");
-exports.sortdown = __webpack_require__(/*! ./icons/icon_sort-down.svg */ "./sources/icons/icon_sort-down.svg");
-exports.filter = __webpack_require__(/*! ./icons/icon_filter.svg */ "./sources/icons/icon_filter.svg");
-exports.more = __webpack_require__(/*! ./icons/icon_more.svg */ "./sources/icons/icon_more.svg");
-exports.edit = __webpack_require__(/*! ./icons/icon_edit.svg */ "./sources/icons/icon_edit.svg");
-exports.arrowright = __webpack_require__(/*! ./icons/icon_arrow-right.svg */ "./sources/icons/icon_arrow-right.svg");
-exports.search = __webpack_require__(/*! ./icons/icon_search.svg */ "./sources/icons/icon_search.svg");
-exports.cross = __webpack_require__(/*! ./icons/icon_cross.svg */ "./sources/icons/icon_cross.svg");
-exports.arrowdown = __webpack_require__(/*! ./icons/icon_arrow-down.svg */ "./sources/icons/icon_arrow-down.svg");
+exports.add = __webpack_require__(/*! ./icon_item-add.svg */ "./sources/icons/icon_item-add.svg");
+exports.equal = __webpack_require__(/*! ./icon_equal.svg */ "./sources/icons/icon_equal.svg");
+exports.table = __webpack_require__(/*! ./icon_table-merge.svg */ "./sources/icons/icon_table-merge.svg");
+exports.save = __webpack_require__(/*! ./icon_item-save.svg */ "./sources/icons/icon_item-save.svg");
+exports.del = __webpack_require__(/*! ./icon_item-delete.svg */ "./sources/icons/icon_item-delete.svg");
+exports.paste = __webpack_require__(/*! ./icon_paste.svg */ "./sources/icons/icon_paste.svg");
+exports.more_sq = __webpack_require__(/*! ./icon_more_sq.svg */ "./sources/icons/icon_more_sq.svg");
+exports.check = __webpack_require__(/*! ./icon_check.svg */ "./sources/icons/icon_check.svg");
+exports.sortup = __webpack_require__(/*! ./icon_sort-up.svg */ "./sources/icons/icon_sort-up.svg");
+exports.sortdown = __webpack_require__(/*! ./icon_sort-down.svg */ "./sources/icons/icon_sort-down.svg");
+exports.filter = __webpack_require__(/*! ./icon_filter.svg */ "./sources/icons/icon_filter.svg");
+exports.more = __webpack_require__(/*! ./icon_more.svg */ "./sources/icons/icon_more.svg");
+exports.edit = __webpack_require__(/*! ./icon_edit.svg */ "./sources/icons/icon_edit.svg");
+exports.arrowright = __webpack_require__(/*! ./icon_arrow-right.svg */ "./sources/icons/icon_arrow-right.svg");
+exports.search = __webpack_require__(/*! ./icon_search.svg */ "./sources/icons/icon_search.svg");
+exports.cross = __webpack_require__(/*! ./icon_cross.svg */ "./sources/icons/icon_cross.svg");
+exports.arrowdown = __webpack_require__(/*! ./icon_arrow-down.svg */ "./sources/icons/icon_arrow-down.svg");
 
 
 /***/ }),
@@ -1048,6 +1342,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./core/action */ "./sources/core/action.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/actions */ "./sources/core/actions.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/core/dropdown-actions.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/domain */ "./sources/core/domain.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/bool */ "./sources/core/field-types/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/currency */ "./sources/core/field-types/currency.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/date */ "./sources/core/field-types/date.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/datetime */ "./sources/core/field-types/datetime.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/number */ "./sources/core/field-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./find */ "./sources/find.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table */ "./sources/table/index.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/table/cell.ts"), exports);
@@ -1057,12 +1357,140 @@ __exportStar(__webpack_require__(/*! ./table/column-filter */ "./sources/table/c
 __exportStar(__webpack_require__(/*! ./table/column-filter-item */ "./sources/table/column-filter-item.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-default */ "./sources/table/filter-default.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/table/filter-select.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/number */ "./sources/table/number.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool */ "./sources/table/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/bool */ "./sources/table/cell-types/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/currency */ "./sources/table/cell-types/currency.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/date */ "./sources/table/cell-types/date.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/datetime */ "./sources/table/cell-types/datetime.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/table/cell-types/indicator.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/number */ "./sources/table/cell-types/number.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/table/cell-types/progress.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/editor */ "./sources/widgets/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor */ "./sources/table/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor-inplace */ "./sources/table/editor-inplace.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor-row */ "./sources/table/editor-row.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/array-data-provider */ "./sources/utils/array-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/remote-data-provider */ "./sources/utils/remote-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/utils */ "./sources/utils/utils.ts"), exports);
-__exportStar(__webpack_require__(/*! ./icon */ "./sources/icon.ts"), exports);
+__exportStar(__webpack_require__(/*! ./icons */ "./sources/icons/index.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./sources/knockout/core/action.ts":
+/*!*****************************************!*\
+  !*** ./sources/knockout/core/action.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActionItemWidget = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+var actionTemplate = (__webpack_require__(/*! ./action.html */ "./sources/knockout/core/action.html")["default"]);
+ko.components.register("table4js-action-item", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return params;
+        }
+    },
+    template: actionTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/core/actions.ts":
+/*!******************************************!*\
+  !*** ./sources/knockout/core/actions.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisActionsWidget = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+var actionsTemplate = (__webpack_require__(/*! ./actions.html */ "./sources/knockout/core/actions.html")["default"]);
+ko.components.register("table4js-actions", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            var modelValue = (params.model || {})[params.options.action];
+            return {
+                actions: modelValue,
+                short: params.options.short,
+                groupName: params.options.groupName,
+                toggleChildActions: function (_, event) {
+                    event.target.classList.toggle("table4js-nested-actions--open");
+                }
+            };
+        }
+    },
+    template: actionsTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/core/dropdown-actions.ts":
+/*!***************************************************!*\
+  !*** ./sources/knockout/core/dropdown-actions.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisDropdownActions = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+var dropdownTemplate = (__webpack_require__(/*! ./dropdown-actions.html */ "./sources/knockout/core/dropdown-actions.html")["default"]);
+ko.components.register("table4js-dropdown-actions", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            var isOpen = params.isOpen || ko.observable(false);
+            var close = function () { return isOpen(false); };
+            document.body.addEventListener("click", close);
+            ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () {
+                document.body.removeEventListener("click", close);
+            });
+            return {
+                isOpen: isOpen,
+                title: params.title || "",
+                moreText: params.moreText || "",
+                data: params.data,
+                actions: params.actions,
+                toggle: function (_, event) {
+                    isOpen(!isOpen());
+                    event.stopPropagation();
+                },
+            };
+        }
+    },
+    template: dropdownTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/core/icon.ts":
+/*!***************************************!*\
+  !*** ./sources/knockout/core/icon.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisIconWidget = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+ko.components.register("table4js-icon", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return params;
+        }
+    },
+    template: (__webpack_require__(/*! ./icon.html */ "./sources/knockout/core/icon.html")["default"])
+});
 
 
 /***/ }),
@@ -1109,21 +1537,27 @@ exports.tableTemplate = exports.KnockoutHashTableStorage = exports.KnockoutInsta
 var ko = __webpack_require__(/*! knockout */ "knockout");
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var table_1 = __webpack_require__(/*! ../table */ "./sources/table/index.ts");
+__exportStar(__webpack_require__(/*! ./table/row */ "./sources/knockout/table/row.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/knockout/table/cell.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/knockout/table/cell-editor.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/cell-viewer */ "./sources/knockout/table/cell-viewer.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/default */ "./sources/knockout/table/cell-types/default.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/knockout/table/cell-types/indicator.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/knockout/table/cell-types/progress.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/summary */ "./sources/knockout/table/summary.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/search */ "./sources/knockout/table/search.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-default */ "./sources/knockout/table/filter-default.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column-filter */ "./sources/knockout/table/column-filter.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column-filter-item */ "./sources/knockout/table/column-filter-item.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/knockout/table/filter-select.ts"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/action */ "./sources/knockout/widgets/action.ts"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/actions */ "./sources/knockout/widgets/actions.ts"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/dropdown-actions */ "./sources/knockout/widgets/dropdown-actions.ts"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/icon */ "./sources/knockout/widgets/icon.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool-cell-editor */ "./sources/knockout/table/bool-cell-editor.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool-cell-viewer */ "./sources/knockout/table/bool-cell-viewer.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/action */ "./sources/knockout/core/action.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/actions */ "./sources/knockout/core/actions.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/knockout/core/dropdown-actions.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/icon */ "./sources/knockout/core/icon.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/knockout/table/cell-editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/row-editor */ "./sources/knockout/table/row-editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/default */ "./sources/knockout/widgets/default.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/checkbox */ "./sources/knockout/widgets/checkbox.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/property */ "./sources/knockout/widgets/property.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/form */ "./sources/knockout/widgets/form.ts"), exports);
 __exportStar(__webpack_require__(/*! .. */ "./sources/index.ts"), exports);
 exports.KnockoutInstance = ko;
 var KnockoutHashTableStorage = (function (_super) {
@@ -1165,6 +1599,14 @@ var KnockoutHashTableStorage = (function (_super) {
         var observable = this.hash[name];
         this.hash[name](val);
     };
+    KnockoutHashTableStorage.prototype.peekValue = function (name, defaultValue) {
+        var value = _super.prototype.getValue.call(this, name, defaultValue);
+        if (!ko.isObservable(value)) {
+            this.hash[name] = this.createObservable(value);
+        }
+        var observable = this.hash[name];
+        return observable.peek();
+    };
     return KnockoutHashTableStorage;
 }(base_1.HashTableStorage));
 exports.KnockoutHashTableStorage = KnockoutHashTableStorage;
@@ -1174,6 +1616,7 @@ ko.components.register("table4", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             var model = params.model;
+            componentInfo.element.className += " table4js-root--fit-width";
             model.initialize(componentInfo.element);
             return model;
         }
@@ -1197,72 +1640,37 @@ table_1.Table.prototype["render"] = renderTable;
 
 /***/ }),
 
-/***/ "./sources/knockout/table/bool-cell-editor.ts":
-/*!****************************************************!*\
-  !*** ./sources/knockout/table/bool-cell-editor.ts ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.boolCellEditorTemplate = void 0;
-var ko = __webpack_require__(/*! knockout */ "knockout");
-exports.boolCellEditorTemplate = __webpack_require__(/*! ./bool-cell-editor.html */ "./sources/knockout/table/bool-cell-editor.html")["default"];
-ko.components.register("bool-cell-editor", {
-    viewModel: {
-        createViewModel: function (params, componentInfo) {
-            var model = ko.unwrap(params.model);
-            return model;
-        }
-    },
-    template: exports.boolCellEditorTemplate
-});
-
-
-/***/ }),
-
-/***/ "./sources/knockout/table/bool-cell-viewer.ts":
-/*!****************************************************!*\
-  !*** ./sources/knockout/table/bool-cell-viewer.ts ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.boolCellViewerTemplate = void 0;
-var ko = __webpack_require__(/*! knockout */ "knockout");
-exports.boolCellViewerTemplate = __webpack_require__(/*! ./bool-cell-viewer.html */ "./sources/knockout/table/bool-cell-viewer.html")["default"];
-ko.components.register("bool-cell-viewer", {
-    viewModel: {
-        createViewModel: function (params, componentInfo) {
-            return params;
-        }
-    },
-    template: exports.boolCellViewerTemplate
-});
-
-
-/***/ }),
-
 /***/ "./sources/knockout/table/cell-editor.ts":
 /*!***********************************************!*\
   !*** ./sources/knockout/table/cell-editor.ts ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.cellEditorTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
+var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
+var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
 exports.cellEditorTemplate = __webpack_require__(/*! ./cell-editor.html */ "./sources/knockout/table/cell-editor.html")["default"];
 ko.components.register("table4js-cell-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            var model = ko.unwrap(params.model);
-            return model;
+            var isMergedCell = ko.computed(function () { return params.cell.count > 1 && params.table.isMergedСells; });
+            var editor = params.editor;
+            return __assign(__assign({}, params), { editor: editor, inputType: editor_1.Editor.getInputType(params.cell.type), component: editor_1.Editor.editors[params.cell.type] || editor_1.Editor.editors.default, containerCss: ko.computed(function () { return cell_1.TableCell.getContainerCss(params.cell, isMergedCell()); }), contentCss: ko.computed(function () { return cell_1.TableCell.getContentCss(params.cell, isMergedCell()); }), isMergedCell: isMergedCell });
         }
     },
     template: exports.cellEditorTemplate
@@ -1271,25 +1679,98 @@ ko.components.register("table4js-cell-editor", {
 
 /***/ }),
 
-/***/ "./sources/knockout/table/cell-viewer.ts":
-/*!***********************************************!*\
-  !*** ./sources/knockout/table/cell-viewer.ts ***!
-  \***********************************************/
+/***/ "./sources/knockout/table/cell-types/default.ts":
+/*!******************************************************!*\
+  !*** ./sources/knockout/table/cell-types/default.ts ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.cellViewerTemplate = void 0;
+exports.cellDefaultTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
-exports.cellViewerTemplate = __webpack_require__(/*! ./cell-viewer.html */ "./sources/knockout/table/cell-viewer.html")["default"];
-ko.components.register("table4js-cell-viewer", {
+exports.cellDefaultTemplate = __webpack_require__(/*! ./default.html */ "./sources/knockout/table/cell-types/default.html")["default"];
+ko.components.register("table4js-cell-default", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             return params;
         }
     },
-    template: exports.cellViewerTemplate
+    template: exports.cellDefaultTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/table/cell-types/indicator.ts":
+/*!********************************************************!*\
+  !*** ./sources/knockout/table/cell-types/indicator.ts ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.cellIndicatorTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+var indicator_1 = __webpack_require__(/*! ../../../table/cell-types/indicator */ "./sources/table/cell-types/indicator.ts");
+exports.cellIndicatorTemplate = __webpack_require__(/*! ./indicator.html */ "./sources/knockout/table/cell-types/indicator.html")["default"];
+ko.components.register("table4js-cell-indicator", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            var value = parseFloat(params.cell.data);
+            return __assign(__assign({}, params), { style: { backgroundColor: value > indicator_1.IndicatorCell.threshold ? indicator_1.IndicatorCell.greaterColor : indicator_1.IndicatorCell.lessColor } });
+        }
+    },
+    template: exports.cellIndicatorTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/table/cell-types/progress.ts":
+/*!*******************************************************!*\
+  !*** ./sources/knockout/table/cell-types/progress.ts ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.cellProgressTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+exports.cellProgressTemplate = __webpack_require__(/*! ./progress.html */ "./sources/knockout/table/cell-types/progress.html")["default"];
+ko.components.register("table4js-cell-progress", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            var value = parseFloat(params.cell.data);
+            return __assign(__assign({}, params), { value: (Number.isNaN(value) ? 0 : (value * 100).toFixed(2)) + "%" });
+        }
+    },
+    template: exports.cellProgressTemplate
 });
 
 
@@ -1319,11 +1800,11 @@ exports.cellTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
 var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
 exports.cellTemplate = __webpack_require__(/*! ./cell.html */ "./sources/knockout/table/cell.html")["default"];
-ko.components.register("table4js-table-cell", {
+ko.components.register("table4js-cell", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             var isMergedCell = ko.computed(function () { return params.cell.count > 1 && params.table.isMergedСells; });
-            return __assign(__assign({}, params), { startEdit: function () { return params.table.startEditCell(params.cell); }, containerCss: ko.computed(function () { return cell_1.TableCell.getContainerCss(params.cell, isMergedCell()); }), contentCss: ko.computed(function () { return cell_1.TableCell.getContentCss(params.cell, isMergedCell()); }), isMergedCell: isMergedCell });
+            return __assign(__assign({}, params), { containerCss: ko.computed(function () { return cell_1.TableCell.getContainerCss(params.cell, isMergedCell()); }), contentCss: ko.computed(function () { return cell_1.TableCell.getContentCss(params.cell, isMergedCell()); }), isMergedCell: isMergedCell });
         }
     },
     template: exports.cellTemplate
@@ -1389,7 +1870,7 @@ ko.components.register("table4js-column-filter", {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 var ko = __webpack_require__(/*! knockout */ "knockout");
 var defaultFilterTemplate = (__webpack_require__(/*! ./filter-default.html */ "./sources/knockout/table/filter-default.html")["default"]);
-ko.components.register("table4js-table-filter-default", {
+ko.components.register("table4js-filter-default", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             return params;
@@ -1426,6 +1907,65 @@ ko.components.register("table4js-filter-select", {
         }
     },
     template: selectboxFilterTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/table/row-editor.ts":
+/*!**********************************************!*\
+  !*** ./sources/knockout/table/row-editor.ts ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.rowEditorTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+exports.rowEditorTemplate = __webpack_require__(/*! ./row-editor.html */ "./sources/knockout/table/row-editor.html")["default"];
+ko.components.register("table4js-row-editor", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return __assign(__assign({}, params), { isEditMode: ko.computed(function () { return params.row.mode === "edit-row"; }) });
+        }
+    },
+    template: exports.rowEditorTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/table/row.ts":
+/*!***************************************!*\
+  !*** ./sources/knockout/table/row.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.rowTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+exports.rowTemplate = __webpack_require__(/*! ./row.html */ "./sources/knockout/table/row.html")["default"];
+ko.components.register("table4js-row", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return params;
+        }
+    },
+    template: exports.rowTemplate
 });
 
 
@@ -1481,7 +2021,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.summaryTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
 exports.summaryTemplate = __webpack_require__(/*! ./summary.html */ "./sources/knockout/table/summary.html")["default"];
-ko.components.register("table4js-table-summary", {
+ko.components.register("table4js-summary", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             return params.column.summary;
@@ -1493,120 +2033,102 @@ ko.components.register("table4js-table-summary", {
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/action.ts":
-/*!********************************************!*\
-  !*** ./sources/knockout/widgets/action.ts ***!
-  \********************************************/
+/***/ "./sources/knockout/widgets/checkbox.ts":
+/*!**********************************************!*\
+  !*** ./sources/knockout/widgets/checkbox.ts ***!
+  \**********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ActionItemWidget = void 0;
+exports.boolEditorTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
-var actionTemplate = (__webpack_require__(/*! ./action.html */ "./sources/knockout/widgets/action.html")["default"]);
-ko.components.register("table4js-action-item", {
+exports.boolEditorTemplate = __webpack_require__(/*! ./checkbox.html */ "./sources/knockout/widgets/checkbox.html")["default"];
+ko.components.register("table4js-checkbox-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            return params;
+            var model = ko.unwrap(params.model);
+            return model;
         }
     },
-    template: actionTemplate
+    template: exports.boolEditorTemplate
 });
 
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/actions.ts":
+/***/ "./sources/knockout/widgets/default.ts":
 /*!*********************************************!*\
-  !*** ./sources/knockout/widgets/actions.ts ***!
+  !*** ./sources/knockout/widgets/default.ts ***!
   \*********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisActionsWidget = void 0;
+exports.defaultEditorTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
-var actionsTemplate = (__webpack_require__(/*! ./actions.html */ "./sources/knockout/widgets/actions.html")["default"]);
-ko.components.register("table4js-actions", {
+exports.defaultEditorTemplate = __webpack_require__(/*! ./default.html */ "./sources/knockout/widgets/default.html")["default"];
+ko.components.register("table4js-default-editor", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            var modelValue = (params.model || {})[params.options.action];
-            return {
-                actions: modelValue,
-                short: params.options.short,
-                groupName: params.options.groupName,
-                toggleChildActions: function (_, event) {
-                    event.target.classList.toggle("table4js-nested-actions--open");
-                }
-            };
+            return params;
         }
     },
-    template: actionsTemplate
+    template: exports.defaultEditorTemplate
 });
 
 
 /***/ }),
 
-/***/ "./sources/knockout/widgets/dropdown-actions.ts":
-/*!******************************************************!*\
-  !*** ./sources/knockout/widgets/dropdown-actions.ts ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisDropdownActions = void 0;
-var ko = __webpack_require__(/*! knockout */ "knockout");
-var dropdownTemplate = (__webpack_require__(/*! ./dropdown-actions.html */ "./sources/knockout/widgets/dropdown-actions.html")["default"]);
-ko.components.register("table4js-dropdown-actions", {
-    viewModel: {
-        createViewModel: function (params, componentInfo) {
-            var isOpen = params.isOpen || ko.observable(false);
-            var close = function () { return isOpen(false); };
-            document.body.addEventListener("click", close);
-            ko.utils.domNodeDisposal.addDisposeCallback(componentInfo.element, function () {
-                document.body.removeEventListener("click", close);
-            });
-            return {
-                isOpen: isOpen,
-                title: params.title || "",
-                moreText: params.moreText || "",
-                data: params.data,
-                actions: params.actions,
-                toggle: function (_, event) {
-                    isOpen(!isOpen());
-                    event.stopPropagation();
-                },
-            };
-        }
-    },
-    template: dropdownTemplate
-});
-
-
-/***/ }),
-
-/***/ "./sources/knockout/widgets/icon.ts":
+/***/ "./sources/knockout/widgets/form.ts":
 /*!******************************************!*\
-  !*** ./sources/knockout/widgets/icon.ts ***!
+  !*** ./sources/knockout/widgets/form.ts ***!
   \******************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisIconWidget = void 0;
+exports.formEditorTemplate = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
-ko.components.register("table4js-icon", {
+exports.formEditorTemplate = __webpack_require__(/*! ./form.html */ "./sources/knockout/widgets/form.html")["default"];
+ko.components.register("table4js-form", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            return params;
+            return params.form;
         }
     },
-    template: (__webpack_require__(/*! ./icon.html */ "./sources/knockout/widgets/icon.html")["default"])
+    template: exports.formEditorTemplate
+});
+
+
+/***/ }),
+
+/***/ "./sources/knockout/widgets/property.ts":
+/*!**********************************************!*\
+  !*** ./sources/knockout/widgets/property.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.propertyEditorTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "knockout");
+var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
+exports.propertyEditorTemplate = __webpack_require__(/*! ./property.html */ "./sources/knockout/widgets/property.html")["default"];
+ko.components.register("table4js-property-editor", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return {
+                property: params.property,
+                component: editor_1.Editor.editors[params.property.type] || editor_1.Editor.editors.default
+            };
+        }
+    },
+    template: exports.propertyEditorTemplate
 });
 
 
@@ -1640,7 +2162,9 @@ var Localization = (function () {
         filterdateequal: "Equal",
         filterdategreater: "From",
         filterdateless: "To",
-        noData: "No Data"
+        noData: "No Data",
+        true: "True",
+        false: "False"
     };
     Localization.getString = function (stringId) {
         return _a.englishStrings[stringId];
@@ -1652,95 +2176,137 @@ exports.Localization = Localization;
 
 /***/ }),
 
-/***/ "./sources/table/bool.ts":
-/*!*******************************!*\
-  !*** ./sources/table/bool.ts ***!
-  \*******************************/
+/***/ "./sources/table/cell-types/bool.ts":
+/*!******************************************!*\
+  !*** ./sources/table/cell-types/bool.ts ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.BoolCell = void 0;
-var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
-__webpack_require__(/*! ./bool.scss */ "./sources/table/bool.scss");
-var BoolCell = (function () {
-    function BoolCell() {
-        this.name = "bool";
-        this.editor = "bool-cell-editor";
-        this.viewer = "bool-cell-viewer";
-    }
-    return BoolCell;
-}());
-exports.BoolCell = BoolCell;
-cell_1.TableCell.registerCellType(new BoolCell());
+var bool_1 = __webpack_require__(/*! ../../core/field-types/bool */ "./sources/core/field-types/bool.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new bool_1.BoolField());
 
 
 /***/ }),
 
-/***/ "./sources/table/cell-editor.ts":
-/*!**************************************!*\
-  !*** ./sources/table/cell-editor.ts ***!
-  \**************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./sources/table/cell-types/currency.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/currency.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.InplaceEditor = void 0;
-var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
-var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
-__webpack_require__(/*! ./cell-editor.scss */ "./sources/table/cell-editor.scss");
-var InplaceEditor = (function (_super) {
-    __extends(InplaceEditor, _super);
-    function InplaceEditor(cell) {
-        var _this = _super.call(this) || this;
-        _this.cell = cell;
-        _this.value = _this.cell.data;
-        return _this;
+var currency_1 = __webpack_require__(/*! ../../core/field-types/currency */ "./sources/core/field-types/currency.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new currency_1.CurrencyField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/date.ts":
+/*!******************************************!*\
+  !*** ./sources/table/cell-types/date.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var date_1 = __webpack_require__(/*! ../../core/field-types/date */ "./sources/core/field-types/date.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new date_1.DateField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/datetime.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/datetime.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var datetime_1 = __webpack_require__(/*! ../../core/field-types/datetime */ "./sources/core/field-types/datetime.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new datetime_1.DateTimeField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/indicator.ts":
+/*!***********************************************!*\
+  !*** ./sources/table/cell-types/indicator.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.IndicatorCell = void 0;
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+__webpack_require__(/*! ./indicator.scss */ "./sources/table/cell-types/indicator.scss");
+var IndicatorCell = (function () {
+    function IndicatorCell() {
+        this.name = "indicator";
+        this.css = "table4js-cell--center";
+        this.component = "table4js-cell-indicator";
     }
-    InplaceEditor.prototype.complete = function (commit) {
-        if (commit) {
-            this.cell.data = this.value;
-        }
-        this.cell.inplaceEditor = undefined;
-    };
-    InplaceEditor.prototype.processKeyUp = function (event) {
-        if (event.keyCode === 13 || event.keyCode === 27) {
-            this.complete(event.keyCode === 13);
-        }
-    };
-    __decorate([
-        (0, property_1.property)(),
-        __metadata("design:type", Object)
-    ], InplaceEditor.prototype, "value", void 0);
-    return InplaceEditor;
-}(base_1.Base));
-exports.InplaceEditor = InplaceEditor;
+    IndicatorCell.threshold = 0.5;
+    IndicatorCell.greaterColor = "lightgreen";
+    IndicatorCell.lessColor = "pink";
+    return IndicatorCell;
+}());
+exports.IndicatorCell = IndicatorCell;
+cell_1.TableCell.registerCellType(new IndicatorCell());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/number.ts":
+/*!********************************************!*\
+  !*** ./sources/table/cell-types/number.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var number_1 = __webpack_require__(/*! ../../core/field-types/number */ "./sources/core/field-types/number.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new number_1.NumberField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/progress.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/progress.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ProgressCell = void 0;
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+__webpack_require__(/*! ./progress.scss */ "./sources/table/cell-types/progress.scss");
+var ProgressCell = (function () {
+    function ProgressCell() {
+        this.name = "progress";
+        this.css = "table4js-cell--right";
+        this.component = "table4js-cell-progress";
+    }
+    return ProgressCell;
+}());
+exports.ProgressCell = ProgressCell;
+cell_1.TableCell.registerCellType(new ProgressCell());
 
 
 /***/ }),
@@ -1784,22 +2350,26 @@ var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/pro
 var TableCell = (function (_super) {
     __extends(TableCell, _super);
     function TableCell() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._isUpdating = false;
+        _this.type = "default";
+        _this.rowData = {};
+        return _this;
     }
     TableCell.registerCellType = function (cellType) {
         TableCell.cellTypes[cellType.name] = cellType;
     };
     TableCell.getContainerCss = function (cell, isMergedCell) {
-        var containerCss = "table4js-table-cell__container " + cell.css;
+        var containerCss = "table4js-cell__container " + cell.css;
         if (isMergedCell) {
             containerCss += " cell__sticky-text";
         }
         return containerCss;
     };
     TableCell.getContentCss = function (cell, isMergedCell) {
-        var contentCss = isMergedCell ? "table4js-table-cell__text--merged" : "table4js-table-cell__text";
+        var contentCss = isMergedCell ? "table4js-cell__text--merged" : "table4js-cell__text";
         if (cell instanceof TableCell && cell.isModified) {
-            contentCss += " table4js-table-cell__text--modified";
+            contentCss += " table4js-cell__text--modified";
         }
         return contentCss;
     };
@@ -1809,22 +2379,31 @@ var TableCell = (function (_super) {
     TableCell.prototype.getCellCss = function (data, column) {
         return this.getCellTypeDescription(column.type).css;
     };
-    TableCell.prototype.getCellEditor = function (data, column) {
-        return this.getCellTypeDescription(column.type).editor || TableCell.cellTypes["default"].editor;
-    };
-    TableCell.prototype.getCellViewer = function (data, column) {
-        return this.getCellTypeDescription(column.type).viewer || TableCell.cellTypes["default"].viewer;
-    };
     TableCell.prototype.getCellText = function (val) {
-        return val;
+        var cellTypeDescription = this.getCellTypeDescription(this.type);
+        if (!!cellTypeDescription && typeof cellTypeDescription.getText === "function") {
+            return cellTypeDescription.getText(val);
+        }
+        return this.getCellTypeDescription("default").getText(val);
     };
-    TableCell.prototype.initialize = function (col, back, data, color) {
-        this.data = data[col.name],
-            this.color = color;
+    Object.defineProperty(TableCell.prototype, "component", {
+        get: function () {
+            var cellTypeDescription = this.getCellTypeDescription(this.type);
+            if (!!cellTypeDescription && !!cellTypeDescription.component) {
+                return cellTypeDescription.component;
+            }
+            return this.getCellTypeDescription("default").component;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    TableCell.prototype.initialize = function (col, back, rowData, color) {
+        this.type = col.type;
         this.name = col.name;
-        this.css = this.getCellCss(data, col);
-        this.editor = this.getCellEditor(data, col);
-        this.viewer = this.getCellViewer(data, col);
+        this.rowData = rowData;
+        this.data = rowData[col.name];
+        this.color = color;
+        this.css = this.getCellCss(rowData, col);
         if (back !== null) {
             if (back) {
                 if (col.last && col.last.text === this.text) {
@@ -1854,11 +2433,17 @@ var TableCell = (function (_super) {
         }
         this.isModified = false;
     };
+    TableCell.prototype.update = function () {
+        this._isUpdating = true;
+        this.data = this.rowData[this.name];
+        this._isUpdating = false;
+    };
     TableCell.cellTypes = {
         "default": {
-            css: "table4js-table-cell--left",
-            editor: "table4js-cell-editor",
-            viewer: "table4js-cell-viewer"
+            name: "default",
+            css: "table4js-cell--left",
+            getText: function (val) { return typeof val === "object" ? JSON.stringify(val) : val; },
+            component: "table4js-cell-default"
         },
     };
     __decorate([
@@ -1870,7 +2455,9 @@ var TableCell = (function (_super) {
             onSet: function (val, target) {
                 if (target.text !== val) {
                     target.text = target.getCellText(val);
-                    target.isModified = true;
+                    if (!target._isUpdating) {
+                        target.isModified = true;
+                    }
                 }
             }
         }),
@@ -1892,10 +2479,6 @@ var TableCell = (function (_super) {
         (0, property_1.property)(),
         __metadata("design:type", String)
     ], TableCell.prototype, "name", void 0);
-    __decorate([
-        (0, property_1.property)(),
-        __metadata("design:type", Object)
-    ], TableCell.prototype, "inplaceEditor", void 0);
     __decorate([
         (0, property_1.property)(),
         __metadata("design:type", String)
@@ -1981,7 +2564,7 @@ var ColumnFilterItem = (function (_super) {
     }
     Object.defineProperty(ColumnFilterItem.prototype, "filterEditorName", {
         get: function () {
-            return "table4js-table-filter-default";
+            return "table4js-filter-default";
         },
         enumerable: false,
         configurable: true
@@ -2071,6 +2654,10 @@ var FilterContext = (function (_super) {
             _this.showFilter = !!currentFilterItems.length;
             _this.value = currentFilterItems.map(function (i) { return i.filterItemValue; });
         };
+        _this.clickFilter = function (column, event) {
+            column.filterContext.addItem(column);
+            event.stopPropagation();
+        };
         return _this;
     }
     FilterContext.prototype.apply = function () {
@@ -2139,10 +2726,6 @@ var TableColumn = (function (_super) {
         _this.table = table;
         _this.type = "string";
         _this.visible = true;
-        _this.clickFilter = function (column, event) {
-            column.filterContext.addItem(column);
-            event.stopPropagation();
-        };
         Object.keys(columnDescription || {}).forEach(function (key) {
             if (columnDescription[key] !== undefined) {
                 _this[key] = columnDescription[key];
@@ -2163,6 +2746,292 @@ var TableColumn = (function (_super) {
     return TableColumn;
 }(base_1.Base));
 exports.TableColumn = TableColumn;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor-inplace.ts":
+/*!*****************************************!*\
+  !*** ./sources/table/editor-inplace.ts ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InplaceEditorPlugin = void 0;
+var editor_1 = __webpack_require__(/*! ../widgets/editor */ "./sources/widgets/editor.ts");
+var editor_2 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
+var InplaceEditorPlugin = (function (_super) {
+    __extends(InplaceEditorPlugin, _super);
+    function InplaceEditorPlugin() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._activeEditors = undefined;
+        _this.name = "inplace-editor";
+        return _this;
+    }
+    InplaceEditorPlugin.prototype.startEditRow = function (row) {
+        var _this = this;
+        this._activeEditors = {};
+        row.cells.forEach(function (cell) {
+            _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name, function (value, commit) {
+                if (commit) {
+                    cell.data = value;
+                }
+            });
+        });
+        this._editedRow = row;
+        row.mode = "edit-inplace";
+    };
+    InplaceEditorPlugin.prototype.endEditRow = function (commit) {
+        var _this = this;
+        Object.keys(this._activeEditors || {}).forEach(function (name) {
+            _this._activeEditors[name].complete(commit);
+        });
+        if (!!this._editedRow) {
+            if (commit) {
+                this.saveRow(this._editedRow);
+            }
+            this._editedRow.mode = "default";
+            this._editedRow = undefined;
+        }
+        this._activeEditors = undefined;
+    };
+    InplaceEditorPlugin.prototype.onRowCreated = function (row) {
+        var _this = this;
+        var prev = row.getCellComponent;
+        row.getCellComponent = function (cell) {
+            if (row.mode === "edit-inplace") {
+                return "table4js-cell-editor";
+            }
+            return prev(cell);
+        };
+        row.getCellComponentParams = function (params) {
+            if (row.mode === "edit-inplace") {
+                params.editor = _this._activeEditors[params.cell.name];
+            }
+            return params;
+        };
+    };
+    return InplaceEditorPlugin;
+}(editor_2.EditorPlugin));
+exports.InplaceEditorPlugin = InplaceEditorPlugin;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor-row.ts":
+/*!*************************************!*\
+  !*** ./sources/table/editor-row.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RowEditorPlugin = void 0;
+var form_1 = __webpack_require__(/*! ../widgets/form */ "./sources/widgets/form.ts");
+var editor_1 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
+var RowEditorPlugin = (function (_super) {
+    __extends(RowEditorPlugin, _super);
+    function RowEditorPlugin() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._form = undefined;
+        _this.name = "row-editor";
+        return _this;
+    }
+    RowEditorPlugin.prototype.startEditRow = function (row) {
+        this._form = new form_1.Form(this._table.columns);
+        this._form.object = row.rowData;
+        this._editedRow = row;
+        row.mode = "edit-row";
+    };
+    RowEditorPlugin.prototype.endEditRow = function (commit) {
+        if (!!this._form) {
+            this._form.complete(commit);
+            this._form = undefined;
+        }
+        if (!!this._editedRow) {
+            if (commit) {
+                this.saveRow(this._editedRow);
+            }
+            this._editedRow.mode = "default";
+            this._editedRow.update();
+            this._editedRow = undefined;
+        }
+    };
+    RowEditorPlugin.prototype.onRowCreated = function (row) {
+        var _this = this;
+        row.getRowComponent = function () {
+            if (row.mode === "edit-row") {
+                return "table4js-row-editor";
+            }
+            return "table4js-row";
+        };
+        row.getRowComponentParams = function (params) {
+            if (row.mode === "edit-row") {
+                params.form = _this._form;
+            }
+            return params;
+        };
+    };
+    return RowEditorPlugin;
+}(editor_1.EditorPlugin));
+exports.RowEditorPlugin = RowEditorPlugin;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor.ts":
+/*!*********************************!*\
+  !*** ./sources/table/editor.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.EditorPlugin = void 0;
+var utils_1 = __webpack_require__(/*! ../utils/utils */ "./sources/utils/utils.ts");
+var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
+var EditorPlugin = (function () {
+    function EditorPlugin() {
+        this._editedRow = undefined;
+        this.name = "editor";
+    }
+    EditorPlugin.prototype.init = function (table) {
+        this._table = table;
+    };
+    EditorPlugin.prototype.saveRow = function (row) {
+        var isInsert = false;
+        var modifications = {};
+        row.cells.forEach(function (c) { return c.isModified && (modifications[c.name] = c.data); });
+        if (!(0, utils_1.isEmpty)(modifications)) {
+            if (row.number > 0) {
+                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+                    row.cells.forEach(function (c) { return c.isModified = false; });
+                }
+            }
+            else {
+                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
+                    isInsert = true;
+                }
+            }
+        }
+        return isInsert;
+    };
+    EditorPlugin.prototype.add = function () {
+        var newRowData = {};
+        this._table.columns.forEach(function (c) { return c.visible && (newRowData[c.name] = ""); });
+        var newRow = this._table.createRow(newRowData, -1);
+        this._table.rows.unshift(newRow);
+        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
+        return newRow;
+    };
+    EditorPlugin.prototype.save = function () {
+        var _this = this;
+        var isInsert = false;
+        this._table.rows.forEach(function (row) {
+            isInsert = _this.saveRow(row);
+        });
+        if (isInsert) {
+            this._table.refresh();
+        }
+    };
+    EditorPlugin.prototype.delete = function () {
+        var _this = this;
+        this._table.selectedRows.forEach(function (row) {
+            if (row.number > 0) {
+                _this._table.rows.slice(_this._table.rows.indexOf(row), 1);
+            }
+        });
+        var keys = this._table.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this._table.keyColumn]; });
+        this._table.dataProvider.deleteData(this._table.keyColumn, keys, (function (_) { return _this._table.refresh(); }));
+    };
+    EditorPlugin.prototype.startEditRow = function (row) {
+    };
+    EditorPlugin.prototype.endEditRow = function (commit) {
+    };
+    EditorPlugin.prototype.getActions = function () {
+        var _this = this;
+        return [
+            new action_1.Action({
+                name: "save-action",
+                action: function () { return _this.save(); },
+                svg: Icons.save,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "delete-action",
+                action: function () { return _this.delete(); },
+                svg: Icons.del,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "add-action",
+                action: function () {
+                    var newRow = _this.add();
+                    _this.endEditRow(false);
+                    _this.startEditRow(newRow);
+                },
+                svg: Icons.add,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "edit-action",
+                action: function (row) {
+                    if (_this._editedRow !== row) {
+                        _this.endEditRow(false);
+                        _this.startEditRow(row);
+                    }
+                    else {
+                        _this.endEditRow(true);
+                    }
+                },
+                svg: Icons.edit,
+                cssClasses: "table4js__edit",
+                container: "row"
+            })
+        ];
+    };
+    EditorPlugin.prototype.onColumnCreated = function (column) {
+    };
+    EditorPlugin.prototype.onRowCreated = function (row) {
+    };
+    return EditorPlugin;
+}());
+exports.EditorPlugin = EditorPlugin;
 
 
 /***/ }),
@@ -2306,7 +3175,6 @@ var TableFilterSelect = (function (_super) {
     ], TableFilterSelect.prototype, "isLoadMore", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: [], onSet: function (val, target) {
-                console.log("Set filter value to " + JSON.stringify(val));
                 target.value.value = target.selectedItems;
             } }),
         __metadata("design:type", Array)
@@ -2363,19 +3231,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Table = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
-var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 var dependencies_1 = __webpack_require__(/*! ../core/dependencies */ "./sources/core/dependencies.ts");
-var cell_editor_1 = __webpack_require__(/*! ./cell-editor */ "./sources/table/cell-editor.ts");
 var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
 var column_1 = __webpack_require__(/*! ./column */ "./sources/table/column.ts");
 var search_1 = __webpack_require__(/*! ./search */ "./sources/table/search.ts");
 var array_data_provider_1 = __webpack_require__(/*! ../utils/array-data-provider */ "./sources/utils/array-data-provider.ts");
 var row_1 = __webpack_require__(/*! ./row */ "./sources/table/row.ts");
-var utils_1 = __webpack_require__(/*! ../utils/utils */ "./sources/utils/utils.ts");
 var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 var summary_1 = __webpack_require__(/*! ./summary */ "./sources/table/summary.ts");
-var Icons = __webpack_require__(/*! ../icon */ "./sources/icon.ts");
+var editor_inplace_1 = __webpack_require__(/*! ./editor-inplace */ "./sources/table/editor-inplace.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./index.scss */ "./sources/table/index.scss");
 var Table = (function (_super) {
     __extends(Table, _super);
@@ -2386,22 +3253,18 @@ var Table = (function (_super) {
         _this.icons = Icons;
         _this._dataProvider = undefined;
         _this.clickColumn = function (column, event) {
-            if (_this.isShowDetail) {
-                _this.hideDetail();
+            var newOrder = undefined;
+            if (column.order === undefined) {
+                newOrder = false;
             }
-            var newOrder = column.order === undefined ? false : !column.order;
+            else if (column.order === false) {
+                newOrder = true;
+            }
             if (!event.shiftKey) {
                 _this.columns.map(function (c) { return c.order = undefined; });
             }
             column.order = newOrder;
             _this.refresh();
-        };
-        _this.startEditCell = function (cell) {
-            if (_this.currentCellEditor)
-                _this.currentCellEditor.inplaceEditor = undefined;
-            cell.inplaceEditor = new cell_editor_1.InplaceEditor(cell);
-            _this.currentCellEditor = cell;
-            _this.completeEditCell();
         };
         _this.curCol = undefined;
         _this.nxtCol = undefined;
@@ -2450,9 +3313,12 @@ var Table = (function (_super) {
         };
         _this.plugins = [];
         _this.plugins = config.plugins || [];
-        if (config.enableSummary === true) {
-            if (_this.plugins.length === 0) {
-                _this.plugins.push(new summary_1.TableSummaryPlugin());
+        if (_this.plugins.length === 0) {
+            if (config.enableSummary === true) {
+                _this.plugins.push(new summary_1.SummaryPlugin());
+            }
+            if (config.enableEdit === true) {
+                _this.plugins.push(new editor_inplace_1.InplaceEditorPlugin());
             }
         }
         _this.plugins.forEach(function (plugin) { return plugin.init(_this); });
@@ -2465,7 +3331,7 @@ var Table = (function (_super) {
         if (!!element) {
             _this.initialize(element);
         }
-        _this.isMergedСells = config.enableMergedСells;
+        _this.isMergedCells = config.enableMergedCells;
         return _this;
     }
     Table.prototype.updateByFilter = function () {
@@ -2493,9 +3359,9 @@ var Table = (function (_super) {
     };
     Table.prototype.initialize = function (element) {
         var _this = this;
-        this.scrollerElement = element.getElementsByClassName("table4js-table-scroll-container")[0];
+        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
         this.tableElement = element.getElementsByTagName("table")[0];
-        this.resizerElement = element.getElementsByClassName("table4js-table")[0];
+        this.resizerElement = element.getElementsByClassName("table4js")[0];
         var checkLoading = function () {
             var self = _this;
             self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
@@ -2520,10 +3386,10 @@ var Table = (function (_super) {
                     var entry = entries_1[_i];
                     if (entry.target.tagName === "THEAD") {
                         if (entry.contentRect.width < 700) {
-                            entry.target.parentElement.classList.add("table4js-table--small");
+                            entry.target.parentElement.classList.add("table4js--small");
                         }
                         else {
-                            entry.target.parentElement.classList.remove("table4js-table--small");
+                            entry.target.parentElement.classList.remove("table4js--small");
                         }
                         _this.tableHeadHeight = entry.contentRect.height + 5;
                     }
@@ -2532,13 +3398,6 @@ var Table = (function (_super) {
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
         }
     };
-    Table.prototype.showDetail = function (rowData) {
-        this.isShowDetail = true;
-    };
-    Table.prototype.hideDetail = function () {
-        this.expandedRowKey = null;
-        this.isShowDetail = false;
-    };
     Table.prototype.navigateTo = function (startRow) {
         if (startRow) {
             this.lastOffsetBack = startRow - 1;
@@ -2546,7 +3405,6 @@ var Table = (function (_super) {
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
             this.drawRows(this.partRowCount, startRow - 1, false);
-            this.hideDetail();
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -2563,61 +3421,14 @@ var Table = (function (_super) {
     Table.prototype.createActions = function (config) {
         var _this = this;
         this.plugins.forEach(function (plugin) { return _this.innerActions.push.apply(_this.innerActions, plugin.getActions()); });
-        if (config.enableMergedСellsToggle === true) {
+        if (config.enableMergedCellsToggle === true) {
             this.innerActions.push(new action_1.Action({
                 name: "mergedСells-action",
                 action: function () {
-                    _this.isMergedСells = !_this.isMergedСells;
+                    _this.isMergedCells = !_this.isMergedCells;
                 },
                 svg: this.icons.table,
                 container: "top"
-            }));
-        }
-        if (config.enableEdit === true) {
-            this.innerActions.push(new action_1.Action({
-                name: "save-action",
-                action: function () {
-                    var isInsert = false;
-                    _this.rows.forEach(function (r) {
-                        var modify = {};
-                        if (r.number > 0) {
-                            r.cells.forEach(function (c) { return c.text !== c.data && (modify[c.name] = c.text); });
-                            if (!(0, utils_1.isEmpty)(modify)) {
-                                if (_this.dataProvider.saveData(_this.keyColumn, r.rowData[_this.keyColumn], modify))
-                                    r.cells.forEach(function (c) { return c.data = c.text; });
-                            }
-                        }
-                        else {
-                            r.cells.forEach(function (c) { return modify[c.name] = c.text; });
-                            if (_this.dataProvider.insertData(_this.keyColumn, modify))
-                                isInsert = true;
-                        }
-                    });
-                    if (isInsert)
-                        _this.refresh();
-                },
-                svg: this.icons.save,
-                container: "bottom"
-            }), new action_1.Action({
-                name: "delete-action",
-                action: function () {
-                    _this.selectedRows.forEach(function (r) {
-                        if (r.number > 0)
-                            _this.rows.slice(_this.rows.indexOf(r), 1);
-                    });
-                    _this.dataProvider.deleteData(_this.keyColumn, _this.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this.keyColumn]; }), (function (_) { return _this.refresh(); }));
-                },
-                svg: this.icons.del,
-                container: "bottom"
-            }), new action_1.Action({
-                name: "newRow-action",
-                action: function () {
-                    var newRow = {};
-                    _this.columns.forEach(function (c) { return c.visible && (newRow[c.name] = ""); });
-                    _this.rows.unshift(_this.createRow(newRow, -1, null));
-                },
-                svg: this.icons.add,
-                container: "bottom"
             }));
         }
     };
@@ -2645,7 +3456,6 @@ var Table = (function (_super) {
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
         this.drawRows(this.partRowCount, 0, false);
-        this.hideDetail();
     };
     Table.prototype.drawRows = function (limit, offset, back) {
         var _this = this;
@@ -2664,7 +3474,9 @@ var Table = (function (_super) {
                 _this.loadMore = _this.lastOffset <= totalCount;
                 var currentRows = _this.rows;
                 (data || []).forEach(function (dataItem, index) {
-                    var newRow = _this.createRow(back ? data[data.length - 1 - Number(index)] : dataItem, back ? data.length - 1 - Number(index) + offset : Number(index) + offset, back);
+                    var rowData = back ? data[data.length - 1 - Number(index)] : dataItem;
+                    var rowNumber = back ? data.length - 1 - Number(index) + offset : Number(index) + offset;
+                    var newRow = _this.createRow(rowData, rowNumber, back);
                     if (back) {
                         currentRows.unshift(newRow);
                     }
@@ -2690,11 +3502,10 @@ var Table = (function (_super) {
         }
         if (row.selected)
             this.lastSelectRow = row;
-        if (this.selectedRows.length !== 1)
-            this.hideDetail();
     };
     Table.prototype.createRow = function (data, num, back) {
         var _this = this;
+        if (back === void 0) { back = false; }
         var rowCells = [];
         var lastText = null;
         var colorCell = null, colorRow = null;
@@ -2717,23 +3528,15 @@ var Table = (function (_super) {
         row.rowData = data;
         row.id = row_id;
         row.number = num + 1;
-        row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
-        row.select = function (data, event) { return _this.selectRow(data, event); },
-            row.click = function (data, event) { return _this.clickRow(data, event); };
+        row.select = function (data, event) { return _this.selectRow(data, event); };
+        row.click = function (data, event) { return _this.clickRow(data, event); };
+        this.plugins.forEach(function (plugin) { return plugin.onRowCreated(row); });
         return row;
     };
-    Table.prototype.rowExpanded = function (id) {
-        return false;
-    };
-    Table.prototype.completeEditCell = function () {
-    };
-    Table.prototype.hasActiveInplaceEditorCore = function () {
-        return false;
-    };
-    Object.defineProperty(Table.prototype, "hasActiveInplaceEditor", {
+    Object.defineProperty(Table.prototype, "allowRowSelection", {
         get: function () {
-            return this.hasActiveInplaceEditorCore();
+            return true;
         },
         enumerable: false,
         configurable: true
@@ -2784,6 +3587,13 @@ var Table = (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Table.prototype, "rowActions", {
+        get: function () {
+            return this.getActions('row');
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Table.prototype, "noDataText", {
         get: function () {
             return localization_1.Localization.getString("noData");
@@ -2819,7 +3629,7 @@ var Table = (function (_super) {
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
-    ], Table.prototype, "isMerged\u0421ells", void 0);
+    ], Table.prototype, "isMergedCells", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
@@ -2876,37 +3686,9 @@ var Table = (function (_super) {
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
     ], Table.prototype, "viewFilterTable", void 0);
-    __decorate([
-        (0, property_1.property)({ defaultValue: false }),
-        __metadata("design:type", Boolean)
-    ], Table.prototype, "isShowDetail", void 0);
     return Table;
 }(base_1.Base));
 exports.Table = Table;
-
-
-/***/ }),
-
-/***/ "./sources/table/number.ts":
-/*!*********************************!*\
-  !*** ./sources/table/number.ts ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NumberCell = void 0;
-var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
-var NumberCell = (function () {
-    function NumberCell() {
-        this.name = "number";
-        this.css = "table4js-table-cell--right";
-    }
-    return NumberCell;
-}());
-exports.NumberCell = NumberCell;
-cell_1.TableCell.registerCellType(new NumberCell());
 
 
 /***/ }),
@@ -2952,10 +3734,36 @@ var TableRow = (function (_super) {
     function TableRow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    TableRow.prototype.getRowComponent = function () {
+        return "table4js-row";
+    };
+    TableRow.prototype.getRowComponentParams = function (params) {
+        return params;
+    };
+    TableRow.prototype.getCellComponent = function (cell) {
+        return "table4js-cell";
+    };
+    TableRow.prototype.getCellComponentParams = function (params) {
+        return params;
+    };
+    Object.defineProperty(TableRow.prototype, "css", {
+        get: function () {
+            var result = "table4js__row table4js__row--" + this.mode;
+            if (this.selected) {
+                result += " table4js__row--selected";
+            }
+            return result;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    TableRow.prototype.update = function () {
+        this.cells.forEach(function (cell) { return cell.update(); });
+    };
     __decorate([
-        (0, property_1.property)({ defaultValue: [] }),
-        __metadata("design:type", Array)
-    ], TableRow.prototype, "cells", void 0);
+        (0, property_1.property)({ defaultValue: "default" }),
+        __metadata("design:type", String)
+    ], TableRow.prototype, "mode", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
@@ -2964,6 +3772,10 @@ var TableRow = (function (_super) {
         (0, property_1.property)(),
         __metadata("design:type", String)
     ], TableRow.prototype, "color", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: [] }),
+        __metadata("design:type", Array)
+    ], TableRow.prototype, "cells", void 0);
     return TableRow;
 }(base_1.Base));
 exports.TableRow = TableRow;
@@ -3067,67 +3879,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableSummaryPlugin = exports.TableSummary = exports.TableSummaryItem = void 0;
+exports.SummaryPlugin = exports.FieldSummary = exports.SummaryItem = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
 var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 __webpack_require__(/*! ./summary.scss */ "./sources/table/summary.scss");
 var Functions = [
     { title: "-", value: "", hint: "" },
-    { title: "Σ", value: "sum", hint: "Sum of cells for this table column", types: ["integer", "money", "number"] },
-    { title: "x̄", value: "avg", hint: "Arithmetic mean in this table column", types: ["integer", "money", "number"] },
-    { title: "min", value: "min", hint: "Minimum value in this table column", types: ["integer", "money", "date", "number"] },
-    { title: "max", value: "max", hint: "Maximum value in this table column", types: ["integer", "money", "date", "number"] },
-    { title: "Ν", value: "count", hint: "Number of non-blank cells in this column" },
+    { title: "Σ", value: "sum", hint: "Sum of cells for this table column", types: ["integer", "money", "currency", "progress", "number"] },
+    { title: "x̄", value: "avg", hint: "Arithmetic mean in this table column", types: ["integer", "money", "currency", "progress", "number"] },
+    { title: "min", value: "min", hint: "Minimum value in this table column", types: ["integer", "money", "currency", "progress", "number", "date", "datetime"] },
+    { title: "max", value: "max", hint: "Maximum value in this table column", types: ["integer", "money", "currency", "progress", "number", "date", "datetime"] },
+    { title: "N", value: "count", hint: "Number of non-blank cells in this column" },
     { title: "U", value: "unique", hint: "Number of unique cells in this column" },
 ];
-var TableSummaryItem = (function () {
-    function TableSummaryItem(title, value) {
+var SummaryItem = (function () {
+    function SummaryItem(title, value) {
         this.title = title;
         this.value = value;
     }
-    return TableSummaryItem;
+    return SummaryItem;
 }());
-exports.TableSummaryItem = TableSummaryItem;
-var TableSummary = (function (_super) {
-    __extends(TableSummary, _super);
-    function TableSummary(table, column) {
+exports.SummaryItem = SummaryItem;
+var FieldSummary = (function (_super) {
+    __extends(FieldSummary, _super);
+    function FieldSummary(table, field) {
         var _this = _super.call(this) || this;
         _this.table = table;
-        _this.column = column;
+        _this.field = field;
         _this.summaryItems = Functions.filter(function (funcDescription) {
-            return !funcDescription.types || funcDescription.types.indexOf(column.type) !== -1;
-        }).map(function (funcDescription) { return new TableSummaryItem(funcDescription.title, funcDescription.value); });
+            return !funcDescription.types || funcDescription.types.indexOf(field.type) !== -1;
+        }).map(function (funcDescription) { return new SummaryItem(funcDescription.title, funcDescription.value); });
         return _this;
     }
-    TableSummary.prototype.calculateSummary = function () {
+    FieldSummary.prototype.calculateSummary = function () {
         var _this = this;
         this.value = undefined;
         if (!!this.func) {
-            this.table.dataProvider.getSummary(this.func, this.column.name, this.table["tableFilter"], function (data) { return _this.value = data; });
+            this.table.dataProvider.getSummary(this.func, this.field.name, this.table["tableFilter"], function (data) { return _this.value = data; });
         }
     };
     __decorate([
         (0, property_1.property)(),
         __metadata("design:type", Number)
-    ], TableSummary.prototype, "value", void 0);
+    ], FieldSummary.prototype, "value", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: null, onSet: function (val, target) {
                 target.calculateSummary();
             } }),
         __metadata("design:type", Object)
-    ], TableSummary.prototype, "func", void 0);
-    return TableSummary;
+    ], FieldSummary.prototype, "func", void 0);
+    return FieldSummary;
 }(base_1.Base));
-exports.TableSummary = TableSummary;
-var TableSummaryPlugin = (function () {
-    function TableSummaryPlugin() {
+exports.FieldSummary = FieldSummary;
+var SummaryPlugin = (function () {
+    function SummaryPlugin() {
         this.name = "summary";
     }
-    TableSummaryPlugin.prototype.init = function (table) {
+    SummaryPlugin.prototype.init = function (table) {
         this._table = table;
     };
-    TableSummaryPlugin.prototype.getActions = function () {
+    SummaryPlugin.prototype.getActions = function () {
         var _this = this;
         return [new action_1.Action({
                 name: "summary-action",
@@ -3138,12 +3950,14 @@ var TableSummaryPlugin = (function () {
                 container: "top"
             })];
     };
-    TableSummaryPlugin.prototype.onColumnCreated = function (column) {
-        column.summary = new TableSummary(this._table, column);
+    SummaryPlugin.prototype.onColumnCreated = function (column) {
+        column.summary = new FieldSummary(this._table, column);
     };
-    return TableSummaryPlugin;
+    SummaryPlugin.prototype.onRowCreated = function (row) {
+    };
+    return SummaryPlugin;
 }());
-exports.TableSummaryPlugin = TableSummaryPlugin;
+exports.SummaryPlugin = SummaryPlugin;
 
 
 /***/ }),
@@ -3405,6 +4219,352 @@ function isEqual(obj1, obj2) {
     return obj1 === obj2;
 }
 exports.isEqual = isEqual;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/editor.ts":
+/*!***********************************!*\
+  !*** ./sources/widgets/editor.ts ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Editor = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+__webpack_require__(/*! ./editor.scss */ "./sources/widgets/editor.scss");
+var Editor = (function (_super) {
+    __extends(Editor, _super);
+    function Editor(_data, name, onComplete) {
+        var _this = _super.call(this) || this;
+        _this._data = _data;
+        _this.name = name;
+        _this.onComplete = onComplete;
+        _this.value = _data[_this.name];
+        return _this;
+    }
+    Editor.getInputType = function (type) {
+        return Editor.inputTypes[type];
+    };
+    Object.defineProperty(Editor.prototype, "isModified", {
+        get: function () {
+            return this.value !== this.data[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "css", {
+        get: function () {
+            var result = "table4js-editor";
+            if (this.isModified) {
+                result += " table4js-editor--modified";
+            }
+            return result;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (val) {
+            this._data = val;
+            this.value = val[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Editor.prototype.complete = function (commit) {
+        if (commit) {
+            this.data[this.name] = this.value;
+        }
+        !!this.onComplete && this.onComplete(this.value, commit);
+    };
+    Editor.inputTypes = {
+        number: "number",
+        currency: "number",
+        indicator: "number",
+        progress: "number",
+        date: "date",
+        datetime: "datetime-local",
+    };
+    Editor.editors = {
+        default: "table4js-default-editor",
+        bool: "table4js-checkbox-editor",
+    };
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", Object)
+    ], Editor.prototype, "value", void 0);
+    return Editor;
+}(base_1.Base));
+exports.Editor = Editor;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/form.ts":
+/*!*********************************!*\
+  !*** ./sources/widgets/form.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Form = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var property_2 = __webpack_require__(/*! ./property */ "./sources/widgets/property.ts");
+__webpack_require__(/*! ./form.scss */ "./sources/widgets/form.scss");
+var Form = (function (_super) {
+    __extends(Form, _super);
+    function Form(fields, layout) {
+        var _this = _super.call(this) || this;
+        _this.fields = fields;
+        _this.layout = layout;
+        _this._properties = {};
+        if (!_this.layout) {
+            _this.layout = { elements: (fields || []).filter(function (f) { return f.visible; }).map(function (f) { return ({ name: f.name, title: f.title }); }) };
+        }
+        _this.fields.forEach(function (field) { return _this._properties[field.name] = new property_2.Property(field); });
+        return _this;
+    }
+    Object.defineProperty(Form.prototype, "properties", {
+        get: function () {
+            var _this = this;
+            return this.layout.elements.map(function (el) { return _this._properties[el.name]; });
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Form.prototype.complete = function (commit) {
+        var _this = this;
+        Object.keys(this._properties).forEach(function (name) { return _this._properties[name].complete(commit); });
+    };
+    __decorate([
+        (0, property_1.property)({
+            onSet: function (val, target) {
+                Object.keys(target._properties).forEach(function (name) { return target._properties[name].obj = val; });
+            }
+        }),
+        __metadata("design:type", Object)
+    ], Form.prototype, "object", void 0);
+    return Form;
+}(base_1.Base));
+exports.Form = Form;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/property.ts":
+/*!*************************************!*\
+  !*** ./sources/widgets/property.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Property = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var editor_1 = __webpack_require__(/*! ./editor */ "./sources/widgets/editor.ts");
+__webpack_require__(/*! ./property.scss */ "./sources/widgets/property.scss");
+var Property = (function (_super) {
+    __extends(Property, _super);
+    function Property(field) {
+        var _this = _super.call(this) || this;
+        _this.field = field;
+        _this.title = field.title || field.name;
+        _this.editor = new editor_1.Editor(_this.obj, _this.name);
+        return _this;
+    }
+    Property.registerPropertyType = function (propertyType) {
+        Property.propertyTypes[propertyType.name] = propertyType;
+    };
+    Object.defineProperty(Property.prototype, "type", {
+        get: function () {
+            var _a;
+            return ((_a = this.field) === null || _a === void 0 ? void 0 : _a.type) || "default";
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "name", {
+        get: function () {
+            return this.field.name;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "value", {
+        get: function () {
+            return this.editor.value;
+        },
+        set: function (val) {
+            this.editor.value = val;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "hasValue", {
+        get: function () {
+            return this.editor.value !== undefined;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "css", {
+        get: function () {
+            return this.getPropertyCss(this.obj, this.field);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Property.prototype.getPropertyTypeDescription = function (type) {
+        return Property.propertyTypes[type] || Property.propertyTypes["default"];
+    };
+    Property.prototype.getPropertyCss = function (data, field) {
+        return this.getPropertyTypeDescription(field.type).css;
+    };
+    Property.prototype.getText = function (val) {
+        var propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+        if (!!propertyTypeDescription && typeof propertyTypeDescription.getText === "function") {
+            return propertyTypeDescription.getText(val);
+        }
+        return this.getPropertyTypeDescription("default").getText(val);
+    };
+    Object.defineProperty(Property.prototype, "component", {
+        get: function () {
+            var propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+            if (!!propertyTypeDescription && !!propertyTypeDescription.component) {
+                return propertyTypeDescription.component;
+            }
+            return this.getPropertyTypeDescription("default").component;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "inputType", {
+        get: function () {
+            return editor_1.Editor.getInputType(this.type);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Property.prototype.complete = function (commit) {
+        this.editor.complete(commit);
+    };
+    Property.propertyTypes = {
+        "default": {
+            name: "default",
+            css: "table4js-cell--left",
+            getText: function (val) { return typeof val === "object" ? JSON.stringify(val) : val; },
+            component: "table4js-property-editor"
+        },
+    };
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", String)
+    ], Property.prototype, "title", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: false }),
+        __metadata("design:type", Boolean)
+    ], Property.prototype, "isModified", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: false }),
+        __metadata("design:type", Boolean)
+    ], Property.prototype, "isReadOnly", void 0);
+    __decorate([
+        (0, property_1.property)({
+            defaultValue: {},
+            onSet: function (val, target) {
+                target.editor.data = val;
+                target.isModified = false;
+            }
+        }),
+        __metadata("design:type", Object)
+    ], Property.prototype, "obj", void 0);
+    return Property;
+}(base_1.Base));
+exports.Property = Property;
 
 
 /***/ }),

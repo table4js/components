@@ -37,10 +37,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./sources/table/bool.scss":
-/*!*********************************!*\
-  !*** ./sources/table/bool.scss ***!
-  \*********************************/
+/***/ "./sources/table/cell-types/indicator.scss":
+/*!*************************************************!*\
+  !*** ./sources/table/cell-types/indicator.scss ***!
+  \*************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -50,10 +50,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./sources/table/cell-editor.scss":
-/*!****************************************!*\
-  !*** ./sources/table/cell-editor.scss ***!
-  \****************************************/
+/***/ "./sources/table/cell-types/progress.scss":
+/*!************************************************!*\
+  !*** ./sources/table/cell-types/progress.scss ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -132,6 +132,45 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************!*\
   !*** ./sources/table/summary.scss ***!
   \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/widgets/editor.scss":
+/*!*************************************!*\
+  !*** ./sources/widgets/editor.scss ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/widgets/form.scss":
+/*!***********************************!*\
+  !*** ./sources/widgets/form.scss ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/widgets/property.scss":
+/*!***************************************!*\
+  !*** ./sources/widgets/property.scss ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -449,6 +488,9 @@ var HashTableStorage = (function () {
     HashTableStorage.prototype.setValue = function (name, val) {
         this.hash[name] = val;
     };
+    HashTableStorage.prototype.peekValue = function (name, defaultValue) {
+        return this.getValue(name, defaultValue);
+    };
     return HashTableStorage;
 }());
 exports.HashTableStorage = HashTableStorage;
@@ -493,7 +535,7 @@ var Base = (function () {
         return this.getPropertyValueCore(propertyName, defaultValue);
     };
     Base.prototype.setPropertyValue = function (propertyName, newValue, defaultValue) {
-        var oldValue = this.getPropertyValue(propertyName, defaultValue);
+        var oldValue = this.storage.peekValue(propertyName, defaultValue);
         if (!(0, utils_1.isEqual)(oldValue, newValue)) {
             this.setPropertyValueCore(propertyName, newValue);
             this.onPropertyValueChanged(propertyName, oldValue, newValue);
@@ -613,6 +655,19 @@ exports.ComputedUpdater = ComputedUpdater;
 
 /***/ }),
 
+/***/ "./sources/core/domain.ts":
+/*!********************************!*\
+  !*** ./sources/core/domain.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
 /***/ "./sources/core/dropdown-actions.ts":
 /*!******************************************!*\
   !*** ./sources/core/dropdown-actions.ts ***!
@@ -623,6 +678,155 @@ exports.ComputedUpdater = ComputedUpdater;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __webpack_require__(/*! ./dropdown-actions.scss */ "./sources/core/dropdown-actions.scss");
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/bool.ts":
+/*!******************************************!*\
+  !*** ./sources/core/field-types/bool.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BoolField = void 0;
+var localization_1 = __webpack_require__(/*! ../../localization */ "./sources/localization.ts");
+var BoolField = (function () {
+    function BoolField() {
+        this.name = "bool";
+        this.css = "table4js-cell--center";
+        this.getText = function (val) {
+            if (val === true || val === "t" || val === "true") {
+                return localization_1.Localization.getString("true");
+            }
+            return localization_1.Localization.getString("false");
+        };
+    }
+    return BoolField;
+}());
+exports.BoolField = BoolField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/currency.ts":
+/*!**********************************************!*\
+  !*** ./sources/core/field-types/currency.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CurrencyField = void 0;
+var CurrencyField = (function () {
+    function CurrencyField() {
+        this.name = "currency";
+        this.css = "table4js-cell--right";
+        this.getText = function (val) {
+            if (!val || Number.isNaN(val)) {
+                val = 0;
+            }
+            var result = !!CurrencyField.prefix ? (CurrencyField.prefix + " ") : "";
+            result += parseFloat(val).toFixed(CurrencyField.precision).toString();
+            if (!!CurrencyField.suffix) {
+                result += " " + CurrencyField.suffix;
+            }
+            return result;
+        };
+    }
+    CurrencyField.prefix = "$";
+    CurrencyField.suffix = "";
+    CurrencyField.precision = 2;
+    return CurrencyField;
+}());
+exports.CurrencyField = CurrencyField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/date.ts":
+/*!******************************************!*\
+  !*** ./sources/core/field-types/date.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DateField = void 0;
+var DateField = (function () {
+    function DateField() {
+        this.name = "date";
+        this.getText = function (val) {
+            var result = "";
+            try {
+                var date = new Date((val || "").split("T")[0]);
+                result = date.toLocaleDateString();
+            }
+            catch (_a) {
+            }
+            return result;
+        };
+    }
+    return DateField;
+}());
+exports.DateField = DateField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/datetime.ts":
+/*!**********************************************!*\
+  !*** ./sources/core/field-types/datetime.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DateTimeField = void 0;
+var DateTimeField = (function () {
+    function DateTimeField() {
+        this.name = "datetime";
+        this.getText = function (val) {
+            var result = "";
+            try {
+                var date = new Date(val || "");
+                result = date.toLocaleString();
+            }
+            catch (_a) {
+            }
+            return result;
+        };
+    }
+    return DateTimeField;
+}());
+exports.DateTimeField = DateTimeField;
+
+
+/***/ }),
+
+/***/ "./sources/core/field-types/number.ts":
+/*!********************************************!*\
+  !*** ./sources/core/field-types/number.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NumberField = void 0;
+var NumberField = (function () {
+    function NumberField() {
+        this.name = "number";
+        this.css = "table4js-cell--right";
+    }
+    return NumberField;
+}());
+exports.NumberField = NumberField;
 
 
 /***/ }),
@@ -751,33 +955,33 @@ Object.keys(defaultOperationsMap).forEach(function (key) { return exports.operat
 
 /***/ }),
 
-/***/ "./sources/icon.ts":
-/*!*************************!*\
-  !*** ./sources/icon.ts ***!
-  \*************************/
+/***/ "./sources/icons/index.ts":
+/*!********************************!*\
+  !*** ./sources/icons/index.ts ***!
+  \********************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.arrowdown = exports.cross = exports.search = exports.arrowright = exports.edit = exports.more = exports.filter = exports.sortdown = exports.sortup = exports.check = exports.more_sq = exports.paste = exports.del = exports.save = exports.table = exports.equal = exports.add = void 0;
-exports.add = __webpack_require__(/*! ./icons/icon_item-add.svg */ "./sources/icons/icon_item-add.svg");
-exports.equal = __webpack_require__(/*! ./icons/icon_equal.svg */ "./sources/icons/icon_equal.svg");
-exports.table = __webpack_require__(/*! ./icons/icon_table-merge.svg */ "./sources/icons/icon_table-merge.svg");
-exports.save = __webpack_require__(/*! ./icons/icon_item-save.svg */ "./sources/icons/icon_item-save.svg");
-exports.del = __webpack_require__(/*! ./icons/icon_item-delete.svg */ "./sources/icons/icon_item-delete.svg");
-exports.paste = __webpack_require__(/*! ./icons/icon_paste.svg */ "./sources/icons/icon_paste.svg");
-exports.more_sq = __webpack_require__(/*! ./icons/icon_more_sq.svg */ "./sources/icons/icon_more_sq.svg");
-exports.check = __webpack_require__(/*! ./icons/icon_check.svg */ "./sources/icons/icon_check.svg");
-exports.sortup = __webpack_require__(/*! ./icons/icon_sort-up.svg */ "./sources/icons/icon_sort-up.svg");
-exports.sortdown = __webpack_require__(/*! ./icons/icon_sort-down.svg */ "./sources/icons/icon_sort-down.svg");
-exports.filter = __webpack_require__(/*! ./icons/icon_filter.svg */ "./sources/icons/icon_filter.svg");
-exports.more = __webpack_require__(/*! ./icons/icon_more.svg */ "./sources/icons/icon_more.svg");
-exports.edit = __webpack_require__(/*! ./icons/icon_edit.svg */ "./sources/icons/icon_edit.svg");
-exports.arrowright = __webpack_require__(/*! ./icons/icon_arrow-right.svg */ "./sources/icons/icon_arrow-right.svg");
-exports.search = __webpack_require__(/*! ./icons/icon_search.svg */ "./sources/icons/icon_search.svg");
-exports.cross = __webpack_require__(/*! ./icons/icon_cross.svg */ "./sources/icons/icon_cross.svg");
-exports.arrowdown = __webpack_require__(/*! ./icons/icon_arrow-down.svg */ "./sources/icons/icon_arrow-down.svg");
+exports.add = __webpack_require__(/*! ./icon_item-add.svg */ "./sources/icons/icon_item-add.svg");
+exports.equal = __webpack_require__(/*! ./icon_equal.svg */ "./sources/icons/icon_equal.svg");
+exports.table = __webpack_require__(/*! ./icon_table-merge.svg */ "./sources/icons/icon_table-merge.svg");
+exports.save = __webpack_require__(/*! ./icon_item-save.svg */ "./sources/icons/icon_item-save.svg");
+exports.del = __webpack_require__(/*! ./icon_item-delete.svg */ "./sources/icons/icon_item-delete.svg");
+exports.paste = __webpack_require__(/*! ./icon_paste.svg */ "./sources/icons/icon_paste.svg");
+exports.more_sq = __webpack_require__(/*! ./icon_more_sq.svg */ "./sources/icons/icon_more_sq.svg");
+exports.check = __webpack_require__(/*! ./icon_check.svg */ "./sources/icons/icon_check.svg");
+exports.sortup = __webpack_require__(/*! ./icon_sort-up.svg */ "./sources/icons/icon_sort-up.svg");
+exports.sortdown = __webpack_require__(/*! ./icon_sort-down.svg */ "./sources/icons/icon_sort-down.svg");
+exports.filter = __webpack_require__(/*! ./icon_filter.svg */ "./sources/icons/icon_filter.svg");
+exports.more = __webpack_require__(/*! ./icon_more.svg */ "./sources/icons/icon_more.svg");
+exports.edit = __webpack_require__(/*! ./icon_edit.svg */ "./sources/icons/icon_edit.svg");
+exports.arrowright = __webpack_require__(/*! ./icon_arrow-right.svg */ "./sources/icons/icon_arrow-right.svg");
+exports.search = __webpack_require__(/*! ./icon_search.svg */ "./sources/icons/icon_search.svg");
+exports.cross = __webpack_require__(/*! ./icon_cross.svg */ "./sources/icons/icon_cross.svg");
+exports.arrowdown = __webpack_require__(/*! ./icon_arrow-down.svg */ "./sources/icons/icon_arrow-down.svg");
 
 
 /***/ }),
@@ -808,6 +1012,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(/*! ./core/action */ "./sources/core/action.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/actions */ "./sources/core/actions.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/core/dropdown-actions.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/domain */ "./sources/core/domain.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/bool */ "./sources/core/field-types/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/currency */ "./sources/core/field-types/currency.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/date */ "./sources/core/field-types/date.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/datetime */ "./sources/core/field-types/datetime.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/field-types/number */ "./sources/core/field-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./find */ "./sources/find.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table */ "./sources/table/index.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/table/cell.ts"), exports);
@@ -817,12 +1027,21 @@ __exportStar(__webpack_require__(/*! ./table/column-filter */ "./sources/table/c
 __exportStar(__webpack_require__(/*! ./table/column-filter-item */ "./sources/table/column-filter-item.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-default */ "./sources/table/filter-default.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/table/filter-select.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/number */ "./sources/table/number.ts"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool */ "./sources/table/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/bool */ "./sources/table/cell-types/bool.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/currency */ "./sources/table/cell-types/currency.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/date */ "./sources/table/cell-types/date.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/datetime */ "./sources/table/cell-types/datetime.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/table/cell-types/indicator.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/number */ "./sources/table/cell-types/number.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/table/cell-types/progress.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/editor */ "./sources/widgets/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor */ "./sources/table/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor-inplace */ "./sources/table/editor-inplace.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/editor-row */ "./sources/table/editor-row.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/array-data-provider */ "./sources/utils/array-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/remote-data-provider */ "./sources/utils/remote-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/utils */ "./sources/utils/utils.ts"), exports);
-__exportStar(__webpack_require__(/*! ./icon */ "./sources/icon.ts"), exports);
+__exportStar(__webpack_require__(/*! ./icons */ "./sources/icons/index.ts"), exports);
 
 
 /***/ }),
@@ -855,7 +1074,9 @@ var Localization = (function () {
         filterdateequal: "Equal",
         filterdategreater: "From",
         filterdateless: "To",
-        noData: "No Data"
+        noData: "No Data",
+        true: "True",
+        false: "False"
     };
     Localization.getString = function (stringId) {
         return _a.englishStrings[stringId];
@@ -896,6 +1117,88 @@ function AbrisComponent(_a) {
     return componentCreator(componentProps);
 }
 exports.AbrisComponent = AbrisComponent;
+
+
+/***/ }),
+
+/***/ "./sources/react/core/action.tsx":
+/*!***************************************!*\
+  !*** ./sources/react/core/action.tsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisAction = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+function AbrisAction(_a) {
+    var action = _a.action;
+    (0, reactivity_1.makeReactive)(action);
+    return (React.createElement("button", { key: action.name, onClick: function () { return action.action(); }, className: "table4js-button--transparent action-button table4js-action-button " +
+            action.cssClasses +
+            (action.active === true ? " table4js-action--active" : ""), type: action["formId"] !== undefined ? "submit" : "button", title: action.title || action.name },
+        action.svg && (React.createElement("div", { className: "table4js-action-button__icon table4js-button__svg-icon", dangerouslySetInnerHTML: { __html: action.svg } })),
+        React.createElement("span", { className: "table4js-action-button__label " + action.cssLabel, style: { display: action.title ? "block" : "none" } }, action.title)));
+}
+exports.AbrisAction = AbrisAction;
+
+
+/***/ }),
+
+/***/ "./sources/react/core/actions.tsx":
+/*!****************************************!*\
+  !*** ./sources/react/core/actions.tsx ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisActions = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var action_1 = __webpack_require__(/*! ./action */ "./sources/react/core/action.tsx");
+function AbrisActions(_a) {
+    var className = _a.className, actions = _a.actions;
+    return (React.createElement("div", { className: className }, actions.map(function (action) {
+        if (!action.actions) {
+            return React.createElement(action_1.AbrisAction, { key: action.name, action: action });
+        }
+        if (action.actions && action.actions.length > 0) {
+            return (React.createElement("div", { className: "table4js-nested-actions table4js-action-context-button" },
+                React.createElement("span", { className: "table4js-button__label", "data-bind": "text: title" }),
+                React.createElement("div", { className: "table4js-nested-actions__dropdown" }, action.actions.map(function (a) { return (React.createElement(action_1.AbrisAction, { key: a.name, action: a })); }))));
+        }
+    })));
+}
+exports.AbrisActions = AbrisActions;
+
+
+/***/ }),
+
+/***/ "./sources/react/core/dropdown-actions.tsx":
+/*!*************************************************!*\
+  !*** ./sources/react/core/dropdown-actions.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AbrisDropdownActions = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var actions_1 = __webpack_require__(/*! ./actions */ "./sources/react/core/actions.tsx");
+function AbrisDropdownActions(_a) {
+    var className = _a.className, actions = _a.actions;
+    return (React.createElement("div", { className: className },
+        React.createElement("button", { className: "table4js-action-button table4js-button--transparent table4js-button-toggle", type: "button", "data-bind": "click: toggle, attr: { title: title }" },
+            React.createElement("div", { "data-bind": "html: $root.icons.more_sq" }),
+            React.createElement("span", { className: "table4js-action-button__label", "data-bind": "text: moreText" })),
+        React.createElement("ul", { className: "table4js-button-toggle__dropdown-menu" },
+            React.createElement(actions_1.AbrisActions, { className: "table4js-context-actions", actions: actions }))));
+}
+exports.AbrisDropdownActions = AbrisDropdownActions;
 
 
 /***/ }),
@@ -943,18 +1246,23 @@ var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 __exportStar(__webpack_require__(/*! ./abris-component */ "./sources/react/abris-component.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table */ "./sources/react/table/index.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/react/table/cell.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/react/table/cell-editor.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./table/cell-viewer */ "./sources/react/table/cell-viewer.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/default */ "./sources/react/table/cell-types/default.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/react/table/cell-types/indicator.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/react/table/cell-types/progress.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/row */ "./sources/react/table/row.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/summary */ "./sources/react/table/summary.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/search */ "./sources/react/table/search.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/column-filter */ "./sources/react/table/column-filter.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/react/table/filter-select.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/action */ "./sources/react/widgets/action.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/actions */ "./sources/react/widgets/actions.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/dropdown-actions */ "./sources/react/widgets/dropdown-actions.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool-cell-editor */ "./sources/react/table/bool-cell-editor.tsx"), exports);
-__exportStar(__webpack_require__(/*! ./table/bool-cell-viewer */ "./sources/react/table/bool-cell-viewer.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./core/action */ "./sources/react/core/action.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./core/actions */ "./sources/react/core/actions.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/react/core/dropdown-actions.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/react/table/cell-editor.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./table/row-editor */ "./sources/react/table/row-editor.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/default */ "./sources/react/widgets/default.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/checkbox */ "./sources/react/widgets/checkbox.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/property */ "./sources/react/widgets/property.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/form */ "./sources/react/widgets/form.tsx"), exports);
 __exportStar(__webpack_require__(/*! .. */ "./sources/index.ts"), exports);
 var ReactHashTableStorage = (function (_super) {
     __extends(ReactHashTableStorage, _super);
@@ -1029,57 +1337,6 @@ exports.makeReactive = makeReactive;
 
 /***/ }),
 
-/***/ "./sources/react/table/bool-cell-editor.tsx":
-/*!**************************************************!*\
-  !*** ./sources/react/table/bool-cell-editor.tsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Table4BoolCellEditor = void 0;
-var React = __webpack_require__(/*! react */ "react");
-var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
-var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-function Table4BoolCellEditor(_a) {
-    var model = _a.model;
-    (0, reactivity_1.makeReactive)(model);
-    return (React.createElement("div", { className: "table4js-table__bool-cell-editor" },
-        React.createElement("input", { type: "checkbox", checked: model.value, onChange: function (e) {
-                model.value = e.target.checked;
-                model.complete(true);
-            } })));
-}
-exports.Table4BoolCellEditor = Table4BoolCellEditor;
-(0, abris_component_1.registerComponent)("bool-cell-editor", Table4BoolCellEditor);
-
-
-/***/ }),
-
-/***/ "./sources/react/table/bool-cell-viewer.tsx":
-/*!**************************************************!*\
-  !*** ./sources/react/table/bool-cell-viewer.tsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Table4BoolCellViewer = void 0;
-var React = __webpack_require__(/*! react */ "react");
-var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
-function Table4BoolCellViewer(_a) {
-    var cell = _a.cell, className = _a.className;
-    return (React.createElement("span", { className: className + " table4js-table__bool-cell-viewer" },
-        React.createElement("span", { className: "table4js-table__bool-cell-viewer-circle", style: { backgroundColor: cell.data ? "green" : "red" } })));
-}
-exports.Table4BoolCellViewer = Table4BoolCellViewer;
-(0, abris_component_1.registerComponent)("bool-cell-viewer", Table4BoolCellViewer);
-
-
-/***/ }),
-
 /***/ "./sources/react/table/cell-editor.tsx":
 /*!*********************************************!*\
   !*** ./sources/react/table/cell-editor.tsx ***!
@@ -1092,12 +1349,16 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Table4CellEditor = void 0;
 var React = __webpack_require__(/*! react */ "react");
 var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
+var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
 function Table4CellEditor(_a) {
-    var model = _a.model;
-    (0, reactivity_1.makeReactive)(model);
-    return (React.createElement("div", { className: "table4js-table__cell-editor" },
-        React.createElement("input", { defaultValue: model.value, onChange: function (e) { return model.value = e.target.value; }, onKeyUp: function (e) { return model.processKeyUp(e.nativeEvent); } })));
+    var table = _a.table, cell = _a.cell, editor = _a.editor;
+    (0, reactivity_1.makeReactive)(cell);
+    var isMergedCell = cell.count > 1 && table.isMergedCells;
+    return (React.createElement("div", { className: cell_1.TableCell.getContainerCss(cell, isMergedCell), style: { top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined } },
+        React.createElement(abris_component_2.AbrisComponent, { componentName: editor_1.Editor.editors[cell.type] || editor_1.Editor.editors.default, componentProps: { model: editor, className: cell_1.TableCell.getContentCss(cell, isMergedCell), inputType: editor_1.Editor.getInputType(cell.type) } })));
 }
 exports.Table4CellEditor = Table4CellEditor;
 (0, abris_component_1.registerComponent)("table4js-cell-editor", Table4CellEditor);
@@ -1105,24 +1366,74 @@ exports.Table4CellEditor = Table4CellEditor;
 
 /***/ }),
 
-/***/ "./sources/react/table/cell-viewer.tsx":
-/*!*********************************************!*\
-  !*** ./sources/react/table/cell-viewer.tsx ***!
-  \*********************************************/
+/***/ "./sources/react/table/cell-types/default.tsx":
+/*!****************************************************!*\
+  !*** ./sources/react/table/cell-types/default.tsx ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Table4CellViewer = void 0;
+exports.Table4DefaultCell = void 0;
 var React = __webpack_require__(/*! react */ "react");
-var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
-function Table4CellViewer(_a) {
+var abris_component_1 = __webpack_require__(/*! ../../abris-component */ "./sources/react/abris-component.tsx");
+function Table4DefaultCell(_a) {
     var cell = _a.cell, className = _a.className;
     return (React.createElement("span", { className: className, dangerouslySetInnerHTML: { __html: cell.text } }));
 }
-exports.Table4CellViewer = Table4CellViewer;
-(0, abris_component_1.registerComponent)("table4js-cell-viewer", Table4CellViewer);
+exports.Table4DefaultCell = Table4DefaultCell;
+(0, abris_component_1.registerComponent)("table4js-cell-default", Table4DefaultCell);
+
+
+/***/ }),
+
+/***/ "./sources/react/table/cell-types/indicator.tsx":
+/*!******************************************************!*\
+  !*** ./sources/react/table/cell-types/indicator.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Table4IndicatorCell = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var indicator_1 = __webpack_require__(/*! ../../../table/cell-types/indicator */ "./sources/table/cell-types/indicator.ts");
+var abris_component_1 = __webpack_require__(/*! ../../abris-component */ "./sources/react/abris-component.tsx");
+function Table4IndicatorCell(_a) {
+    var cell = _a.cell, className = _a.className;
+    var value = parseFloat(cell.data);
+    return (React.createElement("span", { className: className + " table4js__indicator-cell" },
+        React.createElement("span", { className: "table4js__indicator-cell-circle", style: { backgroundColor: value > indicator_1.IndicatorCell.threshold ? indicator_1.IndicatorCell.greaterColor : indicator_1.IndicatorCell.lessColor } })));
+}
+exports.Table4IndicatorCell = Table4IndicatorCell;
+(0, abris_component_1.registerComponent)("table4js-cell-indicator", Table4IndicatorCell);
+
+
+/***/ }),
+
+/***/ "./sources/react/table/cell-types/progress.tsx":
+/*!*****************************************************!*\
+  !*** ./sources/react/table/cell-types/progress.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Table4ProgressCell = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../../abris-component */ "./sources/react/abris-component.tsx");
+function Table4ProgressCell(_a) {
+    var cell = _a.cell, className = _a.className;
+    var value = parseFloat(cell.data);
+    var precentage = (Number.isNaN(value) ? 0 : (value * 100).toFixed(2)) + "%";
+    return (React.createElement("div", { className: className + " table4js__progress-cell" },
+        React.createElement("div", { className: "table4js__progress-cell-value", style: { width: precentage } }, precentage)));
+}
+exports.Table4ProgressCell = Table4ProgressCell;
+(0, abris_component_1.registerComponent)("table4js-cell-progress", Table4ProgressCell);
 
 
 /***/ }),
@@ -1138,23 +1449,19 @@ exports.Table4CellViewer = Table4CellViewer;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Table4Cell = void 0;
 var React = __webpack_require__(/*! react */ "react");
-var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
 var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
+var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
 function Table4Cell(_a) {
     var table = _a.table, cell = _a.cell;
     (0, reactivity_1.makeReactive)(cell);
-    var isEditMode = !!cell.inplaceEditor && table.config.enableEdit;
-    var isMergedCell = cell.count > 1 && table.isMergedСells;
-    if (!isEditMode) {
-        return (React.createElement("div", { className: cell_1.TableCell.getContainerCss(cell, isMergedCell), style: { top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }, onClick: function (e) { return table.startEditCell(cell); } },
-            React.createElement(abris_component_1.AbrisComponent, { componentName: cell.viewer, componentProps: { cell: cell, className: cell_1.TableCell.getContentCss(cell, isMergedCell) } })));
-    }
-    else {
-        return (React.createElement(abris_component_1.AbrisComponent, { componentName: cell.editor, componentProps: { model: cell.inplaceEditor } }));
-    }
+    var isMergedCell = cell.count > 1 && table.isMergedCells;
+    return (React.createElement("div", { className: cell_1.TableCell.getContainerCss(cell, isMergedCell), style: { top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined } },
+        React.createElement(abris_component_2.AbrisComponent, { componentName: cell.component, componentProps: { cell: cell, className: cell_1.TableCell.getContentCss(cell, isMergedCell) } })));
 }
 exports.Table4Cell = Table4Cell;
+(0, abris_component_1.registerComponent)("table4js-cell", Table4Cell);
 
 
 /***/ }),
@@ -1207,7 +1514,7 @@ exports.Table4ColumnFilter = void 0;
 var React = __webpack_require__(/*! react */ "react");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
 var column_filter_item_1 = __webpack_require__(/*! ./column-filter-item */ "./sources/react/table/column-filter-item.tsx");
-var Icons = __webpack_require__(/*! ../../icon */ "./sources/icon.ts");
+var Icons = __webpack_require__(/*! ../../icons */ "./sources/icons/index.ts");
 function Table4ColumnFilter(_a) {
     var context = _a.context;
     (0, reactivity_1.makeReactive)(context);
@@ -1241,7 +1548,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Table4FilterSelect = void 0;
 var React = __webpack_require__(/*! react */ "react");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-var Icons = __webpack_require__(/*! ../../icon */ "./sources/icon.ts");
+var Icons = __webpack_require__(/*! ../../icons */ "./sources/icons/index.ts");
 function Table4FilterSelect(_a) {
     var viewModel = _a.viewModel;
     (0, reactivity_1.makeReactive)(viewModel);
@@ -1284,29 +1591,29 @@ exports.Table4 = void 0;
 var React = __webpack_require__(/*! react */ "react");
 var react_1 = __webpack_require__(/*! react */ "react");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-var actions_1 = __webpack_require__(/*! ../widgets/actions */ "./sources/react/widgets/actions.tsx");
-var dropdown_actions_1 = __webpack_require__(/*! ../widgets/dropdown-actions */ "./sources/react/widgets/dropdown-actions.tsx");
-var row_1 = __webpack_require__(/*! ./row */ "./sources/react/table/row.tsx");
+var actions_1 = __webpack_require__(/*! ../core/actions */ "./sources/react/core/actions.tsx");
+var dropdown_actions_1 = __webpack_require__(/*! ../core/dropdown-actions */ "./sources/react/core/dropdown-actions.tsx");
 var summary_1 = __webpack_require__(/*! ./summary */ "./sources/react/table/summary.tsx");
 var search_1 = __webpack_require__(/*! ./search */ "./sources/react/table/search.tsx");
 var column_filter_1 = __webpack_require__(/*! ./column-filter */ "./sources/react/table/column-filter.tsx");
+var row_wrapper_1 = __webpack_require__(/*! ./row-wrapper */ "./sources/react/table/row-wrapper.tsx");
 function EmptyTable() {
-    return (React.createElement("tr", { className: "table4js-table__row" },
-        React.createElement("td", { className: "table4js-table-cell", colSpan: "100%", "data-bind": "text: noDataText" }, "noData")));
+    return (React.createElement("tr", { className: "table4js__row" },
+        React.createElement("td", { className: "table4js-cell", colSpan: "100%", "data-bind": "text: noDataText" }, "noData")));
 }
 function LoadingIndicator(table) {
     var visibleColumns = table.columns.filter(function (c) { return c.visible; });
-    return (React.createElement(React.Fragment, null, visibleColumns.map(function (c, index) { return (React.createElement("tr", { key: index, className: "table4js-table__row" },
-        React.createElement("td", { className: "table4js-table-cell table4js-table-technical-cell" },
-            React.createElement("div", { className: "table4js-table-technical-cell__container" },
-                React.createElement("div", { className: "table4js-table__check" },
-                    React.createElement("div", { className: "table4js-svg-icon table4js-table__icon-check" })))),
-        visibleColumns.map(function (vc) { return (React.createElement("td", { className: "table4js-table-cell table4js-table-technical-cell" },
-            React.createElement("div", { className: "table4js-table-cell__container table4js-table-cell__container--loading" }))); }),
-        React.createElement("td", { className: "table4js-table-cell table4js-table-technical-cell" },
-            React.createElement("div", { className: "table4js-table-technical-cell__container" },
-                React.createElement("div", { className: "table4js-svg-icon table4js-table-icon-row-tools table4js-table__more", dangerouslySetInnerHTML: { __html: table.icons.more } }),
-                React.createElement("div", { className: "table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit", dangerouslySetInnerHTML: { __html: table.icons.edit } }))))); })));
+    return (React.createElement(React.Fragment, null, visibleColumns.map(function (c, index) { return (React.createElement("tr", { key: index, className: "table4js__row" },
+        React.createElement("td", { className: "table4js-cell table4js-technical-cell" },
+            React.createElement("div", { className: "table4js-technical-cell__container" },
+                React.createElement("div", { className: "table4js__check" },
+                    React.createElement("div", { className: "table4js-svg-icon table4js__icon-check" })))),
+        visibleColumns.map(function (vc) { return (React.createElement("td", { className: "table4js-cell table4js-technical-cell" },
+            React.createElement("div", { className: "table4js-cell__container table4js-cell__container--loading" }))); }),
+        React.createElement("td", { className: "table4js-cell table4js-technical-cell" },
+            React.createElement("div", { className: "table4js-technical-cell__container" },
+                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__more", dangerouslySetInnerHTML: { __html: table.icons.more } }),
+                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__edit", dangerouslySetInnerHTML: { __html: table.icons.edit } }))))); })));
 }
 function Table4(_a) {
     var model = _a.model;
@@ -1317,88 +1624,157 @@ function Table4(_a) {
     (0, react_1.useEffect)(function () {
         model.initialize(rootRef.current.parentElement);
     });
-    return (React.createElement("div", { className: "table4js-root" },
-        React.createElement("div", { ref: rootRef, className: "table4js-table-resizable-container" },
-            React.createElement("div", { className: "table4js-table-scroll-container" },
-                React.createElement("table", { className: "table4js-table" },
-                    React.createElement("thead", { className: "table4js-table__header table4js-table-sticky-component" },
-                        React.createElement("tr", { key: "header-tools", className: "table4js-table-header-tools" },
-                            React.createElement("th", { className: "table4js-table-header-tools__cell", colSpan: "100%" },
-                                React.createElement("div", { className: "table4js-table-header-tools__container table4js-table-group-header-technical-cell" },
-                                    React.createElement("div", { className: "table4js-table-preheader" },
-                                        React.createElement("div", { className: "table4js-table-search-group" },
+    return (React.createElement("div", { className: "table4js-root table4js-root--fit-width" },
+        React.createElement("div", { ref: rootRef, className: "table4js-resizable-container" },
+            React.createElement("div", { className: "table4js-scroll-container" },
+                React.createElement("table", { className: "table4js" },
+                    React.createElement("thead", { className: "table4js__header table4js-sticky-component" },
+                        React.createElement("tr", { key: "header-tools", className: "table4js-header-tools" },
+                            React.createElement("th", { className: "table4js-header-tools__cell", colSpan: "100%" },
+                                React.createElement("div", { className: "table4js-header-tools__container table4js-group-header-technical-cell" },
+                                    React.createElement("div", { className: "table4js-preheader" },
+                                        React.createElement("div", { className: "table4js-search-group" },
                                             model.showSearch ? (React.createElement(search_1.Table4Search, { icon: model.icons.search, searchModel: model.searchModel })) : null,
-                                            React.createElement(actions_1.AbrisActions, { className: "table4js-table-actions", actions: model.topActions }),
-                                            model.dropdownActions.length > 0 && (React.createElement(dropdown_actions_1.AbrisDropdownActions, { className: "table4js-table-dropdown table4js-table-actions-menu", actions: model.dropdownActions })))),
-                                    model.viewFilterTable && (React.createElement("div", { className: "table4js-table-filter" },
-                                        React.createElement("div", { className: "table4js-table-filter__container" }, model.columns.map(function (c) { return (React.createElement(column_filter_1.Table4ColumnFilter, { key: c.name, context: c.filterContext })); }))))))),
-                        React.createElement("tr", { key: "header-title", className: "table4js-table-header-title" },
-                            React.createElement("th", { key: "row-selection-cell", className: "table4js-table-header-title__cell table4js-table-switch" },
+                                            React.createElement(actions_1.AbrisActions, { className: "table4js-actions", actions: model.topActions }),
+                                            model.dropdownActions.length > 0 && (React.createElement(dropdown_actions_1.AbrisDropdownActions, { className: "table4js-dropdown table4js-actions-menu", actions: model.dropdownActions })))),
+                                    model.viewFilterTable && (React.createElement("div", { className: "table4js-filter" },
+                                        React.createElement("div", { className: "table4js-filter__container" }, model.columns.map(function (c) { return (React.createElement(column_filter_1.Table4ColumnFilter, { key: c.name, context: c.filterContext })); }))))))),
+                        React.createElement("tr", { key: "header-title", className: "table4js-header-title" },
+                            React.createElement("th", { key: "row-selection-cell", className: "table4js-header-title__cell table4js-switch" },
                                 React.createElement("div", { className: model.isNumber
-                                        ? "table4js-table-switch__text switch__text--selected"
-                                        : "table4js-table-switch__text", onClick: function (_) { return (model.isNumber = !model.isNumber); } }, "#")),
+                                        ? "table4js-switch__text switch__text--selected"
+                                        : "table4js-switch__text", onClick: function (_) { return (model.isNumber = !model.isNumber); } }, "#")),
                             model.columns
                                 .filter(function (c) { return c.visible; })
-                                .map(function (c) { return (React.createElement("th", { key: c.name, className: "table4js-table-header-title__cell", onMouseOut: function (e) { return model.logMouseOut(c, e); }, onMouseMove: function (e) { return model.logMouseMove(c, e); }, onMouseUp: function (e) { return model.logMouseUp(c, e); } },
-                                React.createElement("div", { className: "table4js-table-title" },
-                                    React.createElement("span", { className: "table4js-table-title__text", onClick: function (e) {
+                                .map(function (c) { return (React.createElement("th", { key: c.name, className: "table4js-header-title__cell", onMouseOut: function (e) { return model.logMouseOut(c, e); }, onMouseMove: function (e) { return model.logMouseMove(c, e); }, onMouseUp: function (e) { return model.logMouseUp(c, e); } },
+                                React.createElement("div", { className: "table4js-title" },
+                                    React.createElement("span", { className: "table4js-title__text", onClick: function (e) {
                                             model.clickColumn(c, e);
                                         } }, c.title),
-                                    React.createElement("div", { className: "table4js-table-title__tools" },
-                                        React.createElement("div", { className: "table4js-svg-icon table4js-table-title__sorter", style: {
+                                    React.createElement("div", { className: "table4js-title__tools" },
+                                        React.createElement("div", { className: "table4js-svg-icon table4js-title__sorter", style: {
                                                 visibility: c.order === false ? "visible" : "hidden",
                                             }, dangerouslySetInnerHTML: {
                                                 __html: model.icons.sortup,
                                             } }),
-                                        React.createElement("div", { className: "table4js-svg-icon table4js-table-title__sorter", style: {
+                                        React.createElement("div", { className: "table4js-svg-icon table4js-title__sorter", style: {
                                                 visibility: c.order === true ? "visible" : "hidden",
                                             }, dangerouslySetInnerHTML: {
                                                 __html: model.icons.sortdown,
                                             } }),
-                                        React.createElement("div", { className: "table4js-svg-icon table4js-table-title__filter", onClick: function (e) { return c.clickFilter(c, e.nativeEvent); }, dangerouslySetInnerHTML: {
+                                        React.createElement("div", { className: "table4js-svg-icon table4js-title__filter", onClick: function (e) { return c.filterContext.clickFilter(c, e.nativeEvent); }, dangerouslySetInnerHTML: {
                                                 __html: model.icons.filter,
                                             } }))),
-                                React.createElement("div", { className: "table4js-table-title_resize", onMouseOver: function (e) { return model.logMouseOver(c, e); }, onMouseOut: function (e) { return model.logMouseOut(c, e); }, onMouseMove: function (e) { return model.logMouseMove(c, e); }, onMouseUp: function (e) { return model.logMouseUp(c, e); }, onMouseDown: function (e) { return model.logMouseDown(c, e); } }))); }),
-                            React.createElement("th", { key: "row-context-menu-cell", className: "table4js-table-header-title__cell" }))),
-                    React.createElement("tbody", { className: "table4js-table__body" },
+                                React.createElement("div", { className: "table4js-title_resize", onMouseOver: function (e) { return model.logMouseOver(c, e); }, onMouseOut: function (e) { return model.logMouseOut(c, e); }, onMouseMove: function (e) { return model.logMouseMove(c, e); }, onMouseUp: function (e) { return model.logMouseUp(c, e); }, onMouseDown: function (e) { return model.logMouseDown(c, e); } }))); }),
+                            React.createElement("th", { key: "row-context-menu-cell", className: "table4js-header-title__cell" }))),
+                    React.createElement("tbody", { className: "table4js__body" },
                         model.rows.length == 0 && model.loadingMutex == false
                             ? EmptyTable()
                             : null,
                         model.loadingMutex
                             ? LoadingIndicator(model)
-                            : model.rows.map(function (r) { return (React.createElement(row_1.TableRow, { key: r.id || r.number, table: model, row: r })); })),
-                    React.createElement("tfoot", { className: "table4js-table__footer table4js-table-sticky-component" },
-                        model.showTableSummary && (React.createElement("tr", { key: "footer-summary", className: "table4js-table-footer-summary" },
-                            React.createElement("th", { key: "footer-tech-cell", className: "table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell" },
-                                React.createElement("div", { className: "table4js-table-technical-cell__container" },
-                                    React.createElement("div", { className: "table4js-svg-icon table4js-table-icon-equal", dangerouslySetInnerHTML: {
+                            : model.rows.map(function (row, index) { return (React.createElement(row_wrapper_1.Table4RowWrapper, { key: "row" + index + "_" + (row.id || row.number), table: model, row: row })); })),
+                    React.createElement("tfoot", { className: "table4js__footer table4js-sticky-component" },
+                        model.showTableSummary && (React.createElement("tr", { key: "footer-summary", className: "table4js-footer-summary" },
+                            React.createElement("th", { key: "footer-tech-cell", className: "table4js-cell table4js-technical-cell table4js-footer__cell" },
+                                React.createElement("div", { className: "table4js-technical-cell__container" },
+                                    React.createElement("div", { className: "table4js-svg-icon table4js-icon-equal", dangerouslySetInnerHTML: {
                                             __html: model.icons.equal,
                                         } }))),
                             model.columns
                                 .filter(function (c) { return c.visible; })
-                                .map(function (c) { return (React.createElement("th", { key: c.name, className: "table4js-table-cell table4js-table-footer__cell" },
+                                .map(function (c) { return (React.createElement("th", { key: c.name, className: "table4js-cell table4js-footer__cell" },
                                 React.createElement(summary_1.Table4Summary, { column: c }))); }),
-                            React.createElement("th", { key: "footer-context-menu-cell", className: "table4js-table-cell table4js-table-technical-cell table4js-table-footer__cell" }))),
-                        React.createElement("tr", { key: "footer-tools", className: "table4js-table-footer-tools" },
-                            React.createElement("th", { className: "table4js-table-footer-tools__cell", colSpan: "100%" },
-                                React.createElement("div", { className: "table4js-table-footer-tools__container table4js-table-group-header-technical-cell" },
-                                    React.createElement("div", { className: "table4js-table-row-management" },
-                                        React.createElement(actions_1.AbrisActions, { className: "table4js-table-actions", actions: model.bottomActions })),
-                                    React.createElement("div", { className: "table4js-table-info" },
-                                        React.createElement("span", { className: "table4js-table-info__total table4js-table-info__text" }, "Total: " + model.totalCount),
-                                        React.createElement("div", { className: "table4js-table-info__go-to" },
-                                            React.createElement("span", { className: "table4js-table-go-to__text table4js-table-info__text" }, "Go to:"),
-                                            React.createElement("input", { className: "table4js-table-go-to__value", defaultValue: model.startRow, onChange: function (e) { return setStartRow(+e.target.value); }, onKeyDown: function (e) {
+                            React.createElement("th", { key: "footer-context-menu-cell", className: "table4js-cell table4js-technical-cell table4js-footer__cell" }))),
+                        React.createElement("tr", { key: "footer-tools", className: "table4js-footer-tools" },
+                            React.createElement("th", { className: "table4js-footer-tools__cell", colSpan: "100%" },
+                                React.createElement("div", { className: "table4js-footer-tools__container table4js-group-header-technical-cell" },
+                                    React.createElement("div", { className: "table4js-row-management" },
+                                        React.createElement(actions_1.AbrisActions, { className: "table4js-actions", actions: model.bottomActions })),
+                                    React.createElement("div", { className: "table4js-info" },
+                                        React.createElement("span", { className: "table4js-info__total table4js-info__text" }, "Total: " + model.totalCount),
+                                        React.createElement("div", { className: "table4js-info__go-to" },
+                                            React.createElement("span", { className: "table4js-go-to__text table4js-info__text" }, "Go to:"),
+                                            React.createElement("input", { className: "table4js-go-to__value", defaultValue: model.startRow, onChange: function (e) { return setStartRow(+e.target.value); }, onKeyDown: function (e) {
                                                     if (e.code === "Enter") {
                                                         model.startRow = +e.target.value;
                                                     }
                                                 } }),
                                             React.createElement("button", { className: "table4js-btn-transparent" },
-                                                React.createElement("div", { className: "table4js-svg-icon table4js-table-go-to__icon", dangerouslySetInnerHTML: {
+                                                React.createElement("div", { className: "table4js-svg-icon table4js-go-to__icon", dangerouslySetInnerHTML: {
                                                         __html: model.icons.arrowright,
                                                     }, onClick: function (_) { return (model.startRow = startRow); } })))))))))))));
 }
 exports.Table4 = Table4;
+
+
+/***/ }),
+
+/***/ "./sources/react/table/row-editor.tsx":
+/*!********************************************!*\
+  !*** ./sources/react/table/row-editor.tsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Table4RowEditor = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+var row_1 = __webpack_require__(/*! ./row */ "./sources/react/table/row.tsx");
+var form_1 = __webpack_require__(/*! ../widgets/form */ "./sources/react/widgets/form.tsx");
+function Table4RowEditor(_a) {
+    var table = _a.table, row = _a.row, form = _a.form;
+    (0, reactivity_1.makeReactive)(row);
+    var rowEditor = null;
+    if (row.mode === "edit-row") {
+        rowEditor = (React.createElement("tr", { className: "table4js__row", key: (row.id || row.number) + "-editor" },
+            React.createElement("td", { className: "table4js-cell", colSpan: "100%" },
+                React.createElement(form_1.Form4, { form: form }))));
+    }
+    return (React.createElement(React.Fragment, null,
+        React.createElement(row_1.Table4Row, { key: (row.id || row.number) + "-edited", table: table, row: row }),
+        rowEditor));
+}
+exports.Table4RowEditor = Table4RowEditor;
+(0, abris_component_1.registerComponent)("table4js-row-editor", Table4RowEditor);
+
+
+/***/ }),
+
+/***/ "./sources/react/table/row-wrapper.tsx":
+/*!*********************************************!*\
+  !*** ./sources/react/table/row-wrapper.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Table4RowWrapper = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+function Table4RowWrapper(props) {
+    (0, reactivity_1.makeReactive)(props.row);
+    return (React.createElement(abris_component_2.AbrisComponent, { componentName: props.row.getRowComponent(), componentProps: props.row.getRowComponentParams(__assign({}, props)) }));
+}
+exports.Table4RowWrapper = Table4RowWrapper;
+(0, abris_component_1.registerComponent)("table4js-row-wrapper", Table4RowWrapper);
 
 
 /***/ }),
@@ -1412,34 +1788,38 @@ exports.Table4 = Table4;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableRow = void 0;
+exports.Table4Row = void 0;
 var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-var cell_1 = __webpack_require__(/*! ./cell */ "./sources/react/table/cell.tsx");
-function TableRow(_a) {
+function Table4Row(_a) {
     var table = _a.table, row = _a.row;
     (0, reactivity_1.makeReactive)(row);
     var visibleColumns = table.columns.filter(function (c) { return c.visible; });
-    return (React.createElement("tr", { key: row.id || row.number, className: row.selected
-            ? "table4js-table__row table4js-table__row--selected"
-            : "table4js-table__row", style: { background: "none" } },
-        React.createElement("td", { key: "technical-cell", className: "table4js-table-cell table4js-table-technical-cell", onClick: function (e) { return row.select(row, e); } },
-            React.createElement("div", { className: "table4js-table-technical-cell__container" }, table.isNumber ? (React.createElement("div", { className: "table4js-table__number" }, row.number)) : (React.createElement("div", { className: "table4js-table__check" }, row.selected && (React.createElement("div", { className: "table4js-svg-icon table4js-table__icon-check", dangerouslySetInnerHTML: { __html: table.icons.check } })))))),
+    return (React.createElement("tr", { key: row.id || row.number, className: row.css, style: { background: "none" } },
+        React.createElement("td", { key: "technical-cell", className: "table4js-cell table4js-technical-cell", onClick: function (e) { return row.select(row, e); } },
+            React.createElement("div", { className: "table4js-technical-cell__container" }, table.isNumber ? (React.createElement("div", { className: "table4js__number" }, row.number)) : (React.createElement("div", { className: "table4js__check" }, row.selected && (React.createElement("div", { className: "table4js-svg-icon table4js__icon-check", dangerouslySetInnerHTML: { __html: table.icons.check } })))))),
         row.cells.map(function (cell) {
-            return (cell.count > 0 || !table.isMergedСells) && (React.createElement("td", { key: cell.name, className: "table4js-table-cell " +
-                    (cell.count > 1 && table.isMergedСells
-                        ? "table4js-table-cell--merged "
-                        : ""), style: { background: cell.color }, rowSpan: table.isMergedСells ? cell.count : 1 },
-                React.createElement(cell_1.Table4Cell, { key: cell.name, table: table, cell: cell })));
+            return (cell.count > 0 || !table.isMergedCells) && (React.createElement("td", { key: cell.name, className: "table4js-cell " +
+                    (cell.count > 1 && table.isMergedCells
+                        ? "table4js-cell--merged "
+                        : ""), style: { background: cell.color }, rowSpan: table.isMergedCells ? cell.count : 1 },
+                React.createElement(abris_component_1.AbrisComponent, { componentName: row.getCellComponent(cell), componentProps: row.getCellComponentParams({ key: cell.name, table: table, cell: cell }) })));
         }),
-        React.createElement("td", { key: "context-menu-cell", className: "table4js-table-cell table4js-table-technical-cell", onClick: function (e) { return row.click(row, e); } },
-            React.createElement("div", { className: "table4js-table-technical-cell__container" },
-                React.createElement("div", { className: "table4js-svg-icon table4js-table-icon-row-tools table4js-table__more", dangerouslySetInnerHTML: { __html: table.icons.more } }),
-                React.createElement("div", { className: "table4js-svg-icon table4js-table-icon-row-tools table4js-table__edit", dangerouslySetInnerHTML: { __html: table.icons.edit } })),
-            !table.hasActiveInplaceEditor && (React.createElement("div", { className: "table4js-table__row--select" })),
-            React.createElement("div", { className: "table4js-table__row--colored", style: { background: row.color ? row.color : "rgba(248,249,253)" } }))));
+        React.createElement("td", { key: "context-menu-cell", className: "table4js-cell table4js-technical-cell", onClick: function (e) { return row.click(row, e); } },
+            React.createElement("div", { className: "table4js-technical-cell__container" },
+                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__more", dangerouslySetInnerHTML: { __html: table.icons.more } }),
+                table.rowActions.map(function (action) {
+                    return React.createElement("div", { key: action.name, className: "table4js-svg-icon table4js-icon-row-tools " + action.cssClasses, dangerouslySetInnerHTML: { __html: action.svg }, onClick: function (e) {
+                            action.action(row);
+                            e.stopPropagation();
+                        }, title: action.title });
+                })),
+            table.allowRowSelection && (React.createElement("div", { className: "table4js__row--select" })),
+            React.createElement("div", { className: "table4js__row--colored", style: { background: row.color ? row.color : "rgba(248,249,253)" } }))));
 }
-exports.TableRow = TableRow;
+exports.Table4Row = Table4Row;
+(0, abris_component_1.registerComponent)("table4js-row", Table4Row);
 
 
 /***/ }),
@@ -1491,8 +1871,8 @@ function Table4Summary(_a) {
     }
     (0, reactivity_1.makeReactive)(summary);
     return (React.createElement(React.Fragment, null,
-        React.createElement("span", { className: "table4js-table-summary__value" }, summary.value),
-        React.createElement("select", { className: "table4js-table-summary__select", value: summary.func, onChange: function (e) { return summary.func = e.target.value; } }, summary.summaryItems &&
+        React.createElement("span", { className: "table4js-summary__value" }, summary.value),
+        React.createElement("select", { className: "table4js-summary__select", value: summary.func, onChange: function (e) { return summary.func = e.target.value; } }, summary.summaryItems &&
             summary.summaryItems.map(function (s) { return (React.createElement("option", { value: s.value, title: s.title }, s.title)); }))));
 }
 exports.Table4Summary = Table4Summary;
@@ -1500,177 +1880,245 @@ exports.Table4Summary = Table4Summary;
 
 /***/ }),
 
-/***/ "./sources/react/widgets/action.tsx":
-/*!******************************************!*\
-  !*** ./sources/react/widgets/action.tsx ***!
-  \******************************************/
+/***/ "./sources/react/widgets/checkbox.tsx":
+/*!********************************************!*\
+  !*** ./sources/react/widgets/checkbox.tsx ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisAction = void 0;
+exports.Table4CheckboxEditor = void 0;
 var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-function AbrisAction(_a) {
-    var action = _a.action;
-    (0, reactivity_1.makeReactive)(action);
-    return (React.createElement("button", { key: action.name, onClick: function () { return action.action(); }, className: "table4js-button--transparent action-button table4js-action-button " +
-            action.cssClasses +
-            (action.active === true ? " table4js-action--active" : ""), type: action["formId"] !== undefined ? "submit" : "button", title: action.title || action.name },
-        action.svg && (React.createElement("div", { className: "table4js-action-button__icon table4js-button__svg-icon", dangerouslySetInnerHTML: { __html: action.svg } })),
-        React.createElement("span", { className: "table4js-action-button__label " + action.cssLabel, style: { display: action.title ? "block" : "none" } }, action.title)));
+function Table4CheckboxEditor(_a) {
+    var model = _a.model;
+    (0, reactivity_1.makeReactive)(model);
+    return (React.createElement("div", { className: "table4js__checkbox-editor" },
+        React.createElement("input", { type: "checkbox", checked: model.value, onChange: function (e) {
+                model.value = e.target.checked;
+            } })));
 }
-exports.AbrisAction = AbrisAction;
+exports.Table4CheckboxEditor = Table4CheckboxEditor;
+(0, abris_component_1.registerComponent)("table4js-checkbox-editor", Table4CheckboxEditor);
 
 
 /***/ }),
 
-/***/ "./sources/react/widgets/actions.tsx":
+/***/ "./sources/react/widgets/default.tsx":
 /*!*******************************************!*\
-  !*** ./sources/react/widgets/actions.tsx ***!
+  !*** ./sources/react/widgets/default.tsx ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisActions = void 0;
+exports.Table4DefaultCellEditor = void 0;
 var React = __webpack_require__(/*! react */ "react");
-var action_1 = __webpack_require__(/*! ./action */ "./sources/react/widgets/action.tsx");
-function AbrisActions(_a) {
-    var className = _a.className, actions = _a.actions;
-    return (React.createElement("div", { className: className }, actions.map(function (action) {
-        if (!action.actions) {
-            return React.createElement(action_1.AbrisAction, { key: action.name, action: action });
-        }
-        if (action.actions && action.actions.length > 0) {
-            return (React.createElement("div", { className: "table4js-nested-actions table4js-action-context-button" },
-                React.createElement("span", { className: "table4js-button__label", "data-bind": "text: title" }),
-                React.createElement("div", { className: "table4js-nested-actions__dropdown" }, action.actions.map(function (a) { return (React.createElement(action_1.AbrisAction, { key: a.name, action: a })); }))));
-        }
-    })));
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+function Table4DefaultCellEditor(_a) {
+    var model = _a.model, className = _a.className, inputType = _a.inputType;
+    (0, reactivity_1.makeReactive)(model);
+    return (React.createElement("div", { className: "table4js__editor " + className },
+        React.createElement("input", { className: model.css, type: inputType, defaultValue: model.value, onChange: function (e) {
+                model.value = e.target.value;
+            } })));
 }
-exports.AbrisActions = AbrisActions;
+exports.Table4DefaultCellEditor = Table4DefaultCellEditor;
+(0, abris_component_1.registerComponent)("table4js-default-editor", Table4DefaultCellEditor);
 
 
 /***/ }),
 
-/***/ "./sources/react/widgets/dropdown-actions.tsx":
-/*!****************************************************!*\
-  !*** ./sources/react/widgets/dropdown-actions.tsx ***!
-  \****************************************************/
+/***/ "./sources/react/widgets/form.tsx":
+/*!****************************************!*\
+  !*** ./sources/react/widgets/form.tsx ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AbrisDropdownActions = void 0;
+exports.Form4 = void 0;
 var React = __webpack_require__(/*! react */ "react");
-var actions_1 = __webpack_require__(/*! ./actions */ "./sources/react/widgets/actions.tsx");
-function AbrisDropdownActions(_a) {
-    var className = _a.className, actions = _a.actions;
-    return (React.createElement("div", { className: className },
-        React.createElement("button", { className: "table4js-action-button table4js-button--transparent table4js-button-toggle", type: "button", "data-bind": "click: toggle, attr: { title: title }" },
-            React.createElement("div", { "data-bind": "html: $root.icons.more_sq" }),
-            React.createElement("span", { className: "table4js-action-button__label", "data-bind": "text: moreText" })),
-        React.createElement("ul", { className: "table4js-button-toggle__dropdown-menu" },
-            React.createElement(actions_1.AbrisActions, { className: "table4js-context-actions", actions: actions }))));
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+function Form4(_a) {
+    var form = _a.form;
+    (0, reactivity_1.makeReactive)(form);
+    return (React.createElement("div", { className: "table4js-form" }, form.properties.map(function (property) { return (React.createElement(abris_component_2.AbrisComponent, { key: property.name, componentName: "table4js-property-editor", componentProps: { property: property } })); })));
 }
-exports.AbrisDropdownActions = AbrisDropdownActions;
+exports.Form4 = Form4;
+(0, abris_component_1.registerComponent)("table4js-form", Form4);
 
 
 /***/ }),
 
-/***/ "./sources/table/bool.ts":
-/*!*******************************!*\
-  !*** ./sources/table/bool.ts ***!
-  \*******************************/
+/***/ "./sources/react/widgets/property.tsx":
+/*!********************************************!*\
+  !*** ./sources/react/widgets/property.tsx ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.BoolCell = void 0;
-var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
-__webpack_require__(/*! ./bool.scss */ "./sources/table/bool.scss");
-var BoolCell = (function () {
-    function BoolCell() {
-        this.name = "bool";
-        this.editor = "bool-cell-editor";
-        this.viewer = "bool-cell-viewer";
+exports.Table4PropertyEditor = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
+function Table4PropertyEditor(_a) {
+    var property = _a.property;
+    (0, reactivity_1.makeReactive)(property);
+    var component = editor_1.Editor.editors[property.type] || editor_1.Editor.editors.default;
+    return (React.createElement("div", { key: property.name, className: "table4js-form__property" + (property.hasValue ? " table4js-form__property--with-value" : "") },
+        React.createElement(abris_component_2.AbrisComponent, { componentName: component, componentProps: { model: property.editor, className: property.css, inputType: property.inputType } }),
+        React.createElement("label", { className: "table4js-form__property-title" }, property.title)));
+}
+exports.Table4PropertyEditor = Table4PropertyEditor;
+(0, abris_component_1.registerComponent)("table4js-property-editor", Table4PropertyEditor);
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/bool.ts":
+/*!******************************************!*\
+  !*** ./sources/table/cell-types/bool.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var bool_1 = __webpack_require__(/*! ../../core/field-types/bool */ "./sources/core/field-types/bool.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new bool_1.BoolField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/currency.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/currency.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var currency_1 = __webpack_require__(/*! ../../core/field-types/currency */ "./sources/core/field-types/currency.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new currency_1.CurrencyField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/date.ts":
+/*!******************************************!*\
+  !*** ./sources/table/cell-types/date.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var date_1 = __webpack_require__(/*! ../../core/field-types/date */ "./sources/core/field-types/date.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new date_1.DateField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/datetime.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/datetime.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var datetime_1 = __webpack_require__(/*! ../../core/field-types/datetime */ "./sources/core/field-types/datetime.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new datetime_1.DateTimeField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/indicator.ts":
+/*!***********************************************!*\
+  !*** ./sources/table/cell-types/indicator.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.IndicatorCell = void 0;
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+__webpack_require__(/*! ./indicator.scss */ "./sources/table/cell-types/indicator.scss");
+var IndicatorCell = (function () {
+    function IndicatorCell() {
+        this.name = "indicator";
+        this.css = "table4js-cell--center";
+        this.component = "table4js-cell-indicator";
     }
-    return BoolCell;
+    IndicatorCell.threshold = 0.5;
+    IndicatorCell.greaterColor = "lightgreen";
+    IndicatorCell.lessColor = "pink";
+    return IndicatorCell;
 }());
-exports.BoolCell = BoolCell;
-cell_1.TableCell.registerCellType(new BoolCell());
+exports.IndicatorCell = IndicatorCell;
+cell_1.TableCell.registerCellType(new IndicatorCell());
 
 
 /***/ }),
 
-/***/ "./sources/table/cell-editor.ts":
-/*!**************************************!*\
-  !*** ./sources/table/cell-editor.ts ***!
-  \**************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ "./sources/table/cell-types/number.ts":
+/*!********************************************!*\
+  !*** ./sources/table/cell-types/number.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.InplaceEditor = void 0;
-var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
-var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
-__webpack_require__(/*! ./cell-editor.scss */ "./sources/table/cell-editor.scss");
-var InplaceEditor = (function (_super) {
-    __extends(InplaceEditor, _super);
-    function InplaceEditor(cell) {
-        var _this = _super.call(this) || this;
-        _this.cell = cell;
-        _this.value = _this.cell.data;
-        return _this;
+var number_1 = __webpack_require__(/*! ../../core/field-types/number */ "./sources/core/field-types/number.ts");
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+cell_1.TableCell.registerCellType(new number_1.NumberField());
+
+
+/***/ }),
+
+/***/ "./sources/table/cell-types/progress.ts":
+/*!**********************************************!*\
+  !*** ./sources/table/cell-types/progress.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ProgressCell = void 0;
+var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
+__webpack_require__(/*! ./progress.scss */ "./sources/table/cell-types/progress.scss");
+var ProgressCell = (function () {
+    function ProgressCell() {
+        this.name = "progress";
+        this.css = "table4js-cell--right";
+        this.component = "table4js-cell-progress";
     }
-    InplaceEditor.prototype.complete = function (commit) {
-        if (commit) {
-            this.cell.data = this.value;
-        }
-        this.cell.inplaceEditor = undefined;
-    };
-    InplaceEditor.prototype.processKeyUp = function (event) {
-        if (event.keyCode === 13 || event.keyCode === 27) {
-            this.complete(event.keyCode === 13);
-        }
-    };
-    __decorate([
-        (0, property_1.property)(),
-        __metadata("design:type", Object)
-    ], InplaceEditor.prototype, "value", void 0);
-    return InplaceEditor;
-}(base_1.Base));
-exports.InplaceEditor = InplaceEditor;
+    return ProgressCell;
+}());
+exports.ProgressCell = ProgressCell;
+cell_1.TableCell.registerCellType(new ProgressCell());
 
 
 /***/ }),
@@ -1714,22 +2162,26 @@ var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/pro
 var TableCell = (function (_super) {
     __extends(TableCell, _super);
     function TableCell() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._isUpdating = false;
+        _this.type = "default";
+        _this.rowData = {};
+        return _this;
     }
     TableCell.registerCellType = function (cellType) {
         TableCell.cellTypes[cellType.name] = cellType;
     };
     TableCell.getContainerCss = function (cell, isMergedCell) {
-        var containerCss = "table4js-table-cell__container " + cell.css;
+        var containerCss = "table4js-cell__container " + cell.css;
         if (isMergedCell) {
             containerCss += " cell__sticky-text";
         }
         return containerCss;
     };
     TableCell.getContentCss = function (cell, isMergedCell) {
-        var contentCss = isMergedCell ? "table4js-table-cell__text--merged" : "table4js-table-cell__text";
+        var contentCss = isMergedCell ? "table4js-cell__text--merged" : "table4js-cell__text";
         if (cell instanceof TableCell && cell.isModified) {
-            contentCss += " table4js-table-cell__text--modified";
+            contentCss += " table4js-cell__text--modified";
         }
         return contentCss;
     };
@@ -1739,22 +2191,31 @@ var TableCell = (function (_super) {
     TableCell.prototype.getCellCss = function (data, column) {
         return this.getCellTypeDescription(column.type).css;
     };
-    TableCell.prototype.getCellEditor = function (data, column) {
-        return this.getCellTypeDescription(column.type).editor || TableCell.cellTypes["default"].editor;
-    };
-    TableCell.prototype.getCellViewer = function (data, column) {
-        return this.getCellTypeDescription(column.type).viewer || TableCell.cellTypes["default"].viewer;
-    };
     TableCell.prototype.getCellText = function (val) {
-        return val;
+        var cellTypeDescription = this.getCellTypeDescription(this.type);
+        if (!!cellTypeDescription && typeof cellTypeDescription.getText === "function") {
+            return cellTypeDescription.getText(val);
+        }
+        return this.getCellTypeDescription("default").getText(val);
     };
-    TableCell.prototype.initialize = function (col, back, data, color) {
-        this.data = data[col.name],
-            this.color = color;
+    Object.defineProperty(TableCell.prototype, "component", {
+        get: function () {
+            var cellTypeDescription = this.getCellTypeDescription(this.type);
+            if (!!cellTypeDescription && !!cellTypeDescription.component) {
+                return cellTypeDescription.component;
+            }
+            return this.getCellTypeDescription("default").component;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    TableCell.prototype.initialize = function (col, back, rowData, color) {
+        this.type = col.type;
         this.name = col.name;
-        this.css = this.getCellCss(data, col);
-        this.editor = this.getCellEditor(data, col);
-        this.viewer = this.getCellViewer(data, col);
+        this.rowData = rowData;
+        this.data = rowData[col.name];
+        this.color = color;
+        this.css = this.getCellCss(rowData, col);
         if (back !== null) {
             if (back) {
                 if (col.last && col.last.text === this.text) {
@@ -1784,11 +2245,17 @@ var TableCell = (function (_super) {
         }
         this.isModified = false;
     };
+    TableCell.prototype.update = function () {
+        this._isUpdating = true;
+        this.data = this.rowData[this.name];
+        this._isUpdating = false;
+    };
     TableCell.cellTypes = {
         "default": {
-            css: "table4js-table-cell--left",
-            editor: "table4js-cell-editor",
-            viewer: "table4js-cell-viewer"
+            name: "default",
+            css: "table4js-cell--left",
+            getText: function (val) { return typeof val === "object" ? JSON.stringify(val) : val; },
+            component: "table4js-cell-default"
         },
     };
     __decorate([
@@ -1800,7 +2267,9 @@ var TableCell = (function (_super) {
             onSet: function (val, target) {
                 if (target.text !== val) {
                     target.text = target.getCellText(val);
-                    target.isModified = true;
+                    if (!target._isUpdating) {
+                        target.isModified = true;
+                    }
                 }
             }
         }),
@@ -1822,10 +2291,6 @@ var TableCell = (function (_super) {
         (0, property_1.property)(),
         __metadata("design:type", String)
     ], TableCell.prototype, "name", void 0);
-    __decorate([
-        (0, property_1.property)(),
-        __metadata("design:type", Object)
-    ], TableCell.prototype, "inplaceEditor", void 0);
     __decorate([
         (0, property_1.property)(),
         __metadata("design:type", String)
@@ -1911,7 +2376,7 @@ var ColumnFilterItem = (function (_super) {
     }
     Object.defineProperty(ColumnFilterItem.prototype, "filterEditorName", {
         get: function () {
-            return "table4js-table-filter-default";
+            return "table4js-filter-default";
         },
         enumerable: false,
         configurable: true
@@ -2001,6 +2466,10 @@ var FilterContext = (function (_super) {
             _this.showFilter = !!currentFilterItems.length;
             _this.value = currentFilterItems.map(function (i) { return i.filterItemValue; });
         };
+        _this.clickFilter = function (column, event) {
+            column.filterContext.addItem(column);
+            event.stopPropagation();
+        };
         return _this;
     }
     FilterContext.prototype.apply = function () {
@@ -2069,10 +2538,6 @@ var TableColumn = (function (_super) {
         _this.table = table;
         _this.type = "string";
         _this.visible = true;
-        _this.clickFilter = function (column, event) {
-            column.filterContext.addItem(column);
-            event.stopPropagation();
-        };
         Object.keys(columnDescription || {}).forEach(function (key) {
             if (columnDescription[key] !== undefined) {
                 _this[key] = columnDescription[key];
@@ -2093,6 +2558,292 @@ var TableColumn = (function (_super) {
     return TableColumn;
 }(base_1.Base));
 exports.TableColumn = TableColumn;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor-inplace.ts":
+/*!*****************************************!*\
+  !*** ./sources/table/editor-inplace.ts ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InplaceEditorPlugin = void 0;
+var editor_1 = __webpack_require__(/*! ../widgets/editor */ "./sources/widgets/editor.ts");
+var editor_2 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
+var InplaceEditorPlugin = (function (_super) {
+    __extends(InplaceEditorPlugin, _super);
+    function InplaceEditorPlugin() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._activeEditors = undefined;
+        _this.name = "inplace-editor";
+        return _this;
+    }
+    InplaceEditorPlugin.prototype.startEditRow = function (row) {
+        var _this = this;
+        this._activeEditors = {};
+        row.cells.forEach(function (cell) {
+            _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name, function (value, commit) {
+                if (commit) {
+                    cell.data = value;
+                }
+            });
+        });
+        this._editedRow = row;
+        row.mode = "edit-inplace";
+    };
+    InplaceEditorPlugin.prototype.endEditRow = function (commit) {
+        var _this = this;
+        Object.keys(this._activeEditors || {}).forEach(function (name) {
+            _this._activeEditors[name].complete(commit);
+        });
+        if (!!this._editedRow) {
+            if (commit) {
+                this.saveRow(this._editedRow);
+            }
+            this._editedRow.mode = "default";
+            this._editedRow = undefined;
+        }
+        this._activeEditors = undefined;
+    };
+    InplaceEditorPlugin.prototype.onRowCreated = function (row) {
+        var _this = this;
+        var prev = row.getCellComponent;
+        row.getCellComponent = function (cell) {
+            if (row.mode === "edit-inplace") {
+                return "table4js-cell-editor";
+            }
+            return prev(cell);
+        };
+        row.getCellComponentParams = function (params) {
+            if (row.mode === "edit-inplace") {
+                params.editor = _this._activeEditors[params.cell.name];
+            }
+            return params;
+        };
+    };
+    return InplaceEditorPlugin;
+}(editor_2.EditorPlugin));
+exports.InplaceEditorPlugin = InplaceEditorPlugin;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor-row.ts":
+/*!*************************************!*\
+  !*** ./sources/table/editor-row.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RowEditorPlugin = void 0;
+var form_1 = __webpack_require__(/*! ../widgets/form */ "./sources/widgets/form.ts");
+var editor_1 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
+var RowEditorPlugin = (function (_super) {
+    __extends(RowEditorPlugin, _super);
+    function RowEditorPlugin() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._form = undefined;
+        _this.name = "row-editor";
+        return _this;
+    }
+    RowEditorPlugin.prototype.startEditRow = function (row) {
+        this._form = new form_1.Form(this._table.columns);
+        this._form.object = row.rowData;
+        this._editedRow = row;
+        row.mode = "edit-row";
+    };
+    RowEditorPlugin.prototype.endEditRow = function (commit) {
+        if (!!this._form) {
+            this._form.complete(commit);
+            this._form = undefined;
+        }
+        if (!!this._editedRow) {
+            if (commit) {
+                this.saveRow(this._editedRow);
+            }
+            this._editedRow.mode = "default";
+            this._editedRow.update();
+            this._editedRow = undefined;
+        }
+    };
+    RowEditorPlugin.prototype.onRowCreated = function (row) {
+        var _this = this;
+        row.getRowComponent = function () {
+            if (row.mode === "edit-row") {
+                return "table4js-row-editor";
+            }
+            return "table4js-row";
+        };
+        row.getRowComponentParams = function (params) {
+            if (row.mode === "edit-row") {
+                params.form = _this._form;
+            }
+            return params;
+        };
+    };
+    return RowEditorPlugin;
+}(editor_1.EditorPlugin));
+exports.RowEditorPlugin = RowEditorPlugin;
+
+
+/***/ }),
+
+/***/ "./sources/table/editor.ts":
+/*!*********************************!*\
+  !*** ./sources/table/editor.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.EditorPlugin = void 0;
+var utils_1 = __webpack_require__(/*! ../utils/utils */ "./sources/utils/utils.ts");
+var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
+var EditorPlugin = (function () {
+    function EditorPlugin() {
+        this._editedRow = undefined;
+        this.name = "editor";
+    }
+    EditorPlugin.prototype.init = function (table) {
+        this._table = table;
+    };
+    EditorPlugin.prototype.saveRow = function (row) {
+        var isInsert = false;
+        var modifications = {};
+        row.cells.forEach(function (c) { return c.isModified && (modifications[c.name] = c.data); });
+        if (!(0, utils_1.isEmpty)(modifications)) {
+            if (row.number > 0) {
+                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+                    row.cells.forEach(function (c) { return c.isModified = false; });
+                }
+            }
+            else {
+                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
+                    isInsert = true;
+                }
+            }
+        }
+        return isInsert;
+    };
+    EditorPlugin.prototype.add = function () {
+        var newRowData = {};
+        this._table.columns.forEach(function (c) { return c.visible && (newRowData[c.name] = ""); });
+        var newRow = this._table.createRow(newRowData, -1);
+        this._table.rows.unshift(newRow);
+        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
+        return newRow;
+    };
+    EditorPlugin.prototype.save = function () {
+        var _this = this;
+        var isInsert = false;
+        this._table.rows.forEach(function (row) {
+            isInsert = _this.saveRow(row);
+        });
+        if (isInsert) {
+            this._table.refresh();
+        }
+    };
+    EditorPlugin.prototype.delete = function () {
+        var _this = this;
+        this._table.selectedRows.forEach(function (row) {
+            if (row.number > 0) {
+                _this._table.rows.slice(_this._table.rows.indexOf(row), 1);
+            }
+        });
+        var keys = this._table.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this._table.keyColumn]; });
+        this._table.dataProvider.deleteData(this._table.keyColumn, keys, (function (_) { return _this._table.refresh(); }));
+    };
+    EditorPlugin.prototype.startEditRow = function (row) {
+    };
+    EditorPlugin.prototype.endEditRow = function (commit) {
+    };
+    EditorPlugin.prototype.getActions = function () {
+        var _this = this;
+        return [
+            new action_1.Action({
+                name: "save-action",
+                action: function () { return _this.save(); },
+                svg: Icons.save,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "delete-action",
+                action: function () { return _this.delete(); },
+                svg: Icons.del,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "add-action",
+                action: function () {
+                    var newRow = _this.add();
+                    _this.endEditRow(false);
+                    _this.startEditRow(newRow);
+                },
+                svg: Icons.add,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "edit-action",
+                action: function (row) {
+                    if (_this._editedRow !== row) {
+                        _this.endEditRow(false);
+                        _this.startEditRow(row);
+                    }
+                    else {
+                        _this.endEditRow(true);
+                    }
+                },
+                svg: Icons.edit,
+                cssClasses: "table4js__edit",
+                container: "row"
+            })
+        ];
+    };
+    EditorPlugin.prototype.onColumnCreated = function (column) {
+    };
+    EditorPlugin.prototype.onRowCreated = function (row) {
+    };
+    return EditorPlugin;
+}());
+exports.EditorPlugin = EditorPlugin;
 
 
 /***/ }),
@@ -2236,7 +2987,6 @@ var TableFilterSelect = (function (_super) {
     ], TableFilterSelect.prototype, "isLoadMore", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: [], onSet: function (val, target) {
-                console.log("Set filter value to " + JSON.stringify(val));
                 target.value.value = target.selectedItems;
             } }),
         __metadata("design:type", Array)
@@ -2293,19 +3043,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Table = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
-var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 var dependencies_1 = __webpack_require__(/*! ../core/dependencies */ "./sources/core/dependencies.ts");
-var cell_editor_1 = __webpack_require__(/*! ./cell-editor */ "./sources/table/cell-editor.ts");
 var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
 var column_1 = __webpack_require__(/*! ./column */ "./sources/table/column.ts");
 var search_1 = __webpack_require__(/*! ./search */ "./sources/table/search.ts");
 var array_data_provider_1 = __webpack_require__(/*! ../utils/array-data-provider */ "./sources/utils/array-data-provider.ts");
 var row_1 = __webpack_require__(/*! ./row */ "./sources/table/row.ts");
-var utils_1 = __webpack_require__(/*! ../utils/utils */ "./sources/utils/utils.ts");
 var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 var summary_1 = __webpack_require__(/*! ./summary */ "./sources/table/summary.ts");
-var Icons = __webpack_require__(/*! ../icon */ "./sources/icon.ts");
+var editor_inplace_1 = __webpack_require__(/*! ./editor-inplace */ "./sources/table/editor-inplace.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./index.scss */ "./sources/table/index.scss");
 var Table = (function (_super) {
     __extends(Table, _super);
@@ -2316,22 +3065,18 @@ var Table = (function (_super) {
         _this.icons = Icons;
         _this._dataProvider = undefined;
         _this.clickColumn = function (column, event) {
-            if (_this.isShowDetail) {
-                _this.hideDetail();
+            var newOrder = undefined;
+            if (column.order === undefined) {
+                newOrder = false;
             }
-            var newOrder = column.order === undefined ? false : !column.order;
+            else if (column.order === false) {
+                newOrder = true;
+            }
             if (!event.shiftKey) {
                 _this.columns.map(function (c) { return c.order = undefined; });
             }
             column.order = newOrder;
             _this.refresh();
-        };
-        _this.startEditCell = function (cell) {
-            if (_this.currentCellEditor)
-                _this.currentCellEditor.inplaceEditor = undefined;
-            cell.inplaceEditor = new cell_editor_1.InplaceEditor(cell);
-            _this.currentCellEditor = cell;
-            _this.completeEditCell();
         };
         _this.curCol = undefined;
         _this.nxtCol = undefined;
@@ -2380,9 +3125,12 @@ var Table = (function (_super) {
         };
         _this.plugins = [];
         _this.plugins = config.plugins || [];
-        if (config.enableSummary === true) {
-            if (_this.plugins.length === 0) {
-                _this.plugins.push(new summary_1.TableSummaryPlugin());
+        if (_this.plugins.length === 0) {
+            if (config.enableSummary === true) {
+                _this.plugins.push(new summary_1.SummaryPlugin());
+            }
+            if (config.enableEdit === true) {
+                _this.plugins.push(new editor_inplace_1.InplaceEditorPlugin());
             }
         }
         _this.plugins.forEach(function (plugin) { return plugin.init(_this); });
@@ -2395,7 +3143,7 @@ var Table = (function (_super) {
         if (!!element) {
             _this.initialize(element);
         }
-        _this.isMergedСells = config.enableMergedСells;
+        _this.isMergedCells = config.enableMergedCells;
         return _this;
     }
     Table.prototype.updateByFilter = function () {
@@ -2423,9 +3171,9 @@ var Table = (function (_super) {
     };
     Table.prototype.initialize = function (element) {
         var _this = this;
-        this.scrollerElement = element.getElementsByClassName("table4js-table-scroll-container")[0];
+        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
         this.tableElement = element.getElementsByTagName("table")[0];
-        this.resizerElement = element.getElementsByClassName("table4js-table")[0];
+        this.resizerElement = element.getElementsByClassName("table4js")[0];
         var checkLoading = function () {
             var self = _this;
             self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
@@ -2450,10 +3198,10 @@ var Table = (function (_super) {
                     var entry = entries_1[_i];
                     if (entry.target.tagName === "THEAD") {
                         if (entry.contentRect.width < 700) {
-                            entry.target.parentElement.classList.add("table4js-table--small");
+                            entry.target.parentElement.classList.add("table4js--small");
                         }
                         else {
-                            entry.target.parentElement.classList.remove("table4js-table--small");
+                            entry.target.parentElement.classList.remove("table4js--small");
                         }
                         _this.tableHeadHeight = entry.contentRect.height + 5;
                     }
@@ -2462,13 +3210,6 @@ var Table = (function (_super) {
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
         }
     };
-    Table.prototype.showDetail = function (rowData) {
-        this.isShowDetail = true;
-    };
-    Table.prototype.hideDetail = function () {
-        this.expandedRowKey = null;
-        this.isShowDetail = false;
-    };
     Table.prototype.navigateTo = function (startRow) {
         if (startRow) {
             this.lastOffsetBack = startRow - 1;
@@ -2476,7 +3217,6 @@ var Table = (function (_super) {
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
             this.drawRows(this.partRowCount, startRow - 1, false);
-            this.hideDetail();
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -2493,61 +3233,14 @@ var Table = (function (_super) {
     Table.prototype.createActions = function (config) {
         var _this = this;
         this.plugins.forEach(function (plugin) { return _this.innerActions.push.apply(_this.innerActions, plugin.getActions()); });
-        if (config.enableMergedСellsToggle === true) {
+        if (config.enableMergedCellsToggle === true) {
             this.innerActions.push(new action_1.Action({
                 name: "mergedСells-action",
                 action: function () {
-                    _this.isMergedСells = !_this.isMergedСells;
+                    _this.isMergedCells = !_this.isMergedCells;
                 },
                 svg: this.icons.table,
                 container: "top"
-            }));
-        }
-        if (config.enableEdit === true) {
-            this.innerActions.push(new action_1.Action({
-                name: "save-action",
-                action: function () {
-                    var isInsert = false;
-                    _this.rows.forEach(function (r) {
-                        var modify = {};
-                        if (r.number > 0) {
-                            r.cells.forEach(function (c) { return c.text !== c.data && (modify[c.name] = c.text); });
-                            if (!(0, utils_1.isEmpty)(modify)) {
-                                if (_this.dataProvider.saveData(_this.keyColumn, r.rowData[_this.keyColumn], modify))
-                                    r.cells.forEach(function (c) { return c.data = c.text; });
-                            }
-                        }
-                        else {
-                            r.cells.forEach(function (c) { return modify[c.name] = c.text; });
-                            if (_this.dataProvider.insertData(_this.keyColumn, modify))
-                                isInsert = true;
-                        }
-                    });
-                    if (isInsert)
-                        _this.refresh();
-                },
-                svg: this.icons.save,
-                container: "bottom"
-            }), new action_1.Action({
-                name: "delete-action",
-                action: function () {
-                    _this.selectedRows.forEach(function (r) {
-                        if (r.number > 0)
-                            _this.rows.slice(_this.rows.indexOf(r), 1);
-                    });
-                    _this.dataProvider.deleteData(_this.keyColumn, _this.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this.keyColumn]; }), (function (_) { return _this.refresh(); }));
-                },
-                svg: this.icons.del,
-                container: "bottom"
-            }), new action_1.Action({
-                name: "newRow-action",
-                action: function () {
-                    var newRow = {};
-                    _this.columns.forEach(function (c) { return c.visible && (newRow[c.name] = ""); });
-                    _this.rows.unshift(_this.createRow(newRow, -1, null));
-                },
-                svg: this.icons.add,
-                container: "bottom"
             }));
         }
     };
@@ -2575,7 +3268,6 @@ var Table = (function (_super) {
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
         this.drawRows(this.partRowCount, 0, false);
-        this.hideDetail();
     };
     Table.prototype.drawRows = function (limit, offset, back) {
         var _this = this;
@@ -2594,7 +3286,9 @@ var Table = (function (_super) {
                 _this.loadMore = _this.lastOffset <= totalCount;
                 var currentRows = _this.rows;
                 (data || []).forEach(function (dataItem, index) {
-                    var newRow = _this.createRow(back ? data[data.length - 1 - Number(index)] : dataItem, back ? data.length - 1 - Number(index) + offset : Number(index) + offset, back);
+                    var rowData = back ? data[data.length - 1 - Number(index)] : dataItem;
+                    var rowNumber = back ? data.length - 1 - Number(index) + offset : Number(index) + offset;
+                    var newRow = _this.createRow(rowData, rowNumber, back);
                     if (back) {
                         currentRows.unshift(newRow);
                     }
@@ -2620,11 +3314,10 @@ var Table = (function (_super) {
         }
         if (row.selected)
             this.lastSelectRow = row;
-        if (this.selectedRows.length !== 1)
-            this.hideDetail();
     };
     Table.prototype.createRow = function (data, num, back) {
         var _this = this;
+        if (back === void 0) { back = false; }
         var rowCells = [];
         var lastText = null;
         var colorCell = null, colorRow = null;
@@ -2647,23 +3340,15 @@ var Table = (function (_super) {
         row.rowData = data;
         row.id = row_id;
         row.number = num + 1;
-        row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
-        row.select = function (data, event) { return _this.selectRow(data, event); },
-            row.click = function (data, event) { return _this.clickRow(data, event); };
+        row.select = function (data, event) { return _this.selectRow(data, event); };
+        row.click = function (data, event) { return _this.clickRow(data, event); };
+        this.plugins.forEach(function (plugin) { return plugin.onRowCreated(row); });
         return row;
     };
-    Table.prototype.rowExpanded = function (id) {
-        return false;
-    };
-    Table.prototype.completeEditCell = function () {
-    };
-    Table.prototype.hasActiveInplaceEditorCore = function () {
-        return false;
-    };
-    Object.defineProperty(Table.prototype, "hasActiveInplaceEditor", {
+    Object.defineProperty(Table.prototype, "allowRowSelection", {
         get: function () {
-            return this.hasActiveInplaceEditorCore();
+            return true;
         },
         enumerable: false,
         configurable: true
@@ -2714,6 +3399,13 @@ var Table = (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Table.prototype, "rowActions", {
+        get: function () {
+            return this.getActions('row');
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Table.prototype, "noDataText", {
         get: function () {
             return localization_1.Localization.getString("noData");
@@ -2749,7 +3441,7 @@ var Table = (function (_super) {
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
-    ], Table.prototype, "isMerged\u0421ells", void 0);
+    ], Table.prototype, "isMergedCells", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
@@ -2806,37 +3498,9 @@ var Table = (function (_super) {
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
     ], Table.prototype, "viewFilterTable", void 0);
-    __decorate([
-        (0, property_1.property)({ defaultValue: false }),
-        __metadata("design:type", Boolean)
-    ], Table.prototype, "isShowDetail", void 0);
     return Table;
 }(base_1.Base));
 exports.Table = Table;
-
-
-/***/ }),
-
-/***/ "./sources/table/number.ts":
-/*!*********************************!*\
-  !*** ./sources/table/number.ts ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NumberCell = void 0;
-var cell_1 = __webpack_require__(/*! ./cell */ "./sources/table/cell.ts");
-var NumberCell = (function () {
-    function NumberCell() {
-        this.name = "number";
-        this.css = "table4js-table-cell--right";
-    }
-    return NumberCell;
-}());
-exports.NumberCell = NumberCell;
-cell_1.TableCell.registerCellType(new NumberCell());
 
 
 /***/ }),
@@ -2882,10 +3546,36 @@ var TableRow = (function (_super) {
     function TableRow() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    TableRow.prototype.getRowComponent = function () {
+        return "table4js-row";
+    };
+    TableRow.prototype.getRowComponentParams = function (params) {
+        return params;
+    };
+    TableRow.prototype.getCellComponent = function (cell) {
+        return "table4js-cell";
+    };
+    TableRow.prototype.getCellComponentParams = function (params) {
+        return params;
+    };
+    Object.defineProperty(TableRow.prototype, "css", {
+        get: function () {
+            var result = "table4js__row table4js__row--" + this.mode;
+            if (this.selected) {
+                result += " table4js__row--selected";
+            }
+            return result;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    TableRow.prototype.update = function () {
+        this.cells.forEach(function (cell) { return cell.update(); });
+    };
     __decorate([
-        (0, property_1.property)({ defaultValue: [] }),
-        __metadata("design:type", Array)
-    ], TableRow.prototype, "cells", void 0);
+        (0, property_1.property)({ defaultValue: "default" }),
+        __metadata("design:type", String)
+    ], TableRow.prototype, "mode", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
@@ -2894,6 +3584,10 @@ var TableRow = (function (_super) {
         (0, property_1.property)(),
         __metadata("design:type", String)
     ], TableRow.prototype, "color", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: [] }),
+        __metadata("design:type", Array)
+    ], TableRow.prototype, "cells", void 0);
     return TableRow;
 }(base_1.Base));
 exports.TableRow = TableRow;
@@ -2997,67 +3691,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableSummaryPlugin = exports.TableSummary = exports.TableSummaryItem = void 0;
+exports.SummaryPlugin = exports.FieldSummary = exports.SummaryItem = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
 var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 __webpack_require__(/*! ./summary.scss */ "./sources/table/summary.scss");
 var Functions = [
     { title: "-", value: "", hint: "" },
-    { title: "Σ", value: "sum", hint: "Sum of cells for this table column", types: ["integer", "money", "number"] },
-    { title: "x̄", value: "avg", hint: "Arithmetic mean in this table column", types: ["integer", "money", "number"] },
-    { title: "min", value: "min", hint: "Minimum value in this table column", types: ["integer", "money", "date", "number"] },
-    { title: "max", value: "max", hint: "Maximum value in this table column", types: ["integer", "money", "date", "number"] },
-    { title: "Ν", value: "count", hint: "Number of non-blank cells in this column" },
+    { title: "Σ", value: "sum", hint: "Sum of cells for this table column", types: ["integer", "money", "currency", "progress", "number"] },
+    { title: "x̄", value: "avg", hint: "Arithmetic mean in this table column", types: ["integer", "money", "currency", "progress", "number"] },
+    { title: "min", value: "min", hint: "Minimum value in this table column", types: ["integer", "money", "currency", "progress", "number", "date", "datetime"] },
+    { title: "max", value: "max", hint: "Maximum value in this table column", types: ["integer", "money", "currency", "progress", "number", "date", "datetime"] },
+    { title: "N", value: "count", hint: "Number of non-blank cells in this column" },
     { title: "U", value: "unique", hint: "Number of unique cells in this column" },
 ];
-var TableSummaryItem = (function () {
-    function TableSummaryItem(title, value) {
+var SummaryItem = (function () {
+    function SummaryItem(title, value) {
         this.title = title;
         this.value = value;
     }
-    return TableSummaryItem;
+    return SummaryItem;
 }());
-exports.TableSummaryItem = TableSummaryItem;
-var TableSummary = (function (_super) {
-    __extends(TableSummary, _super);
-    function TableSummary(table, column) {
+exports.SummaryItem = SummaryItem;
+var FieldSummary = (function (_super) {
+    __extends(FieldSummary, _super);
+    function FieldSummary(table, field) {
         var _this = _super.call(this) || this;
         _this.table = table;
-        _this.column = column;
+        _this.field = field;
         _this.summaryItems = Functions.filter(function (funcDescription) {
-            return !funcDescription.types || funcDescription.types.indexOf(column.type) !== -1;
-        }).map(function (funcDescription) { return new TableSummaryItem(funcDescription.title, funcDescription.value); });
+            return !funcDescription.types || funcDescription.types.indexOf(field.type) !== -1;
+        }).map(function (funcDescription) { return new SummaryItem(funcDescription.title, funcDescription.value); });
         return _this;
     }
-    TableSummary.prototype.calculateSummary = function () {
+    FieldSummary.prototype.calculateSummary = function () {
         var _this = this;
         this.value = undefined;
         if (!!this.func) {
-            this.table.dataProvider.getSummary(this.func, this.column.name, this.table["tableFilter"], function (data) { return _this.value = data; });
+            this.table.dataProvider.getSummary(this.func, this.field.name, this.table["tableFilter"], function (data) { return _this.value = data; });
         }
     };
     __decorate([
         (0, property_1.property)(),
         __metadata("design:type", Number)
-    ], TableSummary.prototype, "value", void 0);
+    ], FieldSummary.prototype, "value", void 0);
     __decorate([
         (0, property_1.property)({ defaultValue: null, onSet: function (val, target) {
                 target.calculateSummary();
             } }),
         __metadata("design:type", Object)
-    ], TableSummary.prototype, "func", void 0);
-    return TableSummary;
+    ], FieldSummary.prototype, "func", void 0);
+    return FieldSummary;
 }(base_1.Base));
-exports.TableSummary = TableSummary;
-var TableSummaryPlugin = (function () {
-    function TableSummaryPlugin() {
+exports.FieldSummary = FieldSummary;
+var SummaryPlugin = (function () {
+    function SummaryPlugin() {
         this.name = "summary";
     }
-    TableSummaryPlugin.prototype.init = function (table) {
+    SummaryPlugin.prototype.init = function (table) {
         this._table = table;
     };
-    TableSummaryPlugin.prototype.getActions = function () {
+    SummaryPlugin.prototype.getActions = function () {
         var _this = this;
         return [new action_1.Action({
                 name: "summary-action",
@@ -3068,12 +3762,14 @@ var TableSummaryPlugin = (function () {
                 container: "top"
             })];
     };
-    TableSummaryPlugin.prototype.onColumnCreated = function (column) {
-        column.summary = new TableSummary(this._table, column);
+    SummaryPlugin.prototype.onColumnCreated = function (column) {
+        column.summary = new FieldSummary(this._table, column);
     };
-    return TableSummaryPlugin;
+    SummaryPlugin.prototype.onRowCreated = function (row) {
+    };
+    return SummaryPlugin;
 }());
-exports.TableSummaryPlugin = TableSummaryPlugin;
+exports.SummaryPlugin = SummaryPlugin;
 
 
 /***/ }),
@@ -3335,6 +4031,352 @@ function isEqual(obj1, obj2) {
     return obj1 === obj2;
 }
 exports.isEqual = isEqual;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/editor.ts":
+/*!***********************************!*\
+  !*** ./sources/widgets/editor.ts ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Editor = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+__webpack_require__(/*! ./editor.scss */ "./sources/widgets/editor.scss");
+var Editor = (function (_super) {
+    __extends(Editor, _super);
+    function Editor(_data, name, onComplete) {
+        var _this = _super.call(this) || this;
+        _this._data = _data;
+        _this.name = name;
+        _this.onComplete = onComplete;
+        _this.value = _data[_this.name];
+        return _this;
+    }
+    Editor.getInputType = function (type) {
+        return Editor.inputTypes[type];
+    };
+    Object.defineProperty(Editor.prototype, "isModified", {
+        get: function () {
+            return this.value !== this.data[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "css", {
+        get: function () {
+            var result = "table4js-editor";
+            if (this.isModified) {
+                result += " table4js-editor--modified";
+            }
+            return result;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (val) {
+            this._data = val;
+            this.value = val[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Editor.prototype.complete = function (commit) {
+        if (commit) {
+            this.data[this.name] = this.value;
+        }
+        !!this.onComplete && this.onComplete(this.value, commit);
+    };
+    Editor.inputTypes = {
+        number: "number",
+        currency: "number",
+        indicator: "number",
+        progress: "number",
+        date: "date",
+        datetime: "datetime-local",
+    };
+    Editor.editors = {
+        default: "table4js-default-editor",
+        bool: "table4js-checkbox-editor",
+    };
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", Object)
+    ], Editor.prototype, "value", void 0);
+    return Editor;
+}(base_1.Base));
+exports.Editor = Editor;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/form.ts":
+/*!*********************************!*\
+  !*** ./sources/widgets/form.ts ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Form = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var property_2 = __webpack_require__(/*! ./property */ "./sources/widgets/property.ts");
+__webpack_require__(/*! ./form.scss */ "./sources/widgets/form.scss");
+var Form = (function (_super) {
+    __extends(Form, _super);
+    function Form(fields, layout) {
+        var _this = _super.call(this) || this;
+        _this.fields = fields;
+        _this.layout = layout;
+        _this._properties = {};
+        if (!_this.layout) {
+            _this.layout = { elements: (fields || []).filter(function (f) { return f.visible; }).map(function (f) { return ({ name: f.name, title: f.title }); }) };
+        }
+        _this.fields.forEach(function (field) { return _this._properties[field.name] = new property_2.Property(field); });
+        return _this;
+    }
+    Object.defineProperty(Form.prototype, "properties", {
+        get: function () {
+            var _this = this;
+            return this.layout.elements.map(function (el) { return _this._properties[el.name]; });
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Form.prototype.complete = function (commit) {
+        var _this = this;
+        Object.keys(this._properties).forEach(function (name) { return _this._properties[name].complete(commit); });
+    };
+    __decorate([
+        (0, property_1.property)({
+            onSet: function (val, target) {
+                Object.keys(target._properties).forEach(function (name) { return target._properties[name].obj = val; });
+            }
+        }),
+        __metadata("design:type", Object)
+    ], Form.prototype, "object", void 0);
+    return Form;
+}(base_1.Base));
+exports.Form = Form;
+
+
+/***/ }),
+
+/***/ "./sources/widgets/property.ts":
+/*!*************************************!*\
+  !*** ./sources/widgets/property.ts ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Property = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var editor_1 = __webpack_require__(/*! ./editor */ "./sources/widgets/editor.ts");
+__webpack_require__(/*! ./property.scss */ "./sources/widgets/property.scss");
+var Property = (function (_super) {
+    __extends(Property, _super);
+    function Property(field) {
+        var _this = _super.call(this) || this;
+        _this.field = field;
+        _this.title = field.title || field.name;
+        _this.editor = new editor_1.Editor(_this.obj, _this.name);
+        return _this;
+    }
+    Property.registerPropertyType = function (propertyType) {
+        Property.propertyTypes[propertyType.name] = propertyType;
+    };
+    Object.defineProperty(Property.prototype, "type", {
+        get: function () {
+            var _a;
+            return ((_a = this.field) === null || _a === void 0 ? void 0 : _a.type) || "default";
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "name", {
+        get: function () {
+            return this.field.name;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "value", {
+        get: function () {
+            return this.editor.value;
+        },
+        set: function (val) {
+            this.editor.value = val;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "hasValue", {
+        get: function () {
+            return this.editor.value !== undefined;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "css", {
+        get: function () {
+            return this.getPropertyCss(this.obj, this.field);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Property.prototype.getPropertyTypeDescription = function (type) {
+        return Property.propertyTypes[type] || Property.propertyTypes["default"];
+    };
+    Property.prototype.getPropertyCss = function (data, field) {
+        return this.getPropertyTypeDescription(field.type).css;
+    };
+    Property.prototype.getText = function (val) {
+        var propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+        if (!!propertyTypeDescription && typeof propertyTypeDescription.getText === "function") {
+            return propertyTypeDescription.getText(val);
+        }
+        return this.getPropertyTypeDescription("default").getText(val);
+    };
+    Object.defineProperty(Property.prototype, "component", {
+        get: function () {
+            var propertyTypeDescription = this.getPropertyTypeDescription(this.type);
+            if (!!propertyTypeDescription && !!propertyTypeDescription.component) {
+                return propertyTypeDescription.component;
+            }
+            return this.getPropertyTypeDescription("default").component;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Property.prototype, "inputType", {
+        get: function () {
+            return editor_1.Editor.getInputType(this.type);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Property.prototype.complete = function (commit) {
+        this.editor.complete(commit);
+    };
+    Property.propertyTypes = {
+        "default": {
+            name: "default",
+            css: "table4js-cell--left",
+            getText: function (val) { return typeof val === "object" ? JSON.stringify(val) : val; },
+            component: "table4js-property-editor"
+        },
+    };
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", String)
+    ], Property.prototype, "title", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: false }),
+        __metadata("design:type", Boolean)
+    ], Property.prototype, "isModified", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: false }),
+        __metadata("design:type", Boolean)
+    ], Property.prototype, "isReadOnly", void 0);
+    __decorate([
+        (0, property_1.property)({
+            defaultValue: {},
+            onSet: function (val, target) {
+                target.editor.data = val;
+                target.isModified = false;
+            }
+        }),
+        __metadata("design:type", Object)
+    ], Property.prototype, "obj", void 0);
+    return Property;
+}(base_1.Base));
+exports.Property = Property;
 
 
 /***/ }),

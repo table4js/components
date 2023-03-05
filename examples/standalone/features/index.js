@@ -1,8 +1,8 @@
 var options = {
     enableSearch: true,
     enableSummary: true,
-    enableMergedСellsToggle: true,
-    enableMergedСells: true,
+    enableMergedCellsToggle: true,
+    enableMergedCells: true,
     enableEdit: true,
     columns: [
         {
