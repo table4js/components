@@ -165,15 +165,6 @@ export class Table extends Base implements IDataProviderOwner {
         }
     }
 
-    protected showDetail(rowData: ITableRowData) {
-        this.isShowDetail = true;
-    }
-
-    protected hideDetail() {
-        this.expandedRowKey = null;
-        this.isShowDetail = false;
-    }
-
     navigateTo(startRow: number) {
         if (startRow) {
             this.lastOffsetBack = startRow - 1;
@@ -181,7 +172,6 @@ export class Table extends Base implements IDataProviderOwner {
             this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
             this.rows = [];
             this.drawRows(this.partRowCount, startRow - 1, false);
-            this.hideDetail();
         }
     }
 
@@ -230,7 +220,6 @@ export class Table extends Base implements IDataProviderOwner {
         this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
         this.drawRows(this.partRowCount, 0, false);
-        this.hideDetail();
     }
 
     drawRows(limit: number, offset: number, back = false) {
@@ -279,13 +268,9 @@ export class Table extends Base implements IDataProviderOwner {
                 .forEach(e => e.selected = true);
         }
         if (row.selected) this.lastSelectRow = row;
-        if (this.selectedRows.length !== 1) this.hideDetail();
     }
 
     public clickColumn = (column: ITableColumn, event) => {
-        if (this.isShowDetail) {
-            this.hideDetail();
-        }
         var newOrder = column.order === undefined ? false : !column.order;
         if (!event.shiftKey) {
             this.columns.map((c) => c.order = undefined)
@@ -316,7 +301,7 @@ export class Table extends Base implements IDataProviderOwner {
         row.rowData = data;
         row.id = row_id;
         row.number = num + 1;
-        row.selected = row_id && (this.expandedRowKey === row_id);
+        // row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
         row.select = (data, event) => this.selectRow(data, event);
         row.click = (data, event) => this.clickRow(data, event);
@@ -410,8 +395,7 @@ export class Table extends Base implements IDataProviderOwner {
     @property({ defaultValue: true }) showTableFilter: boolean;
     @property({ defaultValue: false }) viewFilterTable: boolean;
     tableFilter: ITableFilter[];
-    @property({ defaultValue: false }) isShowDetail: boolean;
-    expandedRowKey;
+    // expandedRowKey;
 
     searchModel = new SearchModel();
 
