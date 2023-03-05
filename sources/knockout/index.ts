@@ -83,6 +83,7 @@ ko.components.register("table4", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
             const model = params.model as Table;
+            componentInfo.element.className += " table4js-root--fit-width";
             model.initialize(componentInfo.element);
             return model;
         }

@@ -40,7 +40,6 @@ button {
 .table4js-resizable-container {
   min-height: 100px;
   height: 100%;
-  width: 100%;
 }
 
 .table4js-scroll-container {
@@ -81,7 +80,6 @@ button {
 .table4js {
   border-collapse: separate;
   border-spacing: 0;
-  min-width: 100%;
 }
 
 .table4js--small {
@@ -534,7 +532,6 @@ button {
 table4, .table4js-root {
   display: inline-block;
   height: 100%;
-  width: 100%;
 
   &.abrs-table-child-view {
     height: 100%;
@@ -642,4 +639,16 @@ table4, .table4js-root {
 .table4js-svg-icon.table4js-go-to__icon {
   width: 16px;
   height: 16px;
+}
+
+.table4js-root--fit-width {
+  width: 100%;
+
+  .table4js-resizable-container {
+    width: 100%;
+  }
+  .table4js {
+    min-width: 100%;
+    table-layout: fixed;
+  }
 }
