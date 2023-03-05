@@ -20,7 +20,7 @@ var examples = ko.observableArray([
     {
         name: "basic",
         title: "Basic usage",
-        description: "Basic usage description",
+        description: "You can show in table columns text, number, boolean, date/time and many other data types. Column and several columns can be sorted via a click on a column header cell (hold the shift key to sort several columns). Table has infinite scrolling out-of-the box: data are loaded as soon as you scrolled to the bottom of a table.",
         show: ko.observable(false),
         current_tab_file: ko.observable("index.js"),
         files: [ 
