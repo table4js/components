@@ -1,6 +1,6 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
-import { IFindOperation, operationsMap } from "../find";
+import { IFindOperation, operationsMap } from "../core/find";
 import { ITableColumn } from "./column";
 
 export class FilterItemValue extends Base {

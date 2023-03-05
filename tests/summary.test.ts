@@ -10,10 +10,10 @@ test("Summary in table", () => {
     const table = new Table(<any>{
             enableSummary: true,
             columns: [{ name: "col1", type: "number" }],
-            getData: (limit, offset, order, filters, key, back, callback) => {
+            getData: (limit, offset, order, key, back, callback) => {
                 callback([{col1: 5}]);
             },
-            getSummary: function (func, field, filter, callback) {
+            getSummary: function (func, field, callback) {
                 callback(5);
             }
         }, undefined);

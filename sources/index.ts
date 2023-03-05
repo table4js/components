@@ -7,8 +7,8 @@ export * from "./core/field-types/currency";
 export * from "./core/field-types/date";
 export * from "./core/field-types/datetime";
 export * from "./core/field-types/number";
+export * from "./core/find";
 
-export * from "./find";
 export * from "./table";
 export * from "./table/cell";
 export * from "./table/column";

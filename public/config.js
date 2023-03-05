@@ -71,8 +71,8 @@ var options = {
             concatPrev: true,
         },
     ],
-    // getData: function (limit, offset, order, filters, key, back, callback) {
-    //     sampleDataProvider.getData(limit, offset, order, filters, key, back, callback);
+    // getData: function (limit, offset, order, key, back, callback) {
+    //     sampleDataProvider.getData(limit, offset, order, key, back, callback);
     // },
     // getSummary: function (func, field, callback) {
     //     sampleDataProvider.getSummary(func, field, callback);

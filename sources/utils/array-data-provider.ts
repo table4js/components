@@ -1,8 +1,8 @@
+import { IFilterItem } from "../core/find";
 import { IDataProvider } from "./data-provider";
 
 export class ArrayDataProvider implements IDataProvider {
     constructor(public data: Array<any>) {
-
     }
 
     filtered(filters, data) {
@@ -19,7 +19,7 @@ export class ArrayDataProvider implements IDataProvider {
         ) ?? [];
     }
 
-    getData(limit, offset, order, filters, key, back, callback) {
+    getData(limit, offset, order, key, back, callback) {
         function sortfunc(a, b) {
             for (let i = 0; i < order.length; i++) {
                 if (a[order[i].field] === b[order[i].field]) continue;
@@ -29,7 +29,7 @@ export class ArrayDataProvider implements IDataProvider {
         }
         (order.length > 0) && this.data.sort(sortfunc);
         let result = [];
-        const filteredData = this.filtered(filters, this.data);
+        const filteredData = this.filtered(this.filter, this.data);
         for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
             result.push(filteredData[i]);
         }
@@ -40,8 +40,8 @@ export class ArrayDataProvider implements IDataProvider {
         callback(result, offset + limit, filteredData.length, back);
     }
 
-    getSummary(func, field, filters, callback) {
-        const filteredData = this.filtered(filters, this.data);
+    getSummary(func, field, callback) {
+        const filteredData = this.filtered(this.filter, this.data);
         let result = filteredData.length ? filteredData[0][field] : false;
         let sum = 0, count = 0, uniques = [];
         this.data.forEach(row => {
@@ -87,4 +87,5 @@ export class ArrayDataProvider implements IDataProvider {
         callback(true);
     } 
 
+    filter: IFilterItem[] = [];
 }

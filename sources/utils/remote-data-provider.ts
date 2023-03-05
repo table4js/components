@@ -1,3 +1,4 @@
+import { IFilterItem } from "../core/find";
 import { IDataProvider } from "./data-provider";
 
 export async function postData(url = '', data = {}) {
@@ -19,16 +20,15 @@ export async function postData(url = '', data = {}) {
 
 export class RemoteDataProvider implements IDataProvider {
     constructor(public name: string, public url: string) {
-
     }
 
-    getData(limit: number, offset: number, order: any[], filters: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void) {
-        postData(this.url + "getData", { name: this.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then((data) => {
+    getData(limit: number, offset: number, order: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void) {
+        postData(this.url + "getData", { name: this.name, limit: limit, offset: offset, order: order, filters: this.filter, key: key, }).then((data) => {
             callback(data.data, offset + limit, data.count, back);
         });
     }
-    getSummary(func: string, field: string, filters: any[], callback: (value: any) => void) {
-        postData(this.url + "getSummary", { name: this.name, func: func, field: field, filters: filters }).then((data) => {
+    getSummary(func: string, field: string, callback: (value: any) => void) {
+        postData(this.url + "getSummary", { name: this.name, func: func, field: field, filters: this.filter }).then((data) => {
             callback(data.data);
         });
     }
@@ -53,4 +53,5 @@ export class RemoteDataProvider implements IDataProvider {
         callback(true);
     }
 
+    filter: IFilterItem[] = [];
 }

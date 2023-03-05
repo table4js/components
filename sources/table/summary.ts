@@ -34,7 +34,7 @@ export class FieldSummary extends Base {
   calculateSummary(): void {
     this.value = undefined;
     if(!!this.func) {
-        this.table.dataProvider.getSummary(this.func, this.field.name, this.table["tableFilter"], (data) => this.value = data);
+        this.table.dataProvider.getSummary(this.func, this.field.name, (data) => this.value = data);
     }
   }
   @property() value: number;

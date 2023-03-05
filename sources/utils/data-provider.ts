@@ -1,7 +1,10 @@
+import { IFilterItem } from "../core/find";
+
 export interface IListDataProvider {
-    getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
-    getSummary(func: string, field: string, filters: any[], callback: (value: any) => void);
+    getData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void);
+    getSummary(func: string, field: string, callback: (value: any) => void);
     getColumnData: (column, value, limit, offset, callback) => void;
+    filter: IFilterItem[];
 }
 export interface ICRUDDataProvider {
     saveData: (keyName: string,  key: any, modify: { } ) => boolean;

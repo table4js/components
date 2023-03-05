@@ -1,4 +1,4 @@
-import { Localization } from "./localization";
+import { Localization } from "../localization";
 
 type  TOperation = "EQ" | "NEQ" | "G" | "L" | "GEQ" | "LEQ" | "ISN" | "ISNN" | "C";
 export interface IFindOperation {
@@ -11,6 +11,12 @@ export interface IFindCompare {
     field: string;
     op: TOperation;
     value: string;
+}
+
+export interface IFilterItem {
+    value: string,
+    op: string,
+    field: string,
 }
 
 export interface IFindOperand {
