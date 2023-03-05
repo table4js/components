@@ -104,7 +104,7 @@ export class Table extends Base implements IDataProviderOwner {
                 this.plugins.push(new SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                this.plugins.push(new RowEditorPlugin());
+                this.plugins.push(new InplaceEditorPlugin());
             }
         }
 
