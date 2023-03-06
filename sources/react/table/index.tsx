@@ -65,9 +65,7 @@ export interface ITableProps {
   model: Table;
 }
 
-export function Table4({
-  model,
-}: ITableProps): React.ReactNode {
+export function Table4({ model }: ITableProps) {
   const dropdownActions = model.getActions("dropdownActions");
   const [startRow, setStartRow] = useState<number | undefined>(undefined);
   const rootRef = useRef(null);
