@@ -1,10 +1,10 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCTS1YFCL5"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=SPECIAL_GOOGLE_KEY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-LCTS1YFCL5');
+  gtag('config', 'SPECIAL_GOOGLE_KEY');
 </script>
 <meta name="keywords" content="data, table, grid, javascript, enterprise, community, support">
