@@ -2,6 +2,8 @@ import { Base } from "../core/base";
 import { property } from "../core/property";
 import { ITableCell } from "./cell";
 
+import "./row.scss";
+
 /**
  * The collection of data for a table row. The key is the name of the column. The value is the content of the table cell.
  */

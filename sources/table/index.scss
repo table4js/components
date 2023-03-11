@@ -35,6 +35,7 @@ button {
   width: 18px;
   height: 18px;
   fill: var(--abc-primary-2, $abc-primary-2);
+  display: inline-block;
 }
 
 .table4js-resizable-container {
@@ -164,14 +165,19 @@ button {
 .table4js-header-title__cell {
   padding: 14px 6px;
   background: var(--abc-primary-0, $abc-primary-0);
-  border-right: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
+  border-left: 1px solid var(--abc-primary-2-op-30, $abc-primary-2-op-30);
   position: relative;
+  user-select: none;
 
   &:hover {
     .table4js-title__filter {
       display: block;
     }
   }
+}
+
+.table4js-header-title__technical-cell--right {
+  border-left: none;
 }
 
 .table4js-switch {
@@ -227,93 +233,6 @@ button {
   cursor: col-resize;
 }
 
-.table4js__row {
-  //background: var(--abc-primary-1, $abc-primary-1);
-  position: relative;
-
-  &:hover {
-    .table4js__more {
-      display: none;
-    }
-
-    .table4js__edit {
-      display: block;
-    }
-
-    .table4js__row--select {
-      display: block;
-    }
-  }
-
-  &:last-child {
-    .table4js-cell {
-      border-bottom: none;
-    }
-  }
-}
-
-.table4js__row--selected {
-  .table4js__check {
-    border-color: var(--abc-primary-4, $abc-primary-4);
-  }
-
-  .table4js__more {
-    display: none;
-  }
-
-  .table4js__edit {
-    display: block;
-    fill: var(--abc-primary-4, $abc-primary-4);
-  }
-
-  .table4js__row--select {
-    display: block;
-    border-color: var(--abc-primary-0-op-20, $abc-primary-0-op-20);
-    background: var(--abc-primary-0-op-10, $abc-primary-0-op-10);
-  }
-}
-
-.table4js__row--edit-inplace {
-
-  .table4js__more {
-    display: none;
-  }
-
-  .table4js__edit {
-    display: block;
-    fill: var(--abc-primary-4, $abc-primary-4);
-  }
-}
-
-.table4js-cell {
-  border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-  border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-  vertical-align: top;
-
-  &:first-child {
-    border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
-  }
-}
-
-.table4js-cell--merged {
-  vertical-align: text-top;
-}
-
-.table4js-technical-cell {
-  background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
-  max-width: 35px;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-}
-
-.table4js-technical-cell__container {
-  display: flex;
-  padding: 6px;
-  z-index: 1;
-  position: relative;
-}
-
 .table4js__number {
   margin: auto;
 }
@@ -333,17 +252,6 @@ button {
   height: 100%;
   width: 100%;
   fill: var(--abc-primary-4, $abc-primary-4);
-}
-
-.table4js-icon-row-tools {
-  height: 20px;
-  width: 20px;
-  fill: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
-  margin: auto;
-}
-
-.table4js__edit {
-  display: none;
 }
 
 .table4js-cell__container {
@@ -373,46 +281,6 @@ button {
   100% {
     background-position: 0% 50%;
   }
-}
-
-.table4js-cell__text {
-  margin: auto 0;
-  z-index: 1;
-}
-
-.table4js-cell__text--modified {
-  font-weight: bold;
-}
-
-.table4js-cell__text--merged {
-  z-index: 1;
-  position: relative;
-}
-
-.cell__sticky-text {
-  position: sticky;
-}
-
-.table4js__row--select {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  /*border-radius: 8px;*/
-  border: 1px solid var(--abc-primary-0-op-10, $abc-primary-0-op-10);
-  background: var(--abc-primary-0-op-05, $abc-primary-0-op-05);
-  pointer-events: none;
-}
-
-.table4js__row--colored {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  height: calc(100%);
-  width: calc(100% - 60px);
-  z-index: -1;
 }
 
 .table4js__footer {
@@ -572,68 +440,6 @@ table4, .table4js-root {
 
 .table4js-view-content-holder-inner {
   height: 100%;
-}
-
-.abrs-table-container {
-  height: 100%;
-  display: flex;
-  position: relative;
-
-  .abrs-table-container-one {
-    height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-  }
-
-  .abrs-table-container-side {
-    height: calc(100vh - 117px);
-    display: flex;
-    flex-direction: column;
-
-    .table4js-scroll-container {
-      width: 100%;
-      height: inherit;
-      margin-top: 5px;
-    }
-  }
-
-  .abrs-table-main {
-    flex: 3;
-    height: 25%;
-  }
-}
-
-@-moz-document url-prefix() {
-  .abrs-table-container-side {
-    .table4js-scroll-container {
-      width: calc(100% + 8px);
-    }
-  }
-}
-
-.row.abrs-table-content-right {
-  padding-right: 10px;
-}
-
-.table4js-cell--left {
-  text-align: left;
-  input {
-    text-align: left;
-  }
-}
-
-.table4js-cell--center {
-  text-align: center;
-  input {
-    text-align: center;
-  }
-}
-
-.table4js-cell--right {
-  text-align: right;
-  input {
-    text-align: right;
-  }
 }
 
 .table4js-svg-icon.table4js-go-to__icon {

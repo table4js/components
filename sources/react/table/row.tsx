@@ -20,7 +20,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
     >
       <td
         key="technical-cell"
-        className="table4js-cell table4js-technical-cell"
+        className="table4js-cell table4js-technical-cell table4js-technical-cell--left"
         onClick={(e) => row.select(row, e)}
       >
         <div className="table4js-technical-cell__container">
@@ -60,7 +60,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
       )}
       <td
         key="context-menu-cell"
-        className="table4js-cell table4js-technical-cell"
+        className="table4js-cell table4js-technical-cell table4js-technical-cell--right"
         onClick={(e) => row.click(row, e)}
       >
         <div className="table4js-technical-cell__container">

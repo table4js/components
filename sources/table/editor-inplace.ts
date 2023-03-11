@@ -2,7 +2,9 @@ import { ITableRow, ITableRowData } from "./row";
 import { ITableCell } from "./cell";
 import { Editor } from "../widgets/editor";
 import { EditorPlugin } from "./editor";
+import { Action, IAction } from "../core/action";
 
+import * as Icons from "../icons"
 
 export class InplaceEditorPlugin extends EditorPlugin {
     private _activeEditors: { [name: string]: Editor } = undefined;
@@ -31,6 +33,28 @@ export class InplaceEditorPlugin extends EditorPlugin {
             this._editedRow = undefined;
         }
         this._activeEditors = undefined;
+    }
+    getActions(): IAction[] {
+        const actions = super.getActions();
+        actions.push(new Action({
+            name: "save-edit-action",
+            action: (row: any) => {
+                this.endEditRow(true);
+            },
+            svg: Icons.save_ok,
+            cssClasses: "table4js__save-edit",
+            container: "row"
+        }));
+        actions.push(new Action({
+            name: "cancel-edit-action",
+            action: (row: any) => {
+                this.endEditRow(false);
+            },
+            svg: Icons.cancel,
+            cssClasses: "table4js__cancel-edit",
+            container: "row"
+        }));
+        return actions;
     }
     onRowCreated(row: ITableRow): void {
         const prev = row.getCellComponent;

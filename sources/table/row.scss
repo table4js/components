@@ -1,0 +1,80 @@
+@import "../_colors";
+
+
+.table4js__row {
+    //background: var(--abc-primary-1, $abc-primary-1);
+    position: relative;
+
+    .table4js__edit {
+        display: none;
+    }
+
+    &:hover {
+        .table4js__more {
+            display: none;
+        }
+
+        .table4js__edit {
+            display: inline-block;
+        }
+
+        .table4js__row--select {
+            display: inline-block;
+        }
+    }
+
+    &:last-child {
+        .table4js-cell {
+            border-bottom: none;
+        }
+    }
+}
+
+.table4js__row--selected {
+    .table4js__check {
+        border-color: var(--abc-primary-4, $abc-primary-4);
+    }
+
+    .table4js__more {
+        display: none;
+    }
+
+    .table4js__edit {
+        display: inline-block;
+        fill: var(--abc-primary-4, $abc-primary-4);
+    }
+
+    .table4js__row--select {
+        display: block;
+        border-color: var(--abc-primary-0-op-20, $abc-primary-0-op-20);
+        background: var(--abc-primary-0-op-10, $abc-primary-0-op-10);
+    }
+}
+
+.table4js__row--select {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /*border-radius: 8px;*/
+    border: 1px solid var(--abc-primary-0-op-10, $abc-primary-0-op-10);
+    background: var(--abc-primary-0-op-05, $abc-primary-0-op-05);
+    pointer-events: none;
+}
+
+.table4js__row--colored {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100%);
+    width: calc(100%);
+    z-index: -1;
+}
+
+.table4js-icon-row-tools.table4js-svg-icon {
+    fill: var(--abc-primary-0-op-40, $abc-primary-0-op-40);
+    margin: auto;
+    cursor: pointer;
+}

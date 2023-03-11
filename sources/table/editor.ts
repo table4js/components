@@ -5,6 +5,7 @@ import { ITableColumn } from "./column";
 import { ITableRow, ITableRowData } from "./row";
 
 import * as Icons from "../icons"
+import "./editor.scss";
 
 export class EditorPlugin implements ITablePlugin {
     protected _table: Table;

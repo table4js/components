@@ -15,3 +15,5 @@ export const arrowright = require('./icon_arrow-right.svg');
 export const search = require('./icon_search.svg');
 export const cross = require('./icon_cross.svg');
 export const arrowdown = require('./icon_arrow-down.svg');
+export const save_ok = require('./icon_save-ok.svg');
+export const cancel = require('./icon_cancel.svg');

@@ -1,0 +1,81 @@
+@import "../_colors";
+
+.table4js-cell {
+    border-left: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+    border-bottom: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+    vertical-align: top;
+
+    &:last-child {
+        border-right: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+    }
+}
+
+.table4js-cell--merged {
+    vertical-align: text-top;
+}
+
+.table4js-technical-cell {
+    height: 30px;
+    padding: 0;
+}
+
+.table4js-technical-cell--left {
+    max-width: 35px;
+    width: 30px;
+    background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
+}
+
+.table4js-technical-cell--right {
+    max-width: 70px;
+    width: 60px;
+    border-left: none;    
+}
+
+.table4js-technical-cell__container {
+    padding: 6px;
+    z-index: 1;
+    position: relative;
+    text-align: right;
+}
+
+.table4js-cell__text {
+    margin: auto 0;
+    z-index: 1;
+}
+
+.table4js-cell__text--modified {
+    font-weight: bold;
+}
+
+.table4js-cell__text--merged {
+    z-index: 1;
+    position: relative;
+}
+
+.cell__sticky-text {
+    position: sticky;
+}
+
+.table4js-cell--left {
+    text-align: left;
+
+    input {
+        text-align: left;
+    }
+}
+
+.table4js-cell--center {
+    text-align: center;
+
+    input {
+        text-align: center;
+    }
+}
+
+.table4js-cell--right {
+    text-align: right;
+
+    input {
+        text-align: right;
+    }
+}

@@ -43,15 +43,11 @@ function LoadingIndicator(table: Table) {
               <div className="table4js-cell__container table4js-cell__container--loading"></div>
             </td>
           ))}
-          <td className="table4js-cell table4js-technical-cell">
+          <td className="table4js-cell table4js-technical-cell table4js-technical-cell--right">
             <div className="table4js-technical-cell__container">
               <div
                 className="table4js-svg-icon table4js-icon-row-tools table4js__more"
                 dangerouslySetInnerHTML={{ __html: table.icons.more }}
-              ></div>
-              <div
-                className="table4js-svg-icon table4js-icon-row-tools table4js__edit"
-                dangerouslySetInnerHTML={{ __html: table.icons.edit }}
               ></div>
             </div>
           </td>
@@ -198,7 +194,7 @@ export function Table4({ model }: ITableProps) {
                   ))}
                 <th
                   key="row-context-menu-cell"
-                  className="table4js-header-title__cell"
+                  className="table4js-header-title__cell table4js-header-title__technical-cell--right"
                 ></th>
               </tr>
             </thead>
@@ -240,7 +236,7 @@ export function Table4({ model }: ITableProps) {
                     ))}
                   <th
                     key="footer-context-menu-cell"
-                    className="table4js-cell table4js-technical-cell table4js-footer__cell"
+                    className="table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right"
                   ></th>
                 </tr>
               )}

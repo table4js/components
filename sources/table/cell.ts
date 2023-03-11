@@ -3,6 +3,8 @@ import { IFieldDescription, IFieldType } from "../core/domain";
 import { property } from "../core/property";
 import { ITableColumn } from "./column";
 
+import "./cell.scss";
+
 export interface ITableCell {
     rowData: any;
     data: any;
