@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/table4js/components/compare/v0.2.7...v0.2.8) (2023-03-11)
+
+
+### Features
+
+* Introduced allowRowSelection option, move filter to data provider ([f20e30f](https://github.com/table4js/components/commit/f20e30f57bc9dd3f8e40e2fdb6e84b427dc9bca1))
+
 ### [0.2.7](https://github.com/table4js/components/compare/v0.2.6...v0.2.7) (2023-03-05)
 
 ### [0.2.6](https://github.com/table4js/components/compare/v0.2.5...v0.2.6) (2023-03-05)
