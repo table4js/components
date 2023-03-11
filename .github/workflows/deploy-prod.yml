@@ -20,7 +20,10 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run doc:gen
+      - run: sed  -i "s/SPECIAL_GOOGLE_KEY/${{ secrets.GOOGLE_ANALYTICS_KEY }}/" site/ga4.txt
       - run: sed  -i "/<head>/r site/ga4.txt" site/index.html
+      - run: sed  -i "/<head>/r site/ga4.txt" site/examples/index.html
+      - run: sed  -i "/<head>/r site/ga4.txt" site/docs/index.html
       - run: rm -rf site/ga4.txt
       
       - name: copy files via ssh password
