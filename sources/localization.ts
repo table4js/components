@@ -14,7 +14,14 @@ export class Localization {
         filterdateless: "To",
         noData: "No Data",
         true: "True",
-        false: "False"
+        false: "False",
+        saveRow: "Save",
+        deleteRow: "Delete",
+        addRow: "Add",
+        saveEdit: "Save",
+        cancelEdit: "Cancel",
+        summary: "Summary",
+        mergeCells: "Merge cells"
     };
     static getString = (stringId: string) => {
         return this.englishStrings[stringId];

@@ -24,12 +24,14 @@ export function AbrisAction({ action }: { action: Action }) {
           dangerouslySetInnerHTML={{ __html: action.svg }}
         ></div>
       )}
+      {!action.short && (
       <span
         className={"table4js-action-button__label " + action.cssLabel}
         style={{ display: action.title ? "block" : "none" }}
       >
         {action.title}
       </span>
+      )}
     </button>
   );
 }

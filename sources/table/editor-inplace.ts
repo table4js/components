@@ -3,6 +3,7 @@ import { ITableCell } from "./cell";
 import { Editor } from "../widgets/editor";
 import { EditorPlugin } from "./editor";
 import { Action, IAction } from "../core/action";
+import { Localization } from "../localization";
 
 import * as Icons from "../icons"
 
@@ -38,6 +39,7 @@ export class InplaceEditorPlugin extends EditorPlugin {
         const actions = super.getActions();
         actions.push(new Action({
             name: "save-edit-action",
+            title: Localization.getString("saveEdit"),
             action: (row: any) => {
                 this.endEditRow(true);
             },
@@ -47,6 +49,7 @@ export class InplaceEditorPlugin extends EditorPlugin {
         }));
         actions.push(new Action({
             name: "cancel-edit-action",
+            title: Localization.getString("cancelEdit"),
             action: (row: any) => {
                 this.endEditRow(false);
             },

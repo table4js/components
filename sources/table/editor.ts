@@ -3,6 +3,7 @@ import { isEmpty } from "../utils/utils";
 import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
 import { ITableRow, ITableRowData } from "./row";
+import { Localization } from "../localization";
 
 import * as Icons from "../icons"
 import "./editor.scss";
@@ -64,44 +65,48 @@ export class EditorPlugin implements ITablePlugin {
     protected endEditRow(commit: boolean) {
     }
     getActions(): IAction[] {
-      return [
-        new Action({
-            name: "save-action",
-            action: () => this.save(),
-            svg: Icons.save,
-            container: "bottom"
-        }),
-        new Action({
-            name: "delete-action",
-            action: () => this.delete(),
-            svg: Icons.del,
-            container: "bottom"
-        }),
-        new Action({
-            name: "add-action",
-            action: () => {
-                const newRow = this.add();
-                this.endEditRow(false);
-                this.startEditRow(newRow);
-            },
-            svg: Icons.add,
-            container: "bottom"
-        }),
-        new Action({
-            name: "edit-action",
-            action: (row: any) => {
-                if(this._editedRow !== row) {
+        return [
+            new Action({
+                name: "add-action",
+                title: Localization.getString("addRow"),
+                action: () => {
+                    const newRow = this.add();
                     this.endEditRow(false);
-                    this.startEditRow(row);
-                } else {
-                    this.endEditRow(true);
-                }
-            },
-            svg: Icons.edit,
-            cssClasses: "table4js__edit",
-            container: "row"
-        })
-      ];
+                    this.startEditRow(newRow);
+                },
+                svg: Icons.add,
+                container: "bottom"
+            }),
+            new Action({
+                name: "save-action",
+                title: Localization.getString("saveRow"),
+                action: () => this.save(),
+                svg: Icons.save,
+                container: "bottom"
+            }),
+            new Action({
+                name: "delete-action",
+                title: Localization.getString("deleteRow"),
+                action: () => this.delete(),
+                svg: Icons.del,
+                container: "bottom"
+            }),
+            new Action({
+                name: "edit-action",
+                title: Localization.getString("editRow"),
+                action: (row: any) => {
+                    if(this._editedRow !== row) {
+                        this.endEditRow(false);
+                        this.startEditRow(row);
+                    } else {
+                        this.endEditRow(true);
+                    }
+                },
+                svg: Icons.edit,
+                cssClasses: "table4js__edit",
+                container: "row"
+            })
+        ];
     }
     onColumnCreated(column: ITableColumn): void {
     }

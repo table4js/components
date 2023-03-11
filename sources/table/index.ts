@@ -208,6 +208,8 @@ export class Table extends Base implements IDataProviderOwner {
         if (config.enableMergedCellsToggle === true) {
             this.innerActions.push(new Action({
                 name: "mergedСells-action",
+                title: Localization.getString("mergeCells"),
+                short: true,
                 action: () => {
                     this.isMergedCells = !this.isMergedCells;
                 },

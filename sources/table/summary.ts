@@ -5,7 +5,7 @@ import { IAction, Action } from "../core/action";
 import { ITableColumn } from "./column";
 import { ITableRow } from "./row";
 import { IFieldDescription } from "../core/domain";
-
+import { Localization } from "../localization";
 
 import "./summary.scss";
 
@@ -53,6 +53,8 @@ export class SummaryPlugin implements ITablePlugin {
   getActions(): IAction[] {
     return [new Action({
         name: "summary-action",
+        title: Localization.getString("summary"),
+        short: true,
         action: () => {
             this._table.showTableSummary = !this._table.showTableSummary;
         },

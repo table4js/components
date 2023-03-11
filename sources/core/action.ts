@@ -14,6 +14,7 @@ export interface IAction {
     cssClasses?: string;
     cssImage?: string;
     cssLabel?: string;
+    short?: boolean;
 }
 
 export class Action extends Base implements IAction {
@@ -33,4 +34,5 @@ export class Action extends Base implements IAction {
     @property() cssClasses: string;
     @property() cssImage: string;
     @property() cssLabel: string;
+    @property() short: boolean;
 }

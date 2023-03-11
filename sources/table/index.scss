@@ -298,6 +298,7 @@ button {
   padding: 0;
   background: var(--abc-primary-1-dark-2, $abc-primary-1-dark-2);
   border-top: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
+  vertical-align: middle;
 }
 
 .table4js-footer-tools__cell {
