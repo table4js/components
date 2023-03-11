@@ -215,10 +215,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./sources/table/cell.scss":
+/*!*********************************!*\
+  !*** ./sources/table/cell.scss ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./sources/table/column-filter.scss":
 /*!******************************************!*\
   !*** ./sources/table/column-filter.scss ***!
   \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/table/editor.scss":
+/*!***********************************!*\
+  !*** ./sources/table/editor.scss ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -258,6 +284,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./sources/table/index.scss ***!
   \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./sources/table/row.scss":
+/*!********************************!*\
+  !*** ./sources/table/row.scss ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -538,7 +577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell table4js-header-title__technical-cell--right\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -568,7 +607,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<tr class=\"table4js__row\" data-bind=\"css: $data.row.css, style: { 'background-color': 'none' }\">\n  <td class=\"table4js-cell table4js-technical-cell\" data-bind=\"click: function() { $data.row.select($data.row); }\">\n    <div class=\"table4js-technical-cell__container\">\n      <!-- ko if: table.isNumber -->\n      <div class=\"table4js__number\" data-bind=\"text: row.number\"></div>\n      <!-- /ko -->\n      <!-- ko if: !table.isNumber -->\n      <div class=\"table4js__check\">\n        <div class=\"table4js-svg-icon table4js__icon-check\" data-bind=\"visible: row.selected, html: table.icons.check\"></div>\n      </div>\n      <!-- /ko -->\n    </div>\n  </td>\n  <!-- ko foreach: row.cells -->\n  <td class=\"table4js-cell\" data-bind=\"attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },\n    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',\n    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } \">\n    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->\n    <!-- /ko -->\n  </td>\n  <!-- /ko -->\n  <td class=\"table4js-cell table4js-technical-cell\">\n    <div class=\"table4js-technical-cell__container\">\n      <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: table.icons.more\"></div>\n      <!-- ko foreach: table.rowActions -->\n      <div class=\"table4js-svg-icon table4js-icon-row-tools\" data-bind=\"html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }\"></div>\n      <!-- /ko -->\n    </div>\n    <div class=\"table4js__row--select\" data-bind=\"visible: table.allowRowSelection\"></div>\n    <div class=\"table4js__row--colored\" data-bind=\"style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }\"></div>\n  </td>\n</tr>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<tr class=\"table4js__row\" data-bind=\"css: $data.row.css, style: { 'background-color': 'none' }\">\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--left\" data-bind=\"click: function(_, event) { $data.row.select($data.row, event); }\">\n    <div class=\"table4js-technical-cell__container\">\n      <!-- ko if: table.isNumber -->\n      <div class=\"table4js__number\" data-bind=\"text: row.number\"></div>\n      <!-- /ko -->\n      <!-- ko if: !table.isNumber -->\n      <div class=\"table4js__check\" data-bind=\"visible: table.allowRowSelection\">\n        <div class=\"table4js-svg-icon table4js__icon-check\" data-bind=\"visible: row.selected, html: table.icons.check\"></div>\n      </div>\n      <!-- /ko -->\n    </div>\n  </td>\n  <!-- ko foreach: row.cells -->\n  <td class=\"table4js-cell\" data-bind=\"attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },\n    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',\n    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } \">\n    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->\n    <!-- /ko -->\n  </td>\n  <!-- /ko -->\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n    <div class=\"table4js-technical-cell__container\">\n      <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: table.icons.more\"></div>\n      <!-- ko foreach: table.rowActions -->\n      <div class=\"table4js-svg-icon table4js-icon-row-tools\" data-bind=\"html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }\"></div>\n      <!-- /ko -->\n    </div>\n    <div class=\"table4js__row--select\" data-bind=\"visible: table.allowRowSelection\"></div>\n    <div class=\"table4js__row--colored\" data-bind=\"style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }\"></div>\n  </td>\n</tr>");
 
 /***/ }),
 
@@ -682,6 +721,16 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 30 30\
 
 /***/ }),
 
+/***/ "./sources/icons/icon_cancel.svg":
+/*!***************************************!*\
+  !*** ./sources/icons/icon_cancel.svg ***!
+  \***************************************/
+/***/ ((module) => {
+
+module.exports = "<svg viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g clip-path=\"url(#clip0_301_529)\"><path d=\"M24.8995 5.0995C22.9416 3.14156 20.447 1.80819 17.7313 1.268C15.0155 0.727808 12.2006 1.00505 9.64244 2.06468C7.08427 3.12431 4.89777 4.91872 3.35943 7.22101C1.82109 9.5233 1.00001 12.2301 1.00001 14.999C1 17.7679 1.82109 20.4747 3.35943 22.777C4.89777 25.0793 7.08427 26.8737 9.64244 27.9333C12.2006 28.9929 15.0155 29.2702 17.7313 28.73C20.447 28.1898 22.9416 26.8564 24.8995 24.8985C27.525 22.273 29 18.712 29 14.999C29 11.286 27.525 7.72501 24.8995 5.0995ZM19.0305 21.7165L15 17.686L10.9695 21.7165C10.7931 21.8929 10.5836 22.0329 10.3531 22.1284C10.1226 22.2239 9.87551 22.273 9.62599 22.273C9.37648 22.273 9.12941 22.2239 8.89889 22.1284C8.66838 22.0329 8.45892 21.8929 8.28249 21.7165C8.10606 21.5401 7.96611 21.3306 7.87062 21.1001C7.77514 20.8696 7.72599 20.6225 7.72599 20.373C7.72599 20.1235 7.77514 19.8764 7.87062 19.6459C7.96611 19.4154 8.10606 19.2059 8.28249 19.0295L12.313 14.999L8.28249 10.9685C8.10606 10.7921 7.96611 10.5826 7.87062 10.3521C7.77514 10.1216 7.72599 9.8745 7.72599 9.62498C7.72599 9.37547 7.77514 9.1284 7.87062 8.89788C7.96611 8.66737 8.10606 8.45791 8.28249 8.28148C8.45892 8.10505 8.66838 7.9651 8.89889 7.86961C9.12941 7.77413 9.37648 7.72498 9.62599 7.72498C9.8755 7.72498 10.1226 7.77413 10.3531 7.86961C10.5836 7.9651 10.7931 8.10505 10.9695 8.28148L15 12.312L19.0305 8.28148C19.2069 8.10505 19.4164 7.9651 19.6469 7.86961C19.8774 7.77413 20.1245 7.72498 20.374 7.72498C20.6235 7.72498 20.8706 7.77413 21.1011 7.86961C21.3316 7.9651 21.5411 8.10505 21.7175 8.28148C21.894 8.45791 22.0339 8.66737 22.1294 8.89789C22.2249 9.1284 22.274 9.37547 22.274 9.62498C22.274 9.8745 22.2249 10.1216 22.1294 10.3521C22.0339 10.5826 21.894 10.7921 21.7175 10.9685L17.687 14.999L21.7175 19.0295C22.0738 19.3858 22.274 19.8691 22.274 20.373C22.274 20.8769 22.0738 21.3602 21.7175 21.7165C21.3612 22.0728 20.8779 22.273 20.374 22.273C19.8701 22.273 19.3868 22.0728 19.0305 21.7165Z\" fill=\"black\"></path></g><defs><clipPath id=\"clip0_301_529\"><rect width=\"30\" height=\"30\" fill=\"white\"></rect></clipPath></defs></svg>"
+
+/***/ }),
+
 /***/ "./sources/icons/icon_check.svg":
 /*!**************************************!*\
   !*** ./sources/icons/icon_check.svg ***!
@@ -789,6 +838,16 @@ module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 30 30\
 /***/ ((module) => {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 30 30\"><path d=\"M3.209.75H20.678a3.2,3.2,0,0,1,3.209,3.177V5.75h2.936A3.18,3.18,0,0,1,30,8.927V26.073a3.18,3.18,0,0,1-3.177,3.177H9.322a3.2,3.2,0,0,1-3.209-3.177V24.25h-2.9A3.2,3.2,0,0,1,0,21.073V3.927A3.2,3.2,0,0,1,3.209.75Zm23.582,25.5A.2.2,0,0,0,27,26.073V8.927a.2.2,0,0,0-.209-.177H9.427a.178.178,0,0,0-.177.177V26.073a.178.178,0,0,0,.177.177ZM3,21.073a.2.2,0,0,0,.209.177H6.25V8.927A3.18,3.18,0,0,1,9.427,5.75h11.46V3.927a.2.2,0,0,0-.209-.177H3.209A.2.2,0,0,0,3,3.927Z\" style=\"fill:#092a3a\"></path><rect x=\"11.5\" y=\"10.823\" width=\"13\" height=\"3\" rx=\"1.5\" transform=\"translate(36 24.645) rotate(-180)\"></rect><rect x=\"11.5\" y=\"15.823\" width=\"13\" height=\"3\" rx=\"1.5\" transform=\"translate(36 34.645) rotate(180)\" style=\"fill:#092a3a\"></rect><rect x=\"11.5\" y=\"20.823\" width=\"13\" height=\"3\" rx=\"1.5\" transform=\"translate(36 44.645) rotate(180)\"></rect><title></title></svg>"
+
+/***/ }),
+
+/***/ "./sources/icons/icon_save-ok.svg":
+/*!****************************************!*\
+  !*** ./sources/icons/icon_save-ok.svg ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 30 30\"><path d=\"M15 1a14 14 0 1 0 14 14 14 14 0 0 0-14-14zm8.914 9.269l-10.486 11.318a1.153 1.153 0 0 1-1.718 0l-5.624-6.07a1.387 1.387 0 0 1 0-1.856 1.154 1.154 0 0 1 1.719 0l4.266 4.6a.668.668 0 0 0 1 0l9.129-9.848a1.154 1.154 0 0 1 1.719 0 1.387 1.387 0 0 1-.005 1.856z\"></path><title></title></svg>"
 
 /***/ }),
 
@@ -923,6 +982,10 @@ var Action = (function (_super) {
         (0, property_1.property)(),
         __metadata("design:type", String)
     ], Action.prototype, "cssLabel", void 0);
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", Boolean)
+    ], Action.prototype, "short", void 0);
     return Action;
 }(base_1.Base));
 exports.Action = Action;
@@ -1313,65 +1376,17 @@ exports.NumberField = NumberField;
 
 /***/ }),
 
-/***/ "./sources/core/property.ts":
-/*!**********************************!*\
-  !*** ./sources/core/property.ts ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.property = void 0;
-var dependencies_1 = __webpack_require__(/*! ./dependencies */ "./sources/core/dependencies.ts");
-function property(options) {
-    return function (target, key) {
-        var processComputedUpdater = function (obj, val) {
-            if (!!val && typeof val === "object" && val.type === dependencies_1.ComputedUpdater.ComputedUpdaterType) {
-                return dependencies_1.ComputedUpdater.CollectDependencies(obj, val, key);
-            }
-            return val;
-        };
-        var getDefaultValue = function () {
-            var defaultValue = undefined;
-            if (!!options) {
-                if (options.defaultValue !== undefined) {
-                    defaultValue = options.defaultValue;
-                    defaultValue = Array.isArray(defaultValue) ? [].concat(defaultValue) : defaultValue;
-                }
-            }
-            return defaultValue;
-        };
-        Object.defineProperty(target, key, {
-            get: function () {
-                return this.getPropertyValue(key, getDefaultValue());
-            },
-            set: function (val) {
-                var newValue = processComputedUpdater(this, val);
-                this.setPropertyValue(key, newValue, getDefaultValue());
-                if (!!options && options.onSet) {
-                    options.onSet(newValue, this);
-                }
-            },
-        });
-    };
-}
-exports.property = property;
-
-
-/***/ }),
-
-/***/ "./sources/find.ts":
-/*!*************************!*\
-  !*** ./sources/find.ts ***!
-  \*************************/
+/***/ "./sources/core/find.ts":
+/*!******************************!*\
+  !*** ./sources/core/find.ts ***!
+  \******************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.operationsMap = void 0;
-var localization_1 = __webpack_require__(/*! ./localization */ "./sources/localization.ts");
+var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 exports.operationsMap = {};
 var defaultOperationsMap = {
     string: [
@@ -1437,6 +1452,54 @@ Object.keys(defaultOperationsMap).forEach(function (key) { return exports.operat
 
 /***/ }),
 
+/***/ "./sources/core/property.ts":
+/*!**********************************!*\
+  !*** ./sources/core/property.ts ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.property = void 0;
+var dependencies_1 = __webpack_require__(/*! ./dependencies */ "./sources/core/dependencies.ts");
+function property(options) {
+    return function (target, key) {
+        var processComputedUpdater = function (obj, val) {
+            if (!!val && typeof val === "object" && val.type === dependencies_1.ComputedUpdater.ComputedUpdaterType) {
+                return dependencies_1.ComputedUpdater.CollectDependencies(obj, val, key);
+            }
+            return val;
+        };
+        var getDefaultValue = function () {
+            var defaultValue = undefined;
+            if (!!options) {
+                if (options.defaultValue !== undefined) {
+                    defaultValue = options.defaultValue;
+                    defaultValue = Array.isArray(defaultValue) ? [].concat(defaultValue) : defaultValue;
+                }
+            }
+            return defaultValue;
+        };
+        Object.defineProperty(target, key, {
+            get: function () {
+                return this.getPropertyValue(key, getDefaultValue());
+            },
+            set: function (val) {
+                var newValue = processComputedUpdater(this, val);
+                this.setPropertyValue(key, newValue, getDefaultValue());
+                if (!!options && options.onSet) {
+                    options.onSet(newValue, this);
+                }
+            },
+        });
+    };
+}
+exports.property = property;
+
+
+/***/ }),
+
 /***/ "./sources/icons/index.ts":
 /*!********************************!*\
   !*** ./sources/icons/index.ts ***!
@@ -1446,7 +1509,7 @@ Object.keys(defaultOperationsMap).forEach(function (key) { return exports.operat
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.arrowdown = exports.cross = exports.search = exports.arrowright = exports.edit = exports.more = exports.filter = exports.sortdown = exports.sortup = exports.check = exports.more_sq = exports.paste = exports.del = exports.save = exports.table = exports.equal = exports.add = void 0;
+exports.cancel = exports.save_ok = exports.arrowdown = exports.cross = exports.search = exports.arrowright = exports.edit = exports.more = exports.filter = exports.sortdown = exports.sortup = exports.check = exports.more_sq = exports.paste = exports.del = exports.save = exports.table = exports.equal = exports.add = void 0;
 exports.add = __webpack_require__(/*! ./icon_item-add.svg */ "./sources/icons/icon_item-add.svg");
 exports.equal = __webpack_require__(/*! ./icon_equal.svg */ "./sources/icons/icon_equal.svg");
 exports.table = __webpack_require__(/*! ./icon_table-merge.svg */ "./sources/icons/icon_table-merge.svg");
@@ -1464,6 +1527,8 @@ exports.arrowright = __webpack_require__(/*! ./icon_arrow-right.svg */ "./source
 exports.search = __webpack_require__(/*! ./icon_search.svg */ "./sources/icons/icon_search.svg");
 exports.cross = __webpack_require__(/*! ./icon_cross.svg */ "./sources/icons/icon_cross.svg");
 exports.arrowdown = __webpack_require__(/*! ./icon_arrow-down.svg */ "./sources/icons/icon_arrow-down.svg");
+exports.save_ok = __webpack_require__(/*! ./icon_save-ok.svg */ "./sources/icons/icon_save-ok.svg");
+exports.cancel = __webpack_require__(/*! ./icon_cancel.svg */ "./sources/icons/icon_cancel.svg");
 
 
 /***/ }),
@@ -1500,7 +1565,7 @@ __exportStar(__webpack_require__(/*! ./core/field-types/currency */ "./sources/c
 __exportStar(__webpack_require__(/*! ./core/field-types/date */ "./sources/core/field-types/date.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/field-types/datetime */ "./sources/core/field-types/datetime.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/field-types/number */ "./sources/core/field-types/number.ts"), exports);
-__exportStar(__webpack_require__(/*! ./find */ "./sources/find.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/find */ "./sources/core/find.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table */ "./sources/table/index.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/table/cell.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column */ "./sources/table/column.ts"), exports);
@@ -2316,7 +2381,14 @@ var Localization = (function () {
         filterdateless: "To",
         noData: "No Data",
         true: "True",
-        false: "False"
+        false: "False",
+        saveRow: "Save",
+        deleteRow: "Delete",
+        addRow: "Add",
+        saveEdit: "Save",
+        cancelEdit: "Cancel",
+        summary: "Summary",
+        mergeCells: "Merge cells"
     };
     Localization.getString = function (stringId) {
         return _a.englishStrings[stringId];
@@ -2499,6 +2571,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableCell = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+__webpack_require__(/*! ./cell.scss */ "./sources/table/cell.scss");
 var TableCell = (function (_super) {
     __extends(TableCell, _super);
     function TableCell() {
@@ -2678,7 +2751,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ColumnFilterItem = exports.FilterItemValue = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
-var find_1 = __webpack_require__(/*! ../find */ "./sources/find.ts");
+var find_1 = __webpack_require__(/*! ../core/find */ "./sources/core/find.ts");
 var FilterItemValue = (function (_super) {
     __extends(FilterItemValue, _super);
     function FilterItemValue(column) {
@@ -2929,6 +3002,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.InplaceEditorPlugin = void 0;
 var editor_1 = __webpack_require__(/*! ../widgets/editor */ "./sources/widgets/editor.ts");
 var editor_2 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
+var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
+var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 var InplaceEditorPlugin = (function (_super) {
     __extends(InplaceEditorPlugin, _super);
     function InplaceEditorPlugin() {
@@ -2963,6 +3039,31 @@ var InplaceEditorPlugin = (function (_super) {
             this._editedRow = undefined;
         }
         this._activeEditors = undefined;
+    };
+    InplaceEditorPlugin.prototype.getActions = function () {
+        var _this = this;
+        var actions = _super.prototype.getActions.call(this);
+        actions.push(new action_1.Action({
+            name: "save-edit-action",
+            title: localization_1.Localization.getString("saveEdit"),
+            action: function (row) {
+                _this.endEditRow(true);
+            },
+            svg: Icons.save_ok,
+            cssClasses: "table4js__save-edit",
+            container: "row"
+        }));
+        actions.push(new action_1.Action({
+            name: "cancel-edit-action",
+            title: localization_1.Localization.getString("cancelEdit"),
+            action: function (row) {
+                _this.endEditRow(false);
+            },
+            svg: Icons.cancel,
+            cssClasses: "table4js__cancel-edit",
+            container: "row"
+        }));
+        return actions;
     };
     InplaceEditorPlugin.prototype.onRowCreated = function (row) {
         var _this = this;
@@ -3076,7 +3177,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EditorPlugin = void 0;
 var utils_1 = __webpack_require__(/*! ../utils/utils */ "./sources/utils/utils.ts");
 var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
+var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
+__webpack_require__(/*! ./editor.scss */ "./sources/table/editor.scss");
 var EditorPlugin = (function () {
     function EditorPlugin() {
         this._editedRow = undefined;
@@ -3084,6 +3187,7 @@ var EditorPlugin = (function () {
     }
     EditorPlugin.prototype.init = function (table) {
         this._table = table;
+        this._table.allowRowSelection = true;
     };
     EditorPlugin.prototype.saveRow = function (row) {
         var isInsert = false;
@@ -3139,19 +3243,8 @@ var EditorPlugin = (function () {
         var _this = this;
         return [
             new action_1.Action({
-                name: "save-action",
-                action: function () { return _this.save(); },
-                svg: Icons.save,
-                container: "bottom"
-            }),
-            new action_1.Action({
-                name: "delete-action",
-                action: function () { return _this.delete(); },
-                svg: Icons.del,
-                container: "bottom"
-            }),
-            new action_1.Action({
                 name: "add-action",
+                title: localization_1.Localization.getString("addRow"),
                 action: function () {
                     var newRow = _this.add();
                     _this.endEditRow(false);
@@ -3161,7 +3254,22 @@ var EditorPlugin = (function () {
                 container: "bottom"
             }),
             new action_1.Action({
+                name: "save-action",
+                title: localization_1.Localization.getString("saveRow"),
+                action: function () { return _this.save(); },
+                svg: Icons.save,
+                container: "bottom"
+            }),
+            new action_1.Action({
+                name: "delete-action",
+                title: localization_1.Localization.getString("deleteRow"),
+                action: function () { return _this.delete(); },
+                svg: Icons.del,
+                container: "bottom"
+            }),
+            new action_1.Action({
                 name: "edit-action",
+                title: localization_1.Localization.getString("editRow"),
                 action: function (row) {
                     if (_this._editedRow !== row) {
                         _this.endEditRow(false);
@@ -3394,6 +3502,7 @@ var row_1 = __webpack_require__(/*! ./row */ "./sources/table/row.ts");
 var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 var summary_1 = __webpack_require__(/*! ./summary */ "./sources/table/summary.ts");
 var editor_inplace_1 = __webpack_require__(/*! ./editor-inplace */ "./sources/table/editor-inplace.ts");
+var editor_row_1 = __webpack_require__(/*! ./editor-row */ "./sources/table/editor-row.ts");
 var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./index.scss */ "./sources/table/index.scss");
 var Table = (function (_super) {
@@ -3453,11 +3562,11 @@ var Table = (function (_super) {
             _this.curColWidth = undefined;
             return false;
         };
-        _this.rootLevel = true;
         _this.lastOffset = 0;
         _this.lastOffsetBack = 0;
         _this.partRowCount = 10;
         _this.lastSelectRow = null;
+        _this.editMode = "inplace";
         _this.searchModel = new search_1.SearchModel();
         _this.getActions = function (container) {
             var actions = [].concat(_this.innerActions).concat(_this.config.actions || []);
@@ -3465,16 +3574,29 @@ var Table = (function (_super) {
         };
         _this.plugins = [];
         _this.plugins = config.plugins || [];
+        if (config.editMode !== undefined) {
+            _this.editMode = config.editMode;
+        }
         if (_this.plugins.length === 0) {
             if (config.enableSummary === true) {
                 _this.plugins.push(new summary_1.SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                _this.plugins.push(new editor_inplace_1.InplaceEditorPlugin());
+                if (_this.editMode === "inplace") {
+                    _this.plugins.push(new editor_inplace_1.InplaceEditorPlugin());
+                }
+                if (_this.editMode === "row") {
+                    _this.plugins.push(new editor_row_1.RowEditorPlugin());
+                }
             }
         }
         _this.plugins.forEach(function (plugin) { return plugin.init(_this); });
-        _this.showSearch = config.enableSearch === true;
+        if (config.enableSearch !== undefined) {
+            _this.showSearch = config.enableSearch === true;
+        }
+        if (config.allowRowSelection !== undefined) {
+            _this.allowRowSelection = config.allowRowSelection === true;
+        }
         _this.createActions(_this.config);
         _this.createColumns(_this.config);
         _this.filterUpdater = new dependencies_1.ComputedUpdater(function () { return _this.updateByFilter(); });
@@ -3487,11 +3609,11 @@ var Table = (function (_super) {
         return _this;
     }
     Table.prototype.updateByFilter = function () {
-        var _this = this;
-        var isOldFilter = (this.tableFilter && this.tableFilter.length > 0);
-        this.tableFilter = [];
+        var dataProvider = this.dataProvider;
+        var isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
+        dataProvider.filter = [];
         if (this.searchModel.searchValue) {
-            this.tableFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
+            dataProvider.filter.push({ value: this.searchModel.searchValue, op: "C", field: null });
         }
         this.columns.forEach(function (column) {
             var columnFilterValue = column.filterContext.value;
@@ -3499,12 +3621,13 @@ var Table = (function (_super) {
                 columnFilterValue.forEach(function (fiv) {
                     var op = fiv.op;
                     var val = fiv.value;
-                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN"))
-                        _this.tableFilter.push({ value: val, op: op, field: fiv.field });
+                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
+                        dataProvider.filter.push({ value: val, op: op, field: fiv.field });
+                    }
                 });
             }
         });
-        if ((this.tableFilter.length > 0) || (isOldFilter && this.tableFilter.length === 0)) {
+        if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
             this.refresh();
         }
@@ -3576,6 +3699,8 @@ var Table = (function (_super) {
         if (config.enableMergedCellsToggle === true) {
             this.innerActions.push(new action_1.Action({
                 name: "mergedСells-action",
+                title: localization_1.Localization.getString("mergeCells"),
+                short: true,
                 action: function () {
                     _this.isMergedCells = !_this.isMergedCells;
                 },
@@ -3614,7 +3739,7 @@ var Table = (function (_super) {
         if (back === void 0) { back = false; }
         if (!this.loadingMutex) {
             this.loadingMutex = true;
-            this.dataProvider.getData(limit, offset, this.columns.filter(function (c) { return c.order !== undefined; }).map(function (c) { return ({ field: c.name, desc: c.order }); }), this.tableFilter, null, back, function (data, newOffset, totalCount, back) {
+            this.dataProvider.getData(limit, offset, this.columns.filter(function (c) { return c.order !== undefined; }).map(function (c) { return ({ field: c.name, desc: c.order }); }), null, back, function (data, newOffset, totalCount, back) {
                 if (back) {
                     _this.lastOffsetBack = _this.lastOffsetBack - limit;
                 }
@@ -3641,6 +3766,9 @@ var Table = (function (_super) {
         }
     };
     Table.prototype.clickRow = function (row, event) {
+        if (!this.allowRowSelection) {
+            return;
+        }
         this.selectedRows.forEach(function (r) { return r.selected = false; });
         row.selected = true;
     };
@@ -3686,13 +3814,6 @@ var Table = (function (_super) {
         this.plugins.forEach(function (plugin) { return plugin.onRowCreated(row); });
         return row;
     };
-    Object.defineProperty(Table.prototype, "allowRowSelection", {
-        get: function () {
-            return true;
-        },
-        enumerable: false,
-        configurable: true
-    });
     Table.prototype.paddingDiff = function (col) {
         if (this.getStyleVal(col, 'box-sizing') == 'border-box') {
             return 0;
@@ -3732,9 +3853,9 @@ var Table = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Table.prototype, "bottomActions", {
+    Object.defineProperty(Table.prototype, "columnHeaderActions", {
         get: function () {
-            return this.getActions('bottom');
+            return this.getActions('header');
         },
         enumerable: false,
         configurable: true
@@ -3742,6 +3863,13 @@ var Table = (function (_super) {
     Object.defineProperty(Table.prototype, "rowActions", {
         get: function () {
             return this.getActions('row');
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Table.prototype, "bottomActions", {
+        get: function () {
+            return this.getActions('bottom');
         },
         enumerable: false,
         configurable: true
@@ -3831,13 +3959,13 @@ var Table = (function (_super) {
         __metadata("design:type", Number)
     ], Table.prototype, "tableHeadHeight", void 0);
     __decorate([
-        (0, property_1.property)({ defaultValue: true }),
-        __metadata("design:type", Boolean)
-    ], Table.prototype, "showTableFilter", void 0);
-    __decorate([
         (0, property_1.property)({ defaultValue: false }),
         __metadata("design:type", Boolean)
     ], Table.prototype, "viewFilterTable", void 0);
+    __decorate([
+        (0, property_1.property)({ defaultValue: true }),
+        __metadata("design:type", Boolean)
+    ], Table.prototype, "allowRowSelection", void 0);
     return Table;
 }(base_1.Base));
 exports.Table = Table;
@@ -3881,6 +4009,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableRow = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+__webpack_require__(/*! ./row.scss */ "./sources/table/row.scss");
 var TableRow = (function (_super) {
     __extends(TableRow, _super);
     function TableRow() {
@@ -4035,6 +4164,7 @@ exports.SummaryPlugin = exports.FieldSummary = exports.SummaryItem = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
 var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
+var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
 __webpack_require__(/*! ./summary.scss */ "./sources/table/summary.scss");
 var Functions = [
     { title: "-", value: "", hint: "" },
@@ -4068,7 +4198,7 @@ var FieldSummary = (function (_super) {
         var _this = this;
         this.value = undefined;
         if (!!this.func) {
-            this.table.dataProvider.getSummary(this.func, this.field.name, this.table["tableFilter"], function (data) { return _this.value = data; });
+            this.table.dataProvider.getSummary(this.func, this.field.name, function (data) { return _this.value = data; });
         }
     };
     __decorate([
@@ -4095,6 +4225,8 @@ var SummaryPlugin = (function () {
         var _this = this;
         return [new action_1.Action({
                 name: "summary-action",
+                title: localization_1.Localization.getString("summary"),
+                short: true,
                 action: function () {
                     _this._table.showTableSummary = !_this._table.showTableSummary;
                 },
@@ -4127,6 +4259,7 @@ exports.ArrayDataProvider = void 0;
 var ArrayDataProvider = (function () {
     function ArrayDataProvider(data) {
         this.data = data;
+        this.filter = [];
     }
     ArrayDataProvider.prototype.filtered = function (filters, data) {
         var _a;
@@ -4142,7 +4275,7 @@ var ArrayDataProvider = (function () {
             });
         })) !== null && _a !== void 0 ? _a : [];
     };
-    ArrayDataProvider.prototype.getData = function (limit, offset, order, filters, key, back, callback) {
+    ArrayDataProvider.prototype.getData = function (limit, offset, order, key, back, callback) {
         function sortfunc(a, b) {
             for (var i_1 = 0; i_1 < order.length; i_1++) {
                 if (a[order[i_1].field] === b[order[i_1].field])
@@ -4153,14 +4286,14 @@ var ArrayDataProvider = (function () {
         }
         (order.length > 0) && this.data.sort(sortfunc);
         var result = [];
-        var filteredData = this.filtered(filters, this.data);
+        var filteredData = this.filtered(this.filter, this.data);
         for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
             result.push(filteredData[i]);
         }
         callback(result, offset + limit, filteredData.length, back);
     };
-    ArrayDataProvider.prototype.getSummary = function (func, field, filters, callback) {
-        var filteredData = this.filtered(filters, this.data);
+    ArrayDataProvider.prototype.getSummary = function (func, field, callback) {
+        var filteredData = this.filtered(this.filter, this.data);
         var result = filteredData.length ? filteredData[0][field] : false;
         var sum = 0, count = 0, uniques = [];
         this.data.forEach(function (row) {
@@ -4305,14 +4438,15 @@ var RemoteDataProvider = (function () {
     function RemoteDataProvider(name, url) {
         this.name = name;
         this.url = url;
+        this.filter = [];
     }
-    RemoteDataProvider.prototype.getData = function (limit, offset, order, filters, key, back, callback) {
-        postData(this.url + "getData", { name: this.name, limit: limit, offset: offset, order: order, filters: filters, key: key, }).then(function (data) {
+    RemoteDataProvider.prototype.getData = function (limit, offset, order, key, back, callback) {
+        postData(this.url + "getData", { name: this.name, limit: limit, offset: offset, order: order, filters: this.filter, key: key, }).then(function (data) {
             callback(data.data, offset + limit, data.count, back);
         });
     };
-    RemoteDataProvider.prototype.getSummary = function (func, field, filters, callback) {
-        postData(this.url + "getSummary", { name: this.name, func: func, field: field, filters: filters }).then(function (data) {
+    RemoteDataProvider.prototype.getSummary = function (func, field, callback) {
+        postData(this.url + "getSummary", { name: this.name, func: func, field: field, filters: this.filter }).then(function (data) {
             callback(data.data);
         });
     };

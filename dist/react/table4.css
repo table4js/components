@@ -133,6 +133,90 @@ table4js-filter-select, .table4js-filter-select {
   white-space: break-spaces;
   text-align: left;
 }
+/*!**************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell.scss ***!
+  \**************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* Fallback colors for variables */
+/* Основной Цвет */
+/* Вторичный Цвет A */
+/* Вторичный Цвет B */
+/* Дополнительный Цвет */
+.table4js-cell {
+  border-left: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
+  border-bottom: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
+  vertical-align: top;
+}
+.table4js-cell:last-child {
+  border-right: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
+}
+
+.table4js-cell--merged {
+  vertical-align: text-top;
+}
+
+.table4js-technical-cell {
+  height: 30px;
+  padding: 0;
+}
+
+.table4js-technical-cell--left {
+  max-width: 35px;
+  width: 30px;
+  background: var(--abc-primary-1-dark-2, #f0f2fb);
+}
+
+.table4js-technical-cell--right {
+  max-width: 70px;
+  width: 60px;
+  border-left: none;
+}
+
+.table4js-technical-cell__container {
+  padding: 6px;
+  z-index: 1;
+  position: relative;
+  text-align: right;
+}
+
+.table4js-cell__text {
+  margin: auto 0;
+  z-index: 1;
+}
+
+.table4js-cell__text--modified {
+  font-weight: bold;
+}
+
+.table4js-cell__text--merged {
+  z-index: 1;
+  position: relative;
+}
+
+.cell__sticky-text {
+  position: sticky;
+}
+
+.table4js-cell--left {
+  text-align: left;
+}
+.table4js-cell--left input {
+  text-align: left;
+}
+
+.table4js-cell--center {
+  text-align: center;
+}
+.table4js-cell--center input {
+  text-align: center;
+}
+
+.table4js-cell--right {
+  text-align: right;
+}
+.table4js-cell--right input {
+  text-align: right;
+}
 /*!******************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-types/indicator.scss ***!
   \******************************************************************************************************************************************************************************************/
@@ -455,6 +539,77 @@ table4js-search {
 .table4js-search__button:hover .table4js-search__icon {
   fill: var(--abc-primary-4, #263769);
 }
+/*!*************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/row.scss ***!
+  \*************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* Fallback colors for variables */
+/* Основной Цвет */
+/* Вторичный Цвет A */
+/* Вторичный Цвет B */
+/* Дополнительный Цвет */
+.table4js__row {
+  position: relative;
+}
+.table4js__row .table4js__edit {
+  display: none;
+}
+.table4js__row:hover .table4js__more {
+  display: none;
+}
+.table4js__row:hover .table4js__edit {
+  display: inline-block;
+}
+.table4js__row:hover .table4js__row--select {
+  display: inline-block;
+}
+.table4js__row:last-child .table4js-cell {
+  border-bottom: none;
+}
+
+.table4js__row--selected .table4js__check {
+  border-color: var(--abc-primary-4, #263769);
+}
+.table4js__row--selected .table4js__more {
+  display: none;
+}
+.table4js__row--selected .table4js__edit {
+  display: inline-block;
+  fill: var(--abc-primary-4, #263769);
+}
+.table4js__row--selected .table4js__row--select {
+  display: block;
+  border-color: var(--abc-primary-0-op-20, rgba(38, 55, 105, 0.2));
+  background: var(--abc-primary-0-op-10, rgba(38, 55, 105, 0.1));
+}
+
+.table4js__row--select {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*border-radius: 8px;*/
+  border: 1px solid var(--abc-primary-0-op-10, rgba(38, 55, 105, 0.1));
+  background: var(--abc-primary-0-op-05, rgba(38, 55, 105, 0.05));
+  pointer-events: none;
+}
+
+.table4js__row--colored {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.table4js-icon-row-tools.table4js-svg-icon {
+  fill: var(--abc-primary-0-op-40, rgba(38, 55, 105, 0.4));
+  margin: auto;
+  cursor: pointer;
+}
 /*!*****************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/summary.scss ***!
   \*****************************************************************************************************************************************************************************/
@@ -483,6 +638,80 @@ table4js-summary {
 .table4js-summary__value {
   font-weight: lighter;
   color: var(--abc-primary-0-op-65, rgba(38, 55, 105, 0.65));
+}
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/editor.scss ***!
+  \****************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/* Fallback colors for variables */
+/* Основной Цвет */
+/* Вторичный Цвет A */
+/* Вторичный Цвет B */
+/* Дополнительный Цвет */
+.table4js__row .table4js__edit, .table4js__row .table4js__save-edit, .table4js__row .table4js__cancel-edit {
+  display: none;
+}
+
+.table4js__row--edit-inplace .table4js__more, .table4js__row--edit-inplace .table4js__edit {
+  display: none;
+}
+.table4js__row--edit-inplace .table4js__save-edit, .table4js__row--edit-inplace .table4js__cancel-edit {
+  display: inline-block;
+  fill: var(--abc-primary-4, #263769);
+}
+.table4js__row--edit-inplace:hover .table4js__more, .table4js__row--edit-inplace:hover .table4js__edit {
+  display: none;
+}
+/*!********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/property.scss ***!
+  \********************************************************************************************************************************************************************************/
+.table4js-form__property {
+  position: relative;
+  max-width: 320px;
+  padding-top: 24px;
+}
+.table4js-form__property input {
+  padding: 2px 3px;
+}
+
+.table4js-form__property-title {
+  position: absolute;
+  top: 26px;
+  left: 3px;
+  transition: 0.2s ease all;
+  color: gray;
+  pointer-events: none;
+}
+
+.table4js__editor:focus-within ~ .table4js-form__property-title {
+  top: 7px;
+  font-size: 0.75em;
+  color: black;
+}
+
+.table4js-form__property--with-value .table4js-form__property-title {
+  opacity: 0;
+}
+.table4js-form__property--with-value .table4js__editor:focus-within ~ .table4js-form__property-title {
+  opacity: 1;
+}
+
+.table4js-form__property:not(.table4js-form__property--with-value) input:not(:focus)::-webkit-datetime-edit {
+  color: transparent;
+}
+
+.table4js__checkbox-editor + .table4js-form__property-title {
+  top: 26px;
+  left: 26px;
+  opacity: 1;
+  color: black;
+  pointer-events: all;
+}
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/form.scss ***!
+  \****************************************************************************************************************************************************************************/
+.table4js-form {
+  padding: 10px;
 }
 /*!***************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/index.scss ***!
@@ -525,6 +754,7 @@ button {
   width: 18px;
   height: 18px;
   fill: var(--abc-primary-2, #ffffff);
+  display: inline-block;
 }
 
 .table4js-resizable-container {
@@ -650,11 +880,16 @@ button {
 .table4js-header-title__cell {
   padding: 14px 6px;
   background: var(--abc-primary-0, #263769);
-  border-right: 1px solid var(--abc-primary-2-op-30, rgba(255, 255, 255, 0.3));
+  border-left: 1px solid var(--abc-primary-2-op-30, rgba(255, 255, 255, 0.3));
   position: relative;
+  user-select: none;
 }
 .table4js-header-title__cell:hover .table4js-title__filter {
   display: block;
+}
+
+.table4js-header-title__technical-cell--right {
+  border-left: none;
 }
 
 .table4js-switch {
@@ -710,74 +945,6 @@ button {
   cursor: col-resize;
 }
 
-.table4js__row {
-  position: relative;
-}
-.table4js__row:hover .table4js__more {
-  display: none;
-}
-.table4js__row:hover .table4js__edit {
-  display: block;
-}
-.table4js__row:hover .table4js__row--select {
-  display: block;
-}
-.table4js__row:last-child .table4js-cell {
-  border-bottom: none;
-}
-
-.table4js__row--selected .table4js__check {
-  border-color: var(--abc-primary-4, #263769);
-}
-.table4js__row--selected .table4js__more {
-  display: none;
-}
-.table4js__row--selected .table4js__edit {
-  display: block;
-  fill: var(--abc-primary-4, #263769);
-}
-.table4js__row--selected .table4js__row--select {
-  display: block;
-  border-color: var(--abc-primary-0-op-20, rgba(38, 55, 105, 0.2));
-  background: var(--abc-primary-0-op-10, rgba(38, 55, 105, 0.1));
-}
-
-.table4js__row--edit-inplace .table4js__more {
-  display: none;
-}
-.table4js__row--edit-inplace .table4js__edit {
-  display: block;
-  fill: var(--abc-primary-4, #263769);
-}
-
-.table4js-cell {
-  border-right: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
-  border-bottom: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
-  vertical-align: top;
-}
-.table4js-cell:first-child {
-  border-left: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
-}
-
-.table4js-cell--merged {
-  vertical-align: text-top;
-}
-
-.table4js-technical-cell {
-  background: var(--abc-primary-1-dark-2, #f0f2fb);
-  max-width: 35px;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-}
-
-.table4js-technical-cell__container {
-  display: flex;
-  padding: 6px;
-  z-index: 1;
-  position: relative;
-}
-
 .table4js__number {
   margin: auto;
 }
@@ -797,17 +964,6 @@ button {
   height: 100%;
   width: 100%;
   fill: var(--abc-primary-4, #263769);
-}
-
-.table4js-icon-row-tools {
-  height: 20px;
-  width: 20px;
-  fill: var(--abc-primary-0-op-40, rgba(38, 55, 105, 0.4));
-  margin: auto;
-}
-
-.table4js__edit {
-  display: none;
 }
 
 .table4js-cell__container {
@@ -836,46 +992,6 @@ button {
     background-position: 0% 50%;
   }
 }
-.table4js-cell__text {
-  margin: auto 0;
-  z-index: 1;
-}
-
-.table4js-cell__text--modified {
-  font-weight: bold;
-}
-
-.table4js-cell__text--merged {
-  z-index: 1;
-  position: relative;
-}
-
-.cell__sticky-text {
-  position: sticky;
-}
-
-.table4js__row--select {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  /*border-radius: 8px;*/
-  border: 1px solid var(--abc-primary-0-op-10, rgba(38, 55, 105, 0.1));
-  background: var(--abc-primary-0-op-05, rgba(38, 55, 105, 0.05));
-  pointer-events: none;
-}
-
-.table4js__row--colored {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  height: 100%;
-  width: calc(100% - 60px);
-  z-index: -1;
-}
-
 .table4js__footer {
   bottom: 0;
   z-index: 9;
@@ -891,6 +1007,7 @@ button {
   padding: 0;
   background: var(--abc-primary-1-dark-2, #f0f2fb);
   border-top: 1px solid var(--abc-primary-1-dark-7, #dce1f5);
+  vertical-align: middle;
 }
 
 .table4js-footer-tools__cell {
@@ -1015,61 +1132,6 @@ table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table
   height: 100%;
 }
 
-.abrs-table-container {
-  height: 100%;
-  display: flex;
-  position: relative;
-}
-.abrs-table-container .abrs-table-container-one {
-  height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
-}
-.abrs-table-container .abrs-table-container-side {
-  height: calc(100vh - 117px);
-  display: flex;
-  flex-direction: column;
-}
-.abrs-table-container .abrs-table-container-side .table4js-scroll-container {
-  width: 100%;
-  height: inherit;
-  margin-top: 5px;
-}
-.abrs-table-container .abrs-table-main {
-  flex: 3;
-  height: 25%;
-}
-
-@-moz-document url-prefix() {
-  .abrs-table-container-side .table4js-scroll-container {
-    width: calc(100% + 8px);
-  }
-}
-.row.abrs-table-content-right {
-  padding-right: 10px;
-}
-
-.table4js-cell--left {
-  text-align: left;
-}
-.table4js-cell--left input {
-  text-align: left;
-}
-
-.table4js-cell--center {
-  text-align: center;
-}
-.table4js-cell--center input {
-  text-align: center;
-}
-
-.table4js-cell--right {
-  text-align: right;
-}
-.table4js-cell--right input {
-  text-align: right;
-}
-
 .table4js-svg-icon.table4js-go-to__icon {
   width: 16px;
   height: 16px;
@@ -1106,57 +1168,6 @@ table4 .abrs-table-side-edit .abrs-table-side-detail, .table4js-root .abrs-table
   height: 100%;
   background-color: lightgreen;
   font-size: 0.75em;
-}
-/*!********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/property.scss ***!
-  \********************************************************************************************************************************************************************************/
-.table4js-form__property {
-  position: relative;
-  max-width: 320px;
-  padding-top: 24px;
-}
-.table4js-form__property input {
-  padding: 2px 3px;
-}
-
-.table4js-form__property-title {
-  position: absolute;
-  top: 26px;
-  left: 3px;
-  transition: 0.2s ease all;
-  color: gray;
-  pointer-events: none;
-}
-
-.table4js__editor:focus-within ~ .table4js-form__property-title {
-  top: 7px;
-  font-size: 0.75em;
-  color: black;
-}
-
-.table4js-form__property--with-value .table4js-form__property-title {
-  opacity: 0;
-}
-.table4js-form__property--with-value .table4js__editor:focus-within ~ .table4js-form__property-title {
-  opacity: 1;
-}
-
-.table4js-form__property:not(.table4js-form__property--with-value) input:not(:focus)::-webkit-datetime-edit {
-  color: transparent;
-}
-
-.table4js__checkbox-editor + .table4js-form__property-title {
-  top: 26px;
-  left: 26px;
-  opacity: 1;
-  color: black;
-  pointer-events: all;
-}
-/*!****************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/form.scss ***!
-  \****************************************************************************************************************************************************************************/
-.table4js-form {
-  padding: 10px;
 }
 
 /*# sourceMappingURL=table4.css.map*/

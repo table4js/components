@@ -83,6 +83,7 @@ declare module "core/action" {
         cssClasses?: string;
         cssImage?: string;
         cssLabel?: string;
+        short?: boolean;
     }
     export class Action extends Base implements IAction {
         constructor(source?: IAction);
@@ -98,6 +99,7 @@ declare module "core/action" {
         cssClasses: string;
         cssImage: string;
         cssLabel: string;
+        short: boolean;
     }
 }
 declare module "core/actions" {
@@ -138,6 +140,13 @@ declare module "localization" {
             noData: string;
             true: string;
             false: string;
+            saveRow: string;
+            deleteRow: string;
+            addRow: string;
+            saveEdit: string;
+            cancelEdit: string;
+            summary: string;
+            mergeCells: string;
         };
         static getString: (stringId: string) => any;
     }
@@ -182,7 +191,7 @@ declare module "core/field-types/number" {
         css: string;
     }
 }
-declare module "find" {
+declare module "core/find" {
     type TOperation = "EQ" | "NEQ" | "G" | "L" | "GEQ" | "LEQ" | "ISN" | "ISNN" | "C";
     export interface IFindOperation {
         op: string;
@@ -193,6 +202,11 @@ declare module "find" {
         field: string;
         op: TOperation;
         value: string;
+    }
+    export interface IFilterItem {
+        value: string;
+        op: string;
+        field: string;
     }
     export interface IFindOperand {
         levelup: boolean;
@@ -220,10 +234,12 @@ declare module "find" {
     };
 }
 declare module "utils/data-provider" {
+    import { IFilterItem } from "core/find";
     export interface IListDataProvider {
-        getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
-        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): any;
+        getData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
+        getSummary(func: string, field: string, callback: (value: any) => void): any;
         getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
+        filter: IFilterItem[];
     }
     export interface ICRUDDataProvider {
         saveData: (keyName: string, key: any, modify: {}) => boolean;
@@ -238,7 +254,7 @@ declare module "utils/data-provider" {
 }
 declare module "table/column-filter-item" {
     import { Base } from "core/base";
-    import { IFindOperation } from "find";
+    import { IFindOperation } from "core/find";
     import { ITableColumn } from "table/column";
     export class FilterItemValue extends Base {
         private column;
@@ -321,6 +337,7 @@ declare module "table/cell" {
     import { Base } from "core/base";
     import { IFieldDescription, IFieldType } from "core/domain";
     import { ITableColumn } from "table/column";
+    import "./cell.scss";
     export interface ITableCell {
         rowData: any;
         data: any;
@@ -365,22 +382,25 @@ declare module "table/search" {
     }
 }
 declare module "utils/array-data-provider" {
+    import { IFilterItem } from "core/find";
     import { IDataProvider } from "utils/data-provider";
     export class ArrayDataProvider implements IDataProvider {
         data: Array<any>;
         constructor(data: Array<any>);
         filtered(filters: any, data: any): any;
-        getData(limit: any, offset: any, order: any, filters: any, key: any, back: any, callback: any): void;
-        getSummary(func: any, field: any, filters: any, callback: any): void;
+        getData(limit: any, offset: any, order: any, key: any, back: any, callback: any): void;
+        getSummary(func: any, field: any, callback: any): void;
         getColumnData(columnName: any, filter: any, limit: any, offset: any, callback: any): void;
         saveData(keyName: string, key: any, modify: {}): boolean;
         insertData(keyName: string, modify: {}): boolean;
         deleteData(keyName: string, keys: any[], callback: any): void;
+        filter: IFilterItem[];
     }
 }
 declare module "table/row" {
     import { Base } from "core/base";
     import { ITableCell } from "table/cell";
+    import "./row.scss";
     /**
      * The collection of data for a table row. The key is the name of the column. The value is the content of the table cell.
      */
@@ -508,12 +528,15 @@ declare module "icons/index" {
     export const search: any;
     export const cross: any;
     export const arrowdown: any;
+    export const save_ok: any;
+    export const cancel: any;
 }
 declare module "table/editor" {
     import { ITablePlugin, Table } from "table/index";
     import { IAction } from "core/action";
     import { ITableColumn } from "table/column";
     import { ITableRow } from "table/row";
+    import "./editor.scss";
     export class EditorPlugin implements ITablePlugin {
         protected _table: Table;
         protected _editedRow: ITableRow;
@@ -533,112 +556,15 @@ declare module "table/editor" {
 declare module "table/editor-inplace" {
     import { ITableRow } from "table/row";
     import { EditorPlugin } from "table/editor";
+    import { IAction } from "core/action";
     export class InplaceEditorPlugin extends EditorPlugin {
         private _activeEditors;
         name: string;
         protected startEditRow(row: ITableRow): void;
         protected endEditRow(commit: boolean): void;
+        getActions(): IAction[];
         onRowCreated(row: ITableRow): void;
     }
-}
-declare module "knockout/table/row" {
-    export var rowTemplate: any;
-}
-declare module "knockout/table/cell" {
-    export var cellTemplate: any;
-}
-declare module "knockout/table/cell-types/default" {
-    export var cellDefaultTemplate: any;
-}
-declare module "table/cell-types/indicator" {
-    import { IFieldType } from "core/domain";
-    import "./indicator.scss";
-    export class IndicatorCell implements IFieldType {
-        name: string;
-        css: string;
-        component: string;
-        static threshold: number;
-        static greaterColor: any;
-        static lessColor: any;
-    }
-}
-declare module "knockout/table/cell-types/indicator" {
-    export var cellIndicatorTemplate: any;
-}
-declare module "table/cell-types/progress" {
-    import { IFieldType } from "core/domain";
-    import "./progress.scss";
-    export class ProgressCell implements IFieldType {
-        name: string;
-        css: string;
-        component: string;
-    }
-}
-declare module "knockout/table/cell-types/progress" {
-    export var cellProgressTemplate: any;
-}
-declare module "knockout/table/summary" {
-    export var summaryTemplate: any;
-}
-declare module "knockout/table/search" {
-    export var searchTemplate: any;
-}
-declare module "knockout/table/filter-default" { }
-declare module "knockout/table/column-filter" { }
-declare module "knockout/table/column-filter-item" { }
-declare module "table/filter-select" {
-    import { Base } from "core/base";
-    import { FilterItemValue } from "table/column-filter-item";
-    import "./filter-select.scss";
-    export class TableFilterSelect extends Base {
-        private value;
-        private columnName;
-        private columnType;
-        private getColumnData;
-        title: string;
-        moreText: string;
-        private limit;
-        private offset;
-        constructor(value: FilterItemValue, columnName: string, columnType: string, getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback: (items: any[]) => void) => void, isOpen?: boolean, title?: string, moreText?: string);
-        private updateFoundItems;
-        loadMore(): void;
-        isOpen: boolean;
-        isFilterSearchByType: boolean;
-        isLoadMore: boolean;
-        toggle: (_: any, event: any) => void;
-        selectedItems: Array<any>;
-        foundItems: Array<any>;
-        filterText: string;
-        isChecked: (item: any) => boolean;
-        clickItem: (item: any) => void;
-        deleteItems: (name: any) => void;
-        dispose(): void;
-    }
-}
-declare module "knockout/table/filter-select" { }
-declare module "knockout/core/action" {
-    export var ActionItemWidget: any;
-}
-declare module "knockout/core/actions" {
-    export var AbrisActionsWidget: any;
-}
-declare module "knockout/core/dropdown-actions" {
-    export var AbrisDropdownActions: any;
-}
-declare module "knockout/core/icon" {
-    export var AbrisIconWidget: any;
-}
-declare module "knockout/table/cell-editor" {
-    export var cellEditorTemplate: any;
-}
-declare module "knockout/table/row-editor" {
-    export var rowEditorTemplate: any;
-}
-declare module "knockout/widgets/default" {
-    export var defaultEditorTemplate: any;
-}
-declare module "knockout/widgets/checkbox" {
-    export var boolEditorTemplate: any;
 }
 declare module "widgets/property" {
     import { Base } from "core/base";
@@ -669,50 +595,9 @@ declare module "widgets/property" {
         complete(commit: boolean): void;
     }
 }
-declare module "knockout/widgets/property" {
-    export var propertyEditorTemplate: any;
-}
-declare module "knockout/widgets/form" {
-    export var formEditorTemplate: any;
-}
-declare module "knockout/index" {
-    import * as ko from "knockout";
-    import { HashTableStorage } from "core/base";
-    export * from "knockout/table/row";
-    export * from "knockout/table/cell";
-    export * from "knockout/table/cell-types/default";
-    export * from "knockout/table/cell-types/indicator";
-    export * from "knockout/table/cell-types/progress";
-    export * from "knockout/table/summary";
-    export * from "knockout/table/search";
-    export * from "knockout/table/filter-default";
-    export * from "knockout/table/column-filter";
-    export * from "knockout/table/column-filter-item";
-    export * from "knockout/table/filter-select";
-    export * from "knockout/core/action";
-    export * from "knockout/core/actions";
-    export * from "knockout/core/dropdown-actions";
-    export * from "knockout/core/icon";
-    export * from "knockout/table/cell-editor";
-    export * from "knockout/table/row-editor";
-    export * from "knockout/widgets/default";
-    export * from "knockout/widgets/checkbox";
-    export * from "knockout/widgets/property";
-    export * from "knockout/widgets/form";
-    export * from "index";
-    export const KnockoutInstance: typeof ko;
-    export class KnockoutHashTableStorage extends HashTableStorage {
-        private linkArrayToObservable;
-        private createObservable;
-        getValue(name: string, defaultValue?: any): any;
-        setValue(name: string, val: any): void;
-        peekValue(name: string, defaultValue?: any): any;
-    }
-    export var tableTemplate: any;
-}
 declare module "widgets/form" {
     import { Base } from "core/base";
-    import { IFieldDescription } from "knockout/index";
+    import { IFieldDescription } from "core/domain";
     import { Property } from "widgets/property";
     import "./form.scss";
     export interface IFormElement {
@@ -750,25 +635,29 @@ declare module "table/index" {
     import { SearchModel } from "table/search";
     import { IDataProvider, IDataProviderOwner } from "utils/data-provider";
     import { ITableRow } from "table/row";
+    import { IFieldDescription } from "core/domain";
     import * as Icons from "icons/index";
     import "./index.scss";
-    import { IFieldDescription } from "core/domain";
     /**
      * Parameters for customizing the table view.
      */
     export interface ITableConfig extends IDataProvider {
         /** Description of columns */
         columns: Array<IFieldDescription>;
-        /** Permission to display the search bar */
+        /** Allows display the search bar */
         enableSearch?: boolean;
-        /** Permission to display summary panel */
+        /** Allows display summary panel */
         enableSummary?: boolean;
-        /** Permission to display merged cells toggle */
+        /** Allows display merged cells toggle */
         enableMergedCellsToggle?: boolean;
         /** The primary value of the parameter for merging cells */
         enableMergedCells?: boolean;
-        /** Permission to edit data */
+        /** Allows edit data */
         enableEdit?: boolean;
+        /** Allows edit data */
+        editMode?: "inplace" | "row" | "aside";
+        /** Allows row selection */
+        allowRowSelection?: boolean;
         /** Actions to display in the table actions panel */
         actions?: Array<IAction>;
         /** The key field of the table. Needed to edit the table. */
@@ -777,11 +666,6 @@ declare module "table/index" {
         selectCellColor?: string;
         /** Table plugins array */
         plugins?: Array<ITablePlugin>;
-    }
-    export interface ITableFilter {
-        value: string;
-        op: string;
-        field: string;
     }
     export interface ITablePlugin {
         name: string;
@@ -822,7 +706,6 @@ declare module "table/index" {
         createRow(data: {
             [key: string]: string | number;
         }, num: number, back?: boolean): ITableRow;
-        get allowRowSelection(): boolean;
         private curCol;
         private nxtCol;
         private pageX;
@@ -835,7 +718,6 @@ declare module "table/index" {
         logMouseUp: (d: any, e: any) => boolean;
         paddingDiff(col: any): number;
         getStyleVal(elm: any, css: any): string;
-        protected rootLevel: any;
         isNumber: boolean;
         isMergedCells: boolean;
         loadingMutex: boolean;
@@ -854,15 +736,16 @@ declare module "table/index" {
         lastSelectRow: any;
         totalCount: number;
         tableHeadHeight: number;
-        showTableFilter: boolean;
         viewFilterTable: boolean;
-        tableFilter: ITableFilter[];
+        allowRowSelection: boolean;
+        editMode: "inplace" | "row" | "aside";
         searchModel: SearchModel;
         getActions: (container?: string) => any[];
         get topActions(): any[];
         get dropdownActions(): any[];
-        get bottomActions(): any[];
+        get columnHeaderActions(): any[];
         get rowActions(): any[];
+        get bottomActions(): any[];
         get noDataText(): any;
         private plugins;
         registerPlugin(plugin: ITablePlugin): ITablePlugin;
@@ -872,24 +755,76 @@ declare module "table/index" {
 declare module "table/filter-default" {
     import "./filter-default.scss";
 }
+declare module "table/filter-select" {
+    import { Base } from "core/base";
+    import { FilterItemValue } from "table/column-filter-item";
+    import "./filter-select.scss";
+    export class TableFilterSelect extends Base {
+        private value;
+        private columnName;
+        private columnType;
+        private getColumnData;
+        title: string;
+        moreText: string;
+        private limit;
+        private offset;
+        constructor(value: FilterItemValue, columnName: string, columnType: string, getColumnData: (name: string, filterValue: any, limit: number, offset: number, callback: (items: any[]) => void) => void, isOpen?: boolean, title?: string, moreText?: string);
+        private updateFoundItems;
+        loadMore(): void;
+        isOpen: boolean;
+        isFilterSearchByType: boolean;
+        isLoadMore: boolean;
+        toggle: (_: any, event: any) => void;
+        selectedItems: Array<any>;
+        foundItems: Array<any>;
+        filterText: string;
+        isChecked: (item: any) => boolean;
+        clickItem: (item: any) => void;
+        deleteItems: (name: any) => void;
+        dispose(): void;
+    }
+}
 declare module "table/cell-types/bool" { }
 declare module "table/cell-types/currency" { }
 declare module "table/cell-types/date" { }
 declare module "table/cell-types/datetime" { }
+declare module "table/cell-types/indicator" {
+    import { IFieldType } from "core/domain";
+    import "./indicator.scss";
+    export class IndicatorCell implements IFieldType {
+        name: string;
+        css: string;
+        component: string;
+        static threshold: number;
+        static greaterColor: any;
+        static lessColor: any;
+    }
+}
 declare module "table/cell-types/number" { }
+declare module "table/cell-types/progress" {
+    import { IFieldType } from "core/domain";
+    import "./progress.scss";
+    export class ProgressCell implements IFieldType {
+        name: string;
+        css: string;
+        component: string;
+    }
+}
 declare module "utils/remote-data-provider" {
+    import { IFilterItem } from "core/find";
     import { IDataProvider } from "utils/data-provider";
     export function postData(url?: string, data?: {}): Promise<any>;
     export class RemoteDataProvider implements IDataProvider {
         name: string;
         url: string;
         constructor(name: string, url: string);
-        getData(limit: number, offset: number, order: any[], filters: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void): void;
-        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): void;
+        getData(limit: number, offset: number, order: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void): void;
+        getSummary(func: string, field: string, callback: (value: any) => void): void;
         getColumnData(columnName: string, filter: any, limit: number, offset: number, callback: (value: any) => void): void;
         saveData(keyName: string, key: any, modify: {}): boolean;
         insertData(keyName: string, modify: {}): boolean;
         deleteData(keyName: string, keys: any[], callback: any): void;
+        filter: IFilterItem[];
     }
 }
 declare module "index" {
@@ -902,7 +837,7 @@ declare module "index" {
     export * from "core/field-types/date";
     export * from "core/field-types/datetime";
     export * from "core/field-types/number";
-    export * from "find";
+    export * from "core/find";
     export * from "table/index";
     export * from "table/cell";
     export * from "table/column";

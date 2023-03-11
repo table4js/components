@@ -83,6 +83,7 @@ declare module "core/action" {
         cssClasses?: string;
         cssImage?: string;
         cssLabel?: string;
+        short?: boolean;
     }
     export class Action extends Base implements IAction {
         constructor(source?: IAction);
@@ -98,6 +99,7 @@ declare module "core/action" {
         cssClasses: string;
         cssImage: string;
         cssLabel: string;
+        short: boolean;
     }
 }
 declare module "core/domain" {
@@ -112,23 +114,6 @@ declare module "core/domain" {
         css?: string;
         component?: string;
         getText?: (val: any) => string;
-    }
-}
-declare module "utils/data-provider" {
-    export interface IListDataProvider {
-        getData(limit: number, offset: number, order: any[], filters: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
-        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): any;
-        getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
-    }
-    export interface ICRUDDataProvider {
-        saveData: (keyName: string, key: any, modify: {}) => boolean;
-        insertData: (keyName: string, modify: {}) => boolean;
-        deleteData: (keyName: string, keys: any[], callback: any) => void;
-    }
-    export interface IDataProvider extends IListDataProvider, ICRUDDataProvider {
-    }
-    export interface IDataProviderOwner {
-        get dataProvider(): IDataProvider;
     }
 }
 declare module "localization" {
@@ -149,11 +134,18 @@ declare module "localization" {
             noData: string;
             true: string;
             false: string;
+            saveRow: string;
+            deleteRow: string;
+            addRow: string;
+            saveEdit: string;
+            cancelEdit: string;
+            summary: string;
+            mergeCells: string;
         };
         static getString: (stringId: string) => any;
     }
 }
-declare module "find" {
+declare module "core/find" {
     type TOperation = "EQ" | "NEQ" | "G" | "L" | "GEQ" | "LEQ" | "ISN" | "ISNN" | "C";
     export interface IFindOperation {
         op: string;
@@ -164,6 +156,11 @@ declare module "find" {
         field: string;
         op: TOperation;
         value: string;
+    }
+    export interface IFilterItem {
+        value: string;
+        op: string;
+        field: string;
     }
     export interface IFindOperand {
         levelup: boolean;
@@ -190,9 +187,28 @@ declare module "find" {
         [index: string]: IFindOperation[];
     };
 }
+declare module "utils/data-provider" {
+    import { IFilterItem } from "core/find";
+    export interface IListDataProvider {
+        getData(limit: number, offset: number, order: any[], key: null, back: boolean, callback: (data: any, newOffset: number, totalCount: number, back: any) => void): any;
+        getSummary(func: string, field: string, callback: (value: any) => void): any;
+        getColumnData: (column: any, value: any, limit: any, offset: any, callback: any) => void;
+        filter: IFilterItem[];
+    }
+    export interface ICRUDDataProvider {
+        saveData: (keyName: string, key: any, modify: {}) => boolean;
+        insertData: (keyName: string, modify: {}) => boolean;
+        deleteData: (keyName: string, keys: any[], callback: any) => void;
+    }
+    export interface IDataProvider extends IListDataProvider, ICRUDDataProvider {
+    }
+    export interface IDataProviderOwner {
+        get dataProvider(): IDataProvider;
+    }
+}
 declare module "table/column-filter-item" {
     import { Base } from "core/base";
-    import { IFindOperation } from "find";
+    import { IFindOperation } from "core/find";
     import { ITableColumn } from "table/column";
     export class FilterItemValue extends Base {
         private column;
@@ -275,6 +291,7 @@ declare module "table/cell" {
     import { Base } from "core/base";
     import { IFieldDescription, IFieldType } from "core/domain";
     import { ITableColumn } from "table/column";
+    import "./cell.scss";
     export interface ITableCell {
         rowData: any;
         data: any;
@@ -319,22 +336,25 @@ declare module "table/search" {
     }
 }
 declare module "utils/array-data-provider" {
+    import { IFilterItem } from "core/find";
     import { IDataProvider } from "utils/data-provider";
     export class ArrayDataProvider implements IDataProvider {
         data: Array<any>;
         constructor(data: Array<any>);
         filtered(filters: any, data: any): any;
-        getData(limit: any, offset: any, order: any, filters: any, key: any, back: any, callback: any): void;
-        getSummary(func: any, field: any, filters: any, callback: any): void;
+        getData(limit: any, offset: any, order: any, key: any, back: any, callback: any): void;
+        getSummary(func: any, field: any, callback: any): void;
         getColumnData(columnName: any, filter: any, limit: any, offset: any, callback: any): void;
         saveData(keyName: string, key: any, modify: {}): boolean;
         insertData(keyName: string, modify: {}): boolean;
         deleteData(keyName: string, keys: any[], callback: any): void;
+        filter: IFilterItem[];
     }
 }
 declare module "table/row" {
     import { Base } from "core/base";
     import { ITableCell } from "table/cell";
+    import "./row.scss";
     /**
      * The collection of data for a table row. The key is the name of the column. The value is the content of the table cell.
      */
@@ -462,12 +482,15 @@ declare module "icons/index" {
     export const search: any;
     export const cross: any;
     export const arrowdown: any;
+    export const save_ok: any;
+    export const cancel: any;
 }
 declare module "table/editor" {
     import { ITablePlugin, Table } from "table/index";
     import { IAction } from "core/action";
     import { ITableColumn } from "table/column";
     import { ITableRow } from "table/row";
+    import "./editor.scss";
     export class EditorPlugin implements ITablePlugin {
         protected _table: Table;
         protected _editedRow: ITableRow;
@@ -487,11 +510,13 @@ declare module "table/editor" {
 declare module "table/editor-inplace" {
     import { ITableRow } from "table/row";
     import { EditorPlugin } from "table/editor";
+    import { IAction } from "core/action";
     export class InplaceEditorPlugin extends EditorPlugin {
         private _activeEditors;
         name: string;
         protected startEditRow(row: ITableRow): void;
         protected endEditRow(commit: boolean): void;
+        getActions(): IAction[];
         onRowCreated(row: ITableRow): void;
     }
 }
@@ -526,7 +551,7 @@ declare module "widgets/property" {
 }
 declare module "widgets/form" {
     import { Base } from "core/base";
-    import { IFieldDescription } from "knockout/index";
+    import { IFieldDescription } from "core/domain";
     import { Property } from "widgets/property";
     import "./form.scss";
     export interface IFormElement {
@@ -564,25 +589,29 @@ declare module "table/index" {
     import { SearchModel } from "table/search";
     import { IDataProvider, IDataProviderOwner } from "utils/data-provider";
     import { ITableRow } from "table/row";
+    import { IFieldDescription } from "core/domain";
     import * as Icons from "icons/index";
     import "./index.scss";
-    import { IFieldDescription } from "core/domain";
     /**
      * Parameters for customizing the table view.
      */
     export interface ITableConfig extends IDataProvider {
         /** Description of columns */
         columns: Array<IFieldDescription>;
-        /** Permission to display the search bar */
+        /** Allows display the search bar */
         enableSearch?: boolean;
-        /** Permission to display summary panel */
+        /** Allows display summary panel */
         enableSummary?: boolean;
-        /** Permission to display merged cells toggle */
+        /** Allows display merged cells toggle */
         enableMergedCellsToggle?: boolean;
         /** The primary value of the parameter for merging cells */
         enableMergedCells?: boolean;
-        /** Permission to edit data */
+        /** Allows edit data */
         enableEdit?: boolean;
+        /** Allows edit data */
+        editMode?: "inplace" | "row" | "aside";
+        /** Allows row selection */
+        allowRowSelection?: boolean;
         /** Actions to display in the table actions panel */
         actions?: Array<IAction>;
         /** The key field of the table. Needed to edit the table. */
@@ -591,11 +620,6 @@ declare module "table/index" {
         selectCellColor?: string;
         /** Table plugins array */
         plugins?: Array<ITablePlugin>;
-    }
-    export interface ITableFilter {
-        value: string;
-        op: string;
-        field: string;
     }
     export interface ITablePlugin {
         name: string;
@@ -636,7 +660,6 @@ declare module "table/index" {
         createRow(data: {
             [key: string]: string | number;
         }, num: number, back?: boolean): ITableRow;
-        get allowRowSelection(): boolean;
         private curCol;
         private nxtCol;
         private pageX;
@@ -649,7 +672,6 @@ declare module "table/index" {
         logMouseUp: (d: any, e: any) => boolean;
         paddingDiff(col: any): number;
         getStyleVal(elm: any, css: any): string;
-        protected rootLevel: any;
         isNumber: boolean;
         isMergedCells: boolean;
         loadingMutex: boolean;
@@ -668,15 +690,16 @@ declare module "table/index" {
         lastSelectRow: any;
         totalCount: number;
         tableHeadHeight: number;
-        showTableFilter: boolean;
         viewFilterTable: boolean;
-        tableFilter: ITableFilter[];
+        allowRowSelection: boolean;
+        editMode: "inplace" | "row" | "aside";
         searchModel: SearchModel;
         getActions: (container?: string) => any[];
         get topActions(): any[];
         get dropdownActions(): any[];
-        get bottomActions(): any[];
+        get columnHeaderActions(): any[];
         get rowActions(): any[];
+        get bottomActions(): any[];
         get noDataText(): any;
         private plugins;
         registerPlugin(plugin: ITablePlugin): ITablePlugin;
@@ -843,18 +866,20 @@ declare module "table/cell-types/date" { }
 declare module "table/cell-types/datetime" { }
 declare module "table/cell-types/number" { }
 declare module "utils/remote-data-provider" {
+    import { IFilterItem } from "core/find";
     import { IDataProvider } from "utils/data-provider";
     export function postData(url?: string, data?: {}): Promise<any>;
     export class RemoteDataProvider implements IDataProvider {
         name: string;
         url: string;
         constructor(name: string, url: string);
-        getData(limit: number, offset: number, order: any[], filters: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void): void;
-        getSummary(func: string, field: string, filters: any[], callback: (value: any) => void): void;
+        getData(limit: number, offset: number, order: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void): void;
+        getSummary(func: string, field: string, callback: (value: any) => void): void;
         getColumnData(columnName: string, filter: any, limit: number, offset: number, callback: (value: any) => void): void;
         saveData(keyName: string, key: any, modify: {}): boolean;
         insertData(keyName: string, modify: {}): boolean;
         deleteData(keyName: string, keys: any[], callback: any): void;
+        filter: IFilterItem[];
     }
 }
 declare module "index" {
@@ -867,7 +892,7 @@ declare module "index" {
     export * from "core/field-types/date";
     export * from "core/field-types/datetime";
     export * from "core/field-types/number";
-    export * from "find";
+    export * from "core/find";
     export * from "table/index";
     export * from "table/cell";
     export * from "table/column";
