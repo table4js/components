@@ -13,10 +13,10 @@ import { FilterItemValue } from "./column-filter-item";
 import { SummaryPlugin } from "./summary";
 import { InplaceEditorPlugin } from "./editor-inplace";
 import { RowEditorPlugin } from "./editor-row";
+import { IFieldDescription } from "../core/domain";
 
 import * as Icons from "../icons"
 import "./index.scss";
-import { IFieldDescription } from "../core/domain";
 
 /**
  * Parameters for customizing the table view.
@@ -34,6 +34,8 @@ export interface ITableConfig extends IDataProvider {
     enableMergedCells?: boolean;
     /** Allows edit data */
     enableEdit?: boolean;
+    /** Allows edit data */
+    editMode?: "inplace" | "row" | "aside";
     /** Allows row selection */
     allowRowSelection?: boolean;
     /** Actions to display in the table actions panel */
@@ -97,12 +99,22 @@ export class Table extends Base implements IDataProviderOwner {
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
         this.plugins = config.plugins || [];
+
+        if(config.editMode !== undefined) {
+            this.editMode = config.editMode;
+        }
+
         if(this.plugins.length === 0) {
             if (config.enableSummary === true) {
                 this.plugins.push(new SummaryPlugin());
             }
             if (config.enableEdit === true) {
-                this.plugins.push(new InplaceEditorPlugin());
+                if(this.editMode === "inplace") {
+                    this.plugins.push(new InplaceEditorPlugin());
+                }
+                if(this.editMode === "row") {
+                    this.plugins.push(new RowEditorPlugin());
+                }
             }
         }
 
@@ -401,6 +413,7 @@ export class Table extends Base implements IDataProviderOwner {
     @property({ defaultValue: false }) viewFilterTable: boolean; // TODO: rename to showTableFilter
     @property({ defaultValue: true }) allowRowSelection: boolean;
     // expandedRowKey;
+    editMode: "inplace" | "row" | "aside" = "inplace";
 
     searchModel = new SearchModel();
 
