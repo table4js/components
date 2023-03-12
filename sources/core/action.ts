@@ -25,9 +25,9 @@ export class Action extends Base implements IAction {
     @property() name: string;
     @property() action: (context?: any) => void;
     @property() title: string;
-    @property() visible: boolean;
-    @property() enabled: boolean;
-    @property() active: boolean;
+    @property({ defaultValue: true }) visible: boolean;
+    @property({ defaultValue: true }) enabled: boolean;
+    @property({ defaultValue: true }) active: boolean;
     @property() icon: string;
     @property() svg: string;
     @property() container: string;

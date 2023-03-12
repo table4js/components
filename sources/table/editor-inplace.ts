@@ -11,6 +11,7 @@ export class InplaceEditorPlugin extends EditorPlugin {
     private _activeEditors: { [name: string]: Editor } = undefined;
     name: string = "inplace-editor";
     protected startEditRow(row: ITableRow) {
+        super.startEditRow(row);
         this._activeEditors = {};
         row.cells.forEach(cell => {
             this._activeEditors[cell.name] = new Editor(cell.rowData, cell.name, (value: any, commit: boolean) => {
@@ -19,17 +20,14 @@ export class InplaceEditorPlugin extends EditorPlugin {
                 }
             });
         });
-        this._editedRow = row;
         row.mode = "edit-inplace";
     }
     protected endEditRow(commit: boolean) {
+        super.endEditRow(commit);
         Object.keys(this._activeEditors || {}).forEach(name => {
             this._activeEditors[name].complete(commit);
         });
         if(!!this._editedRow) {
-            if(commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow = undefined;
         }
@@ -42,6 +40,7 @@ export class InplaceEditorPlugin extends EditorPlugin {
             title: Localization.getString("saveEdit"),
             action: (row: any) => {
                 this.endEditRow(true);
+                this.saveRow(row);
             },
             svg: Icons.save_ok,
             cssClasses: "table4js__save-edit",

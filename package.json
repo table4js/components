@@ -2,11 +2,9 @@
   "name": "table4js-components",
   "version": "0.2.8",
   "description": "JavaScript table components library - table4js",
-  "homepage": "https://github.com/table4js/components",
+  "homepage": "https://table4js.com",
   "authors": [
-    "Serge T <@domain.com>",
-    "Fedor D <@domain.com>",
-    "Alexey N <@domain.com>"
+    "Serge T <@domain.com>"
   ],
   "private": true,
   "license": "MIT",

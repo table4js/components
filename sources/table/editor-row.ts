@@ -8,20 +8,18 @@ export class RowEditorPlugin extends EditorPlugin {
     private _form: Form = undefined;
     name: string = "row-editor";
     protected startEditRow(row: ITableRow) {
+        super.startEditRow(row);
         this._form = new Form(this._table.columns);
         this._form.object = row.rowData;
-        this._editedRow = row;
         row.mode = "edit-row";
     }
     protected endEditRow(commit: boolean) {
+        super.endEditRow(commit);
         if(!!this._form) {
             this._form.complete(commit);
             this._form = undefined;
         }
         if(!!this._editedRow) {
-            if(commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow.update();
             this._editedRow = undefined;

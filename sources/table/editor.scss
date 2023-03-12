@@ -2,14 +2,14 @@
 
 .table4js__row {
 
-    .table4js__edit, .table4js__save-edit, .table4js__cancel-edit {
+    .table4js__row-context-action, .table4js__save-edit, .table4js__cancel-edit {
         display: none;
     }
 }
 
 .table4js__row--edit-inplace {
 
-    .table4js__more, .table4js__edit {
+    .table4js__row-more-action, .table4js__row-context-action {
         display: none;
     }
 
@@ -19,7 +19,7 @@
     }
 
     &:hover {
-        .table4js__more, .table4js__edit {
+        .table4js__row-more-action, .table4js__row-context-action {
             display: none;
         }        
     }

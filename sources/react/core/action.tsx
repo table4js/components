@@ -4,6 +4,9 @@ import { makeReactive } from "../reactivity";
 
 export function AbrisAction({ action }: { action: Action }) {
   makeReactive(action);
+  if(!action.visible) {
+    return null;
+  }
   return (
     <button
       key={action.name}
@@ -14,9 +17,8 @@ export function AbrisAction({ action }: { action: Action }) {
         action.cssClasses +
         (action.active === true ? " table4js-action--active" : "")
       }
-      type={action["formId"] !== undefined ? "submit" : "button"}
+      type="button"
       title={action.title || action.name}
-      // form={action.formId}
     >
       {action.svg && (
         <div

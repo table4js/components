@@ -54,6 +54,7 @@ export interface ITablePlugin {
     getActions(): Array<IAction>;
     onColumnCreated(column: ITableColumn): void;
     onRowCreated(row: ITableRow): void;
+    onSelectionChanged?(): void;
 }
 
 /**
@@ -271,12 +272,17 @@ export class Table extends Base implements IDataProviderOwner {
         }
     }
 
+    protected selectionChanged() {
+        this.plugins.forEach(plugin => !!plugin.onSelectionChanged && plugin.onSelectionChanged());
+    }
+
     protected clickRow(row: ITableRow, event) {
         if(!this.allowRowSelection) {
             return;
         }
         this.selectedRows.forEach(r => r.selected = false);
         row.selected = true;
+        this.selectionChanged();
     }
 
     protected selectRow(row: ITableRow, event) {
@@ -288,6 +294,7 @@ export class Table extends Base implements IDataProviderOwner {
                 .forEach(e => e.selected = true);
         }
         if (row.selected) this.lastSelectRow = row;
+        this.selectionChanged();
     }
 
     public clickColumn = (column: ITableColumn, event) => {

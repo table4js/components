@@ -65,7 +65,7 @@ export function Table4Row({ table, row }: ITableRowProps) {
       >
         <div className="table4js-technical-cell__container">
           <div
-            className="table4js-svg-icon table4js-icon-row-tools table4js__more"
+            className="table4js-svg-icon table4js-icon-row-tools table4js__row-more-action"
             dangerouslySetInnerHTML={{ __html: table.icons.more }}
           ></div>
           {

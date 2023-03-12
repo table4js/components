@@ -1,18 +1,15 @@
-<button data-bind="click: $data.formId !== undefined ? undefined : action, 
-                visible: !$data.visible || ko.unwrap(visible),
-                enable: !$data.enabled || ko.unwrap(enabled),
-                attr: {
-                        class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),
-                        title: $data.title || $data.name, form: $data.formId,
-                        type: $data.formId !== undefined ? 'submit' : 'button'
-                    }">
+<!-- ko if: $data.visible === undefined || ko.unwrap(visible) -->
+<button type="button" data-bind="click: action, enable: $data.enabled === undefined || ko.unwrap(enabled),
+                attr: { class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),
+                        title: $data.title || $data.name }">
     <!-- ko if: $data.icon -->
     <!-- <span data-bind="css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))"></span> -->
     <!-- /ko -->
     <!-- ko if: $data.svg -->
     <div class="table4js-action-button__icon table4js-button__svg-icon" data-bind="html: svg"></div>
     <!-- /ko -->
-    <!-- ko ifnot: $parents[1].short -->
+    <!-- ko ifnot: $data.short -->
     <span class="table4js-action-button__label" data-bind="text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}" ></span>
     <!-- /ko -->
 </button>
+<!-- /ko -->

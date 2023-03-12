@@ -9,6 +9,8 @@ import * as Icons from "../icons"
 import "./editor.scss";
 
 export class EditorPlugin implements ITablePlugin {
+    protected _deleteAction: IAction;
+    protected _saveAction: IAction;
     protected _table: Table;
     protected _editedRow: ITableRow = undefined;
     name: string = "editor";
@@ -36,10 +38,8 @@ export class EditorPlugin implements ITablePlugin {
     protected add() {
         // this.scrollerElement.scrollTop = 0;
         const newRowData: ITableRowData = {};
-        this._table.columns.forEach(c => c.visible && (newRowData[c.name] = ""));
         const newRow = this._table.createRow(newRowData, -1);
         this._table.rows.unshift(newRow);
-        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
         return newRow;
     }
     protected save() {
@@ -52,58 +52,77 @@ export class EditorPlugin implements ITablePlugin {
         }
     }
     protected delete() {
+        const keysToDelete = [];
         this._table.selectedRows.forEach(row => {
-            if (row.number > 0) {
-                this._table.rows.slice(this._table.rows.indexOf(row), 1);
+            this._table.rows.splice(this._table.rows.indexOf(row), 1);
+            if(row.number > 0 && row.rowData[this._table.keyColumn]) {
+                keysToDelete.push(row.rowData[this._table.keyColumn])
             }
         });
-        const keys = this._table.selectedRows.map(r => r.number > 0 && r.rowData[this._table.keyColumn]);
-        this._table.dataProvider.deleteData(this._table.keyColumn, keys, (_ => this._table.refresh()));
+        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (_ => this._table.refresh()));
+        this._deleteAction.visible = false;
     }
     protected startEditRow(row: ITableRow) {
+        this._editedRow = row;
+        this._saveAction.visible = true;
     }
     protected endEditRow(commit: boolean) {
+        if(!commit && !!this._editedRow && this._editedRow.number <= 0) {
+            this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
+        }
+        this._saveAction.visible = false;
+    }
+    onSelectionChanged(): void {
+        if(!!this._deleteAction) {
+            this._deleteAction.visible = this._table.selectedRows.length > 0;
+        }
     }
     getActions(): IAction[] {
+        this._deleteAction = new Action({
+            name: "delete-action",
+            title: Localization.getString("deleteRow"),
+            action: () => this.delete(),
+            visible: this._table.selectedRows.length > 0,
+            svg: Icons.del,
+            container: "bottom"
+        });
+        this._saveAction = new Action({
+            name: "save-action",
+            title: Localization.getString("saveRow"),
+            action: () => {
+                this.endEditRow(true);
+                this.save();
+            },
+            visible: !!this._editedRow,
+            svg: Icons.save,
+            container: "bottom"
+        });
         return [
             new Action({
                 name: "add-action",
                 title: Localization.getString("addRow"),
                 action: () => {
-                    const newRow = this.add();
                     this.endEditRow(false);
+                    const newRow = this.add();
                     this.startEditRow(newRow);
                 },
                 svg: Icons.add,
                 container: "bottom"
             }),
-            new Action({
-                name: "save-action",
-                title: Localization.getString("saveRow"),
-                action: () => this.save(),
-                svg: Icons.save,
-                container: "bottom"
-            }),
-            new Action({
-                name: "delete-action",
-                title: Localization.getString("deleteRow"),
-                action: () => this.delete(),
-                svg: Icons.del,
-                container: "bottom"
-            }),
+            this._saveAction,
+            this._deleteAction,
             new Action({
                 name: "edit-action",
                 title: Localization.getString("editRow"),
                 action: (row: any) => {
-                    if(this._editedRow !== row) {
-                        this.endEditRow(false);
+                    const editedRow = this._editedRow;
+                    this.endEditRow(false);
+                    if(editedRow !== row) {
                         this.startEditRow(row);
-                    } else {
-                        this.endEditRow(true);
                     }
                 },
                 svg: Icons.edit,
-                cssClasses: "table4js__edit",
+                cssClasses: "table4js__row-context-action",
                 container: "row"
             })
         ];

@@ -5,16 +5,16 @@
     //background: var(--abc-primary-1, $abc-primary-1);
     position: relative;
 
-    .table4js__edit {
+    .table4js__row-context-action {
         display: none;
     }
 
     &:hover {
-        .table4js__more {
+        .table4js__row-more-action {
             display: none;
         }
 
-        .table4js__edit {
+        .table4js__row-context-action {
             display: inline-block;
         }
 
@@ -35,11 +35,11 @@
         border-color: var(--abc-primary-4, $abc-primary-4);
     }
 
-    .table4js__more {
+    .table4js__row-more-action {
         display: none;
     }
 
-    .table4js__edit {
+    .table4js__row-context-action {
         display: inline-block;
         fill: var(--abc-primary-4, $abc-primary-4);
     }
