@@ -251,7 +251,7 @@ table4js-filter-select, .table4js-filter-select {
   width: 100%;
 }
 .table4js__editor input.table4js-editor--modified {
-  box-shadow: 0px 3px 3px -3px yellow;
+  box-shadow: 0px 3px 3px -3px gold;
 }
 /*!****************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/core/actions.scss ***!
@@ -551,13 +551,13 @@ table4js-search {
 .table4js__row {
   position: relative;
 }
-.table4js__row .table4js__edit {
+.table4js__row .table4js__row-context-action {
   display: none;
 }
-.table4js__row:hover .table4js__more {
+.table4js__row:hover .table4js__row-more-action {
   display: none;
 }
-.table4js__row:hover .table4js__edit {
+.table4js__row:hover .table4js__row-context-action {
   display: inline-block;
 }
 .table4js__row:hover .table4js__row--select {
@@ -570,10 +570,10 @@ table4js-search {
 .table4js__row--selected .table4js__check {
   border-color: var(--abc-primary-4, #263769);
 }
-.table4js__row--selected .table4js__more {
+.table4js__row--selected .table4js__row-more-action {
   display: none;
 }
-.table4js__row--selected .table4js__edit {
+.table4js__row--selected .table4js__row-context-action {
   display: inline-block;
   fill: var(--abc-primary-4, #263769);
 }
@@ -648,18 +648,18 @@ table4js-summary {
 /* Вторичный Цвет A */
 /* Вторичный Цвет B */
 /* Дополнительный Цвет */
-.table4js__row .table4js__edit, .table4js__row .table4js__save-edit, .table4js__row .table4js__cancel-edit {
+.table4js__row .table4js__row-context-action, .table4js__row .table4js__save-edit, .table4js__row .table4js__cancel-edit {
   display: none;
 }
 
-.table4js__row--edit-inplace .table4js__more, .table4js__row--edit-inplace .table4js__edit {
+.table4js__row--edit-inplace .table4js__row-more-action, .table4js__row--edit-inplace .table4js__row-context-action {
   display: none;
 }
 .table4js__row--edit-inplace .table4js__save-edit, .table4js__row--edit-inplace .table4js__cancel-edit {
   display: inline-block;
   fill: var(--abc-primary-4, #263769);
 }
-.table4js__row--edit-inplace:hover .table4js__more, .table4js__row--edit-inplace:hover .table4js__edit {
+.table4js__row--edit-inplace:hover .table4js__row-more-action, .table4js__row--edit-inplace:hover .table4js__row-context-action {
   display: none;
 }
 /*!********************************************************************************************************************************************************************************!*\

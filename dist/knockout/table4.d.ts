@@ -492,6 +492,8 @@ declare module "table/editor" {
     import { ITableRow } from "table/row";
     import "./editor.scss";
     export class EditorPlugin implements ITablePlugin {
+        protected _deleteAction: IAction;
+        protected _saveAction: IAction;
         protected _table: Table;
         protected _editedRow: ITableRow;
         name: string;
@@ -502,6 +504,7 @@ declare module "table/editor" {
         protected delete(): void;
         protected startEditRow(row: ITableRow): void;
         protected endEditRow(commit: boolean): void;
+        onSelectionChanged(): void;
         getActions(): IAction[];
         onColumnCreated(column: ITableColumn): void;
         onRowCreated(row: ITableRow): void;
@@ -627,6 +630,7 @@ declare module "table/index" {
         getActions(): Array<IAction>;
         onColumnCreated(column: ITableColumn): void;
         onRowCreated(row: ITableRow): void;
+        onSelectionChanged?(): void;
     }
     /**
      * Creates Table class.
@@ -654,6 +658,7 @@ declare module "table/index" {
         set data(_data: Array<any>);
         refresh(): void;
         drawRows(limit: number, offset: number, back?: boolean): void;
+        protected selectionChanged(): void;
         protected clickRow(row: ITableRow, event: any): void;
         protected selectRow(row: ITableRow, event: any): void;
         clickColumn: (column: ITableColumn, event: any) => void;

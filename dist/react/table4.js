@@ -465,15 +465,15 @@ var Action = (function (_super) {
         __metadata("design:type", String)
     ], Action.prototype, "title", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "visible", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "enabled", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "active", void 0);
     __decorate([
@@ -1208,9 +1208,12 @@ var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/rea
 function AbrisAction(_a) {
     var action = _a.action;
     (0, reactivity_1.makeReactive)(action);
+    if (!action.visible) {
+        return null;
+    }
     return (React.createElement("button", { key: action.name, onClick: function () { return action.action(); }, className: "table4js-button--transparent action-button table4js-action-button " +
             action.cssClasses +
-            (action.active === true ? " table4js-action--active" : ""), type: action["formId"] !== undefined ? "submit" : "button", title: action.title || action.name },
+            (action.active === true ? " table4js-action--active" : ""), type: "button", title: action.title || action.name },
         action.svg && (React.createElement("div", { className: "table4js-action-button__icon table4js-button__svg-icon", dangerouslySetInnerHTML: { __html: action.svg } })),
         !action.short && (React.createElement("span", { className: "table4js-action-button__label " + action.cssLabel, style: { display: action.title ? "block" : "none" } }, action.title))));
 }
@@ -1684,7 +1687,7 @@ function LoadingIndicator(table) {
             React.createElement("div", { className: "table4js-cell__container table4js-cell__container--loading" }))); }),
         React.createElement("td", { className: "table4js-cell table4js-technical-cell table4js-technical-cell--right" },
             React.createElement("div", { className: "table4js-technical-cell__container" },
-                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__more", dangerouslySetInnerHTML: { __html: table.icons.more } }))))); })));
+                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__row-more-action", dangerouslySetInnerHTML: { __html: table.icons.more } }))))); })));
 }
 function Table4(_a) {
     var model = _a.model;
@@ -1879,7 +1882,7 @@ function Table4Row(_a) {
         }),
         React.createElement("td", { key: "context-menu-cell", className: "table4js-cell table4js-technical-cell table4js-technical-cell--right", onClick: function (e) { return row.click(row, e); } },
             React.createElement("div", { className: "table4js-technical-cell__container" },
-                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__more", dangerouslySetInnerHTML: { __html: table.icons.more } }),
+                React.createElement("div", { className: "table4js-svg-icon table4js-icon-row-tools table4js__row-more-action", dangerouslySetInnerHTML: { __html: table.icons.more } }),
                 table.rowActions.map(function (action) {
                     return React.createElement("div", { key: action.name, className: "table4js-svg-icon table4js-icon-row-tools " + action.cssClasses, dangerouslySetInnerHTML: { __html: action.svg }, onClick: function (e) {
                             action.action(row);
@@ -2674,6 +2677,7 @@ var InplaceEditorPlugin = (function (_super) {
     }
     InplaceEditorPlugin.prototype.startEditRow = function (row) {
         var _this = this;
+        _super.prototype.startEditRow.call(this, row);
         this._activeEditors = {};
         row.cells.forEach(function (cell) {
             _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name, function (value, commit) {
@@ -2682,18 +2686,15 @@ var InplaceEditorPlugin = (function (_super) {
                 }
             });
         });
-        this._editedRow = row;
         row.mode = "edit-inplace";
     };
     InplaceEditorPlugin.prototype.endEditRow = function (commit) {
         var _this = this;
+        _super.prototype.endEditRow.call(this, commit);
         Object.keys(this._activeEditors || {}).forEach(function (name) {
             _this._activeEditors[name].complete(commit);
         });
         if (!!this._editedRow) {
-            if (commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow = undefined;
         }
@@ -2707,6 +2708,7 @@ var InplaceEditorPlugin = (function (_super) {
             title: localization_1.Localization.getString("saveEdit"),
             action: function (row) {
                 _this.endEditRow(true);
+                _this.saveRow(row);
             },
             svg: Icons.save_ok,
             cssClasses: "table4js__save-edit",
@@ -2783,20 +2785,18 @@ var RowEditorPlugin = (function (_super) {
         return _this;
     }
     RowEditorPlugin.prototype.startEditRow = function (row) {
+        _super.prototype.startEditRow.call(this, row);
         this._form = new form_1.Form(this._table.columns);
         this._form.object = row.rowData;
-        this._editedRow = row;
         row.mode = "edit-row";
     };
     RowEditorPlugin.prototype.endEditRow = function (commit) {
+        _super.prototype.endEditRow.call(this, commit);
         if (!!this._form) {
             this._form.complete(commit);
             this._form = undefined;
         }
         if (!!this._editedRow) {
-            if (commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow.update();
             this._editedRow = undefined;
@@ -2868,10 +2868,8 @@ var EditorPlugin = (function () {
     };
     EditorPlugin.prototype.add = function () {
         var newRowData = {};
-        this._table.columns.forEach(function (c) { return c.visible && (newRowData[c.name] = ""); });
         var newRow = this._table.createRow(newRowData, -1);
         this._table.rows.unshift(newRow);
-        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
         return newRow;
     };
     EditorPlugin.prototype.save = function () {
@@ -2886,60 +2884,78 @@ var EditorPlugin = (function () {
     };
     EditorPlugin.prototype.delete = function () {
         var _this = this;
+        var keysToDelete = [];
         this._table.selectedRows.forEach(function (row) {
-            if (row.number > 0) {
-                _this._table.rows.slice(_this._table.rows.indexOf(row), 1);
+            _this._table.rows.splice(_this._table.rows.indexOf(row), 1);
+            if (row.number > 0 && row.rowData[_this._table.keyColumn]) {
+                keysToDelete.push(row.rowData[_this._table.keyColumn]);
             }
         });
-        var keys = this._table.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this._table.keyColumn]; });
-        this._table.dataProvider.deleteData(this._table.keyColumn, keys, (function (_) { return _this._table.refresh(); }));
+        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
+        this._deleteAction.visible = false;
     };
     EditorPlugin.prototype.startEditRow = function (row) {
+        this._editedRow = row;
+        this._saveAction.visible = true;
     };
     EditorPlugin.prototype.endEditRow = function (commit) {
+        if (!commit && !!this._editedRow && this._editedRow.number <= 0) {
+            this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
+        }
+        this._saveAction.visible = false;
+    };
+    EditorPlugin.prototype.onSelectionChanged = function () {
+        if (!!this._deleteAction) {
+            this._deleteAction.visible = this._table.selectedRows.length > 0;
+        }
     };
     EditorPlugin.prototype.getActions = function () {
         var _this = this;
+        this._deleteAction = new action_1.Action({
+            name: "delete-action",
+            title: localization_1.Localization.getString("deleteRow"),
+            action: function () { return _this.delete(); },
+            visible: this._table.selectedRows.length > 0,
+            svg: Icons.del,
+            container: "bottom"
+        });
+        this._saveAction = new action_1.Action({
+            name: "save-action",
+            title: localization_1.Localization.getString("saveRow"),
+            action: function () {
+                _this.endEditRow(true);
+                _this.save();
+            },
+            visible: !!this._editedRow,
+            svg: Icons.save,
+            container: "bottom"
+        });
         return [
             new action_1.Action({
                 name: "add-action",
                 title: localization_1.Localization.getString("addRow"),
                 action: function () {
-                    var newRow = _this.add();
                     _this.endEditRow(false);
+                    var newRow = _this.add();
                     _this.startEditRow(newRow);
                 },
                 svg: Icons.add,
                 container: "bottom"
             }),
-            new action_1.Action({
-                name: "save-action",
-                title: localization_1.Localization.getString("saveRow"),
-                action: function () { return _this.save(); },
-                svg: Icons.save,
-                container: "bottom"
-            }),
-            new action_1.Action({
-                name: "delete-action",
-                title: localization_1.Localization.getString("deleteRow"),
-                action: function () { return _this.delete(); },
-                svg: Icons.del,
-                container: "bottom"
-            }),
+            this._saveAction,
+            this._deleteAction,
             new action_1.Action({
                 name: "edit-action",
                 title: localization_1.Localization.getString("editRow"),
                 action: function (row) {
-                    if (_this._editedRow !== row) {
-                        _this.endEditRow(false);
+                    var editedRow = _this._editedRow;
+                    _this.endEditRow(false);
+                    if (editedRow !== row) {
                         _this.startEditRow(row);
-                    }
-                    else {
-                        _this.endEditRow(true);
                     }
                 },
                 svg: Icons.edit,
-                cssClasses: "table4js__edit",
+                cssClasses: "table4js__row-context-action",
                 container: "row"
             })
         ];
@@ -3424,12 +3440,16 @@ var Table = (function (_super) {
             });
         }
     };
+    Table.prototype.selectionChanged = function () {
+        this.plugins.forEach(function (plugin) { return !!plugin.onSelectionChanged && plugin.onSelectionChanged(); });
+    };
     Table.prototype.clickRow = function (row, event) {
         if (!this.allowRowSelection) {
             return;
         }
         this.selectedRows.forEach(function (r) { return r.selected = false; });
         row.selected = true;
+        this.selectionChanged();
     };
     Table.prototype.selectRow = function (row, event) {
         var _this = this;
@@ -3441,6 +3461,7 @@ var Table = (function (_super) {
         }
         if (row.selected)
             this.lastSelectRow = row;
+        this.selectionChanged();
     };
     Table.prototype.createRow = function (data, num, back) {
         var _this = this;

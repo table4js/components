@@ -230,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button data-bind=\"click: $data.formId !== undefined ? undefined : action, \n                visible: !$data.visible || ko.unwrap(visible),\n                enable: !$data.enabled || ko.unwrap(enabled),\n                attr: {\n                        class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),\n                        title: $data.title || $data.name, form: $data.formId,\n                        type: $data.formId !== undefined ? 'submit' : 'button'\n                    }\">\n    <!-- ko if: $data.icon -->\n    <!-- <span data-bind=\"css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))\"></span> -->\n    <!-- /ko -->\n    <!-- ko if: $data.svg -->\n    <div class=\"table4js-action-button__icon table4js-button__svg-icon\" data-bind=\"html: svg\"></div>\n    <!-- /ko -->\n    <!-- ko ifnot: $parents[1].short -->\n    <span class=\"table4js-action-button__label\" data-bind=\"text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}\" ></span>\n    <!-- /ko -->\n</button>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko if: $data.visible === undefined || ko.unwrap(visible) -->\n<button type=\"button\" data-bind=\"click: action, enable: $data.enabled === undefined || ko.unwrap(enabled),\n                attr: { class: 'table4js-button--transparent action-button table4js-action-button ' + ko.unwrap($data.cssClasses) + (ko.unwrap($data.active) === true ? ' table4js-action--active' : ''),\n                        title: $data.title || $data.name }\">\n    <!-- ko if: $data.icon -->\n    <!-- <span data-bind=\"css: ('fa icon ' + (typeof icon == 'function' ? icon() : icon))\"></span> -->\n    <!-- /ko -->\n    <!-- ko if: $data.svg -->\n    <div class=\"table4js-action-button__icon table4js-button__svg-icon\" data-bind=\"html: svg\"></div>\n    <!-- /ko -->\n    <!-- ko ifnot: $data.short -->\n    <span class=\"table4js-action-button__label\" data-bind=\"text: $data.title, css: ko.unwrap($data.cssLabel), style: {'display' : $data.title ? 'block' : 'none'}\" ></span>\n    <!-- /ko -->\n</button>\n<!-- /ko -->");
 
 /***/ }),
 
@@ -425,7 +425,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell table4js-header-title__technical-cell--right\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell table4js-header-title__technical-cell--right\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__row-more-action\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -455,7 +455,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<tr class=\"table4js__row\" data-bind=\"css: $data.row.css, style: { 'background-color': 'none' }\">\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--left\" data-bind=\"click: function(_, event) { $data.row.select($data.row, event); }\">\n    <div class=\"table4js-technical-cell__container\">\n      <!-- ko if: table.isNumber -->\n      <div class=\"table4js__number\" data-bind=\"text: row.number\"></div>\n      <!-- /ko -->\n      <!-- ko if: !table.isNumber -->\n      <div class=\"table4js__check\" data-bind=\"visible: table.allowRowSelection\">\n        <div class=\"table4js-svg-icon table4js__icon-check\" data-bind=\"visible: row.selected, html: table.icons.check\"></div>\n      </div>\n      <!-- /ko -->\n    </div>\n  </td>\n  <!-- ko foreach: row.cells -->\n  <td class=\"table4js-cell\" data-bind=\"attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },\n    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',\n    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } \">\n    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->\n    <!-- /ko -->\n  </td>\n  <!-- /ko -->\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n    <div class=\"table4js-technical-cell__container\">\n      <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__more\" data-bind=\"html: table.icons.more\"></div>\n      <!-- ko foreach: table.rowActions -->\n      <div class=\"table4js-svg-icon table4js-icon-row-tools\" data-bind=\"html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }\"></div>\n      <!-- /ko -->\n    </div>\n    <div class=\"table4js__row--select\" data-bind=\"visible: table.allowRowSelection\"></div>\n    <div class=\"table4js__row--colored\" data-bind=\"style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }\"></div>\n  </td>\n</tr>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<tr class=\"table4js__row\" data-bind=\"css: $data.row.css, style: { 'background-color': 'none' }\">\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--left\" data-bind=\"click: function(_, event) { $data.row.select($data.row, event); }\">\n    <div class=\"table4js-technical-cell__container\">\n      <!-- ko if: table.isNumber -->\n      <div class=\"table4js__number\" data-bind=\"text: row.number\"></div>\n      <!-- /ko -->\n      <!-- ko if: !table.isNumber -->\n      <div class=\"table4js__check\" data-bind=\"visible: table.allowRowSelection\">\n        <div class=\"table4js-svg-icon table4js__icon-check\" data-bind=\"visible: row.selected, html: table.icons.check\"></div>\n      </div>\n      <!-- /ko -->\n    </div>\n  </td>\n  <!-- ko foreach: row.cells -->\n  <td class=\"table4js-cell\" data-bind=\"attr: { rowspan: $parent.table.isMergedCells ? $data.count : 1 },\n    css: ($data.count > 1) && $parent.table.isMergedCells ? 'table4js-cell--merged ' : '',\n    visible: ($data.count > 0) || !$parent.table.isMergedCells, style: { 'background-color': $data.color } \">\n    <!-- ko component: { name: $parent.row.getCellComponent($data), params: $parent.row.getCellComponentParams({ cell: $data, table: $parent.table }) } -->\n    <!-- /ko -->\n  </td>\n  <!-- /ko -->\n  <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n    <div class=\"table4js-technical-cell__container\">\n      <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__row-more-action\" data-bind=\"html: table.icons.more\"></div>\n      <!-- ko foreach: table.rowActions -->\n      <div class=\"table4js-svg-icon table4js-icon-row-tools\" data-bind=\"html: $data.svg, css: $data.cssClasses, click: function() { $data.action($parent.row); }, attr: { title: $data.title }\"></div>\n      <!-- /ko -->\n    </div>\n    <div class=\"table4js__row--select\" data-bind=\"visible: table.allowRowSelection\"></div>\n    <div class=\"table4js__row--colored\" data-bind=\"style: { 'background': row.color ? row.color : 'rgba(248,249,253)' }\"></div>\n  </td>\n</tr>");
 
 /***/ }),
 
@@ -795,15 +795,15 @@ var Action = (function (_super) {
         __metadata("design:type", String)
     ], Action.prototype, "title", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "visible", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "enabled", void 0);
     __decorate([
-        (0, property_1.property)(),
+        (0, property_1.property)({ defaultValue: true }),
         __metadata("design:type", Boolean)
     ], Action.prototype, "active", void 0);
     __decorate([
@@ -2863,6 +2863,7 @@ var InplaceEditorPlugin = (function (_super) {
     }
     InplaceEditorPlugin.prototype.startEditRow = function (row) {
         var _this = this;
+        _super.prototype.startEditRow.call(this, row);
         this._activeEditors = {};
         row.cells.forEach(function (cell) {
             _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name, function (value, commit) {
@@ -2871,18 +2872,15 @@ var InplaceEditorPlugin = (function (_super) {
                 }
             });
         });
-        this._editedRow = row;
         row.mode = "edit-inplace";
     };
     InplaceEditorPlugin.prototype.endEditRow = function (commit) {
         var _this = this;
+        _super.prototype.endEditRow.call(this, commit);
         Object.keys(this._activeEditors || {}).forEach(function (name) {
             _this._activeEditors[name].complete(commit);
         });
         if (!!this._editedRow) {
-            if (commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow = undefined;
         }
@@ -2896,6 +2894,7 @@ var InplaceEditorPlugin = (function (_super) {
             title: localization_1.Localization.getString("saveEdit"),
             action: function (row) {
                 _this.endEditRow(true);
+                _this.saveRow(row);
             },
             svg: Icons.save_ok,
             cssClasses: "table4js__save-edit",
@@ -2972,20 +2971,18 @@ var RowEditorPlugin = (function (_super) {
         return _this;
     }
     RowEditorPlugin.prototype.startEditRow = function (row) {
+        _super.prototype.startEditRow.call(this, row);
         this._form = new form_1.Form(this._table.columns);
         this._form.object = row.rowData;
-        this._editedRow = row;
         row.mode = "edit-row";
     };
     RowEditorPlugin.prototype.endEditRow = function (commit) {
+        _super.prototype.endEditRow.call(this, commit);
         if (!!this._form) {
             this._form.complete(commit);
             this._form = undefined;
         }
         if (!!this._editedRow) {
-            if (commit) {
-                this.saveRow(this._editedRow);
-            }
             this._editedRow.mode = "default";
             this._editedRow.update();
             this._editedRow = undefined;
@@ -3057,10 +3054,8 @@ var EditorPlugin = (function () {
     };
     EditorPlugin.prototype.add = function () {
         var newRowData = {};
-        this._table.columns.forEach(function (c) { return c.visible && (newRowData[c.name] = ""); });
         var newRow = this._table.createRow(newRowData, -1);
         this._table.rows.unshift(newRow);
-        this._table.dataProvider.insertData(this._table.keyColumn, newRowData);
         return newRow;
     };
     EditorPlugin.prototype.save = function () {
@@ -3075,60 +3070,78 @@ var EditorPlugin = (function () {
     };
     EditorPlugin.prototype.delete = function () {
         var _this = this;
+        var keysToDelete = [];
         this._table.selectedRows.forEach(function (row) {
-            if (row.number > 0) {
-                _this._table.rows.slice(_this._table.rows.indexOf(row), 1);
+            _this._table.rows.splice(_this._table.rows.indexOf(row), 1);
+            if (row.number > 0 && row.rowData[_this._table.keyColumn]) {
+                keysToDelete.push(row.rowData[_this._table.keyColumn]);
             }
         });
-        var keys = this._table.selectedRows.map(function (r) { return r.number > 0 && r.rowData[_this._table.keyColumn]; });
-        this._table.dataProvider.deleteData(this._table.keyColumn, keys, (function (_) { return _this._table.refresh(); }));
+        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
+        this._deleteAction.visible = false;
     };
     EditorPlugin.prototype.startEditRow = function (row) {
+        this._editedRow = row;
+        this._saveAction.visible = true;
     };
     EditorPlugin.prototype.endEditRow = function (commit) {
+        if (!commit && !!this._editedRow && this._editedRow.number <= 0) {
+            this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
+        }
+        this._saveAction.visible = false;
+    };
+    EditorPlugin.prototype.onSelectionChanged = function () {
+        if (!!this._deleteAction) {
+            this._deleteAction.visible = this._table.selectedRows.length > 0;
+        }
     };
     EditorPlugin.prototype.getActions = function () {
         var _this = this;
+        this._deleteAction = new action_1.Action({
+            name: "delete-action",
+            title: localization_1.Localization.getString("deleteRow"),
+            action: function () { return _this.delete(); },
+            visible: this._table.selectedRows.length > 0,
+            svg: Icons.del,
+            container: "bottom"
+        });
+        this._saveAction = new action_1.Action({
+            name: "save-action",
+            title: localization_1.Localization.getString("saveRow"),
+            action: function () {
+                _this.endEditRow(true);
+                _this.save();
+            },
+            visible: !!this._editedRow,
+            svg: Icons.save,
+            container: "bottom"
+        });
         return [
             new action_1.Action({
                 name: "add-action",
                 title: localization_1.Localization.getString("addRow"),
                 action: function () {
-                    var newRow = _this.add();
                     _this.endEditRow(false);
+                    var newRow = _this.add();
                     _this.startEditRow(newRow);
                 },
                 svg: Icons.add,
                 container: "bottom"
             }),
-            new action_1.Action({
-                name: "save-action",
-                title: localization_1.Localization.getString("saveRow"),
-                action: function () { return _this.save(); },
-                svg: Icons.save,
-                container: "bottom"
-            }),
-            new action_1.Action({
-                name: "delete-action",
-                title: localization_1.Localization.getString("deleteRow"),
-                action: function () { return _this.delete(); },
-                svg: Icons.del,
-                container: "bottom"
-            }),
+            this._saveAction,
+            this._deleteAction,
             new action_1.Action({
                 name: "edit-action",
                 title: localization_1.Localization.getString("editRow"),
                 action: function (row) {
-                    if (_this._editedRow !== row) {
-                        _this.endEditRow(false);
+                    var editedRow = _this._editedRow;
+                    _this.endEditRow(false);
+                    if (editedRow !== row) {
                         _this.startEditRow(row);
-                    }
-                    else {
-                        _this.endEditRow(true);
                     }
                 },
                 svg: Icons.edit,
-                cssClasses: "table4js__edit",
+                cssClasses: "table4js__row-context-action",
                 container: "row"
             })
         ];
@@ -3613,12 +3626,16 @@ var Table = (function (_super) {
             });
         }
     };
+    Table.prototype.selectionChanged = function () {
+        this.plugins.forEach(function (plugin) { return !!plugin.onSelectionChanged && plugin.onSelectionChanged(); });
+    };
     Table.prototype.clickRow = function (row, event) {
         if (!this.allowRowSelection) {
             return;
         }
         this.selectedRows.forEach(function (r) { return r.selected = false; });
         row.selected = true;
+        this.selectionChanged();
     };
     Table.prototype.selectRow = function (row, event) {
         var _this = this;
@@ -3630,6 +3647,7 @@ var Table = (function (_super) {
         }
         if (row.selected)
             this.lastSelectRow = row;
+        this.selectionChanged();
     };
     Table.prototype.createRow = function (data, num, back) {
         var _this = this;
