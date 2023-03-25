@@ -96,6 +96,7 @@ export function Table4({ model }: ITableProps) {
                         />
                         {model.dropdownActions.length > 0 && (
                           <AbrisDropdownActions
+                            title=""
                             className="table4js-dropdown table4js-actions-menu"
                             actions={model.dropdownActions}
                           />
