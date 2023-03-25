@@ -15,7 +15,7 @@ import { InplaceEditorPlugin } from "./editor-inplace";
 import { RowEditorPlugin } from "./editor-row";
 import { IFieldDescription } from "../core/domain";
 
-import * as Icons from "../icons"
+import * as Icons from "../icons";
 import "./index.scss";
 
 /**
@@ -153,14 +153,14 @@ export class Table extends Base implements IDataProviderOwner {
             this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
             if(scrollerElement.scrollTop < Table.rowHeight && this.lastOffsetBack > 0) {
                 if ((this.lastOffsetBack - this.partRowCount) < 0) {
-                    this.drawRows(this.lastOffsetBack, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
+                    this.loadRowsBatch(this.lastOffsetBack, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
                 }
                 else {
-                    this.drawRows(this.partRowCount, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
+                    this.loadRowsBatch(this.partRowCount, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
                 }
             }
             if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && this.loadMore) {
-                this.drawRows(this.partRowCount, this.lastOffset, false);
+                this.loadRowsBatch(this.partRowCount, this.lastOffset, false);
             }
         }
         scrollerElement.onscroll = loadData2Display;
@@ -209,7 +209,7 @@ export class Table extends Base implements IDataProviderOwner {
             this.lastOffset = startRow - 1;
             this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
             this.rows = [];
-            this.drawRows(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
         }
     }
 
@@ -259,10 +259,10 @@ export class Table extends Base implements IDataProviderOwner {
         this.lastOffset = 0;
         this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.drawRows(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.partRowCount, 0, false);
     }
 
-    drawRows(limit: number, offset: number, back = false) {
+    protected loadRowsBatch(limit: number, offset: number, back = false) {
         if(!!this.dataProvider && !this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(

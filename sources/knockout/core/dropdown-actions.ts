@@ -1,4 +1,5 @@
 import * as ko from "knockout";
+import * as Icons from "../../icons";
 
 var dropdownTemplate = require("./dropdown-actions.html").default;
 
@@ -15,6 +16,7 @@ ko.components.register("table4js-dropdown-actions", {
                 isOpen,
                 title: params.title || "",
                 moreText: params.moreText || "",
+                moreIcon: params.moreIcon || Icons.more_sq,
                 data: params.data,
                 actions: params.actions,
                 toggle: (_, event) => {

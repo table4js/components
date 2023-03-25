@@ -1,6 +1,7 @@
 import { Base } from "../core/base";
 import { property } from "../core/property";
 import { FilterItemValue } from "./column-filter-item";
+import * as Icons from "../icons";
 
 import "./filter-select.scss";
 
@@ -76,6 +77,7 @@ export class TableFilterSelect extends Base {
         const itemIndex = this.selectedItems.indexOf(name);
         this.selectedItems.splice(itemIndex, 1);
     }
+    icons = Icons;
 
     dispose() {
     }

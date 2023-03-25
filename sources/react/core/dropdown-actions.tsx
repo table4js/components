@@ -1,30 +1,37 @@
 import * as React from "react";
 import { AbrisActions } from "./actions";
+import * as Icons from "../../icons";
 
 export function AbrisDropdownActions({
+  title,
   className,
   actions,
+  moreText,
+  moreIcon
 }: {
+  title: string;
   className: string;
   actions: any[];
+  moreText?: string;
+  moreIcon?: any;
 }) {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
   return (
     <div className={className}>
       <button
         className="table4js-action-button table4js-button--transparent table4js-button-toggle"
         type="button"
-        data-bind="click: toggle, attr: { title: title }"
+        title={title || ""}
+        onClick={e => { setIsOpen(!isOpen); e.nativeEvent.stopPropagation(); }}
       >
-        <div data-bind="html: $root.icons.more_sq"></div>
-        <span
-          className="table4js-action-button__label"
-          data-bind="text: moreText"
-        ></span>
+        <div dangerouslySetInnerHTML={{ __html: moreIcon || Icons.more_sq }}></div>
+        <span className="table4js-action-button__label">{moreText || ""}</span>
       </button>
-      {/* <!-- ko if: isOpen --> */}
+      {isOpen ?
       <ul className="table4js-button-toggle__dropdown-menu">
         <AbrisActions className="table4js-context-actions" actions={actions} />
       </ul>
+      : null}
     </div>
   );
 }

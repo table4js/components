@@ -2,11 +2,11 @@
     <!-- ko foreach: selectedItems -->
     <div class="table4js-select-selection-item">
         <span class="table4js-select-item-title" data-bind="text: name"></span>
-        <div class="table4js-svg-icon table4js-select-item-close" data-bind="click: $parent.deleteItems, html: $root.icons.cross"></div>
+        <div class="table4js-svg-icon table4js-select-item-close" data-bind="click: $parent.deleteItems, html: $parent.icons.cross"></div>
     </div>
     <!-- /ko -->
 </div>
-<div class="table4js-select-button table4js-svg-icon" data-bind="click: toggle, attr: { title: title }, html: $root.icons.arrowdown"></div>
+<div class="table4js-select-button table4js-svg-icon" data-bind="click: toggle, attr: { title: title }, html: icons.arrowdown"></div>
 <!-- ko if: isOpen -->
 <ul class="table4js-select__dropdown-menu table4js-button-toggle__dropdown-menu" data-bind="click: function(_, e) { e.stopPropagation(); }">
     <!-- ko if: isFilterSearchByType -->
@@ -17,7 +17,7 @@
     <!-- ko foreach: foundItems -->
     <div class="table4js-select__dropdown-item" data-bind="click: $parent.clickItem">
         <input class="table4js-select__dropdown-hide-check" type="checkbox" data-bind="checked: $parent.isChecked($data)" />
-        <div class="table4js-svg-icon table4js-select__dropdown-check" data-bind="html: $root.icons.check"></div>
+        <div class="table4js-svg-icon table4js-select__dropdown-check" data-bind="html: $parent.icons.check"></div>
         <span class="table4js-select__dropdown-label" data-bind="text: name"></span>
     </div>
     <!-- /ko -->
