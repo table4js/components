@@ -21,7 +21,7 @@ import "./index.scss";
 /**
  * Parameters for customizing the table view.
  */
-export interface ITableConfig extends IDataProvider {
+export interface ITableConfig {
     /** Description of columns */
     columns: Array<IFieldDescription>;
     /** Allows display the search bar */
@@ -73,11 +73,9 @@ export class Table extends Base implements IDataProviderOwner {
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
 
     private updateByFilter() {
-        const dataProvider = this.dataProvider;
-        const isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
-        dataProvider.filter = [];
+        const newFilter = [];
         if (this.searchModel.searchValue) {
-            dataProvider.filter.push({ value: this.searchModel.searchValue, op: "C", field: null });
+            newFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
         }
         this.columns.forEach(column => {
             let columnFilterValue = column.filterContext.value;
@@ -86,11 +84,15 @@ export class Table extends Base implements IDataProviderOwner {
                     const op = fiv.op;
                     const val = fiv.value;
                     if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
-                        dataProvider.filter.push({ value: val, op: op, field: fiv.field });
+                        newFilter.push({ value: val, op: op, field: fiv.field });
                     }
                 });
             }
         });
+        const dataProvider = this.dataProvider;
+        if(!dataProvider) return;     
+        const isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
+        dataProvider.filter = newFilter;
         if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
             this.refresh();
@@ -133,11 +135,12 @@ export class Table extends Base implements IDataProviderOwner {
         this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
         this.filterUpdater.observe(this, "__filterUpdaterValue"); // TODO: make it elegant
         this.searchModel.updater = () => this.updateByFilter();
+
+        this.isMergedCells = config.enableMergedCells;
+        
         if (!!element) {
             this.initialize(element);
         }
-
-        this.isMergedCells = config.enableMergedCells;
     }
 
     initialize(element: HTMLElement) {
@@ -221,8 +224,8 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     private _dataProvider: IDataProvider = undefined;
-    get dataProvider() {
-        return this._dataProvider || this.config;
+    get dataProvider(): IDataProvider {
+        return this._dataProvider;
     }
     set dataProvider(provider: IDataProvider) {
         this._dataProvider = provider;
@@ -242,7 +245,7 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     drawRows(limit: number, offset: number, back = false) {
-        if (!this.loadingMutex) {
+        if(!!this.dataProvider && !this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(
                 limit,

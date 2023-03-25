@@ -6,17 +6,21 @@
 import { Table } from "../sources/table";
 import { FieldSummary } from "../sources/table/summary";
 
+const dataProvider: any = {
+    getData: (limit, offset, order, key, back, callback) => {
+        callback([{col1: 5}]);
+    },
+    getSummary: function (func, field, callback) {
+        callback(5);
+    }
+}
+
 test("Summary in table", () => {
     const table = new Table(<any>{
             enableSummary: true,
-            columns: [{ name: "col1", type: "number" }],
-            getData: (limit, offset, order, key, back, callback) => {
-                callback([{col1: 5}]);
-            },
-            getSummary: function (func, field, callback) {
-                callback(5);
-            }
+            columns: [{ name: "col1", type: "number" }]
         }, undefined);
+    table.dataProvider = dataProvider;
 
     expect(table).toBeDefined();
     expect(table.columns.length).toBe(1);
