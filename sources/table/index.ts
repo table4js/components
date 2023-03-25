@@ -62,13 +62,11 @@ export interface ITablePlugin {
  * @param config - table options.
  */
 export class Table extends Base implements IDataProviderOwner {
-    private scrollerElement: HTMLDivElement;
-    private resizerElement: HTMLDivElement;
-    private tableElement: HTMLTableElement;
-
+    private element: HTMLElement;
+    protected _detachHandler: () => void = undefined;
     private innerActions: Array<IAction> = [];
-    public icons = Icons;
     private filterUpdater: ComputedUpdater;
+    public icons = Icons;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
 
@@ -139,36 +137,39 @@ export class Table extends Base implements IDataProviderOwner {
         this.isMergedCells = config.enableMergedCells;
         
         if (!!element) {
-            this.initialize(element);
+            this.attach(element);
         }
     }
 
-    initialize(element: HTMLElement) {
-        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0] as HTMLDivElement;
-        this.tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
-        this.resizerElement = element.getElementsByClassName("table4js")[0] as HTMLDivElement;
+    public attach(element: HTMLElement) {
+        if(this.element === element) return;
+        this.detach();
+        this.element = element;
+        const scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0] as HTMLDivElement;
+        const tableElement = element.getElementsByTagName("table")[0] as HTMLTableElement;
+        const resizerElement = element.getElementsByClassName("table4js")[0] as HTMLDivElement;
 
-        var checkLoading = () => {
-            var self = this;
-            self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
-            if (self.scrollerElement.scrollTop < Table.rowHeight && self.lastOffsetBack > 0) {
-                if ((self.lastOffsetBack - self.partRowCount) < 0) {
-                    self.drawRows(self.lastOffsetBack, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+        var loadData2Display = () => {
+            this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            if(scrollerElement.scrollTop < Table.rowHeight && this.lastOffsetBack > 0) {
+                if ((this.lastOffsetBack - this.partRowCount) < 0) {
+                    this.drawRows(this.lastOffsetBack, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
                 }
                 else {
-                    self.drawRows(self.partRowCount, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+                    this.drawRows(this.partRowCount, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
                 }
             }
-            if ((self.scrollerElement.scrollTop >= self.tableElement.clientHeight - self.scrollerElement.clientHeight) && this.loadMore) {
-                self.drawRows(self.partRowCount, self.lastOffset, false);
+            if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && this.loadMore) {
+                this.drawRows(this.partRowCount, this.lastOffset, false);
             }
         }
-        this.scrollerElement.onscroll = checkLoading;
-        this.resizerElement.onresize = checkLoading;
-        checkLoading();
+        scrollerElement.onscroll = loadData2Display;
+        resizerElement.onresize = loadData2Display;
+        loadData2Display();
 
-        if (typeof ResizeObserver !== "undefined") {
-            const resizeObserver = new ResizeObserver(entries => {
+        let resizeObserver: ResizeObserver = undefined;
+        if(typeof ResizeObserver !== "undefined") {
+            resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
                     if (entry.target.tagName === "THEAD") {
                         if (entry.contentRect.width < 700) {
@@ -182,6 +183,23 @@ export class Table extends Base implements IDataProviderOwner {
                 }
             });
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
+        }
+
+        this._detachHandler = () => {
+            if(!!resizeObserver) {
+                resizeObserver.disconnect();
+            }
+            scrollerElement.onscroll = undefined;
+            resizerElement.onresize = undefined;
+        }
+    }
+    public detach() {
+        if(!!this._detachHandler) {
+            this._detachHandler();
+            this._detachHandler = undefined;
+        }
+        if(!!this.element) {
+            this.element = undefined;
         }
     }
 
@@ -345,6 +363,10 @@ export class Table extends Base implements IDataProviderOwner {
         return row;
     }
 
+    private lastOffset = 0;
+    private lastOffsetBack = 0;
+    private partRowCount = 10;
+
     private curCol = undefined;
     private nxtCol = undefined;
     private pageX = undefined;
@@ -397,9 +419,7 @@ export class Table extends Base implements IDataProviderOwner {
     @property({ defaultValue: false }) loadingMutex: boolean;
     @property({ defaultValue: true }) loadMore: boolean;
     @property({ defaultValue: false }) loadMoreBack: boolean;
-    lastOffset = 0;
-    lastOffsetBack = 0;
-    partRowCount = 10;
+
     @property({
         defaultValue: [], onSet: (val: ITableColumn[], target: Table) => {
             target.viewFilterTable = new ComputedUpdater(() => val.filter(c => c.filterContext.showFilter).length > 0) as any;
@@ -473,5 +493,9 @@ export class Table extends Base implements IDataProviderOwner {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    }
+
+    dispose() {
+        this.detach();
     }
 }

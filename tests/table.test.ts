@@ -70,3 +70,18 @@ test("Change order", () => {
     expect(col2.order).toBe(undefined);
     expect(orderLog).toBe("[{\"field\":\"col1\",\"desc\":true}]");
 });
+
+test("Initialize once for the same element", () => {
+    const rootWidgetElement = document.createElement("div");
+    rootWidgetElement.innerHTML = `<div class="table4js-resizable-container"><div class="table4js-scroll-container"><table class="table4js"></div></div></div>`;
+    const table = new Table(<any>{ columns: [{ name: "col1" }] });
+
+    expect(table["_detachHandler"]).toBeUndefined();
+    table.attach(rootWidgetElement);
+    const _detachHandler = table["_detachHandler"];
+    expect(_detachHandler).toBeDefined();
+    table.attach(rootWidgetElement);
+    expect(table["_detachHandler"]).toBe(_detachHandler);
+    table.detach();
+    expect(table["_detachHandler"]).toBeUndefined();
+});

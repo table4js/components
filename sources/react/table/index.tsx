@@ -68,7 +68,7 @@ export function Table4({ model }: ITableProps) {
   makeReactive(model);
   // makeReactive(model.searchModel);
   useEffect(() => {
-    model.initialize(rootRef.current.parentElement);
+    model.attach(rootRef.current.parentElement);
   });
   return (
     <div className="table4js-root table4js-root--fit-width">
