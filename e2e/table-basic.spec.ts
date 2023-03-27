@@ -3,7 +3,41 @@ import { initTable } from './helpers';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:8080/');
-  await initTable(page);
+  await initTable(page, {
+    columns: [
+      {   name: "id",
+          visible: false,
+      },
+      {
+          name: "first_name",
+          title: "First Name"
+      },
+      {
+          name: "last_name",
+          title: "Last Name"
+      },
+      {
+          name: "int16",
+          title: "Number",
+          type: "number"
+      },
+      {
+        name: "iso-8601_date",
+        type: "date",
+        title: "Date",
+      },
+      {
+          name: "float",
+          type: "indicator",
+          title: "Indicator",
+      },
+      {
+          name: "uint16",
+          type: "currency",
+          title: "Currency",
+      },
+    ]
+  });
 });
 
 test.describe('Basic functionality', () => {
@@ -22,18 +56,58 @@ test.describe('Basic functionality', () => {
   });
 
   test('column order', async ({ page }) => {
-    await expect(page.getByRole('cell', { name: 'Last Name' }).locator('svg').first()).toBeHidden();
+    const columnHeader = await page.getByRole('cell', { name: 'Last Name' });
     const rows = await page.locator('.table4js__body tr');
-    await expect(rows.nth(1).getByText('Adams').first()).toBeVisible();
-    await expect(rows.nth(2).getByText('Cooper').first()).toBeVisible();
-    await expect(rows.nth(3).getByText('Brooks').first()).toBeVisible();
-    const col2Header = await page.getByText('Last Name');
-    
-    // await col2Header.click();
-    // await expect(page.getByRole('cell', { name: 'Last Name' }).locator('svg').first()).toBeVisible();
-    // await expect(page.getByRole('row').nth(1).getByText('Adams')).toBeVisible();
-    // await expect(page.getByRole('row').nth(2).getByText('Adams')).toBeVisible();
-    // await expect(page.getByRole('row').nth(3).getByText('Adams')).toBeVisible();
+
+    await expect(columnHeader.locator('svg').nth(0)).toBeHidden();
+    await expect(columnHeader.locator('svg').nth(1)).toBeHidden();
+
+    await expect(rows.nth(0).getByText('Adams')).toBeVisible();
+    await expect(rows.nth(1).getByText('Cooper')).toBeVisible();
+    await expect(rows.nth(2).getByText('Brooks')).toBeVisible();
+
+    await page.getByText('Last Name').click();
+    await expect(columnHeader.locator('svg').nth(0)).toBeVisible();
+    await expect(columnHeader.locator('svg').nth(1)).toBeHidden();
+
+    await expect(rows.nth(0).getByText('Adams')).toBeVisible();
+    await expect(rows.nth(1).getByText('Adams')).toBeVisible();
+    await expect(rows.nth(2).getByText('Adams')).toBeVisible();
+
+    await page.getByText('Last Name').click();
+    await expect(columnHeader.locator('svg').nth(0)).toBeHidden();
+    await expect(columnHeader.locator('svg').nth(1)).toBeVisible();
+
+    await expect(rows.nth(0).getByText('Young')).toBeVisible();
+    await expect(rows.nth(1).getByText('Young')).toBeVisible();
+    await expect(rows.nth(2).getByText('Young')).toBeVisible();
+
+    await page.getByText('Last Name').click();
+    await expect(columnHeader.locator('svg').nth(0)).toBeHidden();
+    await expect(columnHeader.locator('svg').nth(1)).toBeHidden();
+
+    await expect(rows.nth(0).getByText('Adams')).toBeVisible();
+    await expect(rows.nth(1).getByText('Cooper')).toBeVisible();
+    await expect(rows.nth(2).getByText('Brooks')).toBeVisible();
   });
 
+  test('search', async ({ page }) => {
+    await expect(page.getByText('Total: 1000')).toBeVisible();
+    await page.getByPlaceholder('Search...').click();
+    await page.getByPlaceholder('Search...').fill('Adams');
+    await page.getByPlaceholder('Search...').press('Enter');
+    await expect(page.getByText('Total: 11')).toBeVisible();
+    await page.getByPlaceholder('Search...').click();
+    await page.getByPlaceholder('Search...').fill('');
+    await page.getByPlaceholder('Search...').press('Enter');
+    await expect(page.getByText('Total: 1000')).toBeVisible();
+  });
+
+  test('filter by column', async ({ page }) => {
+    const col2Header = await page.getByRole('cell', { name: 'Last Name' });
+    await col2Header.hover();
+    const columnFilter = await col2Header.locator('.table4js-title__filter');
+    await columnFilter.click();
+    
+  });
 });

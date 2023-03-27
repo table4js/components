@@ -212,9 +212,8 @@ button {
 .table4js-title__tools {
   display: flex;
   align-items: center;
-  height: 100%;
   position: absolute;
-  right: -5px;
+  right: 0;
   background: linear-gradient(90deg, transparent 0%, var(--abc-primary-0, $abc-primary-0) 20%);
 }
 
