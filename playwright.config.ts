@@ -12,7 +12,7 @@ import { devices } from '@playwright/test';
  */
 const config: PlaywrightTestConfig = {
   webServer: {
-    command: 'npm run start',
+    command: 'npm run start:e2e',
     url: 'http://localhost:8080/',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,

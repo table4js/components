@@ -6,7 +6,7 @@ var options = {
     keyColumn: "id",
     selectCellColor: "#ffd9d9",
     enableEdit: true,
-    // editMode: "row",
+    editMode: "row",
     columns: [
         {   name: "id",
             visible: false,

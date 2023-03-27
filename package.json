@@ -22,6 +22,7 @@
   "scripts": {
     "start": "webpack serve --config ./webpack.config.dev.js",
     "start:react": "webpack serve --config ./webpack.config.react.dev.js",
+    "start:e2e": "webpack serve --config ./webpack.config.e2e.js",
     "build": "npm run build:ko && npm run build:react && npm run build:standalone",
     "build:ko": "webpack --config ./webpack.config.ko.js",
     "build:react": "webpack --config ./webpack.config.react.js",
