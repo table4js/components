@@ -150,17 +150,17 @@ export class Table extends Base implements IDataProviderOwner {
         const resizerElement = element.getElementsByClassName("table4js")[0] as HTMLDivElement;
 
         var loadData2Display = () => {
-            this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            this.loadBatchSize = Math.round(scrollerElement.clientHeight / Table.rowHeight);
             if(scrollerElement.scrollTop < Table.rowHeight && this.lastOffsetBack > 0) {
-                if ((this.lastOffsetBack - this.partRowCount) < 0) {
-                    this.loadRowsBatch(this.lastOffsetBack, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
+                if ((this.lastOffsetBack - this.loadBatchSize) < 0) {
+                    this.loadRowsBatch(this.lastOffsetBack, Math.max(0, this.lastOffsetBack - this.loadBatchSize), true);
                 }
                 else {
-                    this.loadRowsBatch(this.partRowCount, Math.max(0, this.lastOffsetBack - this.partRowCount), true);
+                    this.loadRowsBatch(this.loadBatchSize, Math.max(0, this.lastOffsetBack - this.loadBatchSize), true);
                 }
             }
             if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && this.loadMore) {
-                this.loadRowsBatch(this.partRowCount, this.lastOffset, false);
+                this.loadRowsBatch(this.loadBatchSize, this.lastOffset, false);
             }
         }
         scrollerElement.onscroll = loadData2Display;
@@ -209,7 +209,7 @@ export class Table extends Base implements IDataProviderOwner {
             this.lastOffset = startRow - 1;
             this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null });
             this.rows = [];
-            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.loadBatchSize, startRow - 1, false);
         }
     }
 
@@ -259,7 +259,7 @@ export class Table extends Base implements IDataProviderOwner {
         this.lastOffset = 0;
         this.columns.forEach(c => { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.loadRowsBatch(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.loadBatchSize, 0, false);
     }
 
     protected loadRowsBatch(limit: number, offset: number, back = false) {
@@ -365,7 +365,7 @@ export class Table extends Base implements IDataProviderOwner {
 
     private lastOffset = 0;
     private lastOffsetBack = 0;
-    private partRowCount = 10;
+    private loadBatchSize = 10;
 
     private curCol = undefined;
     private nxtCol = undefined;
