@@ -260,7 +260,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button class=\"table4js-action-button table4js-button--transparent table4js-button-toggle\" type=\"button\"\n    data-bind=\"click: toggle, attr: { title: title }\">\n    <div data-bind=\"html: $root.icons.more_sq\"></div>\n    <span class=\"table4js-action-button__label\" data-bind=\"text: moreText\"></span>\n</button>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-button-toggle__dropdown-menu\">\n    <table4js-actions class=\"table4js-context-actions\" params=\"model: data, options: { action: actions }\">\n    </table4js-actions>\n</ul>\n<!-- /ko -->");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<button class=\"table4js-action-button table4js-button--transparent table4js-button-toggle\" type=\"button\"\n    data-bind=\"click: toggle, attr: { title: title }\">\n    <div data-bind=\"html: moreIcon\"></div>\n    <span class=\"table4js-action-button__label\" data-bind=\"text: moreText\"></span>\n</button>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-button-toggle__dropdown-menu\">\n    <table4js-actions class=\"table4js-context-actions\" params=\"model: data, options: { action: actions }\">\n    </table4js-actions>\n</ul>\n<!-- /ko -->");
 
 /***/ }),
 
@@ -380,7 +380,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko if: filterItems.length > 0 -->\n<div class=\"table4js-filter-item\">\n  <div class=\"table4js-filter__title table4js-filter-text\" data-bind=\"text: column.title + ':'\"></div>\n  <!-- ko foreach: filterItems -->\n  <div class=\"table4js-filter__content\">\n    <!-- ko if: $index() > 0 -->\n    <div class=\"table4js-filter__operator table4js-filter-text\" data-bind=\"text: '&'\"></div>\n    <!-- /ko -->\n    <!-- ko component: { name: 'table4js-column-filter-item', params: { filterItem: $data } } -->\n    <!-- /ko -->\n    <div class=\"table4js-filter__remove\"\n      data-bind=\"click: $parent.removeItem, clickBubble: false\">\n      <div class=\"table4js-filter__remove-icon table4js-svg-icon\" data-bind=\"html: $root.icons.cross\"></div>\n    </div>\n  </div>\n  <!-- /ko -->\n</div>\n<!-- /ko -->");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko if: filterItems.length > 0 -->\n<div class=\"table4js-filter-item\">\n  <div class=\"table4js-filter__title table4js-filter-text\" data-bind=\"text: column.title + ':'\"></div>\n  <!-- ko foreach: filterItems -->\n  <div class=\"table4js-filter__content\">\n    <!-- ko if: $index() > 0 -->\n    <div class=\"table4js-filter__operator table4js-filter-text\" data-bind=\"text: '&'\"></div>\n    <!-- /ko -->\n    <!-- ko component: { name: 'table4js-column-filter-item', params: { filterItem: $data } } -->\n    <!-- /ko -->\n    <div class=\"table4js-filter__remove\"\n      data-bind=\"click: $parent.removeItem, clickBubble: false\">\n      <div class=\"table4js-filter__remove-icon table4js-svg-icon\" data-bind=\"html: $parent.removeItemIcon\"></div>\n    </div>\n  </div>\n  <!-- /ko -->\n</div>\n<!-- /ko -->");
 
 /***/ }),
 
@@ -410,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-select-selection\">\n    <!-- ko foreach: selectedItems -->\n    <div class=\"table4js-select-selection-item\">\n        <span class=\"table4js-select-item-title\" data-bind=\"text: name\"></span>\n        <div class=\"table4js-svg-icon table4js-select-item-close\" data-bind=\"click: $parent.deleteItems, html: $root.icons.cross\"></div>\n    </div>\n    <!-- /ko -->\n</div>\n<div class=\"table4js-select-button table4js-svg-icon\" data-bind=\"click: toggle, attr: { title: title }, html: $root.icons.arrowdown\"></div>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-select__dropdown-menu table4js-button-toggle__dropdown-menu\" data-bind=\"click: function(_, e) { e.stopPropagation(); }\">\n    <!-- ko if: isFilterSearchByType -->\n    <div class=\"table4js-select__dropdown-search-container\">\n        <input class=\"table4js-select__dropdown-search\" placeholder=\"*\" data-bind=\"value: filterText, valueUpdate: 'afterkeydown'\" />\n    </div>\n    <!-- /ko -->\n    <!-- ko foreach: foundItems -->\n    <div class=\"table4js-select__dropdown-item\" data-bind=\"click: $parent.clickItem\">\n        <input class=\"table4js-select__dropdown-hide-check\" type=\"checkbox\" data-bind=\"checked: $parent.isChecked($data)\" />\n        <div class=\"table4js-svg-icon table4js-select__dropdown-check\" data-bind=\"html: $root.icons.check\"></div>\n        <span class=\"table4js-select__dropdown-label\" data-bind=\"text: name\"></span>\n    </div>\n    <!-- /ko -->\n    <!-- ko if: isLoadMore -->\n    <button class=\"table4js-select__dropdown-button\" data-bind=\"click: loadMore\">\n        <span class=\"table4js-action-button__label\">More</span>\n    </button>\n    <!-- /ko -->\n</ul>\n<!-- /ko -->");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-select-selection\">\n    <!-- ko foreach: selectedItems -->\n    <div class=\"table4js-select-selection-item\">\n        <span class=\"table4js-select-item-title\" data-bind=\"text: name\"></span>\n        <div class=\"table4js-svg-icon table4js-select-item-close\" data-bind=\"click: $parent.deleteItems, html: $parent.icons.cross\"></div>\n    </div>\n    <!-- /ko -->\n</div>\n<div class=\"table4js-select-button table4js-svg-icon\" data-bind=\"click: toggle, attr: { title: title }, html: icons.arrowdown\"></div>\n<!-- ko if: isOpen -->\n<ul class=\"table4js-select__dropdown-menu table4js-button-toggle__dropdown-menu\" data-bind=\"click: function(_, e) { e.stopPropagation(); }\">\n    <!-- ko if: isFilterSearchByType -->\n    <div class=\"table4js-select__dropdown-search-container\">\n        <input class=\"table4js-select__dropdown-search\" placeholder=\"*\" data-bind=\"value: filterText, valueUpdate: 'afterkeydown'\" />\n    </div>\n    <!-- /ko -->\n    <!-- ko foreach: foundItems -->\n    <div class=\"table4js-select__dropdown-item\" data-bind=\"click: $parent.clickItem\">\n        <input class=\"table4js-select__dropdown-hide-check\" type=\"checkbox\" data-bind=\"checked: $parent.isChecked($data)\" />\n        <div class=\"table4js-svg-icon table4js-select__dropdown-check\" data-bind=\"html: $parent.icons.check\"></div>\n        <span class=\"table4js-select__dropdown-label\" data-bind=\"text: name\"></span>\n    </div>\n    <!-- /ko -->\n    <!-- ko if: isLoadMore -->\n    <button class=\"table4js-select__dropdown-button\" data-bind=\"click: loadMore\">\n        <span class=\"table4js-action-button__label\">More</span>\n    </button>\n    <!-- /ko -->\n</ul>\n<!-- /ko -->");
 
 /***/ }),
 
@@ -1508,6 +1508,7 @@ ko.components.register("table4js-actions", {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AbrisDropdownActions = void 0;
 var ko = __webpack_require__(/*! knockout */ "knockout");
+var Icons = __webpack_require__(/*! ../../icons */ "./sources/icons/index.ts");
 var dropdownTemplate = (__webpack_require__(/*! ./dropdown-actions.html */ "./sources/knockout/core/dropdown-actions.html")["default"]);
 ko.components.register("table4js-dropdown-actions", {
     viewModel: {
@@ -1522,6 +1523,7 @@ ko.components.register("table4js-dropdown-actions", {
                 isOpen: isOpen,
                 title: params.title || "",
                 moreText: params.moreText || "",
+                moreIcon: params.moreIcon || Icons.more_sq,
                 data: params.data,
                 actions: params.actions,
                 toggle: function (_, event) {
@@ -1682,7 +1684,7 @@ ko.components.register("table4", {
         createViewModel: function (params, componentInfo) {
             var model = params.model;
             componentInfo.element.className += " table4js-root--fit-width";
-            model.initialize(componentInfo.element);
+            model.attach(componentInfo.element);
             return model;
         }
     },
@@ -2708,6 +2710,7 @@ exports.FilterContext = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
 var column_filter_item_1 = __webpack_require__(/*! ./column-filter-item */ "./sources/table/column-filter-item.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./column-filter.scss */ "./sources/table/column-filter.scss");
 var FilterContext = (function (_super) {
     __extends(FilterContext, _super);
@@ -2731,6 +2734,7 @@ var FilterContext = (function (_super) {
             column.filterContext.addItem(column);
             event.stopPropagation();
         };
+        _this.removeItemIcon = Icons.cross;
         return _this;
     }
     FilterContext.prototype.apply = function () {
@@ -3207,6 +3211,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFilterSelect = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./filter-select.scss */ "./sources/table/filter-select.scss");
 function conversionByType(value, columnType) {
     if (columnType === "bool")
@@ -3255,6 +3260,7 @@ var TableFilterSelect = (function (_super) {
             var itemIndex = _this.selectedItems.indexOf(name);
             _this.selectedItems.splice(itemIndex, 1);
         };
+        _this.icons = Icons;
         if (isOpen !== undefined) {
             _this.isOpen = isOpen;
         }
@@ -3371,6 +3377,7 @@ var Table = (function (_super) {
     function Table(config, element) {
         var _this = _super.call(this) || this;
         _this.config = config;
+        _this._detachHandler = undefined;
         _this.innerActions = [];
         _this.icons = Icons;
         _this._dataProvider = undefined;
@@ -3388,6 +3395,9 @@ var Table = (function (_super) {
             column.order = newOrder;
             _this.refresh();
         };
+        _this.lastOffset = 0;
+        _this.lastOffsetBack = 0;
+        _this.partRowCount = 10;
         _this.curCol = undefined;
         _this.nxtCol = undefined;
         _this.pageX = undefined;
@@ -3423,9 +3433,6 @@ var Table = (function (_super) {
             _this.curColWidth = undefined;
             return false;
         };
-        _this.lastOffset = 0;
-        _this.lastOffsetBack = 0;
-        _this.partRowCount = 10;
         _this.lastSelectRow = null;
         _this.editMode = "inplace";
         _this.searchModel = new search_1.SearchModel();
@@ -3463,18 +3470,16 @@ var Table = (function (_super) {
         _this.filterUpdater = new dependencies_1.ComputedUpdater(function () { return _this.updateByFilter(); });
         _this.filterUpdater.observe(_this, "__filterUpdaterValue");
         _this.searchModel.updater = function () { return _this.updateByFilter(); };
-        if (!!element) {
-            _this.initialize(element);
-        }
         _this.isMergedCells = config.enableMergedCells;
+        if (!!element) {
+            _this.attach(element);
+        }
         return _this;
     }
     Table.prototype.updateByFilter = function () {
-        var dataProvider = this.dataProvider;
-        var isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
-        dataProvider.filter = [];
+        var newFilter = [];
         if (this.searchModel.searchValue) {
-            dataProvider.filter.push({ value: this.searchModel.searchValue, op: "C", field: null });
+            newFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
         }
         this.columns.forEach(function (column) {
             var columnFilterValue = column.filterContext.value;
@@ -3483,41 +3488,50 @@ var Table = (function (_super) {
                     var op = fiv.op;
                     var val = fiv.value;
                     if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
-                        dataProvider.filter.push({ value: val, op: op, field: fiv.field });
+                        newFilter.push({ value: val, op: op, field: fiv.field });
                     }
                 });
             }
         });
+        var dataProvider = this.dataProvider;
+        if (!dataProvider)
+            return;
+        var isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
+        dataProvider.filter = newFilter;
         if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
             this.refresh();
         }
     };
-    Table.prototype.initialize = function (element) {
+    Table.prototype.attach = function (element) {
         var _this = this;
-        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
-        this.tableElement = element.getElementsByTagName("table")[0];
-        this.resizerElement = element.getElementsByClassName("table4js")[0];
-        var checkLoading = function () {
-            var self = _this;
-            self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
-            if (self.scrollerElement.scrollTop < Table.rowHeight && self.lastOffsetBack > 0) {
-                if ((self.lastOffsetBack - self.partRowCount) < 0) {
-                    self.drawRows(self.lastOffsetBack, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+        if (this.element === element)
+            return;
+        this.detach();
+        this.element = element;
+        var scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
+        var tableElement = element.getElementsByTagName("table")[0];
+        var resizerElement = element.getElementsByClassName("table4js")[0];
+        var loadData2Display = function () {
+            _this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            if (scrollerElement.scrollTop < Table.rowHeight && _this.lastOffsetBack > 0) {
+                if ((_this.lastOffsetBack - _this.partRowCount) < 0) {
+                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
                 }
                 else {
-                    self.drawRows(self.partRowCount, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+                    _this.loadRowsBatch(_this.partRowCount, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
                 }
             }
-            if ((self.scrollerElement.scrollTop >= self.tableElement.clientHeight - self.scrollerElement.clientHeight) && _this.loadMore) {
-                self.drawRows(self.partRowCount, self.lastOffset, false);
+            if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && _this.loadMore) {
+                _this.loadRowsBatch(_this.partRowCount, _this.lastOffset, false);
             }
         };
-        this.scrollerElement.onscroll = checkLoading;
-        this.resizerElement.onresize = checkLoading;
-        checkLoading();
+        scrollerElement.onscroll = loadData2Display;
+        resizerElement.onresize = loadData2Display;
+        loadData2Display();
+        var resizeObserver = undefined;
         if (typeof ResizeObserver !== "undefined") {
-            var resizeObserver = new ResizeObserver(function (entries) {
+            resizeObserver = new ResizeObserver(function (entries) {
                 for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
                     var entry = entries_1[_i];
                     if (entry.target.tagName === "THEAD") {
@@ -3533,6 +3547,22 @@ var Table = (function (_super) {
             });
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
         }
+        this._detachHandler = function () {
+            if (!!resizeObserver) {
+                resizeObserver.disconnect();
+            }
+            scrollerElement.onscroll = undefined;
+            resizerElement.onresize = undefined;
+        };
+    };
+    Table.prototype.detach = function () {
+        if (!!this._detachHandler) {
+            this._detachHandler();
+            this._detachHandler = undefined;
+        }
+        if (!!this.element) {
+            this.element = undefined;
+        }
     };
     Table.prototype.navigateTo = function (startRow) {
         if (startRow) {
@@ -3540,7 +3570,7 @@ var Table = (function (_super) {
             this.lastOffset = startRow - 1;
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
-            this.drawRows(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -3572,7 +3602,7 @@ var Table = (function (_super) {
     };
     Object.defineProperty(Table.prototype, "dataProvider", {
         get: function () {
-            return this._dataProvider || this.config;
+            return this._dataProvider;
         },
         set: function (provider) {
             this._dataProvider = provider;
@@ -3593,12 +3623,12 @@ var Table = (function (_super) {
         this.lastOffset = 0;
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.drawRows(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.partRowCount, 0, false);
     };
-    Table.prototype.drawRows = function (limit, offset, back) {
+    Table.prototype.loadRowsBatch = function (limit, offset, back) {
         var _this = this;
         if (back === void 0) { back = false; }
-        if (!this.loadingMutex) {
+        if (!!this.dataProvider && !this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(limit, offset, this.columns.filter(function (c) { return c.order !== undefined; }).map(function (c) { return ({ field: c.name, desc: c.order }); }), null, back, function (data, newOffset, totalCount, back) {
                 if (back) {
@@ -3766,6 +3796,9 @@ var Table = (function (_super) {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    };
+    Table.prototype.dispose = function () {
+        this.detach();
     };
     Table.rowHeight = 20;
     __decorate([
@@ -4123,13 +4156,30 @@ exports.SummaryPlugin = SummaryPlugin;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ArrayDataProvider = void 0;
 var ArrayDataProvider = (function () {
-    function ArrayDataProvider(data) {
-        this.data = data;
+    function ArrayDataProvider(_data) {
+        this._data = _data;
         this.filter = [];
     }
+    ArrayDataProvider.prototype.ordered = function (order, data) {
+        if (data === void 0) { data = []; }
+        function sortfunc(a, b) {
+            for (var i = 0; i < order.length; i++) {
+                if (a[order[i].field] === b[order[i].field])
+                    continue;
+                return (a[order[i].field] > b[order[i].field] ? 1 : -1) * (order[i].desc ? -1 : 1);
+            }
+            return 0;
+        }
+        var ordered = [].concat(data);
+        if (order.length > 0) {
+            ordered.sort(sortfunc);
+        }
+        return ordered;
+    };
     ArrayDataProvider.prototype.filtered = function (filters, data) {
         var _a;
-        return (_a = data === null || data === void 0 ? void 0 : data.filter(function (row) {
+        if (data === void 0) { data = []; }
+        return (_a = data.filter(function (row) {
             return filters.every(function (f) {
                 switch (f.op) {
                     case "EQ": return f.value.includes(row[f.field]);
@@ -4142,27 +4192,16 @@ var ArrayDataProvider = (function () {
         })) !== null && _a !== void 0 ? _a : [];
     };
     ArrayDataProvider.prototype.getData = function (limit, offset, order, key, back, callback) {
-        function sortfunc(a, b) {
-            for (var i_1 = 0; i_1 < order.length; i_1++) {
-                if (a[order[i_1].field] === b[order[i_1].field])
-                    continue;
-                return (a[order[i_1].field] > b[order[i_1].field] ? 1 : -1) * (order[i_1].desc ? -1 : 1);
-            }
-            return 0;
-        }
-        (order.length > 0) && this.data.sort(sortfunc);
-        var result = [];
-        var filteredData = this.filtered(this.filter, this.data);
-        for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
-            result.push(filteredData[i]);
-        }
-        callback(result, offset + limit, filteredData.length, back);
+        var result = this.ordered(order, this._data);
+        var filtered = this.filtered(this.filter, result);
+        result = filtered.slice(offset, offset + limit);
+        callback(result, offset + limit, filtered.length, back);
     };
     ArrayDataProvider.prototype.getSummary = function (func, field, callback) {
-        var filteredData = this.filtered(this.filter, this.data);
+        var filteredData = this.filtered(this.filter, this._data);
         var result = filteredData.length ? filteredData[0][field] : false;
         var sum = 0, count = 0, uniques = [];
-        this.data.forEach(function (row) {
+        this._data.forEach(function (row) {
             switch (func) {
                 case "sum":
                     result = result + row[field];
@@ -4196,7 +4235,7 @@ var ArrayDataProvider = (function () {
     };
     ArrayDataProvider.prototype.getColumnData = function (columnName, filter, limit, offset, callback) {
         var result = [], uniques = [];
-        var filteredData = this.data.map(function (row) {
+        var filteredData = this._data.map(function (row) {
             if ((!(filter) || ~row[columnName].toUpperCase().indexOf(filter.toUpperCase())) && !uniques.includes(row[columnName])) {
                 uniques.push(row[columnName]);
             }
@@ -4209,19 +4248,19 @@ var ArrayDataProvider = (function () {
     };
     ArrayDataProvider.prototype.saveData = function (keyName, key, modify) {
         var _this = this;
-        Object.keys(modify).forEach(function (p) { return _this.data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
+        Object.keys(modify).forEach(function (p) { return _this._data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
         return true;
     };
     ArrayDataProvider.prototype.insertData = function (keyName, modify) {
         console.log(modify);
-        modify[keyName] = this.data.length + 1;
-        this.data.push(modify);
+        modify[keyName] = this._data.length + 1;
+        this._data.push(modify);
         return true;
     };
     ArrayDataProvider.prototype.deleteData = function (keyName, keys, callback) {
         var _this = this;
-        keys.forEach(function (k) { return _this.data.find(function (r) { return _this.data.splice(_this.data.indexOf(_this.data.find(function (r) { return r[keyName] == k; })), 1); }); });
-        console.log(this.data);
+        keys.forEach(function (k) { return _this._data.find(function (r) { return _this._data.splice(_this._data.indexOf(_this._data.find(function (r) { return r[keyName] == k; })), 1); }); });
+        console.log(this._data);
         callback(true);
     };
     return ArrayDataProvider;

@@ -1264,14 +1264,18 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AbrisDropdownActions = void 0;
 var React = __webpack_require__(/*! react */ "react");
 var actions_1 = __webpack_require__(/*! ./actions */ "./sources/react/core/actions.tsx");
+var Icons = __webpack_require__(/*! ../../icons */ "./sources/icons/index.ts");
 function AbrisDropdownActions(_a) {
-    var className = _a.className, actions = _a.actions;
+    var title = _a.title, className = _a.className, actions = _a.actions, moreText = _a.moreText, moreIcon = _a.moreIcon;
+    var _b = React.useState(false), isOpen = _b[0], setIsOpen = _b[1];
     return (React.createElement("div", { className: className },
-        React.createElement("button", { className: "table4js-action-button table4js-button--transparent table4js-button-toggle", type: "button", "data-bind": "click: toggle, attr: { title: title }" },
-            React.createElement("div", { "data-bind": "html: $root.icons.more_sq" }),
-            React.createElement("span", { className: "table4js-action-button__label", "data-bind": "text: moreText" })),
-        React.createElement("ul", { className: "table4js-button-toggle__dropdown-menu" },
-            React.createElement(actions_1.AbrisActions, { className: "table4js-context-actions", actions: actions }))));
+        React.createElement("button", { className: "table4js-action-button table4js-button--transparent table4js-button-toggle", type: "button", title: title || "", onClick: function (e) { setIsOpen(!isOpen); e.nativeEvent.stopPropagation(); } },
+            React.createElement("div", { dangerouslySetInnerHTML: { __html: moreIcon || Icons.more_sq } }),
+            React.createElement("span", { className: "table4js-action-button__label" }, moreText || "")),
+        isOpen ?
+            React.createElement("ul", { className: "table4js-button-toggle__dropdown-menu" },
+                React.createElement(actions_1.AbrisActions, { className: "table4js-context-actions", actions: actions }))
+            : null));
 }
 exports.AbrisDropdownActions = AbrisDropdownActions;
 
@@ -1696,7 +1700,7 @@ function Table4(_a) {
     var rootRef = (0, react_1.useRef)(null);
     (0, reactivity_1.makeReactive)(model);
     (0, react_1.useEffect)(function () {
-        model.initialize(rootRef.current.parentElement);
+        model.attach(rootRef.current.parentElement);
     });
     return (React.createElement("div", { className: "table4js-root table4js-root--fit-width" },
         React.createElement("div", { ref: rootRef, className: "table4js-resizable-container" },
@@ -1710,7 +1714,7 @@ function Table4(_a) {
                                         React.createElement("div", { className: "table4js-search-group" },
                                             model.showSearch ? (React.createElement(search_1.Table4Search, { icon: model.icons.search, searchModel: model.searchModel })) : null,
                                             React.createElement(actions_1.AbrisActions, { className: "table4js-actions", actions: model.topActions }),
-                                            model.dropdownActions.length > 0 && (React.createElement(dropdown_actions_1.AbrisDropdownActions, { className: "table4js-dropdown table4js-actions-menu", actions: model.dropdownActions })))),
+                                            model.dropdownActions.length > 0 && (React.createElement(dropdown_actions_1.AbrisDropdownActions, { title: "", className: "table4js-dropdown table4js-actions-menu", actions: model.dropdownActions })))),
                                     model.viewFilterTable && (React.createElement("div", { className: "table4js-filter" },
                                         React.createElement("div", { className: "table4js-filter__container" }, model.columns.map(function (c) { return (React.createElement(column_filter_1.Table4ColumnFilter, { key: c.name, context: c.filterContext })); }))))))),
                         React.createElement("tr", { key: "header-title", className: "table4js-header-title" },
@@ -2522,6 +2526,7 @@ exports.FilterContext = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
 var column_filter_item_1 = __webpack_require__(/*! ./column-filter-item */ "./sources/table/column-filter-item.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./column-filter.scss */ "./sources/table/column-filter.scss");
 var FilterContext = (function (_super) {
     __extends(FilterContext, _super);
@@ -2545,6 +2550,7 @@ var FilterContext = (function (_super) {
             column.filterContext.addItem(column);
             event.stopPropagation();
         };
+        _this.removeItemIcon = Icons.cross;
         return _this;
     }
     FilterContext.prototype.apply = function () {
@@ -3021,6 +3027,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFilterSelect = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+var Icons = __webpack_require__(/*! ../icons */ "./sources/icons/index.ts");
 __webpack_require__(/*! ./filter-select.scss */ "./sources/table/filter-select.scss");
 function conversionByType(value, columnType) {
     if (columnType === "bool")
@@ -3069,6 +3076,7 @@ var TableFilterSelect = (function (_super) {
             var itemIndex = _this.selectedItems.indexOf(name);
             _this.selectedItems.splice(itemIndex, 1);
         };
+        _this.icons = Icons;
         if (isOpen !== undefined) {
             _this.isOpen = isOpen;
         }
@@ -3185,6 +3193,7 @@ var Table = (function (_super) {
     function Table(config, element) {
         var _this = _super.call(this) || this;
         _this.config = config;
+        _this._detachHandler = undefined;
         _this.innerActions = [];
         _this.icons = Icons;
         _this._dataProvider = undefined;
@@ -3202,6 +3211,9 @@ var Table = (function (_super) {
             column.order = newOrder;
             _this.refresh();
         };
+        _this.lastOffset = 0;
+        _this.lastOffsetBack = 0;
+        _this.partRowCount = 10;
         _this.curCol = undefined;
         _this.nxtCol = undefined;
         _this.pageX = undefined;
@@ -3237,9 +3249,6 @@ var Table = (function (_super) {
             _this.curColWidth = undefined;
             return false;
         };
-        _this.lastOffset = 0;
-        _this.lastOffsetBack = 0;
-        _this.partRowCount = 10;
         _this.lastSelectRow = null;
         _this.editMode = "inplace";
         _this.searchModel = new search_1.SearchModel();
@@ -3277,18 +3286,16 @@ var Table = (function (_super) {
         _this.filterUpdater = new dependencies_1.ComputedUpdater(function () { return _this.updateByFilter(); });
         _this.filterUpdater.observe(_this, "__filterUpdaterValue");
         _this.searchModel.updater = function () { return _this.updateByFilter(); };
-        if (!!element) {
-            _this.initialize(element);
-        }
         _this.isMergedCells = config.enableMergedCells;
+        if (!!element) {
+            _this.attach(element);
+        }
         return _this;
     }
     Table.prototype.updateByFilter = function () {
-        var dataProvider = this.dataProvider;
-        var isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
-        dataProvider.filter = [];
+        var newFilter = [];
         if (this.searchModel.searchValue) {
-            dataProvider.filter.push({ value: this.searchModel.searchValue, op: "C", field: null });
+            newFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
         }
         this.columns.forEach(function (column) {
             var columnFilterValue = column.filterContext.value;
@@ -3297,41 +3304,50 @@ var Table = (function (_super) {
                     var op = fiv.op;
                     var val = fiv.value;
                     if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
-                        dataProvider.filter.push({ value: val, op: op, field: fiv.field });
+                        newFilter.push({ value: val, op: op, field: fiv.field });
                     }
                 });
             }
         });
+        var dataProvider = this.dataProvider;
+        if (!dataProvider)
+            return;
+        var isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
+        dataProvider.filter = newFilter;
         if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
             this.refresh();
         }
     };
-    Table.prototype.initialize = function (element) {
+    Table.prototype.attach = function (element) {
         var _this = this;
-        this.scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
-        this.tableElement = element.getElementsByTagName("table")[0];
-        this.resizerElement = element.getElementsByClassName("table4js")[0];
-        var checkLoading = function () {
-            var self = _this;
-            self.partRowCount = Math.round(self.scrollerElement.clientHeight / Table.rowHeight);
-            if (self.scrollerElement.scrollTop < Table.rowHeight && self.lastOffsetBack > 0) {
-                if ((self.lastOffsetBack - self.partRowCount) < 0) {
-                    self.drawRows(self.lastOffsetBack, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+        if (this.element === element)
+            return;
+        this.detach();
+        this.element = element;
+        var scrollerElement = element.getElementsByClassName("table4js-scroll-container")[0];
+        var tableElement = element.getElementsByTagName("table")[0];
+        var resizerElement = element.getElementsByClassName("table4js")[0];
+        var loadData2Display = function () {
+            _this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            if (scrollerElement.scrollTop < Table.rowHeight && _this.lastOffsetBack > 0) {
+                if ((_this.lastOffsetBack - _this.partRowCount) < 0) {
+                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
                 }
                 else {
-                    self.drawRows(self.partRowCount, Math.max(0, self.lastOffsetBack - self.partRowCount), true);
+                    _this.loadRowsBatch(_this.partRowCount, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
                 }
             }
-            if ((self.scrollerElement.scrollTop >= self.tableElement.clientHeight - self.scrollerElement.clientHeight) && _this.loadMore) {
-                self.drawRows(self.partRowCount, self.lastOffset, false);
+            if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && _this.loadMore) {
+                _this.loadRowsBatch(_this.partRowCount, _this.lastOffset, false);
             }
         };
-        this.scrollerElement.onscroll = checkLoading;
-        this.resizerElement.onresize = checkLoading;
-        checkLoading();
+        scrollerElement.onscroll = loadData2Display;
+        resizerElement.onresize = loadData2Display;
+        loadData2Display();
+        var resizeObserver = undefined;
         if (typeof ResizeObserver !== "undefined") {
-            var resizeObserver = new ResizeObserver(function (entries) {
+            resizeObserver = new ResizeObserver(function (entries) {
                 for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
                     var entry = entries_1[_i];
                     if (entry.target.tagName === "THEAD") {
@@ -3347,6 +3363,22 @@ var Table = (function (_super) {
             });
             resizeObserver.observe(element.getElementsByTagName("thead")[0]);
         }
+        this._detachHandler = function () {
+            if (!!resizeObserver) {
+                resizeObserver.disconnect();
+            }
+            scrollerElement.onscroll = undefined;
+            resizerElement.onresize = undefined;
+        };
+    };
+    Table.prototype.detach = function () {
+        if (!!this._detachHandler) {
+            this._detachHandler();
+            this._detachHandler = undefined;
+        }
+        if (!!this.element) {
+            this.element = undefined;
+        }
     };
     Table.prototype.navigateTo = function (startRow) {
         if (startRow) {
@@ -3354,7 +3386,7 @@ var Table = (function (_super) {
             this.lastOffset = startRow - 1;
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
-            this.drawRows(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -3386,7 +3418,7 @@ var Table = (function (_super) {
     };
     Object.defineProperty(Table.prototype, "dataProvider", {
         get: function () {
-            return this._dataProvider || this.config;
+            return this._dataProvider;
         },
         set: function (provider) {
             this._dataProvider = provider;
@@ -3407,12 +3439,12 @@ var Table = (function (_super) {
         this.lastOffset = 0;
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.drawRows(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.partRowCount, 0, false);
     };
-    Table.prototype.drawRows = function (limit, offset, back) {
+    Table.prototype.loadRowsBatch = function (limit, offset, back) {
         var _this = this;
         if (back === void 0) { back = false; }
-        if (!this.loadingMutex) {
+        if (!!this.dataProvider && !this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(limit, offset, this.columns.filter(function (c) { return c.order !== undefined; }).map(function (c) { return ({ field: c.name, desc: c.order }); }), null, back, function (data, newOffset, totalCount, back) {
                 if (back) {
@@ -3580,6 +3612,9 @@ var Table = (function (_super) {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    };
+    Table.prototype.dispose = function () {
+        this.detach();
     };
     Table.rowHeight = 20;
     __decorate([
@@ -3937,13 +3972,30 @@ exports.SummaryPlugin = SummaryPlugin;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ArrayDataProvider = void 0;
 var ArrayDataProvider = (function () {
-    function ArrayDataProvider(data) {
-        this.data = data;
+    function ArrayDataProvider(_data) {
+        this._data = _data;
         this.filter = [];
     }
+    ArrayDataProvider.prototype.ordered = function (order, data) {
+        if (data === void 0) { data = []; }
+        function sortfunc(a, b) {
+            for (var i = 0; i < order.length; i++) {
+                if (a[order[i].field] === b[order[i].field])
+                    continue;
+                return (a[order[i].field] > b[order[i].field] ? 1 : -1) * (order[i].desc ? -1 : 1);
+            }
+            return 0;
+        }
+        var ordered = [].concat(data);
+        if (order.length > 0) {
+            ordered.sort(sortfunc);
+        }
+        return ordered;
+    };
     ArrayDataProvider.prototype.filtered = function (filters, data) {
         var _a;
-        return (_a = data === null || data === void 0 ? void 0 : data.filter(function (row) {
+        if (data === void 0) { data = []; }
+        return (_a = data.filter(function (row) {
             return filters.every(function (f) {
                 switch (f.op) {
                     case "EQ": return f.value.includes(row[f.field]);
@@ -3956,27 +4008,16 @@ var ArrayDataProvider = (function () {
         })) !== null && _a !== void 0 ? _a : [];
     };
     ArrayDataProvider.prototype.getData = function (limit, offset, order, key, back, callback) {
-        function sortfunc(a, b) {
-            for (var i_1 = 0; i_1 < order.length; i_1++) {
-                if (a[order[i_1].field] === b[order[i_1].field])
-                    continue;
-                return (a[order[i_1].field] > b[order[i_1].field] ? 1 : -1) * (order[i_1].desc ? -1 : 1);
-            }
-            return 0;
-        }
-        (order.length > 0) && this.data.sort(sortfunc);
-        var result = [];
-        var filteredData = this.filtered(this.filter, this.data);
-        for (var i = offset > 0 ? offset : 0; i < offset + limit && filteredData && i < filteredData.length; i++) {
-            result.push(filteredData[i]);
-        }
-        callback(result, offset + limit, filteredData.length, back);
+        var result = this.ordered(order, this._data);
+        var filtered = this.filtered(this.filter, result);
+        result = filtered.slice(offset, offset + limit);
+        callback(result, offset + limit, filtered.length, back);
     };
     ArrayDataProvider.prototype.getSummary = function (func, field, callback) {
-        var filteredData = this.filtered(this.filter, this.data);
+        var filteredData = this.filtered(this.filter, this._data);
         var result = filteredData.length ? filteredData[0][field] : false;
         var sum = 0, count = 0, uniques = [];
-        this.data.forEach(function (row) {
+        this._data.forEach(function (row) {
             switch (func) {
                 case "sum":
                     result = result + row[field];
@@ -4010,7 +4051,7 @@ var ArrayDataProvider = (function () {
     };
     ArrayDataProvider.prototype.getColumnData = function (columnName, filter, limit, offset, callback) {
         var result = [], uniques = [];
-        var filteredData = this.data.map(function (row) {
+        var filteredData = this._data.map(function (row) {
             if ((!(filter) || ~row[columnName].toUpperCase().indexOf(filter.toUpperCase())) && !uniques.includes(row[columnName])) {
                 uniques.push(row[columnName]);
             }
@@ -4023,19 +4064,19 @@ var ArrayDataProvider = (function () {
     };
     ArrayDataProvider.prototype.saveData = function (keyName, key, modify) {
         var _this = this;
-        Object.keys(modify).forEach(function (p) { return _this.data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
+        Object.keys(modify).forEach(function (p) { return _this._data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
         return true;
     };
     ArrayDataProvider.prototype.insertData = function (keyName, modify) {
         console.log(modify);
-        modify[keyName] = this.data.length + 1;
-        this.data.push(modify);
+        modify[keyName] = this._data.length + 1;
+        this._data.push(modify);
         return true;
     };
     ArrayDataProvider.prototype.deleteData = function (keyName, keys, callback) {
         var _this = this;
-        keys.forEach(function (k) { return _this.data.find(function (r) { return _this.data.splice(_this.data.indexOf(_this.data.find(function (r) { return r[keyName] == k; })), 1); }); });
-        console.log(this.data);
+        keys.forEach(function (k) { return _this._data.find(function (r) { return _this._data.splice(_this._data.indexOf(_this._data.find(function (r) { return r[keyName] == k; })), 1); }); });
+        console.log(this._data);
         callback(true);
     };
     return ArrayDataProvider;

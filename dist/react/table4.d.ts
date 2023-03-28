@@ -243,6 +243,27 @@ declare module "table/column-filter-item" {
         };
     }
 }
+declare module "icons/index" {
+    export const add: any;
+    export const equal: any;
+    export const table: any;
+    export const save: any;
+    export const del: any;
+    export const paste: any;
+    export const more_sq: any;
+    export const check: any;
+    export const sortup: any;
+    export const sortdown: any;
+    export const filter: any;
+    export const more: any;
+    export const edit: any;
+    export const arrowright: any;
+    export const search: any;
+    export const cross: any;
+    export const arrowdown: any;
+    export const save_ok: any;
+    export const cancel: any;
+}
 declare module "table/column-filter" {
     import { Base } from "core/base";
     import { IDataProviderOwner } from "utils/data-provider";
@@ -260,6 +281,7 @@ declare module "table/column-filter" {
         addItem: (column: ITableColumn) => void;
         removeItem: (item: ColumnFilterItem) => void;
         clickFilter: (column: ITableColumn, event: MouseEvent | any) => void;
+        removeItemIcon: any;
     }
 }
 declare module "table/column" {
@@ -349,9 +371,10 @@ declare module "utils/array-data-provider" {
     import { IFilterItem } from "core/find";
     import { IDataProvider } from "utils/data-provider";
     export class ArrayDataProvider implements IDataProvider {
-        data: Array<any>;
-        constructor(data: Array<any>);
-        filtered(filters: any, data: any): any;
+        private _data;
+        constructor(_data: Array<any>);
+        ordered(order: Array<any>, data?: Array<any>): Array<any>;
+        filtered(filters: Array<IFilterItem>, data?: Array<any>): Array<any>;
         getData(limit: any, offset: any, order: any, key: any, back: any, callback: any): void;
         getSummary(func: any, field: any, callback: any): void;
         getColumnData(columnName: any, filter: any, limit: any, offset: any, callback: any): void;
@@ -474,27 +497,6 @@ declare module "widgets/editor" {
         complete(commit: boolean): void;
     }
 }
-declare module "icons/index" {
-    export const add: any;
-    export const equal: any;
-    export const table: any;
-    export const save: any;
-    export const del: any;
-    export const paste: any;
-    export const more_sq: any;
-    export const check: any;
-    export const sortup: any;
-    export const sortdown: any;
-    export const filter: any;
-    export const more: any;
-    export const edit: any;
-    export const arrowright: any;
-    export const search: any;
-    export const cross: any;
-    export const arrowdown: any;
-    export const save_ok: any;
-    export const cancel: any;
-}
 declare module "table/editor" {
     import { ITablePlugin, Table } from "table/index";
     import { IAction } from "core/action";
@@ -608,7 +610,7 @@ declare module "table/index" {
     /**
      * Parameters for customizing the table view.
      */
-    export interface ITableConfig extends IDataProvider {
+    export interface ITableConfig {
         /** Description of columns */
         columns: Array<IFieldDescription>;
         /** Allows display the search bar */
@@ -648,16 +650,16 @@ declare module "table/index" {
      */
     export class Table extends Base implements IDataProviderOwner {
         config: ITableConfig;
-        private scrollerElement;
-        private resizerElement;
-        private tableElement;
+        private element;
+        protected _detachHandler: () => void;
         private innerActions;
-        icons: typeof Icons;
         private filterUpdater;
+        icons: typeof Icons;
         static rowHeight: number;
         private updateByFilter;
         constructor(config: ITableConfig, element?: HTMLElement);
-        initialize(element: HTMLElement): void;
+        attach(element: HTMLElement): void;
+        detach(): void;
         navigateTo(startRow: number): void;
         protected createColumn(column: any, model: ITableConfig): ITableColumn;
         protected createColumns(config: ITableConfig): void;
@@ -667,7 +669,7 @@ declare module "table/index" {
         set dataProvider(provider: IDataProvider);
         set data(_data: Array<any>);
         refresh(): void;
-        drawRows(limit: number, offset: number, back?: boolean): void;
+        protected loadRowsBatch(limit: number, offset: number, back?: boolean): void;
         protected selectionChanged(): void;
         protected clickRow(row: ITableRow, event: any): void;
         protected selectRow(row: ITableRow, event: any): void;
@@ -675,6 +677,9 @@ declare module "table/index" {
         createRow(data: {
             [key: string]: string | number;
         }, num: number, back?: boolean): ITableRow;
+        private lastOffset;
+        private lastOffsetBack;
+        private partRowCount;
         private curCol;
         private nxtCol;
         private pageX;
@@ -692,9 +697,6 @@ declare module "table/index" {
         loadingMutex: boolean;
         loadMore: boolean;
         loadMoreBack: boolean;
-        lastOffset: number;
-        lastOffsetBack: number;
-        partRowCount: number;
         columns: Array<ITableColumn>;
         get keyColumn(): string;
         rows: Array<ITableRow>;
@@ -719,6 +721,7 @@ declare module "table/index" {
         private plugins;
         registerPlugin(plugin: ITablePlugin): ITablePlugin;
         unregisterPlugin(pluginName: string): ITablePlugin;
+        dispose(): void;
     }
 }
 declare module "react/reactivity" {
@@ -738,9 +741,12 @@ declare module "react/core/actions" {
     }): JSX.Element;
 }
 declare module "react/core/dropdown-actions" {
-    export function AbrisDropdownActions({ className, actions, }: {
+    export function AbrisDropdownActions({ title, className, actions, moreText, moreIcon }: {
+        title: string;
         className: string;
         actions: any[];
+        moreText?: string;
+        moreIcon?: any;
     }): JSX.Element;
 }
 declare module "react/table/row" {
@@ -770,6 +776,7 @@ declare module "react/table/search" {
 declare module "table/filter-select" {
     import { Base } from "core/base";
     import { FilterItemValue } from "table/column-filter-item";
+    import * as Icons from "icons/index";
     import "./filter-select.scss";
     export class TableFilterSelect extends Base {
         private value;
@@ -793,6 +800,7 @@ declare module "table/filter-select" {
         isChecked: (item: any) => boolean;
         clickItem: (item: any) => void;
         deleteItems: (name: any) => void;
+        icons: typeof Icons;
         dispose(): void;
     }
 }
