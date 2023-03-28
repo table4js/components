@@ -37,7 +37,7 @@ export class ArrayDataProvider implements IDataProvider {
     getData(limit, offset, order, key, back, callback) {
         let result = this.ordered(order, this._data);
         const filtered = this.filtered(this.filter, result);
-        result = filtered.slice(offset, limit);
+        result = filtered.slice(offset, offset + limit);
         callback(result, offset + limit, filtered.length, back);
     }
 
