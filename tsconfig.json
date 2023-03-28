@@ -18,7 +18,8 @@
         "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "ignoreDeprecations": "5.0"
     },
     "exclude": [
         "node_modules"
