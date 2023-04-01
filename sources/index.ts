@@ -27,6 +27,8 @@ export * from "./table/cell-types/number";
 export * from "./table/cell-types/progress";
 
 export * from "./widgets/editor";
+export * from "./widgets/property";
+export * from "./widgets/form";
 
 export * from "./table/editor";
 export * from "./table/editor-inplace";

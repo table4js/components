@@ -86,7 +86,11 @@ export class ArrayDataProvider implements IDataProvider {
         keys.forEach(k => this._data.find(r => this._data.splice(this._data.indexOf(this._data.find(r => r[keyName] == k)),1)))
         console.log(this._data);
         callback(true);
-    } 
+    }
+
+    get data(): Array<any> {
+        return this._data;
+    }
 
     filter: IFilterItem[] = [];
 }
