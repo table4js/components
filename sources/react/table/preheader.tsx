@@ -13,7 +13,7 @@ export function Table4Preheader(
 
   return (
     <div className="table4js-preheader">
-      <div className="table4js-search-group">
+      <div className="table4js-preheader__first-row">
         <Table4Search
           icon={props.model.icons.search}
           searchModel={searchModel}

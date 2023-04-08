@@ -83,7 +83,7 @@ export function Table4({ model }: ITableProps) {
                 >
                   <div className="table4js-header-tools__container table4js-group-header-technical-cell">
                     <div className="table4js-preheader">
-                      <div className="table4js-search-group">
+                      <div className="table4js-preheader__first-row">
                         {model.showSearch ? (
                           <Table4Search
                             icon={model.icons.search}
