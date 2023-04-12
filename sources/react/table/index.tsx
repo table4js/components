@@ -267,7 +267,7 @@ export function Table4({ model }: ITableProps) {
                           onChange={(e) => setStartRow(+e.target.value)}
                           onKeyDown={(e) => {
                             if (e.code === "Enter") {
-                              model.startRow = +e.target.value;
+                              model.startRow = +((e.target as any).value);
                             }
                           }}
                         />

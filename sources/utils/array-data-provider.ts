@@ -70,21 +70,20 @@ export class ArrayDataProvider implements IDataProvider {
         callback(result);
     }
 
-    saveData(keyName:string, key:any, modify:{}) {
-        Object.keys(modify).forEach(p => this._data.find(r => r[keyName] == key)[p] = modify[p]);
-        return true;
+    get(keyName: string,  key: any, callback: (data: any) => void): void {
+        callback(this._data.filter(r => r[keyName] == key)[0]);
     }
-
-    insertData(keyName:string, modify:{}) {
-        console.log(modify);
+    update(keyName: string,  key: any, modify: { }, callback: (data: any) => void): void {
+        Object.keys(modify).forEach(p => this._data.find(r => r[keyName] == key)[p] = modify[p]);
+        callback(modify);
+    }
+    create(keyName: string, modify: {}, callback: (data: any) => void): void {
         modify[keyName] = this._data.length + 1;
         this._data.push(modify);
-        return true;
+        callback(modify);
     }
-
-    deleteData(keyName:string, keys:any[], callback) {
-        keys.forEach(k => this._data.find(r => this._data.splice(this._data.indexOf(this._data.find(r => r[keyName] == k)),1)))
-        console.log(this._data);
+    delete(keyName: string, keys: any[], callback: (data: any) => void): void {
+        keys.forEach(k => this._data.find(r => this._data.splice(this._data.indexOf(this._data.find(r => r[keyName] == k)), 1)));
         callback(true);
     }
 

@@ -23,14 +23,15 @@ export class EditorPlugin implements ITablePlugin {
         let modifications = {};
         row.cells.forEach(c => (<any>c).isModified && (modifications[c.name] = c.data));
         if (!isEmpty(modifications)) {
-            if (row.number > 0) {
-                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+            if (row.number !== undefined) {
+                this._table.dataProvider.update(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications, (_: any) => {
                     row.cells.forEach(c => (<any>c).isModified = false);
-                }
+                })
             } else {
-                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
-                    isInsert = true;
-                }
+                this._table.dataProvider.create(this._table.keyColumn, modifications, (data: any) => {
+                    row.number = data[this._table.keyColumn];
+                });
+                isInsert = true;
             }
         }
         return isInsert;
@@ -38,7 +39,7 @@ export class EditorPlugin implements ITablePlugin {
     protected add() {
         // this.scrollerElement.scrollTop = 0;
         const newRowData: ITableRowData = {};
-        const newRow = this._table.createRow(newRowData, -1);
+        const newRow = this._table.createRow(newRowData);
         this._table.rows.unshift(newRow);
         return newRow;
     }
@@ -59,7 +60,7 @@ export class EditorPlugin implements ITablePlugin {
                 keysToDelete.push(row.rowData[this._table.keyColumn])
             }
         });
-        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (_ => this._table.refresh()));
+        this._table.dataProvider.delete(this._table.keyColumn, keysToDelete, (_ => this._table.refresh()));
         this._deleteAction.visible = false;
     }
     protected startEditRow(row: ITableRow) {

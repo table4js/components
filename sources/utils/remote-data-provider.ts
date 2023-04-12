@@ -38,19 +38,25 @@ export class RemoteDataProvider implements IDataProvider {
         });
     }
 
-    saveData(keyName:string, key:any, modify:{}) {
-        console.log(`${keyName} - ${key} => ${modify}`);
-        return true;
+    get(keyName: string,  key: any, callback: (data: any) => void): void {
+        postData(this.url + "get", { name: this.name, keyName: keyName, key: key }).then((data) => {
+            callback(data.data);
+        });
     }
-
-    insertData(keyName:string, modify:{}) {
-        console.log(`${keyName} => ${modify}`);
-        return true;
+    update(keyName: string,  key: any, modify: { }, callback: (data: any) => void): void {
+        postData(this.url + "update", { name: this.name, keyName: keyName, key: key, modify: modify }).then((data) => {
+            callback(data.data);
+        });
     }
-
-    deleteData(keyName:string, keys:any[], callback) {
-        console.log(`${keyName} - ${keys}`);
-        callback(true);
+    create(keyName: string, modify: {}, callback: (data: any) => void): void {
+        postData(this.url + "create", { name: this.name, keyName: keyName, modify: modify }).then((data) => {
+            callback(data.data);
+        });
+    }
+    delete(keyName: string, keys: any[], callback: (data: any) => void): void {
+        postData(this.url + "delete", { name: this.name, keyName: keyName, keys: keys }).then((data) => {
+            callback(data.data);
+        });
     }
 
     filter: IFilterItem[] = [];

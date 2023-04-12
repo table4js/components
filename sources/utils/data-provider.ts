@@ -7,9 +7,10 @@ export interface IListDataProvider {
     filter: IFilterItem[];
 }
 export interface ICRUDDataProvider {
-    saveData: (keyName: string,  key: any, modify: { } ) => boolean;
-    insertData: (keyName: string, modify: {} ) => boolean;
-    deleteData: (keyName: string, keys: any[], callback) => void;
+    get: (keyName: string,  key: any, callback: (data: any) => void) => void;
+    update: (keyName: string,  key: any, modify: { }, callback: (data: any) => void) => void;
+    create: (keyName: string, modify: {}, callback: (data: any) => void) => void;
+    delete: (keyName: string, keys: any[], callback: (data: any) => void) => void;
 }
 
 export interface IDataProvider extends IListDataProvider, ICRUDDataProvider {

@@ -339,7 +339,7 @@ export class Table extends Base implements IDataProviderOwner {
         this.refresh();
     }
 
-    createRow(data: { [key: string]: string | number }, num: number, back: boolean = false): ITableRow {
+    createRow(data: { [key: string]: string | number }, num?: number, back: boolean = false): ITableRow {
         let rowCells = [];
         let lastText = null;
         let colorCell = null, colorRow = null;
@@ -360,7 +360,9 @@ export class Table extends Base implements IDataProviderOwner {
         row.cells = rowCells.reverse();
         row.rowData = data;
         row.id = row_id;
-        row.number = num + 1;
+        if(num !== undefined) {
+            row.number = num + 1;
+        }
         // row.selected = row_id && (this.expandedRowKey === row_id);
         row.color = colorRow;
         row.select = (data, event) => this.selectRow(data, event);
