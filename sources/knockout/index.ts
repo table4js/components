@@ -16,6 +16,7 @@ export * from "./table/filter-select";
 export * from "./core/action";
 export * from "./core/actions";
 export * from "./core/dropdown-actions";
+export * from "./core/elements-container";
 export * from "./core/icon";
 
 export * from "./table/cell-editor";

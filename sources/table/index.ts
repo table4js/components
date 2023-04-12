@@ -57,6 +57,13 @@ export interface ITablePlugin {
     onSelectionChanged?(): void;
 }
 
+export interface ILayoutElement {
+    name: string;
+    container: string;
+    component: string;
+    data: any;
+}
+
 /**
  * Creates Table class.
  * @param config - table options.
@@ -493,6 +500,26 @@ export class Table extends Base implements IDataProviderOwner {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    }
+
+    private layoutElemets: Array<ILayoutElement> = [];
+    public removeLayoutElement(elementName: string): ILayoutElement {
+        let prevElement: ILayoutElement = undefined;
+        for(let i=0; i<this.layoutElemets.length; i++) {
+            if(this.layoutElemets[i].name === elementName) {
+                prevElement = this.layoutElemets.splice(i, 1)[0];
+                break;
+            }
+        }
+        return prevElement;
+    }
+    public addLayoutElement(element: ILayoutElement): ILayoutElement {
+        let prevElement = this.removeLayoutElement(element.name);
+        this.layoutElemets.push(element);
+        return prevElement;        
+    }
+    getLayoutElements = (container?: string) => {
+        return this.layoutElemets.filter(element => element.container === container);
     }
 
     dispose() {
