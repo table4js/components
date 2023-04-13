@@ -242,9 +242,10 @@ declare module "utils/data-provider" {
         filter: IFilterItem[];
     }
     export interface ICRUDDataProvider {
-        saveData: (keyName: string, key: any, modify: {}) => boolean;
-        insertData: (keyName: string, modify: {}) => boolean;
-        deleteData: (keyName: string, keys: any[], callback: any) => void;
+        get: (keyName: string, key: any, callback: (data: any) => void) => void;
+        update: (keyName: string, key: any, modify: {}, callback: (data: any) => void) => void;
+        create: (keyName: string, modify: {}, callback: (data: any) => void) => void;
+        delete: (keyName: string, keys: any[], callback: (data: any) => void) => void;
     }
     export interface IDataProvider extends IListDataProvider, ICRUDDataProvider {
     }
@@ -414,9 +415,11 @@ declare module "utils/array-data-provider" {
         getData(limit: any, offset: any, order: any, key: any, back: any, callback: any): void;
         getSummary(func: any, field: any, callback: any): void;
         getColumnData(columnName: any, filter: any, limit: any, offset: any, callback: any): void;
-        saveData(keyName: string, key: any, modify: {}): boolean;
-        insertData(keyName: string, modify: {}): boolean;
-        deleteData(keyName: string, keys: any[], callback: any): void;
+        get(keyName: string, key: any, callback: (data: any) => void): void;
+        update(keyName: string, key: any, modify: {}, callback: (data: any) => void): void;
+        create(keyName: string, modify: {}, callback: (data: any) => void): void;
+        delete(keyName: string, keys: any[], callback: (data: any) => void): void;
+        get data(): Array<any>;
         filter: IFilterItem[];
     }
 }
@@ -680,6 +683,12 @@ declare module "table/index" {
         onRowCreated(row: ITableRow): void;
         onSelectionChanged?(): void;
     }
+    export interface ILayoutElement {
+        name: string;
+        container: string;
+        component: string;
+        data: any;
+    }
     /**
      * Creates Table class.
      * @param config - table options.
@@ -712,10 +721,10 @@ declare module "table/index" {
         clickColumn: (column: ITableColumn, event: any) => void;
         createRow(data: {
             [key: string]: string | number;
-        }, num: number, back?: boolean): ITableRow;
+        }, num?: number, back?: boolean): ITableRow;
         private lastOffset;
         private lastOffsetBack;
-        private partRowCount;
+        private loadBatchSize;
         private curCol;
         private nxtCol;
         private pageX;
@@ -757,6 +766,10 @@ declare module "table/index" {
         private plugins;
         registerPlugin(plugin: ITablePlugin): ITablePlugin;
         unregisterPlugin(pluginName: string): ITablePlugin;
+        private layoutElemets;
+        removeLayoutElement(elementName: string): ILayoutElement;
+        addLayoutElement(element: ILayoutElement): ILayoutElement;
+        getLayoutElements: (container?: string) => ILayoutElement[];
         dispose(): void;
     }
 }
@@ -831,9 +844,10 @@ declare module "utils/remote-data-provider" {
         getData(limit: number, offset: number, order: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void): void;
         getSummary(func: string, field: string, callback: (value: any) => void): void;
         getColumnData(columnName: string, filter: any, limit: number, offset: number, callback: (value: any) => void): void;
-        saveData(keyName: string, key: any, modify: {}): boolean;
-        insertData(keyName: string, modify: {}): boolean;
-        deleteData(keyName: string, keys: any[], callback: any): void;
+        get(keyName: string, key: any, callback: (data: any) => void): void;
+        update(keyName: string, key: any, modify: {}, callback: (data: any) => void): void;
+        create(keyName: string, modify: {}, callback: (data: any) => void): void;
+        delete(keyName: string, keys: any[], callback: (data: any) => void): void;
         filter: IFilterItem[];
     }
 }
@@ -864,6 +878,8 @@ declare module "index" {
     export * from "table/cell-types/number";
     export * from "table/cell-types/progress";
     export * from "widgets/editor";
+    export * from "widgets/property";
+    export * from "widgets/form";
     export * from "table/editor";
     export * from "table/editor-inplace";
     export * from "table/editor-row";

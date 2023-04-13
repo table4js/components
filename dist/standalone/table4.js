@@ -416,6 +416,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./sources/knockout/core/elements-container.html":
+/*!*******************************************************!*\
+  !*** ./sources/knockout/core/elements-container.html ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<!-- ko foreach: $data -->\n  <!-- ko component: { name: component, params: data } -->\n  <!-- /ko -->\n<!-- /ko --> ");
+
+/***/ }),
+
 /***/ "./sources/knockout/core/icon.html":
 /*!*****************************************!*\
   !*** ./sources/knockout/core/icon.html ***!
@@ -577,7 +592,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-search-group\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell table4js-header-title__technical-cell--right\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__row-more-action\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<div class=\"table4js-resizable-container\">\n  <div class=\"table4js-scroll-container\">\n    <table class=\"table4js\">\n      <thead class=\"table4js__header table4js-sticky-component\">\n        <tr class=\"table4js-header-tools\">\n          <th class=\"table4js-header-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-header-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-preheader\">\n                <div class=\"table4js-preheader__first-row\">\n                  <!-- ko if: showSearch -->\n                  <table4js-search params=\"model: searchModel, icon: icons.search\"></table4js-search>\n                  <!-- /ko -->\n                  <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'topActions' }\">\n                  </table4js-actions>\n                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->\n                  <table4js-dropdown-actions class=\"table4js-dropdown table4js-actions-menu\"\n                    params=\"data: $data, actions: 'dropdownActions'\">\n                  </table4js-dropdown-actions>\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- ko if: viewFilterTable -->\n              <div class=\"table4js-filter\">\n                <div class=\"table4js-filter__container\">\n                  <!-- ko foreach: columns -->\n                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->\n                  <!-- /ko -->\n                  <!-- /ko -->\n                </div>\n              </div>\n              <!-- /ko -->\n            </div>\n          </th>\n        </tr>\n        <tr class=\"table4js-header-title\">\n          <th class=\"table4js-header-title__cell table4js-switch\">\n            <div class=\"table4js-switch__text\"\n              data-bind=\"css: {'switch__text--selected': isNumber}, click: () => $data.isNumber = !$data.isNumber\">#\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-header-title__cell\"\n            data-bind=\"event: {mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp}\">\n            <div class=\"table4js-title\">\n              <span class=\"table4js-title__text\" data-bind=\"html: title, click: $parent.clickColumn\"></span>\n              <div class=\"table4js-title__tools\">\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === false, html: $parent.icons.sortup\"></div>\n                <div class=\"table4js-svg-icon table4js-title__sorter\" data-bind=\"visible: order === true, html: $parent.icons.sortdown\"></div>\n                <div class=\"table4js-svg-icon table4js-title__filter\" data-bind=\"click: filterContext.clickFilter, html: $parent.icons.filter\"></div>\n              </div>\n            </div>\n            <div class=\"table4js-title_resize\"\n              data-bind=\"event: {mouseover: $parent.logMouseOver, mouseout: $parent.logMouseOut, mousemove: $parent.logMouseMove, mouseup: $parent.logMouseUp, mousedown: $parent.logMouseDown}\">\n            </div>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-header-title__cell table4js-header-title__technical-cell--right\"></th>\n        </tr>\n      </thead>\n      <tbody class=\"table4js__body\">\n        <!-- ko if: rows.length == 0 && loadingMutex == false  -->\n        <tr class=\"table4js__row\">\n          <th class=\"table4js-cell\" colspan=\"100%\" data-bind=\"text: noDataText\"></th>\n        </tr>\n        <!-- /ko -->\n        <!-- ko if: loadingMutex -->\n        <!-- ko foreach: columns -->\n        <tr class=\"table4js__row\">\n          <td class=\"table4js-cell table4js-technical-cell\" >\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js__check\">\n                <div class=\"table4js-svg-icon table4js__icon-check\"></div>\n              </div>\n            </div>\n          </td>\n        <!-- ko foreach: $parent.columns -->\n        <!-- ko if: visible -->\n          <td class=\"table4js-cell table4js-technical-cell\">\n            <div class=\"table4js-cell__container table4js-cell__container--loading\">\n            </div>\n          </td>\n        <!-- /ko -->\n        <!-- /ko -->\n          <td class=\"table4js-cell table4js-technical-cell table4js-technical-cell--right\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-row-tools table4js__row-more-action\" data-bind=\"html: $parent.icons.more\"></div>\n            </div>\n          </td>\n        </tr>\n        <!-- /ko -->\n        <!-- /ko -->\n        <!-- ko foreach: rows -->\n        <!-- ko component: { name: getRowComponent(), params: getRowComponentParams({ table: $parent, row: $data }) } -->\n        <!-- /ko -->\n        <!-- /ko -->\n      </tbody>\n      <tfoot class=\"table4js__footer table4js-sticky-component\">\n        <tr class=\"table4js-footer-summary\" data-bind=\"visible: showTableSummary\">\n          <th class=\"table4js-cell table4js-technical-cell table4js-footer__cell\">\n            <div class=\"table4js-technical-cell__container\">\n              <div class=\"table4js-svg-icon table4js-icon-equal\" data-bind=\"html: icons.equal\"></div>\n            </div>\n          </th>\n          <!-- ko foreach: columns -->\n          <!-- ko if: visible -->\n          <th class=\"table4js-cell table4js-footer__cell\">\n            <table4js-summary params='column: $data'></table4js-summary>\n          </th>\n          <!-- /ko -->\n          <!-- /ko -->\n          <th class=\"table4js-cell table4js-footer__cell table4js-technical-cell table4js-technical-cell--right\"></th>\n        </tr>\n        <tr class=\"table4js-footer-tools\">\n          <th class=\"table4js-footer-tools__cell\" colspan=\"100%\">\n            <div class=\"table4js-footer-tools__container table4js-group-header-technical-cell\">\n              <div class=\"table4js-row-management\">\n                <table4js-actions class=\"table4js-actions\" params=\"model: $data, options: { action: 'bottomActions' }\">\n                </table4js-actions>\n              </div>\n              <div class=\"table4js-info\">\n                <span class=\"table4js-info__total table4js-info__text\"\n                  data-bind=\"text: 'Total: ' + totalCount\"></span>\n                <div class=\"table4js-info__go-to\">\n                  <span class=\"table4js-go-to__text table4js-info__text\">Go to: </span>\n                  <input class=\"table4js-go-to__value\" data-bind=\"value: startRow\"/>\n                  <button class=\"table4js-btn-transparent\">\n                    <div class=\"table4js-svg-icon table4js-go-to__icon\" data-bind=\"html: icons.arrowright\"></div>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </th>\n        </tr>\n      </tfoot>\n    </table>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -1582,6 +1597,8 @@ __exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/
 __exportStar(__webpack_require__(/*! ./table/cell-types/number */ "./sources/table/cell-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/table/cell-types/progress.ts"), exports);
 __exportStar(__webpack_require__(/*! ./widgets/editor */ "./sources/widgets/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/property */ "./sources/widgets/property.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/form */ "./sources/widgets/form.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor */ "./sources/table/editor.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor-inplace */ "./sources/table/editor-inplace.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor-row */ "./sources/table/editor-row.ts"), exports);
@@ -1691,6 +1708,30 @@ ko.components.register("table4js-dropdown-actions", {
 
 /***/ }),
 
+/***/ "./sources/knockout/core/elements-container.ts":
+/*!*****************************************************!*\
+  !*** ./sources/knockout/core/elements-container.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.elementsContainerTemplate = void 0;
+var ko = __webpack_require__(/*! knockout */ "./node_modules/knockout/build/output/knockout-latest.js");
+exports.elementsContainerTemplate = __webpack_require__(/*! ./elements-container.html */ "./sources/knockout/core/elements-container.html")["default"];
+ko.components.register("table4js-elements", {
+    viewModel: {
+        createViewModel: function (params, componentInfo) {
+            return params.elements || [];
+        }
+    },
+    template: exports.elementsContainerTemplate
+});
+
+
+/***/ }),
+
 /***/ "./sources/knockout/core/icon.ts":
 /*!***************************************!*\
   !*** ./sources/knockout/core/icon.ts ***!
@@ -1770,6 +1811,7 @@ __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/knockou
 __exportStar(__webpack_require__(/*! ./core/action */ "./sources/knockout/core/action.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/actions */ "./sources/knockout/core/actions.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/knockout/core/dropdown-actions.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/elements-container */ "./sources/knockout/core/elements-container.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/icon */ "./sources/knockout/core/icon.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/knockout/table/cell-editor.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/row-editor */ "./sources/knockout/table/row-editor.ts"), exports);
@@ -3191,26 +3233,28 @@ var EditorPlugin = (function () {
         this._table.allowRowSelection = true;
     };
     EditorPlugin.prototype.saveRow = function (row) {
+        var _this = this;
         var isInsert = false;
         var modifications = {};
         row.cells.forEach(function (c) { return c.isModified && (modifications[c.name] = c.data); });
         if (!(0, utils_1.isEmpty)(modifications)) {
-            if (row.number > 0) {
-                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+            if (row.number !== undefined) {
+                this._table.dataProvider.update(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications, function (_) {
                     row.cells.forEach(function (c) { return c.isModified = false; });
-                }
+                });
             }
             else {
-                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
-                    isInsert = true;
-                }
+                this._table.dataProvider.create(this._table.keyColumn, modifications, function (data) {
+                    row.number = data[_this._table.keyColumn];
+                });
+                isInsert = true;
             }
         }
         return isInsert;
     };
     EditorPlugin.prototype.add = function () {
         var newRowData = {};
-        var newRow = this._table.createRow(newRowData, -1);
+        var newRow = this._table.createRow(newRowData);
         this._table.rows.unshift(newRow);
         return newRow;
     };
@@ -3233,7 +3277,7 @@ var EditorPlugin = (function () {
                 keysToDelete.push(row.rowData[_this._table.keyColumn]);
             }
         });
-        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
+        this._table.dataProvider.delete(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
         this._deleteAction.visible = false;
     };
     EditorPlugin.prototype.startEditRow = function (row) {
@@ -3241,7 +3285,7 @@ var EditorPlugin = (function () {
         this._saveAction.visible = true;
     };
     EditorPlugin.prototype.endEditRow = function (commit) {
-        if (!commit && !!this._editedRow && this._editedRow.number <= 0) {
+        if (!commit && !!this._editedRow && this._editedRow.number === undefined) {
             this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
         }
         this._saveAction.visible = false;
@@ -3549,7 +3593,7 @@ var Table = (function (_super) {
         };
         _this.lastOffset = 0;
         _this.lastOffsetBack = 0;
-        _this.partRowCount = 10;
+        _this.loadBatchSize = 10;
         _this.curCol = undefined;
         _this.nxtCol = undefined;
         _this.pageX = undefined;
@@ -3593,6 +3637,10 @@ var Table = (function (_super) {
             return actions.filter(function (action) { return action.container === container; });
         };
         _this.plugins = [];
+        _this.layoutElemets = [];
+        _this.getLayoutElements = function (container) {
+            return _this.layoutElemets.filter(function (element) { return element.container === container; });
+        };
         _this.plugins = config.plugins || [];
         if (config.editMode !== undefined) {
             _this.editMode = config.editMode;
@@ -3665,17 +3713,17 @@ var Table = (function (_super) {
         var tableElement = element.getElementsByTagName("table")[0];
         var resizerElement = element.getElementsByClassName("table4js")[0];
         var loadData2Display = function () {
-            _this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            _this.loadBatchSize = Math.round(scrollerElement.clientHeight / Table.rowHeight);
             if (scrollerElement.scrollTop < Table.rowHeight && _this.lastOffsetBack > 0) {
-                if ((_this.lastOffsetBack - _this.partRowCount) < 0) {
-                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
+                if ((_this.lastOffsetBack - _this.loadBatchSize) < 0) {
+                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.loadBatchSize), true);
                 }
                 else {
-                    _this.loadRowsBatch(_this.partRowCount, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
+                    _this.loadRowsBatch(_this.loadBatchSize, Math.max(0, _this.lastOffsetBack - _this.loadBatchSize), true);
                 }
             }
             if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && _this.loadMore) {
-                _this.loadRowsBatch(_this.partRowCount, _this.lastOffset, false);
+                _this.loadRowsBatch(_this.loadBatchSize, _this.lastOffset, false);
             }
         };
         scrollerElement.onscroll = loadData2Display;
@@ -3722,7 +3770,7 @@ var Table = (function (_super) {
             this.lastOffset = startRow - 1;
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
-            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.loadBatchSize, startRow - 1, false);
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -3775,7 +3823,7 @@ var Table = (function (_super) {
         this.lastOffset = 0;
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.loadRowsBatch(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.loadBatchSize, 0, false);
     };
     Table.prototype.loadRowsBatch = function (limit, offset, back) {
         var _this = this;
@@ -3855,7 +3903,9 @@ var Table = (function (_super) {
         row.cells = rowCells.reverse();
         row.rowData = data;
         row.id = row_id;
-        row.number = num + 1;
+        if (num !== undefined) {
+            row.number = num + 1;
+        }
         row.color = colorRow;
         row.select = function (data, event) { return _this.selectRow(data, event); };
         row.click = function (data, event) { return _this.clickRow(data, event); };
@@ -3948,6 +3998,21 @@ var Table = (function (_super) {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    };
+    Table.prototype.removeLayoutElement = function (elementName) {
+        var prevElement = undefined;
+        for (var i = 0; i < this.layoutElemets.length; i++) {
+            if (this.layoutElemets[i].name === elementName) {
+                prevElement = this.layoutElemets.splice(i, 1)[0];
+                break;
+            }
+        }
+        return prevElement;
+    };
+    Table.prototype.addLayoutElement = function (element) {
+        var prevElement = this.removeLayoutElement(element.name);
+        this.layoutElemets.push(element);
+        return prevElement;
     };
     Table.prototype.dispose = function () {
         this.detach();
@@ -4398,23 +4463,31 @@ var ArrayDataProvider = (function () {
         }
         callback(result);
     };
-    ArrayDataProvider.prototype.saveData = function (keyName, key, modify) {
+    ArrayDataProvider.prototype.get = function (keyName, key, callback) {
+        callback(this._data.filter(function (r) { return r[keyName] == key; })[0]);
+    };
+    ArrayDataProvider.prototype.update = function (keyName, key, modify, callback) {
         var _this = this;
         Object.keys(modify).forEach(function (p) { return _this._data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
-        return true;
+        callback(modify);
     };
-    ArrayDataProvider.prototype.insertData = function (keyName, modify) {
-        console.log(modify);
+    ArrayDataProvider.prototype.create = function (keyName, modify, callback) {
         modify[keyName] = this._data.length + 1;
         this._data.push(modify);
-        return true;
+        callback(modify);
     };
-    ArrayDataProvider.prototype.deleteData = function (keyName, keys, callback) {
+    ArrayDataProvider.prototype.delete = function (keyName, keys, callback) {
         var _this = this;
         keys.forEach(function (k) { return _this._data.find(function (r) { return _this._data.splice(_this._data.indexOf(_this._data.find(function (r) { return r[keyName] == k; })), 1); }); });
-        console.log(this._data);
         callback(true);
     };
+    Object.defineProperty(ArrayDataProvider.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return ArrayDataProvider;
 }());
 exports.ArrayDataProvider = ArrayDataProvider;
@@ -4512,17 +4585,25 @@ var RemoteDataProvider = (function () {
             callback(data.data);
         });
     };
-    RemoteDataProvider.prototype.saveData = function (keyName, key, modify) {
-        console.log("".concat(keyName, " - ").concat(key, " => ").concat(modify));
-        return true;
+    RemoteDataProvider.prototype.get = function (keyName, key, callback) {
+        postData(this.url + "get", { name: this.name, keyName: keyName, key: key }).then(function (data) {
+            callback(data.data);
+        });
     };
-    RemoteDataProvider.prototype.insertData = function (keyName, modify) {
-        console.log("".concat(keyName, " => ").concat(modify));
-        return true;
+    RemoteDataProvider.prototype.update = function (keyName, key, modify, callback) {
+        postData(this.url + "update", { name: this.name, keyName: keyName, key: key, modify: modify }).then(function (data) {
+            callback(data.data);
+        });
     };
-    RemoteDataProvider.prototype.deleteData = function (keyName, keys, callback) {
-        console.log("".concat(keyName, " - ").concat(keys));
-        callback(true);
+    RemoteDataProvider.prototype.create = function (keyName, modify, callback) {
+        postData(this.url + "create", { name: this.name, keyName: keyName, modify: modify }).then(function (data) {
+            callback(data.data);
+        });
+    };
+    RemoteDataProvider.prototype.delete = function (keyName, keys, callback) {
+        postData(this.url + "delete", { name: this.name, keyName: keyName, keys: keys }).then(function (data) {
+            callback(data.data);
+        });
     };
     return RemoteDataProvider;
 }());

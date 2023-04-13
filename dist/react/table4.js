@@ -1100,6 +1100,8 @@ __exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/
 __exportStar(__webpack_require__(/*! ./table/cell-types/number */ "./sources/table/cell-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/table/cell-types/progress.ts"), exports);
 __exportStar(__webpack_require__(/*! ./widgets/editor */ "./sources/widgets/editor.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/property */ "./sources/widgets/property.ts"), exports);
+__exportStar(__webpack_require__(/*! ./widgets/form */ "./sources/widgets/form.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor */ "./sources/table/editor.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor-inplace */ "./sources/table/editor-inplace.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor-row */ "./sources/table/editor-row.ts"), exports);
@@ -1282,6 +1284,29 @@ exports.AbrisDropdownActions = AbrisDropdownActions;
 
 /***/ }),
 
+/***/ "./sources/react/core/elements-container.tsx":
+/*!***************************************************!*\
+  !*** ./sources/react/core/elements-container.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ElementsContainer = void 0;
+var React = __webpack_require__(/*! react */ "react");
+var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
+function ElementsContainer(_a) {
+    var elements = _a.elements;
+    return (React.createElement(React.Fragment, null, (elements || []).map(function (element) {
+        return React.createElement(abris_component_1.AbrisComponent, { componentName: element.component, componentProps: element.data });
+    })));
+}
+exports.ElementsContainer = ElementsContainer;
+
+
+/***/ }),
+
 /***/ "./sources/react/index.ts":
 /*!********************************!*\
   !*** ./sources/react/index.ts ***!
@@ -1336,6 +1361,7 @@ __exportStar(__webpack_require__(/*! ./table/filter-select */ "./sources/react/t
 __exportStar(__webpack_require__(/*! ./core/action */ "./sources/react/core/action.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./core/actions */ "./sources/react/core/actions.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/react/core/dropdown-actions.tsx"), exports);
+__exportStar(__webpack_require__(/*! ./core/elements-container */ "./sources/react/core/elements-container.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-editor */ "./sources/react/table/cell-editor.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./table/row-editor */ "./sources/react/table/row-editor.tsx"), exports);
 __exportStar(__webpack_require__(/*! ./widgets/default */ "./sources/react/widgets/default.tsx"), exports);
@@ -1711,7 +1737,7 @@ function Table4(_a) {
                             React.createElement("th", { className: "table4js-header-tools__cell", colSpan: "100%" },
                                 React.createElement("div", { className: "table4js-header-tools__container table4js-group-header-technical-cell" },
                                     React.createElement("div", { className: "table4js-preheader" },
-                                        React.createElement("div", { className: "table4js-search-group" },
+                                        React.createElement("div", { className: "table4js-preheader__first-row" },
                                             model.showSearch ? (React.createElement(search_1.Table4Search, { icon: model.icons.search, searchModel: model.searchModel })) : null,
                                             React.createElement(actions_1.AbrisActions, { className: "table4js-actions", actions: model.topActions }),
                                             model.dropdownActions.length > 0 && (React.createElement(dropdown_actions_1.AbrisDropdownActions, { title: "", className: "table4js-dropdown table4js-actions-menu", actions: model.dropdownActions })))),
@@ -1775,7 +1801,7 @@ function Table4(_a) {
                                             React.createElement("span", { className: "table4js-go-to__text table4js-info__text" }, "Go to:"),
                                             React.createElement("input", { className: "table4js-go-to__value", defaultValue: model.startRow, onChange: function (e) { return setStartRow(+e.target.value); }, onKeyDown: function (e) {
                                                     if (e.code === "Enter") {
-                                                        model.startRow = +e.target.value;
+                                                        model.startRow = +(e.target.value);
                                                     }
                                                 } }),
                                             React.createElement("button", { className: "table4js-btn-transparent" },
@@ -2855,26 +2881,28 @@ var EditorPlugin = (function () {
         this._table.allowRowSelection = true;
     };
     EditorPlugin.prototype.saveRow = function (row) {
+        var _this = this;
         var isInsert = false;
         var modifications = {};
         row.cells.forEach(function (c) { return c.isModified && (modifications[c.name] = c.data); });
         if (!(0, utils_1.isEmpty)(modifications)) {
-            if (row.number > 0) {
-                if (this._table.dataProvider.saveData(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications)) {
+            if (row.number !== undefined) {
+                this._table.dataProvider.update(this._table.keyColumn, row.rowData[this._table.keyColumn], modifications, function (_) {
                     row.cells.forEach(function (c) { return c.isModified = false; });
-                }
+                });
             }
             else {
-                if (this._table.dataProvider.insertData(this._table.keyColumn, modifications)) {
-                    isInsert = true;
-                }
+                this._table.dataProvider.create(this._table.keyColumn, modifications, function (data) {
+                    row.number = data[_this._table.keyColumn];
+                });
+                isInsert = true;
             }
         }
         return isInsert;
     };
     EditorPlugin.prototype.add = function () {
         var newRowData = {};
-        var newRow = this._table.createRow(newRowData, -1);
+        var newRow = this._table.createRow(newRowData);
         this._table.rows.unshift(newRow);
         return newRow;
     };
@@ -2897,7 +2925,7 @@ var EditorPlugin = (function () {
                 keysToDelete.push(row.rowData[_this._table.keyColumn]);
             }
         });
-        this._table.dataProvider.deleteData(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
+        this._table.dataProvider.delete(this._table.keyColumn, keysToDelete, (function (_) { return _this._table.refresh(); }));
         this._deleteAction.visible = false;
     };
     EditorPlugin.prototype.startEditRow = function (row) {
@@ -2905,7 +2933,7 @@ var EditorPlugin = (function () {
         this._saveAction.visible = true;
     };
     EditorPlugin.prototype.endEditRow = function (commit) {
-        if (!commit && !!this._editedRow && this._editedRow.number <= 0) {
+        if (!commit && !!this._editedRow && this._editedRow.number === undefined) {
             this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
         }
         this._saveAction.visible = false;
@@ -3213,7 +3241,7 @@ var Table = (function (_super) {
         };
         _this.lastOffset = 0;
         _this.lastOffsetBack = 0;
-        _this.partRowCount = 10;
+        _this.loadBatchSize = 10;
         _this.curCol = undefined;
         _this.nxtCol = undefined;
         _this.pageX = undefined;
@@ -3257,6 +3285,10 @@ var Table = (function (_super) {
             return actions.filter(function (action) { return action.container === container; });
         };
         _this.plugins = [];
+        _this.layoutElemets = [];
+        _this.getLayoutElements = function (container) {
+            return _this.layoutElemets.filter(function (element) { return element.container === container; });
+        };
         _this.plugins = config.plugins || [];
         if (config.editMode !== undefined) {
             _this.editMode = config.editMode;
@@ -3329,17 +3361,17 @@ var Table = (function (_super) {
         var tableElement = element.getElementsByTagName("table")[0];
         var resizerElement = element.getElementsByClassName("table4js")[0];
         var loadData2Display = function () {
-            _this.partRowCount = Math.round(scrollerElement.clientHeight / Table.rowHeight);
+            _this.loadBatchSize = Math.round(scrollerElement.clientHeight / Table.rowHeight);
             if (scrollerElement.scrollTop < Table.rowHeight && _this.lastOffsetBack > 0) {
-                if ((_this.lastOffsetBack - _this.partRowCount) < 0) {
-                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
+                if ((_this.lastOffsetBack - _this.loadBatchSize) < 0) {
+                    _this.loadRowsBatch(_this.lastOffsetBack, Math.max(0, _this.lastOffsetBack - _this.loadBatchSize), true);
                 }
                 else {
-                    _this.loadRowsBatch(_this.partRowCount, Math.max(0, _this.lastOffsetBack - _this.partRowCount), true);
+                    _this.loadRowsBatch(_this.loadBatchSize, Math.max(0, _this.lastOffsetBack - _this.loadBatchSize), true);
                 }
             }
             if ((scrollerElement.scrollTop >= tableElement.clientHeight - scrollerElement.clientHeight) && _this.loadMore) {
-                _this.loadRowsBatch(_this.partRowCount, _this.lastOffset, false);
+                _this.loadRowsBatch(_this.loadBatchSize, _this.lastOffset, false);
             }
         };
         scrollerElement.onscroll = loadData2Display;
@@ -3386,7 +3418,7 @@ var Table = (function (_super) {
             this.lastOffset = startRow - 1;
             this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; c.last = null; });
             this.rows = [];
-            this.loadRowsBatch(this.partRowCount, startRow - 1, false);
+            this.loadRowsBatch(this.loadBatchSize, startRow - 1, false);
         }
     };
     Table.prototype.createColumn = function (column, model) {
@@ -3439,7 +3471,7 @@ var Table = (function (_super) {
         this.lastOffset = 0;
         this.columns.forEach(function (c) { c.count = null; c.prev = null; c.prevValue = undefined; });
         this.rows = [];
-        this.loadRowsBatch(this.partRowCount, 0, false);
+        this.loadRowsBatch(this.loadBatchSize, 0, false);
     };
     Table.prototype.loadRowsBatch = function (limit, offset, back) {
         var _this = this;
@@ -3519,7 +3551,9 @@ var Table = (function (_super) {
         row.cells = rowCells.reverse();
         row.rowData = data;
         row.id = row_id;
-        row.number = num + 1;
+        if (num !== undefined) {
+            row.number = num + 1;
+        }
         row.color = colorRow;
         row.select = function (data, event) { return _this.selectRow(data, event); };
         row.click = function (data, event) { return _this.clickRow(data, event); };
@@ -3612,6 +3646,21 @@ var Table = (function (_super) {
             oldOne = this.plugins.splice(oldOneIndex, 1)[0];
         }
         return oldOne;
+    };
+    Table.prototype.removeLayoutElement = function (elementName) {
+        var prevElement = undefined;
+        for (var i = 0; i < this.layoutElemets.length; i++) {
+            if (this.layoutElemets[i].name === elementName) {
+                prevElement = this.layoutElemets.splice(i, 1)[0];
+                break;
+            }
+        }
+        return prevElement;
+    };
+    Table.prototype.addLayoutElement = function (element) {
+        var prevElement = this.removeLayoutElement(element.name);
+        this.layoutElemets.push(element);
+        return prevElement;
     };
     Table.prototype.dispose = function () {
         this.detach();
@@ -4062,23 +4111,31 @@ var ArrayDataProvider = (function () {
         }
         callback(result);
     };
-    ArrayDataProvider.prototype.saveData = function (keyName, key, modify) {
+    ArrayDataProvider.prototype.get = function (keyName, key, callback) {
+        callback(this._data.filter(function (r) { return r[keyName] == key; })[0]);
+    };
+    ArrayDataProvider.prototype.update = function (keyName, key, modify, callback) {
         var _this = this;
         Object.keys(modify).forEach(function (p) { return _this._data.find(function (r) { return r[keyName] == key; })[p] = modify[p]; });
-        return true;
+        callback(modify);
     };
-    ArrayDataProvider.prototype.insertData = function (keyName, modify) {
-        console.log(modify);
+    ArrayDataProvider.prototype.create = function (keyName, modify, callback) {
         modify[keyName] = this._data.length + 1;
         this._data.push(modify);
-        return true;
+        callback(modify);
     };
-    ArrayDataProvider.prototype.deleteData = function (keyName, keys, callback) {
+    ArrayDataProvider.prototype.delete = function (keyName, keys, callback) {
         var _this = this;
         keys.forEach(function (k) { return _this._data.find(function (r) { return _this._data.splice(_this._data.indexOf(_this._data.find(function (r) { return r[keyName] == k; })), 1); }); });
-        console.log(this._data);
         callback(true);
     };
+    Object.defineProperty(ArrayDataProvider.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return ArrayDataProvider;
 }());
 exports.ArrayDataProvider = ArrayDataProvider;
@@ -4176,17 +4233,25 @@ var RemoteDataProvider = (function () {
             callback(data.data);
         });
     };
-    RemoteDataProvider.prototype.saveData = function (keyName, key, modify) {
-        console.log("".concat(keyName, " - ").concat(key, " => ").concat(modify));
-        return true;
+    RemoteDataProvider.prototype.get = function (keyName, key, callback) {
+        postData(this.url + "get", { name: this.name, keyName: keyName, key: key }).then(function (data) {
+            callback(data.data);
+        });
     };
-    RemoteDataProvider.prototype.insertData = function (keyName, modify) {
-        console.log("".concat(keyName, " => ").concat(modify));
-        return true;
+    RemoteDataProvider.prototype.update = function (keyName, key, modify, callback) {
+        postData(this.url + "update", { name: this.name, keyName: keyName, key: key, modify: modify }).then(function (data) {
+            callback(data.data);
+        });
     };
-    RemoteDataProvider.prototype.deleteData = function (keyName, keys, callback) {
-        console.log("".concat(keyName, " - ").concat(keys));
-        callback(true);
+    RemoteDataProvider.prototype.create = function (keyName, modify, callback) {
+        postData(this.url + "create", { name: this.name, keyName: keyName, modify: modify }).then(function (data) {
+            callback(data.data);
+        });
+    };
+    RemoteDataProvider.prototype.delete = function (keyName, keys, callback) {
+        postData(this.url + "delete", { name: this.name, keyName: keyName, keys: keys }).then(function (data) {
+            callback(data.data);
+        });
     };
     return RemoteDataProvider;
 }());
