@@ -68,7 +68,7 @@ export class EditorPlugin implements ITablePlugin {
         this._saveAction.visible = true;
     }
     protected endEditRow(commit: boolean) {
-        if(!commit && !!this._editedRow && this._editedRow.number <= 0) {
+        if(!commit && !!this._editedRow && this._editedRow.number === undefined) {
             this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
         }
         this._saveAction.visible = false;
