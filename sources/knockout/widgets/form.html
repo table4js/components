@@ -1,6 +1,12 @@
 <div class="table4js-form">
+  <div className="table4js-form__header">
+  </div>
   <!-- ko foreach: properties -->
     <!-- ko component: { name: "table4js-property-editor", params: { property: $data } } -->
     <!-- /ko -->
   <!-- /ko -->
+  <div class="table4js-form__footer">
+    <table4js-actions class="table4js-actions" params="model: $data, options: { action: 'bottomActions' }">
+    </table4js-actions>
+  </div>
 </div>
