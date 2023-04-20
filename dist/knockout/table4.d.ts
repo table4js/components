@@ -323,7 +323,7 @@ declare module "table/cell" {
         count: number;
         color: string;
         css: string;
-        update(): void;
+        update(quiet?: boolean): void;
     }
     export class TableCell extends Base implements ITableCell {
         private static cellTypes;
@@ -344,8 +344,8 @@ declare module "table/cell" {
         protected getCellCss(data: any, column: IFieldDescription): string;
         protected getCellText(val: any): string;
         get component(): string;
-        initialize(col: ITableColumn, back: boolean, rowData: any, color: string): void;
-        update(): void;
+        initialize(col: ITableColumn, rowData: any, back?: boolean, color?: string): void;
+        update(quiet?: boolean): void;
     }
 }
 declare module "table/search" {
@@ -410,7 +410,7 @@ declare module "table/row" {
         getRowComponentParams: (params: any) => any;
         getCellComponent: (cell: ITableCell) => string;
         getCellComponentParams: (params: any) => any;
-        update(): void;
+        update(quiet?: boolean): void;
     }
     export class TableRow extends Base implements ITableRow {
         rowData: ITableRowData;
@@ -427,7 +427,7 @@ declare module "table/row" {
         getCellComponent(cell: ITableCell): string;
         getCellComponentParams(params: any): any;
         get css(): string;
-        update(): void;
+        update(quiet?: boolean): void;
     }
 }
 declare module "table/summary" {
@@ -461,27 +461,21 @@ declare module "table/summary" {
         onRowCreated(row: ITableRow): void;
     }
 }
-declare module "widgets/editor" {
+declare module "core/editor" {
     import { Base } from "core/base";
     import "./editor.scss";
     export class Editor extends Base {
         private _data;
         private name;
-        private onComplete?;
-        static inputTypes: {
-            number: string;
-            currency: string;
-            indicator: string;
-            progress: string;
-            date: string;
-            datetime: string;
-        };
-        static getInputType(type: string): any;
+        static inputTypes: {};
+        static setInputType(typeName: string, inputType: string): string;
+        static getInputType(typeName: string): any;
         static editors: {
             default: string;
-            bool: string;
         };
-        constructor(_data: any, name: string, onComplete?: (value: any, commit: boolean) => void);
+        static setComponent(typeName: string, componentName: string): string;
+        static getComponent(typeName: string): any;
+        constructor(_data: any, name: string);
         value: any;
         get isModified(): boolean;
         get css(): string;
@@ -531,7 +525,7 @@ declare module "table/editor-inplace" {
 declare module "widgets/property" {
     import { Base } from "core/base";
     import { IFieldDescription, IFieldType } from "core/domain";
-    import { Editor } from "widgets/editor";
+    import { Editor } from "core/editor";
     import "./property.scss";
     export class Property extends Base {
         private field;
@@ -558,6 +552,7 @@ declare module "widgets/property" {
     }
 }
 declare module "widgets/form" {
+    import { IAction } from "core/action";
     import { Base } from "core/base";
     import { IFieldDescription } from "core/domain";
     import { Property } from "widgets/property";
@@ -573,10 +568,15 @@ declare module "widgets/form" {
         private fields;
         private layout?;
         private _properties;
+        private innerActions;
         constructor(fields: Array<IFieldDescription>, layout?: IFormLayout);
         object: any;
         get properties(): Array<Property>;
         complete(commit: boolean): void;
+        get bottomActions(): any[];
+        getActions: (container?: string) => any[];
+        addAction(action: IAction): IAction;
+        removeAction(actionName: string): IAction;
     }
 }
 declare module "table/editor-row" {
@@ -920,10 +920,13 @@ declare module "index" {
     export * from "core/field-types/datetime";
     export * from "core/field-types/number";
     export * from "core/find";
+    export * from "core/editor";
     export * from "table/index";
+    export * from "table/row";
     export * from "table/cell";
     export * from "table/column";
     export * from "table/summary";
+    export * from "table/search";
     export * from "table/column-filter";
     export * from "table/column-filter-item";
     export * from "table/filter-default";
@@ -935,7 +938,6 @@ declare module "index" {
     export * from "table/cell-types/indicator";
     export * from "table/cell-types/number";
     export * from "table/cell-types/progress";
-    export * from "widgets/editor";
     export * from "widgets/property";
     export * from "widgets/form";
     export * from "table/editor";
@@ -944,7 +946,7 @@ declare module "index" {
     export * from "utils/array-data-provider";
     export * from "utils/remote-data-provider";
     export * from "utils/utils";
-    export * from "icons/index";
+    export * as Icons from "icons/index";
 }
 declare module "knockout/index" {
     import * as ko from "knockout";

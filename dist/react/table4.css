@@ -217,24 +217,9 @@ table4js-filter-select, .table4js-filter-select {
 .table4js-cell--right input {
   text-align: right;
 }
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-types/indicator.scss ***!
-  \******************************************************************************************************************************************************************************************/
-.table4js__indicator-cell {
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-}
-
-.table4js__indicator-cell-circle {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border-radius: 0.5em;
-}
-/*!******************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/widgets/editor.scss ***!
-  \******************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/core/editor.scss ***!
+  \***************************************************************************************************************************************************************************/
 @charset "UTF-8";
 /* Fallback colors for variables */
 /* Основной Цвет */
@@ -252,6 +237,21 @@ table4js-filter-select, .table4js-filter-select {
 }
 .table4js__editor input.table4js-editor--modified {
   box-shadow: 0px 3px 3px -3px gold;
+}
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/table/cell-types/indicator.scss ***!
+  \******************************************************************************************************************************************************************************************/
+.table4js__indicator-cell {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+.table4js__indicator-cell-circle {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 0.5em;
 }
 /*!****************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./sources/core/actions.scss ***!

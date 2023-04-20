@@ -37,6 +37,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./sources/core/editor.scss":
+/*!**********************************!*\
+  !*** ./sources/core/editor.scss ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./sources/table/cell-types/indicator.scss":
 /*!*************************************************!*\
   !*** ./sources/table/cell-types/indicator.scss ***!
@@ -171,19 +184,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************!*\
   !*** ./sources/table/summary.scss ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./sources/widgets/editor.scss":
-/*!*************************************!*\
-  !*** ./sources/widgets/editor.scss ***!
-  \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -745,6 +745,113 @@ __webpack_require__(/*! ./dropdown-actions.scss */ "./sources/core/dropdown-acti
 
 /***/ }),
 
+/***/ "./sources/core/editor.ts":
+/*!********************************!*\
+  !*** ./sources/core/editor.ts ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Editor = void 0;
+var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
+var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
+__webpack_require__(/*! ./editor.scss */ "./sources/core/editor.scss");
+var Editor = (function (_super) {
+    __extends(Editor, _super);
+    function Editor(_data, name) {
+        var _this = _super.call(this) || this;
+        _this._data = _data;
+        _this.name = name;
+        _this.value = _data[_this.name];
+        return _this;
+    }
+    Editor.setInputType = function (typeName, inputType) {
+        return Editor.inputTypes[typeName] = inputType;
+    };
+    Editor.getInputType = function (typeName) {
+        return Editor.inputTypes[typeName];
+    };
+    Editor.setComponent = function (typeName, componentName) {
+        return Editor.editors[typeName] = componentName;
+    };
+    Editor.getComponent = function (typeName) {
+        return Editor.editors[typeName] || Editor.editors.default;
+    };
+    Object.defineProperty(Editor.prototype, "isModified", {
+        get: function () {
+            return this.value !== this.data[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "css", {
+        get: function () {
+            var result = "table4js-editor";
+            if (this.isModified) {
+                result += " table4js-editor--modified";
+            }
+            return result;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Editor.prototype, "data", {
+        get: function () {
+            return this._data;
+        },
+        set: function (val) {
+            this._data = val;
+            this.value = val[this.name];
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Editor.prototype.complete = function (commit) {
+        if (commit) {
+            this.data[this.name] = this.value;
+        }
+    };
+    Editor.inputTypes = {};
+    Editor.editors = {
+        default: "table4js-default-editor",
+    };
+    __decorate([
+        (0, property_1.property)(),
+        __metadata("design:type", Object)
+    ], Editor.prototype, "value", void 0);
+    return Editor;
+}(base_1.Base));
+exports.Editor = Editor;
+
+
+/***/ }),
+
 /***/ "./sources/core/field-types/bool.ts":
 /*!******************************************!*\
   !*** ./sources/core/field-types/bool.ts ***!
@@ -756,6 +863,7 @@ __webpack_require__(/*! ./dropdown-actions.scss */ "./sources/core/dropdown-acti
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.BoolField = void 0;
 var localization_1 = __webpack_require__(/*! ../../localization */ "./sources/localization.ts");
+var editor_1 = __webpack_require__(/*! ../editor */ "./sources/core/editor.ts");
 var BoolField = (function () {
     function BoolField() {
         this.name = "bool";
@@ -770,6 +878,7 @@ var BoolField = (function () {
     return BoolField;
 }());
 exports.BoolField = BoolField;
+editor_1.Editor.setComponent("bool", "table4js-checkbox-editor");
 
 
 /***/ }),
@@ -778,12 +887,13 @@ exports.BoolField = BoolField;
 /*!**********************************************!*\
   !*** ./sources/core/field-types/currency.ts ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CurrencyField = void 0;
+var editor_1 = __webpack_require__(/*! ../editor */ "./sources/core/editor.ts");
 var CurrencyField = (function () {
     function CurrencyField() {
         this.name = "currency";
@@ -806,6 +916,7 @@ var CurrencyField = (function () {
     return CurrencyField;
 }());
 exports.CurrencyField = CurrencyField;
+editor_1.Editor.setInputType("currency", "number");
 
 
 /***/ }),
@@ -814,12 +925,13 @@ exports.CurrencyField = CurrencyField;
 /*!******************************************!*\
   !*** ./sources/core/field-types/date.ts ***!
   \******************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DateField = void 0;
+var editor_1 = __webpack_require__(/*! ../editor */ "./sources/core/editor.ts");
 var DateField = (function () {
     function DateField() {
         this.name = "date";
@@ -837,6 +949,7 @@ var DateField = (function () {
     return DateField;
 }());
 exports.DateField = DateField;
+editor_1.Editor.setInputType("date", "date");
 
 
 /***/ }),
@@ -845,12 +958,13 @@ exports.DateField = DateField;
 /*!**********************************************!*\
   !*** ./sources/core/field-types/datetime.ts ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DateTimeField = void 0;
+var editor_1 = __webpack_require__(/*! ../editor */ "./sources/core/editor.ts");
 var DateTimeField = (function () {
     function DateTimeField() {
         this.name = "datetime";
@@ -868,6 +982,7 @@ var DateTimeField = (function () {
     return DateTimeField;
 }());
 exports.DateTimeField = DateTimeField;
+editor_1.Editor.setInputType("datetime", "datetime-local");
 
 
 /***/ }),
@@ -876,12 +991,13 @@ exports.DateTimeField = DateTimeField;
 /*!********************************************!*\
   !*** ./sources/core/field-types/number.ts ***!
   \********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NumberField = void 0;
+var editor_1 = __webpack_require__(/*! ../editor */ "./sources/core/editor.ts");
 var NumberField = (function () {
     function NumberField() {
         this.name = "number";
@@ -890,6 +1006,7 @@ var NumberField = (function () {
     return NumberField;
 }());
 exports.NumberField = NumberField;
+editor_1.Editor.setInputType("number", "number");
 
 
 /***/ }),
@@ -1074,6 +1191,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Icons = void 0;
 __exportStar(__webpack_require__(/*! ./core/action */ "./sources/core/action.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/actions */ "./sources/core/actions.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/dropdown-actions */ "./sources/core/dropdown-actions.ts"), exports);
@@ -1084,10 +1202,13 @@ __exportStar(__webpack_require__(/*! ./core/field-types/date */ "./sources/core/
 __exportStar(__webpack_require__(/*! ./core/field-types/datetime */ "./sources/core/field-types/datetime.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/field-types/number */ "./sources/core/field-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./core/find */ "./sources/core/find.ts"), exports);
+__exportStar(__webpack_require__(/*! ./core/editor */ "./sources/core/editor.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table */ "./sources/table/index.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/row */ "./sources/table/row.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell */ "./sources/table/cell.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column */ "./sources/table/column.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/summary */ "./sources/table/summary.ts"), exports);
+__exportStar(__webpack_require__(/*! ./table/search */ "./sources/table/search.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column-filter */ "./sources/table/column-filter.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/column-filter-item */ "./sources/table/column-filter-item.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/filter-default */ "./sources/table/filter-default.ts"), exports);
@@ -1099,7 +1220,6 @@ __exportStar(__webpack_require__(/*! ./table/cell-types/datetime */ "./sources/t
 __exportStar(__webpack_require__(/*! ./table/cell-types/indicator */ "./sources/table/cell-types/indicator.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-types/number */ "./sources/table/cell-types/number.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/cell-types/progress */ "./sources/table/cell-types/progress.ts"), exports);
-__exportStar(__webpack_require__(/*! ./widgets/editor */ "./sources/widgets/editor.ts"), exports);
 __exportStar(__webpack_require__(/*! ./widgets/property */ "./sources/widgets/property.ts"), exports);
 __exportStar(__webpack_require__(/*! ./widgets/form */ "./sources/widgets/form.ts"), exports);
 __exportStar(__webpack_require__(/*! ./table/editor */ "./sources/table/editor.ts"), exports);
@@ -1108,7 +1228,7 @@ __exportStar(__webpack_require__(/*! ./table/editor-row */ "./sources/table/edit
 __exportStar(__webpack_require__(/*! ./utils/array-data-provider */ "./sources/utils/array-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/remote-data-provider */ "./sources/utils/remote-data-provider.ts"), exports);
 __exportStar(__webpack_require__(/*! ./utils/utils */ "./sources/utils/utils.ts"), exports);
-__exportStar(__webpack_require__(/*! ./icons */ "./sources/icons/index.ts"), exports);
+exports.Icons = __webpack_require__(/*! ./icons */ "./sources/icons/index.ts");
 
 
 /***/ }),
@@ -1457,13 +1577,13 @@ var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources
 var cell_1 = __webpack_require__(/*! ../../table/cell */ "./sources/table/cell.ts");
 var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
+var editor_1 = __webpack_require__(/*! ../../core/editor */ "./sources/core/editor.ts");
 function Table4CellEditor(_a) {
     var table = _a.table, cell = _a.cell, editor = _a.editor;
     (0, reactivity_1.makeReactive)(cell);
     var isMergedCell = cell.count > 1 && table.isMergedCells;
     return (React.createElement("div", { className: cell_1.TableCell.getContainerCss(cell, isMergedCell), style: { top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined } },
-        React.createElement(abris_component_2.AbrisComponent, { componentName: editor_1.Editor.editors[cell.type] || editor_1.Editor.editors.default, componentProps: { model: editor, className: cell_1.TableCell.getContentCss(cell, isMergedCell), inputType: editor_1.Editor.getInputType(cell.type) } })));
+        React.createElement(abris_component_2.AbrisComponent, { componentName: editor_1.Editor.getComponent(cell.type), componentProps: { model: editor, className: cell_1.TableCell.getContentCss(cell, isMergedCell), inputType: editor_1.Editor.getInputType(cell.type) } })));
 }
 exports.Table4CellEditor = Table4CellEditor;
 (0, abris_component_1.registerComponent)("table4js-cell-editor", Table4CellEditor);
@@ -2052,10 +2172,15 @@ var React = __webpack_require__(/*! react */ "react");
 var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
+var actions_1 = __webpack_require__(/*! ../core/actions */ "./sources/react/core/actions.tsx");
 function Form4(_a) {
     var form = _a.form;
     (0, reactivity_1.makeReactive)(form);
-    return (React.createElement("div", { className: "table4js-form" }, form.properties.map(function (property) { return (React.createElement(abris_component_2.AbrisComponent, { key: property.name, componentName: "table4js-property-editor", componentProps: { property: property } })); })));
+    return (React.createElement("div", { className: "table4js-form" },
+        React.createElement("div", { className: "table4js-form__header" }),
+        form.properties.map(function (property) { return (React.createElement(abris_component_2.AbrisComponent, { key: property.name, componentName: "table4js-property-editor", componentProps: { property: property } })); }),
+        React.createElement("div", { className: "table4js-form__footer" },
+            React.createElement(actions_1.AbrisActions, { className: "table4js-actions", actions: form.bottomActions }))));
 }
 exports.Form4 = Form4;
 (0, abris_component_1.registerComponent)("table4js-form", Form4);
@@ -2077,7 +2202,7 @@ var React = __webpack_require__(/*! react */ "react");
 var abris_component_1 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var abris_component_2 = __webpack_require__(/*! ../abris-component */ "./sources/react/abris-component.tsx");
 var reactivity_1 = __webpack_require__(/*! ../reactivity */ "./sources/react/reactivity.ts");
-var editor_1 = __webpack_require__(/*! ../../widgets/editor */ "./sources/widgets/editor.ts");
+var editor_1 = __webpack_require__(/*! ../../core/editor */ "./sources/core/editor.ts");
 function Table4PropertyEditor(_a) {
     var property = _a.property;
     (0, reactivity_1.makeReactive)(property);
@@ -2166,6 +2291,7 @@ cell_1.TableCell.registerCellType(new datetime_1.DateTimeField());
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.IndicatorCell = void 0;
+var editor_1 = __webpack_require__(/*! ../../core/editor */ "./sources/core/editor.ts");
 var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
 __webpack_require__(/*! ./indicator.scss */ "./sources/table/cell-types/indicator.scss");
 var IndicatorCell = (function () {
@@ -2180,6 +2306,7 @@ var IndicatorCell = (function () {
     return IndicatorCell;
 }());
 exports.IndicatorCell = IndicatorCell;
+editor_1.Editor.setInputType("indicator", "number");
 cell_1.TableCell.registerCellType(new IndicatorCell());
 
 
@@ -2211,6 +2338,7 @@ cell_1.TableCell.registerCellType(new number_1.NumberField());
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ProgressCell = void 0;
+var editor_1 = __webpack_require__(/*! ../../core/editor */ "./sources/core/editor.ts");
 var cell_1 = __webpack_require__(/*! ../cell */ "./sources/table/cell.ts");
 __webpack_require__(/*! ./progress.scss */ "./sources/table/cell-types/progress.scss");
 var ProgressCell = (function () {
@@ -2222,6 +2350,7 @@ var ProgressCell = (function () {
     return ProgressCell;
 }());
 exports.ProgressCell = ProgressCell;
+editor_1.Editor.setInputType("progress", "number");
 cell_1.TableCell.registerCellType(new ProgressCell());
 
 
@@ -2314,7 +2443,8 @@ var TableCell = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    TableCell.prototype.initialize = function (col, back, rowData, color) {
+    TableCell.prototype.initialize = function (col, rowData, back, color) {
+        if (back === void 0) { back = false; }
         this.type = col.type;
         this.name = col.name;
         this.rowData = rowData;
@@ -2350,10 +2480,15 @@ var TableCell = (function (_super) {
         }
         this.isModified = false;
     };
-    TableCell.prototype.update = function () {
-        this._isUpdating = true;
+    TableCell.prototype.update = function (quiet) {
+        if (quiet === void 0) { quiet = true; }
+        if (quiet) {
+            this._isUpdating = true;
+        }
         this.data = this.rowData[this.name];
-        this._isUpdating = false;
+        if (quiet) {
+            this._isUpdating = false;
+        }
     };
     TableCell.cellTypes = {
         "default": {
@@ -2694,7 +2829,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.InplaceEditorPlugin = void 0;
-var editor_1 = __webpack_require__(/*! ../widgets/editor */ "./sources/widgets/editor.ts");
+var editor_1 = __webpack_require__(/*! ../core/editor */ "./sources/core/editor.ts");
 var editor_2 = __webpack_require__(/*! ./editor */ "./sources/table/editor.ts");
 var action_1 = __webpack_require__(/*! ../core/action */ "./sources/core/action.ts");
 var localization_1 = __webpack_require__(/*! ../localization */ "./sources/localization.ts");
@@ -2712,25 +2847,17 @@ var InplaceEditorPlugin = (function (_super) {
         _super.prototype.startEditRow.call(this, row);
         this._activeEditors = {};
         row.cells.forEach(function (cell) {
-            _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name, function (value, commit) {
-                if (commit) {
-                    cell.data = value;
-                }
-            });
+            _this._activeEditors[cell.name] = new editor_1.Editor(cell.rowData, cell.name);
         });
         row.mode = "edit-inplace";
     };
     InplaceEditorPlugin.prototype.endEditRow = function (commit) {
         var _this = this;
-        _super.prototype.endEditRow.call(this, commit);
         Object.keys(this._activeEditors || {}).forEach(function (name) {
             _this._activeEditors[name].complete(commit);
         });
-        if (!!this._editedRow) {
-            this._editedRow.mode = "default";
-            this._editedRow = undefined;
-        }
         this._activeEditors = undefined;
+        _super.prototype.endEditRow.call(this, commit);
     };
     InplaceEditorPlugin.prototype.getActions = function () {
         var _this = this;
@@ -2823,16 +2950,11 @@ var RowEditorPlugin = (function (_super) {
         row.mode = "edit-row";
     };
     RowEditorPlugin.prototype.endEditRow = function (commit) {
-        _super.prototype.endEditRow.call(this, commit);
         if (!!this._form) {
             this._form.complete(commit);
             this._form = undefined;
         }
-        if (!!this._editedRow) {
-            this._editedRow.mode = "default";
-            this._editedRow.update();
-            this._editedRow = undefined;
-        }
+        _super.prototype.endEditRow.call(this, commit);
     };
     RowEditorPlugin.prototype.onRowCreated = function (row) {
         var _this = this;
@@ -2935,6 +3057,13 @@ var EditorPlugin = (function () {
     EditorPlugin.prototype.endEditRow = function (commit) {
         if (!commit && !!this._editedRow && this._editedRow.number === undefined) {
             this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
+        }
+        if (!!this._editedRow) {
+            this._editedRow.mode = "default";
+            if (commit) {
+                this._editedRow.update(false);
+            }
+            this._editedRow = undefined;
         }
         this._saveAction.visible = false;
     };
@@ -3535,7 +3664,7 @@ var Table = (function (_super) {
         var colorCell = null, colorRow = null;
         this.columns.reverse().forEach(function (col) {
             var cell = new cell_1.TableCell();
-            cell.initialize(col, back, data, colorCell);
+            cell.initialize(col, data, back, colorCell);
             if (!!lastText) {
                 cell.text += ("/" + lastText);
             }
@@ -3802,8 +3931,9 @@ var TableRow = (function (_super) {
         enumerable: false,
         configurable: true
     });
-    TableRow.prototype.update = function () {
-        this.cells.forEach(function (cell) { return cell.update(); });
+    TableRow.prototype.update = function (quiet) {
+        if (quiet === void 0) { quiet = true; }
+        this.cells.forEach(function (cell) { return cell.update(quiet); });
     };
     __decorate([
         (0, property_1.property)({ defaultValue: "default" }),
@@ -4295,114 +4425,6 @@ exports.isEqual = isEqual;
 
 /***/ }),
 
-/***/ "./sources/widgets/editor.ts":
-/*!***********************************!*\
-  !*** ./sources/widgets/editor.ts ***!
-  \***********************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Editor = void 0;
-var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
-var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
-__webpack_require__(/*! ./editor.scss */ "./sources/widgets/editor.scss");
-var Editor = (function (_super) {
-    __extends(Editor, _super);
-    function Editor(_data, name, onComplete) {
-        var _this = _super.call(this) || this;
-        _this._data = _data;
-        _this.name = name;
-        _this.onComplete = onComplete;
-        _this.value = _data[_this.name];
-        return _this;
-    }
-    Editor.getInputType = function (type) {
-        return Editor.inputTypes[type];
-    };
-    Object.defineProperty(Editor.prototype, "isModified", {
-        get: function () {
-            return this.value !== this.data[this.name];
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Editor.prototype, "css", {
-        get: function () {
-            var result = "table4js-editor";
-            if (this.isModified) {
-                result += " table4js-editor--modified";
-            }
-            return result;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Editor.prototype, "data", {
-        get: function () {
-            return this._data;
-        },
-        set: function (val) {
-            this._data = val;
-            this.value = val[this.name];
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Editor.prototype.complete = function (commit) {
-        if (commit) {
-            this.data[this.name] = this.value;
-        }
-        !!this.onComplete && this.onComplete(this.value, commit);
-    };
-    Editor.inputTypes = {
-        number: "number",
-        currency: "number",
-        indicator: "number",
-        progress: "number",
-        date: "date",
-        datetime: "datetime-local",
-    };
-    Editor.editors = {
-        default: "table4js-default-editor",
-        bool: "table4js-checkbox-editor",
-    };
-    __decorate([
-        (0, property_1.property)(),
-        __metadata("design:type", Object)
-    ], Editor.prototype, "value", void 0);
-    return Editor;
-}(base_1.Base));
-exports.Editor = Editor;
-
-
-/***/ }),
-
 /***/ "./sources/widgets/form.ts":
 /*!*********************************!*\
   !*** ./sources/widgets/form.ts ***!
@@ -4448,6 +4470,11 @@ var Form = (function (_super) {
         _this.fields = fields;
         _this.layout = layout;
         _this._properties = {};
+        _this.innerActions = [];
+        _this.getActions = function (container) {
+            var actions = [].concat(_this.innerActions);
+            return actions.filter(function (action) { return action.container === container; });
+        };
         if (!_this.layout) {
             _this.layout = { elements: (fields || []).filter(function (f) { return f.visible; }).map(function (f) { return ({ name: f.name, title: f.title }); }) };
         }
@@ -4465,6 +4492,32 @@ var Form = (function (_super) {
     Form.prototype.complete = function (commit) {
         var _this = this;
         Object.keys(this._properties).forEach(function (name) { return _this._properties[name].complete(commit); });
+    };
+    Object.defineProperty(Form.prototype, "bottomActions", {
+        get: function () {
+            return this.getActions('bottom');
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Form.prototype.addAction = function (action) {
+        var oldOne = this.removeAction(action.name);
+        this.innerActions.push(action);
+        return oldOne;
+    };
+    Form.prototype.removeAction = function (actionName) {
+        var oldOneIndex = -1;
+        for (var i = 0; i < this.innerActions.length; i++) {
+            if (this.innerActions[i].name === actionName) {
+                oldOneIndex = i;
+                break;
+            }
+        }
+        var oldOne = undefined;
+        if (oldOneIndex >= 0) {
+            oldOne = this.innerActions.splice(oldOneIndex, 1)[0];
+        }
+        return oldOne;
     };
     __decorate([
         (0, property_1.property)({
@@ -4517,7 +4570,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Property = void 0;
 var base_1 = __webpack_require__(/*! ../core/base */ "./sources/core/base.ts");
 var property_1 = __webpack_require__(/*! ../core/property */ "./sources/core/property.ts");
-var editor_1 = __webpack_require__(/*! ./editor */ "./sources/widgets/editor.ts");
+var editor_1 = __webpack_require__(/*! ../core/editor */ "./sources/core/editor.ts");
 __webpack_require__(/*! ./property.scss */ "./sources/widgets/property.scss");
 var Property = (function (_super) {
     __extends(Property, _super);
