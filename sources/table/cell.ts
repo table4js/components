@@ -13,7 +13,7 @@ export interface ITableCell {
     count: number;
     color: string;
     css: string;
-    update(): void;
+    update(quiet?: boolean): void;
 }
 
 export class TableCell extends Base implements ITableCell {
@@ -123,9 +123,13 @@ export class TableCell extends Base implements ITableCell {
         }
         this.isModified = false;
     }
-    public update(): void {
-        this._isUpdating = true;
+    public update(quiet = true): void {
+        if(quiet) {
+            this._isUpdating = true;
+        }
         this.data = this.rowData[this.name];
-        this._isUpdating = false;
+        if(quiet) {
+            this._isUpdating = false;
+        }
     }
 }

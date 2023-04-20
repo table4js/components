@@ -20,7 +20,7 @@ export class Editor extends Base {
         bool: "table4js-checkbox-editor",
     };
 
-    constructor(private _data: any, private name: string, private onComplete?: (value: any, commit: boolean) => void) {
+    constructor(private _data: any, private name: string) {
         super();
         this.value = _data[this.name];
     }
@@ -46,7 +46,6 @@ export class Editor extends Base {
         if(commit) {
             this.data[this.name] = this.value;
         }
-        !!this.onComplete && this.onComplete(this.value, commit);
     }
 
     // processKeyUp(event: KeyboardEvent) {

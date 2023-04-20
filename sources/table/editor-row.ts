@@ -14,16 +14,11 @@ export class RowEditorPlugin extends EditorPlugin {
         row.mode = "edit-row";
     }
     protected endEditRow(commit: boolean) {
-        super.endEditRow(commit);
         if(!!this._form) {
             this._form.complete(commit);
             this._form = undefined;
         }
-        if(!!this._editedRow) {
-            this._editedRow.mode = "default";
-            this._editedRow.update();
-            this._editedRow = undefined;
-        }
+        super.endEditRow(commit);
     }
     onRowCreated(row: ITableRow): void {
         row.getRowComponent = () => {

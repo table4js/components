@@ -71,6 +71,13 @@ export class EditorPlugin implements ITablePlugin {
         if(!commit && !!this._editedRow && this._editedRow.number === undefined) {
             this._table.rows.splice(this._table.rows.indexOf(this._editedRow), 1);
         }
+        if(!!this._editedRow) {
+            this._editedRow.mode = "default";
+            if(commit) {
+                this._editedRow.update(false);
+            }
+            this._editedRow = undefined;
+        }
         this._saveAction.visible = false;
     }
     onSelectionChanged(): void {

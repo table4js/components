@@ -14,24 +14,16 @@ export class InplaceEditorPlugin extends EditorPlugin {
         super.startEditRow(row);
         this._activeEditors = {};
         row.cells.forEach(cell => {
-            this._activeEditors[cell.name] = new Editor(cell.rowData, cell.name, (value: any, commit: boolean) => {
-                if(commit) {
-                    cell.data = value;
-                }
-            });
+            this._activeEditors[cell.name] = new Editor(cell.rowData, cell.name);
         });
         row.mode = "edit-inplace";
     }
     protected endEditRow(commit: boolean) {
-        super.endEditRow(commit);
         Object.keys(this._activeEditors || {}).forEach(name => {
             this._activeEditors[name].complete(commit);
         });
-        if(!!this._editedRow) {
-            this._editedRow.mode = "default";
-            this._editedRow = undefined;
-        }
         this._activeEditors = undefined;
+        super.endEditRow(commit);
     }
     getActions(): IAction[] {
         const actions = super.getActions();

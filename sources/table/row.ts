@@ -35,7 +35,7 @@ import "./row.scss";
     getRowComponentParams: (params: any) => any;
     getCellComponent: (cell: ITableCell) => string;
     getCellComponentParams: (params: any) => any;
-    update(): void;
+    update(quiet?: boolean): void;
 }
 
 export class TableRow extends Base implements ITableRow {
@@ -67,7 +67,7 @@ export class TableRow extends Base implements ITableRow {
         }
         return result;
     }
-    public update() {
-        this.cells.forEach(cell => cell.update());
+    public update(quiet = true) {
+        this.cells.forEach(cell => cell.update(quiet));
     }
 }   
