@@ -116,4 +116,8 @@ In our plans we have
  - npm test
  - npm run build
 
-Build artifacts can be fount in the `/site/dist` subfolders: `standalone`, `react`, `knockout`
+Build artifacts can be found in the `/site/dist` subfolders: `standalone`, `react`, `knockout`
+
+## How to run live example
+ - `npm start` - for standalone (framework-agnostic) build
+ - `npm start:react` - for ReactJS framework version
