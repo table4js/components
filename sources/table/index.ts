@@ -345,7 +345,7 @@ export class Table extends Base implements IDataProviderOwner {
         let colorCell = null, colorRow = null;
         this.columns.reverse().forEach(col => {
             let cell = new TableCell();
-            cell.initialize(col, back, data, colorCell);
+            cell.initialize(col, data, back, colorCell);
             if (!!lastText) {
                 cell.text += ("/" + lastText);
             }

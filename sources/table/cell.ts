@@ -88,7 +88,7 @@ export class TableCell extends Base implements ITableCell {
         return this.getCellTypeDescription("default").component;
     }
 
-    public initialize(col: ITableColumn, back: boolean, rowData: any, color: string) {
+    public initialize(col: ITableColumn, rowData: any, back: boolean = false, color?: string) {
         this.type = col.type;
         this.name = col.name;
         this.rowData = rowData;
