@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Editor } from "../../widgets/editor";
+import { Editor } from "../../core/editor";
 import { Form } from "../../widgets/form";
 
 export var formEditorTemplate = require("./form.html").default;

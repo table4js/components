@@ -8,6 +8,7 @@ export * from "./core/field-types/date";
 export * from "./core/field-types/datetime";
 export * from "./core/field-types/number";
 export * from "./core/find";
+export * from "./core/editor";
 
 export * from "./table";
 export * from "./table/row";
@@ -28,7 +29,6 @@ export * from "./table/cell-types/indicator";
 export * from "./table/cell-types/number";
 export * from "./table/cell-types/progress";
 
-export * from "./widgets/editor";
 export * from "./widgets/property";
 export * from "./widgets/form";
 

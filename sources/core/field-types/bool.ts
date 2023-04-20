@@ -1,5 +1,7 @@
 import { IFieldType } from "../domain";
 import { Localization } from "../../localization";
+import { Editor } from "../editor";
+
 
 export class BoolField implements IFieldType {
     name: string = "bool";
@@ -11,6 +13,8 @@ export class BoolField implements IFieldType {
         return Localization.getString("false");
     }
 }
+
+Editor.setComponent("bool", "table4js-checkbox-editor");
 
 // export const boolConverter = {
 //     from: (val: any): boolean => val === true || val === "t" || val === "true",

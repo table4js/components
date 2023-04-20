@@ -2,7 +2,7 @@ import * as React from "react";
 import { registerComponent } from "../abris-component";
 import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { Editor } from "../../widgets/editor";
+import { Editor } from "../../core/editor";
 import { Property } from "../../widgets/property";
 
 export interface IPropertyEditorProps {

@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Editor } from "../../widgets/editor";
+import { Editor } from "../../core/editor";
 
 export var boolEditorTemplate = require("./checkbox.html").default;
 

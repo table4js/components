@@ -1,3 +1,4 @@
+import { Editor } from "../editor";
 import { IFieldType } from "../domain";
 
 export class CurrencyField implements IFieldType {
@@ -18,3 +19,5 @@ export class CurrencyField implements IFieldType {
         return result;
     }
 }
+
+Editor.setInputType("currency", "number");

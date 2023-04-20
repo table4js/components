@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Editor } from "../../widgets/editor";
+import { Editor } from "../../core/editor";
 import { Property } from "../../widgets/property";
 
 export var propertyEditorTemplate = require("./property.html").default;
@@ -9,7 +9,7 @@ ko.components.register("table4js-property-editor", {
         createViewModel: function (params, componentInfo) {
             return {
                 property: params.property,
-                component: Editor.editors[params.property.type] || Editor.editors.default
+                component: Editor.getComponent(params.property.type)
             };
         }
     },

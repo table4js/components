@@ -1,7 +1,7 @@
 import { Base } from "../core/base";
 import { IFieldDescription, IFieldType } from "../core/domain";
 import { property } from "../core/property";
-import { Editor } from "./editor";
+import { Editor } from "../core/editor";
 
 import "./property.scss";
 

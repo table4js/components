@@ -1,6 +1,6 @@
 import { ITableRow, ITableRowData } from "./row";
 import { ITableCell } from "./cell";
-import { Editor } from "../widgets/editor";
+import { Editor } from "../core/editor";
 import { EditorPlugin } from "./editor";
 import { Action, IAction } from "../core/action";
 import { Localization } from "../localization";

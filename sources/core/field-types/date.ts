@@ -1,5 +1,6 @@
 import { IFieldType } from "../domain";
 import { Localization } from "../../localization";
+import { Editor } from "../editor";
 
 export class DateField implements IFieldType {
     name: string = "date";
@@ -13,3 +14,5 @@ export class DateField implements IFieldType {
         return result;
     }
 }
+
+Editor.setInputType("date", "date");

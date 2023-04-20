@@ -4,7 +4,7 @@ import { Table } from "../../table";
 import { ITableCell, TableCell } from "../../table/cell";
 import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { Editor } from "../../widgets/editor";
+import { Editor } from "../../core/editor";
 import { ITableCellProps } from "./cell";
 
 export interface ITableCellEditorProps extends ITableCellProps {
@@ -20,7 +20,7 @@ export function Table4CellEditor({ table, cell, editor }: ITableCellEditorProps)
       className={TableCell.getContainerCss(cell, isMergedCell)}
       style={{ top: isMergedCell ? table.tableHeadHeight - 2 + "px" : undefined }}
     >
-      <AbrisComponent componentName={Editor.editors[cell.type] || Editor.editors.default} componentProps={{ model: editor, className: TableCell.getContentCss(cell, isMergedCell), inputType: Editor.getInputType(cell.type) }} />
+      <AbrisComponent componentName={Editor.getComponent(cell.type)} componentProps={{ model: editor, className: TableCell.getContentCss(cell, isMergedCell), inputType: Editor.getInputType(cell.type) }} />
     </div>
   );
 }

@@ -5,21 +5,23 @@ import "./editor.scss";
 
 export class Editor extends Base {
     public static inputTypes = {
-        number: "number",
-        currency: "number",
-        indicator: "number",
-        progress: "number",
-        date: "date",
-        datetime: "datetime-local",
     };
-    public static getInputType(type: string) {
-      return Editor.inputTypes[type];
+    public static setInputType(typeName: string, inputType: string) {
+        return Editor.inputTypes[typeName] = inputType;
+    }
+    public static getInputType(typeName: string) {
+      return Editor.inputTypes[typeName];
     }
     public static editors = {
         default: "table4js-default-editor",
-        bool: "table4js-checkbox-editor",
     };
-
+    public static setComponent(typeName: string, componentName: string) {
+        return Editor.editors[typeName] = componentName;
+    }
+    public static getComponent(typeName: string) {
+        return Editor.editors[typeName] || Editor.editors.default;
+    }
+    
     constructor(private _data: any, private name: string) {
         super();
         this.value = _data[this.name];
