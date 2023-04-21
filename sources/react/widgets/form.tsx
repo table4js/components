@@ -2,10 +2,10 @@ import * as React from "react";
 import { registerComponent } from "../abris-component";
 import { AbrisComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { Editor } from "../../core/editor";
-import { Property } from "../../widgets/property";
-import { Form } from "../../widgets/form";
-import { AbrisActions } from "../core/actions";
+import { Editor } from "../../common/shared/editor";
+import { Property } from "../../common/widgets/property";
+import { Form } from "../../common/widgets/form";
+import { AbrisActions } from "../shared/actions";
 
 export interface IFormProps {
   form: Form;

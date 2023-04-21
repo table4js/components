@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ITableProps } from ".";
-import { Table } from "../../table";
-import { SearchModel } from "../../table/search";
+import { Table } from "../../common/table";
+import { SearchModel } from "../../common/table/search";
 import { makeReactive } from "../reactivity";
 import { Table4Search } from "./search";
 

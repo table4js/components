@@ -1,6 +1,6 @@
 import * as ko from "knockout";
-import { Base, HashTableStorage } from "../core/base";
-import { Table } from "../table";
+import { Base, HashTableStorage } from "../common/shared/base";
+import { Table } from "../common/table";
 
 export * from "./table/row";
 export * from "./table/cell";
@@ -13,11 +13,11 @@ export * from "./table/filter-default";
 export * from "./table/column-filter";
 export * from "./table/column-filter-item";
 export * from "./table/filter-select";
-export * from "./core/action";
-export * from "./core/actions";
-export * from "./core/dropdown-actions";
-export * from "./core/elements-container";
-export * from "./core/icon";
+export * from "./shared/action";
+export * from "./shared/actions";
+export * from "./shared/dropdown-actions";
+export * from "./shared/elements-container";
+export * from "./shared/icon";
 
 export * from "./table/cell-editor";
 export * from "./table/row-editor";
@@ -27,7 +27,7 @@ export * from "./widgets/checkbox";
 export * from "./widgets/property";
 export * from "./widgets/form";
 
-export * from "..";
+export * from "../common";
 
 export const KnockoutInstance = ko;
 
@@ -43,24 +43,24 @@ export class KnockoutHashTableStorage extends HashTableStorage {
         return result;
     }
     private createObservable(value: any) {
-        if(Array.isArray(value)) {
+        if (Array.isArray(value)) {
             return ko.observableArray(value);
         }
         return ko.observable(value);
     }
     public getValue(name: string, defaultValue?: any) {
         const value = super.getValue(name, defaultValue);
-        if(!ko.isObservable(value)) {
+        if (!ko.isObservable(value)) {
             this.hash[name] = this.createObservable(value);
         }
         const observable = this.hash[name];
-        if((ko as any).isObservableArray(observable)) { // TODO - remove any cast
+        if ((ko as any).isObservableArray(observable)) { // TODO - remove any cast
             return this.linkArrayToObservable(observable);
         }
         return observable();
     }
     public setValue(name: string, val: any) {
-        if(!ko.isObservable(this.hash[name])) {
+        if (!ko.isObservable(this.hash[name])) {
             this.hash[name] = this.createObservable(this.hash[name]);
         }
         const observable = this.hash[name];
@@ -68,7 +68,7 @@ export class KnockoutHashTableStorage extends HashTableStorage {
     }
     public peekValue(name: string, defaultValue?: any) {
         const value = super.getValue(name, defaultValue);
-        if(!ko.isObservable(value)) {
+        if (!ko.isObservable(value)) {
             this.hash[name] = this.createObservable(value);
         }
         const observable = this.hash[name];
@@ -94,7 +94,7 @@ ko.components.register("table4", {
 
 function renderTable(element: string | Element) {
     let el: Element = element as Element;
-    if(typeof element === "string") {
+    if (typeof element === "string") {
         el = document.querySelectorAll(element)[0];
     }
     el.innerHTML = `<table4 params="{ model: $data }"></table4>`;

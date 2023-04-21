@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { Table } from "../sources/table";
+import { Table } from "../sources/common/table";
 
 const dataProvider: any = {
     getData: (limit, offset, order, key, back, callback) => {

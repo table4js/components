@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TableCell } from "../../table/cell";
+import { TableCell } from "../../common/table/cell";
 
 export var cellTemplate = require("./cell.html").default;
 

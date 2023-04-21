@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Table } from "../../table";
-import { ITableRow } from "../../table/row";
+import { Table } from "../../common/table";
+import { ITableRow } from "../../common/table/row";
 import { AbrisComponent, registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 

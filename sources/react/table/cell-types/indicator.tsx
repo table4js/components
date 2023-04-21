@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IndicatorCell } from "../../../table/cell-types/indicator";
+import { IndicatorCell } from "../../../common/table/cell-types/indicator";
 import { registerComponent } from "../../abris-component";
 import { makeReactive } from "../../reactivity";
 import { ITableContentCellProps } from "./default";

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
-import { Table } from "../../table";
+import { Table } from "../../common/table";
 import { makeReactive } from "../reactivity";
-import { AbrisActions } from "../core/actions";
-import { AbrisDropdownActions } from "../core/dropdown-actions";
+import { AbrisActions } from "../shared/actions";
+import { AbrisDropdownActions } from "../shared/dropdown-actions";
 import { Table4Row } from "./row";
 import { Table4Summary } from "./summary";
 import { Table4Search } from "./search";

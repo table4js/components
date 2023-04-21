@@ -2,7 +2,7 @@ import React = require('react');
 import { fireEvent, render, screen} from '@testing-library/react'
 
 import { Table4Search } from '../../../sources/react/table/search';
-import { SearchModel } from '../../../sources/table/search';
+import { SearchModel } from '../../../sources/common/table/search';
 
 test("Table search render test", () => {
   let model = new SearchModel();

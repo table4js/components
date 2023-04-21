@@ -2,7 +2,7 @@ import React = require('react');
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import { Table4Preheader } from '../../../sources/react/table/preheader';
-import { ITableConfig, Table } from '../../../sources/table';
+import { ITableConfig, Table } from '../../../sources/common/table';
 
 jest.mock("../../../sources/react/table/search", () => ({
   Table4Search: (props) => {

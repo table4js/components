@@ -3,12 +3,12 @@
  * @jest-environment jsdom
  */
 
-import { Table } from "../sources/table";
-import { FieldSummary } from "../sources/table/summary";
+import { Table } from "../sources/common/table";
+import { FieldSummary } from "../sources/common/table/summary";
 
 const dataProvider: any = {
     getData: (limit, offset, order, key, back, callback) => {
-        callback([{col1: 5}]);
+        callback([{ col1: 5 }]);
     },
     getSummary: function (func, field, callback) {
         callback(5);
@@ -17,9 +17,9 @@ const dataProvider: any = {
 
 test("Summary in table", () => {
     const table = new Table(<any>{
-            enableSummary: true,
-            columns: [{ name: "col1", type: "number" }]
-        }, undefined);
+        enableSummary: true,
+        columns: [{ name: "col1", type: "number" }]
+    }, undefined);
     table.dataProvider = dataProvider;
 
     expect(table).toBeDefined();

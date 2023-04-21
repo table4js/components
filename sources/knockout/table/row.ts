@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TableRow } from "../../table/row";
+import { TableRow } from "../../common/table/row";
 
 export var rowTemplate = require("./row.html").default;
 

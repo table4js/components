@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { FilterContext } from "../../table/column-filter";
+import { FilterContext } from "../../common/table/column-filter";
 
 var filterTemplate = require("./column-filter.html").default;
 

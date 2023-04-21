@@ -1,6 +1,6 @@
 import * as ko from "knockout";
-import { TableCell } from "../../table/cell";
-import { Editor } from "../../core/editor";
+import { TableCell } from "../../common/table/cell";
+import { Editor } from "../../common/shared/editor";
 
 export var rowEditorTemplate = require("./row-editor.html").default;
 

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { FilterContext } from "../../table/column-filter";
+import { FilterContext } from "../../common/table/column-filter";
 import { makeReactive } from "../reactivity";
 import { Table4ColumnFilterItem } from "./column-filter-item";
-import * as Icons from "../../icons";
+import * as Icons from "../../common/icons";
 
 export function Table4ColumnFilter({ context }: { context: FilterContext }) {
   makeReactive(context);

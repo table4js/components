@@ -1,7 +1,7 @@
 import * as React from "react";
-import { TableFilterSelect } from "../../table/filter-select";
+import { TableFilterSelect } from "../../common/table/filter-select";
 import { makeReactive } from "../reactivity";
-import * as Icons from "../../icons";
+import * as Icons from "../../common/icons";
 
 export function Table4FilterSelect({
   viewModel,

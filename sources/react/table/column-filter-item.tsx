@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useState } from "react";
-import { FilterContext } from "../../table/column-filter";
+import { FilterContext } from "../../common/table/column-filter";
 import { makeReactive } from "../reactivity";
-import * as Icons from "../../icons";
+import * as Icons from "../../common/icons";
 import { Table4FilterSelect } from "./filter-select";
-import { TableFilterSelect } from "../../table/filter-select";
-import { ColumnFilterItem } from "../../table/column-filter-item";
+import { TableFilterSelect } from "../../common/table/filter-select";
+import { ColumnFilterItem } from "../../common/table/column-filter-item";
 
 export function Table4ColumnFilterItem({
   filterItem,

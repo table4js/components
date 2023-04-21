@@ -1,7 +1,7 @@
 import * as React from "react";
 import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
-import { Form } from "../../widgets/form";
+import { Form } from "../../common/widgets/form";
 import { ITableRowProps, Table4Row } from "./row";
 import { Form4 } from "../widgets/form";
 

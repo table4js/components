@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { SearchModel } from "../../table/search";
+import { SearchModel } from "../../common/table/search";
 
 export var searchTemplate = require("./search.html").default;
 

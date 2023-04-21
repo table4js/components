@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { TableFilterSelect } from "../../table/filter-select"
+import { TableFilterSelect } from "../../common/table/filter-select"
 
 
 var selectboxFilterTemplate = require("./filter-select.html").default;

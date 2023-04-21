@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { Editor } from "../../core/editor";
+import { Editor } from "../../common/shared/editor";
 
 export var defaultEditorTemplate = require("./default.html").default;
 

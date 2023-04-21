@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { TableCell } from "../sources/table/cell";
-import { TableColumn } from "../sources/table/column";
-import { TableRow } from "../sources/table/row";
+import { TableCell } from "../sources/common/table/cell";
+import { TableColumn } from "../sources/common/table/column";
+import { TableRow } from "../sources/common/table/row";
 
 test("Row update", () => {
     const row = new TableRow();

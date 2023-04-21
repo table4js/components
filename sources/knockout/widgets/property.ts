@@ -1,6 +1,6 @@
 import * as ko from "knockout";
-import { Editor } from "../../core/editor";
-import { Property } from "../../widgets/property";
+import { Editor } from "../../common/shared/editor";
+import { Property } from "../../common/widgets/property";
 
 export var propertyEditorTemplate = require("./property.html").default;
 

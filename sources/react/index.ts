@@ -1,4 +1,4 @@
-import { Base, HashTableStorage } from "../core/base";
+import { Base, HashTableStorage } from "../common/shared/base";
 
 export * from "./abris-component";
 export * from "./table";
@@ -12,10 +12,10 @@ export * from "./table/search";
 // export * from "./table/filter-default";
 export * from "./table/column-filter";
 export * from "./table/filter-select";
-export * from "./core/action";
-export * from "./core/actions";
-export * from "./core/dropdown-actions";
-export * from "./core/elements-container";
+export * from "./shared/action";
+export * from "./shared/actions";
+export * from "./shared/dropdown-actions";
+export * from "./shared/elements-container";
 
 export * from "./table/cell-editor";
 export * from "./table/row-editor";
@@ -25,7 +25,7 @@ export * from "./widgets/checkbox";
 export * from "./widgets/property";
 export * from "./widgets/form";
 
-export * from "..";
+export * from "../common";
 
 export class ReactHashTableStorage extends HashTableStorage {
   private linkArrayToObservable(array: Array<any>) {

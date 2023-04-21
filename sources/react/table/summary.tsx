@@ -1,6 +1,6 @@
 import * as React from "react";
-import { ITableColumn } from "../../table/column";
-import { FieldSummary } from "../../table/summary";
+import { ITableColumn } from "../../common/table/column";
+import { FieldSummary } from "../../common/table/summary";
 import { makeReactive } from "../reactivity";
 
 export interface ITableSummaryProps {

@@ -1,6 +1,6 @@
 import * as ko from "knockout";
-import { ITableCell } from "../../../table/cell";
-import { IndicatorCell } from "../../../table/cell-types/indicator";
+import { ITableCell } from "../../../common/table/cell";
+import { IndicatorCell } from "../../../common/table/cell-types/indicator";
 
 export var cellIndicatorTemplate = require("./indicator.html").default;
 

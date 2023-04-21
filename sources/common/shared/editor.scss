@@ -1,0 +1,16 @@
+@import "../_colors";
+
+.table4js__editor {
+    input {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        border: none;
+        background: transparent;
+        box-shadow: 0px 3px 3px -3px #111;
+        width: 100%;
+        &.table4js-editor--modified {
+            box-shadow: 0px 3px 3px -3px gold;
+        }
+    }
+}

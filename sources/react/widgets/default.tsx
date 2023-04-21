@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Editor } from "../../core/editor";
+import { Editor } from "../../common/shared/editor";
 import { registerComponent } from "../abris-component";
 import { makeReactive } from "../reactivity";
 
