@@ -1,6 +1,6 @@
 import { Base } from "../shared/base";
 import { property } from "../shared/property";
-import { IDataProvider, IDataProviderOwner } from "../shared/data-provider";
+import { IDataProvider, IDataProviderOwner } from "../shared/data-provider/data-provider";
 import { ITableColumn } from "./column";
 import { FilterItemValue, ColumnFilterItem } from "./column-filter-item";
 import * as Icons from "../icons";

@@ -9,6 +9,10 @@ export * from "./shared/field-types/datetime";
 export * from "./shared/field-types/number";
 export * from "./shared/find";
 export * from "./shared/editor";
+export * from "./shared/data-provider/data-provider";
+export * from "./shared/data-provider/array-data-provider";
+export * from "./shared/data-provider/remote-data-provider";
+export * from "./shared/utils";
 
 export * from "./table";
 export * from "./table/row";
@@ -36,7 +40,4 @@ export * from "./table/editor";
 export * from "./table/editor-inplace";
 export * from "./table/editor-row";
 
-export * from "./shared/array-data-provider";
-export * from "./shared/remote-data-provider";
-export * from "./shared/utils";
 export * as Icons from "./icons";

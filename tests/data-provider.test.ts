@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { ArrayDataProvider } from "../sources/common/shared/array-data-provider";
+import { ArrayDataProvider } from "../sources/common/shared/data-provider/array-data-provider";
 
 test("CRUD", () => {
     const dataProvider = new ArrayDataProvider([]);

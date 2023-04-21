@@ -7,6 +7,7 @@ import { Localization } from "../localization";
 
 import * as Icons from "../icons"
 import "./editor.scss";
+import { IDataProvider } from "../shared/data-provider/data-provider";
 
 export class EditorPlugin implements ITablePlugin {
     protected _deleteAction: IAction;
@@ -138,5 +139,7 @@ export class EditorPlugin implements ITablePlugin {
     onColumnCreated(column: ITableColumn): void {
     }
     onRowCreated(row: ITableRow): void {
+    }
+    onDataProviderCreated(dataProvider: IDataProvider): void {
     }
 }

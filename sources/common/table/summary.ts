@@ -8,6 +8,7 @@ import { IFieldDescription } from "../shared/domain";
 import { Localization } from "../localization";
 
 import "./summary.scss";
+import { IDataProvider } from "../shared/data-provider/data-provider";
 
 const Functions: Array<{ title: string; value: string; hint: string, types?: string[] }> = [
   { title: "-", value: "", hint: "" },
@@ -68,5 +69,7 @@ export class SummaryPlugin implements ITablePlugin {
     column.summary = new FieldSummary(this._table, column);
   }
   onRowCreated(row: ITableRow): void {
+  }
+  onDataProviderCreated(dataProvider: IDataProvider): void {
   }
 }

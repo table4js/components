@@ -1,5 +1,6 @@
-import { IFilterItem } from "../shared/find";
+import { IFilterItem } from "../find";
 import { IDataProvider } from "./data-provider";
+import { FilterOwner } from "./filter-owner";
 
 export async function postData(url = '', data = {}) {
     // Default options are marked with *
@@ -18,8 +19,9 @@ export async function postData(url = '', data = {}) {
     return await response.json(); // parses JSON response into native JavaScript objects
 }
 
-export class RemoteDataProvider implements IDataProvider {
+export class RemoteDataProvider extends FilterOwner implements IDataProvider {
     constructor(public name: string, public url: string) {
+        super();
     }
 
     getData(limit: number, offset: number, order: any[], key: any, back: boolean, callback: (data: any, start: number, coumt: number, back: boolean) => void) {
@@ -58,6 +60,4 @@ export class RemoteDataProvider implements IDataProvider {
             callback(data.data);
         });
     }
-
-    filter: IFilterItem[] = [];
 }

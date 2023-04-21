@@ -1,7 +1,7 @@
 import { Base } from "../shared/base";
 import { IFieldDescription } from "../shared/domain";
 import { property } from "../shared/property";
-import { IDataProviderOwner } from "../shared/data-provider";
+import { IDataProviderOwner } from "../shared/data-provider/data-provider";
 import { ITableCell } from "./cell";
 import { FilterContext } from "./column-filter";
 

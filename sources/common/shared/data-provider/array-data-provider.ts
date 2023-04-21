@@ -1,8 +1,10 @@
-import { IFilterItem } from "./find";
+import { IFilterItem } from "../find";
 import { IDataProvider } from "./data-provider";
+import { FilterOwner } from "./filter-owner";
 
-export class ArrayDataProvider implements IDataProvider {
+export class ArrayDataProvider extends FilterOwner implements IDataProvider {
     constructor(private _data: Array<any>) {
+        super();
     }
 
     ordered(order: Array<any>, data: Array<any> = []): Array<any> {
@@ -90,6 +92,4 @@ export class ArrayDataProvider implements IDataProvider {
     get data(): Array<any> {
         return this._data;
     }
-
-    filter: IFilterItem[] = [];
 }

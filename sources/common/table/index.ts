@@ -5,8 +5,8 @@ import { ComputedUpdater } from "../shared/dependencies";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, TableColumn } from "./column";
 import { SearchModel } from "./search";
-import { IDataProvider, IDataProviderOwner } from "../shared/data-provider";
-import { ArrayDataProvider } from "../shared/array-data-provider";
+import { IDataProvider, IDataProviderOwner } from "../shared/data-provider/data-provider";
+import { ArrayDataProvider } from "../shared/data-provider/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
 import { FilterItemValue } from "./column-filter-item";
@@ -55,6 +55,7 @@ export interface ITablePlugin {
     onColumnCreated(column: ITableColumn): void;
     onRowCreated(row: ITableRow): void;
     onSelectionChanged?(): void;
+    onDataProviderCreated(dataProvider: IDataProvider): void;
 }
 
 export interface ILayoutElement {
@@ -97,10 +98,9 @@ export class Table extends Base implements IDataProviderOwner {
         const dataProvider = this.dataProvider;
         if (!dataProvider) return;
         const isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
-        dataProvider.filter = newFilter;
         if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
             this.searchModel.prevSearchValue = this.searchModel.searchValue;
-            this.refresh();
+            dataProvider.filter = newFilter;
         }
     }
 
@@ -253,7 +253,12 @@ export class Table extends Base implements IDataProviderOwner {
         return this._dataProvider;
     }
     set dataProvider(provider: IDataProvider) {
+        if (!!this._dataProvider) {
+            this._dataProvider.stopFilterUpdating();
+        }
         this._dataProvider = provider;
+        this.plugins.forEach(plugin => plugin.onDataProviderCreated(this._dataProvider));
+        this._dataProvider.onFilterChanged = () => this.refresh();
         this.refresh();
     }
 
