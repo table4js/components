@@ -13,6 +13,7 @@ export * from "./table/filter-default";
 export * from "./table/column-filter";
 export * from "./table/column-filter-item";
 export * from "./table/filter-select";
+export * from "./table/filter";
 export * from "./shared/action";
 export * from "./shared/actions";
 export * from "./shared/dropdown-actions";

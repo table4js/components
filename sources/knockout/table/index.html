@@ -4,31 +4,22 @@
       <thead class="table4js__header table4js-sticky-component">
         <tr class="table4js-header-tools">
           <th class="table4js-header-tools__cell" colspan="100%">
-            <div class="table4js-header-tools__container table4js-group-header-technical-cell">
-              <div class="table4js-preheader">
-                <div class="table4js-preheader__first-row">
-                  <!-- ko if: showSearch -->
-                  <table4js-search params="model: searchModel, icon: icons.search"></table4js-search>
-                  <!-- /ko -->
-                  <table4js-actions class="table4js-actions" params="model: $data, options: { action: 'topActions' }">
-                  </table4js-actions>
-                  <!-- ko if: $data.getActions('dropdownActions').length > 0 -->
-                  <table4js-dropdown-actions class="table4js-dropdown table4js-actions-menu"
-                    params="data: $data, actions: 'dropdownActions'">
-                  </table4js-dropdown-actions>
-                  <!-- /ko -->
-                </div>
+            <div class="table4js-header-tools__container table4js-group-header-technical-cell">     
+              <div class="table4js-preheader__first-row">
+                <!-- ko component: { name: 'table4js-elements', params: { elements: getLayoutElements("preHeaderFirstRow") } } -->
+                <!-- /ko -->
+                <table4js-actions class="table4js-actions" params="model: $data, options: { action: 'topActions' }">
+                </table4js-actions>
+                <!-- ko if: $data.getActions('dropdownActions').length > 0 -->
+                <table4js-dropdown-actions class="table4js-dropdown table4js-actions-menu"
+                  params="data: $data, actions: 'dropdownActions'">
+                </table4js-dropdown-actions>
+                <!-- /ko -->
               </div>
-              <!-- ko if: viewFilterTable -->
-              <div class="table4js-filter">
-                <div class="table4js-filter__container">
-                  <!-- ko foreach: columns -->
-                  <!-- ko component: { name: 'table4js-column-filter', params: { context: filterContext } } -->
-                  <!-- /ko -->
-                  <!-- /ko -->
-                </div>
+              <div class="table4js-preheader__second-row">
+                <!-- ko component: { name: 'table4js-elements', params: { elements: getLayoutElements("preHeaderSecondRow") } } -->
+                <!-- /ko -->
               </div>
-              <!-- /ko -->
             </div>
           </th>
         </tr>
@@ -47,7 +38,9 @@
               <div class="table4js-title__tools">
                 <div class="table4js-svg-icon table4js-title__sorter" data-bind="visible: order === false, html: $parent.icons.sortup"></div>
                 <div class="table4js-svg-icon table4js-title__sorter" data-bind="visible: order === true, html: $parent.icons.sortdown"></div>
-                <div class="table4js-svg-icon table4js-title__filter" data-bind="click: filterContext.clickFilter, html: $parent.icons.filter"></div>
+                <!-- ko foreach: $parent.columnHeaderActions -->
+                  <div class="table4js-svg-icon" data-bind="html: $data.svg, css: $data.cssClasses, click: function(m, e) { $data.action($parent); e.stopPropagation(); }, attr: { title: $data.title }"></div>
+                <!-- /ko -->
               </div>
             </div>
             <div class="table4js-title_resize"

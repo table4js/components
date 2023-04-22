@@ -16,25 +16,23 @@ export class FilterContext extends Base {
   @property() value: any;
   @property({ defaultValue: [] }) filterItems: Array<ColumnFilterItem>;
 
-  apply() {
+  public apply() {
     this.value = this.filterItems.map(item => item.getFilterValue());
+    this.dataProviderOwner.dataProvider.updateFilter();
   }
-  addItem = (column: ITableColumn) => {
+  public addItem = (column: ITableColumn) => {
     // filterValue.op.subscribe(o => {if(o === "EQ") filterValue.value(null); this.apply()});
-    this.filterItems.push(new ColumnFilterItem(this.column, (column, filter, limit, offset, callback) => {
+    this.filterItems.push(new ColumnFilterItem(this, this.column, (column, filter, limit, offset, callback) => {
       this.dataProviderOwner.dataProvider.getColumnData(column, filter, limit, offset, callback);
     }));
     this.showFilter = true;
   };
-  removeItem = (item: ColumnFilterItem) => {
+  public removeItem = (item: ColumnFilterItem) => {
     const currentFilterItems = this.filterItems;
     currentFilterItems.splice(currentFilterItems.indexOf(item), 1);
     this.showFilter = !!currentFilterItems.length;
     this.value = currentFilterItems.map(i => i.filterItemValue);
-  }
-  public clickFilter = (column: ITableColumn, event: MouseEvent | any) => {
-    column.filterContext.addItem(column);
-    event.stopPropagation();
+    this.dataProviderOwner.dataProvider.updateFilter();
   }
   removeItemIcon = Icons.cross;
 }

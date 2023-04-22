@@ -6,18 +6,18 @@ export var searchTemplate = require("./search.html").default;
 ko.components.register("table4js-search", {
     viewModel: {
         createViewModel: function (params, componentInfo) {
-            var model = ko.unwrap(params.model);
-            var searchModel: SearchModel = model[params.options?.data] || model;
-            var searchText = params.options?.text && model[params.options.text] || ko.observable();
+            const searchModel = ko.unwrap(params.searchModel);
+            const searchText = ko.observable();
+            const inputElement = componentInfo.element.nextSibling.children[0];
             const process = event => {
                 if (event.keyCode === 13) searchModel.search(searchText());
             };
-            componentInfo.element.addEventListener('keyup', process);
+            inputElement.addEventListener('keyup', process);
             return {
                 icon: params.icon,
                 value: searchText,
                 refresh: () => { searchModel.search(searchText()); },
-                dispose: () => componentInfo.element.removeEventListener('keyup', process)
+                dispose: () => inputElement.removeEventListener('keyup', process)
             };
         }
     },

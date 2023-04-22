@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { FilterContext } from "../../common/table/column-filter";
 import { makeReactive } from "../reactivity";
-import * as Icons from "../../common/icons";
 import { Table4FilterSelect } from "./filter-select";
 import { TableFilterSelect } from "../../common/table/filter-select";
 import { ColumnFilterItem } from "../../common/table/column-filter-item";

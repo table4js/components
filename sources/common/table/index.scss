@@ -111,16 +111,16 @@ button {
   border: 1px solid var(--abc-primary-1-dark-7, $abc-primary-1-dark-7);
 }
 
-.table4js-preheader {
+.table4js-preheader__first-row {
   display: flex;
-  align-items: center;
   padding: 6px;
 }
 
-.table4js-preheader__first-row {
+.table4js-preheader__second-row {
   display: flex;
-  flex-grow: 1;
-  margin-right: 25px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 6px;
 }
 
 .table4js-advanced-settings {

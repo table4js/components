@@ -4,16 +4,17 @@ import { Action, IAction } from "../shared/action";
 import { ComputedUpdater } from "../shared/dependencies";
 import { ITableCell, TableCell } from "./cell";
 import { ITableColumn, TableColumn } from "./column";
-import { SearchModel } from "./search";
 import { IDataProvider, IDataProviderOwner } from "../shared/data-provider/data-provider";
 import { ArrayDataProvider } from "../shared/data-provider/array-data-provider";
 import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
-import { FilterItemValue } from "./column-filter-item";
+import { IFieldDescription } from "../shared/domain";
+
 import { SummaryPlugin } from "./summary";
 import { InplaceEditorPlugin } from "./editor-inplace";
 import { RowEditorPlugin } from "./editor-row";
-import { IFieldDescription } from "../shared/domain";
+import { SearchPlugin } from "./search";
+import { FilterPlugin } from "./filter";
 
 import * as Icons from "../icons";
 import "./index.scss";
@@ -73,36 +74,9 @@ export class Table extends Base implements IDataProviderOwner {
     private element: HTMLElement;
     protected _detachHandler: () => void = undefined;
     private innerActions: Array<IAction> = [];
-    private filterUpdater: ComputedUpdater;
     public icons = Icons;
 
     public static rowHeight = 20; // TODO: we need to calculate row height somehow beforehand
-
-    private updateByFilter() {
-        const newFilter = [];
-        if (this.searchModel.searchValue) {
-            newFilter.push({ value: this.searchModel.searchValue, op: "C", field: null });
-        }
-        this.columns.forEach(column => {
-            let columnFilterValue = column.filterContext.value;
-            if (columnFilterValue) {
-                columnFilterValue.forEach((fiv: FilterItemValue) => {
-                    const op = fiv.op;
-                    const val = fiv.value;
-                    if ((op === "EQ" && val) || (op === "C" && val) || (op === "ISN") || (op === "ISNN")) {
-                        newFilter.push({ value: val, op: op, field: fiv.field });
-                    }
-                });
-            }
-        });
-        const dataProvider = this.dataProvider;
-        if (!dataProvider) return;
-        const isOldFilter = (dataProvider.filter && dataProvider.filter.length > 0);
-        if ((dataProvider.filter.length > 0) || (isOldFilter && dataProvider.filter.length === 0)) {
-            this.searchModel.prevSearchValue = this.searchModel.searchValue;
-            dataProvider.filter = newFilter;
-        }
-    }
 
     constructor(public config: ITableConfig, element?: HTMLElement) {
         super();
@@ -113,6 +87,10 @@ export class Table extends Base implements IDataProviderOwner {
         }
 
         if (this.plugins.length === 0) {
+            this.plugins.push(new FilterPlugin());
+            if (config.enableSearch === true) {
+                this.plugins.push(new SearchPlugin());
+            }
             if (config.enableSummary === true) {
                 this.plugins.push(new SummaryPlugin());
             }
@@ -136,10 +114,6 @@ export class Table extends Base implements IDataProviderOwner {
 
         this.createActions(this.config);
         this.createColumns(this.config);
-
-        this.filterUpdater = new ComputedUpdater(() => this.updateByFilter());
-        this.filterUpdater.observe(this, "__filterUpdaterValue"); // TODO: make it elegant
-        this.searchModel.updater = () => this.updateByFilter();
 
         this.isMergedCells = config.enableMergedCells;
 
@@ -221,7 +195,7 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     protected createColumn(column: any, model: ITableConfig): ITableColumn {
-        return new TableColumn(column, this);
+        return new TableColumn(column);
     }
 
     protected createColumns(config: ITableConfig) {
@@ -434,11 +408,7 @@ export class Table extends Base implements IDataProviderOwner {
     @property({ defaultValue: true }) loadMore: boolean;
     @property({ defaultValue: false }) loadMoreBack: boolean;
 
-    @property({
-        defaultValue: [], onSet: (val: ITableColumn[], target: Table) => {
-            target.viewFilterTable = new ComputedUpdater(() => val.filter(c => c.filterContext.showFilter).length > 0) as any;
-        }
-    }) columns: Array<ITableColumn>;
+    @property({ defaultValue: [] }) columns: Array<ITableColumn>;
     get keyColumn(): string {
         return this.config.keyColumn;
     }
@@ -456,12 +426,9 @@ export class Table extends Base implements IDataProviderOwner {
     lastSelectRow = null;
     @property({ defaultValue: 0 }) totalCount: number;
     @property({ defaultValue: 0 }) tableHeadHeight: number;
-    @property({ defaultValue: false }) viewFilterTable: boolean; // TODO: rename to showTableFilter
     @property({ defaultValue: true }) allowRowSelection: boolean;
     // expandedRowKey;
     editMode: "inplace" | "row" | "aside" = "inplace";
-
-    searchModel = new SearchModel();
 
     getActions = (container?: string) => {
         const actions = [].concat(this.innerActions).concat(this.config.actions || []);

@@ -4,22 +4,21 @@ import { IFindOperation, operationsMap } from "../shared/find";
 import { ITableColumn } from "./column";
 
 export class FilterItemValue extends Base {
-  constructor(private column: ITableColumn) {
+  constructor(private filterContext, public field: string) {
     super();
-    this.field = column.name;
   }
-  @property({ onSet: (val, target: FilterItemValue) => target.column.filterContext.apply() }) value: any;
-  @property({ onSet: (val, target: FilterItemValue) => target.column.filterContext.apply() }) op: string;
-  field: string;
+  @property({ onSet: (val, target: FilterItemValue) => target.filterContext.apply() }) value: any;
+  @property({ onSet: (val, target: FilterItemValue) => target.filterContext.apply() }) op: string;
 }
 
 export class ColumnFilterItem extends Base {
   constructor(
-    public column: any,
-    public getColumnData
+    public filterContext: any,
+    public column: ITableColumn,
+    public getColumnData: any
   ) {
     super();
-    this.filterItemValue = new FilterItemValue(column);
+    this.filterItemValue = new FilterItemValue(filterContext, column.name);
     if (operationsMap[this.column.type]) {
       this.operations = operationsMap[this.column.type];
     }

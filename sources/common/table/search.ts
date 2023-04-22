@@ -9,14 +9,14 @@ import { IFilterItem } from "../shared/find";
 import { IDataProvider } from "../shared/data-provider/data-provider";
 
 import "./search.scss";
+import { search } from "../icons";
 
 export class SearchModel extends Base implements IFilterProvider {
     private _filterOwner: IFilterOwner;
     public search = (text: string) => {
-        if (this.prevSearchValue !== this.searchValue) {
+        if (this.prevSearchValue !== text) {
             this.prevSearchValue = this.searchValue;
             this.searchValue = text;
-            this.updater && this.updater();
             if (!!this._filterOwner) {
                 this._filterOwner.updateFilter();
             }
@@ -24,8 +24,8 @@ export class SearchModel extends Base implements IFilterProvider {
     }
     public setFilterOwner(filterOwner: IFilterOwner) {
         this._filterOwner = filterOwner;
+        !!this._filterOwner && this._filterOwner.addFilterProvider(this);
     }
-    public updater: () => void;
     @property() public prevSearchValue: string;
     @property() public searchValue: string;
     public getFilter(): IFilterItem[] {
@@ -47,8 +47,11 @@ export class SearchPlugin implements ITablePlugin {
         this._table.addLayoutElement({
             name: "table-search",
             container: "preHeaderFirstRow",
-            data: this._searchModel,
-            component: "table4-search-addon"
+            data: {
+                icon: search,
+                searchModel: this._searchModel,
+            },
+            component: "table4js-search"
         });
     }
     getActions(): IAction[] {

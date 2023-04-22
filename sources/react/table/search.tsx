@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useState } from "react";
-import { Table } from "../../common/table";
+import { useEffect, useRef } from "react";
 import { SearchModel } from "../../common/table/search";
 import { makeReactive } from "../reactivity";
+import { registerComponent } from "../abris-component";
 
 export interface ITable4SearchProps {
   icon: any;
@@ -11,9 +11,17 @@ export interface ITable4SearchProps {
 
 export function Table4Search({ icon, searchModel }: ITable4SearchProps) {
   makeReactive(searchModel);
+  const inputRef = useRef(null);
+  const process = event => {
+      if (event.keyCode === 13) searchModel.search(inputRef.current.value);
+  };
+  useEffect(() => {
+    inputRef.current.addEventListener('keyup', process);
+    return () => inputRef.current.removeEventListener('keyup', process);
+  });
   return (
     <div className="table4js-search">
-      <input
+      <input ref={inputRef} 
         defaultValue={searchModel.searchValue}
         onChange={(event) => {
           searchModel.searchValue = event.target.value;
@@ -34,3 +42,5 @@ export function Table4Search({ icon, searchModel }: ITable4SearchProps) {
     </div>
   );
 }
+
+registerComponent("table4js-search", Table4Search);

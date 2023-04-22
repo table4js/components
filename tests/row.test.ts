@@ -12,7 +12,7 @@ test("Row update", () => {
         "f1": 0
     };
     const cell = new TableCell();
-    const column = new TableColumn(<any>{ name: "f1" }, null);
+    const column = new TableColumn(<any>{ name: "f1" });
     cell.initialize(column, row.rowData);
     row.cells = [cell];
     expect(cell.data).toBe(0);

@@ -1,0 +1,10 @@
+<!-- ko if: filterModel.visible -->
+<div class="table4js-filter">
+    <div class="table4js-filter__container">
+        <!-- ko foreach: filterModel.filters -->
+            <!-- ko component: { name: 'table4js-column-filter', params: { context: $data } } -->
+            <!-- /ko -->
+        <!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->

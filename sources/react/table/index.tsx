@@ -10,6 +10,7 @@ import { Table4Search } from "./search";
 import { Table4ColumnFilter } from "./column-filter";
 import { AbrisComponent } from "../abris-component";
 import { Table4RowWrapper } from "./row-wrapper";
+import { ElementsContainer } from "../shared/elements-container";
 
 function EmptyTable() {
   return (
@@ -82,39 +83,23 @@ export function Table4({ model }: ITableProps) {
                   colSpan={"100%" as any}
                 >
                   <div className="table4js-header-tools__container table4js-group-header-technical-cell">
-                    <div className="table4js-preheader">
-                      <div className="table4js-preheader__first-row">
-                        {model.showSearch ? (
-                          <Table4Search
-                            icon={model.icons.search}
-                            searchModel={model.searchModel}
-                          ></Table4Search>
-                        ) : null}
-                        <AbrisActions
-                          className="table4js-actions"
-                          actions={model.topActions}
+                    <div className="table4js-preheader__first-row">
+                      <ElementsContainer elements={model.getLayoutElements("preHeaderFirstRow")}></ElementsContainer>
+                      <AbrisActions
+                        className="table4js-actions"
+                        actions={model.topActions}
+                      />
+                      {model.dropdownActions.length > 0 && (
+                        <AbrisDropdownActions
+                          title=""
+                          className="table4js-dropdown table4js-actions-menu"
+                          actions={model.dropdownActions}
                         />
-                        {model.dropdownActions.length > 0 && (
-                          <AbrisDropdownActions
-                            title=""
-                            className="table4js-dropdown table4js-actions-menu"
-                            actions={model.dropdownActions}
-                          />
-                        )}
-                      </div>
+                      )}
                     </div>
-                    {model.viewFilterTable && (
-                      <div className="table4js-filter">
-                        <div className="table4js-filter__container">
-                          {model.columns.map((c) => (
-                            <Table4ColumnFilter
-                              key={c.name}
-                              context={c.filterContext}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                    <div className="table4js-preheader__second-row">
+                      <ElementsContainer elements={model.getLayoutElements("preHeaderSecondRow")}></ElementsContainer>
+                    </div>
                   </div>
                 </th>
               </tr>
@@ -174,13 +159,19 @@ export function Table4({ model }: ITableProps) {
                               __html: model.icons.sortdown,
                             }}
                           ></div>
-                          <div
-                            className="table4js-svg-icon table4js-title__filter"
-                            onClick={(e) => c.filterContext.clickFilter(c, e.nativeEvent)}
-                            dangerouslySetInnerHTML={{
-                              __html: model.icons.filter,
-                            }}
-                          ></div>
+                          {
+                            model.columnHeaderActions.map(action => {
+                              return <div key={action.name}
+                                className={"table4js-svg-icon " + action.cssClasses}
+                                dangerouslySetInnerHTML={{ __html: action.svg }}
+                                onClick={(e) => {
+                                  action.action(c);
+                                  e.stopPropagation();
+                                }}
+                                title={action.title}
+                              ></div>;
+                            })
+                          }
                         </div>
                       </div>
                       <div

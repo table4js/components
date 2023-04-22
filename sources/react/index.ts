@@ -9,7 +9,7 @@ export * from "./table/cell-types/progress";
 export * from "./table/row";
 export * from "./table/summary";
 export * from "./table/search";
-// export * from "./table/filter-default";
+export * from "./table/filter";
 export * from "./table/column-filter";
 export * from "./table/filter-select";
 export * from "./shared/action";

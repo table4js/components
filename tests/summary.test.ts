@@ -12,7 +12,8 @@ const dataProvider: any = {
     },
     getSummary: function (func, field, callback) {
         callback(5);
-    }
+    },
+    addFilterProvider: (_: any) => { }
 }
 
 test("Summary in table", () => {

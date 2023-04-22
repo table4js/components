@@ -7,7 +7,7 @@ import { Table } from "../sources/common/table";
 const dataProvider: any = {
     getData: (limit, offset, order, key, back, callback) => {
         callback([]);
-    },
+    }
 }
 
 test("Constructor", () => {
@@ -33,6 +33,7 @@ test("Change order", () => {
             orderLog = JSON.stringify(order);
             callback([]);
         },
+        addFilterProvider: (_: any) => { }
     };
     const col1 = table.columns[0];
     const col2 = table.columns[1];

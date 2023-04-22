@@ -9,18 +9,23 @@ import { IFilterItem } from "../shared/find";
 import { IDataProvider } from "../shared/data-provider/data-provider";
 import { FilterContext } from "./column-filter";
 import { FilterItemValue } from "./column-filter-item";
+import { Localization } from "../localization";
+import { filter } from "../icons";
+import { ComputedUpdater } from "../shared/dependencies";
 
-export class FilterModel implements IFilterProvider {
+export class FilterModel extends Base implements IFilterProvider {
     private _filterOwner: IFilterOwner;
     constructor(private _table: Table) {
+        super();
     }
     public setFilterOwner(filterOwner: IFilterOwner) {
         this._filterOwner = filterOwner;
+        !!this._filterOwner && this._filterOwner.addFilterProvider(this);
     }
     public getFilter(): IFilterItem[] {
         const newFilter = [];
-        this._table.columns.forEach(column => {
-            let columnFilterValue = column.filterContext.value;
+        this.filters.forEach(filterContext => {
+            let columnFilterValue = filterContext.value;
             if (columnFilterValue) {
                 columnFilterValue.forEach((fiv: FilterItemValue) => {
                     const op = fiv.op;
@@ -33,6 +38,9 @@ export class FilterModel implements IFilterProvider {
         });
         return newFilter;
     }
+
+    @property({ defaultValue: false }) visible: boolean;
+    filters: Array<FilterContext> = [];
 }
 
 export class FilterPlugin implements ITablePlugin {
@@ -46,15 +54,31 @@ export class FilterPlugin implements ITablePlugin {
         this._table.addLayoutElement({
             name: "table-filter",
             container: "preHeaderSecondRow",
-            data: this._filterModel,
-            component: "table4-filter-addon"
+            data: {
+                filterModel: this._filterModel
+            },
+            component: "table4js-filter"
         });
     }
     getActions(): IAction[] {
-        return [];
+        return [new Action({
+            name: "filter-action",
+            title: Localization.getString("filter"),
+            cssClasses: "table4js-title__filter",
+            short: true,
+            action: (column) => {
+                const filterContext = this._filterModel.filters.filter(f => f.column.name === column.name)[0];
+                if(!!filterContext) {
+                    filterContext.addItem(column);
+                }
+            },
+            svg: filter,
+            container: "header"
+          })];
     }
     onColumnCreated(column: ITableColumn): void {
-        column.filterContext = new FilterContext(column, this._table);
+        this._filterModel.filters.push(new FilterContext(column, this._table));
+        this._filterModel.visible = <any>new ComputedUpdater(() => this._filterModel.filters.some(f => f.showFilter));
     }
     onRowCreated(row: ITableRow): void {
     }
