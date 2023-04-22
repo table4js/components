@@ -18,13 +18,6 @@ export * from "./table";
 export * from "./table/row";
 export * from "./table/cell";
 export * from "./table/column";
-export * from "./table/summary";
-export * from "./table/search";
-export * from "./table/filter";
-export * from "./table/column-filter";
-export * from "./table/column-filter-item";
-export * from "./table/filter-default";
-export * from "./table/filter-select";
 
 export * from "./table/cell-types/bool";
 export * from "./table/cell-types/currency";
@@ -37,8 +30,15 @@ export * from "./table/cell-types/progress";
 export * from "./widgets/property";
 export * from "./widgets/form";
 
-export * from "./table/editor";
-export * from "./table/editor-inplace";
-export * from "./table/editor-row";
+export * from "./table/plugins/summary";
+export * from "./table/plugins/search";
+export * from "./table/plugins/filter/filter";
+export * from "./table/plugins/filter/column-filter";
+export * from "./table/plugins/filter/column-filter-item";
+export * from "./table/plugins/filter/filter-default";
+export * from "./table/plugins/filter/filter-select";
+export * from "./table/plugins/editor/editor";
+export * from "./table/plugins/editor/editor-inplace";
+export * from "./table/plugins/editor/editor-row";
 
 export * as Icons from "./icons";

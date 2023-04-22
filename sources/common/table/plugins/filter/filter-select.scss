@@ -1,0 +1,130 @@
+@import "../../../_colors";
+
+table4js-filter-select, .table4js-filter-select {
+  white-space: nowrap;
+  padding: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 105px;
+  height: 24px;
+  border: none;
+  border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+}
+
+.table4js-select-selection {
+  flex-grow: 1;
+  display: flex;
+}
+
+.table4js-select-selection-item {
+  display: flex;
+  align-items: center;
+  width: min-content;
+  padding: 3px;
+  background: var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+  border-radius: 4px; 
+  margin-bottom: 2px;
+  margin-right: 5px;
+}
+
+.table4js-select-item-title {
+  margin-right: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+.table4js-select-item-close.table4js-select-item-close {
+  fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+  width: 8px;
+  height: 16px;
+  cursor: pointer;
+
+  &:hover {
+    fill: var(--abc-primary-0, $abc-primary-0);
+  }
+}
+
+.table4js-select-button.table4js-select-button {
+  fill: var(--abc-primary-0, $abc-primary-0);
+  width: 12px;
+  height: 12px;
+}
+
+.table4js-select__dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  max-height: 250px;
+  padding: 5px;
+  overflow-y: auto;
+}
+
+.table4js-select__dropdown-search-container {
+  position: sticky;
+  top: -5px;
+  background: linear-gradient(0deg, transparent, var(--abc-primary-1, $abc-primary-1) 10%);
+  margin: -5px;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+.table4js-select__dropdown-search {
+  @include mx-form-control;
+
+  &:focus {
+    @include mx-form-control-focus;
+  }
+}
+
+.table4js-select__dropdown-item {
+  display: flex;
+  padding: 5px;
+  border-bottom: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+
+
+.table4js-select__dropdown-hide-check {
+  display: none;
+
+  &:checked + .table4js-select__dropdown-check {
+    fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+  }
+}
+
+.table4js-select__dropdown-check {
+  border: 1px solid var(--abc-primary-0-op-15, $abc-primary-0-op-15);
+  border-radius: 4px;
+  margin-right: 5px;
+  width: 17px;
+  height: 17px;
+  fill: transparent;
+}
+
+.table4js-select__dropdown-button {
+  border: none;
+  background: none;
+  padding: 5px;
+  color: var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+  }
+}
+
+.table4js-select__dropdown-label {
+  max-width: 300px;
+  white-space: break-spaces;
+  text-align: left;
+}

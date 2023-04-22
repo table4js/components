@@ -1,0 +1,72 @@
+@import "../../../_colors";
+
+.table4js-filter-item {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+  height: 34px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background: var(--abc-primary-1-dark-8, $abc-primary-1-dark-8);
+  border-radius: 20px;
+}
+
+.table4js-filter-text {
+  color: var(--abc-primary-0, $abc-primary-0);
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 5px;
+  width: auto;
+  min-width: fit-content;
+}
+
+.table4js-filter__operator {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.table4js-filter___operation {
+  height: 24px;
+  background: none;
+  border: none;
+  width: 105px;
+  border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+  padding: 2px 0;
+}
+
+.table4js-filter__operand input {
+  width: 105px !important;
+  max-width: 105px;
+  height: 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--abc-primary-0-op-30, $abc-primary-0-op-30);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.table4js-filter__remove {
+  display: flex;
+  cursor: pointer;
+  margin-left: 5px;
+  width: 12px;
+  height: 12px;
+}
+
+.table4js-filter__remove-icon.table4js-filter__remove-icon {
+  width: 12px;
+  height: 12px;
+  fill: var(--abc-primary-0-op-65, $abc-primary-0-op-65);
+  padding-top: 4px;
+
+  &:hover {
+    fill: var(--abc-primary-0, $abc-primary-0);
+  }
+}
+
+
+.table4js-filter__content {
+  display: flex;
+}

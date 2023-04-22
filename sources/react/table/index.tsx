@@ -5,11 +5,11 @@ import { makeReactive } from "../reactivity";
 import { AbrisActions } from "../shared/actions";
 import { AbrisDropdownActions } from "../shared/dropdown-actions";
 import { Table4Row } from "./row";
-import { Table4Summary } from "./summary";
-import { Table4Search } from "./search";
-import { Table4ColumnFilter } from "./column-filter";
 import { AbrisComponent } from "../abris-component";
 import { Table4RowWrapper } from "./row-wrapper";
+import { Table4Summary } from "./plugins/summary";
+import { Table4Search } from "./plugins/search";
+import { Table4ColumnFilter } from "./plugins/filter/column-filter";
 import { ElementsContainer } from "../shared/elements-container";
 
 function EmptyTable() {

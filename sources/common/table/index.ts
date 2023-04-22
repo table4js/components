@@ -10,11 +10,11 @@ import { ITableRow, ITableRowData, TableRow } from "./row";
 import { Localization } from "../localization";
 import { IFieldDescription } from "../shared/domain";
 
-import { SummaryPlugin } from "./summary";
-import { InplaceEditorPlugin } from "./editor-inplace";
-import { RowEditorPlugin } from "./editor-row";
-import { SearchPlugin } from "./search";
-import { FilterPlugin } from "./filter";
+import { SummaryPlugin } from "./plugins/summary";
+import { InplaceEditorPlugin } from "./plugins/editor/editor-inplace";
+import { RowEditorPlugin } from "./plugins/editor/editor-row";
+import { SearchPlugin } from "./plugins/search";
+import { FilterPlugin } from "./plugins/filter/filter";
 
 import * as Icons from "../icons";
 import "./index.scss";

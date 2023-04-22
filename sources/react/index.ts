@@ -7,18 +7,18 @@ export * from "./table/cell-types/default";
 export * from "./table/cell-types/indicator";
 export * from "./table/cell-types/progress";
 export * from "./table/row";
-export * from "./table/summary";
-export * from "./table/search";
-export * from "./table/filter";
-export * from "./table/column-filter";
-export * from "./table/filter-select";
 export * from "./shared/action";
 export * from "./shared/actions";
 export * from "./shared/dropdown-actions";
 export * from "./shared/elements-container";
 
-export * from "./table/cell-editor";
-export * from "./table/row-editor";
+export * from "./table/plugins/summary";
+export * from "./table/plugins/search";
+export * from "./table/plugins/filter/filter";
+export * from "./table/plugins/filter/column-filter";
+export * from "./table/plugins/filter/filter-select";
+export * from "./table/plugins/editor/cell-editor";
+export * from "./table/plugins/editor/row-editor";
 
 export * from "./widgets/default";
 export * from "./widgets/checkbox";

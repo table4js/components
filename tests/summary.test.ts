@@ -4,7 +4,7 @@
  */
 
 import { Table } from "../sources/common/table";
-import { FieldSummary } from "../sources/common/table/summary";
+import { FieldSummary } from "../sources/common/table/plugins/summary";
 
 const dataProvider: any = {
     getData: (limit, offset, order, key, back, callback) => {
