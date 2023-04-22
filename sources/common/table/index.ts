@@ -25,8 +25,14 @@ import "./index.scss";
 export interface ITableConfig {
     /** Description of columns */
     columns: Array<IFieldDescription>;
+    /** The key field of the table. Needed to edit the table. */
+    keyColumn?: string;
+    /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
+    selectCellColor?: string;
     /** Allows display the search bar */
     enableSearch?: boolean;
+    /** Allows filtering data by columns */
+    enableFilter?: boolean;
     /** Allows display summary panel */
     enableSummary?: boolean;
     /** Allows display merged cells toggle */
@@ -41,10 +47,6 @@ export interface ITableConfig {
     allowRowSelection?: boolean;
     /** Actions to display in the table actions panel */
     actions?: Array<IAction>;
-    /** The key field of the table. Needed to edit the table. */
-    keyColumn?: string;
-    /** Setting the color for selected cells in case the selection is set using an attached boolean column. The color is set according to the rules of CSS. */
-    selectCellColor?: string;
     /** Table plugins array */
     plugins?: Array<ITablePlugin>;
 }
@@ -86,21 +88,21 @@ export class Table extends Base implements IDataProviderOwner {
             this.editMode = config.editMode;
         }
 
-        if (this.plugins.length === 0) {
+        if (config.enableFilter === undefined || config.enableFilter === true) {
             this.plugins.push(new FilterPlugin());
-            if (config.enableSearch === true) {
-                this.plugins.push(new SearchPlugin());
+        }
+        if (config.enableSearch === undefined || config.enableSearch === true) {
+            this.plugins.push(new SearchPlugin());
+        }
+        if (config.enableSummary === true) {
+            this.plugins.push(new SummaryPlugin());
+        }
+        if (config.enableEdit === true) {
+            if (this.editMode === "inplace") {
+                this.plugins.push(new InplaceEditorPlugin());
             }
-            if (config.enableSummary === true) {
-                this.plugins.push(new SummaryPlugin());
-            }
-            if (config.enableEdit === true) {
-                if (this.editMode === "inplace") {
-                    this.plugins.push(new InplaceEditorPlugin());
-                }
-                if (this.editMode === "row") {
-                    this.plugins.push(new RowEditorPlugin());
-                }
+            if (this.editMode === "row") {
+                this.plugins.push(new RowEditorPlugin());
             }
         }
 
