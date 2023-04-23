@@ -251,7 +251,7 @@ export class Table extends Base implements IDataProviderOwner {
     }
 
     protected loadRowsBatch(limit: number, offset: number, back = false) {
-        if (!!this.dataProvider && !this.loadingMutex) {
+        if (!!this.element && !!this.dataProvider && !this.loadingMutex) {
             this.loadingMutex = true;
             this.dataProvider.getData(
                 limit,

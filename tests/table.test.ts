@@ -27,6 +27,7 @@ test("Pass key field", () => {
 
 test("Change order", () => {
     const table = new Table(<any>{ columns: [{ name: "col1" }, { name: "col2" }], keyColumn: "col1" });
+    (<any>table)["element"] = {};
     let orderLog = "";
     table.dataProvider = <any>{
         getData: (limit, offset, order, key, back, callback) => {
