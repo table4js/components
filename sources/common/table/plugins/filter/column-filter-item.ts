@@ -1,7 +1,7 @@
 import { Base } from "../../../shared/base";
 import { property } from "../../../shared/property";
+import { IFieldDescription } from "../../../shared/domain";
 import { IFindOperation, operationsMap } from "../../../shared/filter";
-import { ITableColumn } from "../../column";
 
 export class FilterItemValue extends Base {
   constructor(private filterContext, public field: string) {
@@ -14,7 +14,7 @@ export class FilterItemValue extends Base {
 export class ColumnFilterItem extends Base {
   constructor(
     public filterContext: any,
-    public column: ITableColumn,
+    public column: IFieldDescription,
     public getColumnData: any
   ) {
     super();
