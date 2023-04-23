@@ -8,53 +8,19 @@ import { Table4Row } from "./row";
 import { AbrisComponent } from "../abris-component";
 import { Table4RowWrapper } from "./row-wrapper";
 import { Table4Summary } from "./plugins/summary";
-import { Table4Search } from "./plugins/search";
-import { Table4ColumnFilter } from "./plugins/filter/column-filter";
 import { ElementsContainer } from "../shared/elements-container";
+import { LoadingIndicator } from "./loading-indicator";
 
-function EmptyTable() {
+function EmptyTable(table: Table) {
   return (
     <tr className="table4js__row">
       <td
         className="table4js-cell"
         colSpan={"100%" as any}
-        data-bind="text: noDataText"
       >
-        noData
+        {table.noDataText}
       </td>
     </tr>
-  );
-}
-
-function LoadingIndicator(table: Table) {
-  const visibleColumns = table.columns.filter((c) => c.visible);
-  return (
-    <>
-      {visibleColumns.map((c, index) => (
-        <tr key={index} className="table4js__row">
-          <td className="table4js-cell table4js-technical-cell">
-            <div className="table4js-technical-cell__container">
-              <div className="table4js__check">
-                <div className="table4js-svg-icon table4js__icon-check"></div>
-              </div>
-            </div>
-          </td>
-          {visibleColumns.map((vc) => (
-            <td className="table4js-cell table4js-technical-cell">
-              <div className="table4js-cell__container table4js-cell__container--loading"></div>
-            </td>
-          ))}
-          <td className="table4js-cell table4js-technical-cell table4js-technical-cell--right">
-            <div className="table4js-technical-cell__container">
-              <div
-                className="table4js-svg-icon table4js-icon-row-tools table4js__row-more-action"
-                dangerouslySetInnerHTML={{ __html: table.icons.more }}
-              ></div>
-            </div>
-          </td>
-        </tr>
-      ))}
-    </>
   );
 }
 
@@ -192,13 +158,13 @@ export function Table4({ model }: ITableProps) {
             </thead>
             <tbody className="table4js__body">
               {model.rows.length == 0 && model.loadingMutex == false
-                ? EmptyTable()
+                ? EmptyTable(model)
                 : null}
-              {model.loadingMutex
-                ? LoadingIndicator(model)
-                : model.rows.map((row, index) => (
+              {model.loadingMutex && model.loadMoreBack ? LoadingIndicator(model) : null }
+              {model.rows.map((row, index) => (
                   <Table4RowWrapper key={"row" + index + "_" + (row.id || row.number)} table={model} row={row} />
                 ))}
+              {model.loadingMutex && model.loadMore ? LoadingIndicator(model) : null }
             </tbody>
             <tfoot className="table4js__footer table4js-sticky-component">
               {model.showTableSummary && (

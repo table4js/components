@@ -4,6 +4,7 @@ import { Table } from "../common/table";
 
 export * from "./table/row";
 export * from "./table/cell";
+export * from "./table/loading-indicator";
 export * from "./table/cell-types/default";
 export * from "./table/cell-types/indicator";
 export * from "./table/cell-types/progress";

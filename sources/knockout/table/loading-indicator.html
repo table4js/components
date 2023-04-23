@@ -1,0 +1,24 @@
+<!-- ko foreach: rows -->
+<tr class="table4js__row">
+  <td class="table4js-cell table4js-technical-cell" >
+    <div class="table4js-technical-cell__container">
+      <div class="table4js__check">
+        <div class="table4js-svg-icon table4js__icon-check"></div>
+      </div>
+    </div>
+  </td>
+<!-- ko foreach: $parent.columns -->
+<!-- ko if: visible -->
+  <td class="table4js-cell table4js-technical-cell">
+    <div class="table4js-cell__container table4js-cell__container--loading">
+    </div>
+  </td>
+<!-- /ko -->
+<!-- /ko -->
+  <td class="table4js-cell table4js-technical-cell table4js-technical-cell--right">
+    <div class="table4js-technical-cell__container">
+      <div class="table4js-svg-icon table4js-icon-row-tools table4js__row-more-action" data-bind="html: $parent.iconMore"></div>
+    </div>
+  </td>
+</tr>
+<!-- /ko -->

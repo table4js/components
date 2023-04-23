@@ -6,7 +6,7 @@ export function ElementsContainer({ elements }: { elements: ILayoutElement[] }) 
   return (
     <>
       {(elements || []).map((element) => {
-          return <AbrisComponent componentName={element.component} componentProps={element.data} />;
+          return <AbrisComponent key={element.name} componentName={element.component} componentProps={element.data} />;
         })}
     </>
   );

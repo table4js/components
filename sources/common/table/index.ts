@@ -355,7 +355,7 @@ export class Table extends Base implements IDataProviderOwner {
 
     private lastOffset = 0;
     private lastOffsetBack = 0;
-    private loadBatchSize = 10;
+    public loadBatchSize = 10;
 
     private curCol = undefined;
     private nxtCol = undefined;
