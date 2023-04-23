@@ -1,5 +1,5 @@
 import * as ko from "knockout";
-import { FilterModel } from "../../../../common/table/plugins/filter/filter";
+import { FilterModel } from "../../../../common/table/plugins/filter";
 
 export var filterTemplate = require("./filter.html").default;
 

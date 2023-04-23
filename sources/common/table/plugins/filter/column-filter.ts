@@ -7,7 +7,7 @@ import * as Icons from "../../../icons";
 
 import "./column-filter.scss";
 
-export class FilterContext extends Base {
+export class ColumnFilter extends Base {
   constructor(public column: ITableColumn, private dataProviderOwner: IDataProviderOwner) {
     super();
   }

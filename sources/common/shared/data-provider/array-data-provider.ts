@@ -1,4 +1,4 @@
-import { IFilterItem } from "../find";
+import { IFilterItem } from "../filter";
 import { IDataProvider } from "./data-provider";
 import { FilterOwner } from "./filter-owner";
 

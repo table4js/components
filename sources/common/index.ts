@@ -7,7 +7,7 @@ export * from "./shared/field-types/currency";
 export * from "./shared/field-types/date";
 export * from "./shared/field-types/datetime";
 export * from "./shared/field-types/number";
-export * from "./shared/find";
+export * from "./shared/filter";
 export * from "./shared/editor";
 export * from "./shared/data-provider/data-provider";
 export * from "./shared/data-provider/array-data-provider";
@@ -32,7 +32,7 @@ export * from "./widgets/form";
 
 export * from "./table/plugins/summary";
 export * from "./table/plugins/search";
-export * from "./table/plugins/filter/filter";
+export * from "./table/plugins/filter";
 export * from "./table/plugins/filter/column-filter";
 export * from "./table/plugins/filter/column-filter-item";
 export * from "./table/plugins/filter/filter-default";

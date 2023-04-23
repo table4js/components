@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeReactive } from "../../../reactivity";
 import { registerComponent } from "../../../abris-component";
-import { FilterModel } from "../../../../common/table/plugins/filter/filter";
+import { FilterModel } from "../../../../common/table/plugins/filter";
 import { Table4ColumnFilter } from "./column-filter";
 
 export interface ITable4FilterProps {

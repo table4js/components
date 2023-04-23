@@ -1,4 +1,4 @@
-import { IFilterItem } from "../find";
+import { IFilterItem } from "../filter";
 
 export interface IFilterOwner {
     addFilterProvider(filterProvider: IFilterProvider): void;

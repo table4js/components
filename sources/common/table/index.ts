@@ -14,7 +14,7 @@ import { SummaryPlugin } from "./plugins/summary";
 import { InplaceEditorPlugin } from "./plugins/editor/editor-inplace";
 import { RowEditorPlugin } from "./plugins/editor/editor-row";
 import { SearchPlugin } from "./plugins/search";
-import { FilterPlugin } from "./plugins/filter/filter";
+import { FilterPlugin } from "./plugins/filter";
 
 import * as Icons from "../icons";
 import "./index.scss";

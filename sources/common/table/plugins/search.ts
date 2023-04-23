@@ -5,7 +5,7 @@ import { property } from "../../shared/property";
 import { ITableColumn } from "../column";
 import { ITableRow } from "../row";
 import { IFilterOwner, IFilterProvider } from "../../shared/data-provider/filter-owner";
-import { IFilterItem } from "../../shared/find";
+import { IFilterItem } from "../../shared/filter";
 import { IDataProvider } from "../../shared/data-provider/data-provider";
 import { search } from "../../icons";
 

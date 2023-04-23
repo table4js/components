@@ -1,6 +1,6 @@
 import { Base } from "../../../shared/base";
 import { property } from "../../../shared/property";
-import { IFindOperation, operationsMap } from "../../../shared/find";
+import { IFindOperation, operationsMap } from "../../../shared/filter";
 import { ITableColumn } from "../../column";
 
 export class FilterItemValue extends Base {

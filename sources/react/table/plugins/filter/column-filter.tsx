@@ -1,10 +1,10 @@
 import * as React from "react";
-import { FilterContext } from "../../../../common/table/plugins/filter/column-filter";
+import { ColumnFilter } from "../../../../common/table/plugins/filter/column-filter";
 import { makeReactive } from "../../../reactivity";
 import { Table4ColumnFilterItem } from "./column-filter-item";
 import * as Icons from "../../../../common/icons";
 
-export function Table4ColumnFilter({ context }: { context: FilterContext }) {
+export function Table4ColumnFilter({ context }: { context: ColumnFilter }) {
   makeReactive(context);
   if (context.filterItems.length === 0) {
     return null;

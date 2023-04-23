@@ -5,9 +5,9 @@ import { property } from "../../../shared/property";
 import { ITableColumn } from "../../column";
 import { ITableRow } from "../../row";
 import { IFilterOwner, IFilterProvider } from "../../../shared/data-provider/filter-owner";
-import { IFilterItem } from "../../../shared/find";
+import { IFilterItem } from "../../../shared/filter";
 import { IDataProvider } from "../../../shared/data-provider/data-provider";
-import { FilterContext } from "./column-filter";
+import { ColumnFilter } from "./column-filter";
 import { FilterItemValue } from "./column-filter-item";
 import { Localization } from "../../../localization";
 import { filter } from "../../../icons";
@@ -40,7 +40,7 @@ export class FilterModel extends Base implements IFilterProvider {
     }
 
     @property({ defaultValue: false }) visible: boolean;
-    filters: Array<FilterContext> = [];
+    filters: Array<ColumnFilter> = [];
 }
 
 export class FilterPlugin implements ITablePlugin {
@@ -77,7 +77,7 @@ export class FilterPlugin implements ITablePlugin {
           })];
     }
     onColumnCreated(column: ITableColumn): void {
-        this._filterModel.filters.push(new FilterContext(column, this._table));
+        this._filterModel.filters.push(new ColumnFilter(column, this._table));
         this._filterModel.visible = <any>new ComputedUpdater(() => this._filterModel.filters.some(f => f.showFilter));
     }
     onRowCreated(row: ITableRow): void {
