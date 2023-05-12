@@ -12,14 +12,14 @@ $abc-secondary-a-1: #07742B;
 $abc-secondary-a-2: #AC160A;
 $abc-secondary-a-3: #1B274B;
 $abc-secondary-a-4: #bbbfca2a;
-$abc-secondary-a-5: #afecbf;
+$abc-secondary-a-5: #3FC565;
 $abc-secondary-a-6: #C1170B;
 $abc-secondary-a-7: #9A1309;
 $abc-secondary-a-8: #078834;
 $abc-secondary-a-9: #056125;
 $abc-secondary-a-10: #304788;
 $abc-secondary-a-11: #202F5B;
-$abc-secondary-a-12: #BCC5CC;
+$abc-secondary-a-12: #d8dfe4;
 $abc-secondary-a-13: #FBE5A4;
 
 $abc-secondary-b-0: #ff9486;	/* Вторичный Цвет B */
@@ -91,4 +91,5 @@ $abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);
     background: linear-gradient(#f8f9fd, 75%, #FBE5A4BD);//#FBE5A4BD !important; //var(--abc-secondary-a-13, $abc-secondary-a-13);
 }
 
-$progress-color: var(--abc-secondary-a-8, $abc-secondary-a-8);
+$progress-background-color: var(--abc-secondary-a-12, $abc-secondary-a-12);
+$progress-line-color: var(--abc-secondary-a-5, $abc-secondary-a-5);

@@ -9,17 +9,17 @@
     display: inline-block;    
     width: 100px;
     height: 1em;
-    border-radius: 0.5em;
+    border-radius: 1em;
     position: relative;
-    border: 1px solid $progress-color;
+    background: $progress-background-color;
     overflow: hidden;
 }
 
 .table4js__progress-cell-value {
     position: absolute;
     height: 100%;
-    background-color: $progress-color;
-    font-size: 0.75em;
+    background-color: $progress-line-color;
+    border-radius: 1em;
 }
 
 .table4js__progress-cell-text {
