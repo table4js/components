@@ -1,15 +1,27 @@
+@import "../../colors";
+
 .table4js__progress-cell {
     display: inline-block;    
-    text-align: center;
-    width: 100%;
+    white-space: nowrap;
+}
+
+.table4js__progress-cell-indicator {
+    display: inline-block;    
+    width: 100px;
     height: 1em;
+    border-radius: 0.5em;
     position: relative;
-    border: 1px solid lightgreen;
+    border: 1px solid $progress-color;
+    overflow: hidden;
 }
 
 .table4js__progress-cell-value {
     position: absolute;
     height: 100%;
-    background-color: lightgreen;
+    background-color: $progress-color;
     font-size: 0.75em;
+}
+
+.table4js__progress-cell-text {
+    display: inline-block;    
 }

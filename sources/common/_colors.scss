@@ -90,3 +90,5 @@ $abc-secondary-a-0-op-15:  scale-color($abc-secondary-a-0, $alpha: -85%);
 @mixin mx-form-control-momodified {
     background: linear-gradient(#f8f9fd, 75%, #FBE5A4BD);//#FBE5A4BD !important; //var(--abc-secondary-a-13, $abc-secondary-a-13);
 }
+
+$progress-color: var(--abc-secondary-a-8, $abc-secondary-a-8);
