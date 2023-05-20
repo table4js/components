@@ -13,6 +13,8 @@
     position: relative;
     background: $progress-background-color;
     overflow: hidden;
+    vertical-align: middle;
+    margin-inline-end: 10px;
 }
 
 .table4js__progress-cell-value {

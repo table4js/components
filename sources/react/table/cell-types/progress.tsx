@@ -8,10 +8,11 @@ export function Table4ProgressCell({ cell, className }: ITableContentCellProps) 
   const value = parseFloat(cell.data);
   const precentage = (Number.isNaN(value) ? 0 : (value * 100).toFixed(2))+"%";
   return (
-    <div className={className + " table4js__progress-cell"}>
-      <div className="table4js__progress-cell-value" style={{ width: precentage}}>
-        {precentage}
+    <div className="table4js__progress-cell">
+      <div className={className + " table4js__progress-cell-indicator"}>
+          <div className="table4js__progress-cell-value" style={{ width: precentage}}></div>
       </div>
+      <div className="table4js__progress-cell-text">{precentage}</div>
     </div>
   );
 }
