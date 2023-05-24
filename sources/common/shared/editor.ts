@@ -1,3 +1,4 @@
+import { IFieldDescription } from "../shared/domain";
 import { Base } from "../shared/base";
 import { property } from "../shared/property";
 
@@ -22,9 +23,12 @@ export class Editor extends Base {
         return Editor.editors[typeName] || Editor.editors.default;
     }
 
-    constructor(private _data: any, private name: string) {
+    constructor(private _data: any, public readonly field: IFieldDescription) {
         super();
         this.value = _data[this.name];
+    }
+    get name() {
+        return this.field.name
     }
     @property() value: any;
     get isModified() {

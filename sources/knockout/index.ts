@@ -26,6 +26,7 @@ export * from "./table/plugins/editor/row-editor";
 
 export * from "./widgets/default";
 export * from "./widgets/checkbox";
+export * from "./widgets/reference";
 export * from "./widgets/property";
 export * from "./widgets/form";
 

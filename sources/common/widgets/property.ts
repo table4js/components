@@ -21,7 +21,7 @@ export class Property extends Base {
     constructor(private field: IFieldDescription) {
         super();
         this.title = field.title || field.name;
-        this.editor = new Editor(this.obj, this.name);
+        this.editor = new Editor(this.obj, this.field);
     }
 
     public editor: Editor;

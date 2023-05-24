@@ -14,7 +14,8 @@ export class InplaceEditorPlugin extends EditorPlugin {
         super.startEditRow(row);
         this._activeEditors = {};
         row.cells.forEach(cell => {
-            this._activeEditors[cell.name] = new Editor(cell.rowData, cell.name);
+            const column = this._table.columns.filter(c => c.name === cell.name)[0];
+            this._activeEditors[cell.name] = new Editor(cell.rowData, column);
         });
         row.mode = "edit-inplace";
     }

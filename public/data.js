@@ -14,6 +14,7 @@ var sampleData = [
     "int16": -2658,
     "float": -1.8258164161965523e+25,
     "progress": 0.9283874173562526,
+    "company": { id: 1, title: "Abris LTD" },
     "paragraph": "Phasellus vehicula sem in nisl consectetur, vel tincidunt tortor blandit. Proin gravida mauris vel sem lacinia mattis. Sed in rhoncus lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ex erat, auctor ac facilisis at, bibendum at nisi. Etiam interdum odio nec suscipit finibus. Etiam pretium erat non elit tempor, quis pretium nisi condimentum. Pellentesque sollicitudin urna sapien, sed viverra libero aliquet a. Proin ultrices velit ut arcu cursus, quis consectetur tellus finibus. Aliquam tempus auctor velit ut dictum.",
     "iso-8601_date": "2010-09-23",
     "iso-8601": "2010-09-23T09:40:03.842+04:00",

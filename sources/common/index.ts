@@ -7,6 +7,7 @@ export * from "./shared/field-types/currency";
 export * from "./shared/field-types/date";
 export * from "./shared/field-types/datetime";
 export * from "./shared/field-types/number";
+export * from "./shared/field-types/reference";
 export * from "./shared/filter";
 export * from "./shared/editor";
 export * from "./shared/data-provider/data-provider";
@@ -25,10 +26,12 @@ export * from "./table/cell-types/date";
 export * from "./table/cell-types/datetime";
 export * from "./table/cell-types/indicator";
 export * from "./table/cell-types/number";
+export * from "./table/cell-types/reference";
 export * from "./table/cell-types/progress";
 
 export * from "./widgets/property";
 export * from "./widgets/form";
+export * from "./widgets/reference";
 
 export * from "./table/plugins/summary";
 export * from "./table/plugins/search";

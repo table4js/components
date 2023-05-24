@@ -62,9 +62,15 @@ var options = {
             title: "Progress",
         },
         {
-            name: "paragraph",
-            title: "Text",
+            name: "company",
+            type: "reference",
+            entity: "company",
+            title: "Company",
         },
+        // {
+        //     name: "paragraph",
+        //     title: "Text",
+        // },
         {
             name: "cs",
             visible: false,
